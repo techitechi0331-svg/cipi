@@ -1,0 +1,30 @@
+id: NEW_RESEARCH
+title: New Research Track
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.0
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+
+completed: []
+
+unresolved:
+  - Define the research question and acceptance criteria.
+
+next_stage: review
+why_next: "Review begins after the initial evidence set and competing explanations are recorded."
+next_confirmation: "Whether the evidence is sufficient, internally consistent, and specific enough to lock a model."
+
+blockers: []

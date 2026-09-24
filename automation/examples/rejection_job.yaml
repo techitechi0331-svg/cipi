@@ -1,0 +1,47 @@
+schema_version: "1.0"
+job_id: AUTO-REJECT-SMOKE-001
+state: QUEUED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: "Can CIPI preserve useful negative evidence when a candidate loses to its baseline?"
+hypothesis: "The deliberately weaker mock candidate will trigger rejection while preserving its evidence and reusable findings."
+counter_hypotheses:
+  - "The candidate unexpectedly exceeds the baseline."
+baseline:
+  - fixed_baseline
+variants:
+  - weak_candidate
+metrics:
+  - objective_score
+acceptance:
+  - "weak_candidate objective_score > fixed_baseline objective_score"
+rejection:
+  - "weak_candidate objective_score <= fixed_baseline objective_score"
+max_runs: 1
+timeout_minutes: 5
+random_seed: 6100999
+allowed_operations:
+  - mock_measurement
+prohibited_operations:
+  - network_write
+  - main_push
+mock_measurements:
+  fixed_baseline:
+    objective_score: 0.50
+  weak_candidate:
+    objective_score: 0.40
+rejection_record:
+  reason: "The candidate fails the declared objective-score baseline and is not suitable for promotion."
+  retained_findings:
+    - "The baseline comparison and complete mock measurement remain valid negative evidence."
+  reusable_findings:
+    - "The experiment contract can distinguish a losing candidate without discarding the run."
+  revisit_if:
+    - "The candidate algorithm materially changes or the baseline definition is revised."
+  scope: "Automation rejection-preservation smoke test only."
+lineage:
+  supersedes: []
+  related_jobs:
+    - AUTO-SMOKE-001
+  related_decisions: []

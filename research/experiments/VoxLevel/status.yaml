@@ -1,29 +1,27 @@
 id: VOXLEVEL_01
 title: CIPI VoxLevel 0.1
 
-status: implementation
+status: measurement
 knowledge_status: PROVISIONAL
 confidence: 0.58
 
 stages:
   research: complete
-  review: in_progress
-  parameter_lock: provisional
+  review: complete
+  parameter_lock: in_progress
   implementation: complete
   measurement: in_progress
   audio_ab: pending
   revision: pending
-  vst3_validation: partial
+  vst3_validation: in_progress
   final_review: pending
 
 current_stage: measurement
 
 completed:
-  - Initial compressor topology research recorded.
-  - Feed-forward soft-knee core implemented.
-  - Dual-timescale detector prototype implemented.
-  - Windows x64 VST3 build passed.
-  - Program-dependent release is explicitly marked hypothesis-level.
+  - research
+  - review
+  - implementation
 
 unresolved:
   - Static transfer curve has not yet been recorded as an artifact.

@@ -31,16 +31,13 @@ public:
 
 private:
     static juce::AudioProcessorValueTreeState::ParameterLayout createLayout();
-    void updateCrossover();
 
     juce::AudioProcessorValueTreeState apvts;
-    double currentSampleRate { 44100.0 };
-    float lastFocusHz { -1.0f };
-
-    using Filter = juce::dsp::IIR::Filter<float>;
-    using Coeff = juce::dsp::IIR::Coefficients<float>;
-    std::array<std::array<Filter, 2>, 2> lp;
-    std::array<std::array<Filter, 2>, 2> hp;
+    juce::dsp::LinkwitzRileyFilter<float> crossover;
+    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Multiplicative> focusSmoother;
+    juce::SmoothedValue<float> tameSmoother;
+    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Multiplicative> outputGainSmoother;
+    float lastAppliedFocusHz { -1.0f };
 
     cipi::dsp::EnvelopeFollower highEnvelope;
     cipi::dsp::EnvelopeFollower fullEnvelope;

@@ -155,3 +155,34 @@ Required next checks:
 **REVISE implementation** to the 40 ms split-direction candidate and rerun deterministic tests and VST3 gates.
 
 Do not promote PeakBody to candidate/release status yet.
+
+
+## Revision-01 real-vocal timing distribution
+
+The 40 ms candidate was also measured directly on active singing frames.
+
+### natural_dereverb_audio
+
+- C2 p10 / median / p90: approximately **2.65 / 4.12 / 7.81**
+- transient factor p10 / median / p90: approximately **0.20 / 0.52 / 0.98**
+- attack p10 / median / p90: approximately **11.9 / 21.1 / 34.5 ms**
+- release p10 / median / p90: approximately **125 / 254 / 343 ms**
+- fraction at maximum transient factor: approximately **9.6%**
+
+### dereverb_clear_audio
+
+- C2 p10 / median / p90: approximately **2.64 / 4.10 / 8.04**
+- transient factor p10 / median / p90: approximately **0.20 / 0.52 / 1.00**
+- attack p10 / median / p90: approximately **11.8 / 21.0 / 35.0 ms**
+- release p10 / median / p90: approximately **120 / 255 / 344 ms**
+- fraction at maximum transient factor: approximately **10.1%**
+
+This is desirable for the prototype: the processor does not spend most active singing time pinned to either timing extreme.
+
+## Real-vocal level-invariance check
+
+The natural-dereverb vocal was re-analysed after a -12 dB linear gain change.
+
+Across active measured frames, the 40 ms C2 trajectory matched the original trajectory to numerical precision in this test.
+
+This confirms the desired level-normalised behavior for the current detector away from the near-silence power floor.

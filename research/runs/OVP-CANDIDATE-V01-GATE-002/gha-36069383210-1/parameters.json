@@ -1,0 +1,25 @@
+{
+  "baseline": [
+    "output_transformer_off"
+  ],
+  "experiment_adapter": "original_vocal_pre_measurement_gate_v1",
+  "job_file": "research/jobs/queued/A-OVP-CANDIDATE-V01-GATE-002.yaml",
+  "metrics": [
+    "checksum_ok",
+    "declared_gate_fail_count",
+    "char50_100hz_thd_percent",
+    "char50_1khz_thd_percent",
+    "char50_lf_to_mid_ratio",
+    "no_output_transformer_100hz_thd_percent",
+    "full_vs_no_output_transformer_lf_ratio",
+    "spectral_protection_off_100hz_thd_percent",
+    "char100_1khz_thd_percent",
+    "char100_stress_thd_percent",
+    "char100_8x_alias_dbc",
+    "char100_16x_alias_dbc",
+    "char50_sample_rate_gain_spread_db"
+  ],
+  "variants": [
+    "full_current_v01"
+  ]
+}

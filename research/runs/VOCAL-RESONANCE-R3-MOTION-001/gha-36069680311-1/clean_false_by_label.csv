@@ -1,0 +1,7 @@
+model,label,clean_false_trigger_rate
+static_r2_style,17,0.0
+static_r2_style,6,1.0
+static_r2_style,9,0.0
+motion_r3,17,0.0
+motion_r3,6,1.0
+motion_r3,9,0.0

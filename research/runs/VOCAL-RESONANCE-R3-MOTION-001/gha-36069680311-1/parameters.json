@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "prominence_only",
+    "static_r2_style_safe_negative"
+  ],
+  "experiment_adapter": "vocal_resonance_motion_coherence_v1",
+  "job_file": "research/jobs/queued/VOCAL-RESONANCE-R3-MOTION-001.yaml",
+  "metrics": [
+    "top5",
+    "top5_effect_gte3",
+    "clean_false_trigger_rate",
+    "top5_high_f0",
+    "generator_ceiling",
+    "mrr"
+  ],
+  "variants": [
+    "motion_r3_f0_harmonic_coherence"
+  ]
+}

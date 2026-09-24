@@ -1,0 +1,121 @@
+{
+  "candidate_budget": 20,
+  "dataset": "Bill13579/vocalset-mirror",
+  "experiment": "VOCAL_RESONANCE_R3_MOTION_COHERENCE",
+  "models": {
+    "motion_r3": {
+      "C": 0.03,
+      "test": {
+        "clean_false_by_label": {
+          "17": 0.0,
+          "6": 1.0,
+          "9": 0.0
+        },
+        "clean_false_trigger": 0.25,
+        "generator_ceiling": 0.875,
+        "mrr": 0.2098629043385235,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "threshold_from_valid_95pct": 0.8120661885940426,
+        "top1": 0.0625,
+        "top1_given_generator_hit": 0.07142857142857142,
+        "top3": 0.25,
+        "top3_given_generator_hit": 0.2857142857142857,
+        "top5": 0.3125,
+        "top5_effect_gte3": 0.5333333333333333,
+        "top5_given_generator_hit": 0.35714285714285715,
+        "top5_high_f0": null
+      },
+      "validation": {
+        "generator_ceiling": 0.90625,
+        "mrr": 0.28329448007273084,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.125,
+        "top1_given_generator_hit": 0.13793103448275862,
+        "top3": 0.28125,
+        "top3_given_generator_hit": 0.3103448275862069,
+        "top5": 0.5,
+        "top5_effect_gte3": 0.5,
+        "top5_given_generator_hit": 0.5517241379310345,
+        "top5_high_f0": null
+      }
+    },
+    "prominence": {
+      "test": {
+        "clean_false_trigger": 0.0,
+        "generator_ceiling": 0.875,
+        "mrr": 0.20290100524475524,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.0,
+        "top1_given_generator_hit": 0.0,
+        "top3": 0.28125,
+        "top3_given_generator_hit": 0.32142857142857145,
+        "top5": 0.34375,
+        "top5_effect_gte3": 0.4,
+        "top5_given_generator_hit": 0.39285714285714285,
+        "top5_high_f0": null
+      }
+    },
+    "static_r2_style": {
+      "C": 0.03,
+      "test": {
+        "clean_false_by_label": {
+          "17": 0.0,
+          "6": 1.0,
+          "9": 0.0
+        },
+        "clean_false_trigger": 0.25,
+        "generator_ceiling": 0.875,
+        "mrr": 0.23541310797260878,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "threshold_from_valid_95pct": 0.7995151250290913,
+        "top1": 0.09375,
+        "top1_given_generator_hit": 0.10714285714285714,
+        "top3": 0.1875,
+        "top3_given_generator_hit": 0.21428571428571427,
+        "top5": 0.40625,
+        "top5_effect_gte3": 0.6,
+        "top5_given_generator_hit": 0.4642857142857143,
+        "top5_high_f0": null
+      },
+      "validation": {
+        "generator_ceiling": 0.90625,
+        "mrr": 0.3277415854162178,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.15625,
+        "top1_given_generator_hit": 0.1724137931034483,
+        "top3": 0.40625,
+        "top3_given_generator_hit": 0.4482758620689655,
+        "top5": 0.5,
+        "top5_effect_gte3": 0.5,
+        "top5_given_generator_hit": 0.5517241379310345,
+        "top5_high_f0": null
+      }
+    }
+  },
+  "product_gate": {
+    "criteria": {
+      "clean_false_trigger_max": 0.15,
+      "strong_top5": 0.92,
+      "top5": 0.85
+    },
+    "passed": false
+  },
+  "raw_audio_persisted": false,
+  "retention_gate": {
+    "accepted": false,
+    "criteria": {
+      "clean_false_minus_0_05_vs_static": false,
+      "high_f0_not_worse_by_0_05": true,
+      "strong_top5_not_worse": false,
+      "top5_plus_0_05_vs_static": false
+    },
+    "meaning": "Whether motion features are worth retaining for further research; not a product promotion."
+  },
+  "seed": 20260929,
+  "skip_per_singer": 2
+}

@@ -1,0 +1,13 @@
+feature,coefficient,model
+rel_local_score,0.1528879368999347,static_r2_style
+rel_log_score,0.15898232968021808,static_r2_style
+rel_persistence,0.1233925959119016,static_r2_style
+rel_q80,0.12331203046546935,static_r2_style
+rel_variability,-0.17235195336542958,static_r2_style
+rel_norm_q,0.13879280631532612,static_r2_style
+rel_prom_x_persist,0.007590654012856491,static_r2_style
+rel_local_minus_log,0.10610565759368318,static_r2_style
+rel_cross_agreement,-0.1458718243308317,static_r2_style
+harmonic_protection,-0.3246170646510292,static_r2_style
+candidate_rank_score,0.33648382228946344,static_r2_style
+log_frequency,-0.006362224958720924,static_r2_style

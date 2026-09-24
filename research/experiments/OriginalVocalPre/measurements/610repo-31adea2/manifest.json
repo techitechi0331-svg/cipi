@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "source_repo": "techitechi0331-svg/610",
   "source_branch": "original-vocal-pre-v0.1",
   "source_sha": "31adea261d5f82d3791ee3c3543974167c5f1e83",
@@ -7,5 +7,8 @@
   "source_artifact_id": 10835130874,
   "source_artifact_sha256": "d910825936b52b59bb135775d816b321374297580c6035e20fe191fe76e833f2",
   "measurement_maturity": "DSP_MEASURED",
+  "source_artifact_checksums": "source_artifact_checksums.sha256",
+  "cipi_normalized_text_checksums": "checksums.sha256",
+  "normalization_note": "Windows CSV CRLF was normalized to LF by text-based CIPI storage. Both checksum domains are preserved; they must not be compared as identical byte streams.",
   "notes": "Copied from the Windows self-hosted OriginalVocalPreAnalyzer artifact. Negative results are intentionally preserved."
 }

@@ -1,0 +1,7 @@
+{
+  "baseline": ["static_r2_style_safe_negative"],
+  "experiment_adapter": "vocal_resonance_clean_negative_audit_v1",
+  "job_file": "research/jobs/queued/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001.yaml",
+  "metrics": ["overall_clean_false_trigger","false_trigger_by_technique","false_trigger_by_singer","false_trigger_by_pitch_bin","technique_false_trigger_spread","p90_ge_400_count","p90_ge_400_false_trigger","label_mapping_resolution"],
+  "variants": ["broader_disjoint_clean_negative_audit"]
+}

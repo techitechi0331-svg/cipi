@@ -1,0 +1,23 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/clean_negative_audit.py --output-dir <temporary> --seed 20260930 --skip-per-singer 4 --max-per-singer 8 --scan-limit 7000"
+  ],
+  "completed_at": "2026-09-24T23:06:00.964460Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_clean_negative_audit_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001",
+  "random_seed": 20260930,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36070450907-1",
+  "schema_version": "1.0",
+  "source_commit": "309c2ff9ad18b17613db56ab1b0b683e4a114b70",
+  "started_at": "2026-09-24T23:00:26.932847Z",
+  "worker_version": "cipi-research-worker/0.2"
+}

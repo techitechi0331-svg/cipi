@@ -1,0 +1,28 @@
+{
+  "audit": {
+    "f0_p90_median_across_cases": 537.5757575757577,
+    "label_mapping": {"0": "belt", "1": "breathy", "2": "fast_forte", "3": "fast_piano", "6": "lip_trill"},
+    "label_names_resolved": true,
+    "n_cases": 32,
+    "n_labels": 5,
+    "n_singers": 4,
+    "overall_clean_false_trigger": 0.3125,
+    "p90_ge_400_count": 24,
+    "p90_ge_400_false_trigger": 0.375,
+    "technique_false_trigger_spread": 0.625
+  },
+  "dataset": "Bill13579/vocalset-mirror",
+  "diagnostic_gate": {
+    "accepted": true,
+    "criteria": {"at_least_24_clean_cases": true, "at_least_4_techniques": true, "at_least_6_p90_ge_400_cases": true, "label_names_resolved": true},
+    "meaning": "Sufficient adversarial clean-negative and pitch coverage to choose the next ranker research question. This is not a product gate."
+  },
+  "experiment": "VOCAL_RESONANCE_R4_CLEAN_NEGATIVE_AUDIT",
+  "hypothesis_readout": {"high_pitch_false_trigger_elevated_by_0_15": false, "supported": true, "technique_concentration_ge_0_20": true},
+  "raw_audio_persisted": false,
+  "seed": 20260930,
+  "selected_C": 0.3,
+  "skip_per_singer": 4,
+  "static_validation_metrics": {"generator_ceiling": 0.875, "mrr": 0.2392980958830901, "n_cases": 32, "n_high_f0_cases": 0, "top1": 0.09375, "top1_given_generator_hit": 0.10714285714285714, "top3": 0.28125, "top3_given_generator_hit": 0.32142857142857145, "top5": 0.375, "top5_effect_gte3": 0.6428571428571429, "top5_given_generator_hit": 0.42857142857142855, "top5_high_f0": null},
+  "validation_threshold_95pct": 0.7432067296971224
+}

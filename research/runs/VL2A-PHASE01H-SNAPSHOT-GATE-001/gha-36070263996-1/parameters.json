@@ -1,0 +1,25 @@
+{
+  "baseline": [
+    "historical_line_amp"
+  ],
+  "experiment_adapter": "vl2a_phase01h_snapshot_gate_v1",
+  "job_file": "research/jobs/queued/VL2A-PHASE01H-SNAPSHOT-GATE-001.yaml",
+  "metrics": [
+    "checksum_ok",
+    "fr_max_abs_30_15k_db",
+    "thd_low_level_below_mid_and_high",
+    "zout_min_ohm",
+    "zout_max_ohm",
+    "sample_rate_gain_spread_db",
+    "stress_all_finite",
+    "cpu_realtime_factor_at_192k",
+    "ab_case_count",
+    "ab_min_correlation",
+    "ab_max_matched_peak_delta_db",
+    "ab_gr_pair_max_abs_diff_db",
+    "raw_audio_present"
+  ],
+  "variants": [
+    "phase01h_line_amp"
+  ]
+}

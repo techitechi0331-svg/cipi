@@ -89,7 +89,8 @@ jobs:
           git config user.name "cipi-research-bot"
           git config user.email "cipi-research-bot@users.noreply.github.com"
           git switch -c "$BOT_BRANCH"
-          git add research/jobs research/runs research/reports research/knowledge_candidates
+          git add -A research/jobs research/runs research/reports
+          if [ -d research/knowledge_candidates ]; then git add -A research/knowledge_candidates; fi
           git commit -m "submit autonomous research evidence: $JOB_ID"
           git push --set-upstream origin "$BOT_BRANCH"
 

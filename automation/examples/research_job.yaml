@@ -34,3 +34,12 @@ mock_measurements:
     objective_score: 0.62
   candidate_b:
     objective_score: 0.55
+knowledge_candidate:
+  claim: "The autonomous smoke contract can emit a bounded evidence candidate without promoting shared knowledge."
+  evidence_type: MEASURED
+  scope: "Automation smoke test only."
+  promotion_requested: HYPOTHESIS
+continuation:
+  on_accept:
+    - automation/job_templates/AUTO-NEXT-SMOKE-002.yaml
+  on_reject: []

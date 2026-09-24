@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "source_repo": "techitechi0331-svg/610",
+  "source_branch": "original-vocal-pre-v0.1",
+  "source_sha": "31adea261d5f82d3791ee3c3543974167c5f1e83",
+  "source_workflow_run": 36060427037,
+  "source_artifact_id": 10835130874,
+  "source_artifact_sha256": "d910825936b52b59bb135775d816b321374297580c6035e20fe191fe76e833f2",
+  "measurement_maturity": "DSP_MEASURED",
+  "notes": "Copied from the Windows self-hosted OriginalVocalPreAnalyzer artifact. Negative results are intentionally preserved."
+}

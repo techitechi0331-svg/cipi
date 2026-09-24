@@ -1,0 +1,9 @@
+gate,value,low,high,status
+char0_thd_percent,0.202882,0,0.15,FAIL
+char50_thd_percent,0.992178,0.15,1,PASS
+char100_thd_percent,11.4564,0.5,3,FAIL
+char100_stress_thd_percent,30.7347,0,10,FAIL
+char50_upper_harmonic_ratio,0.0126702,0,0.5,PASS
+char50_lf_to_mid_thd_ratio,11.9033,0,2,FAIL
+char100_8x_alias_dbc,-80.5881,-300,-70,PASS
+finite_stress,0,0,0,PASS

@@ -1,4 +1,7 @@
-claim: "In VOCAL-RESONANCE-R4-CLEAN-AUDIT-001, the static safe-negative ranker's clean false-trigger rate varied strongly across the exact held-out cohort: belt 0%, breathy 25%, fast_forte 37.5%, fast_piano 62.5%, lip_trill 0%, with 31.25% overall."
+claim: >-
+  In VOCAL-RESONANCE-R4-CLEAN-AUDIT-001, the static safe-negative ranker's clean
+  false-trigger rate varied strongly across the exact held-out cohort: belt 0%,
+  breathy 25%, fast_forte 37.5%, fast_piano 62.5%, lip_trill 0%, with 31.25% overall.
 evidence_type: MEASURED
 scope: Exact 32-excerpt, four-singer Audit-001 VocalSet cohort only; not a universal technique ranking.
 source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1

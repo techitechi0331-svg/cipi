@@ -22,13 +22,14 @@ reusable_findings:
 revisit_if:
 - An independent exercise-balanced cohort contradicts the subgroup concentration.
 - A better-validated pitch frontend shows the previous high-F0 grouping was reliable.
+- Exercise-family confounding remains because Audit-001 selected only arpeggio excerpts.
+- High-F0 coverage remains unresolved because the legacy ACF proxy frequently saturates near 1000 Hz.
 lineage:
   supersedes: []
   related_jobs:
   - VOCAL-RESONANCE-R3-MOTION-001
   related_decisions: []
+parent_decision_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:auto
 created_at: '2026-09-25'
 immutable: true
-review_gaps:
-- Exercise-family confounding remains because Audit-001 selected only arpeggio excerpts.
-- High-F0 coverage remains unresolved because the legacy ACF proxy frequently saturates near 1000 Hz.
+review_gaps: []

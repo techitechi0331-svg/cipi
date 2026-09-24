@@ -1,0 +1,29 @@
+schema_version: '1.0'
+decision_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:auto
+job_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: >-
+  The declared clean-negative audit acceptance gate passed. Automation records the
+  evidence and proposes continued iteration, but does not promote shared knowledge
+  or resolve the remaining subgroup/pitch-front-end questions.
+scope: >-
+  Automated acceptance evidence for VOCAL-RESONANCE-R4-CLEAN-AUDIT-001 only;
+  promotion and product decisions require review.
+declared_rejection_criteria: []
+triggered_criteria: []
+retained_findings:
+  - The complete accepted Audit-001 run evidence is retained; passing the audit gate does not itself promote a semantic detector or product model.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOCAL-RESONANCE-R3-MOTION-001
+  related_decisions: []
+created_at: '2026-09-24T23:06:00.964460Z'
+immutable: true

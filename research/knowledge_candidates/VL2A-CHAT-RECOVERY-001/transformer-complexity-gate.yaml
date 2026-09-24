@@ -1,5 +1,0 @@
-claim: Transformer nonlinear and hysteresis complexity should be added only when device-specific evidence or reproducible measurements show meaningful error reduction over a simpler linear/load-aware baseline.
-evidence_type: INFERRED
-scope: VL2A UTC A-24 research, where linear physical/load structure was supportable but magnetic saturation and hysteresis constants were not evidence-backed.
-source_run: research/plugins/vl2a/evidence/2026-09-25-inventory.md
-promotion_requested: PROVISIONAL

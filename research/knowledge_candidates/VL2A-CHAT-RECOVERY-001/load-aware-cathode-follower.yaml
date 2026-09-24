@@ -1,5 +1,0 @@
-claim: For a tube cathode-follower output stage, load dependence, current sharing, effective source impedance, and headroom should be validated explicitly rather than approximating the stage as an additional generic soft clip.
-evidence_type: INFERRED
-scope: VL2A 12BH7 research and strict review; applies as a reusable modeling principle for tube-output stages driving transformer or line loads.
-source_run: research/plugins/vl2a/evidence/2026-09-25-inventory.md
-promotion_requested: PROVISIONAL

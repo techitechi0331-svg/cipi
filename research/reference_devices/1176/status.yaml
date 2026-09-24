@@ -19,8 +19,6 @@ current_stage: review
 
 completed:
   - research
-  - "Imported Black76 Priority-1 Gain Structure working calibration, measurements, real-audio continuity evidence, and Windows VST3 build evidence."
-  - "Imported Black76 Priority-2 baseline, P2-A detector-drive isolation, and detector-gain/bias optimizer negative evidence."
 
 unresolved:
   - "Review imported Black76 evidence through CIPI gates before any shared-knowledge promotion."

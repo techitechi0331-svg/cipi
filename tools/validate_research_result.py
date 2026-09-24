@@ -57,11 +57,48 @@ def verify_checksums(run_dir: Path, name: str) -> list[str]:
             errors.append(f"{target}: SHA-256 mismatch")
     return errors
 
+def validate_manual_sync_manifest(path: Path, data: dict) -> list[str]:
+    errors=[]
+    required={
+        "schema_version","kind","track","source_repo","source_snapshot_sha",
+        "measured_product_sha","source_ci_run","source_artifact_digest",
+        "raw_audio_in_cipi","imported_files","note",
+    }
+    missing=sorted(required-set(data))
+    if missing:
+        return [f"{path}: manual sync missing required keys: {', '.join(missing)}"]
+    if data.get("schema_version")!="1.0":
+        errors.append(f"{path}: schema_version must be 1.0")
+    if data.get("kind")!="manual_repository_evidence_sync":
+        errors.append(f"{path}: invalid manual sync kind")
+    for key in ("source_snapshot_sha","measured_product_sha"):
+        if not re.fullmatch(r"[0-9a-f]{40}",str(data.get(key,""))):
+            errors.append(f"{path}: {key} must be a 40-char lowercase Git SHA")
+    if not isinstance(data.get("source_ci_run"),int) or data["source_ci_run"] < 1:
+        errors.append(f"{path}: source_ci_run must be a positive integer")
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}",str(data.get("source_artifact_digest",""))):
+        errors.append(f"{path}: source_artifact_digest must be sha256:<64 lowercase hex>")
+    if data.get("raw_audio_in_cipi") is not False:
+        errors.append(f"{path}: manual sync may not declare raw audio in CIPI")
+    imported=data.get("imported_files")
+    if not isinstance(imported,list) or not imported or not all(isinstance(x,str) and x.strip() for x in imported):
+        errors.append(f"{path}: imported_files must be a non-empty string list")
+    if len(str(data.get("track","")).strip()) < 3:
+        errors.append(f"{path}: track is too short")
+    if len(str(data.get("source_repo","")).strip()) < 3:
+        errors.append(f"{path}: source_repo is too short")
+    if len(str(data.get("note","")).strip()) < 10:
+        errors.append(f"{path}: note is too short")
+    return errors
+
+
 def validate_manifest(path: Path) -> list[str]:
     errors=[]
     try: data=json.loads(path.read_text(encoding="utf-8"))
     except Exception as exc: return [f"{path}: JSON parse error: {exc}"]
     if not isinstance(data,dict): return [f"{path}: root must be object"]
+    if data.get("kind") == "manual_repository_evidence_sync":
+        return validate_manual_sync_manifest(path, data)
     missing=sorted(REQUIRED-set(data))
     if missing: return [f"{path}: missing required keys: {', '.join(missing)}"]
     if data["schema_version"]!="1.0": errors.append(f"{path}: schema_version must be 1.0")

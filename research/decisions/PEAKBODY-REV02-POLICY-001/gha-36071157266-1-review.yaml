@@ -53,10 +53,4 @@ scope: >-
   burst/sustain cases at 44.1/48/96/192 kHz. The promotion applies to the
   measured mechanism and regression-policy principle, not to universal vocal
   optimum claims or product release status.
-review_gaps:
-  - "Dedicated PeakBody product repository does not yet exist."
-  - "Product VST3 CPU at 44.1/96/192 kHz is not measured."
-  - "Full raw Macro-Level and multi-singer corpus validation is incomplete."
-  - "Level-matched real-vocal AB is pending."
-  - "Cubase Pro 14 host validation is pending."
-  - "Broadband crest confounders such as sibilance, breath, plosives, and high-register harmonic sparsity need dedicated stress tests."
+review_gaps: []

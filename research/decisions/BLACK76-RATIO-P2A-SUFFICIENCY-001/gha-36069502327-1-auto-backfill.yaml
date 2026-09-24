@@ -1,0 +1,32 @@
+schema_version: '1.0'
+decision_id: BLACK76-RATIO-P2A-SUFFICIENCY-001:gha-36069502327-1:auto-backfill
+job_id: BLACK76-RATIO-P2A-SUFFICIENCY-001
+source_run: research/runs/BLACK76-RATIO-P2A-SUFFICIENCY-001/gha-36069502327-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Legacy manifest indicates a rejection condition triggered. This deterministic
+  backfill does not finalize rejection.
+scope: Legacy automated-proposal backfill for BLACK76-RATIO-P2A-SUFFICIENCY-001; final
+  rejection requires review.
+declared_rejection_criteria:
+- Candidate fixes onset ordering but ratio-slope error remains materially outside
+  acceptance.
+- Deep 12:1 or 20:1 ratio remains below 70 percent of the target.
+triggered_criteria: []
+retained_findings:
+- The complete legacy run evidence is retained; this backfill reconstructs only the
+  pending automated proposal.
+reusable_findings: []
+revisit_if:
+- Revisit if new evidence, a changed model, or a changed baseline materially affects
+  the declared rejection criteria.
+review_gaps:
+- legacy_triggered_criteria_not_recorded
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-24T22:49:06.500309Z'
+immutable: true

@@ -12,3 +12,10 @@ adapters:
     max_timeout_minutes: 2
     network_required: false
     purpose: "Verify the preserved Original Vocal Pre v0.1 Windows measurement snapshot, retain negative results, and apply fixed candidate-vs-simple-baseline gates."
+
+  black76_ratio_p2a_compare_v1:
+    tracks:
+      - 1176_FAMILY_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Deterministically compare imported Black76 baseline and P2-A static-ratio evidence against the committed supplemental target."

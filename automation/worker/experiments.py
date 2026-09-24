@@ -16,6 +16,8 @@ ADAPTERS = {
     "black76_ratio_p2a_compare_v1",
     "peakbody_legacy_model_stress_v1",
     "peakbody_revision02_policy_v1",
+    "peakbody_spectral_guard_stress_v1",
+    "peakbody_periodicity_guard_stress_v1",
     "original_vocal_pre_measurement_gate_v1",
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
@@ -1003,6 +1005,173 @@ def _microdouble_product_v03_gate(repo_root: Path, timeout_seconds: int) -> dict
     }
 
 
+
+def _peakbody_confounder_guard(
+    repo_root: Path,
+    timeout_seconds: int,
+    mode: str,
+) -> dict[str, Any]:
+    script = repo_root / "research/experiments/PeakBody/confounder_guard_model.py"
+    command = [sys.executable, str(script), "--mode", mode]
+    completed = subprocess.run(
+        command,
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=timeout_seconds,
+    )
+
+    rows = list(csv.DictReader(io.StringIO(completed.stdout)))
+    expected_sample_rates = {44100, 48000, 96000, 192000}
+    expected_cases = {
+        "voiced_low",
+        "voiced_high",
+        "voiced_high_bright",
+        "sibilant",
+        "breath",
+        "steady_vowel",
+        "plosive_low",
+    }
+
+    matrix_complete = (
+        len(rows) == len(expected_sample_rates) * len(expected_cases)
+        and {int(row["sample_rate_hz"]) for row in rows} == expected_sample_rates
+        and {row["case"] for row in rows} == expected_cases
+        and {row["mode"] for row in rows} == {mode}
+    )
+
+    finite = bool(rows)
+    for row in rows:
+        for key in (
+            "baseline_peak_t",
+            "candidate_peak_t",
+            "baseline_high_fraction",
+            "candidate_high_fraction",
+            "baseline_mean_t",
+            "candidate_mean_t",
+            "median_highband_ratio_db",
+            "periodicity_confidence",
+        ):
+            finite = finite and math.isfinite(float(row[key]))
+        finite = finite and int(row["finite"]) == 1
+
+    def retention(row: dict[str, str]) -> float:
+        baseline = float(row["baseline_high_fraction"])
+        candidate = float(row["candidate_high_fraction"])
+        if baseline <= 1.0e-12:
+            return 1.0 if candidate <= 1.0e-12 else math.inf
+        return candidate / baseline
+
+    noise_rows = [row for row in rows if row["case"] in {"sibilant", "breath"}]
+    standard_voiced_rows = [
+        row for row in rows if row["case"] in {"voiced_low", "voiced_high"}
+    ]
+    bright_rows = [row for row in rows if row["case"] == "voiced_high_bright"]
+    steady_rows = [row for row in rows if row["case"] == "steady_vowel"]
+    plosive_rows = [row for row in rows if row["case"] == "plosive_low"]
+
+    noise_false_preserve_ratio_max = max(
+        (retention(row) for row in noise_rows),
+        default=math.inf,
+    )
+    standard_voiced_retention_min = min(
+        (retention(row) for row in standard_voiced_rows),
+        default=-math.inf,
+    )
+    bright_high_f0_retention_min = min(
+        (retention(row) for row in bright_rows),
+        default=-math.inf,
+    )
+    steady_mean_t_delta_max = max(
+        (
+            abs(float(row["candidate_mean_t"]) - float(row["baseline_mean_t"]))
+            for row in steady_rows
+        ),
+        default=math.inf,
+    )
+    plosive_retention_min = min(
+        (retention(row) for row in plosive_rows),
+        default=-math.inf,
+    )
+    voiced_periodicity_min = min(
+        (
+            float(row["periodicity_confidence"])
+            for row in rows
+            if row["case"] in {"voiced_low", "voiced_high", "voiced_high_bright", "steady_vowel"}
+        ),
+        default=-math.inf,
+    )
+    noise_periodicity_max = max(
+        (float(row["periodicity_confidence"]) for row in noise_rows),
+        default=math.inf,
+    )
+
+    metrics = {
+        "row_count": len(rows),
+        "matrix_complete": matrix_complete,
+        "all_numeric_finite": finite,
+        "noise_false_preserve_ratio_max": noise_false_preserve_ratio_max,
+        "standard_voiced_retention_min": standard_voiced_retention_min,
+        "bright_high_f0_retention_min": bright_high_f0_retention_min,
+        "steady_mean_t_delta_max": steady_mean_t_delta_max,
+        "plosive_retention_min": plosive_retention_min,
+        "voiced_periodicity_min": voiced_periodicity_min,
+        "noise_periodicity_max": noise_periodicity_max,
+    }
+
+    triggered = []
+    if not finite:
+        triggered.append("non-finite numeric output")
+    if not matrix_complete:
+        triggered.append("required confounder/sample-rate matrix incomplete")
+    if noise_false_preserve_ratio_max > 0.25:
+        triggered.append("noise-like false peak-preservation was not reduced to 25 percent or less of baseline")
+    if standard_voiced_retention_min < 0.90:
+        triggered.append("standard voiced transient retention fell below 90 percent of baseline")
+    if bright_high_f0_retention_min < 0.85:
+        triggered.append("bright high-F0 harmonic transient retention fell below 85 percent of baseline")
+    if steady_mean_t_delta_max > 0.05:
+        triggered.append("steady-vowel mean transient factor changed by more than 0.05")
+    if plosive_retention_min < 0.85:
+        triggered.append("low-frequency plosive transient retention fell below 85 percent of baseline")
+
+    acceptance_met = len(triggered) == 0
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"measurement.csv": completed.stdout},
+        "commands": [
+            f"python research/experiments/PeakBody/confounder_guard_model.py --mode {mode}"
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "triggered_criteria": triggered,
+        "summary": (
+            "Synthetic PeakBody confounder stress using the current broadband crest "
+            "feature and an AirGuard-inspired normalized high-band guard. The spectral-only "
+            "mode tests whether high-band balance alone can reject sibilance/breath without "
+            "damaging voiced transients. The spectral-periodicity mode additionally protects "
+            "periodic/harmonic material using a bounded analysis-only autocorrelation proxy. "
+            "No raw vocal audio, network access, product mutation, confidence/stage mutation, "
+            "or release action is performed."
+        ),
+    }
+
+
+def _peakbody_spectral_guard_stress(
+    repo_root: Path,
+    timeout_seconds: int,
+) -> dict[str, Any]:
+    return _peakbody_confounder_guard(repo_root, timeout_seconds, "spectral_only")
+
+
+def _peakbody_periodicity_guard_stress(
+    repo_root: Path,
+    timeout_seconds: int,
+) -> dict[str, Any]:
+    return _peakbody_confounder_guard(repo_root, timeout_seconds, "spectral_periodicity")
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1012,6 +1181,10 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _peakbody_legacy_model_stress(repo_root, timeout_seconds)
     if name == "peakbody_revision02_policy_v1":
         return _peakbody_revision02_policy(repo_root, timeout_seconds)
+    if name == "peakbody_spectral_guard_stress_v1":
+        return _peakbody_spectral_guard_stress(repo_root, timeout_seconds)
+    if name == "peakbody_periodicity_guard_stress_v1":
+        return _peakbody_periodicity_guard_stress(repo_root, timeout_seconds)
     if name == "black76_ratio_p2a_compare_v1":
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":

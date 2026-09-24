@@ -30,11 +30,11 @@ Current normalized transient feature:
 
 Current CIPI-chosen prototype values:
 
-- crest integration: **40 ms**
+- crest integration: **80 ms**
 - epsilon: linear-power equivalent of a -120 dBFS amplitude floor
 - attack:
-  - `attack = 6 + 29*t` ms
-  - range **6–35 ms**
+  - `attack = 6 + 34*t` ms
+  - range **6–40 ms**
 - release:
   - `release = 400 - 280*t` ms
   - range **120–400 ms**
@@ -90,17 +90,17 @@ The 40 ms split-direction candidate was selected after a targeted sweep using:
 
 Current measured highlights:
 
-- time to ~90% of steady synthetic GR: about **100 ms**;
+- time to ~90% of steady synthetic GR: about **147 ms**;
 - natural-dereverb singing active median GR: about **2.30 dB**;
 - dereverb-clear singing active median GR: about **1.87 dB**;
 - phrase-start 20 ms extra GR vs fixed 40/400 ms:
-  - median across tested variants: about **-0.05 dB**;
-  - worst tested p90: about **+0.014 dB**;
-- phrase-start 50 ms worst tested p90 extra GR: about **+0.051 dB**.
+  - median across tested variants: about **-0.09 dB**;
+  - worst tested p90: about **-0.01 dB**;
+- phrase-start 50 ms worst tested p90 extra GR: about **-0.02 dB**.
 
 Full details:
 
-`research/measurements/PEAKBODY_REVISION_01.md`
+`research/measurements/PEAKBODY_REVISION_02.md`
 
 ## Falsification / revision criteria
 
@@ -127,4 +127,4 @@ Revise again if any of the following occurs:
 - level-matched vocal AB against fixed timing and VoxLevel;
 - Cubase Pro 14 real-host validation.
 
-Revision 01 is a **prototype parameter lock**, not a release lock.
+Revision 02 supersedes Revision 01 and is a **prototype parameter lock**, not a release lock.

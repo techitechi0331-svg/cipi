@@ -53,3 +53,10 @@ adapters:
     max_timeout_minutes: 2
     network_required: false
     purpose: "Diagnose imported VL2A evidence checksum mismatches and distinguish exact-content changes from line-ending normalization."
+
+  voprep_amount_mapping_v1:
+    tracks:
+      - VOPREP_TRANSPARENT_COMP_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare simple user-facing Amount mappings against the frozen Vo.Prep transparent compressor model without raw audio or product mutation."

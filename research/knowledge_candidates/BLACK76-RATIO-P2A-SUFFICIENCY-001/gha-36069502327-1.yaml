@@ -1,0 +1,7 @@
+claim: Black76 P2-A detector-drive correction can fix threshold ordering without being
+  sufficient to recover steep high-ratio static slopes.
+evidence_type: MEASURED
+scope: Black76 Rev E Priority-2 P2-A against the committed supplemental LN-era static-curve
+  target.
+source_run: research/runs/BLACK76-RATIO-P2A-SUFFICIENCY-001/gha-36069502327-1
+promotion_requested: PROVISIONAL

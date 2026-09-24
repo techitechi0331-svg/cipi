@@ -1,0 +1,23 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "deterministic_read:black76_ratio_compare.csv"
+  ],
+  "completed_at": "2026-09-24T22:49:06.500309Z",
+  "environment": {
+    "experiment_adapter": "black76_ratio_p2a_compare_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "BLACK76-RATIO-P2A-SUFFICIENCY-001",
+  "random_seed": 7600331,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36069502327-1",
+  "schema_version": "1.0",
+  "source_commit": "97b9595834f9918e6a5961c2b371a0e378485062",
+  "started_at": "2026-09-24T22:49:06.497949Z",
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -19,8 +19,12 @@ current_stage: review
 
 completed:
   - research
+  - "Imported Black76 Priority-1 Gain Structure working calibration, measurements, real-audio continuity evidence, and Windows VST3 build evidence."
+  - "Imported Black76 Priority-2 baseline, P2-A detector-drive isolation, and detector-gain/bias optimizer negative evidence."
 
 unresolved:
+  - "Review imported Black76 evidence through CIPI gates before any shared-knowledge promotion."
+  - "Determine which missing control/FET/loop interaction is required after detector-drive and detector-bias-only approaches proved insufficient for steep high-ratio slopes."
   - Derive or fit the FET variable-resistance control law over the useful GR region.
   - Quantify feedback-loop and rectifier behavior rather than replacing them with a generic peak detector.
   - Lock attack/release trajectories across control positions and ratios.

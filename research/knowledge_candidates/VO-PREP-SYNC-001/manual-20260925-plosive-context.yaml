@@ -1,0 +1,5 @@
+claim: A plosive detector combining low-frequency onset, low-to-mid ratio and local spectral context separated the current synthetic plosive burst from sustained low-vowel, proximity and fry stress cases better than a low-frequency-energy-only rule.
+evidence_type: MEASURED
+scope: Vo.Prep Plosive Guard v2.2 stress suite and current 11-stem derived evidence; growl-onset false positives remain a known risk.
+source_run: research/runs/VO-PREP-SYNC-001/manual-20260925
+promotion_requested: PROVISIONAL

@@ -173,3 +173,53 @@ The first prototype should use:
 - fractional-delay interpolation suitable for slowly moving delays.
 
 This must be compared against a conventional positive-polarity ADT/Haas baseline in stereo naturalness, correlation, and mono behavior.
+
+
+## Review note — perceptual group-delay budget
+
+SPAT-004 is directly useful for the decorrelation half of MicroDouble.
+
+Its main design lesson is that decorrelation should not be treated as a single broadband "random phase" target. The amount of group delay that can be used effectively without objectionable smearing is frequency dependent, and perceptually informed ERB-scale constraints can outperform naive random-phase approaches.
+
+CIPI implication:
+
+- define a frequency-dependent decorrelation budget rather than one global delay amount;
+- protect low frequencies strongly;
+- allow more phase/time diversity only where the perceptual cost is acceptable;
+- measure both objective coherence and audible smearing;
+- do not assume lower correlation automatically means better vocal sound.
+
+This makes a future ERB-aware side generator more attractive than an arbitrary cascade of identical all-pass sections.
+
+## Review note — fractional-delay interpolation
+
+SPAT-003 confirms that time-varying delay/pitch effects require fractional-delay interpolation.
+
+DELAY-001, although studied in a different audio-DSP context, provides a useful interpolation comparison:
+
+- linear interpolation is simple and has linear phase but increasing high-frequency magnitude error;
+- first-order all-pass interpolation preserves magnitude but has increasing high-frequency phase error;
+- cubic Lagrange interpolation can materially improve fractional-delay accuracy.
+
+For MicroDouble, cubic Lagrange is therefore a strong baseline candidate for time-varying side delays.
+
+This is **INFERRED**, not yet a proven best choice for vocal doubling. The eventual implementation must compare:
+
+- interpolation error;
+- modulation sidebands;
+- CPU;
+- subjective chorus/zipper artifacts.
+
+## Updated leading architecture
+
+Current leading hypothesis:
+
+`dry center + two lower-level generated sides`
+
+Each side:
+
+`fractional delay -> slow stochastic delay modulation -> bounded micro-pitch behavior -> mild ERB-aware decorrelation -> low-frequency side reduction`
+
+The two sides should not use identical modulation trajectories.
+
+The center lead remains unprocessed by the widening stage so mono collapse cannot remove the primary vocal anchor.

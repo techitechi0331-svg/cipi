@@ -56,13 +56,20 @@ public:
         return currentCrestSquared;
     }
 
-    float getTimingScale (float minimumScale = 0.10f) const noexcept
+    float getTimingScale (float minimumScale = 0.25f,
+                          float responseExponent = 0.35f) const noexcept
     {
         minimumScale = juce::jlimit (0.001f, 1.0f, minimumScale);
-        return juce::jlimit (
-            minimumScale,
+        responseExponent = juce::jlimit (0.05f, 1.0f, responseExponent);
+
+        const auto literatureScale = juce::jlimit (
+            0.0f,
             1.0f,
             2.0f / juce::jmax (currentCrestSquared, 1.0f));
+
+        const auto softenedScale = std::pow (literatureScale, responseExponent);
+
+        return juce::jlimit (minimumScale, 1.0f, softenedScale);
     }
 
 private:

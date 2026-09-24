@@ -1,0 +1,50 @@
+id: VOPREP_TRANSPARENT_COMP_01
+title: Vo.Prep Transparent Vocal Compressor Core
+
+status: measurement
+knowledge_status: PROVISIONAL
+confidence: 0.82
+
+product_repository: techitechi0331-svg/Vo.Prep
+product_ref_reviewed: research/integrated-vocal-compressor-core
+product_sha_reviewed: a9441892056725cae8c393e64e5ee4c596af4a7b
+cipi_main_reviewed: 4a4c150daaa6d740d9a63812c387778167bf2f5d
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: measurement
+
+completed:
+  - slow_detector_research
+  - fast_detector_research
+  - fast_slow_fusion_research
+  - static_curve_research
+  - gain_ballistics_research
+  - integrated_cpp_core_unit_measurement
+  - public_real_vocal_objective_validation
+
+unresolved:
+  - Final level-matched human blind listening is pending.
+  - Product Threshold / operating-point architecture is not locked.
+  - Amount mapping is not locked.
+  - Output/makeup and Range are not locked.
+  - Stereo MAX-link result predates the final 70 ms release and needs regression validation.
+  - Product validation metadata contains one stale 80 ms release field while processing uses 70 ms.
+  - Final VST3 product integration, pluginval, official validator, and Cubase Pro 14 validation are pending.
+  - User private raw vocal corpus is not stored in CIPI and remains a final listening source.
+
+next_stage: measurement
+why_next: "The transparent DSP core is numerically locked and objectively GO_FOR_BLIND; the next high-value work is operating-point/Amount research plus stereo regression and level-matched listening preparation without changing the frozen transparent core."
+next_confirmation: "Whether a simple product control mapping can deliver consistent useful GR across vocal levels while preserving the frozen core behavior, and whether the stereo MAX wrapper remains regression-safe with 8/70 ms ballistics."
+
+blockers:
+  - "Human listening sign-off and Cubase Pro 14 host validation require user-side evaluation."

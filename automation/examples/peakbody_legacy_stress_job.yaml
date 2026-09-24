@@ -1,0 +1,40 @@
+schema_version: "1.0"
+job_id: PEAKBODY-LEGACY-STRESS-001
+state: QUEUED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: "Can CIPI autonomously reproduce the historical PeakBody softened crest-to-fast stress model as durable negative evidence?"
+hypothesis: "The allowlisted worker will replay the historical model deterministically and preserve its documented numeric bounds."
+counter_hypotheses:
+  - "The historical model script no longer executes reproducibly."
+  - "The replay produces non-finite or out-of-bound detector/timing values."
+baseline:
+  - documented_historical_model
+variants:
+  - autonomous_replay
+metrics:
+  - row_count
+  - all_numeric_finite
+  - scale_min_global
+  - scale_mean_max
+acceptance:
+  - "exactly six documented stress signals are emitted"
+  - "all numeric fields are finite"
+  - "scale_min_global is at least 0.25"
+  - "scale_mean_max does not exceed 1.0"
+rejection:
+  - "any required invariant fails"
+max_runs: 1
+timeout_minutes: 5
+random_seed: 6100331
+experiment_adapter: peakbody_legacy_model_stress_v1
+allowed_operations:
+  - read_repo_measurement_script
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - main_push
+  - knowledge_promotion

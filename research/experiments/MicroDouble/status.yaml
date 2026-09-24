@@ -1,0 +1,35 @@
+id: MICRODOUBLE_01
+title: CIPI MicroDouble 0.1
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.40
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+
+completed: []
+
+unresolved:
+  - The balance between perceptual width and mono coloration is not numerically locked.
+  - Pitch/time modulation ranges that sound like a second take rather than chorus are not established.
+  - Frequency-dependent decorrelation strategy is not selected.
+  - Low-frequency mono protection and center preservation need objective acceptance targets.
+  - Modulation aliasing / interpolation requirements remain open.
+
+next_stage: review
+why_next: "Delay and time-varying all-pass mechanisms are established; competing vocal-doubling architectures must be compared against mono compatibility and naturalness."
+next_confirmation: "Whether a protected center plus lower-level decorrelated side voices can provide useful vocal width with substantially less mono damage than equal-level Haas copies."
+
+blockers:
+  - "Naturalness and double-track plausibility require level-matched vocal listening."

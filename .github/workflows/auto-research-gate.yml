@@ -41,7 +41,12 @@ jobs:
       - name: Run deterministic mock worker
         run: |
           rm -rf research/runs/AUTO-SMOKE-001
-          python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001
+          python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001 --run-id mock-0001
+
+      - name: Run allowlisted real DSP research adapter
+        run: |
+          rm -rf research/runs/PEAKBODY-LEGACY-STRESS-001
+          python automation/worker/runner.py automation/examples/peakbody_legacy_stress_job.yaml --output research/runs/PEAKBODY-LEGACY-STRESS-001/ci-0001 --run-id ci-0001
 
       - name: Validate research results and artifact safety
         run: python tools/validate_research_result.py

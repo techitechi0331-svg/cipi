@@ -102,6 +102,10 @@
     "random_seed": {
       "type": "integer"
     },
+    "experiment_adapter": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,95}$"
+    },
     "allowed_operations": {
       "type": "array",
       "items": {

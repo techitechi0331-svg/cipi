@@ -1,0 +1,13 @@
+{
+  "all_numeric_finite": true,
+  "burst30_candidate_sr_spread_db": 0.00043391100000000904,
+  "burst_matrix_complete": true,
+  "crest_gain_invariance_abs_diff_max": 0.0,
+  "python_model_realtime_factor_min": 2.692522,
+  "row_count": 36,
+  "settled_fraction_150ms_max": 0.906289821,
+  "settled_fraction_150ms_min": 0.906253007,
+  "short_burst_extra_gr_max_db": 0.006399959,
+  "short_burst_extra_gr_min_db": -0.015419665,
+  "steady_gr_sr_spread_db": 7.211799999984336e-05
+}

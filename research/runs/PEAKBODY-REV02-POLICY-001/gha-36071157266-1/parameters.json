@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "fixed_40ms_attack_400ms_release"
+  ],
+  "experiment_adapter": "peakbody_revision02_policy_v1",
+  "job_file": "research/jobs/queued/PEAKBODY-REV02-POLICY-001.yaml",
+  "metrics": [
+    "short_burst_extra_gr_max_db",
+    "short_burst_extra_gr_min_db",
+    "settled_fraction_150ms_min",
+    "burst30_candidate_sr_spread_db",
+    "steady_gr_sr_spread_db",
+    "crest_gain_invariance_abs_diff_max",
+    "all_numeric_finite",
+    "python_model_realtime_factor_min"
+  ],
+  "variants": [
+    "peakbody_revision02_80ms_split_direction"
+  ]
+}

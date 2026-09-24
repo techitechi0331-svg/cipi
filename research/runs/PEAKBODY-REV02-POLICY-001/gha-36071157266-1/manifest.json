@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/PeakBody/revision02_policy_model.py"
+  ],
+  "completed_at": "2026-09-24T23:08:05.573331Z",
+  "environment": {
+    "experiment_adapter": "peakbody_revision02_policy_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "PEAKBODY-REV02-POLICY-001",
+  "random_seed": 20260925,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36071157266-1",
+  "schema_version": "1.0",
+  "source_commit": "8dea57806777f33ad5c18fe23aadc44d265d85a4",
+  "started_at": "2026-09-24T23:08:00.099391Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

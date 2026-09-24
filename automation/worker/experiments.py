@@ -24,6 +24,7 @@ ADAPTERS = {
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
     "vo_prep_snapshot_gate_v1",
+    "vopripro_real_vocal_snapshot_gate_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -604,6 +605,197 @@ def _vl2a_phase01h_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[
         ),
     }
 
+
+
+def _vopripro_real_vocal_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+
+    root = (
+        repo_root
+        / "research"
+        / "plugins"
+        / "vopripro"
+        / "evidence"
+        / "main-cc796d30"
+    )
+    metrics_path = root / "real_vocal_metrics.csv"
+    checksum_path = root / "checksums.sha256"
+
+    if not metrics_path.is_file():
+        raise FileNotFoundError(metrics_path)
+    if not checksum_path.is_file():
+        raise FileNotFoundError(checksum_path)
+
+    expected: dict[str, str] = {}
+    for line in checksum_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        digest, filename = line.split(None, 1)
+        expected[filename.strip()] = digest.lower()
+
+    checksum_ok = True
+    for filename, digest in expected.items():
+        path = root / filename
+        if not path.is_file():
+            checksum_ok = False
+            continue
+        actual = hashlib.sha256(path.read_bytes()).hexdigest().lower()
+        checksum_ok = checksum_ok and actual == digest
+
+    with metrics_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    expected_files = {
+        "man1_twinkle.wav",
+        "man4_twinkle.wav",
+        "woman1_twinkle.wav",
+        "woman3_twinkle.wav",
+    }
+    expected_presets = {
+        "Amount25-Natural",
+        "Amount50-Smooth",
+        "Amount50-Natural",
+        "Amount50-Punch",
+        "Amount75-Natural",
+        "DrivePlus6",
+    }
+    actual_files = {row["file"] for row in rows}
+    actual_presets = {row["preset"] for row in rows}
+
+    matrix_complete = (
+        len(rows) == len(expected_files) * len(expected_presets)
+        and actual_files == expected_files
+        and actual_presets == expected_presets
+        and all(
+            sum(
+                1
+                for row in rows
+                if row["file"] == filename and row["preset"] == preset
+            )
+            == 1
+            for filename in expected_files
+            for preset in expected_presets
+        )
+    )
+
+    all_status_pass = bool(rows) and all(row["status"] == "PASS" for row in rows)
+    finite_numeric = True
+    numeric_fields = [
+        "duration_s",
+        "input_peak_db",
+        "input_rms_db",
+        "input_crest_db",
+        "input_dynamic_p90_p10_db",
+        "output_peak_db",
+        "output_rms_db",
+        "output_crest_db",
+        "output_dynamic_p90_p10_db",
+        "gr_p50_db",
+        "gr_p95_db",
+        "gr_max_db",
+        "limiter_p95_db",
+        "limiter_max_db",
+        "ab_active_rms_match_gain_db",
+    ]
+    for row in rows:
+        for field in numeric_fields:
+            finite_numeric = finite_numeric and math.isfinite(float(row[field]))
+
+    natural = [row for row in rows if row["preset"] == "Amount50-Natural"]
+    drive = [row for row in rows if row["preset"] == "DrivePlus6"]
+
+    dynamic_reduction = [
+        float(row["input_dynamic_p90_p10_db"])
+        - float(row["output_dynamic_p90_p10_db"])
+        for row in natural
+    ]
+    crest_change_abs = [
+        abs(float(row["output_crest_db"]) - float(row["input_crest_db"]))
+        for row in natural
+    ]
+    natural_limiter = [float(row["limiter_max_db"]) for row in natural]
+    natural_gr_cap_error = [abs(float(row["gr_max_db"]) - 6.0) for row in natural]
+    ab_match_gain = [abs(float(row["ab_active_rms_match_gain_db"])) for row in natural]
+
+    drive_peak_error = [abs(float(row["output_peak_db"]) - (-1.0)) for row in drive]
+    drive_limiter = [float(row["limiter_max_db"]) for row in drive]
+
+    raw_audio_present = any(root.rglob("*.wav"))
+    dynamic_sorted = sorted(dynamic_reduction)
+
+    metrics = {
+        "checksum_ok": checksum_ok,
+        "row_count": len(rows),
+        "file_count": len(actual_files),
+        "preset_count": len(actual_presets),
+        "matrix_complete": matrix_complete,
+        "all_status_pass": all_status_pass,
+        "all_numeric_finite": finite_numeric,
+        "natural_case_count": len(natural),
+        "natural_dynamic_reduction_min_db": min(dynamic_reduction) if dynamic_reduction else None,
+        "natural_dynamic_reduction_median_db": (
+            (dynamic_sorted[1] + dynamic_sorted[2]) / 2.0
+            if len(dynamic_sorted) == 4
+            else None
+        ),
+        "natural_dynamic_reduction_max_db": max(dynamic_reduction) if dynamic_reduction else None,
+        "natural_crest_change_abs_max_db": max(crest_change_abs) if crest_change_abs else None,
+        "natural_limiter_max_db": max(natural_limiter) if natural_limiter else None,
+        "natural_gr_cap_error_max_db": max(natural_gr_cap_error) if natural_gr_cap_error else None,
+        "natural_ab_match_gain_abs_max_db": max(ab_match_gain) if ab_match_gain else None,
+        "drive_case_count": len(drive),
+        "drive_peak_error_max_db": max(drive_peak_error) if drive_peak_error else None,
+        "drive_limiter_min_db": min(drive_limiter) if drive_limiter else None,
+        "drive_limiter_max_db": max(drive_limiter) if drive_limiter else None,
+        "raw_audio_present": raw_audio_present,
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and matrix_complete
+        and all_status_pass
+        and finite_numeric
+        and len(natural) == 4
+        and min(dynamic_reduction) >= 2.0
+        and max(dynamic_reduction) <= 8.0
+        and max(crest_change_abs) <= 2.0
+        and max(natural_limiter) <= 0.25
+        and max(natural_gr_cap_error) <= 0.01
+        and max(ab_match_gain) <= 8.0
+        and len(drive) == 4
+        and max(drive_peak_error) <= 0.01
+        and min(drive_limiter) >= 0.10
+        and not raw_audio_present
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"measurement.csv": output.getvalue()},
+        "commands": [
+            "read committed VoPriPro derived real-vocal CSV",
+            "verify committed SHA256 ledger",
+            "compare Natural50 against identity input baseline using predeclared objective bounds",
+            "verify +6 dB drive safety-limiter stress behavior",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic CIPI review of the imported VoPriPro v0.1 main real-vocal "
+            "measurement snapshot. Identity input is the simple baseline; Natural50 is "
+            "the candidate. The gate checks evidence integrity, matrix completeness, "
+            "bounded 100 ms dynamic-range reduction, crest preservation, limiter inactivity "
+            "for Natural50, and safety-limiter engagement for +6 dB drive. It does not "
+            "judge subjective sound quality, persist raw audio, alter product DSP, change "
+            "confidence/stage, or release a product."
+        ),
+    }
 
 
 def _vocal_resonance_clean_negative_audit(
@@ -1225,4 +1417,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_clean_negative_reaudit(repo_root, timeout_seconds)
     if name == "vo_prep_snapshot_gate_v1":
         return _vo_prep_snapshot_gate(repo_root, timeout_seconds)
+    if name == "vopripro_real_vocal_snapshot_gate_v1":
+        return _vopripro_real_vocal_snapshot_gate(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

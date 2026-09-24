@@ -1,0 +1,6 @@
+claim: Clean-vocal false triggers for resonance ranking may be concentrated by vocal
+  technique or pitch regime rather than uniformly distributed.
+evidence_type: HYPOTHESIS
+scope: Vocal resonance semantic-ranker hard-negative design and subgroup measurement.
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1
+promotion_requested: HYPOTHESIS

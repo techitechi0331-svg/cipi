@@ -1,0 +1,6 @@
+label_name,n,false_trigger_rate,mean_max_score
+belt,5,0.0,0.6525109530397817
+breathy,8,0.25,0.7096159463637411
+fast_forte,8,0.375,0.7197587903743246
+fast_piano,8,0.625,0.7478589547200122
+lip_trill,3,0.0,0.6886118205446681

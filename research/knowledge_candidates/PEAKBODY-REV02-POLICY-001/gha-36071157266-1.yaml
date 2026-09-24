@@ -1,0 +1,8 @@
+claim: For the tested PeakBody model, separating adaptive attack and release direction
+  by crest can preserve 10-30 ms transients near a fixed 40 ms attack while still
+  tightening sustained body within a 150 ms convergence target.
+evidence_type: MEASURED
+scope: PeakBody Revision 02 deterministic model across 44.1/48/96/192 kHz synthetic
+  burst and sustain tests.
+source_run: research/runs/PEAKBODY-REV02-POLICY-001/gha-36071157266-1
+promotion_requested: PROVISIONAL

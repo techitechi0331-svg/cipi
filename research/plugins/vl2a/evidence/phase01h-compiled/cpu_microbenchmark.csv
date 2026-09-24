@@ -1,0 +1,2 @@
+samples,seconds,ns_per_sample,realtime_factor_at_192k,sink
+5000000,0.0897793,17.9559,290.063,4.43916e-12

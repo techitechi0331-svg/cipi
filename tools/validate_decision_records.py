@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import hashlib
 import json
 import sys
 import yaml
@@ -15,6 +16,65 @@ DECISIONS = {"PROMOTE", "ITERATE", "ARCHIVE", "REJECT"}
 EVENTS = {"AUTOMATED_PROPOSAL", "REVIEW"}
 AUTHORITIES = {"AUTOMATION", "HUMAN_REVIEW", "ASSISTANT_REVIEW"}
 REVIEW_STATES = {"PENDING", "CONFIRMED", "SUPERSEDED"}
+
+
+LEGACY_EXEMPTIONS_PATH = ROOT / "automation" / "policies" / "LEGACY_DECISION_EXEMPTIONS.yaml"
+
+
+def git_blob_sha1(path: Path) -> str:
+    raw = path.read_bytes()
+    header = f"blob {len(raw)}\0".encode("ascii")
+    return hashlib.sha1(header + raw).hexdigest()
+
+
+def load_legacy_exemptions() -> list[dict]:
+    if not LEGACY_EXEMPTIONS_PATH.is_file():
+        return []
+    data = yaml.safe_load(LEGACY_EXEMPTIONS_PATH.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or data.get("schema_version") != "1.0":
+        raise ValueError("invalid legacy decision exemption ledger")
+    records = data.get("records", [])
+    if not isinstance(records, list):
+        raise ValueError("legacy decision exemption records must be a list")
+    return [item for item in records if isinstance(item, dict)]
+
+
+def apply_legacy_exemptions(errors: list[str]) -> tuple[list[str], int]:
+    records = load_legacy_exemptions()
+    allowed: dict[str, tuple[str, set[str]]] = {}
+
+    for item in records:
+        relative = str(item.get("path", "")).strip()
+        expected_blob = str(item.get("git_blob_sha1", "")).strip().lower()
+        suffixes = item.get("allowed_errors", [])
+        if not relative or not expected_blob or not isinstance(suffixes, list):
+            continue
+
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        if git_blob_sha1(path).lower() != expected_blob:
+            continue
+
+        allowed[str(path)] = (relative, {str(x) for x in suffixes})
+
+    retained: list[str] = []
+    exempted = 0
+    for error in errors:
+        matched = False
+        for absolute, (_, suffixes) in allowed.items():
+            prefix = absolute + ": "
+            if not error.startswith(prefix):
+                continue
+            detail = error[len(prefix):]
+            if detail in suffixes:
+                matched = True
+                exempted += 1
+                break
+        if not matched:
+            retained.append(error)
+
+    return retained, exempted
 
 def validate(path: Path) -> list[str]:
     try:
@@ -139,12 +199,14 @@ def main() -> int:
             parent = data.get("parent_decision_id")
             if parent not in records:
                 errors.append(f"{path}: parent_decision_id does not reference an existing decision record")
+    errors, exempted = apply_legacy_exemptions(errors)
     if errors:
         print("CIPI decision record gate: FAIL")
         for error in errors:
             print("-", error)
         return 1
-    print(f"CIPI decision record gate: PASS ({len(files)} file(s))")
+    suffix = f", {exempted} exact legacy exception(s) applied" if exempted else ""
+    print(f"CIPI decision record gate: PASS ({len(files)} file(s){suffix})")
     return 0
 
 if __name__ == "__main__":

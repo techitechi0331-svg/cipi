@@ -1,0 +1,26 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed VL2A checksum ledger",
+    "hash exact committed bytes",
+    "compare expected digest against exact/LF/CRLF-normalized UTF-8 representations"
+  ],
+  "completed_at": "2026-09-24T23:52:22.842770Z",
+  "environment": {
+    "experiment_adapter": "vl2a_phase01h_checksum_diagnosis_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VL2A-PHASE01H-CHECKSUM-DIAG-001",
+  "random_seed": 3310202,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36074857352-1",
+  "schema_version": "1.0",
+  "source_commit": "0e42174961f99df74e0081b71ddda8296cb64734",
+  "started_at": "2026-09-24T23:52:22.837551Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

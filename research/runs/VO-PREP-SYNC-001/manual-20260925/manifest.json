@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "kind": "manual_repository_evidence_sync",
+  "track": "VO_PREP_FORMAL",
+  "source_repo": "techitechi0331-svg/Vo.Prep",
+  "source_snapshot_sha": "28afccdf6d863f1c874ecd086fcb62d5b4f21a82",
+  "measured_product_sha": "fbd0220e037e9e45a8161f059ae56ae99a2b6af0",
+  "source_ci_run": 36045159974,
+  "source_artifact_digest": "sha256:309dabf1345a66554c31a150637efd502691d0e4f22280254538375bbb174175",
+  "raw_audio_in_cipi": false,
+  "imported_files": [
+    "docs/MacroLevel_v2_1.md",
+    "docs/PlosiveGuard_v2_2.md",
+    "docs/SibilanceGuard_v2_3.md",
+    "docs/VocalPrep_v2_5_Utilities.md",
+    "Tests/IntegrationTests.cpp",
+    "Tests/PlosiveGuardTests.cpp",
+    "Tests/SibilanceGuardTests.cpp",
+    "Tests/UtilityTests.cpp",
+    ".github/workflows/build-windows.yml"
+  ],
+  "note": "Derived research facts and measurements only. Client audio is not imported."
+}

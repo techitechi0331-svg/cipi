@@ -24,7 +24,6 @@ completed:
   - parameter_lock
   - implementation
   - measurement
-  - autonomous_product_snapshot_gate
 
 unresolved:
   - v0.3 requires target-machine subjective listening on the user's own vocal material.

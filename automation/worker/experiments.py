@@ -10,6 +10,7 @@ import sys
 from typing import Any
 
 ADAPTERS = {
+    "black76_ratio_p2a_compare_v1",
     "peakbody_legacy_model_stress_v1",
     "original_vocal_pre_measurement_gate_v1",
 }
@@ -341,6 +342,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         raise ValueError("timeout_seconds must be positive")
     if name == "peakbody_legacy_model_stress_v1":
         return _peakbody_legacy_model_stress(repo_root, timeout_seconds)
+    if name == "black76_ratio_p2a_compare_v1":
+        return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":
         return _original_vocal_pre_measurement_gate(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

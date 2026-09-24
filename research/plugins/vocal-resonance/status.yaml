@@ -1,0 +1,35 @@
+id: VOCAL_RESONANCE_FORMAL
+title: Vocal Resonance Suppressor Research Track
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.5
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/Vocal_resonance"
+
+stages:
+  research: in_progress
+  review: in_progress
+  parameter_lock: pending
+  implementation: pending
+  measurement: in_progress
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+completed:
+  []
+unresolved:
+  - Real-vocal controlled injection has not passed the hard gate.
+  - High-F0/formant-overlap discovery remains difficult.
+  - Candidate budget K=15 versus K=20 is not frozen.
+  - Semantic ranking must not resume until candidate discovery is validated on real vocals.
+
+next_stage: measurement
+why_next: "Several synthetic detector architectures have been falsified or downgraded; the current design is frozen until observability-aware real-vocal evidence exists."
+next_confirmation: "Whether candidate generation keeps useful recall under a hard budget on real singing without confusing normal harmonics/formants for resonances."
+blockers:
+  - Controlled real-vocal injection is the explicit hard gate.

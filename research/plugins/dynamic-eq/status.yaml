@@ -1,0 +1,35 @@
+id: DYNAMIC_EQ_FORMAL
+title: Dynamic EQ Formal Historical Research Track
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.45
+
+source_kind: historical_project_record
+source_ref: "Project conversation history; no standalone connected GitHub repository found"
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: complete
+  measurement: pending
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+completed:
+  - implementation
+unresolved:
+  - Band state persistence failed when selecting another band in the historical prototype.
+  - Dynamic processing could stop during use.
+  - Multi-band data/state architecture and parameter ownership need redesign and regression coverage.
+  - No current connected source repository is available for code review.
+
+next_stage: review
+why_next: "A prototype existed before the state-management and dynamic-band architecture was adequately formalized; design review must precede more tuning."
+next_confirmation: "A stable multi-band state model, clear per-band dynamic semantics and regression plan preventing reset/stop failures."
+blockers:
+  - Historical source code must be recovered/imported for implementation-level review.

@@ -1,0 +1,37 @@
+id: UA610_FORMAL
+title: 610-B Research Pre Formal Research Track
+
+status: measurement
+knowledge_status: PROVISIONAL
+confidence: 0.76
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/610"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: measurement
+completed:
+  - research
+  - review
+  - implementation
+unresolved:
+  - Exact transformer magnetic parameters and the complete modern 2-610 network are not public.
+  - A reference-hardware Golden Dataset is missing.
+  - Feedback/EQ implementation remains provisional.
+  - Hardware-calibrated magnitude/phase, H2-H10, THD, IMD, transient, EQ and LF saturation data are required.
+
+next_stage: measurement
+why_next: "The gray-box implementation and internal measurement harness exist; further fidelity progress depends on reference-hardware data rather than speculative coding."
+next_confirmation: "How closely the model matches a known 610-B/2-610 reference across level, frequency, harmonic and transient behavior."
+blockers:
+  - Known-reference hardware Golden Dataset is required for hardware-fidelity promotion.

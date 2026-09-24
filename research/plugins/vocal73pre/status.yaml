@@ -1,0 +1,38 @@
+id: VOCAL73PRE_FORMAL
+title: Vocal 73 Pre Formal Research Track
+
+status: measurement
+knowledge_status: PROVISIONAL
+confidence: 0.65
+
+source_kind: repository_verified_nested
+source_ref: "https://github.com/techitechi0331-svg/VocalPrepComp/tree/main/Vocal73Pre"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: complete
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: measurement
+completed:
+  - research
+  - review
+  - implementation
+  - revision
+unresolved:
+  - No exact 1073 hardware-reproduction claim is supported.
+  - Coloration/tone curves need calibrated measurement and level-matched listening.
+  - Cubase Pro 14 full host validation is not formally registered.
+  - Oversampling/latency and ANALOG bypass need continued regression coverage.
+
+next_stage: measurement
+why_next: "v0.2 fixed earlier latency and COLOR=0 problems; remaining work is proving the color mapping is useful and technically well behaved."
+next_confirmation: "Harmonic, frequency, level-compensation, alias and bypass-equivalence behavior across COLOR and INPUT."
+blockers:
+  - Reference-hardware fidelity requires a defined target and measurements.

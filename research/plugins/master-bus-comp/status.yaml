@@ -1,0 +1,37 @@
+id: MASTER_BUS_COMP_FORMAL
+title: Master Bus Comp Formal Research Track
+
+status: review
+knowledge_status: LIKELY
+confidence: 0.6
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/MasterBusComp"
+
+stages:
+  research: complete
+  review: in_progress
+  parameter_lock: pending
+  implementation: complete
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: review
+completed:
+  - research
+  - implementation
+unresolved:
+  - Auto-release curves require measurement and lock.
+  - Auto gain-match behavior needs objective loudness validation.
+  - Feedback calibration and stereo/M-S edge cases are unvalidated.
+  - Tone-mode alias/oversampling behavior needs characterization.
+  - Cubase automation/state recall and real-music AB remain pending.
+
+next_stage: measurement
+why_next: "The prototype contains many interacting mastering features; measurement is needed to separate useful mechanisms from convenience hypotheses."
+next_confirmation: "Transfer/timing, stereo stability, gain matching, nonlinear aliasing and low-GR transparency."
+blockers:
+  - Real-music level-matched listening and Cubase validation are required.

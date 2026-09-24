@@ -1,0 +1,39 @@
+id: VOPRIPRO_FORMAL
+title: VoPriPro / VocalPrepComp Formal Research Track
+
+status: audio_ab
+knowledge_status: PROVISIONAL
+confidence: 0.86
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/VocalPrepComp"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: complete
+  audio_ab: pending
+  revision: complete
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: audio_ab
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+  - measurement
+  - revision
+unresolved:
+  - Gain-matched real-vocal AB is not formally registered in CIPI.
+  - Cubase Pro 14 scan/load/save-reopen verification is not formally complete.
+  - Final review must test the fixed Natural 50% mapping across representative vocals.
+
+next_stage: audio_ab
+why_next: "DSP specification, regression tests, Windows VST3 builds and pluginval validation are already strong; the remaining evidence gap is real-vocal listening and target-host verification."
+next_confirmation: "Whether the locked Amount/Character mapping remains natural across representative singing after level matching."
+blockers:
+  - Target-host and subjective validation require Cubase Pro 14 and representative dry vocals.

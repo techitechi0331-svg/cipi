@@ -23,9 +23,8 @@
 | MET-002 | EBU Tech 3341 v4.0, 2023. https://tech.ebu.ch/publications/tech3341 | technical standard | meter validation | E5 |
 | EQ-001 | Hafezi, Reiss, **Autonomous Multitrack Equalization Based on Masking Reduction**, JAES 63(5), 2015. https://aes.org/publications/elibrary-page/?id=17637 | peer-reviewed / AES | masking-aware adaptive EQ research | E5 |
 | VOX-001 | Wolfe et al., **Vocal tract resonances in speech, singing, and playing musical instruments**, HFSP Journal, 2009. https://pmc.ncbi.nlm.nih.gov/articles/PMC2689615/ | peer-reviewed | vocal resonance / spectral-envelope context | E5 |
-
-A repeated quotation of one original source does not count as independent corroboration.
 | VA-1176-001 | Gerat, Eichas, Zölzer, **Virtual Analog Modeling of a UREI 1176LN Dynamic Range Control System**, AES 143, 2017. https://aes.org/publications/elibrary-page/?id=19249 | peer-reviewed / AES | gray-box block-oriented 1176 modeling and validation | E5 |
 | OPTO-001 | Najnudel, Müller, Hélie, Roze, **Power-Balanced Dynamic Modeling of Vactrols: Application to a VTL5C3/2**, DAFx-23. https://dafx.de/paper-archive/details/FQ0s5ZsffVCpJ_T1Far3GA | peer-reviewed conference | physical stateful optocoupler model for optical compression | E5 |
 | OPTO-002 | Simionato, Fasciani, **Fully Conditioned and Low-Latency Black-Box Modeling of Analog Compression**, DAFx-23. https://www.dafx.de/paper-archive/details/1iUC09PiIdeqD8hEE-xSsg | peer-reviewed conference | parameter-conditioned real-time optical compressor modeling | E5 |
 
+A repeated quotation of one original source does not count as independent corroboration.

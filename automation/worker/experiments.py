@@ -226,6 +226,114 @@ def _original_vocal_pre_measurement_gate(repo_root: Path, timeout_seconds: int) 
     }
 
 
+
+def _black76_ratio_p2a_compare(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    source = repo_root / "research/reference_devices/1176/black76_ratio_compare.csv"
+    if not source.is_file():
+        raise FileNotFoundError(source)
+
+    with source.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    required_datasets = {"supplemental_target", "black76_baseline", "black76_p2a"}
+    modes = ["4", "8", "12", "20"]
+    ratio_fields = ["ratio_1_6", "ratio_6_12", "ratio_12_18"]
+
+    table: dict[str, dict[str, dict[str, float]]] = {}
+    for row in rows:
+        dataset = row["dataset"]
+        mode = row["mode"]
+        table.setdefault(dataset, {})[mode] = {
+            "onset_dbfs": float(row["onset_dbfs"]),
+            **{field: float(row[field]) for field in ratio_fields},
+        }
+
+    missing = [
+        f"{dataset}:{mode}"
+        for dataset in required_datasets
+        for mode in modes
+        if mode not in table.get(dataset, {})
+    ]
+    if missing:
+        raise ValueError("missing ratio evidence rows: " + ", ".join(missing))
+
+    def onset_order_correct(dataset: str) -> bool:
+        values = [table[dataset][mode]["onset_dbfs"] for mode in modes]
+        return all(values[i] < values[i + 1] for i in range(len(values) - 1))
+
+    def onset_mae(dataset: str) -> float:
+        return sum(
+            abs(table[dataset][mode]["onset_dbfs"] - table["supplemental_target"][mode]["onset_dbfs"])
+            for mode in modes
+        ) / len(modes)
+
+    def ratio_log_rmse(dataset: str) -> float:
+        errors = []
+        for mode in modes:
+            for field in ratio_fields:
+                actual = table[dataset][mode][field]
+                target = table["supplemental_target"][mode][field]
+                errors.append(math.log(actual / target))
+        return math.sqrt(sum(e * e for e in errors) / len(errors))
+
+    baseline_error = ratio_log_rmse("black76_baseline")
+    candidate_error = ratio_log_rmse("black76_p2a")
+    improvement_percent = 100.0 * (baseline_error - candidate_error) / max(baseline_error, 1.0e-12)
+
+    deep_fraction_min = min(
+        table["black76_p2a"][mode]["ratio_12_18"]
+        / table["supplemental_target"][mode]["ratio_12_18"]
+        for mode in ("12", "20")
+    )
+
+    metrics = {
+        "baseline_threshold_order_correct": onset_order_correct("black76_baseline"),
+        "candidate_threshold_order_correct": onset_order_correct("black76_p2a"),
+        "baseline_onset_mae_db": onset_mae("black76_baseline"),
+        "candidate_onset_mae_db": onset_mae("black76_p2a"),
+        "baseline_ratio_log_rmse": baseline_error,
+        "candidate_ratio_log_rmse": candidate_error,
+        "ratio_error_improvement_percent": improvement_percent,
+        "candidate_deep_ratio_fraction_min_12_20": deep_fraction_min,
+    }
+
+    acceptance_met = (
+        metrics["candidate_threshold_order_correct"]
+        and metrics["candidate_onset_mae_db"] <= 1.0
+        and candidate_error <= 0.30
+        and improvement_percent >= 15.0
+        and deep_fraction_min >= 0.70
+    )
+
+    comparison = io.StringIO()
+    writer = csv.writer(comparison)
+    writer.writerow([
+        "dataset", "mode", "onset_dbfs",
+        "ratio_1_6", "ratio_6_12", "ratio_12_18"
+    ])
+    for dataset in ("supplemental_target", "black76_baseline", "black76_p2a"):
+        for mode in modes:
+            row = table[dataset][mode]
+            writer.writerow([
+                dataset, mode, row["onset_dbfs"],
+                row["ratio_1_6"], row["ratio_6_12"], row["ratio_12_18"]
+            ])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"comparison.csv": comparison.getvalue()},
+        "commands": ["deterministic_read:black76_ratio_compare.csv"],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic comparison of committed Black76 Priority-2 evidence. "
+            "P2-A is accepted only if it fixes threshold ordering and also materially "
+            "improves static-ratio slope accuracy. A threshold-only improvement is "
+            "retained as useful negative evidence, not promoted as a complete ratio solution."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")

@@ -47,4 +47,10 @@
 | PHON-001 | Toles et al., **Estimating Pressed and Breathy Phonation From Cepstral and Spectral Measures**, Journal of Voice, 2025. https://doi.org/10.1016/j.jvoice.2025.02.017 | peer-reviewed | CPP / H1-H2 distinction for breathy vs typical/pressed phonation | E5 |
 | PHON-002 | Samlan, Story, **Relation of Perceived Breathiness to Laryngeal Kinematics and Acoustic Measures Based on Computational Modeling**, JSLHR, 2013. https://pmc.ncbi.nlm.nih.gov/articles/PMC3984008/ | peer-reviewed | CPP / spectral-slope relation to perceived breathiness | E5 |
 
+| RES-PROD-001 | oeksound, **Soothe3 Manual / product documentation**, 2026. https://soothe3manual.oeksound.com/ | official product documentation | public behavior reference: relative-tone Soft mode, frequency-dependent ballistics, Max Cut, minimum-phase default behavior; proprietary internals unknown | E3 |
+| RES-PROD-002 | TBProAudio, **DSEQ3 Manual**. https://www.tbproaudio.de/assets/content/manuals/dseq3_manual.pdf | official product documentation | public behavior reference: FFT-frequency dynamic EQ, selectivity, timing; proprietary implementation not inferred | E3 |
+| RES-PROD-003 | Baby Audio, **Smooth Operator Pro** product documentation. https://babyaud.io/smooth-operator-plugin | official product documentation | simplified spectral-balancing product behavior / usability reference | E3 |
+| RES-PROD-004 | Waves, **Curves Equator** product documentation. https://www.waves.com/plugins/curves-equator | official product documentation | learned/source-relative suppression-curve product behavior reference; proprietary internals unknown | E3 |
+| DATA-VOX-001 | Wilkins et al., **VocalSet: A Singing Voice Dataset**, ISMIR / Zenodo. https://zenodo.org/records/1442513 | research dataset / paper | 20 professional singers, technique-diverse monophonic singing corpus used for real-vocal controlled-injection validation | E5 |
+
 A repeated quotation of one original source does not count as independent corroboration.

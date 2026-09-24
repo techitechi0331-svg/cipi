@@ -1,0 +1,89 @@
+{
+  "macro_level_v2_1": {
+    "short_ms": 700,
+    "reference_ms": 2500,
+    "dead_zone_db": [
+      1,
+      2
+    ],
+    "cut_ratio": 0.18,
+    "boost_ratio": 0.08,
+    "max_cut_db": -2,
+    "max_boost_db": 1.25,
+    "cut_slew_db_s": 1.5,
+    "boost_slew_db_s": 0.6,
+    "vad_ms": 50,
+    "vad_hangover_ms": 200,
+    "lookahead_samples": 0
+  },
+  "plosive_guard_v2_2": {
+    "detect_low_hz": [
+      20,
+      80
+    ],
+    "mid_ref_hz": [
+      250,
+      1000
+    ],
+    "broad_ref_hz": [
+      80,
+      4000
+    ],
+    "activate": 0.75,
+    "release": 0.55,
+    "pivot_hz": 140,
+    "attack_ms": 2,
+    "hold_ms": 15,
+    "release_ms": 70,
+    "max_event_ms": 120,
+    "max_reduction_50_db": 3,
+    "max_reduction_100_db": 5,
+    "lookahead_samples": 0
+  },
+  "sibilance_guard_v2_3": {
+    "high_hz": [
+      4000,
+      12000
+    ],
+    "mid_hz": [
+      1000,
+      4000
+    ],
+    "broad_hz": [
+      250,
+      12000
+    ],
+    "upper_hz": [
+      7000,
+      12000
+    ],
+    "weights": [
+      0.45,
+      0.3,
+      0.1,
+      0.15
+    ],
+    "activate": 0.65,
+    "release": 0.45,
+    "rearm": 0.35,
+    "split_hz": 4500,
+    "wide_fraction": 0.33,
+    "high_fraction": 0.67,
+    "attack_ms": 1,
+    "hold_ms": 10,
+    "release_ms": 60,
+    "max_event_ms": 350,
+    "max_reduction_50_db": 2,
+    "max_reduction_100_db": 3,
+    "lookahead_samples": 0
+  },
+  "utility_v2_5": {
+    "dc_block_hz": 1,
+    "subsonic_hz": 20,
+    "subsonic_order": 2,
+    "subsonic_default": false,
+    "subsonic_transition_ms": 20,
+    "meter_rms_ms": 300,
+    "latency_samples": 0
+  }
+}

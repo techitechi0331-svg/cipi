@@ -68,3 +68,10 @@ adapters:
     max_timeout_minutes: 12
     network_required: true
     purpose: "Independently re-audit disjoint VocalSet clean negatives across exercise families using a conservative YIN-style pitch proxy; persist derived metrics only."
+
+  vo_prep_snapshot_gate_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Validate the committed Vo.Prep derived-evidence snapshot, preserve negative/unresolved findings, and ensure no raw client audio is imported."

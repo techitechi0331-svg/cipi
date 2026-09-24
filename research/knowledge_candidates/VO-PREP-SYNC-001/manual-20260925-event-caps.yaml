@@ -1,0 +1,5 @@
+claim: Bounded event duration is a useful defensive pattern for short vocal-event detectors because it prevents sustained special phonation from remaining under continuous event-specific gain reduction after an onset-like false trigger.
+evidence_type: INFERRED
+scope: Inference from Vo.Prep Plosive 120 ms and Sibilance 350 ms safeguards plus synthetic stress tests; appropriate cap duration is detector- and product-specific.
+source_run: research/runs/VO-PREP-SYNC-001/manual-20260925
+promotion_requested: LIKELY

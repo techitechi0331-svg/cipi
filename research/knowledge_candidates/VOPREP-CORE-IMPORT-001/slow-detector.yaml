@@ -1,0 +1,8 @@
+claim: For the tested transparent vocal-compressor architecture, a simple 25 ms exponential RMS body detector produced a better held-out stability/error trade-off than the tested dual-time recovery-assisted body detectors; recovery intelligence was better kept out of the level estimator.
+evidence_type: MEASURED
+scope: Vo.Prep Slow/Body detector synthetic and public-real-vocal held-out tests before final gain-control integration.
+promotion_requested: PROVISIONAL
+source_repository: techitechi0331-svg/Vo.Prep
+source_ref: research/integrated-vocal-compressor-core
+source_sha: a9441892056725cae8c393e64e5ee4c596af4a7b
+related_track: research/experiments/VoPrepTransparentCompressor

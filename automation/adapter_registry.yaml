@@ -60,3 +60,10 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Verify the committed Vocal One-Knob Doubler v0.3 product-measurement snapshot against the v0.2 simple baseline and fixed technical gates without raw audio or product mutation."
+
+  vo_prep_snapshot_gate_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Validate the committed Vo.Prep derived-evidence snapshot, preserve negative/unresolved findings, and ensure no raw client audio is imported."

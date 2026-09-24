@@ -1,0 +1,15 @@
+metric,value
+snapshot_checksum_ok,True
+baseline_v02_50_abs_mono_minus_stereo_db,0.083
+candidate_v03_50_abs_mono_minus_stereo_db,0.014
+candidate_v03_50_source_level_delta_abs_db,0.0019999999999988916
+v03_vs_v02_100_lr_correlation_delta_abs,0.011909999999999976
+candidate_v03_100_abs_mono_minus_stereo_db,0.618
+candidate_public50_internal_intensity,0.225
+pitch_error_abs_max_cents,0.00391377
+transport_stale_peak_max,0.0
+block_partition_max_difference,0.0
+fixed_mud_strong_activation_min_pct,99.0
+adaptive_mud_strong_activation_max_pct,5.14
+pluginval_strictness5_pass,1.0
+windows_vst3_build_pass,1.0

@@ -56,7 +56,7 @@ This is important because A/B file generation and objective measurements are not
 
 ### Autonomous follow-up
 
-The next free-research step is to add an allowlisted deterministic snapshot adapter and queue `VOPRIPRO-REALVOCAL-SNAPSHOT-001`. That follow-up will verify the imported snapshot, compare Natural50 against the simple identity-input baseline using predeclared objective bounds, preserve negative evidence if any gate fails, and generate JSON/CSV/Markdown/SHA256 evidence. It must not store raw audio, mutate product DSP, promote the track, or release a product.
+`VOPRIPRO-REALVOCAL-SNAPSHOT-001` is queued for the free CIPI worker with the allowlisted `vopripro_real_vocal_snapshot_gate_v1` adapter. It verifies the imported snapshot, compares Natural50 against the simple identity-input baseline using predeclared objective bounds, preserves negative evidence if any gate fails, and generates JSON/CSV/Markdown/SHA256 evidence. It does not store raw audio, mutate product DSP, promote the track, change confidence/current_stage, or release a product.
 
 ### Current next gate
 

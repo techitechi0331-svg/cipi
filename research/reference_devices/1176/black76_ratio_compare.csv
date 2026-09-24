@@ -1,0 +1,13 @@
+dataset,mode,onset_dbfs,ratio_1_6,ratio_6_12,ratio_12_18
+supplemental_target,4,-42,3.0854,4.6462,5.0337
+supplemental_target,8,-40,4.9467,7.8239,8.2618
+supplemental_target,12,-38,7.7485,11.8871,12.1317
+supplemental_target,20,-37,13.7836,21.9264,22.8206
+black76_baseline,4,-45,2.9277,2.6344,2.1770
+black76_baseline,8,-50,3.5692,2.9622,2.1208
+black76_baseline,12,-52,4.1118,3.2887,1.8749
+black76_baseline,20,-54,4.5805,3.3160,1.5645
+black76_p2a,4,-42,2.9750,2.6379,2.1777
+black76_p2a,8,-40,3.5884,3.0036,2.1319
+black76_p2a,12,-38,4.1318,3.3138,1.8997
+black76_p2a,20,-37,4.6023,3.3454,1.6158

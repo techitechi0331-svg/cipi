@@ -9,10 +9,12 @@ on:
       - "research/reports/**"
       - "research/knowledge_candidates/**"
       - "research/decisions/**"
+      - "research/reviews/**"
       - "tools/validate_research_job.py"
       - "tools/validate_research_result.py"
       - "tools/validate_evidence_candidate.py"
       - "tools/validate_decision_records.py"
+      - "tools/validate_review_triage.py"
       - "tools/validate_research_change_scope.py"
       - "tools/test_research_integrity_guards.py"
       - ".github/workflows/auto-research-gate.yml"
@@ -62,6 +64,8 @@ jobs:
           python tools/validate_research_job.py
           python tools/validate_evidence_candidate.py
           python tools/validate_decision_records.py
+          python automation/review/triage.py --job-id AUTO-SMOKE-001 --run-id mock-0001
+          python tools/validate_review_triage.py
 
       - name: Exercise rejection preservation and decision recording
         run: |
@@ -69,6 +73,8 @@ jobs:
           python automation/worker/runner.py automation/examples/rejection_job.yaml --output research/runs/AUTO-REJECT-SMOKE-001/mock-reject-0001 --run-id mock-reject-0001
           python automation/queue/postprocess.py --job automation/examples/rejection_job.yaml --run-dir research/runs/AUTO-REJECT-SMOKE-001/mock-reject-0001
           python tools/validate_decision_records.py
+          python automation/review/triage.py --job-id AUTO-REJECT-SMOKE-001 --run-id mock-reject-0001
+          python tools/validate_review_triage.py
 
       - name: Run allowlisted real DSP research adapter
         run: |
@@ -80,6 +86,7 @@ jobs:
           python tools/validate_research_result.py
           python tools/validate_evidence_candidate.py
           python tools/validate_decision_records.py
+          python tools/validate_review_triage.py
 
       - name: Validate existing CIPI research contract
         run: python tools/validate_research.py

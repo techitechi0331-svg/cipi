@@ -6,6 +6,7 @@ on:
     paths:
       - "CMakeLists.txt"
       - "src/**"
+      - "tests/**"
       - ".github/workflows/build-windows.yml"
   workflow_dispatch:
 
@@ -16,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: windows-2025-vs2026
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +29,20 @@ jobs:
       - name: Build Release
         shell: pwsh
         run: cmake --build build --config Release --parallel 4
+
+      - name: Run deterministic DSP tests
+        shell: pwsh
+        run: |
+          $testExe = Get-ChildItem -Path build -Recurse -File -Filter CIPITests.exe | Select-Object -First 1
+          if (-not $testExe) {
+            throw "CIPITests.exe was not produced."
+          }
+
+          Write-Host "Running $($testExe.FullName)"
+          & $testExe.FullName
+          if ($LASTEXITCODE -ne 0) {
+            throw "Deterministic DSP tests failed with exit code $LASTEXITCODE."
+          }
 
       - name: Collect VST3 bundles
         shell: pwsh
@@ -47,6 +62,61 @@ jobs:
           Get-ChildItem -Path artifacts -Directory -Filter *.vst3 | ForEach-Object {
             Write-Host " - $($_.Name)"
           }
+
+      - name: Download pinned pluginval
+        shell: pwsh
+        run: |
+          $url = "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip"
+          $expected = "c08e61ce3b96db41636f8ec7e76f4c7e2c13ebdac7fa1b5a1f52b4f32ec715ab"
+
+          Invoke-WebRequest -Uri $url -OutFile pluginval.zip
+          $actual = (Get-FileHash pluginval.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+
+          if ($actual -ne $expected) {
+            throw "pluginval checksum mismatch. Expected $expected, got $actual."
+          }
+
+          Expand-Archive pluginval.zip -DestinationPath pluginval -Force
+
+      - name: Run pluginval strictness 5
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path pluginval-logs | Out-Null
+
+          $pluginval = Get-ChildItem -Path pluginval -Recurse -File -Filter pluginval.exe | Select-Object -First 1
+          if (-not $pluginval) {
+            throw "pluginval.exe was not found."
+          }
+
+          $bundles = Get-ChildItem -Path artifacts -Directory -Filter *.vst3
+          if (-not $bundles) {
+            throw "No VST3 bundles found for pluginval."
+          }
+
+          foreach ($bundle in $bundles) {
+            $safeName = [IO.Path]::GetFileNameWithoutExtension($bundle.Name)
+            $stdout = Join-Path pluginval-logs "$safeName.stdout.log"
+            $stderr = Join-Path pluginval-logs "$safeName.stderr.log"
+
+            Write-Host "pluginval: $($bundle.FullName)"
+            $args = @("--strictness-level", "5", $bundle.FullName)
+            $process = Start-Process -FilePath $pluginval.FullName -ArgumentList $args -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+
+            Get-Content $stdout -ErrorAction SilentlyContinue
+            Get-Content $stderr -ErrorAction SilentlyContinue
+
+            if ($process.ExitCode -ne 0) {
+              throw "pluginval failed for $($bundle.Name) with exit code $($process.ExitCode)."
+            }
+          }
+
+      - name: Upload pluginval logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-pluginval-logs
+          path: pluginval-logs
+          if-no-files-found: ignore
 
       - name: Upload VST3 artifacts
         uses: actions/upload-artifact@v4

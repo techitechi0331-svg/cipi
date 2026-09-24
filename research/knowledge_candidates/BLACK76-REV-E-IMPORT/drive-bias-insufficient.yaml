@@ -1,0 +1,5 @@
+claim: In the tested Black76 architecture, detector gain plus detector bias alone cannot simultaneously reproduce the target onsets and steep 8/12/20 static-ratio slopes.
+evidence_type: MEASURED
+scope: Bounded Black76 ratio optimizer against the supplemental LN-era static-curve targets; not a universal claim about all FET compressor architectures.
+source_run: github:techitechi0331-svg/76blackCompressor/actions/runs/36058202617
+promotion_requested: PROVISIONAL

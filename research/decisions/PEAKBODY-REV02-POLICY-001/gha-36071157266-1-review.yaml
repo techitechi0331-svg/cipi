@@ -1,0 +1,62 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-REV02-POLICY-001:gha-36071157266-1:review-01"
+job_id: PEAKBODY-REV02-POLICY-001
+source_run: research/runs/PEAKBODY-REV02-POLICY-001/gha-36071157266-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: PROMOTE
+review_status: CONFIRMED
+rationale: >-
+  The predeclared deterministic-model acceptance criteria all passed with
+  substantial margin, the complete sample-rate/burst matrix is present, no
+  rejection criterion triggered, and the evidence branch passed CIPI job,
+  result-safety, append-only, and research-contract gates. Promotion is limited
+  to the reusable split-direction crest-ballistics finding for the measured
+  model scope; it does not confirm PeakBody as a product or establish universal
+  timing constants.
+declared_rejection_criteria:
+  - any acceptance invariant fails
+  - any required sample-rate or burst case is missing
+triggered_criteria: []
+retained_findings:
+  - "All 36 expected measurement rows were present and finite."
+  - "Maximum extra gain reduction for 10-30 ms bursts was +0.006399959 dB versus the fixed 40/400 ms baseline."
+  - "Minimum sustained-body settled fraction at 150 ms was 0.906253007."
+  - "30 ms candidate burst sample-rate spread was 0.000433911 dB."
+  - "Steady gain-reduction sample-rate spread was approximately 0.000072118 dB."
+  - "Gain-scaled steady-sine crest difference was 0.0 in the autonomous replay."
+  - "Revision 02 intentionally applies about +0.36 dB extra GR at 50 ms and about +1.04 dB extra GR at 100 ms versus the fixed baseline; this is retained as part of the transient-to-body transition rather than hidden as a negative result."
+reusable_findings:
+  - "Within the tested model, high crest mapped to slower attack and faster release while low crest mapped to faster attack and slower release preserved 10-30 ms events near a fixed 40 ms attack while tightening longer sustained body."
+  - "A peak/RMS crest feature using matched forgetting factors remained gain-scale invariant and numerically stable across 44.1/48/96/192 kHz in the deterministic model."
+  - "Short-event preservation and sustained-body convergence should be encoded as separate regression gates rather than optimized by a single generic compression-strength metric."
+revisit_if:
+  - "Level-matched vocal AB shows no audible benefit or reveals consonant, breath, or sibilance damage."
+  - "A larger raw multi-singer corpus contradicts the transient/body separation."
+  - "The product VST3 implementation deviates materially from the deterministic model."
+  - "Product CPU or realtime behavior is unacceptable at 96 or 192 kHz."
+  - "Cubase Pro 14 host validation exposes timing, state, automation, or compatibility failures."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-LEGACY-STRESS-001
+    - PEAKBODY-LEGACY-REPLICATION-002
+  related_decisions:
+    - "PEAKBODY-REV02-POLICY-001:gha-36071157266-1:auto"
+parent_decision_id: "PEAKBODY-REV02-POLICY-001:gha-36071157266-1:auto"
+created_at: "2026-09-24T23:10:00Z"
+immutable: true
+scope: >-
+  PROVISIONAL reusable knowledge for the PeakBody Revision 02 deterministic
+  model only: 80 ms crest integration, split-direction 6-40 ms attack and
+  120-400 ms release, tested against a fixed 40/400 ms baseline using synthetic
+  burst/sustain cases at 44.1/48/96/192 kHz. The promotion applies to the
+  measured mechanism and regression-policy principle, not to universal vocal
+  optimum claims or product release status.
+review_gaps:
+  - "Dedicated PeakBody product repository does not yet exist."
+  - "Product VST3 CPU at 44.1/96/192 kHz is not measured."
+  - "Full raw Macro-Level and multi-singer corpus validation is incomplete."
+  - "Level-matched real-vocal AB is pending."
+  - "Cubase Pro 14 host validation is pending."
+  - "Broadband crest confounders such as sibilance, breath, plosives, and high-register harmonic sparsity need dedicated stress tests."

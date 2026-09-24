@@ -20,6 +20,7 @@ ADAPTERS = {
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
     "vocal_resonance_clean_negative_audit_v1",
+    "voprep_amount_mapping_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -893,6 +894,131 @@ def _peakbody_revision02_policy(repo_root: Path, timeout_seconds: int) -> dict[s
         ),
     }
 
+
+def _voprep_amount_mapping(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root
+        / "research"
+        / "experiments"
+        / "VoPrepTransparentCompressor"
+        / "amount_mapping_model.py"
+    )
+    command = [sys.executable, str(script)]
+    completed = subprocess.run(
+        command,
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=timeout_seconds,
+    )
+
+    rows = list(csv.DictReader(io.StringIO(completed.stdout)))
+    expected_mappings = {"threshold_sweep", "ratio_interp", "desired_gr_scale"}
+    expected_amounts = {0.0, 0.25, 0.5, 0.75, 1.0}
+    expected_shifts = {-12.0, -6.0, 0.0, 6.0, 12.0}
+
+    finite = bool(rows) and all(int(row["finite"]) == 1 for row in rows)
+    complete = (
+        len(rows) == len(expected_mappings) * len(expected_amounts) * len(expected_shifts)
+        and {row["mapping"] for row in rows} == expected_mappings
+        and {float(row["amount"]) for row in rows} == expected_amounts
+        and {float(row["input_shift_db"]) for row in rows} == expected_shifts
+    )
+
+    def subset(mapping: str) -> list[dict[str, str]]:
+        return [row for row in rows if row["mapping"] == mapping]
+
+    desired = subset("desired_gr_scale")
+    threshold = subset("threshold_sweep")
+    ratio = subset("ratio_interp")
+
+    desired_zero = max(
+        (float(row["zero_null_max_gr_db"]) for row in desired if float(row["amount"]) == 0.0),
+        default=float("inf"),
+    )
+    desired_full = max(
+        (float(row["full_scale_match_max_error_db"]) for row in desired if float(row["amount"]) == 1.0),
+        default=float("inf"),
+    )
+    desired_linearity = max(
+        (float(row["linearity_rmse_db"]) for row in desired),
+        default=float("inf"),
+    )
+    desired_event_linearity = max(
+        (float(row["event_extra_linearity_rmse_db"]) for row in desired),
+        default=float("inf"),
+    )
+    threshold_linearity = max(
+        (float(row["linearity_rmse_db"]) for row in threshold),
+        default=float("inf"),
+    )
+    ratio_linearity = max(
+        (float(row["linearity_rmse_db"]) for row in ratio),
+        default=float("inf"),
+    )
+
+    monotonic = True
+    for shift in expected_shifts:
+        series = sorted(
+            (
+                (float(row["amount"]), float(row["mean_gr_db"]))
+                for row in desired
+                if float(row["input_shift_db"]) == shift
+            ),
+            key=lambda item: item[0],
+        )
+        monotonic = monotonic and all(
+            series[i + 1][1] + 1.0e-12 >= series[i][1]
+            for i in range(len(series) - 1)
+        )
+
+    metrics = {
+        "row_count": len(rows),
+        "matrix_complete": complete,
+        "all_numeric_finite": finite,
+        "desired_gr_scale_zero_null_max_gr_db": desired_zero,
+        "desired_gr_scale_full_match_max_error_db": desired_full,
+        "desired_gr_scale_linearity_rmse_max_db": desired_linearity,
+        "desired_gr_scale_event_extra_linearity_rmse_max_db": desired_event_linearity,
+        "desired_gr_scale_monotonic": monotonic,
+        "threshold_sweep_linearity_rmse_max_db": threshold_linearity,
+        "ratio_interp_linearity_rmse_max_db": ratio_linearity,
+        "desired_vs_threshold_linearity_ratio": (
+            desired_linearity / threshold_linearity
+            if threshold_linearity > 0.0
+            else 0.0
+        ),
+    }
+
+    acceptance_met = (
+        complete
+        and finite
+        and desired_zero <= 1.0e-9
+        and desired_full <= 1.0e-9
+        and desired_linearity <= 1.0e-9
+        and desired_event_linearity <= 1.0e-9
+        and monotonic
+        and threshold_linearity > desired_linearity + 0.05
+    )
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"measurement.csv": completed.stdout},
+        "commands": [
+            "python research/experiments/VoPrepTransparentCompressor/amount_mapping_model.py"
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic model-level comparison of three user-facing Amount mappings "
+            "on the frozen Vo.Prep transparent compressor curve and detector-fusion level model. "
+            "The adapter measures exact-null behavior, monotonicity, endpoint equivalence, "
+            "strength linearity, and transient/body extra-GR scaling. It does not promote a "
+            "product mapping or replace level-matched listening."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -912,4 +1038,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vl2a_phase01h_snapshot_gate(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_audit_v1":
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
+    if name == "voprep_amount_mapping_v1":
+        return _voprep_amount_mapping(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

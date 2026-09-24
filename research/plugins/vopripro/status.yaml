@@ -7,6 +7,7 @@ confidence: 0.86
 
 source_kind: repository_verified
 source_ref: "https://github.com/techitechi0331-svg/VocalPrepComp"
+implementation_commit: "cc796d30d7e1885e0ca66caaf7f1b02d0bffeb33"
 
 stages:
   research: complete
@@ -14,7 +15,7 @@ stages:
   parameter_lock: complete
   implementation: complete
   measurement: complete
-  audio_ab: pending
+  audio_ab: in_progress
   revision: complete
   vst3_validation: in_progress
   final_review: pending
@@ -27,13 +28,31 @@ completed:
   - implementation
   - measurement
   - revision
+
 unresolved:
-  - Gain-matched real-vocal AB is not formally registered in CIPI.
-  - Cubase Pro 14 scan/load/save-reopen verification is not formally complete.
-  - Final review must test the fixed Natural 50% mapping across representative vocals.
+  - Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current main Natural50 A/B pack.
+  - The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle recordings and does not establish universal singer/generalisation claims.
+  - Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally complete on the user's actual machine.
+  - Steinberg official VST3 validator is not currently recorded for the VoPriPro main candidate.
+  - Final precision review remains pending after subjective and target-host evidence.
 
 next_stage: audio_ab
-why_next: "DSP specification, regression tests, Windows VST3 builds and pluginval validation are already strong; the remaining evidence gap is real-vocal listening and target-host verification."
-next_confirmation: "Whether the locked Amount/Character mapping remains natural across representative singing after level matching."
+why_next: "Current main has passed DSP regression, Windows Debug/Release VST3 build, pluginval Strictness 10, and a registered 24-case public real-vocal engineering gate. The remaining decisive audio question is perceptual naturalness under level-matched listening rather than another unbounded theory search."
+next_confirmation: "Whether Natural50 on the current main candidate should be kept, revised, or rolled back after strict level-matched listening; if kept, proceed to Cubase Pro 14 target-host confirmation."
+
 blockers:
-  - Target-host and subjective validation require Cubase Pro 14 and representative dry vocals.
+  - Human listening is required to convert the generated gain-matched A/B pack into perceptual evidence.
+  - Cubase Pro 14 validation ultimately requires the user's Windows host.
+
+history:
+  - date: "2026-09-25"
+    previous_state:
+      audio_ab: pending
+      unresolved:
+        - Gain-matched real-vocal AB is not formally registered in CIPI.
+        - Cubase Pro 14 scan/load/save-reopen verification is not formally complete.
+        - Final review must test the fixed Natural 50% mapping across representative vocals.
+    evidence_update:
+      - Objective gain-matched A/B generation and real-vocal engineering metrics are now registered from product main cc796d30.
+      - Human listening remains separate and unresolved.
+      - Confidence is intentionally unchanged pending subjective and target-host evidence.

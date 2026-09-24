@@ -660,6 +660,134 @@ def _vocal_resonance_clean_negative_audit(
         ),
     }
 
+
+def _vl2a_phase01h_checksum_diagnosis(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = repo_root / "research" / "plugins" / "vl2a" / "evidence"
+    checksum_path = root / "checksums.sha256"
+    if not checksum_path.is_file():
+        raise FileNotFoundError(checksum_path)
+
+    expected: dict[str, str] = {}
+    for line in checksum_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        digest, filename = line.split(None, 1)
+        expected[filename.strip()] = digest.lower()
+
+    rows = []
+    exact_count = 0
+    newline_equivalent_count = 0
+    unexplained_count = 0
+    missing_count = 0
+
+    for filename, expected_digest in sorted(expected.items()):
+        path = root / filename
+        if not path.is_file():
+            rows.append({
+                "file": filename,
+                "expected_sha256": expected_digest,
+                "actual_sha256": "",
+                "lf_sha256": "",
+                "crlf_sha256": "",
+                "match_kind": "MISSING",
+            })
+            missing_count += 1
+            continue
+
+        raw = path.read_bytes()
+        actual = hashlib.sha256(raw).hexdigest()
+        try:
+            text = raw.decode("utf-8-sig")
+        except UnicodeDecodeError:
+            text = None
+
+        lf_hash = ""
+        crlf_hash = ""
+        kind = "UNEXPLAINED"
+        if actual == expected_digest:
+            kind = "EXACT"
+            exact_count += 1
+        elif text is not None:
+            canonical_lf = text.replace("\r\n", "\n").replace("\r", "\n")
+            lf_bytes = canonical_lf.encode("utf-8")
+            crlf_bytes = canonical_lf.replace("\n", "\r\n").encode("utf-8")
+            lf_hash = hashlib.sha256(lf_bytes).hexdigest()
+            crlf_hash = hashlib.sha256(crlf_bytes).hexdigest()
+            if lf_hash == expected_digest:
+                kind = "EXPECTED_IS_LF_NORMALIZED"
+                newline_equivalent_count += 1
+            elif crlf_hash == expected_digest:
+                kind = "EXPECTED_IS_CRLF_NORMALIZED"
+                newline_equivalent_count += 1
+            else:
+                unexplained_count += 1
+        else:
+            unexplained_count += 1
+
+        rows.append({
+            "file": filename,
+            "expected_sha256": expected_digest,
+            "actual_sha256": actual,
+            "lf_sha256": lf_hash,
+            "crlf_sha256": crlf_hash,
+            "match_kind": kind,
+        })
+
+    raw_audio_present = any(root.rglob("*.wav"))
+    metrics = {
+        "file_count": len(expected),
+        "exact_match_count": exact_count,
+        "newline_equivalent_count": newline_equivalent_count,
+        "unexplained_mismatch_count": unexplained_count,
+        "missing_count": missing_count,
+        "raw_audio_present": raw_audio_present,
+    }
+
+    output = io.StringIO()
+    writer = csv.DictWriter(
+        output,
+        fieldnames=[
+            "file",
+            "expected_sha256",
+            "actual_sha256",
+            "lf_sha256",
+            "crlf_sha256",
+            "match_kind",
+        ],
+        lineterminator="\n",
+    )
+    writer.writeheader()
+    writer.writerows(rows)
+
+    acceptance_met = (
+        len(expected) > 0
+        and missing_count == 0
+        and unexplained_count == 0
+        and exact_count + newline_equivalent_count == len(expected)
+        and not raw_audio_present
+    )
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"checksum_diagnosis.csv": output.getvalue()},
+        "commands": [
+            "read committed VL2A checksum ledger",
+            "hash exact committed bytes",
+            "compare expected digest against exact/LF/CRLF-normalized UTF-8 representations",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Diagnostic-only analysis of the prior VL2A snapshot checksum rejection. "
+            "It does not change the existing rejection, rewrite the ledger, alter DSP, "
+            "promote knowledge, or store raw audio. Acceptance means every mismatch is "
+            "fully explained by text line-ending representation rather than numeric/content loss."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")

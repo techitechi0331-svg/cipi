@@ -68,3 +68,10 @@ adapters:
     max_timeout_minutes: 12
     network_required: true
     purpose: "Independently re-audit disjoint VocalSet clean negatives across exercise families using a conservative YIN-style pitch proxy; persist derived metrics only."
+
+  vopripro_real_vocal_snapshot_gate_v1:
+    tracks:
+      - VOPRIPRO_FORMAL
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Verify imported VoPriPro main real-vocal derived measurements against a simple identity baseline without persisting raw audio or mutating product DSP."

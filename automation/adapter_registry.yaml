@@ -6,6 +6,12 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Replay stored PeakBody legacy stress research as reproducible negative evidence."
+  peakbody_revision02_policy_v1:
+    tracks:
+      - PEAKBODY_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Replay PeakBody Revision 02 model policy across sample rates against a fixed-timing simple baseline."
   original_vocal_pre_measurement_gate_v1:
     tracks:
       - UA610_ORIGINAL_VOCAL_PRE

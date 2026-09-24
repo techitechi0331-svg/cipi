@@ -13,8 +13,14 @@ def load_yaml(path: Path):
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 def find_job(root: Path, job_id: str):
+    candidates = []
     base = root / "research" / "jobs"
-    for path in sorted(list(base.rglob("*.yaml")) + list(base.rglob("*.yml")) if base.exists() else []):
+    if base.exists():
+        candidates.extend(list(base.rglob("*.yaml")) + list(base.rglob("*.yml")))
+    examples = root / "automation" / "examples"
+    if examples.exists():
+        candidates.extend(list(examples.glob("*.yaml")) + list(examples.glob("*.yml")))
+    for path in sorted(candidates):
         data = load_yaml(path)
         if isinstance(data, dict) and str(data.get("job_id")) == job_id:
             return path, data

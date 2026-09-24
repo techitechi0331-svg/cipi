@@ -12,7 +12,7 @@ ADAPTERS = {
     "peakbody_legacy_model_stress_v1",
 }
 
-def _peakbody_legacy_model_stress(repo_root: Path) -> dict[str, Any]:
+def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     script = repo_root / "research/experiments/PeakBody/model_stress.py"
     command = [sys.executable, str(script)]
     completed = subprocess.run(
@@ -21,6 +21,7 @@ def _peakbody_legacy_model_stress(repo_root: Path) -> dict[str, Any]:
         check=True,
         capture_output=True,
         text=True,
+        timeout=timeout_seconds,
     )
 
     rows = list(csv.DictReader(io.StringIO(completed.stdout)))
@@ -32,10 +33,8 @@ def _peakbody_legacy_model_stress(repo_root: Path) -> dict[str, Any]:
         "attack_mean_ms",
         "release_mean_ms",
     ]
-
     values: dict[str, list[float]] = {name: [] for name in numeric_fields}
     finite = True
-
     for row in rows:
         for name in numeric_fields:
             value = float(row[name])
@@ -75,11 +74,11 @@ def _peakbody_legacy_model_stress(repo_root: Path) -> dict[str, Any]:
         ),
     }
 
-def run_adapter(name: str, repo_root: Path) -> dict[str, Any]:
+def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
-
+    if timeout_seconds < 1:
+        raise ValueError("timeout_seconds must be positive")
     if name == "peakbody_legacy_model_stress_v1":
-        return _peakbody_legacy_model_stress(repo_root)
-
+        return _peakbody_legacy_model_stress(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

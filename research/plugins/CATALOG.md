@@ -7,6 +7,7 @@ This catalog links every materially developed plug-in or plug-in research progra
 - 76blackCompressor / 1176 family -> `research/reference_devices/1176/`
 
 ## Repository-backed imported tracks
+- VL2A Phase 01-H line-amplifier implementation -> `research/plugins/vl2a/` (reuses `research/reference_devices/la2a/` for LA-2A/T4 reference truth)
 - VoPriPro / VocalPrepComp -> `research/plugins/vopripro/`
 - Vocal Control Comp -> `research/plugins/vocal-control-comp/`
 - Vocal Surface Processor -> `research/plugins/vocal-surface/`

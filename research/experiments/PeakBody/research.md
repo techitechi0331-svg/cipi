@@ -58,3 +58,26 @@ The exact clamp and vocal timing limits are CIPI design choices and must not be 
 ## Next stage
 
 Lock a deliberately conservative experimental parameter set, then implement a prototype and measure before any product claims.
+
+
+## Competing adaptive-ballistics model
+
+DRC-005 is useful as independent evidence that compressor timing can be automated from signal features, but its authors' public MATLAB implementation is **not the same mapping** as the DRC-002/DRC-008 crest-factor timing model.
+
+Public implementation snapshot reviewed:
+
+- repository: `djmoffat/intelligentCompressor`
+- file: `autocomp.m`
+- commit: `056ecc9eb9d227ac504a6db31e1be1ada9421ae4`
+
+That implementation derives/uses:
+
+- long-buffer RMS -> compressor threshold;
+- `peak2rms` crest value -> ratio;
+- estimated tail duration -> attack;
+- tempo relation -> release;
+- attack/release relation and crest -> knee width.
+
+Therefore DRC-005 supports the broader **adaptive control** research direction, but it must not be cited as corroboration for the exact `2/C2` timing law used by the PeakBody prototype.
+
+This competing model remains valuable for a later AB comparison: local short-term crest timing vs longer-context tail/tempo-aware timing.

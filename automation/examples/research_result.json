@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "job_id": "AUTO-SMOKE-001",
+  "run_id": "mock-0001",
+  "source_commit": "0000000000000000000000000000000000000000",
+  "worker_version": "cipi-mock-worker/0.1",
+  "started_at": "2026-09-25T00:00:00Z",
+  "completed_at": "2026-09-25T00:00:01Z",
+  "random_seed": 6100331,
+  "environment": {
+    "mode": "documentation-example"
+  },
+  "commands": [
+    "mock"
+  ],
+  "result": "COMPLETED",
+  "acceptance_met": true,
+  "rejection_triggered": false,
+  "checksums_file": "checksums.sha256"
+}

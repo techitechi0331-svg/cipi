@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CIPI Evidence Candidate",
+  "type": "object",
+  "required": [
+    "claim",
+    "evidence_type",
+    "scope",
+    "source_run",
+    "promotion_requested"
+  ],
+  "properties": {
+    "claim": {
+      "type": "string",
+      "minLength": 10
+    },
+    "evidence_type": {
+      "enum": [
+        "SOURCE_CANDIDATE",
+        "MEASURED",
+        "INFERRED",
+        "HYPOTHESIS"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 3
+    },
+    "source_run": {
+      "type": "string",
+      "minLength": 3
+    },
+    "promotion_requested": {
+      "enum": [
+        "HYPOTHESIS",
+        "LIKELY",
+        "PROVISIONAL"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

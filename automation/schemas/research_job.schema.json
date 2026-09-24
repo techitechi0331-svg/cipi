@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/schemas/research_job.schema.json",
+  "title": "CIPI Research Job",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "job_id",
+    "state",
+    "track",
+    "research_question",
+    "hypothesis",
+    "counter_hypotheses",
+    "baseline",
+    "variants",
+    "metrics",
+    "acceptance",
+    "rejection",
+    "max_runs",
+    "timeout_minutes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"
+    },
+    "state": {
+      "enum": [
+        "QUEUED",
+        "CLAIMED",
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "REJECTED",
+        "CANCELLED"
+      ]
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "id",
+        "path"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^research/"
+        }
+      }
+    },
+    "research_question": {
+      "type": "string",
+      "minLength": 10
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 10
+    },
+    "counter_hypotheses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "baseline": {
+      "type": "array",
+      "minItems": 1
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1
+    },
+    "acceptance": {
+      "type": "array",
+      "minItems": 1
+    },
+    "rejection": {
+      "type": "array",
+      "minItems": 1
+    },
+    "max_runs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "timeout_minutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1440
+    },
+    "random_seed": {
+      "type": "integer"
+    },
+    "allowed_operations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prohibited_operations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

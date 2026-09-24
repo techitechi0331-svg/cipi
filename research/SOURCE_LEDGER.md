@@ -35,5 +35,8 @@
 | SPAT-001 | Tangsangiumvisai, Chambers, Constantinides, **Time-varying allpass filters using spectral-shaped noise for signal decorrelation in stereophonic acoustic echo cancellation**, 2002. https://doi.org/10.1109/ICDSP.2002.1028325 | peer-reviewed conference | time-varying all-pass decorrelation with perceptual-quality constraint | E4 |
 | SPAT-002 | Cecchi et al., **Low-complexity implementation of a real-time decorrelation algorithm for stereophonic acoustic echo cancellation**, Signal Processing 92(11), 2012. https://doi.org/10.1016/j.sigpro.2012.04.013 | peer-reviewed | realtime decorrelation / frequency-dependent perceptual constraints | E5 |
 | SPAT-003 | Disch, Zölzer, **Modulation And Delay Line Based Digital Audio Effects**, DAFx-99. https://www.dafx.de/paper-archive/details/U0QyREn-tXZ76ItfJA-tDQ | peer-reviewed conference | modulation/delay/pitch-effect implementation background | E4 |
+| SPAT-004 | Martens, Marui, **Categories of Perception for Vibrato, Flange, and Stereo Chorus: Mapping Out the Musically Useful Ranges of Modulation Rate and Depth for Delay-Based Effects**, DAFx-06. https://www.dafx.de/paper-archive/details/o5E1oJMJjW58SzTgLy5Bsg | peer-reviewed conference | perceptual regions for modulated-delay rate/depth | E4 |
+| SPAT-005 | EastWest, **Hollywood Orchestra Opus Edition User Manual — Artificial Double Tracking**, official manual. | official product documentation | ADT precedent: variable delay 0.1–50 ms, modulation speed 0–1 Hz | E3 |
+| SPAT-006 | Waves, **Abbey Road Reel ADT User Guide**, official product documentation. | official product documentation | classic-ADT precedent around ~15 ms; flanging closer to 0–5 ms | E3 |
 
 A repeated quotation of one original source does not count as independent corroboration.

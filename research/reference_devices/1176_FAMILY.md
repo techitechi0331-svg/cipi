@@ -73,3 +73,16 @@ Only after those are independently understood should a compact reusable FET-comp
 - full-wave rectification and RC timing network: **E5 documented**.
 - exact digital-equivalent FET law: **unconfirmed**.
 - exact contribution of each nonlinear stage to perceived character: **unconfirmed / measurement required**.
+
+## Gray-box validation route
+
+VA-1176-001 reports a block-oriented gray-box model of an 1176LN reference device fitted from input/output measurements with iterative error minimization and evaluated using objective metrics plus listening tests.
+
+CIPI will therefore keep two independent 1176 research paths:
+
+1. **circuit-derived path** — derive blocks from documented topology and component behavior;
+2. **measurement-identification path** — fit a compact block model to measured transfer/timing/harmonic data.
+
+Agreement between these paths raises confidence. Disagreement becomes a research target rather than being hidden by parameter tuning.
+
+The published model is evidence that this methodology can work; it is not evidence that CIPI already knows the paper's fitted constants or the exact behavior of every hardware revision.

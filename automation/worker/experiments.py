@@ -1003,6 +1003,141 @@ def _microdouble_product_v03_gate(repo_root: Path, timeout_seconds: int) -> dict
     }
 
 
+
+def _vo_prep_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+
+    run_root = (
+        repo_root
+        / "research"
+        / "runs"
+        / "VO-PREP-SYNC-001"
+        / "manual-20260925"
+    )
+    metrics_path = run_root / "metrics.json"
+    parameters_path = run_root / "parameters.json"
+    inventory_path = (
+        repo_root
+        / "research"
+        / "plugins"
+        / "vo-prep"
+        / "evidence"
+        / "2026-09-25-inventory.md"
+    )
+
+    for path in (metrics_path, parameters_path, inventory_path):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+    metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+    parameters = json.loads(parameters_path.read_text(encoding="utf-8"))
+    inventory = inventory_path.read_text(encoding="utf-8")
+
+    required_metric_keys = {
+        "source_product_snapshot_sha",
+        "measured_product_sha",
+        "dsp_ci_run_id",
+        "dsp_ci_success",
+        "vst3_artifact_sha256",
+        "raw_audio_committed",
+        "real_vocal_stem_count",
+        "corrected_program_name",
+        "corrected_official_validator_pending",
+        "cubase_pro_14_pending",
+        "plosive_subjective_gate_pending",
+        "sibilance_subjective_gate_pending",
+    }
+    required_parameter_sections = {
+        "macro_level_v2_1",
+        "plosive_guard_v2_2",
+        "sibilance_guard_v2_3",
+        "utility_v2_5",
+    }
+
+    missing_metrics = sorted(required_metric_keys - set(metrics))
+    missing_parameter_sections = sorted(required_parameter_sections - set(parameters))
+
+    rejected_markers = [
+        "Earlier ~600 ms / 6 s reference / up to -4 dB cut",
+        "Dynamic high-pass as the default processing topology",
+        "Split-band attenuation as the default topology",
+        "Realtime FFT detector",
+        "Full-band attenuation as the sole topology",
+        "Pure high-frequency processing as the sole topology",
+    ]
+    unresolved_markers = [
+        "Plosive Guard final human naturalness gate is not formally closed",
+        "Sibilance Guard final human naturalness/lisping/bright-vowel/breath gate is not formally closed",
+        "Cubase Pro 14 real-host release gate is pending",
+        "CPU measurement should be retained as an explicit release metric",
+    ]
+
+    retained_rejected_count = sum(marker in inventory for marker in rejected_markers)
+    retained_unresolved_count = sum(marker in inventory for marker in unresolved_markers)
+
+    raw_audio_present = any(
+        suffix.lower() in {".wav", ".aif", ".aiff", ".flac", ".mp3", ".m4a", ".ogg"}
+        for suffix in (path.suffix for path in (repo_root / "research" / "plugins" / "vo-prep").rglob("*") if path.is_file())
+    )
+
+    output_metrics = {
+        "missing_required_metric_count": len(missing_metrics),
+        "missing_parameter_section_count": len(missing_parameter_sections),
+        "retained_rejected_marker_count": retained_rejected_count,
+        "expected_rejected_marker_count": len(rejected_markers),
+        "retained_unresolved_marker_count": retained_unresolved_count,
+        "expected_unresolved_marker_count": len(unresolved_markers),
+        "raw_audio_present": raw_audio_present,
+        "snapshot_says_raw_audio_committed": bool(metrics.get("raw_audio_committed", True)),
+        "dsp_ci_success": bool(metrics.get("dsp_ci_success", False)),
+        "corrected_program_name": bool(metrics.get("corrected_program_name", False)),
+        "official_validator_still_pending": bool(metrics.get("corrected_official_validator_pending", False)),
+        "cubase_still_pending": bool(metrics.get("cubase_pro_14_pending", False)),
+        "plosive_subjective_still_pending": bool(metrics.get("plosive_subjective_gate_pending", False)),
+        "sibilance_subjective_still_pending": bool(metrics.get("sibilance_subjective_gate_pending", False)),
+    }
+
+    acceptance_met = (
+        len(missing_metrics) == 0
+        and len(missing_parameter_sections) == 0
+        and retained_rejected_count == len(rejected_markers)
+        and retained_unresolved_count == len(unresolved_markers)
+        and not raw_audio_present
+        and not bool(metrics.get("raw_audio_committed", True))
+        and bool(metrics.get("dsp_ci_success", False))
+        and bool(metrics.get("corrected_program_name", False))
+        and bool(metrics.get("corrected_official_validator_pending", False))
+        and bool(metrics.get("cubase_pro_14_pending", False))
+        and bool(metrics.get("plosive_subjective_gate_pending", False))
+        and bool(metrics.get("sibilance_subjective_gate_pending", False))
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in output_metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": output_metrics,
+        "raw_files": {"measurement.csv": output.getvalue()},
+        "commands": [
+            "read committed Vo.Prep manual evidence snapshot",
+            "verify required metric/parameter fields",
+            "verify rejected and unresolved findings remain present",
+            "verify no raw audio is stored under the Vo.Prep CIPI track",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic evidence-integrity gate for the imported Vo.Prep snapshot. "
+            "It does not judge subjective audio quality, alter product DSP, promote "
+            "knowledge status/confidence/current_stage, use network access, store raw "
+            "audio, or release a product."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")

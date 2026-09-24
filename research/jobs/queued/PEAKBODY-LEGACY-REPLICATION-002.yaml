@@ -1,0 +1,45 @@
+schema_version: "1.0"
+job_id: PEAKBODY-LEGACY-REPLICATION-002
+state: QUEUED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: "Does a second independent free-tier CI run reproduce the stored PeakBody legacy stress invariants?"
+hypothesis: "A second autonomous CI execution will reproduce the finite bounded legacy-model stress results."
+counter_hypotheses:
+  - "The second run diverges from the stored numeric invariants."
+baseline:
+  - first_autonomous_replay
+variants:
+  - second_autonomous_replay
+metrics:
+  - row_count
+  - all_numeric_finite
+  - scale_min_global
+  - scale_mean_max
+acceptance:
+  - "exactly six documented stress signals are emitted"
+  - "all numeric fields are finite"
+  - "scale_min_global is at least 0.25"
+  - "scale_mean_max does not exceed 1.0"
+rejection:
+  - "any required invariant fails"
+max_runs: 1
+timeout_minutes: 5
+random_seed: 6100331
+experiment_adapter: peakbody_legacy_model_stress_v1
+knowledge_candidate:
+  claim: "The stored PeakBody legacy softened crest-to-fast stress model remains reproducible across independent free-tier CI executions."
+  evidence_type: MEASURED
+  scope: "Reproducibility of the stored historical PeakBody stress artifact only; this does not revive the rejected model as a product candidate."
+  promotion_requested: PROVISIONAL
+allowed_operations:
+  - read_repo_measurement_script
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+  - write_knowledge_candidate
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - main_push
+  - knowledge_promotion

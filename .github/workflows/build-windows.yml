@@ -29,12 +29,23 @@ jobs:
         shell: pwsh
         run: cmake --build build --config Release --parallel 4
 
-      - name: Collect VST3
+      - name: Collect VST3 bundles
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path artifacts | Out-Null
-          Get-ChildItem -Path build -Recurse -Filter *.vst3 | ForEach-Object {
-            Copy-Item $_.FullName -Destination artifacts -Recurse -Force
+          $bundles = Get-ChildItem -Path build -Recurse -Directory -Filter *.vst3
+          if (-not $bundles) {
+            throw "No VST3 bundle directories were produced."
+          }
+
+          foreach ($bundle in $bundles) {
+            $destination = Join-Path artifacts $bundle.Name
+            Copy-Item -LiteralPath $bundle.FullName -Destination $destination -Recurse -Force
+          }
+
+          Write-Host "Collected VST3 bundles:"
+          Get-ChildItem -Path artifacts -Directory -Filter *.vst3 | ForEach-Object {
+            Write-Host " - $($_.Name)"
           }
 
       - name: Upload VST3 artifacts

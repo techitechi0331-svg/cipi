@@ -1,0 +1,15 @@
+claim: The Phase 01-H VL2A line-amplifier replacement produces a subtle but repeatable objective difference from the historical baseline on real singing while leaving the unchanged opto sidechain gain-reduction trajectory intact.
+evidence_type: MEASURED
+scope: Objective level-matched VocalSet AB matrix only; no subjective preference is claimed.
+source_run: techitechi0331-svg/VocalPrepComp workflow 36057598192
+promotion_requested: PROVISIONAL
+details:
+  corpus: VocalSet CC BY 4.0
+  conditions: 9
+  correlation_min: 0.999928
+  correlation_max: 0.999937
+  residual_rel_db_min: -38.99
+  residual_rel_db_max: -38.39
+  candidate_match_gain_db_min: 1.105
+  candidate_match_gain_db_max: 1.146
+  limitation: Human blind listening remains required for KEEP/REVISE/ROLLBACK.

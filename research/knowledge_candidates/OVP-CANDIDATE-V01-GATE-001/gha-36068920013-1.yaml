@@ -1,0 +1,9 @@
+claim: The measured Original Vocal Pre v0.1 full candidate fails its fixed product
+  gates; the current output-transformer configuration is associated with a disproportionate
+  low-frequency THD penalty while spectral-drive protection measurably reduces but
+  does not solve that penalty.
+evidence_type: MEASURED
+scope: Original Vocal Pre v0.1, Windows measurement snapshot at source SHA 31adea261d5f82d3791ee3c3543974167c5f1e83
+  only.
+source_run: research/runs/OVP-CANDIDATE-V01-GATE-001/gha-36068920013-1
+promotion_requested: HYPOTHESIS

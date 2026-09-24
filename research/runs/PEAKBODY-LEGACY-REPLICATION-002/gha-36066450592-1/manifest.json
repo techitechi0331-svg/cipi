@@ -1,0 +1,23 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/PeakBody/model_stress.py"
+  ],
+  "completed_at": "2026-09-24T22:16:10.819902Z",
+  "environment": {
+    "experiment_adapter": "peakbody_legacy_model_stress_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "PEAKBODY-LEGACY-REPLICATION-002",
+  "random_seed": 6100331,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36066450592-1",
+  "schema_version": "1.0",
+  "source_commit": "446c52bd4cf4e63d3e56d952d0a8937c93bab6b4",
+  "started_at": "2026-09-24T22:16:09.776503Z",
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -1,0 +1,7 @@
+claim: The stored PeakBody legacy softened crest-to-fast stress model remains reproducible
+  across independent free-tier CI executions.
+evidence_type: MEASURED
+scope: Reproducibility of the stored historical PeakBody stress artifact only; this
+  does not revive the rejected model as a product candidate.
+source_run: research/runs/PEAKBODY-LEGACY-REPLICATION-002/gha-36066450592-1
+promotion_requested: PROVISIONAL

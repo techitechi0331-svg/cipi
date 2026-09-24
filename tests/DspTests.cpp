@@ -212,15 +212,17 @@ void testCrestFactorDetector()
 
         minimumTransientScale = juce::jmin (
             minimumTransientScale,
-            transientDetector.getTimingScale (0.10f));
+            transientDetector.getTimingScale (0.25f, 0.35f));
     }
 
     expect (minimumTransientScale < 0.75f,
             "Transient-rich signal should shorten adaptive timing.");
+    expect (minimumTransientScale >= 0.25f - 1.0e-6f,
+            "Vocal timing scale must respect the 0.25 safety floor.");
 
     transientDetector.reset();
     const auto silenceCrest = transientDetector.process (0.0f);
-    const auto silenceScale = transientDetector.getTimingScale (0.10f);
+    const auto silenceScale = transientDetector.getTimingScale (0.25f, 0.35f);
 
     expect (std::isfinite (silenceCrest) && std::isfinite (silenceScale),
             "Crest detector must remain finite at silence.");

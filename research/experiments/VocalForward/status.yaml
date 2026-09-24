@@ -1,0 +1,35 @@
+id: VOCALFORWARD_01
+title: CIPI VocalForward 0.1
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.48
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+
+completed: []
+
+unresolved:
+  - A vocal-specific masking metric is not numerically locked.
+  - It is not yet decided whether processing should act on the vocal, the accompaniment sidechain, or both.
+  - Presence benefit must be separated from simple loudness increase.
+  - Over-processing could make already-salient lead vocals unnaturally dominant.
+  - Latency and sidechain topology for practical DAW use remain open.
+
+next_stage: review
+why_next: "Masking-aware automatic EQ is well-supported, but the singing-specific target and action policy must be reviewed before implementation."
+next_confirmation: "Whether a bounded, time-frequency masking score can identify moments where selective dynamic unmasking improves vocal audibility without permanent tonal change."
+
+blockers:
+  - "Music-context AB requires vocal and accompaniment stems."

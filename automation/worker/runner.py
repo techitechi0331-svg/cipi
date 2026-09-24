@@ -70,7 +70,11 @@ def main() -> int:
     if isinstance(job.get("mock_measurements"), dict):
         result = run_mock(job)
     elif isinstance(job.get("experiment_adapter"), str):
-        result = run_adapter(job["experiment_adapter"], repo_root)
+        result = run_adapter(
+            job["experiment_adapter"],
+            repo_root,
+            max(1, int(job.get("timeout_minutes", 1))) * 60,
+        )
         result["mode"] = "allowlisted_adapter"
     else:
         raise SystemExit(

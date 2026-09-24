@@ -1,0 +1,8 @@
+schema_version: "1.0"
+adapters:
+  peakbody_legacy_model_stress_v1:
+    tracks:
+      - PEAKBODY_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Replay stored PeakBody legacy stress research as reproducible negative evidence."

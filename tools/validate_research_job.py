@@ -14,8 +14,16 @@ REQUIRED = {
 STATES = {"QUEUED","CLAIMED","RUNNING","COMPLETED","FAILED","REJECTED","CANCELLED"}
 ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._-]{2,95}$")
 
+def load_registry() -> dict:
+    path = ROOT / "automation" / "adapter_registry.yaml"
+    if not path.exists():
+        return {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    return data.get("adapters", {}) if isinstance(data, dict) else {}
+
 def validate(path: Path) -> list[str]:
     errors=[]
+    registry=load_registry()
     try:
         data=yaml.safe_load(path.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -44,6 +52,20 @@ def validate(path: Path) -> list[str]:
         errors.append(f"{path}: max_runs must be 1..10000")
     if not isinstance(data["timeout_minutes"], int) or not 1 <= data["timeout_minutes"] <= 1440:
         errors.append(f"{path}: timeout_minutes must be 1..1440")
+
+    adapter=data.get("experiment_adapter")
+    if adapter is not None:
+        spec=registry.get(adapter)
+        if not isinstance(spec, dict):
+            errors.append(f"{path}: experiment_adapter {adapter!r} is not allowlisted")
+        else:
+            tracks=spec.get("tracks", [])
+            track_id=track.get("id") if isinstance(track, dict) else None
+            if track_id not in tracks:
+                errors.append(f"{path}: adapter {adapter!r} is not permitted for track {track_id!r}")
+            max_timeout=spec.get("max_timeout_minutes")
+            if isinstance(max_timeout, int) and data["timeout_minutes"] > max_timeout:
+                errors.append(f"{path}: timeout exceeds adapter maximum of {max_timeout} minutes")
     return errors
 
 def main() -> int:
@@ -56,7 +78,8 @@ def main() -> int:
             errors += validate(path)
     if errors:
         print("CIPI research job gate: FAIL")
-        for e in errors: print("-",e)
+        for e in errors:
+            print("-",e)
         return 1
     print(f"CIPI research job gate: PASS ({len(files)} file(s))")
     return 0

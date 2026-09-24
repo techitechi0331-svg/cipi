@@ -35,7 +35,7 @@ bool PeakBodyAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts)
 void PeakBodyAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     crestDetector.prepare (sampleRate);
-    crestDetector.setIntegrationTimeMs (200.0f);
+    crestDetector.setIntegrationTimeMs (40.0f);
 
     gainReduction.prepare (sampleRate);
 
@@ -76,9 +76,13 @@ void PeakBodyAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
         crestDetector.process (linkedMagnitude);
 
-        const auto timingScale = crestDetector.getTimingScale (0.25f, 0.35f);
-        const auto attackMs = 40.0f * timingScale;
-        const auto releaseMs = 400.0f * timingScale;
+        const auto transientFactor = crestDetector.getTransientFactor();
+
+        // Singing-specific revision:
+        // high crest -> preserve consonants/peaks with slower attack and faster recovery;
+        // low crest -> stabilise sustained vocal body with faster attack and slower release.
+        const auto attackMs = 6.0f + 29.0f * transientFactor;
+        const auto releaseMs = 400.0f - 280.0f * transientFactor;
 
         const auto amount = amountSmoother.getNextValue();
 

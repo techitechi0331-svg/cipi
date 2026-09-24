@@ -20,6 +20,7 @@ ADAPTERS = {
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
     "vocal_resonance_clean_negative_audit_v1",
+    "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
 }
 
@@ -1003,6 +1004,63 @@ def _microdouble_product_v03_gate(repo_root: Path, timeout_seconds: int) -> dict
     }
 
 
+
+def _vocal_resonance_clean_negative_reaudit(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = repo_root / "research/experiments/VocalResonance/clean_negative_reaudit.py"
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-reaudit-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+            "--max-per-singer",
+            "10",
+            "--scan-limit",
+            "5000",
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {}
+        for name in [
+            "audit_cases.csv",
+            "false_trigger_by_technique.csv",
+            "false_trigger_by_singer.csv",
+            "false_trigger_by_pitch_bin.csv",
+            "false_trigger_by_exercise_family.csv",
+            "pitch_frontend_diagnostics.csv",
+            "label_mapping.json",
+            "summary.json",
+        ]:
+            raw_files[name] = (out / name).read_text(encoding="utf-8")
+
+    accepted = bool(summary["diagnostic_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/clean_negative_reaudit.py --output-dir <temporary> --max-per-singer 10 --scan-limit 5000"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Independent clean-negative re-audit using excerpts excluded from Audit-001, "
+            "exercise-family balancing, and a conservative YIN-style pitch proxy. "
+            "It trains no new model family and persists no raw vocal audio."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1024,4 +1082,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
     if name == "microdouble_product_v03_gate_v1":
         return _microdouble_product_v03_gate(repo_root, timeout_seconds)
+    if name == "vocal_resonance_clean_negative_reaudit_v2":
+        return _vocal_resonance_clean_negative_reaudit(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

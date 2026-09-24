@@ -60,3 +60,11 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Verify the committed Vocal One-Knob Doubler v0.3 product-measurement snapshot against the v0.2 simple baseline and fixed technical gates without raw audio or product mutation."
+
+
+  vocal_resonance_clean_negative_reaudit_v2:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 12
+    network_required: true
+    purpose: "Independently re-audit disjoint VocalSet clean negatives across exercise families using a conservative YIN-style pitch proxy; persist derived metrics only."

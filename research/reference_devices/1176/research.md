@@ -71,3 +71,20 @@ Parameter lock after review convergence.
 - Level-matched vocal AB registered: no.
 - Cubase Pro 14 VST3 validation registered: no.
 - Final review complete: no.
+
+
+## Imported Black76 Rev E product evidence
+
+Product-specific measurements and rejected hypotheses are recorded in:
+`BLACK76_REV_E_IMPORT.md`
+
+Key imported evidence now available to this formal track:
+
+- a working product Gain Structure calibration with explicit hardware-honesty limits;
+- supplemental LN-era control-taper measurements and interpolation-method comparison;
+- corrected ratio-threshold ordering from a detector-drive isolation test;
+- negative evidence that detector drive alone does not repair deep-ratio collapse;
+- bounded optimizer evidence that detector gain plus detector bias alone is insufficient for the target high-ratio slopes;
+- real-vocal numerical continuity checks without storing raw vocal audio in CIPI.
+
+These imports improve the evidence base but do not resolve the blocker of missing directly identified vintage Rev-E hardware transfer measurements.

@@ -23,10 +23,32 @@ Automated unit/measurement checks must cover relevant core blocks:
 
 ## Gate 2 — VST3 conformity
 
-Use Steinberg's official VST3 validator when practical. Steinberg explicitly describes the validator as suitable for automated build-server integration.
+Use Steinberg's official VST3 validator. Steinberg explicitly describes the validator as suitable for automated build-server integration.
+
+CIPI CI baseline:
+
+- VST3 SDK: 3.8.1
+- pinned top-level commit: `3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96`
+- validator logs are retained as CI artifacts.
 
 Source:
 https://steinbergmedia.github.io/vst3_dev_portal/pages/What%2Bis%2Bthe%2BVST%2B3%2BSDK/Validator.html
+
+### Validator-result interpretation
+
+A validator failure blocks promotion until explained, but it is not automatically classified as a CIPI DSP defect.
+
+As of 2026, an open Steinberg SDK issue reports a validator audio-processor call-sequence concern:
+https://github.com/steinbergmedia/vst3sdk/issues/150
+
+Therefore failures are classified as one of:
+
+- plug-in conformance defect;
+- CIPI implementation / state / bus defect;
+- validator/tooling defect or known incompatibility;
+- unresolved.
+
+Only evidence-backed classification may waive a validator failure, and the waiver must be documented in the relevant research track.
 
 ## Gate 3 — host-stability validation
 

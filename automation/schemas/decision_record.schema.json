@@ -18,7 +18,9 @@
     "revisit_if",
     "lineage",
     "created_at",
-    "immutable"
+    "immutable",
+    "scope",
+    "review_gaps"
   ],
   "properties": {
     "schema_version": {
@@ -132,6 +134,17 @@
     },
     "immutable": {
       "const": true
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 3
+    },
+    "review_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
     }
   },
   "additionalProperties": true

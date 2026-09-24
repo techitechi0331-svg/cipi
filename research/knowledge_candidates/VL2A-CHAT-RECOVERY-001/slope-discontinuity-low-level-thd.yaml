@@ -1,0 +1,5 @@
+claim: A value-continuous but first-derivative-discontinuous memoryless waveshaper can produce a persistent relative low-level distortion floor; checking zero-crossing slope continuity is therefore a useful screening test for vocal saturation and preamp models.
+evidence_type: MEASURED
+scope: VL2A historical 12AX7-like Baseline A, where positive and negative small-signal slopes differed and roughly 0.49% relative low-level THD persisted across a wide low-level range.
+source_run: research/plugins/vl2a/evidence/2026-09-25-inventory.md
+promotion_requested: PROVISIONAL

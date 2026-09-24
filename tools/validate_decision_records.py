@@ -82,6 +82,11 @@ def validate(path: Path) -> list[str]:
             errors.append(f"{path}: REJECT requires declared_rejection_criteria")
         if not revisit:
             errors.append(f"{path}: REJECT requires at least one revisit_if condition")
+        triggered = data.get("triggered_criteria")
+        if not isinstance(triggered, list):
+            errors.append(f"{path}: triggered_criteria must be a list")
+        if data.get("event_type") == "REVIEW" and data.get("review_status") == "CONFIRMED" and not triggered:
+            errors.append(f"{path}: confirmed REJECT review requires triggered_criteria")
     if len(str(data.get("rationale", "")).strip()) < 10:
         errors.append(f"{path}: rationale is too short")
     return errors

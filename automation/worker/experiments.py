@@ -21,6 +21,7 @@ ADAPTERS = {
     "vl2a_phase01h_snapshot_gate_v1",
     "vocal_resonance_clean_negative_audit_v1",
     "microdouble_product_v03_gate_v1",
+    "vo_prep_snapshot_gate_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -1159,4 +1160,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
     if name == "microdouble_product_v03_gate_v1":
         return _microdouble_product_v03_gate(repo_root, timeout_seconds)
+    if name == "vo_prep_snapshot_gate_v1":
+        return _vo_prep_snapshot_gate(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

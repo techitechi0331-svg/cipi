@@ -1,0 +1,10 @@
+claim: A load-aware reduced tube follower plus transformer winding/source resistance can reproduce an integrated output-source target without requiring an arbitrary post-stage makeup or generic saturation block.
+evidence_type: MEASURED
+scope: Reusable tube/transformer output-stage architecture lesson from the VL2A Phase 01-H integrated line-amplifier block.
+source_run: techitechi0331-svg/VocalPrepComp workflow 36043621530
+promotion_requested: PROVISIONAL
+details:
+  measured_secondary_source_ohm_min: 150.53
+  measured_secondary_source_ohm_max: 150.75
+  validation_target_ohm: 150
+  limitation: Component fit values remain product-specific and are not hardware facts.

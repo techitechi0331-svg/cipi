@@ -19,7 +19,8 @@
         "SOURCE_CANDIDATE",
         "MEASURED",
         "INFERRED",
-        "HYPOTHESIS"
+        "HYPOTHESIS",
+        "REJECTED"
       ]
     },
     "scope": {

@@ -49,6 +49,7 @@ max_runs: 1
 timeout_minutes: 2
 random_seed: 20260925
 reproduction_conditions:
+  cipi_contract_baseline: 121a28f9fd4f892fa893db604eb5e808ca8a8d3a
   product_repository: techitechi0331-svg/VocalPrepComp
   product_commit: cc796d30d7e1885e0ca66caaf7f1b02d0bffeb33
   evidence_path: research/plugins/vopripro/evidence/main-cc796d30

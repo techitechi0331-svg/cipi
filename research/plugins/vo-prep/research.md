@@ -30,3 +30,26 @@ Plosive context detection, slow macro-level correction, contextual sibilance det
 
 ## Promotion rule
 Do not mark this track `CONFIRMED` until the required measurement, level-matched listening, Cubase Pro 14 / VST3 validation, and final precision review are complete for the stated scope.
+
+
+## 2026-09-25 repository sync
+
+Detailed evidence inventory:
+- `research/plugins/vo-prep/evidence/2026-09-25-inventory.md`
+
+Manual derived-evidence run:
+- `research/runs/VO-PREP-SYNC-001/manual-20260925`
+
+New reusable knowledge candidates:
+- conservative macro-level correction vs full-rider overprocessing;
+- contextual plosive detection instead of LF-energy-only detection;
+- level-normalised time-domain sibilance detection;
+- hybrid wide/high sibilance attenuation for compressor-prep use;
+- bounded event duration as a defensive short-event-detector pattern.
+
+CIPI reuse back into the product during this sync:
+- the existing VST3 empty-program-name conformance finding identified the same defect in Vo.Prep;
+- Vo.Prep was corrected to expose a non-empty `Default` program name;
+- pluginval and Steinberg official-validator gates were added to the product repository.
+
+The track remains PROVISIONAL. This sync does not close the Plosive/Sibilance human naturalness gates, corrected-product validator gate, CPU characterization, or Cubase Pro 14 release-candidate gate.

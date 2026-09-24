@@ -235,6 +235,109 @@ void testCrestFactorDetector()
     expect (std::abs (silenceFactor) < 1.0e-6f,
             "Silence should default to zero transient factor.");
 }
+
+void testPeakBodyRevision02Policy()
+{
+    constexpr double sampleRate = 48000.0;
+    constexpr float thresholdDb = -16.0f;
+    constexpr float ratio = 2.5f;
+    constexpr float kneeDb = 6.0f;
+
+    cipi::dsp::CrestFactorDetector detector;
+    detector.prepare (sampleRate);
+    detector.setIntegrationTimeMs (80.0f);
+
+    cipi::dsp::GainReductionBallistics adaptive;
+    cipi::dsp::GainReductionBallistics fixed;
+    adaptive.prepare (sampleRate);
+    fixed.prepare (sampleRate);
+
+    float adaptiveBurstPeakGr = 0.0f;
+    float fixedBurstPeakGr = 0.0f;
+
+    const int preSamples = static_cast<int> (0.2 * sampleRate);
+    const int burstSamples = static_cast<int> (0.03 * sampleRate);
+    const int totalBurstTest = preSamples + burstSamples + static_cast<int> (0.1 * sampleRate);
+
+    for (int n = 0; n < totalBurstTest; ++n)
+    {
+        float x = 0.0f;
+
+        if (n >= preSamples && n < preSamples + burstSamples)
+        {
+            const auto k = n - preSamples;
+            x = 0.8f * static_cast<float> (
+                std::sin (juce::MathConstants<double>::twoPi
+                          * 220.0 * static_cast<double> (k) / sampleRate));
+        }
+
+        detector.process (x);
+
+        const auto transientFactor = detector.getTransientFactor();
+        const auto attackMs = 6.0f + 34.0f * transientFactor;
+        const auto releaseMs = 400.0f - 280.0f * transientFactor;
+
+        const auto inputDb = juce::Decibels::gainToDecibels (std::abs (x), -120.0f);
+        const auto targetReductionDb = -cipi::dsp::gainComputerDb (
+            inputDb, thresholdDb, ratio, kneeDb);
+
+        const auto adaptiveGr = adaptive.process (
+            targetReductionDb, attackMs, releaseMs);
+
+        const auto fixedGr = fixed.process (
+            targetReductionDb, 40.0f, 400.0f);
+
+        if (n >= preSamples && n < preSamples + burstSamples)
+        {
+            adaptiveBurstPeakGr = juce::jmax (adaptiveBurstPeakGr, adaptiveGr);
+            fixedBurstPeakGr = juce::jmax (fixedBurstPeakGr, fixedGr);
+        }
+    }
+
+    expect (adaptiveBurstPeakGr <= fixedBurstPeakGr + 0.15f,
+            "PeakBody Revision 02 must not over-compress a 30 ms burst by more than 0.15 dB versus fixed 40 ms attack.");
+
+    detector.reset();
+    adaptive.reset();
+
+    const int sustainSamples = static_cast<int> (1.5 * sampleRate);
+    float grAt150Ms = 0.0f;
+    float finalGr = 0.0f;
+
+    for (int n = 0; n < preSamples + sustainSamples; ++n)
+    {
+        float x = 0.0f;
+
+        if (n >= preSamples)
+        {
+            const auto k = n - preSamples;
+            x = 0.3f * static_cast<float> (
+                std::sin (juce::MathConstants<double>::twoPi
+                          * 220.0 * static_cast<double> (k) / sampleRate));
+        }
+
+        detector.process (x);
+
+        const auto transientFactor = detector.getTransientFactor();
+        const auto attackMs = 6.0f + 34.0f * transientFactor;
+        const auto releaseMs = 400.0f - 280.0f * transientFactor;
+
+        const auto inputDb = juce::Decibels::gainToDecibels (std::abs (x), -120.0f);
+        const auto targetReductionDb = -cipi::dsp::gainComputerDb (
+            inputDb, thresholdDb, ratio, kneeDb);
+
+        finalGr = adaptive.process (
+            targetReductionDb, attackMs, releaseMs);
+
+        if (n == preSamples + static_cast<int> (0.15 * sampleRate))
+            grAt150Ms = finalGr;
+    }
+
+    expect (finalGr > 2.5f,
+            "PeakBody sustained-body test must reach meaningful steady gain reduction.");
+    expect (grAt150Ms >= 0.88f * finalGr,
+            "PeakBody Revision 02 must settle at least 88% toward final sustained-body GR within 150 ms.");
+}
 }
 
 int main()
@@ -242,6 +345,7 @@ int main()
     testGainComputer();
     testEnvelopeFollower();
     testCrestFactorDetector();
+    testPeakBodyRevision02Policy();
     testLinkwitzRileyReconstruction();
     testOversamplingFiniteAndLatency();
 

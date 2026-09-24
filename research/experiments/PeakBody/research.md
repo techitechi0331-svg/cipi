@@ -81,3 +81,19 @@ That implementation derives/uses:
 Therefore DRC-005 supports the broader **adaptive control** research direction, but it must not be cited as corroboration for the exact `2/C2` timing law used by the PeakBody prototype.
 
 This competing model remains valuable for a later AB comparison: local short-term crest timing vs longer-context tail/tempo-aware timing.
+
+
+## Numerical stress-test finding
+
+A direct implementation of the literature timing law was stress-tested with synthetic steady and transient material.
+
+Observed model behavior:
+
+- steady sine: crest-squared converges near 2 and timing scale remains near 1;
+- gain-scaled sine: essentially identical crest trajectory, confirming the desired level invariance;
+- broadband noise: much larger crest-squared and timing scale near the fast end;
+- repeated isolated peaks over a low-level sustained tone: the peak-memory state can keep timing near its minimum for extended periods.
+
+This does not invalidate the source method for general program material. It does expose a vocal-specific risk: noise-like consonants, breath, and plosives can dominate the crest feature.
+
+The PeakBody branch therefore uses a softened mapping and a higher timing floor while retaining the source crest detector itself. This is a deliberate CIPI vocal adaptation and remains HYPOTHESIS until listening/measurement.

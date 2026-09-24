@@ -117,6 +117,60 @@
       "items": {
         "type": "string"
       }
+    },
+    "knowledge_candidate": {
+      "type": "object",
+      "required": [
+        "claim",
+        "evidence_type",
+        "scope"
+      ],
+      "properties": {
+        "claim": {
+          "type": "string",
+          "minLength": 10
+        },
+        "evidence_type": {
+          "enum": [
+            "SOURCE_CANDIDATE",
+            "MEASURED",
+            "INFERRED",
+            "HYPOTHESIS"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 3
+        },
+        "promotion_requested": {
+          "enum": [
+            "HYPOTHESIS",
+            "LIKELY",
+            "PROVISIONAL"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "continuation": {
+      "type": "object",
+      "properties": {
+        "on_accept": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^automation/job_templates/"
+          }
+        },
+        "on_reject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^automation/job_templates/"
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": true

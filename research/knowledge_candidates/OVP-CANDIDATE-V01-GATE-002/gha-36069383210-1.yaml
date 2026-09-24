@@ -1,0 +1,9 @@
+claim: After checksum-domain correction, the measured Original Vocal Pre v0.1 candidate
+  still fails fixed acoustic gates; the output-transformer configuration remains associated
+  with excessive LF THD while the spectral-drive protection provides a measurable
+  but insufficient reduction.
+evidence_type: MEASURED
+scope: Original Vocal Pre v0.1 Windows measurement snapshot at source SHA 31adea261d5f82d3791ee3c3543974167c5f1e83;
+  CIPI LF-normalized checksum domain.
+source_run: research/runs/OVP-CANDIDATE-V01-GATE-002/gha-36069383210-1
+promotion_requested: HYPOTHESIS

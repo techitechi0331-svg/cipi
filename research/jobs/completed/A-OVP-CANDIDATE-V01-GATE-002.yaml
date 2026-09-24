@@ -1,0 +1,89 @@
+schema_version: '1.0'
+job_id: OVP-CANDIDATE-V01-GATE-002
+state: COMPLETED
+track:
+  id: UA610_ORIGINAL_VOCAL_PRE
+  path: research/plugins/ua610
+research_question: After separating Windows-source byte checksums from CIPI LF-normalized
+  text checksums, does the measured Original Vocal Pre v0.1 full candidate meet the
+  same fixed product gates and justify its nonlinear complexity versus the simpler
+  output-transformer-off baseline?
+hypothesis: With evidence integrity repaired, the full v0.1 candidate passes every
+  declared candidate gate, keeps Character 50 low-frequency THD bounded relative to
+  1 kHz, and does not impose more than a 2x LF-THD penalty versus the simpler output-transformer-off
+  baseline.
+counter_hypotheses:
+- Checksum verification now passes, but the full candidate still fails acoustic product
+  gates and requires DSP revision.
+- The current output-transformer block still adds disproportionate low-frequency distortion
+  relative to the simpler baseline.
+baseline:
+- output_transformer_off
+variants:
+- full_current_v01
+metrics:
+- checksum_ok
+- declared_gate_fail_count
+- char50_100hz_thd_percent
+- char50_1khz_thd_percent
+- char50_lf_to_mid_ratio
+- no_output_transformer_100hz_thd_percent
+- full_vs_no_output_transformer_lf_ratio
+- spectral_protection_off_100hz_thd_percent
+- char100_1khz_thd_percent
+- char100_stress_thd_percent
+- char100_8x_alias_dbc
+- char100_16x_alias_dbc
+- char50_sample_rate_gain_spread_db
+acceptance:
+- CIPI-normalized committed measurement SHA256 verification passes.
+- declared_gate_fail_count == 0
+- 0.15 <= Character 50 / 1 kHz / -18 dBFS THD <= 1.0 percent
+- Character 50 100 Hz THD / 1 kHz THD <= 2.0
+- Full 100 Hz THD / output-transformer-off 100 Hz THD <= 2.0
+- Character 100 8x alias <= -70 dBc
+- Character 50 sample-rate gain spread <= 0.10 dB
+rejection:
+- CIPI-normalized committed measurement checksum fails.
+- Any predeclared candidate gate fails.
+- Character 50 LF/mid THD ratio > 2.0.
+- Full candidate has >2x the 100 Hz THD of the output-transformer-off baseline.
+- Character 100 8x alias > -70 dBc.
+max_runs: 1
+timeout_minutes: 2
+random_seed: 6100925
+experiment_adapter: original_vocal_pre_measurement_gate_v1
+allowed_operations:
+- read_committed_measurements
+- sha256_verify
+- deterministic_metric_reduction
+prohibited_operations:
+- arbitrary_shell
+- network_write
+- main_push
+- confidence_change
+- current_stage_change
+- confirmed_promotion
+- raw_audio_write
+- product_release
+reproducibility:
+  source_repo: techitechi0331-svg/610
+  source_branch: original-vocal-pre-v0.1
+  source_sha: 31adea261d5f82d3791ee3c3543974167c5f1e83
+  source_workflow_run: 36060427037
+  source_artifact_sha256: d910825936b52b59bb135775d816b321374297580c6035e20fe191fe76e833f2
+  measurement_snapshot: research/experiments/OriginalVocalPre/measurements/610repo-31adea2
+  checksum_domain: cipi_lf_normalized_text
+knowledge_candidate:
+  claim: After checksum-domain correction, the measured Original Vocal Pre v0.1 candidate
+    still fails fixed acoustic gates; the output-transformer configuration remains
+    associated with excessive LF THD while the spectral-drive protection provides
+    a measurable but insufficient reduction.
+  evidence_type: MEASURED
+  scope: Original Vocal Pre v0.1 Windows measurement snapshot at source SHA 31adea261d5f82d3791ee3c3543974167c5f1e83;
+    CIPI LF-normalized checksum domain.
+  promotion_requested: HYPOTHESIS
+continuation:
+  on_accept: []
+  on_reject: []
+latest_run: gha-36069383210-1

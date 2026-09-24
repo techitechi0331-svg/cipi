@@ -1,0 +1,25 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed OriginalVocalPre CSV snapshot",
+    "verify committed SHA256 ledger",
+    "apply predeclared deterministic candidate gates"
+  ],
+  "completed_at": "2026-09-24T22:47:41.403776Z",
+  "environment": {
+    "experiment_adapter": "original_vocal_pre_measurement_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "OVP-CANDIDATE-V01-GATE-002",
+  "random_seed": 6100925,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36069383210-1",
+  "schema_version": "1.0",
+  "source_commit": "553b00809baeb53e873fd07c5b016a543d97b270",
+  "started_at": "2026-09-24T22:47:41.400982Z",
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -69,6 +69,13 @@ def validate(path: Path) -> list[str]:
     lineage = data.get("lineage")
     if not isinstance(lineage, dict):
         errors.append(f"{path}: lineage must be a mapping")
+    gaps = data.get("review_gaps")
+    if not isinstance(gaps, list):
+        errors.append(f"{path}: review_gaps must be a list")
+    if data.get("event_type") == "REVIEW" and data.get("review_status") == "CONFIRMED" and gaps:
+        errors.append(f"{path}: confirmed REVIEW may not retain review_gaps")
+    if len(str(data.get("scope", "")).strip()) < 3:
+        errors.append(f"{path}: scope is too short")
     if data.get("decision") == "REJECT":
         declared = data.get("declared_rejection_criteria")
         if not isinstance(declared, list) or not declared:

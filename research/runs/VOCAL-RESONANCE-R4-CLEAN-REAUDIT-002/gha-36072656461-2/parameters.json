@@ -1,0 +1,24 @@
+{
+  "baseline": [
+    "static_r2_style_safe_negative_frozen_from_audit001"
+  ],
+  "experiment_adapter": "vocal_resonance_clean_negative_reaudit_v2",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002.yaml",
+  "metrics": [
+    "overall_clean_false_trigger",
+    "false_trigger_by_technique",
+    "false_trigger_by_singer",
+    "false_trigger_by_exercise_family",
+    "technique_false_trigger_spread",
+    "fast_piano_forte_minus_other",
+    "yin_p90_ge_400_count",
+    "yin_p90_ge_400_false_trigger",
+    "old_acf_p90_ge900_count",
+    "old_acf_p95_ge900_count",
+    "acf_yin_disagreement_gt300c",
+    "prior_excerpt_overlap_count"
+  ],
+  "variants": [
+    "independent_exercise_balanced_clean_reaudit"
+  ]
+}

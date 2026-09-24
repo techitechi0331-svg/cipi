@@ -1,0 +1,23 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/motion_coherence_ranker.py --output-dir <temporary> --seed 20260929 --skip-per-singer 2"
+  ],
+  "completed_at": "2026-09-24T22:52:59.386232Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_motion_coherence_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R3-MOTION-001",
+  "random_seed": 20260929,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36069680311-1",
+  "schema_version": "1.0",
+  "source_commit": "920f2132f74079fabcedf55e344c0f3b6115ab44",
+  "started_at": "2026-09-24T22:51:28.018493Z",
+  "worker_version": "cipi-research-worker/0.2"
+}

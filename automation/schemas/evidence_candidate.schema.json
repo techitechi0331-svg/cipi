@@ -19,7 +19,8 @@
         "SOURCE_CANDIDATE",
         "MEASURED",
         "INFERRED",
-        "HYPOTHESIS"
+        "HYPOTHESIS",
+        "REJECTED"
       ]
     },
     "scope": {
@@ -28,7 +29,8 @@
     },
     "source_run": {
       "type": "string",
-      "minLength": 3
+      "minLength": 3,
+      "description": "Canonical source evidence reference. Autonomous evidence normally points under research/runs/. Imported historical/product evidence may point under research/plugins/<track>/evidence/."
     },
     "promotion_requested": {
       "enum": [

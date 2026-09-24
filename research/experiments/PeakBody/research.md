@@ -97,3 +97,36 @@ Observed model behavior:
 This does not invalidate the source method for general program material. It does expose a vocal-specific risk: noise-like consonants, breath, and plosives can dominate the crest feature.
 
 The PeakBody branch therefore uses a softened mapping and a higher timing floor while retaining the source crest detector itself. This is a deliberate CIPI vocal adaptation and remains HYPOTHESIS until listening/measurement.
+
+
+## Revision 01 decision
+
+The initial crest->fast timing map is no longer the leading vocal design.
+
+Synthetic burst tests showed material transient flattening when high crest shortened attack. Real singing tests confirmed the direction can add unnecessary early gain reduction at phrase starts, even though the real-world effect is smaller than the synthetic worst case.
+
+A first inverse model using the original 200 ms crest memory preserved peaks but controlled sustained body too slowly.
+
+The current leading candidate is therefore a **split-direction timing model** with a shorter vocal-specific crest memory:
+
+- crest integration: 40 ms;
+- high crest -> slower attack / faster release;
+- low crest -> faster attack / slower release;
+- attack range: 6–35 ms;
+- release range: 120–400 ms.
+
+Normalized transient factor:
+
+`t = clamp(log2(max(C2, 2) / 2) / 2, 0, 1)`
+
+Timing:
+
+`attack = 6 + 29*t` ms
+
+`release = 400 - 280*t` ms
+
+The detailed synthetic and real-vocal evidence is recorded in:
+
+`research/measurements/PEAKBODY_REVISION_01.md`
+
+This mapping is **CIPI_CHOICE / HYPOTHESIS** and returns the track to Revision -> Implementation -> Measurement.

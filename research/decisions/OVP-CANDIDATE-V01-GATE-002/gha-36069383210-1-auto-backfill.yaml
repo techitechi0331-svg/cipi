@@ -1,0 +1,34 @@
+schema_version: '1.0'
+decision_id: OVP-CANDIDATE-V01-GATE-002:gha-36069383210-1:auto-backfill
+job_id: OVP-CANDIDATE-V01-GATE-002
+source_run: research/runs/OVP-CANDIDATE-V01-GATE-002/gha-36069383210-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Legacy manifest indicates a rejection condition triggered. This deterministic
+  backfill does not finalize rejection.
+scope: Legacy automated-proposal backfill for OVP-CANDIDATE-V01-GATE-002; final rejection
+  requires review.
+declared_rejection_criteria:
+- CIPI-normalized committed measurement checksum fails.
+- Any predeclared candidate gate fails.
+- Character 50 LF/mid THD ratio > 2.0.
+- Full candidate has >2x the 100 Hz THD of the output-transformer-off baseline.
+- Character 100 8x alias > -70 dBc.
+triggered_criteria: []
+retained_findings:
+- The complete legacy run evidence is retained; this backfill reconstructs only the
+  pending automated proposal.
+reusable_findings: []
+revisit_if:
+- Revisit if new evidence, a changed model, or a changed baseline materially affects
+  the declared rejection criteria.
+review_gaps:
+- legacy_triggered_criteria_not_recorded
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-24T22:47:41.403776Z'
+immutable: true

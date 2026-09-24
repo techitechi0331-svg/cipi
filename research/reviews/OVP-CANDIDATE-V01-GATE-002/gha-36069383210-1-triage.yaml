@@ -1,0 +1,32 @@
+schema_version: '1.0'
+triage_id: OVP-CANDIDATE-V01-GATE-002:gha-36069383210-1:triage-v1
+job_id: OVP-CANDIDATE-V01-GATE-002
+run_id: gha-36069383210-1
+source_run: research/runs/OVP-CANDIDATE-V01-GATE-002/gha-36069383210-1
+source_decision_id: OVP-CANDIDATE-V01-GATE-002:gha-36069383210-1:auto-backfill
+source_decision_path: research/decisions/OVP-CANDIDATE-V01-GATE-002/gha-36069383210-1-auto-backfill.yaml
+job_path: research/jobs/completed/A-OVP-CANDIDATE-V01-GATE-002.yaml
+knowledge_candidate_path: research/knowledge_candidates/OVP-CANDIDATE-V01-GATE-002/gha-36069383210-1.yaml
+candidate_class: REJECT_CANDIDATE
+route: REJECTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+acceptance_met: false
+rejection_triggered: true
+promotion_requested: HYPOTHESIS
+review_gaps:
+- legacy_triggered_criteria_not_recorded
+required_human_gates: []
+downstream_gate_signals:
+- Level-matched real-vocal AB is pending.
+- Windows VST3/Cubase Pro 14 RC validation is pending.
+- Real-vocal material or an approved open singing corpus is required before the audio_ab
+  gate can be closed.
+- Cubase Pro 14 validation ultimately requires a Windows host run.
+reasons:
+- The automated proposal is REJECT; final rejection still requires review authority.
+recommended_action: Review the triggered rejection criteria, retained findings, reusable
+  findings and revisit conditions; confirm or supersede with a new REVIEW decision.
+created_at: '2026-09-24T22:47:41.403776Z'
+triage_version: '1.0'
+immutable: true

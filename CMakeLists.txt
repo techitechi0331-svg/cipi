@@ -65,3 +65,25 @@ endfunction()
 cipi_add_plugin(CIPIVoxLevel "CIPI VoxLevel" VxL1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VoxLevel")
 cipi_add_plugin(CIPIAirGuard "CIPI AirGuard" ArG1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/AirGuard")
 cipi_add_plugin(CIPIDensity "CIPI Density" Dns1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/Density")
+
+
+juce_add_console_app(CIPITests
+    PRODUCT_NAME "CIPI DSP Tests"
+)
+
+juce_generate_juce_header(CIPITests)
+
+target_sources(CIPITests PRIVATE tests/DspTests.cpp)
+target_include_directories(CIPITests PRIVATE src)
+
+target_link_libraries(CIPITests
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_core
+        juce::juce_dsp
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPITests PROPERTIES OUTPUT_NAME "CIPITests")

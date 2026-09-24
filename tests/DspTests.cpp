@@ -168,7 +168,7 @@ void testCrestFactorDetector()
     {
         cipi::dsp::CrestFactorDetector detector;
         detector.prepare (sampleRate);
-        detector.setIntegrationTimeMs (200.0f);
+        detector.setIntegrationTimeMs (40.0f);
 
         float crestSquared = 0.0f;
 
@@ -197,9 +197,9 @@ void testCrestFactorDetector()
 
     cipi::dsp::CrestFactorDetector transientDetector;
     transientDetector.prepare (sampleRate);
-    transientDetector.setIntegrationTimeMs (200.0f);
+    transientDetector.setIntegrationTimeMs (40.0f);
 
-    float minimumTransientScale = 1.0f;
+    float maximumTransientFactor = 0.0f;
 
     for (int n = 0; n < 96000; ++n)
     {
@@ -210,24 +210,30 @@ void testCrestFactorDetector()
         const auto impulse = (n % 4800 == 0) ? 0.95f : 0.0f;
         transientDetector.process (base + impulse);
 
-        minimumTransientScale = juce::jmin (
-            minimumTransientScale,
-            transientDetector.getTimingScale (0.25f, 0.35f));
+        maximumTransientFactor = juce::jmax (
+            maximumTransientFactor,
+            transientDetector.getTransientFactor());
     }
 
-    expect (minimumTransientScale < 0.75f,
-            "Transient-rich signal should shorten adaptive timing.");
-    expect (minimumTransientScale >= 0.25f - 1.0e-6f,
-            "Vocal timing scale must respect the 0.25 safety floor.");
+    expect (maximumTransientFactor > 0.75f,
+            "Transient-rich signal should produce a high transient factor.");
+
+    const auto transientAttackMs = 6.0f + 29.0f * maximumTransientFactor;
+    const auto transientReleaseMs = 400.0f - 280.0f * maximumTransientFactor;
+
+    expect (transientAttackMs >= 6.0f && transientAttackMs <= 35.0001f,
+            "PeakBody attack mapping must remain within 6-35 ms.");
+    expect (transientReleaseMs >= 119.999f && transientReleaseMs <= 400.0f,
+            "PeakBody release mapping must remain within 120-400 ms.");
 
     transientDetector.reset();
     const auto silenceCrest = transientDetector.process (0.0f);
-    const auto silenceScale = transientDetector.getTimingScale (0.25f, 0.35f);
+    const auto silenceFactor = transientDetector.getTransientFactor();
 
-    expect (std::isfinite (silenceCrest) && std::isfinite (silenceScale),
+    expect (std::isfinite (silenceCrest) && std::isfinite (silenceFactor),
             "Crest detector must remain finite at silence.");
-    expect (std::abs (silenceScale - 1.0f) < 1.0e-6f,
-            "Silence should default to the slow/neutral timing scale.");
+    expect (std::abs (silenceFactor) < 1.0e-6f,
+            "Silence should default to zero transient factor.");
 }
 }
 

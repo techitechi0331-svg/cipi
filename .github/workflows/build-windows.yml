@@ -95,18 +95,16 @@ jobs:
 
           foreach ($bundle in $bundles) {
             $safeName = [IO.Path]::GetFileNameWithoutExtension($bundle.Name)
-            $stdout = Join-Path pluginval-logs "$safeName.stdout.log"
-            $stderr = Join-Path pluginval-logs "$safeName.stderr.log"
+            $log = Join-Path pluginval-logs "$safeName.log"
 
             Write-Host "pluginval: $($bundle.FullName)"
-            $args = @("--strictness-level", "5", $bundle.FullName)
-            $process = Start-Process -FilePath $pluginval.FullName -ArgumentList $args -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdout -RedirectStandardError $stderr
 
-            Get-Content $stdout -ErrorAction SilentlyContinue
-            Get-Content $stderr -ErrorAction SilentlyContinue
+            & $pluginval.FullName --strictness-level 5 $bundle.FullName 2>&1 |
+              Tee-Object -FilePath $log
 
-            if ($process.ExitCode -ne 0) {
-              throw "pluginval failed for $($bundle.Name) with exit code $($process.ExitCode)."
+            $exitCode = $LASTEXITCODE
+            if ($exitCode -ne 0) {
+              throw "pluginval failed for $($bundle.Name) with exit code $exitCode."
             }
           }
 
@@ -119,6 +117,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Upload VST3 artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: CIPI-Windows-VST3

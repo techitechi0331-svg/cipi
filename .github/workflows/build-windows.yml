@@ -3,7 +3,15 @@ name: build-windows-vst3
 on:
   push:
     branches: [ main ]
+    paths:
+      - "CMakeLists.txt"
+      - "src/**"
+      - ".github/workflows/build-windows.yml"
   workflow_dispatch:
+
+concurrency:
+  group: cipi-windows-main
+  cancel-in-progress: true
 
 jobs:
   build:

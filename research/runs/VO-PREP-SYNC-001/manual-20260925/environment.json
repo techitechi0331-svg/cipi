@@ -1,0 +1,8 @@
+{
+  "mode": "manual_repository_evidence_sync",
+  "source_repository": "techitechi0331-svg/Vo.Prep",
+  "source_head": "28afccdf6d863f1c874ecd086fcb62d5b4f21a82",
+  "measured_product_head": "fbd0220e037e9e45a8161f059ae56ae99a2b6af0",
+  "source_ci_run_id": 36045159974,
+  "raw_audio_persisted": false
+}

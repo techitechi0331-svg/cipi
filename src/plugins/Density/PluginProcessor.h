@@ -32,7 +32,7 @@ private:
 
     juce::AudioProcessorValueTreeState apvts;
     std::unique_ptr<juce::dsp::Oversampling<float>> oversampling;
-    juce::AudioBuffer<float> dryBuffer;
+    juce::dsp::DryWetMixer<float> dryWetMixer { 8192 };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DensityAudioProcessor)
 };

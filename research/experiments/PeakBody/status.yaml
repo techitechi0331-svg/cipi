@@ -19,10 +19,8 @@ stages:
 current_stage: parameter_lock
 
 completed:
-  - Crest-factor-based adaptive timing is supported by multiple AES sources.
-  - Feed-forward soft-knee architecture is already established in CIPI.
-  - Level-dependent timing behavior is documented as a major source of compressor character.
-  - Main vocal-specific failure modes have been identified.
+  - research
+  - review
 
 unresolved:
   - Singing-specific crest-factor distribution is not measured.
@@ -31,7 +29,7 @@ unresolved:
   - Threshold/ratio strength mapping remains a product-design hypothesis.
 
 next_stage: implementation
-why_next: "A bounded experimental parameter specification will be locked with explicit hypothesis labels, allowing a prototype without pretending the constants are final."
+why_next: "A bounded experimental parameter specification is documented with explicit hypothesis labels, allowing a prototype without pretending the constants are final."
 next_confirmation: "Whether the literature-derived adaptive timing feature separates transient-rich and sustained vocal-like signals and remains stable in a realtime compressor."
 
 blockers:

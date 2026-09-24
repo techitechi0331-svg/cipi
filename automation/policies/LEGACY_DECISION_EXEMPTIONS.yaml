@@ -1,0 +1,9 @@
+schema_version: "1.0"
+records:
+  - path: research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/assistant-review-20260925.yaml
+    git_blob_sha1: c10bbb216313fd0efe91ccbae11f6ccb3ee59eb3
+    allowed_errors:
+      - "REVIEW requires parent_decision_id"
+      - "confirmed REVIEW may not retain review_gaps"
+      - "parent_decision_id does not reference an existing decision record"
+    rationale: "This immutable REVIEW record predates the tightened parent-decision and resolved-review-gaps contract. Its exact bytes are preserved; only these three schema-era validation errors are grandfathered. Any content change invalidates the exemption."

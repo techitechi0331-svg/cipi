@@ -1067,15 +1067,16 @@ def _vocal_resonance_clean_negative_reaudit(repo_root: Path, timeout_seconds: in
 def _vo_prep_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     del timeout_seconds
 
-    run_root = (
+    evidence_root = (
         repo_root
         / "research"
-        / "runs"
-        / "VO-PREP-SYNC-001"
+        / "plugins"
+        / "vo-prep"
+        / "evidence"
         / "manual-20260925"
     )
-    metrics_path = run_root / "metrics.json"
-    parameters_path = run_root / "parameters.json"
+    metrics_path = evidence_root / "metrics.json"
+    parameters_path = evidence_root / "parameters.json"
     inventory_path = (
         repo_root
         / "research"

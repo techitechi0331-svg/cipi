@@ -55,3 +55,20 @@ for the program name.
 Any future CIPI plug-in that reports one or more programs must provide a non-empty program name for every exposed program index.
 
 This finding demonstrates why CIPI keeps both pluginval and Steinberg's official validator: they overlap, but they do not detect exactly the same integration faults.
+
+
+## Verification after correction
+
+After naming the exposed default program `"Default"` in VoxLevel, AirGuard, and Density:
+
+- Windows VST3 Release build: PASS;
+- deterministic DSP gate: PASS;
+- pluginval strictness 5: PASS;
+- Steinberg VST3 SDK 3.8.1 official validator: **PASS**.
+
+Relevant CI baseline:
+
+- build-windows-vst3 run #22: success;
+- vst3-official-validator run #6: success.
+
+The empty-program-name defect is therefore considered **corrected and regression-covered by the external VST3 gates** for the current three-plugin baseline.

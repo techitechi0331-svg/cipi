@@ -99,7 +99,7 @@ jobs:
 
             Write-Host "pluginval: $($bundle.FullName)"
 
-            & $pluginval.FullName --strictness-level 5 $bundle.FullName 2>&1 |
+            & $pluginval.FullName --validate $bundle.FullName --strictness-level 5 2>&1 |
               Tee-Object -FilePath $log
 
             $exitCode = $LASTEXITCODE

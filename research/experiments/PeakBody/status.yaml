@@ -1,36 +1,40 @@
 id: PEAKBODY_01
 title: CIPI PeakBody 0.1
 
-status: parameter_lock
-knowledge_status: HYPOTHESIS
-confidence: 0.57
+status: measurement
+knowledge_status: PROVISIONAL
+confidence: 0.64
 
 stages:
   research: complete
   review: complete
-  parameter_lock: in_progress
-  implementation: pending
-  measurement: pending
+  parameter_lock: complete
+  implementation: complete
+  measurement: in_progress
   audio_ab: pending
-  revision: pending
-  vst3_validation: pending
+  revision: in_progress
+  vst3_validation: in_progress
   final_review: pending
 
-current_stage: parameter_lock
+current_stage: measurement
 
 completed:
   - research
   - review
+  - parameter_lock
+  - implementation
 
 unresolved:
   - Singing-specific crest-factor distribution is not measured.
-  - Vocal-optimal maximum attack and release values are not known.
-  - Sibilants, plosives, breath, and voiced sustain may require rejection or weighting logic.
+  - Sibilants, plosives, breath, and voiced sustain may still require rejection or weighting logic.
+  - The softened 0.35 exponent / 0.25 floor remains a CIPI hypothesis until real-vocal measurement and listening.
   - Threshold/ratio strength mapping remains a product-design hypothesis.
+  - pluginval, Steinberg validator, and Cubase Pro 14 validation are not complete for PeakBody.
+  - Level-matched vocal AB is pending.
 
-next_stage: implementation
-why_next: "A bounded experimental parameter specification is documented with explicit hypothesis labels, allowing a prototype without pretending the constants are final."
-next_confirmation: "Whether the literature-derived adaptive timing feature separates transient-rich and sustained vocal-like signals and remains stable in a realtime compressor."
+next_stage: measurement
+why_next: "The revised adaptive-timing model passed deterministic C++ tests and the development branch produced a valid PeakBody VST3 bundle. Measurement must now determine whether the prototype behaviour is musically useful and whether additional vocal-event rejection is required."
+next_confirmation: "Adaptive timing trajectories, static compression behavior, consonant/noise stress behavior, and whether the softened mapping deserves retention before full host validation."
 
 blockers:
-  - "Final parameter promotion requires measured vocal corpus and level-matched listening."
+  - "Final audio-quality promotion requires real vocal material and Cubase Pro 14 host validation."

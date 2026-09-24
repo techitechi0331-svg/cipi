@@ -21,6 +21,7 @@ ADAPTERS = {
     "original_vocal_pre_measurement_gate_v1",
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
+    "vl2a_phase01h_checksum_diagnosis_v1",
     "vocal_resonance_clean_negative_audit_v1",
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
@@ -1250,6 +1251,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_motion(repo_root, timeout_seconds)
     if name == "vl2a_phase01h_snapshot_gate_v1":
         return _vl2a_phase01h_snapshot_gate(repo_root, timeout_seconds)
+    if name == "vl2a_phase01h_checksum_diagnosis_v1":
+        return _vl2a_phase01h_checksum_diagnosis(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_audit_v1":
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
     if name == "microdouble_product_v03_gate_v1":

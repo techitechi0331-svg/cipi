@@ -1,0 +1,10 @@
+claim: A first-derivative mismatch at a nonlinear transfer zero crossing can create a persistent low-level relative-distortion floor even when the transfer value itself is continuous.
+evidence_type: MEASURED
+scope: Reusable nonlinear-audio DSP modeling lesson derived from the historical VL2A 12AX7-like piecewise transfer and extended low-level sine measurements.
+source_run: techitechi0331-svg/VocalPrepComp@build-vocal-leveler2a-v01
+promotion_requested: PROVISIONAL
+details:
+  positive_small_signal_slope: 1.094325
+  negative_small_signal_slope: 1.069855
+  historical_low_level_thd_percent_approx: 0.49
+  limitation: This establishes the mechanism for the audited transfer, not a universal THD value for all piecewise nonlinearities.

@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+option(CIPI_ENABLE_LTO "Enable link-time optimisation for release candidates" OFF)
+
 include(FetchContent)
 FetchContent_Declare(
     JUCE
@@ -52,9 +54,12 @@ function(cipi_add_plugin TARGET_NAME PRODUCT_NAME PLUGIN_CODE SOURCE_DIR)
             juce::juce_dsp
         PUBLIC
             juce::juce_recommended_config_flags
-            juce::juce_recommended_lto_flags
             juce::juce_recommended_warning_flags
     )
+
+    if (CIPI_ENABLE_LTO)
+        target_link_libraries(${TARGET_NAME} PUBLIC juce::juce_recommended_lto_flags)
+    endif()
 endfunction()
 
 cipi_add_plugin(CIPIVoxLevel "CIPI VoxLevel" VxL1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VoxLevel")

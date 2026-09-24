@@ -1,0 +1,36 @@
+id: 1176_FAMILY_FORMAL
+title: 1176 / FET Feedback Compressor Formal Research Track
+status: review
+knowledge_status: LIKELY
+confidence: 0.67
+
+stages:
+  research: complete
+  review: in_progress
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: review
+
+completed:
+  - research
+
+unresolved:
+  - Derive or fit the FET variable-resistance control law over the useful GR region.
+  - Quantify feedback-loop and rectifier behavior rather than replacing them with a generic peak detector.
+  - Lock attack/release trajectories across control positions and ratios.
+  - Separate revision-specific amplifier and transformer behavior.
+  - Determine how ratio switching alters threshold, loop gain, timing, and static curve.
+  - Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+
+next_stage: parameter_lock
+why_next: "The documented topology and control ranges are established, but exact FET/control and revision-specific constants are still unresolved."
+next_confirmation: "Which detector, feedback, FET, timing, ratio-network, amplifier, and transformer parameters can be specified reproducibly for a selected 1176 scope."
+
+blockers:
+  - No CIPI hardware measurement set for a specifically identified 1176 revision is registered yet.

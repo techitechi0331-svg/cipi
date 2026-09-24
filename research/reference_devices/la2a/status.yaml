@@ -1,0 +1,35 @@
+id: LA2A_FAMILY_FORMAL
+title: LA-2A / T4 Optical Leveler Formal Research Track
+status: review
+knowledge_status: LIKELY
+confidence: 0.78
+
+stages:
+  research: complete
+  review: in_progress
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: review
+
+completed:
+  - research
+
+unresolved:
+  - Fit a numerical T4/T4A/T4B history-dependent state model.
+  - Separate opto, tube-amplifier, and transformer contributions.
+  - Bound revision-specific differences before claiming one universal model.
+  - Lock COMP/LIMIT static curves and sidechain pre-emphasis numerically.
+  - Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+
+next_stage: parameter_lock
+why_next: "Architecture and program-dependent timing are documented well enough to review contradictions, but exact digital-equivalent constants are not yet justified."
+next_confirmation: "Which optical-memory, sidechain, static-curve, amplifier, and transformer parameters are sufficiently supported to become reproducible numerical specifications."
+
+blockers:
+  - No CIPI hardware measurement set for a known LA-2A/T4 revision is registered yet.

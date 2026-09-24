@@ -1,0 +1,16 @@
+VoPriPro v0.1 Real Vocal Validation
+===================================
+Files processed: 4
+DSP cases: 24
+Hard failures: 0
+Natural50 limiter-use warnings (>0.25 dB block max): 0
+
+Hard PASS criteria:
+- input is finite and not effectively silent
+- output contains no NaN/Inf
+- output remains within the -1.0 dBFS sample-peak safety ceiling (0.01 dB numerical tolerance)
+- gain-matched A/B WAVs can be rendered successfully
+
+The CSV also reports input/output RMS, crest factor, 100 ms active-window P90-P10 dynamics,
+compressor block-max GR percentiles, limiter GR, and active-RMS A/B match gain.
+These measurements are engineering evidence, not a substitute for perceptual listening.

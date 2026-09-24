@@ -26,6 +26,25 @@ def find_job(root: Path, job_id: str):
             return path, data
     raise FileNotFoundError(f"research job not found for {job_id}")
 
+def find_latest_run(root: Path, job_id: str, run_id: str | None):
+    base = root / "research" / "runs" / job_id
+    if run_id:
+        manifest_path = base / run_id / "manifest.json"
+        if not manifest_path.is_file():
+            raise FileNotFoundError(manifest_path)
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        return run_id, manifest_path, manifest
+    found = []
+    if base.exists():
+        for manifest_path in base.glob("*/manifest.json"):
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            found.append((str(manifest.get("completed_at", "")), str(manifest.get("run_id", manifest_path.parent.name)), manifest_path, manifest))
+    if not found:
+        raise FileNotFoundError(f"research run not found for {job_id}")
+    found.sort()
+    _, resolved, manifest_path, manifest = found[-1]
+    return resolved, manifest_path, manifest
+
 def find_auto_decision(root: Path, job_id: str, run_id: str | None):
     base = root / "research" / "decisions" / job_id
     found = []
@@ -43,6 +62,55 @@ def find_auto_decision(root: Path, job_id: str, run_id: str | None):
     found.sort()
     _, _, path, data = found[-1]
     return path, data
+
+def backfill_auto_decision(root: Path, job: dict, manifest: dict):
+    job_id = str(job["job_id"])
+    run_id = str(manifest["run_id"])
+    rejected = bool(manifest.get("rejection_triggered"))
+    triggered = list(manifest.get("triggered_criteria", [])) if isinstance(manifest.get("triggered_criteria", []), list) else []
+    gaps = []
+    if rejected and not triggered:
+        gaps.append("legacy_triggered_criteria_not_recorded")
+    if rejected:
+        decision = "REJECT"
+        retained = ["The complete legacy run evidence is retained; this backfill reconstructs only the pending automated proposal."]
+        reusable = []
+        revisit = ["Revisit if new evidence, a changed model, or a changed baseline materially affects the declared rejection criteria."]
+        rationale = "Legacy manifest indicates a rejection condition triggered. This deterministic backfill does not finalize rejection."
+        scope = f"Legacy automated-proposal backfill for {job_id}; final rejection requires review."
+    else:
+        decision = "ITERATE"
+        retained = ["The complete legacy run evidence is retained; this backfill reconstructs only the pending automated proposal."]
+        reusable = []
+        revisit = []
+        rationale = "Legacy manifest passed its declared experiment gate. This deterministic backfill does not promote knowledge."
+        scope = f"Legacy automated-proposal backfill for {job_id}; promotion requires review."
+
+    payload = {
+        "schema_version": "1.0",
+        "decision_id": f"{job_id}:{run_id}:auto-backfill",
+        "job_id": job_id,
+        "source_run": f"research/runs/{job_id}/{run_id}",
+        "event_type": "AUTOMATED_PROPOSAL",
+        "authority": "AUTOMATION",
+        "decision": decision,
+        "review_status": "PENDING",
+        "rationale": rationale,
+        "scope": scope,
+        "declared_rejection_criteria": list(job.get("rejection", [])),
+        "triggered_criteria": triggered,
+        "retained_findings": retained,
+        "reusable_findings": reusable,
+        "revisit_if": revisit,
+        "review_gaps": gaps,
+        "lineage": {"supersedes": [], "related_jobs": [], "related_decisions": []},
+        "created_at": str(manifest.get("completed_at", "")),
+        "immutable": True,
+    }
+    path = root / "research" / "decisions" / job_id / f"{run_id}-auto-backfill.yaml"
+    content = yaml.safe_dump(payload, sort_keys=False, allow_unicode=True)
+    write_immutable(path, content)
+    return path, payload
 
 def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str):
     base = root / "research" / "decisions" / job_id
@@ -120,14 +188,13 @@ def main() -> int:
 
     root = Path(args.root).resolve()
     job_path, job = find_job(root, args.job_id)
-    decision_path, decision = find_auto_decision(root, args.job_id, args.run_id)
+    run_id, manifest_path, manifest = find_latest_run(root, args.job_id, args.run_id)
+    try:
+        decision_path, decision = find_auto_decision(root, args.job_id, run_id)
+    except FileNotFoundError:
+        decision_path, decision = backfill_auto_decision(root, job, manifest)
     source_run = str(decision["source_run"])
     run_dir = root / source_run
-    manifest_path = run_dir / "manifest.json"
-    if not manifest_path.is_file():
-        raise FileNotFoundError(manifest_path)
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    run_id = str(manifest["run_id"])
 
     confirmed = find_confirmed_review(root, args.job_id, str(decision["decision_id"]))
     candidate_path, candidate = find_candidate(root, args.job_id, source_run)

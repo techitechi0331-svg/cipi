@@ -1,0 +1,9 @@
+claim: In the imported VL2A Phase 01-H evidence, a reduced line-amplifier replacement
+  can satisfy the compiled block gates while preserving identical max gain reduction
+  in line-amplifier-isolated VocalSet renders, enabling objective isolation before
+  human level-matched listening.
+evidence_type: MEASURED
+scope: VL2A Phase 01-H imported compiled measurement snapshot and nine VocalSet objective
+  AB cases only; this does not establish subjective preference or LA-2A hardware identity.
+source_run: research/runs/VL2A-PHASE01H-SNAPSHOT-GATE-001/gha-36070263996-1
+promotion_requested: PROVISIONAL

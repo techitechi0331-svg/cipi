@@ -1,0 +1,25 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed VL2A Phase01H CSV snapshots",
+    "verify committed SHA256 ledger",
+    "apply predeclared compiled and AB-integrity gates"
+  ],
+  "completed_at": "2026-09-24T22:57:47.343191Z",
+  "environment": {
+    "experiment_adapter": "vl2a_phase01h_snapshot_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VL2A-PHASE01H-SNAPSHOT-GATE-001",
+  "random_seed": 3310201,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36070263996-1",
+  "schema_version": "1.0",
+  "source_commit": "37c0abee4bf3ed8af817dd57b0d829e66a166b07",
+  "started_at": "2026-09-24T22:57:47.339555Z",
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -1,0 +1,49 @@
+name: peakbody-revision-check
+
+on:
+  push:
+    branches: ["dev/peakbody-v0.1-current"]
+    paths:
+      - "CMakeLists.txt"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/peakbody-revision.yml"
+
+concurrency:
+  group: cipi-peakbody-revision
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        shell: pwsh
+        run: cmake -S . -B build -G "Visual Studio 18 2026" -A x64
+
+      - name: Build DSP tests
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPITests --parallel 4
+
+      - name: Run DSP tests
+        shell: pwsh
+        run: |
+          $testExe = Get-ChildItem -Path build -Recurse -File -Filter CIPITests.exe | Select-Object -First 1
+          if (-not $testExe) { throw "CIPITests.exe was not produced." }
+          & $testExe.FullName
+          if ($LASTEXITCODE -ne 0) { throw "DSP tests failed." }
+
+      - name: Build PeakBody VST3
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIPeakBody_VST3 --parallel 4
+
+      - name: Verify PeakBody bundle
+        shell: pwsh
+        run: |
+          $bundle = Get-ChildItem -Path build -Recurse -Directory -Filter "CIPI PeakBody.vst3" | Select-Object -First 1
+          if (-not $bundle) { throw "CIPI PeakBody.vst3 was not produced." }
+          Write-Host "PeakBody bundle: $($bundle.FullName)"

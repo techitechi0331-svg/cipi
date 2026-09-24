@@ -1,0 +1,18 @@
+{
+  "char100_16x_alias_dbc": -80.0718,
+  "char100_1khz_thd_percent": 11.4564,
+  "char100_8x_alias_dbc": -80.5881,
+  "char100_8x_minus_16x_alias_db": -0.5163000000000011,
+  "char100_stress_thd_percent": 30.7347,
+  "char50_100hz_thd_percent": 11.8102,
+  "char50_1khz_thd_percent": 0.992178,
+  "char50_lf_to_mid_ratio": 11.903307672615195,
+  "char50_sample_rate_gain_spread_db": 0.0004999999999988347,
+  "checksum_ok": false,
+  "declared_gate_fail_count": 4,
+  "full_vs_no_output_transformer_lf_ratio": 7.931685236301116,
+  "no_output_transformer_100hz_thd_percent": 1.48899,
+  "no_output_transformer_1khz_thd_percent": 0.846036,
+  "spectral_protection_benefit_percent": 23.496184590669415,
+  "spectral_protection_off_100hz_thd_percent": 15.4374
+}

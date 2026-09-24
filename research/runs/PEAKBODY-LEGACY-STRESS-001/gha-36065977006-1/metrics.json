@@ -1,0 +1,10 @@
+{
+  "all_numeric_finite": true,
+  "attack_mean_ms_max": 40.0,
+  "attack_mean_ms_min": 10.0,
+  "release_mean_ms_max": 400.0,
+  "release_mean_ms_min": 100.0,
+  "row_count": 6,
+  "scale_mean_max": 1.0,
+  "scale_min_global": 0.25
+}

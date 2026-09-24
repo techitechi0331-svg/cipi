@@ -81,3 +81,39 @@ Historical workflow/setup failures remain infrastructure evidence and are not cl
 - early offline AB build/headless-startup failures corrected before run `36057598192`.
 
 The successful runs above supersede those infrastructure failures for reproducibility, but the failures are not deleted.
+
+
+## Chat / product-repo recovery addendum
+
+The current chat history was reconciled against the latest product branch before continuing. The following useful details are preserved here because they are reusable beyond the final Phase 01-H summary.
+
+### SOURCE_FACT
+
+- The product parameter IDs `peakReduction`, `gain`, and `mode` are compatibility-sensitive and are intended to remain stable.
+- The product signal-flow decision keeps the user Gain after the T4 audio attenuation node and outside the sidechain detector drive. This detector independence is a retained architectural constraint.
+- The 12AX7, 12BH7, and A-24 isolated research histories remain available in the product repository and were not overwritten by the integrated Phase 01-H result.
+
+### MEASURED
+
+- Historical 12AX7-like Baseline A was independently shown to be value-continuous but first-derivative-discontinuous at zero. The positive/negative small-signal slopes were approximately 1.094325 and 1.069855, respectively.
+- The same historical 12AX7-like baseline retained roughly 0.49% relative low-level THD across a wide low-level range instead of decaying naturally toward zero.
+- The reduced 12AX7 LUT research candidate used 2049 float32 points in the reviewed prototype and reproduced the physical-reference transfer with maximum normalized error on the order of 4e-7 in the tested domain. The point count remained a provisional engineering choice rather than historical truth.
+- 12BH7 strict review found that the old generic follower approximation had no load dependence/current sharing/source-impedance model and rejected it as the final architecture. The accepted direction was a load-aware two-section cathode-follower reference with a reduced realtime architecture.
+- A-24 strict review accepted only a linear physical/load architecture as the current evidence-backed baseline. Nonlinear magnetic saturation/hysteresis constants remained unapproved due to insufficient A-24-specific evidence.
+
+### INFERRED
+
+- A slope discontinuity in a piecewise memoryless nonlinearity can create a persistent low-level distortion floor even when the transfer value itself is continuous.
+- For a cathode-follower output driver, load dependence and source-impedance behavior are more diagnostic of architectural fidelity than simply matching a static soft-clipping curve.
+- Transformer model complexity should be gated by measurable error reduction; adding magnetic hysteresis without device-specific evidence increases model complexity without increasing evidentiary confidence.
+
+### HYPOTHESIS
+
+- The slope-discontinuity / low-level-distortion finding is likely reusable as a generic screening test for other vocal saturation and preamp models.
+- The load-aware follower methodology is likely reusable for other tube-output stages where the transformer or line load materially affects current/headroom.
+
+### REJECTED
+
+- Treating the old 12AX7/12BH7 composite waveshaper as acceptable because it sounded analog-like.
+- Treating 2049 LUT points as a universally optimal nonlinear-model resolution.
+- Treating unsupported transformer magnetic constants as historical truth.

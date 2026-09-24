@@ -1,0 +1,5 @@
+claim: In the current Vo.Prep corpus, conservative dual-timescale macro correction with sub-dB average activity avoided the persistent multi-dB riding observed in the rejected stronger 6 s / -4 dB design while still making a fixed downstream compressor subjectively slightly calmer.
+evidence_type: MEASURED
+scope: Vo.Prep Macro Level v2.1 on the recorded 11-stem 44.1/48 kHz client-vocal corpus and its documented listening check; not a universal vocal-leveler optimum.
+source_run: research/runs/VO-PREP-SYNC-001/manual-20260925
+promotion_requested: PROVISIONAL

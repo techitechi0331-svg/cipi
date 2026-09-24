@@ -1,0 +1,37 @@
+name: build-windows-vst3
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        shell: pwsh
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+      - name: Build Release
+        shell: pwsh
+        run: cmake --build build --config Release --parallel 2
+
+      - name: Collect VST3
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts | Out-Null
+          Get-ChildItem -Path build -Recurse -Filter *.vst3 | ForEach-Object {
+            Copy-Item $_.FullName -Destination artifacts -Recurse -Force
+          }
+
+      - name: Upload VST3 artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Windows-VST3
+          path: artifacts
+          if-no-files-found: error

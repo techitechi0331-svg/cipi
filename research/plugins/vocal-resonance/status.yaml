@@ -2,8 +2,8 @@ id: VOCAL_RESONANCE_FORMAL
 title: Vocal Resonance Suppressor Research Track
 
 status: research
-knowledge_status: HYPOTHESIS
-confidence: 0.5
+knowledge_status: PROVISIONAL
+confidence: 0.72
 
 source_kind: repository_verified
 source_ref: "https://github.com/techitechi0331-svg/Vocal_resonance"
@@ -11,7 +11,7 @@ source_ref: "https://github.com/techitechi0331-svg/Vocal_resonance"
 stages:
   research: in_progress
   review: in_progress
-  parameter_lock: pending
+  parameter_lock: partial
   implementation: pending
   measurement: in_progress
   audio_ab: pending
@@ -21,15 +21,21 @@ stages:
 
 current_stage: research
 completed:
-  []
+  - Candidate-discovery synthetic development and locked holdout.
+  - Real-vocal controlled-injection gate on 20 identifiable VocalSet singers.
+  - Independent real-vocal candidate-budget confirmation cohort.
+  - Candidate budget K=20 locked for current discovery scaffold.
+  - Candidate budget K=15 rejected for current discovery scaffold.
+
 unresolved:
-  - Real-vocal controlled injection has not passed the hard gate.
-  - High-F0/formant-overlap discovery remains difficult.
-  - Candidate budget K=15 versus K=20 is not frozen.
-  - Semantic ranking must not resume until candidate discovery is validated on real vocals.
+  - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
+  - Merge-20 superiority over Local-20 remains unconfirmed.
+  - High-F0/formant-overlap semantic ambiguity remains.
+  - Clean hard-negative false-trigger behavior is not yet good enough to authorize suppression DSP.
+  - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: measurement
-why_next: "Several synthetic detector architectures have been falsified or downgraded; the current design is frozen until observability-aware real-vocal evidence exists."
-next_confirmation: "Whether candidate generation keeps useful recall under a hard budget on real singing without confusing normal harmonics/formants for resonances."
+why_next: "Candidate discovery has passed its scoped real-vocal budget gate; the next falsifiable question is candidate-level semantic ranking under real vocal positives and clean/adversarial negatives."
+next_confirmation: "Whether an interpretable semantic ranker can improve Top-K target ranking and false-positive behavior without collapsing high-F0, formant, fricative, or transient vocal cases."
 blockers:
-  - Controlled real-vocal injection is the explicit hard gate.
+  - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

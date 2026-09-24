@@ -125,7 +125,7 @@ jobs:
           JOB_ID: ${{ steps.select.outputs.job_id }}
           RUN_ID: ${{ steps.execute.outputs.run_id }}
         run: |
-          gh issue create --title "Autonomous research ready: $JOB_ID" --body "Free autonomous research run **$RUN_ID** completed successfully and is saved on branch `$BOT_BRANCH`. Automatic PR creation is disabled by the repository Actions setting, so this issue is the review handoff. The branch already passed the same-workflow Job, Result, Evidence Candidate, and CIPI research-contract gates. No paid external API was used."
+          gh issue create --title "Autonomous research ready: $JOB_ID" --body "Free autonomous research run **$RUN_ID** completed successfully and is saved on branch $BOT_BRANCH. Automatic PR creation is disabled by the repository Actions setting, so this issue is the review handoff. The branch already passed the same-workflow Job, Result, Evidence Candidate, and CIPI research-contract gates. No paid external API was used."
 
       - name: Queue empty
         if: steps.select.outputs.has_job != 'true'

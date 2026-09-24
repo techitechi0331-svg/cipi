@@ -1,0 +1,27 @@
+schema_version: "1.0"
+decision_id: "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:auto"
+job_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: "The declared acceptance gate passed. Automation records evidence but does not promote knowledge or finalize product decisions."
+scope: "Automated acceptance evidence for VOCAL-RESONANCE-R4-CLEAN-AUDIT-001; promotion requires review."
+declared_rejection_criteria:
+  - "fewer than 24 usable clean excerpts"
+  - "label mapping cannot be resolved"
+  - "fewer than 4 technique categories"
+  - "fewer than 6 high-pitch stress excerpts under the predeclared p90 >=400 Hz definition"
+triggered_criteria: []
+retained_findings:
+  - "The complete accepted run evidence is retained; passing an experiment gate does not itself promote shared knowledge."
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: "2026-09-24T23:06:00.964460Z"
+immutable: true

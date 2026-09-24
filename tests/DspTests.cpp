@@ -1,5 +1,6 @@
 #include <JuceHeader.h>
 #include "../src/dsp/EnvelopeFollower.h"
+#include "../src/dsp/CrestFactorDetector.h"
 #include "../src/dsp/SoftKneeCompressor.h"
 
 #include <cmath>
@@ -158,12 +159,83 @@ void testOversamplingFiniteAndLatency()
             expect (std::isfinite (buffer.getSample (ch, i)),
                     "Oversampled nonlinear path produced non-finite output.");
 }
+
+void testCrestFactorDetector()
+{
+    constexpr double sampleRate = 48000.0;
+
+    auto measureSine = [] (float amplitude)
+    {
+        cipi::dsp::CrestFactorDetector detector;
+        detector.prepare (sampleRate);
+        detector.setIntegrationTimeMs (200.0f);
+
+        float crestSquared = 0.0f;
+
+        for (int n = 0; n < 96000; ++n)
+        {
+            const auto phase = juce::MathConstants<double>::twoPi
+                             * 440.0 * static_cast<double> (n) / sampleRate;
+            crestSquared = detector.process (
+                amplitude * static_cast<float> (std::sin (phase)));
+        }
+
+        return crestSquared;
+    };
+
+    const auto fullLevel = measureSine (0.8f);
+    const auto lowerLevel = measureSine (0.08f);
+
+    expect (std::isfinite (fullLevel) && std::isfinite (lowerLevel),
+            "Crest detector produced non-finite output.");
+
+    expect (std::abs (fullLevel - lowerLevel) < 0.02f,
+            "Crest detector should be approximately invariant to gain scaling.");
+
+    expect (fullLevel > 1.8f && fullLevel < 2.2f,
+            "Steady sine crest-squared should settle near 2.");
+
+    cipi::dsp::CrestFactorDetector transientDetector;
+    transientDetector.prepare (sampleRate);
+    transientDetector.setIntegrationTimeMs (200.0f);
+
+    float minimumTransientScale = 1.0f;
+
+    for (int n = 0; n < 96000; ++n)
+    {
+        const auto base = 0.05f * static_cast<float> (
+            std::sin (juce::MathConstants<double>::twoPi
+                      * 220.0 * static_cast<double> (n) / sampleRate));
+
+        const auto impulse = (n % 4800 == 0) ? 0.95f : 0.0f;
+        transientDetector.process (base + impulse);
+
+        minimumTransientScale = juce::jmin (
+            minimumTransientScale,
+            transientDetector.getTimingScale (0.25f, 0.35f));
+    }
+
+    expect (minimumTransientScale < 0.75f,
+            "Transient-rich signal should shorten adaptive timing.");
+    expect (minimumTransientScale >= 0.25f - 1.0e-6f,
+            "Vocal timing scale must respect the 0.25 safety floor.");
+
+    transientDetector.reset();
+    const auto silenceCrest = transientDetector.process (0.0f);
+    const auto silenceScale = transientDetector.getTimingScale (0.25f, 0.35f);
+
+    expect (std::isfinite (silenceCrest) && std::isfinite (silenceScale),
+            "Crest detector must remain finite at silence.");
+    expect (std::abs (silenceScale - 1.0f) < 1.0e-6f,
+            "Silence should default to the slow/neutral timing scale.");
+}
 }
 
 int main()
 {
     testGainComputer();
     testEnvelopeFollower();
+    testCrestFactorDetector();
     testLinkwitzRileyReconstruction();
     testOversamplingFiniteAndLatency();
 

@@ -1,0 +1,8 @@
+claim: For the tested stereo compressor topology, linking left/right slow and fast detector paths by MAX preserved mono threshold interpretation, one-channel behavior, anti-phase safety, and the L/R ratio under one shared gain value better than averaging-based link candidates.
+evidence_type: MEASURED
+scope: Vo.Prep Stereo Link research branch; topology result predates final 70 ms release and requires regression confirmation in the current integrated core.
+promotion_requested: PROVISIONAL
+source_repository: techitechi0331-svg/Vo.Prep
+source_ref: research/stereo-link
+source_sha: d13a1d88e84800c710ef595304082a2eb4a15dd3
+related_track: research/experiments/VoPrepTransparentCompressor

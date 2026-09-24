@@ -30,10 +30,11 @@ unresolved:
   - The full raw Macro-Level vocal corpus is not directly materializable in the current Project runtime.
   - Level-matched vocal AB is still pending.
   - Cubase Pro 14 real-host verification is pending.
+  - A dedicated PeakBody product repository is not currently available; product implementation must not be merged into CIPI main.
 
 next_stage: implementation
-why_next: "Synthetic and real-singing measurements identified a better vocal-specific timing topology: high crest should slow attack and speed release, while low crest should speed attack and slow release. The Revision 02 80 ms / 6–40 ms / 120–400 ms candidate now needs implementation validation."
-next_confirmation: "Whether the revised mapping preserves deterministic detector behavior, builds as VST3, passes pluginval/Steinberg validation, and reproduces the measured transient/body trade-off."
+why_next: "Revision 02 prototype implementation and branch CI are measured, but the formal product implementation must move to a dedicated PeakBody repository while CIPI continues autonomous research replay and measurement."
+next_confirmation: "Whether autonomous Revision 02 replay reproduces the declared policy across sample rates, and whether the future dedicated product repository reproduces the validated prototype behavior through product VST3 gates."
 
 blockers:
   - "Final parameter promotion requires the full raw vocal corpus plus level-matched listening."

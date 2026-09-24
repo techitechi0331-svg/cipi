@@ -64,6 +64,8 @@ def main() -> int:
     job = load_job(args.job)
     started = utc_now()
     out = Path(args.output)
+    if out.exists() and any(out.iterdir()):
+        raise SystemExit(f"refusing to overwrite non-empty research run directory: {out}")
     out.mkdir(parents=True, exist_ok=True)
     repo_root = Path(__file__).resolve().parents[2]
 
@@ -135,6 +137,7 @@ def main() -> int:
         "result": "COMPLETED",
         "acceptance_met": bool(result["acceptance_met"]),
         "rejection_triggered": bool(result["rejection_triggered"]),
+        "triggered_criteria": list(result.get("triggered_criteria", job.get("rejection", []) if result["rejection_triggered"] else [])),
         "checksums_file": "checksums.sha256",
     }
     write_json(out / "manifest.json", manifest)

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/schemas/review_triage.schema.json",
+  "title": "CIPI Automated Review Triage",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "triage_id",
+    "job_id",
+    "run_id",
+    "source_run",
+    "source_decision_id",
+    "candidate_class",
+    "route",
+    "final_decision_made",
+    "acceptance_met",
+    "rejection_triggered",
+    "review_gaps",
+    "required_human_gates",
+    "downstream_gate_signals",
+    "reasons",
+    "recommended_action",
+    "created_at",
+    "triage_version",
+    "immutable"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "triage_version": {
+      "const": "1.0"
+    },
+    "triage_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "job_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "source_run": {
+      "type": "string",
+      "pattern": "^research/runs/"
+    },
+    "source_decision_id": {
+      "type": "string",
+      "minLength": 5
+    },
+    "candidate_class": {
+      "enum": [
+        "REJECT_CANDIDATE",
+        "PROMOTION_CANDIDATE",
+        "RESEARCH_MORE",
+        "ALREADY_REVIEWED"
+      ]
+    },
+    "route": {
+      "enum": [
+        "REJECTION_REVIEW",
+        "PROMOTION_REVIEW",
+        "CONTINUE_RESEARCH",
+        "HUMAN_GATE_REVIEW",
+        "DONE"
+      ]
+    },
+    "final_decision_made": {
+      "type": "boolean"
+    },
+    "acceptance_met": {
+      "type": "boolean"
+    },
+    "rejection_triggered": {
+      "type": "boolean"
+    },
+    "promotion_requested": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_human_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "downstream_gate_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_action": {
+      "type": "string",
+      "minLength": 10
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 4
+    },
+    "immutable": {
+      "const": true
+    }
+  },
+  "additionalProperties": true
+}

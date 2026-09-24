@@ -65,6 +65,7 @@ endfunction()
 cipi_add_plugin(CIPIVoxLevel "CIPI VoxLevel" VxL1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VoxLevel")
 cipi_add_plugin(CIPIAirGuard "CIPI AirGuard" ArG1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/AirGuard")
 cipi_add_plugin(CIPIDensity "CIPI Density" Dns1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/Density")
+cipi_add_plugin(CIPIPeakBody "CIPI PeakBody" PkB1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/PeakBody")
 
 
 juce_add_console_app(CIPITests

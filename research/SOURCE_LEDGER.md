@@ -54,3 +54,8 @@
 | DATA-VOX-001 | Wilkins et al., **VocalSet: A Singing Voice Dataset**, ISMIR / Zenodo. https://zenodo.org/records/1442513 | research dataset / paper | 20 professional singers, technique-diverse monophonic singing corpus used for real-vocal controlled-injection validation | E5 |
 
 A repeated quotation of one original source does not count as independent corroboration.
+
+| PLO-PROD-001 | iZotope, **RX De-plosive documentation / Removing Plosives from a Voice Recording**. https://www.izotope.com/en/content/download/77698/file/izotope-rx-5-help-documentation.pdf | official product documentation | public plosive detector frequency/context behavior and pre-HPF caution | E3 |
+| DEESS-PROD-005 | iZotope, **Nectar 2 Help — De-Esser**. https://help.izotope.com/nectar2/iZotope_Nectar2_Help.pdf | official product documentation | high-frequency energy relative to full-band vocal level for level-robust de-essing | E3 |
+| DEESS-PROD-006 | FabFilter, **Pro-DS Help — Basic/Advanced Controls**. https://www.fabfilter.com/help/pro-ds/using/basiccontrols | official product documentation | public wide-band versus split-band de-essing behavior | E3 |
+| DEESS-PROD-007 | Waves, **Sibilance User Guide**. https://www.waves.com/1lib/pdf/plugins/sibilance.pdf | official product documentation | public S/SH spectral behavior and processing emphasis | E3 |

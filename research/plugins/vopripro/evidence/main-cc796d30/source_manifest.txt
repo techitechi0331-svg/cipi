@@ -1,0 +1,18 @@
+Real-vocal source:
+HUST_Solfege — https://github.com/itec-hust/HUST_Solfege
+Repository license: MIT
+Dataset description: 103 monophonic 44.1 kHz / 16-bit singing/solfege recordings,
+including male, female, and juvenile recordings.
+
+Files selected for VoPriPro v0.1 validation:
+- man1_twinkle.wav
+- man4_twinkle.wav
+- woman1_twinkle.wav
+- woman3_twinkle.wav
+
+Only the self-built man/woman-named samples above are used by this validation.
+The A/B files are delay-aligned and active-RMS matched for listening convenience.
+
+CIPI import policy:
+- raw WAV files are deliberately not copied into CIPI;
+- only derived metrics, provenance, and hashes are retained.

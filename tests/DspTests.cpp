@@ -168,7 +168,7 @@ void testCrestFactorDetector()
     {
         cipi::dsp::CrestFactorDetector detector;
         detector.prepare (sampleRate);
-        detector.setIntegrationTimeMs (40.0f);
+        detector.setIntegrationTimeMs (80.0f);
 
         float crestSquared = 0.0f;
 
@@ -197,7 +197,7 @@ void testCrestFactorDetector()
 
     cipi::dsp::CrestFactorDetector transientDetector;
     transientDetector.prepare (sampleRate);
-    transientDetector.setIntegrationTimeMs (40.0f);
+    transientDetector.setIntegrationTimeMs (80.0f);
 
     float maximumTransientFactor = 0.0f;
 
@@ -218,11 +218,11 @@ void testCrestFactorDetector()
     expect (maximumTransientFactor > 0.75f,
             "Transient-rich signal should produce a high transient factor.");
 
-    const auto transientAttackMs = 6.0f + 29.0f * maximumTransientFactor;
+    const auto transientAttackMs = 6.0f + 34.0f * maximumTransientFactor;
     const auto transientReleaseMs = 400.0f - 280.0f * maximumTransientFactor;
 
-    expect (transientAttackMs >= 6.0f && transientAttackMs <= 35.0001f,
-            "PeakBody attack mapping must remain within 6-35 ms.");
+    expect (transientAttackMs >= 6.0f && transientAttackMs <= 40.0001f,
+            "PeakBody attack mapping must remain within 6-40 ms.");
     expect (transientReleaseMs >= 119.999f && transientReleaseMs <= 400.0f,
             "PeakBody release mapping must remain within 120-400 ms.");
 

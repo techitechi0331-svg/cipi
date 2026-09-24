@@ -1,29 +1,27 @@
 id: AIRGUARD_01
 title: CIPI AirGuard 0.1
 
-status: implementation
+status: measurement
 knowledge_status: PROVISIONAL
 confidence: 0.52
 
 stages:
   research: complete
-  review: in_progress
-  parameter_lock: provisional
+  review: complete
+  parameter_lock: in_progress
   implementation: complete
   measurement: in_progress
   audio_ab: pending
   revision: pending
-  vst3_validation: partial
+  vst3_validation: in_progress
   final_review: pending
 
 current_stage: measurement
 
 completed:
-  - Sibilance research snapshot recorded.
-  - Normalised high-band versus broadband detector implemented.
-  - Linkwitz-Riley split-band topology implemented.
-  - Focus/Tame/Output smoothing added.
-  - Windows x64 VST3 build passed.
+  - research
+  - review
+  - implementation
 
 unresolved:
   - Default focus and threshold mapping remain hypothesis-level.
@@ -33,7 +31,7 @@ unresolved:
   - Cubase Pro 14 verification is pending.
 
 next_stage: measurement
-why_next: "The detector topology is implementable; corpus and reconstruction measurements are now needed before any parameter lock."
+why_next: "The detector topology is implementable; corpus and reconstruction measurements are now needed before any parameter lock is promoted."
 next_confirmation: "Crossover reconstruction, detector invariance to input gain, false-trigger rate, and whether adaptive focus research is justified."
 
 blockers:

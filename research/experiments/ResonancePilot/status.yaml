@@ -1,0 +1,35 @@
+id: RESONANCEPILOT_01
+title: CIPI ResonancePilot 0.1
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.44
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+
+completed: []
+
+unresolved:
+  - A robust vocal-specific definition of unwanted resonance is not yet locked.
+  - High-F0 singing can make harmonics look like spectral/formant peaks.
+  - Legitimate singer-formant energy must not be indiscriminately suppressed.
+  - The best realtime analysis domain and latency target are not yet selected.
+  - Harmonic-protection and temporal-persistence features need numerical validation.
+
+next_stage: review
+why_next: "Primary vocal-resonance literature and implementable resonance-suppression methods are now available; competing detector models must be compared before numerical locking."
+next_confirmation: "Whether local spectral prominence plus harmonic protection, bandwidth, and persistence is sufficient to distinguish problematic narrow resonances from legitimate singing structure."
+
+blockers:
+  - "Final detector thresholds require a labelled vocal corpus."

@@ -86,3 +86,48 @@ Research.
 ## Next stage
 
 Compare spectral-envelope estimators, F0/harmonic guards, and realtime suppression topologies. No production DSP constants are locked yet.
+
+
+## Review note — high-F0 spectral undersampling
+
+High-pitched singing creates a stronger problem than simple harmonic false positives.
+
+As F0 rises, harmonic spacing widens and the vocal-tract envelope becomes sparsely sampled. A physical formant/resonance can fall between harmonics and may therefore be weak or effectively invisible in the observed magnitude spectrum, while an individual harmonic can look unusually dominant.
+
+Consequences for ResonancePilot:
+
+- do not equate a visible FFT peak with a vocal-tract resonance;
+- do not assume every physical resonance will appear as a visible FFT peak;
+- F0/harmonic protection is necessary but not sufficient;
+- high-F0 detection confidence should fall when the local harmonic sampling density becomes sparse;
+- the detector may need an envelope/formant estimator that is explicitly robust to excitation bias, or it should reduce intervention rather than guess.
+
+VOX-002 is especially relevant because adapted WLP-AME outperformed conventional LPC for high-pitched soprano formant estimation.
+
+## Review note — RES-001 should not donate fixed thresholds
+
+RES-001 is useful as an engineering reference for:
+
+- FFT analysis;
+- one-third-octave / ERB-like band partitioning;
+- spectral-shape thresholding;
+- tracked attenuation targets;
+- cascaded second-order peak filters.
+
+However its evaluation is broad-audio rather than singing-specific, uses a relatively small 20-file dataset, and its peer-review record explicitly questions the theoretical support for at least one threshold criterion.
+
+Therefore CIPI classifies RES-001 as a **methodological reference**, not a source for production vocal thresholds.
+
+No RES-001 fixed threshold, attenuation amount, band-selection criterion, or number of filters may be promoted into ResonancePilot without independent CIPI measurement.
+
+## Updated detector-confidence hypothesis
+
+Candidate confidence should depend not only on peak prominence but on whether the spectrum contains enough harmonic sampling density to justify an inference.
+
+One possible future form is:
+
+`confidence = prominence * persistence * narrowness * harmonicGuard * samplingConfidence`
+
+where `samplingConfidence` decreases for high F0 / sparse-harmonic regions.
+
+This remains HYPOTHESIS until synthetic and real-vocal experiments are run.

@@ -32,6 +32,7 @@ milestones:
   - Semantic Ranker v0.4 measured NO-GO.
   - Pairwise Semantic Ranker v0.4R.1 measured and rejected.
   - Causal safe-negative Ranker v0.4R.2 improved Top-5 but remained NO-GO.
+  - Motion-coherence Ranker v0.4R.3 measured and rejected.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -39,11 +40,12 @@ unresolved:
   - High-F0/formant-overlap semantic ambiguity remains.
   - Clean hard-negative false-trigger behavior remains too high to authorize suppression DSP.
   - Strong-effect target ranking remains below the research gate.
-  - F0/harmonic motion coherence has not yet been measured as a candidate-ranking feature.
+  - The tested v0.4R.3 motion-coherence bundle regressed ranking and is rejected; other temporal evidence remains unproven.
+  - The v0.4R.3 test had zero cases under its median-F0 >=500 Hz high-F0 definition, leaving high-pitch coverage unresolved.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "v0.4R.2 improved Top-5 ranking with safer supervision but still failed strong-effect and clean-false-trigger gates. The next bounded question is whether F0/harmonic motion coherence adds information beyond static prominence/persistence features."
-next_confirmation: "Whether motion-coherence features materially improve Top-5/strong-effect ranking and reduce clean false triggers versus v0.4R.2 and a simple prominence baseline without high-F0 subgroup collapse."
+why_next: "v0.4R.3 regressed the static ranker and its high-F0 subgroup was empty. Before another feature family is proposed, the clean false-trigger subgroups and pitch coverage must be measured on a broader disjoint audit cohort."
+next_confirmation: "Which VocalSet techniques and pitch regimes dominate clean false triggers, whether label 6 maps to a reproducible adversarial technique, and whether a high-pitch stress cohort can be formed with adequate sample count."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

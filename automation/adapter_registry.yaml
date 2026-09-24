@@ -33,3 +33,10 @@ adapters:
     max_timeout_minutes: 2
     network_required: false
     purpose: "Validate the imported VL2A Phase 01-H compiled measurement and objective VocalSet AB snapshots without raw audio or product mutation."
+
+  vocal_resonance_clean_negative_audit_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 12
+    network_required: true
+    purpose: "Audit disjoint VocalSet clean negatives by technique, singer, and F0 quantiles without persisting raw audio."

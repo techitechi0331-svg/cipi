@@ -1,0 +1,5 @@
+claim: A level-normalised time-domain sibilance detector based primarily on high-to-broad and high-to-mid energy ratios achieved a precision-biased operating point on the current corpus without requiring a realtime FFT detector.
+evidence_type: MEASURED
+scope: Vo.Prep Sibilance Guard v2.3 against its conservative FFT-derived research reference on the current 11-stem corpus; broader language, singer and bleed conditions remain unresolved.
+source_run: research/runs/VO-PREP-SYNC-001/manual-20260925
+promotion_requested: PROVISIONAL

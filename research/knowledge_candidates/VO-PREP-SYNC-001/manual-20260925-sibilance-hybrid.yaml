@@ -1,0 +1,5 @@
+claim: For the current compressor-preparation objective, a small wide-band contribution combined with mostly high-frequency attenuation preserved body better than pure wide-band reduction while influencing a downstream broadband-compressor proxy more than pure high-only attenuation.
+evidence_type: MEASURED
+scope: Vo.Prep Sibilance Guard v2.3 topology comparison and current fixed compressor proxies; human preference across broader vocals remains unresolved.
+source_run: research/runs/VO-PREP-SYNC-001/manual-20260925
+promotion_requested: PROVISIONAL

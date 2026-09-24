@@ -144,3 +144,30 @@ Research must compare against:
 2. simple local-prominence baseline.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.3 Review — Motion Coherence
+
+Autonomous run `VOCAL-RESONANCE-R3-MOTION-001 / gha-36069680311-1` completed under the CIPI free worker.
+
+Measured locked-test result:
+- static R2-style Top-5: 40.625%;
+- motion R3 Top-5: 31.25%;
+- static strong-effect Top-5: 60.0%;
+- motion strong-effect Top-5: 53.33%;
+- clean false-trigger: 25.0% for both;
+- retention gate: **REJECTED**;
+- product gate: **FAILED**.
+
+The tested F0/harmonic-motion feature bundle is rejected for this scope.
+
+Important caveat:
+- the run contained zero test cases under the predeclared median-F0 >=500 Hz high-F0 definition, so high-F0 behavior remains unresolved.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.4 — Adversarial Clean-Negative / Pitch-Coverage Audit.**
+
+Do not add another model family until false-trigger subgroups and pitch coverage are measured on a broader disjoint clean cohort.

@@ -1,0 +1,29 @@
+schema_version: "1.0"
+job_id: AUTO-SMOKE-001
+state: QUEUED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: "Can the autonomous research worker submission path pass all CIPI safety and evidence gates?"
+hypothesis: "A worker branch restricted to declared research evidence paths will pass the Auto Research Gate."
+counter_hypotheses:
+  - "The worker branch changes a forbidden path or violates the research contract."
+baseline:
+  - current_cipi_gate
+variants:
+  - autonomous_worker_submission
+metrics:
+  - gate_pass
+acceptance:
+  - "all automatic research gates pass"
+rejection:
+  - "any automatic research gate fails"
+max_runs: 1
+timeout_minutes: 5
+random_seed: 6100331
+allowed_operations:
+  - submit_research_job
+prohibited_operations:
+  - main_push
+  - governance_edit
+  - workflow_edit

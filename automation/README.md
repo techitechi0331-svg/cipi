@@ -41,3 +41,11 @@ Every autonomous run now produces a decision proposal under `research/decisions/
 A failed hypothesis is preserved as a REJECT proposal with its evidence, retained findings, reusable findings, revisit conditions, review gaps and lineage. Automation cannot finalize REJECT or PROMOTE. Final review is a new immutable decision event.
 
 Worker evidence paths are append-only: existing runs, reports, knowledge candidates, completed/rejected jobs and decision records cannot be rewritten or deleted by a research-bot branch.
+
+## Autonomous review triage
+
+Completed autonomous evidence is now routed through `automation/review/triage.py`.
+
+The triage layer writes immutable records under `research/reviews/<job-id>/` and classifies the handoff as rejection review, scoped promotion review, continued research, explicit human-gate review, or already reviewed.
+
+A separate free GitHub Actions workflow also drains existing `Autonomous research ready:` issues in bounded batches and comments the deterministic triage result back onto the issue. Triage never creates a final PROMOTE/REJECT decision and never approves a product release.

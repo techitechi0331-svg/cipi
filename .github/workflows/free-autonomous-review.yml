@@ -1,0 +1,178 @@
+name: Free Autonomous Review Triage
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "automation/review/**"
+      - "tools/validate_review_triage.py"
+      - ".github/workflows/free-autonomous-review.yml"
+  workflow_run:
+    workflows: ["Free Autonomous Research Worker"]
+    types: [completed]
+  schedule:
+    - cron: "47 0,6,12,18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: cipi-free-autonomous-review-triage
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      has_items: ${{ steps.select.outputs.has_items }}
+      matrix: ${{ steps.select.outputs.matrix }}
+    steps:
+      - name: Checkout main tooling
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Ensure review labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create "cipi-triaged" --color "1D76DB" --description "CIPI autonomous review triage completed" --force
+          gh label create "cipi-triage-blocked" --color "D93F0B" --description "CIPI triage could not resolve an evidence branch" --force
+          gh label create "cipi-route-promotion" --color "0E8A16" --description "Bounded knowledge promotion review candidate" --force
+          gh label create "cipi-route-reject" --color "B60205" --description "Rejection review candidate" --force
+          gh label create "cipi-route-research" --color "FBCA04" --description "Continue research" --force
+          gh label create "cipi-route-human" --color "5319E7" --description "Explicit human/review gate required" --force
+          gh label create "cipi-route-done" --color "006B75" --description "Confirmed review already exists" --force
+
+      - name: Discover untriaged review handoffs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --state open --search '"Autonomous research ready:" in:title -label:cipi-triaged -label:cipi-triage-blocked' --limit 50 --json number,title,body,labels > review-issues.json
+
+      - name: Select bounded review batch
+        id: select
+        run: python automation/review/select_review_issues.py --issues-json review-issues.json --limit 8 --github-output "$GITHUB_OUTPUT"
+
+  triage:
+    needs: discover
+    if: needs.discover.outputs.has_items == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        item: ${{ fromJson(needs.discover.outputs.matrix) }}
+    steps:
+      - name: Checkout latest CIPI tooling
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: tooling
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Resolve evidence branch
+        id: branch
+        env:
+          JOB_ID: ${{ matrix.item.job_id }}
+          HINT: ${{ matrix.item.branch }}
+        run: |
+          if [ -n "$HINT" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "name=$HINT" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mapfile -t MATCHES < <(
+            git -C tooling ls-remote --heads origin "refs/heads/research-bot/$JOB_ID/*" |
+            awk '{sub("refs/heads/","",$2); print $2}'
+          )
+
+          if [ "${#MATCHES[@]}" -eq 1 ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "name=${MATCHES[0]}" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "Could not uniquely resolve branch for $JOB_ID; matches=${#MATCHES[@]}"
+          fi
+
+      - name: Mark unresolved branch lookup
+        if: steps.branch.outputs.found != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ matrix.item.issue_number }}
+          JOB_ID: ${{ matrix.item.job_id }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body "CIPI automated review triage could not uniquely resolve the evidence branch for **$JOB_ID**. No research decision was changed. The handoff is marked blocked for manual branch disambiguation."
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label "cipi-triage-blocked"
+
+      - name: Checkout evidence branch
+        if: steps.branch.outputs.found == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.branch.outputs.name }}
+          path: evidence
+          fetch-depth: 0
+
+      - name: Generate deterministic triage
+        if: steps.branch.outputs.found == 'true'
+        id: triage
+        env:
+          JOB_ID: ${{ matrix.item.job_id }}
+        run: python tooling/automation/review/triage.py --root evidence --job-id "$JOB_ID" --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate triage
+        if: steps.branch.outputs.found == 'true'
+        run: python tooling/tools/validate_review_triage.py --root evidence
+
+      - name: Commit append-only triage artifacts
+        if: steps.branch.outputs.found == 'true'
+        env:
+          JOB_ID: ${{ matrix.item.job_id }}
+        run: |
+          git -C evidence config user.name "cipi-review-bot"
+          git -C evidence config user.email "cipi-review-bot@users.noreply.github.com"
+          git -C evidence add -A research/reviews research/decisions
+          if git -C evidence diff --cached --quiet; then
+            echo "No new triage artifact to commit."
+          else
+            git -C evidence commit -m "triage autonomous research review: $JOB_ID"
+            git -C evidence push origin HEAD:"${{ steps.branch.outputs.name }}"
+          fi
+
+      - name: Comment and label review handoff
+        if: steps.branch.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ matrix.item.issue_number }}
+          ROUTE: ${{ steps.triage.outputs.route }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "evidence/${{ steps.triage.outputs.markdown_path }}"
+
+          case "$ROUTE" in
+            PROMOTION_REVIEW) LABEL="cipi-route-promotion" ;;
+            REJECTION_REVIEW) LABEL="cipi-route-reject" ;;
+            CONTINUE_RESEARCH) LABEL="cipi-route-research" ;;
+            HUMAN_GATE_REVIEW) LABEL="cipi-route-human" ;;
+            DONE) LABEL="cipi-route-done" ;;
+            *) echo "unknown route: $ROUTE"; exit 1 ;;
+          esac
+
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label "cipi-triaged" --add-label "$LABEL"
+
+      - name: Close resolved handoff
+        if: steps.branch.outputs.found == 'true' && steps.triage.outputs.reviewed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ matrix.item.issue_number }}
+        run: gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --comment "A confirmed REVIEW decision is already present. Closing the review handoff; all evidence and triage records remain preserved."

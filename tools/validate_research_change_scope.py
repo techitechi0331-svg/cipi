@@ -9,6 +9,7 @@ ALLOWED_PREFIXES = (
     "research/reports/",
     "research/knowledge_candidates/",
     "research/decisions/",
+    "research/reviews/",
 )
 
 APPEND_ONLY_PREFIXES = (
@@ -16,6 +17,7 @@ APPEND_ONLY_PREFIXES = (
     "research/reports/",
     "research/knowledge_candidates/",
     "research/decisions/",
+    "research/reviews/",
     "research/jobs/completed/",
     "research/jobs/rejected/",
 )

@@ -120,6 +120,19 @@ def validate(path: Path) -> list[str]:
         if not confirmed:
             errors.append(f"{path}: REJECTED job requires a confirmed REVIEW decision record")
 
+    review_policy=data.get("review_policy")
+    if review_policy is not None:
+        if not isinstance(review_policy, dict):
+            errors.append(f"{path}: review_policy must be a mapping")
+        else:
+            gates=review_policy.get("required_human_gates", [])
+            if not isinstance(gates, list):
+                errors.append(f"{path}: review_policy.required_human_gates must be a list")
+            else:
+                for gate in gates:
+                    if len(str(gate).strip()) < 3:
+                        errors.append(f"{path}: review_policy.required_human_gates contains a short/empty gate")
+
     continuation=data.get("continuation")
     if continuation is not None:
         if not isinstance(continuation, dict):

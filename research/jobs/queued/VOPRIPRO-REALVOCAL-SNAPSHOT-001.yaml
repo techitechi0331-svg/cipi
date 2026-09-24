@@ -48,6 +48,14 @@ rejection:
 max_runs: 1
 timeout_minutes: 2
 random_seed: 20260925
+reproduction_conditions:
+  product_repository: techitechi0331-svg/VocalPrepComp
+  product_commit: cc796d30d7e1885e0ca66caaf7f1b02d0bffeb33
+  evidence_path: research/plugins/vopripro/evidence/main-cc796d30
+  execution_mode: deterministic_committed_snapshot
+  network_required: false
+  raw_audio_required: false
+  corpus_scope: "Four adult HUST_Solfege Twinkle recordings already reduced to committed derived metrics."
 experiment_adapter: vopripro_real_vocal_snapshot_gate_v1
 allowed_operations:
   - committed_snapshot_read

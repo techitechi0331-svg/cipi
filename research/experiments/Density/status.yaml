@@ -1,29 +1,27 @@
 id: DENSITY_01
 title: CIPI Density 0.1
 
-status: implementation
+status: measurement
 knowledge_status: PROVISIONAL
 confidence: 0.50
 
 stages:
   research: complete
-  review: in_progress
-  parameter_lock: provisional
+  review: complete
+  parameter_lock: in_progress
   implementation: complete
   measurement: in_progress
   audio_ab: pending
   revision: in_progress
-  vst3_validation: partial
+  vst3_validation: in_progress
   final_review: pending
 
 current_stage: measurement
 
 completed:
-  - Nonlinear antialiasing research snapshot recorded.
-  - Oversampled tanh prototype implemented.
-  - Parallel dry/wet latency mismatch identified and corrected with wet-latency compensation.
-  - Linear-phase FIR oversampling selected for the parallel baseline.
-  - Windows x64 VST3 build passed.
+  - research
+  - review
+  - implementation
 
 unresolved:
   - Alias energy versus 2x/4x/8x is not measured.

@@ -3,7 +3,7 @@ title: CIPI MicroDouble 0.1 / Vocal One-Knob Doubler product evidence
 
 status: revision
 knowledge_status: PROVISIONAL
-confidence: 0.68
+confidence: 0.72
 
 stages:
   research: complete
@@ -24,6 +24,7 @@ completed:
   - parameter_lock
   - implementation
   - measurement
+  - autonomous_product_snapshot_gate
 
 unresolved:
   - v0.3 requires target-machine subjective listening on the user's own vocal material.

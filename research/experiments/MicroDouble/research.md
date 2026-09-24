@@ -316,3 +316,29 @@ Both remain in the record:
 - product two-voice protected-center topology: implemented, measured, and still pending broad subjective/Cubase v0.3 confirmation.
 
 The contradiction must be resolved by comparative level-matched listening and objective center/mono measurements, not by deleting either branch of evidence.
+
+
+## CIPI autonomous product gate — MEASURED
+
+Research Job: `MICRODOUBLE-V03-PRODUCT-GATE-001`  
+Run: `gha-36071901483-1`
+
+The free allowlisted CIPI worker reproduced the committed product snapshot gate with all predeclared technical acceptance conditions passing.
+
+Key CIPI-reduced measurements:
+
+- snapshot SHA-256 integrity: PASS;
+- v0.2 public 50% absolute mono-minus-stereo RMS delta: 0.083 dB;
+- v0.3 public 50% absolute mono-minus-stereo RMS delta: 0.014 dB;
+- v0.3 50% source-level delta: 0.002 dB absolute;
+- v0.3 vs v0.2 100% L/R-correlation delta: 0.01191;
+- v0.3 100% absolute mono-minus-stereo RMS delta: 0.618 dB;
+- maximum ±5-cent pitch error: 0.00391377 cents;
+- maximum seek/restart stale-output peak: 0;
+- block-partition maximum difference: 0;
+- rejected fixed Mud strong activation minimum: 99%;
+- adaptive Mud strong activation maximum: 5.14%;
+- Windows VST3 build flag: PASS;
+- pluginval 1.0.4 strictness-5 flag: PASS.
+
+This promotes only the **technical snapshot finding** to PROVISIONAL reusable knowledge. It does not confirm subjective naturalness, universal default calibration, the whole product, or Cubase v0.3 release readiness.

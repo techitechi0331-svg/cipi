@@ -1,0 +1,8 @@
+claim: For the imported Vocal One-Knob Doubler evidence, remapping public 50% to the
+  legacy 22.5% internal intensity reduces measured mono/level disturbance relative
+  to the old 50% while the 100% endpoint remains technically comparable.
+evidence_type: MEASURED
+scope: Committed product-repository snapshot only; subjective naturalness and Cubase
+  v0.3 confirmation excluded.
+source_run: research/runs/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1
+promotion_requested: PROVISIONAL

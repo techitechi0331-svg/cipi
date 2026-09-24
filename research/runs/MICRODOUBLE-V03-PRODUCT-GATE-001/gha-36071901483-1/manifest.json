@@ -1,0 +1,26 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed Vocal One-Knob Doubler v0.3 product snapshot",
+    "verify committed SHA256 ledger",
+    "compare v0.3 candidate against v0.2 fixed product baseline using predeclared technical gates"
+  ],
+  "completed_at": "2026-09-24T23:16:47.355462Z",
+  "environment": {
+    "experiment_adapter": "microdouble_product_v03_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "MICRODOUBLE-V03-PRODUCT-GATE-001",
+  "random_seed": 3312026,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36071901483-1",
+  "schema_version": "1.0",
+  "source_commit": "d3ccd7c84b66215eeebfbbf8452d1b5fb4dee319",
+  "started_at": "2026-09-24T23:16:47.352805Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

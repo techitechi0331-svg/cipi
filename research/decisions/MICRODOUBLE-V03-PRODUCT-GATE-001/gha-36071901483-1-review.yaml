@@ -1,0 +1,50 @@
+schema_version: "1.0"
+decision_id: "MICRODOUBLE-V03-PRODUCT-GATE-001:gha-36071901483-1:review-01"
+job_id: MICRODOUBLE-V03-PRODUCT-GATE-001
+source_run: research/runs/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: PROMOTE
+review_status: CONFIRMED
+rationale: >-
+  The predeclared product-snapshot acceptance criteria all passed, snapshot
+  integrity was verified, the evidence branch passed Job/Result/Evidence/
+  Decision/Research gates, and no negative evidence was removed. Promotion is
+  limited to the technical calibration and safety findings represented by the
+  committed snapshot. It does not establish subjective naturalness, universal
+  DOUBLE calibration, Cubase v0.3 confirmation, or product release status.
+declared_rejection_criteria:
+  - any declared acceptance condition fails
+triggered_criteria: []
+retained_findings:
+  - "v0.3 public 50% absolute mono-minus-stereo RMS delta was 0.014 dB versus 0.083 dB for the v0.2 50% baseline."
+  - "v0.3 public 50% stereo RMS was within 0.002 dB of the imported source RMS."
+  - "v0.3 100% L/R correlation differed from v0.2 100% by only 0.01191, while its absolute mono-minus-stereo RMS delta was 0.618 dB."
+  - "Maximum absolute +/-5-cent pitch error was 0.00391377 cents."
+  - "Seek/restart stale-output peak and block-partition difference were both 0 in the imported regression evidence."
+  - "The fixed Mud detector negative result is retained: at least 99% strong activation on the five-recording calibration set."
+  - "The adaptive Mud detector reduced maximum strong activation to 5.14% on that set while the product synthetic buildup test remained responsive."
+  - "Windows VST3 build and pluginval 1.0.4 strictness-5 flags passed."
+reusable_findings:
+  - "For a one-knob vocal spatial processor, a public midpoint may be calibrated to a substantially subtler internal intensity while preserving a full-strength endpoint; midpoint usability and endpoint capability should be gated separately."
+  - "A fixed low-mid/full-band ratio can classify normal singer-dependent spectral balance as a permanent problem; a voice-relative adaptive baseline is a stronger candidate when false-positive control matters."
+  - "Transport-discontinuity stale-state tests should be a regression gate for stateful latency-bearing vocal effects."
+revisit_if:
+  - "Target-machine v0.3 listening rejects the new 50% default or exposes audible chorus, phase, consonant or tonal artifacts."
+  - "Cubase Pro 14 exposes state, loop, automation, latency, realtime/offline or compatibility failures."
+  - "A broader labelled vocal corpus exceeds the declared adaptive-detector false-trigger tolerance."
+  - "A level-matched comparison shows CIPI's exact-mono Side-only topology is perceptually superior to the current two-voice product topology."
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions:
+    - "MICRODOUBLE-V03-PRODUCT-GATE-001:gha-36071901483-1:auto"
+parent_decision_id: "MICRODOUBLE-V03-PRODUCT-GATE-001:gha-36071901483-1:auto"
+created_at: "2026-09-25T08:20:00+09:00"
+immutable: true
+scope: >-
+  PROVISIONAL reusable technical knowledge for the committed Vocal One-Knob
+  Doubler v0.2/v0.3 measurement snapshot only. Subjective naturalness,
+  universal vocal optimum claims, target Cubase v0.3 host confirmation and
+  product release are excluded.
+review_gaps: []

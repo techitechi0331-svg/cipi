@@ -1,0 +1,76 @@
+schema_version: '1.0'
+job_id: MICRODOUBLE-V03-PRODUCT-GATE-001
+state: COMPLETED
+track:
+  id: MICRODOUBLE_01
+  path: research/experiments/MicroDouble
+research_question: Does the imported Vocal One-Knob Doubler v0.3 evidence reduce technical
+  disturbance at the lead-vocal default versus the v0.2 baseline while preserving
+  the strong 100% endpoint and existing safety gates?
+hypothesis: v0.3 public 50% reduces mono/level disturbance relative to v0.2 50%, while
+  v0.3 100% retains comparable stereo decorrelation and remains inside the declared
+  mono, pitch, transport, detector and host-validation limits.
+counter_hypotheses:
+- The apparent default improvement is only a level change and does not reduce mono
+  disturbance.
+- The remap weakens the 100% creative endpoint beyond the declared tolerance.
+- Pitch, transport, detector, build, pluginval or snapshot-integrity gates fail.
+baseline:
+- v0.2_public50
+- v0.2_public100
+variants:
+- v0.3_public50
+- v0.3_public100
+metrics:
+- snapshot_checksum_ok
+- baseline_v02_50_abs_mono_minus_stereo_db
+- candidate_v03_50_abs_mono_minus_stereo_db
+- candidate_v03_50_source_level_delta_abs_db
+- v03_vs_v02_100_lr_correlation_delta_abs
+- candidate_v03_100_abs_mono_minus_stereo_db
+- candidate_public50_internal_intensity
+- pitch_error_abs_max_cents
+- transport_stale_peak_max
+- block_partition_max_difference
+- fixed_mud_strong_activation_min_pct
+- adaptive_mud_strong_activation_max_pct
+- pluginval_strictness5_pass
+- windows_vst3_build_pass
+acceptance:
+- snapshot checksum must match the committed SHA256 ledger
+- v0.3 50% absolute mono-minus-stereo delta < v0.2 50% absolute delta
+- v0.3 50% stereo RMS must remain within 0.15 dB of the source
+- v0.3 100% L/R correlation must remain within 0.05 of v0.2 100%
+- v0.3 100% absolute mono-minus-stereo delta <= 0.75 dB
+- v0.3 public 50% internal intensity == 0.225 within 1e-6
+- maximum absolute +/-5 cent pitch error <= 0.01 cent
+- maximum seek/restart stale-output peak <= 1e-6
+- block-partition maximum difference <= 1e-7
+- rejected fixed Mud detector strong activation minimum >= 95%
+- adaptive Mud detector strong activation maximum <= 7%
+- pluginval strictness-5 and Windows VST3 build flags both pass
+rejection:
+- any declared acceptance condition fails
+max_runs: 1
+timeout_minutes: 3
+random_seed: 3312026
+experiment_adapter: microdouble_product_v03_gate_v1
+allowed_operations:
+- read_committed_snapshot
+- deterministic_compare
+- write_research_evidence
+prohibited_operations:
+- network_write
+- main_push
+- product_mutation
+- raw_audio_persist
+- arbitrary_shell
+knowledge_candidate:
+  claim: For the imported Vocal One-Knob Doubler evidence, remapping public 50% to
+    the legacy 22.5% internal intensity reduces measured mono/level disturbance relative
+    to the old 50% while the 100% endpoint remains technically comparable.
+  evidence_type: MEASURED
+  scope: Committed product-repository snapshot only; subjective naturalness and Cubase
+    v0.3 confirmation excluded.
+  promotion_requested: PROVISIONAL
+latest_run: gha-36071901483-1

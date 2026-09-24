@@ -1,0 +1,28 @@
+{
+  "baseline": [
+    "v0.2_public50",
+    "v0.2_public100"
+  ],
+  "experiment_adapter": "microdouble_product_v03_gate_v1",
+  "job_file": "research/jobs/queued/MICRODOUBLE-V03-PRODUCT-GATE-001.yaml",
+  "metrics": [
+    "snapshot_checksum_ok",
+    "baseline_v02_50_abs_mono_minus_stereo_db",
+    "candidate_v03_50_abs_mono_minus_stereo_db",
+    "candidate_v03_50_source_level_delta_abs_db",
+    "v03_vs_v02_100_lr_correlation_delta_abs",
+    "candidate_v03_100_abs_mono_minus_stereo_db",
+    "candidate_public50_internal_intensity",
+    "pitch_error_abs_max_cents",
+    "transport_stale_peak_max",
+    "block_partition_max_difference",
+    "fixed_mud_strong_activation_min_pct",
+    "adaptive_mud_strong_activation_max_pct",
+    "pluginval_strictness5_pass",
+    "windows_vst3_build_pass"
+  ],
+  "variants": [
+    "v0.3_public50",
+    "v0.3_public100"
+  ]
+}

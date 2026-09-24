@@ -235,6 +235,19 @@
         }
       },
       "additionalProperties": false
+    },
+    "review_policy": {
+      "type": "object",
+      "properties": {
+        "required_human_gates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": true

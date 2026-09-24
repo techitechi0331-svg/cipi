@@ -1,0 +1,38 @@
+id: VO_PREP_FORMAL
+title: Vo.Prep Formal Research Track
+
+status: measurement
+knowledge_status: PROVISIONAL
+confidence: 0.82
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/Vo.Prep"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: measurement
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+unresolved:
+  - Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard are not all formally closed.
+  - Cross-module interaction needs broader real-vocal validation.
+  - Cubase Pro 14 release-candidate validation is pending.
+  - Only derived measurements, never client recordings, may be committed.
+
+next_stage: measurement
+why_next: "Three modules have locked baselines and integration tests; remaining work is broader corpus/subjective validation and host confirmation."
+next_confirmation: "Whether the integrated zero-latency chain preserves vocal identity while reducing plosive, macro-level and sibilance problems across diverse recordings."
+blockers:
+  - Representative real-vocal listening is still required.

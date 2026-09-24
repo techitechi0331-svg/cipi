@@ -1,0 +1,40 @@
+id: ENVELOPE_SCULPTOR_FORMAL
+title: Envelope Sculptor Formal Historical Research Track
+
+status: revision
+knowledge_status: PROVISIONAL
+confidence: 0.86
+
+source_kind: historical_project_record
+source_ref: "Project conversation history; no standalone connected GitHub repository found"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: complete
+  audio_ab: complete
+  revision: in_progress
+  vst3_validation: complete
+  final_review: pending
+
+current_stage: revision
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+  - measurement
+  - audio_ab
+  - vst3_validation
+unresolved:
+  - Stability 0% transition/de-click fix requires final regression confirmation.
+  - Historical source and measurement artifacts should be imported into CIPI.
+  - Final review must verify RC metrics after the stability fix.
+
+next_stage: revision
+why_next: "v0.2 RC1 passed vocal listening and key measurements, but a 0% transition bug was found afterward."
+next_confirmation: "Whether the de-click / rapid GR-return fix removes the transition defect without degrading accepted gain-trajectory behavior."
+blockers:
+  - Standalone source/artifact import is still missing from connected GitHub.

@@ -1,0 +1,35 @@
+id: VOCAL_SURFACE_FORMAL
+title: Vocal Surface Processor Formal Research Track
+
+status: research
+knowledge_status: PROVISIONAL
+confidence: 0.66
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/VocalSurfaceProcessor"
+
+stages:
+  research: in_progress
+  review: in_progress
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: research
+completed:
+  - implementation
+unresolved:
+  - Legitimate harmonics/formants can still be mistaken for unwanted spectral prominence.
+  - The harmonic-safe spectral reference is not numerically locked.
+  - Real-vocal level-matched AB/ABX is incomplete.
+  - 50% nominal calibration remains a design target, not a universal optimum.
+
+next_stage: review
+why_next: "The integrated v0.2 works, but spectral discrimination research reopened because harmonic false positives are a fundamental failure mode."
+next_confirmation: "Which spectral-reference and harmonic-protection method suppresses harshness without damaging legitimate vocal structure."
+blockers:
+  - Representative dry-vocal AB and labelled spectral failures are required.

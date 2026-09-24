@@ -1,0 +1,37 @@
+id: VOCAL_CONTROL_COMP_FORMAL
+title: Vocal Control Comp Formal Research Track
+
+status: measurement
+knowledge_status: PROVISIONAL
+confidence: 0.74
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/VocalControlComp"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: measurement
+completed:
+  - research
+  - review
+  - implementation
+unresolved:
+  - Quantitative transfer/timing measurements are not registered in CIPI.
+  - Crest-factor adaptive timing needs vocal-corpus validation.
+  - Plosive/sibilance detector guards need false-positive/false-negative measurement.
+  - Cubase Pro 14 and level-matched real-vocal AB remain pending.
+
+next_stage: measurement
+why_next: "The dual BODY/PEAK architecture is implemented; objective measurement must determine whether its adaptive mappings beat simpler baselines."
+next_confirmation: "Static curve, timing, peak/body interaction and special-event protection quality."
+blockers:
+  - Representative vocal corpus is required.

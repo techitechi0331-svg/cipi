@@ -1,0 +1,36 @@
+id: VOCAL_FINISHER_FORMAL
+title: Vocal Finisher Formal Historical Research Track
+
+status: measurement
+knowledge_status: LIKELY
+confidence: 0.62
+
+source_kind: historical_project_record
+source_ref: "Project conversation history; no standalone connected GitHub repository found"
+
+stages:
+  research: complete
+  review: in_progress
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: in_progress
+  revision: in_progress
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: measurement
+completed:
+  - research
+  - implementation
+unresolved:
+  - Width calibration needs objective correlation/mono tests.
+  - Control interactions need formal artifact-backed documentation.
+  - Historical source/VST3 artifacts should be imported into CIPI.
+  - Final 50% nominal calibration is not locked.
+
+next_stage: measurement
+why_next: "A functioning implementation exists and user observation exposed non-obvious Width behavior; objective stereo/level measurements are needed before calibration is frozen."
+next_confirmation: "Whether nominal Width creates useful stereo change without excessive mono loss and whether finishing macros remain predictable across vocals."
+blockers:
+  - Standalone source/artifact import is missing from connected GitHub.

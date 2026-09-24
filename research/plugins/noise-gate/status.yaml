@@ -1,0 +1,34 @@
+id: NOISE_GATE_FORMAL
+title: Vocal Noise Gate Formal Historical Research Track
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.32
+
+source_kind: historical_project_record
+source_ref: "Project conversation history; no standalone connected GitHub repository found"
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+completed:
+  []
+unresolved:
+  - Historical prototype/source is not available in connected repositories.
+  - Crackle-free gating, hysteresis/hold/release and breath preservation are not formally specified.
+  - No current measurement or Cubase validation artifacts are registered.
+
+next_stage: review
+why_next: "Early gate work identified the problem area but not a reproducible modern specification; artifact recovery and architecture review must come first."
+next_confirmation: "The minimum state machine and smoothing strategy required to avoid crackles while preserving breath, consonants and tails."
+blockers:
+  - Recover/import the historical gate implementation if it still exists.

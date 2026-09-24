@@ -1,0 +1,39 @@
+id: VOCAL_DOUBLER_FORMAL
+title: Vocal One-Knob Doubler Formal Research Track
+
+status: vst3_validation
+knowledge_status: PROVISIONAL
+confidence: 0.88
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/Vocal-One-Knob-Doubler"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: complete
+  audio_ab: complete
+  revision: complete
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: vst3_validation
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+  - measurement
+  - audio_ab
+  - revision
+unresolved:
+  - Cubase Pro 14 scan/load/state/CPU/realtime-offline render verification is not formally complete.
+  - Final review must recheck mono compatibility and naturalness across a wider vocal set.
+
+next_stage: vst3_validation
+why_next: "Core DSP, Windows build, pluginval, numerical tests and real-vocal AB are already strong; target-host verification is the remaining release gate."
+next_confirmation: "Correct Cubase Pro 14 behavior across state recall, automation, CPU and rendering."
+blockers:
+  - Target Cubase host verification is required.

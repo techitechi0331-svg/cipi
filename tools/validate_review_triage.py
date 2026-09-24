@@ -68,6 +68,17 @@ def validate(root: Path, path: Path) -> list[str]:
     else:
         if decision.get("event_type") != "AUTOMATED_PROPOSAL":
             errors.append(f"{path}: source decision must be AUTOMATED_PROPOSAL")
+        if decision.get("authority") != "AUTOMATION" or decision.get("review_status") != "PENDING":
+            errors.append(f"{path}: source automated decision must remain AUTOMATION/PENDING")
+        if decision.get("immutable") is not True:
+            errors.append(f"{path}: source automated decision must be immutable")
+        expected_decision = "REJECT" if bool(data.get("rejection_triggered")) else "ITERATE"
+        if decision.get("decision") != expected_decision:
+            errors.append(f"{path}: source automated decision must be {expected_decision} for the manifest")
+        if str(decision.get("created_at", "")) != str(manifest.get("completed_at", "")):
+            errors.append(f"{path}: source decision created_at must match source manifest completed_at")
+        if list(decision.get("triggered_criteria", [])) != list(manifest.get("triggered_criteria", [])):
+            errors.append(f"{path}: source decision triggered_criteria must match source manifest")
         if data.get("candidate_class") == "REJECT_CANDIDATE" and decision.get("decision") != "REJECT":
             errors.append(f"{path}: REJECT_CANDIDATE requires REJECT proposal")
         if data.get("route") == "REJECTION_REVIEW" and decision.get("decision") != "REJECT":

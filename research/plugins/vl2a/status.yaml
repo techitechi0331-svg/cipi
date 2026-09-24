@@ -1,0 +1,65 @@
+id: VL2A_PRODUCT
+title: VL2A Optical Leveler Product Track
+
+status: audio_ab
+knowledge_status: PROVISIONAL
+confidence: 0.84
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/VocalPrepComp"
+implementation_branch: "build-vocal-leveler2a-v01"
+imported_product_head: "27ea4b68d17c45b9ea43d1eb73d15764cb107c06"
+reference_track: "research/reference_devices/la2a"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: complete
+  audio_ab: in_progress
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: audio_ab
+
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+  - measurement
+  - automated_real_vocal_objective_ab
+
+milestones:
+  - 12AX7 research and strict review
+  - 12BH7 research and strict review
+  - A-24 research and strict review
+  - integrated line-amplifier research/review
+  - integrated numeric determination/review
+  - Phase 01-H compiled Windows implementation measurement
+  - VocalSet automated render and objective AB pass
+
+unresolved:
+  - Human blind level-matched vocal AB verdict is pending.
+  - Final Gain range -18..+18 dB is approved by product decision but not yet applied to the production candidate.
+  - Top-left UI text/mojibake fix is pending.
+  - Cubase Pro 14 runtime validation is pending.
+  - Final product-level alias/oversampling decision is pending.
+  - T4/R37/sidechain modernization is intentionally deferred until the line-amplifier AB gate closes.
+
+next_stage: audio_ab
+why_next: "Compiled measurement and automated real-vocal objective analysis passed. A human listening verdict is now required before evidence-driven revision or production promotion."
+next_confirmation: "KEEP, REVISE, or ROLLBACK for the Phase 01-H line-amplifier replacement under strict level matching."
+
+blockers:
+  - Human listening is required to make the subjective AB verdict.
+  - Cubase Pro 14 validation ultimately requires the Windows host run.
+
+evidence:
+  compiled_measurement_run: 36043621530
+  compiled_measurement_artifact: 10829478410
+  vst3_artifact: 10829637923
+  automated_vocal_ab_run: 36057598192
+  automated_vocal_ab_artifact: 10833729675

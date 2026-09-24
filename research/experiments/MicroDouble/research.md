@@ -101,3 +101,75 @@ Research.
 ## Next stage
 
 Review modulation ranges, interpolation methods, and mono-compatibility metrics before locking any DSP constants.
+
+
+## Leading architecture after mono-model review
+
+The initial fixed-delay model confirmed that lowering generated-side level reduces static mono coloration, but even protected-center delay copies still alter the mono frequency response because the delayed content remains present in the sum.
+
+A stronger topology is now preferred:
+
+`Lout = Lin + g*S`
+
+`Rout = Rin - g*S`
+
+where `S` is a generated artificial-double side signal.
+
+For a standard mono downmix:
+
+`Mout = (Lout + Rout) / 2`
+
+therefore:
+
+`Mout = (Lin + Rin) / 2`
+
+The generated side cancels algebraically. This means the width effect can disappear in mono without imposing the fixed comb-filter response of conventional equal-polarity Haas doubling.
+
+### Candidate side construction
+
+`M = (Lin + Rin) / 2`
+
+`dA = variableDelayA(M)`
+
+`dB = variableDelayB(M)`
+
+`Sraw = HPF((dA - dB) / 2)`
+
+`S = sideGuard(Sraw, M)`
+
+The two virtual takes should use different bounded delay trajectories. Modulated delay naturally creates small time/pitch variation; explicit pitch shifting is therefore optional in the first prototype.
+
+### Stereo-correlation guard
+
+If dry Mid `M` and generated Side `S` are approximately uncorrelated, the L/R correlation is approximately:
+
+`rho = (sigma_M^2 - g^2 sigma_S^2) / (sigma_M^2 + g^2 sigma_S^2)`
+
+Define the side-to-mid RMS ratio:
+
+`r = g sigma_S / sigma_M`
+
+then:
+
+`rho = (1 - r^2) / (1 + r^2)`
+
+This gives a useful safety relation before implementation. For example, keeping generated Side RMS well below Mid RMS helps retain positive stereo correlation.
+
+## INFERRED
+
+For a lead vocal, exact mono preservation of the original track is a stronger design objective than preserving the generated double in mono.
+
+The current leading topology is therefore **original signal untouched + artificial double encoded only into Side**.
+
+## HYPOTHESIS
+
+The first prototype should use:
+
+- two independently modulated short delays driven from Mid;
+- Side formed from their difference;
+- low-frequency removal from generated Side;
+- bounded Side/Mid RMS ratio;
+- no explicit pitch shifter initially;
+- fractional-delay interpolation suitable for slowly moving delays.
+
+This must be compared against a conventional positive-polarity ADT/Haas baseline in stereo naturalness, correlation, and mono behavior.

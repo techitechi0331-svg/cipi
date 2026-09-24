@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 import sys
 import yaml
 
@@ -43,6 +44,27 @@ def validate(path: Path) -> list[str]:
         errors.append(f"{path}: source_run must point under research/runs/")
     elif not (ROOT / source_run).is_dir():
         errors.append(f"{path}: source_run directory does not exist: {source_run}")
+    else:
+        manifest_path = ROOT / source_run / "manifest.json"
+        if not manifest_path.is_file():
+            errors.append(f"{path}: source_run has no manifest.json")
+        else:
+            try:
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                errors.append(f"{path}: source manifest JSON parse error: {exc}")
+                manifest = {}
+            if manifest.get("job_id") != data.get("job_id"):
+                errors.append(f"{path}: job_id does not match source manifest")
+            if data.get("event_type") == "AUTOMATED_PROPOSAL":
+                expected = "REJECT" if bool(manifest.get("rejection_triggered")) else "ITERATE"
+                if data.get("decision") != expected:
+                    errors.append(f"{path}: automated decision must be {expected} for its source manifest")
+                manifest_triggers = list(manifest.get("triggered_criteria", []))
+                if list(data.get("triggered_criteria", [])) != manifest_triggers:
+                    errors.append(f"{path}: triggered_criteria must match source manifest")
+                if str(data.get("created_at")) != str(manifest.get("completed_at")):
+                    errors.append(f"{path}: created_at must match source manifest completed_at")
     if data.get("event_type") == "AUTOMATED_PROPOSAL":
         if data.get("authority") != "AUTOMATION":
             errors.append(f"{path}: automated proposals must use AUTOMATION authority")
@@ -97,8 +119,26 @@ def main() -> int:
     if root.exists():
         files = list(root.rglob("*.yaml")) + list(root.rglob("*.yml"))
     errors = []
+    records = {}
+    parsed = []
     for path in files:
         errors.extend(validate(path))
+        try:
+            data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        except Exception:
+            data = None
+        if isinstance(data, dict):
+            parsed.append((path, data))
+            decision_id = data.get("decision_id")
+            if decision_id in records:
+                errors.append(f"{path}: duplicate decision_id {decision_id!r}")
+            elif decision_id:
+                records[decision_id] = path
+    for path, data in parsed:
+        if data.get("event_type") == "REVIEW":
+            parent = data.get("parent_decision_id")
+            if parent not in records:
+                errors.append(f"{path}: parent_decision_id does not reference an existing decision record")
     if errors:
         print("CIPI decision record gate: FAIL")
         for error in errors:

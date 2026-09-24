@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "plugin_repo": "techitechi0331-svg/VocalPrepComp",
+  "plugin_branch": "build-vocal-leveler2a-v01",
+  "compiled_measurement": {
+    "workflow_run": 36043621530,
+    "source_sha": "7bf08c28bd2032f08db36faa2e8c318275fe29f8",
+    "artifact_id": 10829478410,
+    "artifact_sha256": "324e169fd9a1de0040392a12b81ed4ca99cc28df6bc5e99dc727a9a0498528c1"
+  },
+  "vst3": {
+    "artifact_id": 10829637923,
+    "artifact_sha256": "67fbf022162d2b48cb7cb0c38204201d6a30a43d701eb0d8f6f634b931172f8c"
+  },
+  "free_vocal_ab": {
+    "workflow_run": 36057598192,
+    "source_sha": "27ea4b68d17c45b9ea43d1eb73d15764cb107c06",
+    "artifact_id": 10833729675,
+    "artifact_sha256": "27a755d40beaecfa242c6cb229690bc3481915dcd6a9e8cd337c45720d3fd523"
+  },
+  "raw_audio_committed": false
+}

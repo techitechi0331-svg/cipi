@@ -26,3 +26,10 @@ adapters:
     max_timeout_minutes: 12
     network_required: true
     purpose: "Stream public VocalSet in runner memory and compare static safe-negative ranking against F0/harmonic-motion coherence without persisting raw audio."
+
+  vl2a_phase01h_snapshot_gate_v1:
+    tracks:
+      - VL2A_PHASE01H_LINEAMP
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Validate the imported VL2A Phase 01-H compiled measurement and objective VocalSet AB snapshots without raw audio or product mutation."

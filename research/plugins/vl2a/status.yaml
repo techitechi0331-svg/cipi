@@ -1,0 +1,46 @@
+id: VL2A_PHASE01H_LINEAMP
+title: VL2A Phase 01-H Line Amplifier Formal Track
+
+status: audio_ab
+knowledge_status: PROVISIONAL
+confidence: 0.84
+
+source_kind: repository_verified
+source_ref: "https://github.com/techitechi0331-svg/VocalPrepComp"
+implementation_branch: "build-vocal-leveler2a-v01"
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: complete
+  audio_ab: in_progress
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: audio_ab
+
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+  - measurement
+
+unresolved:
+  - Human level-matched vocal KEEP/REVISE/ROLLBACK decision is pending.
+  - Final product Gain must be restored from the temporary -30..+30 dB research range to -18..+18 dB after the AB decision.
+  - Top-left UI text/mojibake fix is still pending on the production candidate.
+  - Cubase Pro 14 production-candidate validation is pending.
+  - Final product-level oversampling/alias approval is pending.
+  - T4/R37/sidechain/Peak Reduction calibration remains later work.
+
+next_stage: audio_ab
+why_next: "Compiled Phase 01-H measurements pass and the objective VocalSet AB pack is complete; the remaining line-amplifier uncertainty is perceptual rather than numeric."
+next_confirmation: "KEEP, REVISE, or ROLLBACK of the Phase 01-H line-amplifier candidate under strict level-matched vocal listening."
+
+blockers:
+  - A human listener must perform the blind/level-matched AB before subjective preference can be claimed.
+  - Cubase Pro 14 confirmation ultimately requires a Windows real-host run.

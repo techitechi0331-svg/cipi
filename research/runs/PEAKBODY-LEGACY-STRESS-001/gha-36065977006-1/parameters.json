@@ -1,0 +1,16 @@
+{
+  "baseline": [
+    "documented_historical_model"
+  ],
+  "experiment_adapter": "peakbody_legacy_model_stress_v1",
+  "job_file": "research/jobs/queued/PEAKBODY-LEGACY-STRESS-001.yaml",
+  "metrics": [
+    "row_count",
+    "all_numeric_finite",
+    "scale_min_global",
+    "scale_mean_max"
+  ],
+  "variants": [
+    "autonomous_replay"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "baseline_onset_mae_db": 11.0,
+  "baseline_ratio_log_rmse": 1.336359976775817,
+  "baseline_threshold_order_correct": false,
+  "candidate_deep_ratio_fraction_min_12_20": 0.07080444861221878,
+  "candidate_onset_mae_db": 0.0,
+  "candidate_ratio_log_rmse": 1.3257796022722264,
+  "candidate_threshold_order_correct": true,
+  "ratio_error_improvement_percent": 0.7917308724792455
+}

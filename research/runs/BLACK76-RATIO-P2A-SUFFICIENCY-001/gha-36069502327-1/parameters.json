@@ -1,0 +1,17 @@
+{
+  "baseline": [
+    "black76_baseline"
+  ],
+  "experiment_adapter": "black76_ratio_p2a_compare_v1",
+  "job_file": "research/jobs/queued/BLACK76-RATIO-P2A-SUFFICIENCY-001.yaml",
+  "metrics": [
+    "candidate_threshold_order_correct",
+    "candidate_onset_mae_db",
+    "candidate_ratio_log_rmse",
+    "ratio_error_improvement_percent",
+    "candidate_deep_ratio_fraction_min_12_20"
+  ],
+  "variants": [
+    "black76_p2a"
+  ]
+}

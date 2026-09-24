@@ -1,0 +1,5 @@
+claim: Causal safe-negative supervision improved overall semantic Top-5 ranking over a prominence baseline, but did not solve strong-effect ranking or clean-vocal false triggers.
+evidence_type: MEASURED
+scope: Vocal Resonance Semantic Ranker v0.4R.2 on the recorded singer-disjoint VocalSet benchmark.
+source_run: research/runs/VOCAL-RESONANCE-SYNC-001/manual-20260925
+promotion_requested: PROVISIONAL

@@ -3,16 +3,20 @@ from __future__ import annotations
 import csv
 import hashlib
 import io
+import json
 import math
+import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 from typing import Any
 
 ADAPTERS = {
     "black76_ratio_p2a_compare_v1",
     "peakbody_legacy_model_stress_v1",
     "original_vocal_pre_measurement_gate_v1",
+    "vocal_resonance_motion_coherence_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -335,6 +339,61 @@ def _black76_ratio_p2a_compare(repo_root: Path, timeout_seconds: int) -> dict[st
         ),
     }
 
+
+def _vocal_resonance_motion(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = repo_root / "research/experiments/VocalResonance/motion_coherence_ranker.py"
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+            "--seed",
+            "20260929",
+            "--skip-per-singer",
+            "2",
+        ]
+        completed = subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {}
+        for name in [
+            "comparison.csv",
+            "static_coefficients.csv",
+            "motion_coefficients.csv",
+            "clean_false_by_label.csv",
+            "summary.json",
+        ]:
+            raw_files[name] = (out / name).read_text(encoding="utf-8")
+
+    accepted = bool(summary["retention_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/motion_coherence_ranker.py --output-dir <temporary> --seed 20260929 --skip-per-singer 2"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Research-only comparison of prominence, v0.4R.2-style static safe-negative "
+            "ranking, and F0/harmonic-motion coherence on streamed public VocalSet. "
+            "Raw vocal audio is decoded in runner memory only and is not persisted. "
+            "Acceptance means only that motion features are worth retaining for further "
+            "research; it does not pass the product semantic-ranker gate."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -346,4 +405,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":
         return _original_vocal_pre_measurement_gate(repo_root, timeout_seconds)
+    if name == "vocal_resonance_motion_coherence_v1":
+        return _vocal_resonance_motion(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

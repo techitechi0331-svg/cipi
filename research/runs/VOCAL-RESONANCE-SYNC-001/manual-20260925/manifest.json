@@ -1,0 +1,23 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "manual evidence reconciliation from target GitHub Actions artifacts"
+  ],
+  "completed_at": "2026-09-24T21:55:00Z",
+  "environment": {
+    "cipi_base_head": "c19b6ab0dccce08e312b4cf400d20fc7631a7937",
+    "mode": "manual_evidence_reconciliation",
+    "source_head": "3dd511529d47846fdb04f251e472c04e33a0302f",
+    "source_repository": "techitechi0331-svg/Vocal_resonance"
+  },
+  "job_id": "VOCAL-RESONANCE-SYNC-001",
+  "random_seed": 0,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "manual-20260925",
+  "schema_version": "1.0",
+  "source_commit": "3dd511529d47846fdb04f251e472c04e33a0302f",
+  "started_at": "2026-09-24T21:50:00Z",
+  "worker_version": "chat-evidence-import/1.0"
+}

@@ -1,0 +1,55 @@
+schema_version: "1.0"
+job_id: VOCAL-RESONANCE-R3-MOTION-001
+state: QUEUED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: "Does F0/harmonic motion coherence improve vocal-resonance candidate ranking beyond the v0.4R.2 static safe-negative ranker while reducing clean-vocal false triggers?"
+hypothesis: "Motion-coherence features will improve Top-5 ranking by at least 5 percentage points and reduce clean false-trigger rate by at least 5 percentage points versus the static safe-negative ranker, without degrading strong-effect or high-F0 performance."
+counter_hypotheses:
+  - "The current static spectral features already contain the useful information and motion coherence adds no measurable benefit."
+  - "F0 estimation errors or sparse high-F0 excitation make motion features unstable and worsen high-F0 ranking."
+  - "Motion coherence protects legitimate harmonics but also protects injected resonances that overlap harmonics, producing no net gain."
+baseline:
+  - prominence_only
+  - static_r2_style_safe_negative
+variants:
+  - motion_r3_f0_harmonic_coherence
+metrics:
+  - top5
+  - top5_effect_gte3
+  - clean_false_trigger_rate
+  - top5_high_f0
+  - generator_ceiling
+  - mrr
+acceptance:
+  - "motion Top-5 >= static Top-5 + 0.05"
+  - "motion clean false-trigger rate <= static clean false-trigger rate - 0.05"
+  - "motion strong-effect Top-5 >= static strong-effect Top-5"
+  - "motion high-F0 Top-5 >= static high-F0 Top-5 - 0.05"
+rejection:
+  - "Top-5 improvement is < 0.05"
+  - "clean false-trigger rate does not improve by at least 0.05"
+  - "strong-effect Top-5 regresses"
+  - "high-F0 Top-5 regresses by more than 0.05"
+max_runs: 1
+timeout_minutes: 12
+random_seed: 20260929
+experiment_adapter: vocal_resonance_motion_coherence_v1
+allowed_operations:
+  - stream_public_vocalset_in_runner_memory
+  - controlled_eq_injection
+  - derived_metric_write
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - raw_audio_write
+  - paid_api
+  - product_release
+knowledge_candidate:
+  claim: "F0 and harmonic-motion coherence can improve candidate-level suppression confidence beyond static spectral evidence for singing voice."
+  evidence_type: HYPOTHESIS
+  scope: "Vocal resonance candidate ranking under controlled real-vocal injection and clean hard negatives."
+  promotion_requested: HYPOTHESIS

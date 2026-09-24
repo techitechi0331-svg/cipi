@@ -25,19 +25,25 @@ completed: []
 milestones:
   - Candidate-discovery synthetic development and locked holdout.
   - Real-vocal controlled-injection gate on 20 identifiable VocalSet singers.
-  - Independent real-vocal candidate-budget confirmation cohort.
+  - Preliminary per-singer-skip confirmation cohort retained as historical evidence.
+  - Stricter explicit-exclusion real-vocal confirmation cohort verified.
   - Candidate budget K=20 locked for current discovery scaffold.
   - Candidate budget K=15 rejected for current discovery scaffold.
+  - Semantic Ranker v0.4 measured NO-GO.
+  - Pairwise Semantic Ranker v0.4R.1 measured and rejected.
+  - Causal safe-negative Ranker v0.4R.2 improved Top-5 but remained NO-GO.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
-  - Merge-20 superiority over Local-20 remains unconfirmed.
+  - Merge-20 superiority over Local-20 is unconfirmed; strict confirmation measured both at 85 percent recall.
   - High-F0/formant-overlap semantic ambiguity remains.
-  - Clean hard-negative false-trigger behavior is not yet good enough to authorize suppression DSP.
+  - Clean hard-negative false-trigger behavior remains too high to authorize suppression DSP.
+  - Strong-effect target ranking remains below the research gate.
+  - F0/harmonic motion coherence has not yet been measured as a candidate-ranking feature.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
-next_stage: measurement
-why_next: "Candidate discovery has passed its scoped real-vocal budget gate; the next falsifiable question is candidate-level semantic ranking under real vocal positives and clean/adversarial negatives."
-next_confirmation: "Whether an interpretable semantic ranker can improve Top-K target ranking and false-positive behavior without collapsing high-F0, formant, fricative, or transient vocal cases."
+next_stage: research
+why_next: "v0.4R.2 improved Top-5 ranking with safer supervision but still failed strong-effect and clean-false-trigger gates. The next bounded question is whether F0/harmonic motion coherence adds information beyond static prominence/persistence features."
+next_confirmation: "Whether motion-coherence features materially improve Top-5/strong-effect ranking and reduce clean false triggers versus v0.4R.2 and a simple prominence baseline without high-F0 subgroup collapse."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

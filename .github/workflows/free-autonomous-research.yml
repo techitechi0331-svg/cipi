@@ -45,6 +45,10 @@ jobs:
         id: select
         run: python automation/queue/select_job.py --github-output "$GITHUB_OUTPUT"
 
+      - name: Install pinned Vocal Resonance scientific stack
+        if: steps.select.outputs.has_job == 'true' && startsWith(steps.select.outputs.job_id, 'VOCAL-RESONANCE')
+        run: python -m pip install -r automation/worker/requirements-scientific.txt
+
       - name: Validate jobs before execution
         if: steps.select.outputs.has_job == 'true'
         run: python tools/validate_research_job.py

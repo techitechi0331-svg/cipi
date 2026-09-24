@@ -65,3 +65,34 @@ CIPI should promote a general **history-dependent leveler** pattern only after t
 - program/history-dependent release: **E5 documented**.
 - single numerical state equation for a specific T4 cell: **not yet confirmed**.
 - tube/transformer contribution vs opto contribution: **measurement/modeling required**.
+
+## New modeling route: physical optocoupler state
+
+OPTO-001 demonstrates that an optically coupled light source + photoresistor can be modeled as a nonlinear, dynamic, multi-physical system rather than as a fixed pair of attack/release coefficients.
+
+For CIPI, this suggests two parallel LA-2A research models:
+
+### Model A — compact phenomenological model
+
+- fast attack state;
+- at least two release states;
+- history-dependent weighting;
+- nonlinear input-to-GR mapping.
+
+Purpose: low CPU, easy fitting, useful as a reusable vocal leveler pattern.
+
+### Model B — physical/gray-box model
+
+- sidechain electrical drive;
+- light-emitting element state;
+- illumination-to-photoresistor state;
+- resistance-to-attenuator transfer;
+- amplifier/transformer stages as separate blocks.
+
+Purpose: understand which physical mechanisms are actually needed before simplifying.
+
+No claim is made that the VTL5C3/2 parameters from OPTO-001 equal Teletronix T4 parameters. The paper provides a modeling methodology, not LA-2A component constants.
+
+## Black-box comparison branch
+
+OPTO-002 shows that low-latency parameter-conditioned neural architectures can model time-varying optical compressor behavior. CIPI may use such a model as a benchmark/reference estimator, but a neural black box will not replace interpretable DSP by default.

@@ -80,6 +80,46 @@ def validate(path: Path) -> list[str]:
             if candidate.get("promotion_requested","HYPOTHESIS") not in {"HYPOTHESIS","LIKELY","PROVISIONAL"}:
                 errors.append(f"{path}: invalid knowledge_candidate promotion_requested")
 
+    rejection_record=data.get("rejection_record")
+    if rejection_record is not None:
+        if not isinstance(rejection_record, dict):
+            errors.append(f"{path}: rejection_record must be a mapping")
+        else:
+            for key in ("reason","scope"):
+                value=str(rejection_record.get(key, "")).strip()
+                if value and len(value) < 3:
+                    errors.append(f"{path}: rejection_record.{key} is too short")
+            for key in ("retained_findings","reusable_findings","revisit_if"):
+                values=rejection_record.get(key, [])
+                if not isinstance(values, list):
+                    errors.append(f"{path}: rejection_record.{key} must be a list")
+            if "retained_findings" in rejection_record and not rejection_record.get("retained_findings"):
+                errors.append(f"{path}: rejection_record.retained_findings may not be empty when provided")
+            if "revisit_if" in rejection_record and not rejection_record.get("revisit_if"):
+                errors.append(f"{path}: rejection_record.revisit_if may not be empty when provided")
+
+    lineage=data.get("lineage")
+    if lineage is not None:
+        if not isinstance(lineage, dict):
+            errors.append(f"{path}: lineage must be a mapping")
+        else:
+            for key in ("supersedes","related_jobs","related_decisions"):
+                values=lineage.get(key, [])
+                if not isinstance(values, list):
+                    errors.append(f"{path}: lineage.{key} must be a list")
+
+    if data.get("state") == "REJECTED":
+        decision_root=ROOT/"research"/"decisions"/str(data.get("job_id", ""))
+        confirmed=False
+        if decision_root.exists():
+            for decision_path in list(decision_root.glob("*.yaml")) + list(decision_root.glob("*.yml")):
+                decision_data=yaml.safe_load(decision_path.read_text(encoding="utf-8"))
+                if isinstance(decision_data, dict) and decision_data.get("decision") == "REJECT" and decision_data.get("event_type") == "REVIEW" and decision_data.get("review_status") == "CONFIRMED":
+                    confirmed=True
+                    break
+        if not confirmed:
+            errors.append(f"{path}: REJECTED job requires a confirmed REVIEW decision record")
+
     continuation=data.get("continuation")
     if continuation is not None:
         if not isinstance(continuation, dict):

@@ -11,7 +11,17 @@ Possible decisions:
 - **PROMOTE** — reusable DSP block / recipe.
 - **ITERATE** — measurable promise, unresolved weaknesses.
 - **ARCHIVE** — valid knowledge, not currently useful.
-- **REJECT** — hypothesis failed or benefit/cost is poor.
+- **REJECT** — hypothesis failed or benefit/cost is poor. Rejection archives evidence; it never deletes the run or reusable findings.
+
+## Decision history
+
+Decision history is event-sourced under `research/decisions/<job-id>/`.
+
+- automation may create only pending ITERATE or REJECT proposals;
+- final PROMOTE / ARCHIVE / REJECT decisions require review authority;
+- rejection must retain negative evidence, reusable findings and explicit revisit conditions;
+- prior decision events are immutable; later reviews supersede them by adding a new record;
+- lineage fields connect superseded approaches, related jobs and related decisions.
 
 ## Priority A — foundations
 

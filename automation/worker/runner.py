@@ -47,6 +47,7 @@ def run_mock(job: dict) -> dict:
         "commands": ["mock_measurement"],
         "acceptance_met": c > b,
         "rejection_triggered": c <= b,
+        "triggered_criteria": [job["rejection"][0]] if c <= b and job.get("rejection") else [],
         "summary": (
             f"Mock orchestration only. {baseline}={b}; {candidate}={c}. "
             "This is not scientific evidence."
@@ -64,6 +65,8 @@ def main() -> int:
     job = load_job(args.job)
     started = utc_now()
     out = Path(args.output)
+    if out.exists() and any(out.iterdir()):
+        raise SystemExit(f"refusing to overwrite non-empty research run directory: {out}")
     out.mkdir(parents=True, exist_ok=True)
     repo_root = Path(__file__).resolve().parents[2]
 
@@ -135,6 +138,7 @@ def main() -> int:
         "result": "COMPLETED",
         "acceptance_met": bool(result["acceptance_met"]),
         "rejection_triggered": bool(result["rejection_triggered"]),
+        "triggered_criteria": list(result.get("triggered_criteria", [])),
         "checksums_file": "checksums.sha256",
     }
     write_json(out / "manifest.json", manifest)

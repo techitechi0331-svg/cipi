@@ -8,10 +8,13 @@ on:
       - "research/runs/**"
       - "research/reports/**"
       - "research/knowledge_candidates/**"
+      - "research/decisions/**"
       - "tools/validate_research_job.py"
       - "tools/validate_research_result.py"
       - "tools/validate_evidence_candidate.py"
+      - "tools/validate_decision_records.py"
       - "tools/validate_research_change_scope.py"
+      - "tools/test_research_integrity_guards.py"
       - ".github/workflows/auto-research-gate.yml"
   workflow_dispatch:
 
@@ -39,16 +42,33 @@ jobs:
       - name: Validate research jobs
         run: python tools/validate_research_job.py
 
+      - name: Test append-only research integrity guards
+        run: python tools/test_research_integrity_guards.py
+
       - name: Run deterministic mock worker
         run: |
           rm -rf research/runs/AUTO-SMOKE-001
           python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001 --run-id mock-0001
+          if python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001 --run-id mock-0001; then
+            echo "runner unexpectedly overwrote an existing research run"
+            exit 1
+          else
+            echo "runner overwrite guard: PASS"
+          fi
 
       - name: Exercise deterministic postprocessing
         run: |
           python automation/queue/postprocess.py --job automation/examples/research_job.yaml --run-dir research/runs/AUTO-SMOKE-001/mock-0001
           python tools/validate_research_job.py
           python tools/validate_evidence_candidate.py
+          python tools/validate_decision_records.py
+
+      - name: Exercise rejection preservation and decision recording
+        run: |
+          rm -rf research/runs/AUTO-REJECT-SMOKE-001 research/decisions/AUTO-REJECT-SMOKE-001
+          python automation/worker/runner.py automation/examples/rejection_job.yaml --output research/runs/AUTO-REJECT-SMOKE-001/mock-reject-0001 --run-id mock-reject-0001
+          python automation/queue/postprocess.py --job automation/examples/rejection_job.yaml --run-dir research/runs/AUTO-REJECT-SMOKE-001/mock-reject-0001
+          python tools/validate_decision_records.py
 
       - name: Run allowlisted real DSP research adapter
         run: |
@@ -59,6 +79,7 @@ jobs:
         run: |
           python tools/validate_research_result.py
           python tools/validate_evidence_candidate.py
+          python tools/validate_decision_records.py
 
       - name: Validate existing CIPI research contract
         run: python tools/validate_research.py

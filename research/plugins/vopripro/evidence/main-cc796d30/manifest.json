@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "product_repository": "techitechi0331-svg/VocalPrepComp",
+  "product_commit": "cc796d30d7e1885e0ca66caaf7f1b02d0bffeb33",
+  "windows_vst3_run_id": 36062768701,
+  "windows_vst3_artifact_id": 10834934001,
+  "windows_vst3_artifact_sha256": "8bd284a46a4c3ca108b02cae996a39ba843f68bfc6d1557bbcf67c02c89090c4",
+  "real_vocal_run_id": 36062768702,
+  "real_vocal_artifact_id": 10836287907,
+  "real_vocal_artifact_sha256": "d7efccb6c4a2a493d59915ff389a7e3655b40e3b224e44966c66d119a7e96432",
+  "imported_files": [
+    "real_vocal_metrics.csv",
+    "summary.txt",
+    "source_manifest.txt",
+    "checksums.sha256"
+  ],
+  "raw_audio_committed": false,
+  "notes": "Derived evidence imported from the successful main validation artifact. Delay-aligned A/B WAVs remain outside CIPI."
+}

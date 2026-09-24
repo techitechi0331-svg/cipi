@@ -40,3 +40,10 @@ adapters:
     max_timeout_minutes: 12
     network_required: true
     purpose: "Audit disjoint VocalSet clean negatives by technique, singer, and F0 quantiles without persisting raw audio."
+
+  vl2a_phase01h_checksum_diagnosis_v1:
+    tracks:
+      - VL2A_PHASE01H_LINEAMP
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Diagnose imported VL2A evidence checksum mismatches and distinguish exact-content changes from line-ending normalization."

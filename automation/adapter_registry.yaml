@@ -6,3 +6,9 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Replay stored PeakBody legacy stress research as reproducible negative evidence."
+  original_vocal_pre_measurement_gate_v1:
+    tracks:
+      - UA610_ORIGINAL_VOCAL_PRE
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Verify the preserved Original Vocal Pre v0.1 Windows measurement snapshot, retain negative results, and apply fixed candidate-vs-simple-baseline gates."

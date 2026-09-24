@@ -1,0 +1,5 @@
+claim: A compact piecewise-linear dB LUT can reproduce measured compressor control tapers with deliberate slope changes more accurately than a simple power-law fit in the tested supplemental 1176 control study.
+evidence_type: MEASURED
+scope: Supplemental UA 1176 Classic FET Compressor v1.0.3 normalized Input/Output control curves only; this does not establish vintage Rev-E taper truth.
+source_run: github:techitechi0331-svg/76blackCompressor/actions/runs/36035480634
+promotion_requested: PROVISIONAL

@@ -53,3 +53,10 @@ adapters:
     max_timeout_minutes: 2
     network_required: false
     purpose: "Diagnose imported VL2A evidence checksum mismatches and distinguish exact-content changes from line-ending normalization."
+
+  microdouble_product_v03_gate_v1:
+    tracks:
+      - MICRODOUBLE_01
+    max_timeout_minutes: 3
+    network_required: false
+    purpose: "Verify the committed Vocal One-Knob Doubler v0.3 product-measurement snapshot against the v0.2 simple baseline and fixed technical gates without raw audio or product mutation."

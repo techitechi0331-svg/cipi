@@ -1,35 +1,41 @@
 id: MICRODOUBLE_01
-title: CIPI MicroDouble 0.1
+title: CIPI MicroDouble 0.1 / Vocal One-Knob Doubler product evidence
 
-status: research
-knowledge_status: HYPOTHESIS
-confidence: 0.40
+status: revision
+knowledge_status: PROVISIONAL
+confidence: 0.68
 
 stages:
-  research: in_progress
-  review: pending
-  parameter_lock: pending
-  implementation: pending
-  measurement: pending
-  audio_ab: pending
-  revision: pending
-  vst3_validation: pending
+  research: complete
+  review: complete
+  parameter_lock: complete
+  implementation: complete
+  measurement: complete
+  audio_ab: in_progress
+  revision: in_progress
+  vst3_validation: in_progress
   final_review: pending
 
-current_stage: research
+current_stage: revision
 
-completed: []
+completed:
+  - research
+  - review
+  - parameter_lock
+  - implementation
+  - measurement
 
 unresolved:
-  - The balance between perceptual width and mono coloration is not numerically locked.
-  - Pitch/time modulation ranges that sound like a second take rather than chorus are not established.
-  - Frequency-dependent decorrelation strategy is not selected.
-  - Low-frequency mono protection and center preservation need objective acceptance targets.
-  - Modulation aliasing / interpolation requirements remain open.
+  - v0.3 requires target-machine subjective listening on the user's own vocal material.
+  - v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline render and latency-compensation confirmation.
+  - Exact-mono side-only topology remains an unresolved alternative to the implemented protected-center two-voice topology.
+  - Sibilance false-positive/negative performance is not yet measured on a labelled multilingual singing corpus.
+  - Target-machine CPU behaviour is not yet recorded.
+  - Broader male/female, rap, falsetto, breathy and heavily tuned/compressed vocal naturalness remains open.
 
-next_stage: review
-why_next: "Delay and time-varying all-pass mechanisms are established; competing vocal-doubling architectures must be compared against mono compatibility and naturalness."
-next_confirmation: "Whether a protected center plus lower-level decorrelated side voices can provide useful vocal width with substantially less mono damage than equal-level Haas copies."
+next_stage: audio_ab
+why_next: "v0.3 product core, Windows VST3/pluginval, detector-corpus and objective real-vocal gates pass; remaining release-critical evidence is target-host subjective/Cubase verification and broader listening diversity."
+next_confirmation: "Whether public DOUBLE 50% is a natural lead-vocal default on target material while 75–100% remains useful for stronger doubles, without audible phase, consonant, mud or transport artifacts."
 
 blockers:
-  - "Naturalness and double-track plausibility require level-matched vocal listening."
+  - "Final release evidence requires Cubase Pro 14 and target-machine listening."

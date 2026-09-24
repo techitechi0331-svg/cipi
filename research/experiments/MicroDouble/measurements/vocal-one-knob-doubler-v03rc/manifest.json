@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "source_repository": "techitechi0331-svg/Vocal-One-Knob-Doubler",
+  "product_branch": "v0.3-dev",
+  "product_head": "4b17a9e573b5b1721aa059cd48865fc47b6d8939",
+  "source_documents": [
+    "docs/V0_2_MEASUREMENTS.md",
+    "docs/V0_3_MEASUREMENTS.md",
+    "docs/V0_3_REFINEMENT.md"
+  ],
+  "workflow_runs": {
+    "core_regression": 36065649839,
+    "windows_vst3_pluginval": 36065649852,
+    "detector_corpus": 36065630813,
+    "real_vocal_ab": 36065631021
+  },
+  "raw_audio_persisted": false,
+  "notes": [
+    "Snapshot contains numeric/text evidence only.",
+    "The target-machine v0.2 listening report is preserved as limited-scope listening evidence, not a universal measurement.",
+    "CIPI autonomous gate may mechanically accept/reject this snapshot but may not promote knowledge automatically."
+  ]
+}

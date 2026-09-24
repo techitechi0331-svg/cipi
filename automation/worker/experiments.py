@@ -20,6 +20,7 @@ ADAPTERS = {
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
     "vocal_resonance_clean_negative_audit_v1",
+    "microdouble_product_v03_gate_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -893,6 +894,115 @@ def _peakbody_revision02_policy(repo_root: Path, timeout_seconds: int) -> dict[s
         ),
     }
 
+
+def _microdouble_product_v03_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = (
+        repo_root
+        / "research"
+        / "experiments"
+        / "MicroDouble"
+        / "measurements"
+        / "vocal-one-knob-doubler-v03rc"
+    )
+    metrics_path = root / "metrics.csv"
+    checksum_path = root / "checksums.sha256"
+    if not metrics_path.is_file() or not checksum_path.is_file():
+        raise FileNotFoundError(root)
+
+    expected_digest = ""
+    for line in checksum_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and line.endswith("metrics.csv"):
+            expected_digest = line.split(None, 1)[0]
+            break
+    if not expected_digest:
+        raise ValueError("metrics.csv checksum is missing")
+
+    raw = metrics_path.read_bytes()
+    actual_digest = hashlib.sha256(raw).hexdigest()
+    checksum_ok = actual_digest == expected_digest
+
+    rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
+    values = {row["metric"]: float(row["value"]) for row in rows}
+
+    baseline_50_mono_abs = abs(values["v02_50_mono_minus_stereo_db"])
+    candidate_50_mono_abs = abs(values["v03_50_mono_minus_stereo_db"])
+    candidate_50_source_level_delta_abs = abs(
+        values["v03_50_stereo_rms_dbfs"] - values["source_stereo_rms_dbfs"]
+    )
+    endpoint_corr_delta_abs = abs(
+        values["v03_100_lr_correlation"] - values["v02_100_lr_correlation"]
+    )
+    endpoint_mono_abs = abs(values["v03_100_mono_minus_stereo_db"])
+    pitch_error_abs_max = max(
+        abs(values["v03_pitch_neg5_error_cents"]),
+        abs(values["v03_pitch_pos5_error_cents"]),
+    )
+    transport_stale_peak_max = max(
+        abs(values["v03_transport_seek_stale_peak"]),
+        abs(values["v03_transport_restart_stale_peak"]),
+    )
+
+    metrics = {
+        "snapshot_checksum_ok": checksum_ok,
+        "baseline_v02_50_abs_mono_minus_stereo_db": baseline_50_mono_abs,
+        "candidate_v03_50_abs_mono_minus_stereo_db": candidate_50_mono_abs,
+        "candidate_v03_50_source_level_delta_abs_db": candidate_50_source_level_delta_abs,
+        "v03_vs_v02_100_lr_correlation_delta_abs": endpoint_corr_delta_abs,
+        "candidate_v03_100_abs_mono_minus_stereo_db": endpoint_mono_abs,
+        "candidate_public50_internal_intensity": values["v03_public50_internal_intensity"],
+        "pitch_error_abs_max_cents": pitch_error_abs_max,
+        "transport_stale_peak_max": transport_stale_peak_max,
+        "block_partition_max_difference": abs(values["v03_block_partition_max_difference"]),
+        "fixed_mud_strong_activation_min_pct": values["v03_detector_fixed_mud_strong_activation_min_pct"],
+        "adaptive_mud_strong_activation_max_pct": values["v03_detector_adaptive_mud_strong_activation_max_pct"],
+        "pluginval_strictness5_pass": values["v03_pluginval_strictness5_pass"],
+        "windows_vst3_build_pass": values["v03_windows_vst3_build_pass"],
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and candidate_50_mono_abs < baseline_50_mono_abs
+        and candidate_50_source_level_delta_abs <= 0.15
+        and endpoint_corr_delta_abs <= 0.05
+        and endpoint_mono_abs <= 0.75
+        and abs(values["v03_public50_internal_intensity"] - 0.225) <= 1.0e-6
+        and pitch_error_abs_max <= 0.01
+        and transport_stale_peak_max <= 1.0e-6
+        and abs(values["v03_block_partition_max_difference"]) <= 1.0e-7
+        and values["v03_detector_fixed_mud_strong_activation_min_pct"] >= 95.0
+        and values["v03_detector_adaptive_mud_strong_activation_max_pct"] <= 7.0
+        and values["v03_pluginval_strictness5_pass"] == 1.0
+        and values["v03_windows_vst3_build_pass"] == 1.0
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"comparison.csv": output.getvalue()},
+        "commands": [
+            "read committed Vocal One-Knob Doubler v0.3 product snapshot",
+            "verify committed SHA256 ledger",
+            "compare v0.3 candidate against v0.2 fixed product baseline using predeclared technical gates",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic CIPI gate over an imported product-repository measurement snapshot. "
+            "It checks technical default-calibration disturbance, creative-endpoint retention, "
+            "pitch accuracy, transport stale-state safety, detector negative evidence, build and "
+            "pluginval status. It does not claim subjective naturalness, does not use raw audio, "
+            "does not access the network, and does not mutate or release the product."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -912,4 +1022,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vl2a_phase01h_snapshot_gate(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_audit_v1":
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
+    if name == "microdouble_product_v03_gate_v1":
+        return _microdouble_product_v03_gate(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

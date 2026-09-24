@@ -223,3 +223,96 @@ Each side:
 The two sides should not use identical modulation trajectories.
 
 The center lead remains unprocessed by the widening stage so mono collapse cannot remove the primary vocal anchor.
+
+
+---
+
+# Product evidence import — Vocal One-Knob Doubler v0.2/v0.3
+
+Imported product repository: `techitechi0331-svg/Vocal-One-Knob-Doubler`.
+
+Current product evidence anchor:
+
+- product branch: `v0.3-dev`
+- product head reviewed: `4b17a9e573b5b1721aa059cd48865fc47b6d8939`
+- v0.3 core regression run: `36065649839` — PASS
+- v0.3 Windows VST3/pluginval run: `36065649852` — PASS
+- v0.3 detector-corpus run: `36065630813` — PASS
+- v0.3 real-vocal AB run: `36065631021` — PASS
+- raw/private client vocal audio was not imported into CIPI.
+
+## SOURCE_FACT
+
+The product repository records a working architecture with:
+
+- center-preserving dry path;
+- two generated micro-pitch voices;
+- independent non-periodic timing humanisation;
+- peak-region phase locking;
+- selective transient phase reset;
+- wet-only low-frequency / mud / sibilance protection;
+- deterministic host-timeline-addressed modulation;
+- Windows x64 VST3 build and pluginval 1.0.4 strictness-5 validation.
+
+The product repository also records the following v0.3 measurements:
+
+- public 50% maps to legacy internal intensity 0.225;
+- public 50% wet gain is about -19.0129 dB per generated voice;
+- -5 cent pitch error: +0.00391377 cents;
+- +5 cent pitch error: -0.00234342 cents;
+- manual seek stale-output peak: 0;
+- transport stop/restart stale-output peak: 0;
+- block 64 vs 512 deterministic output difference: 0;
+- adaptive Mud strong-activation maximum across the five-recording public VocalSet-derived calibration set: 5.14%;
+- the rejected fixed Mud detector was approximately 99–100% strongly active on the same calibration set;
+- v0.3 50% real-vocal mono-minus-stereo RMS: -0.014 dB versus v0.2 50%: -0.083 dB;
+- v0.3 100% L/R correlation: 0.73544 versus v0.2 100%: 0.74735.
+
+These are imported product-repository measurements. CIPI does not silently relabel them as independently reproduced CIPI measurements until a CIPI Research Job gates the committed snapshot.
+
+## MEASURED
+
+Existing CIPI MicroDouble mono-model measurement remains valid within its deliberately simplified fixed-delay scope:
+
+- equal-level fixed Haas creates severe regularly spaced mono cancellation;
+- retaining a dominant center and lowering generated-side level materially reduces that static coloration;
+- protected center alone does not guarantee mono transparency.
+
+No new CIPI MEASURED claim is promoted by this import alone. The queued autonomous job `MICRODOUBLE-V03-PRODUCT-GATE-001` is intended to produce a bounded CIPI measurement over the committed product snapshot.
+
+## INFERRED
+
+From the product evidence and prior CIPI MicroDouble model:
+
+1. Exact algebraic cancellation of all artificial-double content in mono is not a prerequisite for useful lead-vocal mono compatibility.
+2. A dominant center plus low-level, time/pitch-diverse generated voices can keep mono level disturbance small in the tested real-vocal case.
+3. The v0.3 public-control remap is a lower-risk revision than independently redesigning wet, delay, pitch, timing and width curves simultaneously because it preserves the previously tested internal relationship.
+4. A detector based only on one fixed low-mid/full-band ratio is not robust enough across different normal singers and techniques; voice-relative adaptation is justified for the tested corpus.
+
+## HYPOTHESIS
+
+1. Mapping public DOUBLE 50% to the old 20–25% intensity region will be a better default lead-vocal calibration across broader utaite material, not only the target-machine review that motivated it.
+2. The current adaptive Mud detector will generalise beyond the five-recording public calibration set without suppressing intentional low-register vocal body.
+3. The existing explicit micro-pitch + timing architecture will sound more take-like than CIPI's earlier side-only modulated-delay hypothesis when compared level-matched on diverse vocals.
+4. The exact-mono-preserving `L=M+S, R=M-S` topology remains an unresolved alternative, not a rejected idea.
+
+## REJECTED
+
+Within the stated tested scopes:
+
+1. **Equal-level fixed Haas as a lead-safe mono strategy** remains rejected by the CIPI mono compatibility model because of deep periodic mono comb cancellation.
+2. **One fixed absolute/relative Mud threshold as the production detector** is rejected for the five-recording product calibration corpus: normal-vocal spectral balance caused approximately 99–100% strong activation before voice-relative adaptation.
+3. **v0.2 public 50% as the intended default for the user's tested lead-vocal use** is rejected for that target-use scope by the target-machine listening report, which preferred approximately 20–25%. This is listening evidence with incomplete level-match/session metadata and is not universalised to all singers.
+
+## Contradiction retained
+
+Earlier CIPI research preferred an artificial-double signal encoded only into Side so that the generated effect cancels algebraically in mono.
+
+The product repository instead uses audible generated voices that remain partially present in mono, with a dominant dry center and measured low mono-level disturbance at practical settings.
+
+Both remain in the record:
+
+- side-only exact-mono topology: unresolved HYPOTHESIS;
+- product two-voice protected-center topology: implemented, measured, and still pending broad subjective/Cubase v0.3 confirmation.
+
+The contradiction must be resolved by comparative level-matched listening and objective center/mono measurements, not by deleting either branch of evidence.

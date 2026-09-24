@@ -1,0 +1,36 @@
+schema_version: "1.0"
+job_id: AUTO-SMOKE-001
+state: QUEUED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: "Can the autonomous research contract execute a deterministic baseline-versus-candidate comparison?"
+hypothesis: "The mock candidate A will exceed the mock baseline on the declared objective score."
+counter_hypotheses:
+  - "The candidate does not exceed the baseline."
+baseline:
+  - fixed_baseline
+variants:
+  - candidate_a
+  - candidate_b
+metrics:
+  - objective_score
+acceptance:
+  - "candidate_a objective_score > fixed_baseline objective_score"
+rejection:
+  - "candidate_a objective_score <= fixed_baseline objective_score"
+max_runs: 3
+timeout_minutes: 5
+random_seed: 6100331
+allowed_operations:
+  - mock_measurement
+prohibited_operations:
+  - network_write
+  - main_push
+mock_measurements:
+  fixed_baseline:
+    objective_score: 0.50
+  candidate_a:
+    objective_score: 0.62
+  candidate_b:
+    objective_score: 0.55

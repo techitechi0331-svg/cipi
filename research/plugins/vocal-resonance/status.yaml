@@ -11,7 +11,7 @@ source_ref: "https://github.com/techitechi0331-svg/Vocal_resonance"
 stages:
   research: in_progress
   review: in_progress
-  parameter_lock: partial
+  parameter_lock: in_progress
   implementation: pending
   measurement: in_progress
   audio_ab: pending
@@ -20,7 +20,9 @@ stages:
   final_review: pending
 
 current_stage: research
-completed:
+completed: []
+
+milestones:
   - Candidate-discovery synthetic development and locked holdout.
   - Real-vocal controlled-injection gate on 20 identifiable VocalSet singers.
   - Independent real-vocal candidate-budget confirmation cohort.

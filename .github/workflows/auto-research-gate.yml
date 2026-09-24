@@ -1,0 +1,54 @@
+name: Auto Research Gate
+
+on:
+  pull_request:
+    paths:
+      - "automation/**"
+      - "research/jobs/**"
+      - "research/runs/**"
+      - "research/reports/**"
+      - "research/knowledge_candidates/**"
+      - "tools/validate_research_job.py"
+      - "tools/validate_research_result.py"
+      - "tools/validate_research_change_scope.py"
+      - ".github/workflows/auto-research-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-auto-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Validate research jobs
+        run: python tools/validate_research_job.py
+
+      - name: Run deterministic mock worker
+        run: |
+          rm -rf research/runs/AUTO-SMOKE-001
+          python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001
+
+      - name: Validate research results and artifact safety
+        run: python tools/validate_research_result.py
+
+      - name: Validate existing CIPI research contract
+        run: python tools/validate_research.py
+
+      - name: Enforce worker branch path allowlist
+        if: ${{ github.event_name == 'pull_request' && startsWith(github.head_ref, 'research-bot/') }}
+        run: python tools/validate_research_change_scope.py --base "${{ github.event.pull_request.base.sha }}" --head "${{ github.event.pull_request.head.sha }}"

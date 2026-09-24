@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/schemas/research_result.schema.json",
+  "title": "CIPI Research Result Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "job_id",
+    "run_id",
+    "source_commit",
+    "worker_version",
+    "started_at",
+    "completed_at",
+    "random_seed",
+    "environment",
+    "commands",
+    "result",
+    "acceptance_met",
+    "rejection_triggered"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "worker_version": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "completed_at": {
+      "type": "string"
+    },
+    "random_seed": {
+      "type": "integer"
+    },
+    "environment": {
+      "type": "object"
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "result": {
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "REJECTED"
+      ]
+    },
+    "acceptance_met": {
+      "type": "boolean"
+    },
+    "rejection_triggered": {
+      "type": "boolean"
+    },
+    "checksums_file": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

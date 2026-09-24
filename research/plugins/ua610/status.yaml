@@ -27,6 +27,10 @@ stages:
 current_stage: measurement
 
 completed:
+  - research
+  - review
+
+milestones:
   - 610 research baseline
   - original-direction review
   - reusable-asset audit

@@ -264,3 +264,33 @@ See the evidence import run:
 **Research / Revision — MODULE 1 v0.4R.3 F0 / Harmonic Motion Coherence**
 
 Use the CIPI Autonomous Research System. Production DSP remains blocked.
+
+
+---
+
+# 14. MEASURED — R4 clean-negative audit
+
+Run: `VOCAL-RESONANCE-R4-CLEAN-AUDIT-001 / gha-36070450907-1`
+
+- 32 clean excerpts.
+- 4 held-out singers.
+- 5 techniques.
+- overall clean false-trigger: 31.25%.
+- belt: 0%.
+- breathy: 25%.
+- fast_forte: 37.5%.
+- fast_piano: 62.5%.
+- lip_trill: 0%.
+- singer false-trigger range: 0% to 62.5%.
+
+## Review classifications
+
+**MEASURED:** the exact subgroup rates above.
+
+**REJECTED:** the earlier generalization that lip_trill is the dominant clean false-trigger failure.
+
+**HYPOTHESIS:** fast-piano / fast-forte or related vocal-event context may be hard negatives, pending independent replication.
+
+**UNRESOLVED:** high-F0 behavior. The legacy ACF proxy reached >=900 Hz at p90 in 8/32 excerpts and >=900 Hz at p95 in 23/32, including many values at the 1000 Hz search ceiling.
+
+No production DSP or VST3 is authorized.

@@ -32,7 +32,7 @@ milestones:
   - Semantic Ranker v0.4 measured NO-GO.
   - Pairwise Semantic Ranker v0.4R.1 measured and rejected.
   - Causal safe-negative Ranker v0.4R.2 improved Top-5 but remained NO-GO.
-  - Motion-coherence Ranker v0.4R.3 measured and rejected.
+  - Motion-coherence Ranker v0.4R.3 measured and rejected.\n  - Clean-negative Audit-001 measured strong technique/singer variation; the earlier lip-trill-specific failure clue did not reproduce.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -41,11 +41,11 @@ unresolved:
   - Clean hard-negative false-trigger behavior remains too high to authorize suppression DSP.
   - Strong-effect target ranking remains below the research gate.
   - The tested v0.4R.3 motion-coherence bundle regressed ranking and is rejected; other temporal evidence remains unproven.
-  - The v0.4R.3 test had zero cases under its median-F0 >=500 Hz high-F0 definition, leaving high-pitch coverage unresolved.
+  - High-pitch coverage remains unresolved: Audit-001 frequently saturated the legacy ACF proxy near its 1000 Hz ceiling, so its p90>=400 grouping is not accepted as validated high-F0 evidence.\n  - Audit-001 selected only arpeggio excerpts, leaving exercise-family confounding in the observed technique differences.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "v0.4R.3 regressed the static ranker and its high-F0 subgroup was empty. Before another feature family is proposed, the clean false-trigger subgroups and pitch coverage must be measured on a broader disjoint audit cohort."
-next_confirmation: "Which VocalSet techniques and pitch regimes dominate clean false triggers, whether label 6 maps to a reproducible adversarial technique, and whether a high-pitch stress cohort can be formed with adequate sample count."
+why_next: "Audit-001 found large technique/singer variation, but lip-trill did not reproduce, all selected excerpts were arpeggios, and the legacy ACF pitch proxy saturated near 1000 Hz. Replicate the subgroup result on excluded excerpts across exercise families with a conservative pitch proxy before adding a new feature family."
+next_confirmation: "Whether fast-piano/fast-forte false-trigger concentration replicates on Audit-001-excluded, exercise-balanced clean excerpts and whether conservative YIN-style pitch measurement yields a credible high-pitch cohort."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

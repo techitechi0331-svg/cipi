@@ -171,3 +171,27 @@ Important caveat:
 **MODULE 1 v0.4R.4 — Adversarial Clean-Negative / Pitch-Coverage Audit.**
 
 Do not add another model family until false-trigger subgroups and pitch coverage are measured on a broader disjoint clean cohort.
+
+
+---
+
+# MODULE 1 v0.4R.4 Clean-Negative Audit — assistant review
+
+Run: `VOCAL-RESONANCE-R4-CLEAN-AUDIT-001 / gha-36070450907-1`
+
+Measured:
+- 32 clean excerpts / 4 test singers / 5 techniques;
+- overall clean false-trigger: **31.25%**;
+- belt 0%, breathy 25%, fast_forte 37.5%, fast_piano 62.5%, lip_trill 0%;
+- singer range: 0% to 62.5%.
+
+Review:
+- subgroup concentration is retained as cohort-level evidence;
+- the earlier lip-trill-specific clue is **REJECTED** because it did not reproduce;
+- high-F0 coverage is **UNRESOLVED** because the legacy ACF proxy frequently saturates at its 1000 Hz search boundary;
+- all Audit-001 excerpts were arpeggios, so exercise-family confounding remains.
+
+Next:
+**MODULE 1 v0.4R.4b — Independent Clean-Negative Re-audit.**
+
+No new semantic model family is authorized before that replication.

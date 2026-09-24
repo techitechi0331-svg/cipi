@@ -1,0 +1,5 @@
+claim: Lip-trill is the dominant reproducible clean false-trigger condition for the current static vocal-resonance ranker.
+evidence_type: REJECTED
+scope: Generalization from the earlier small R3 subgroup clue; Audit-001 measured 0/3 lip-trill false triggers.
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1
+promotion_requested: PROVISIONAL

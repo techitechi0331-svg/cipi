@@ -73,3 +73,74 @@ Start with interpretable deterministic / logistic-style candidate scoring. Requi
 ## Promotion rule
 
 Do not mark the overall product track `CONFIRMED` until semantic ranking, suppression DSP, measurement, level-matched listening, Cubase Pro 14 / VST3 validation, and final precision review are complete for the stated scope.
+
+---
+
+# Evidence reconciliation — 2026-09-25
+
+The original independent-confirmation paragraph above is preserved as history. It describes the preliminary `skip_per_singer=2` confirmation run.
+
+A later and stricter confirmation run explicitly excluded all 40 primary examples.
+
+## Strict explicit-exclusion confirmation
+
+Target Actions run: `36052307694`
+
+- Merge-20: **85.00%**
+- Merge-15: **74.375%**
+- Local-20: **85.00%**
+- paired Merge-20 minus Merge-15: **+10.625 points**
+- bootstrap 95% interval: **+6.25 to +15.625 points**
+- discordant wins/losses: **17 / 0**
+- Merge-20 minus Local-20: **0 points**
+- paired interval: **-5.625 to +5.625 points**
+
+Decision:
+- keep K=20 locked for the current candidate-discovery scaffold;
+- keep K=15 rejected;
+- do **not** claim Merge-20 is superior to Local-20;
+- prefer the strict explicit-exclusion numbers in future summaries while retaining the earlier preliminary cohort.
+
+## Semantic Ranker v0.4
+
+Measured:
+- Top-5: 34.375%
+- strong-effect Top-5: 53.846%
+- clean false trigger: 25.0%
+- gate: NO_GO
+
+## Semantic Ranker v0.4R.1 — pairwise case-relative
+
+Measured:
+- Top-5: 31.25%
+- strong-effect Top-5: 46.154%
+- clean false trigger: 37.5%
+
+Decision: **REJECTED** for this scope.
+
+## Semantic Ranker v0.4R.2 — causal safe-negative supervision
+
+Measured:
+- generator ceiling: 87.5%
+- Top-5: 46.875%
+- Top-5 given generator hit: 53.571%
+- prominence baseline Top-5: 37.5%
+- strong-effect Top-5: 46.154%
+- clean false trigger: 37.5%
+- gate: NO_GO
+
+Interpretation:
+- safer labels improved overall Top-5;
+- strong-effect ranking and clean false-trigger behavior remain inadequate;
+- model complexity should not be increased blindly;
+- the next falsifiable question is whether F0/harmonic motion coherence adds useful protection/context.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.3 — F0 / Harmonic Motion Coherence.**
+
+Research must compare against:
+1. v0.4R.2 safe-negative static ranker;
+2. simple local-prominence baseline.
+
+No production suppressor or VST3 is authorized.

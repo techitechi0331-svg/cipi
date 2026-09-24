@@ -1,0 +1,75 @@
+{
+  "candidate_discovery": {
+    "preliminary_skip2_confirmation": {
+      "artifact_digest": "sha256:cd8179296a3aea53c32833fb1690054ed3bf70425cc523a78cda473d782ebc49",
+      "cases": 160,
+      "local20_recall": 0.825,
+      "merge15_recall": 0.78125,
+      "merge20_recall": 0.86875,
+      "note": "Different rows were selected by skipping two rows per singer, but the later explicit exclusion cohort is the stricter confirmation.",
+      "run_id": 36051626597
+    },
+    "primary_run": {
+      "artifact_digest": "sha256:85513085db84f26a3239ffc0b7d6bca4278bca0011562ba61643ed50c94f6fea",
+      "cases": 160,
+      "merge15_recall": 0.7625,
+      "merge20_recall": 0.875,
+      "run_id": 36050915380
+    },
+    "strict_explicit_exclusion_confirmation": {
+      "artifact_digest": "sha256:23cc1a6e8db03fe54b695746b3edbf637a1a0e0e7d30ca10824274943eef8a62",
+      "cases": 160,
+      "discordant_losses": 0,
+      "discordant_wins": 17,
+      "local20_recall": 0.85,
+      "merge15_recall": 0.74375,
+      "merge20_recall": 0.85,
+      "paired_bootstrap_95": [0.0625, 0.15625],
+      "paired_merge20_minus_local20": 0.0,
+      "paired_merge20_minus_local20_bootstrap_95": [-0.05625, 0.05625],
+      "paired_merge20_minus_merge15": 0.10625,
+      "run_id": 36052307694
+    }
+  },
+  "product_state": {
+    "audio_ab_of_suppressor": false,
+    "cubase_pro_14_validated": false,
+    "production_dsp_implemented": false,
+    "reason": "MODULE 1 semantic ranking gate has not passed.",
+    "vst3_built": false
+  },
+  "semantic_ranker": {
+    "v0_4": {
+      "artifact_digest": "sha256:e0d843daefab63fdcb633d99d265736b2de5dff9f4197ab71d29122dfd2da72e",
+      "clean_false_trigger": 0.25,
+      "pr_auc": 0.0960005572863188,
+      "result": "NO_GO",
+      "run_id": 36052445601,
+      "strong_top5": 0.5384615384615384,
+      "top5": 0.34375
+    },
+    "v0_4R1_pairwise": {
+      "artifact_digest": "sha256:bfd0c5c6c4d16e6e6294c90acc3bd1e0c2290339005856980dc3d17e1cbfde4b",
+      "clean_false_trigger": 0.375,
+      "pr_auc": 0.09175924677485135,
+      "result": "REJECTED",
+      "run_id": 36055722974,
+      "strong_top5": 0.46153846153846156,
+      "top5": 0.3125
+    },
+    "v0_4R2_safe_negative": {
+      "artifact_digest": "sha256:847bc99c2caca108e12963eb7943c0ab791c994184825b3038be3e48b2c6a967",
+      "baseline_top5": 0.375,
+      "clean_false_trigger": 0.375,
+      "generator_ceiling": 0.875,
+      "pr_auc_certain_labels": 0.09692252319518972,
+      "result": "NO_GO",
+      "run_id": 36063335669,
+      "strong_top5": 0.46153846153846156,
+      "top5": 0.46875,
+      "top5_given_generator_hit": 0.5357142857142857
+    }
+  },
+  "source_head": "3dd511529d47846fdb04f251e472c04e33a0302f",
+  "source_repo": "techitechi0331-svg/Vocal_resonance"
+}

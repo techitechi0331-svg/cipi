@@ -1,0 +1,11 @@
+{
+  "evidence_classes": [
+    "SOURCE_FACT",
+    "MEASURED",
+    "INFERRED",
+    "HYPOTHESIS",
+    "REJECTED"
+  ],
+  "raw_audio_committed": false,
+  "scope": "Import and reconcile target-repository and chat evidence into CIPI without promoting product status."
+}

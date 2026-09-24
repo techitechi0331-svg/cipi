@@ -1,0 +1,5 @@
+claim: High-recall candidate discovery and semantic ranking should be measured as separate stages because candidate recall can remain high while end-to-end semantic Top-K ranking remains poor.
+evidence_type: INFERRED
+scope: Adaptive vocal resonance research and other sparse-candidate adaptive spectral processors.
+source_run: research/runs/VOCAL-RESONANCE-SYNC-001/manual-20260925
+promotion_requested: LIKELY

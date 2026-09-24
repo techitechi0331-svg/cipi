@@ -19,3 +19,10 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Deterministically compare imported Black76 baseline and P2-A static-ratio evidence against the committed supplemental target."
+
+  vocal_resonance_motion_coherence_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 12
+    network_required: true
+    purpose: "Stream public VocalSet in runner memory and compare static safe-negative ranking against F0/harmonic-motion coherence without persisting raw audio."

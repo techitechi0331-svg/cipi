@@ -33,3 +33,11 @@ python tools/validate_research.py
 ```
 
 The mock experiment validates orchestration only. The PeakBody adapter validates replay/reproducibility of an existing DSP research artifact; it is not a sound-quality promotion.
+
+## Immutable decision history
+
+Every autonomous run now produces a decision proposal under `research/decisions/<job-id>/`.
+
+A failed hypothesis is preserved as a REJECT proposal with its evidence, retained findings, reusable findings, revisit conditions, review gaps and lineage. Automation cannot finalize REJECT or PROMOTE. Final review is a new immutable decision event.
+
+Worker evidence paths are append-only: existing runs, reports, knowledge candidates, completed/rejected jobs and decision records cannot be rewritten or deleted by a research-bot branch.

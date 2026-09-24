@@ -1,0 +1,66 @@
+schema_version: '1.0'
+job_id: VOPREP-AMOUNT-MAP-001
+state: QUEUED
+track:
+  id: VOPREP_TRANSPARENT_COMP_01
+  path: research/experiments/VoPrepTransparentCompressor
+research_question: Does scaling the frozen transparent core DesiredGR provide a more predictable and reusable one-knob Amount control than sweeping threshold or interpolating ratio, while preserving Amount-zero null and the full-core endpoint?
+hypothesis: DesiredGR scaling will produce exact Amount-zero null, monotonic gain reduction, exact 100-percent equivalence to the frozen core, and near-zero linearity error for both body and peak-extra gain reduction across the tested level shifts.
+counter_hypotheses:
+  - Threshold sweep provides an equally predictable Amount mapping and better preserves useful compressor behavior.
+  - Ratio interpolation is sufficiently linear that direct DesiredGR scaling adds no practical value.
+  - Direct DesiredGR scaling distorts the peak-extra versus body relationship as Amount changes.
+  - Any candidate fails exact null, endpoint equivalence, monotonicity, or numerical finiteness.
+baseline:
+  - threshold_sweep_from_no_compression_to_frozen_threshold
+variants:
+  - ratio_interpolation_1_to_1_5
+  - desired_gr_scale_0_to_1
+metrics:
+  - desired_gr_scale_zero_null_max_gr_db
+  - desired_gr_scale_full_match_max_error_db
+  - desired_gr_scale_linearity_rmse_max_db
+  - desired_gr_scale_event_extra_linearity_rmse_max_db
+  - desired_gr_scale_monotonic
+  - threshold_sweep_linearity_rmse_max_db
+  - ratio_interp_linearity_rmse_max_db
+  - all_numeric_finite
+acceptance:
+  - the full mapping x Amount x input-shift matrix is present
+  - all numeric outputs are finite
+  - DesiredGR scaling Amount zero maximum gain reduction is <= 1e-9 dB
+  - DesiredGR scaling at Amount 100 percent matches the frozen full core within 1e-9 dB
+  - DesiredGR scaling maximum strength-linearity RMSE is <= 1e-9 dB
+  - DesiredGR scaling peak-extra linearity RMSE is <= 1e-9 dB
+  - DesiredGR scaling is monotonic at every tested input shift
+  - threshold-sweep linearity error exceeds DesiredGR-scaling error by at least 0.05 dB
+rejection:
+  - any acceptance invariant fails
+  - required mapping, Amount, or input-shift case is missing
+  - the candidate produces non-finite values
+max_runs: 1
+timeout_minutes: 5
+random_seed: 20260925
+experiment_adapter: voprep_amount_mapping_v1
+allowed_operations:
+  - read_committed_model
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - raw_audio_commit
+  - main_push
+  - confidence_change
+  - stage_change
+  - knowledge_promotion
+  - product_release
+  - product_repo_mutation
+knowledge_candidate:
+  claim: For a fixed compressor core, scaling DesiredGR after the static curve can provide an exact-null, endpoint-preserving, mathematically linear Amount control while preserving the peak-extra/body gain-reduction relationship better than changing threshold.
+  evidence_type: HYPOTHESIS
+  scope: Deterministic level-domain Vo.Prep transparent-core Amount-mapping model across Amount 0/25/50/75/100 and input shifts -12/-6/0/+6/+12 dB.
+  promotion_requested: PROVISIONAL
+lineage:
+  related_jobs: []
+  related_decisions: []

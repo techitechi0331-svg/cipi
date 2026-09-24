@@ -1,0 +1,10 @@
+claim: In the tested transparent vocal-compressor core, a fixed 8 ms attack with refined 70 ms release produced the better evidence/cost trade-off than the tested program-dependent release, whose added memory reduced ripple but failed a held-out phrase-tail criterion.
+evidence_type: MEASURED
+scope: Vo.Prep Gain Ballistics development/validation and integrated-core refinement; transparent core only.
+promotion_requested: PROVISIONAL
+source_repository: techitechi0331-svg/Vo.Prep
+source_ref: research/integrated-vocal-compressor-core
+source_sha: a9441892056725cae8c393e64e5ee4c596af4a7b
+historical_baseline: 8 ms attack / 80 ms release
+current_candidate: 8 ms attack / 70 ms release
+related_track: research/experiments/VoPrepTransparentCompressor

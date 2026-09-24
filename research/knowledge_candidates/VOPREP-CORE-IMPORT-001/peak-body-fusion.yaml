@@ -1,0 +1,8 @@
+claim: For the tested vocal material, using an exact instantaneous sample-peak path only when it exceeds a 25 ms RMS body estimate by 6 dB achieved full tested event recall with low sustained-vowel false control, without requiring extra peak memory or a contribution cap.
+evidence_type: MEASURED
+scope: Vo.Prep Fast detector and Fast/Slow fusion synthetic plus held-out public-real-vocal tests.
+promotion_requested: PROVISIONAL
+source_repository: techitechi0331-svg/Vo.Prep
+source_ref: research/integrated-vocal-compressor-core
+source_sha: a9441892056725cae8c393e64e5ee4c596af4a7b
+related_track: research/experiments/VoPrepTransparentCompressor

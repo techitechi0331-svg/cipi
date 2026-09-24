@@ -1,0 +1,35 @@
+id: BREATHKEEPER_01
+title: CIPI BreathKeeper 0.1
+
+status: research
+knowledge_status: HYPOTHESIS
+confidence: 0.46
+
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: research
+
+completed: []
+
+unresolved:
+  - Breath events and breathy voiced phonation must be separated reliably.
+  - Singing-specific false positives on sibilance, fricatives, room noise, and consonants are not measured.
+  - Accompanied-vocal / bleed robustness is unknown.
+  - The appropriate action is not yet selected: attenuation, dynamic spectral shaping, or event-level gain envelope.
+  - Intentional expressive breaths need a preservation rule rather than blanket removal.
+
+next_stage: review
+why_next: "Singing-specific breath-event data and breathy-phonation acoustic measures are available; the next step is to separate the two problems and compare lightweight realtime detector features."
+next_confirmation: "Whether pause context, periodicity, spectral shape, and temporal envelope can identify unvoiced breath events without suppressing voiced breathy singing."
+
+blockers:
+  - "Final thresholds require labelled singing stems with intentional breaths and confounders."

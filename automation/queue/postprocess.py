@@ -34,6 +34,8 @@ def build_decision_record(job: dict, manifest: dict) -> dict:
 
     if rejected:
         reason = str(context.get("reason", "Declared rejection criteria were triggered; detailed rationale requires review."))
+        if not manifest.get("triggered_criteria"):
+            gaps.append("triggered_criteria_need_adapter_or_review")
         retained = context.get("retained_findings")
         if not isinstance(retained, list) or not retained:
             retained = ["All run artifacts, measurements, parameters, environment data and checksums are retained as negative evidence."]

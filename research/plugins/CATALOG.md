@@ -4,6 +4,7 @@ This catalog links every materially developed plug-in or plug-in research progra
 
 ## Reference-device / hardware-inspired tracks
 - LA2ACompressor / LA-2A / T4 -> `research/reference_devices/la2a/`
+- VL2A product implementation track -> `research/plugins/vl2a/` (reuses the LA-2A reference-device truth track; product measurements and decisions only)
 - 76blackCompressor / 1176 family -> `research/reference_devices/1176/`
 
 ## Repository-backed imported tracks

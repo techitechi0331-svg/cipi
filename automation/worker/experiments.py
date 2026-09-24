@@ -15,6 +15,7 @@ from typing import Any
 ADAPTERS = {
     "black76_ratio_p2a_compare_v1",
     "peakbody_legacy_model_stress_v1",
+    "peakbody_revision02_policy_v1",
     "original_vocal_pre_measurement_gate_v1",
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
@@ -788,6 +789,110 @@ def _vl2a_phase01h_checksum_diagnosis(repo_root: Path, timeout_seconds: int) -> 
     }
 
 
+
+def _peakbody_revision02_policy(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = repo_root / "research/experiments/PeakBody/revision02_policy_model.py"
+    command = [sys.executable, str(script)]
+    completed = subprocess.run(
+        command,
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=timeout_seconds,
+    )
+
+    rows = list(csv.DictReader(io.StringIO(completed.stdout)))
+    expected_sample_rates = {44100, 48000, 96000, 192000}
+    expected_bursts = {10, 20, 30, 50, 100}
+
+    finite = bool(rows) and all(int(row["finite"]) == 1 for row in rows)
+
+    burst_rows = [row for row in rows if row["test"] == "burst_max_gr_db"]
+    settle_rows = [row for row in rows if row["test"] == "settled_fraction_150ms"]
+    steady_rows = [row for row in rows if row["test"] == "steady_gr_db"]
+    invariance_rows = [row for row in rows if row["test"] == "crest_gain_invariance_abs_diff"]
+    realtime_rows = [row for row in rows if row["test"] == "python_model_realtime_factor"]
+
+    burst_matrix_complete = (
+        len(burst_rows) == len(expected_sample_rates) * len(expected_bursts)
+        and {int(row["sample_rate_hz"]) for row in burst_rows} == expected_sample_rates
+        and {int(row["duration_ms"]) for row in burst_rows} == expected_bursts
+    )
+
+    short_burst_extra = [
+        float(row["delta_value"])
+        for row in burst_rows
+        if int(row["duration_ms"]) <= 30
+    ]
+    burst30_by_sr = [
+        float(row["candidate_value"])
+        for row in burst_rows
+        if int(row["duration_ms"]) == 30
+    ]
+    settle_values = [float(row["candidate_value"]) for row in settle_rows]
+    steady_values = [float(row["candidate_value"]) for row in steady_rows]
+    invariance_values = [float(row["candidate_value"]) for row in invariance_rows]
+    realtime_values = [float(row["candidate_value"]) for row in realtime_rows]
+
+    metrics = {
+        "row_count": len(rows),
+        "all_numeric_finite": finite,
+        "burst_matrix_complete": burst_matrix_complete,
+        "short_burst_extra_gr_max_db": max(short_burst_extra) if short_burst_extra else None,
+        "short_burst_extra_gr_min_db": min(short_burst_extra) if short_burst_extra else None,
+        "burst30_candidate_sr_spread_db": (
+            max(burst30_by_sr) - min(burst30_by_sr) if burst30_by_sr else None
+        ),
+        "settled_fraction_150ms_min": min(settle_values) if settle_values else None,
+        "settled_fraction_150ms_max": max(settle_values) if settle_values else None,
+        "steady_gr_sr_spread_db": (
+            max(steady_values) - min(steady_values) if steady_values else None
+        ),
+        "crest_gain_invariance_abs_diff_max": (
+            max(invariance_values) if invariance_values else None
+        ),
+        "python_model_realtime_factor_min": (
+            min(realtime_values) if realtime_values else None
+        ),
+    }
+
+    acceptance_met = (
+        len(rows) == 36
+        and finite
+        and burst_matrix_complete
+        and len(settle_rows) == 4
+        and len(steady_rows) == 4
+        and len(invariance_rows) == 4
+        and len(realtime_rows) == 4
+        and metrics["short_burst_extra_gr_max_db"] is not None
+        and metrics["short_burst_extra_gr_max_db"] <= 0.15
+        and metrics["settled_fraction_150ms_min"] is not None
+        and metrics["settled_fraction_150ms_min"] >= 0.88
+        and metrics["burst30_candidate_sr_spread_db"] is not None
+        and metrics["burst30_candidate_sr_spread_db"] <= 0.05
+        and metrics["steady_gr_sr_spread_db"] is not None
+        and metrics["steady_gr_sr_spread_db"] <= 0.05
+        and metrics["crest_gain_invariance_abs_diff_max"] is not None
+        and metrics["crest_gain_invariance_abs_diff_max"] <= 0.02
+    )
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"measurement.csv": completed.stdout},
+        "commands": ["python research/experiments/PeakBody/revision02_policy_model.py"],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic model-only replay of PeakBody Revision 02 across "
+            "44.1/48/96/192 kHz. It compares the split-direction adaptive timing "
+            "candidate against the simple fixed 40/400 ms baseline for short bursts, "
+            "checks sustained-body convergence, detector gain invariance, numerical "
+            "finiteness, and sample-rate stability. The recorded Python realtime factor "
+            "is diagnostic only and is not treated as VST3 CPU evidence."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -795,6 +900,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         raise ValueError("timeout_seconds must be positive")
     if name == "peakbody_legacy_model_stress_v1":
         return _peakbody_legacy_model_stress(repo_root, timeout_seconds)
+    if name == "peakbody_revision02_policy_v1":
+        return _peakbody_revision02_policy(repo_root, timeout_seconds)
     if name == "black76_ratio_p2a_compare_v1":
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":

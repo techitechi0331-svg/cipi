@@ -14,6 +14,7 @@ on:
       - "tools/validate_evidence_candidate.py"
       - "tools/validate_decision_records.py"
       - "tools/validate_research_change_scope.py"
+      - "tools/test_research_integrity_guards.py"
       - ".github/workflows/auto-research-gate.yml"
   workflow_dispatch:
 
@@ -41,10 +42,19 @@ jobs:
       - name: Validate research jobs
         run: python tools/validate_research_job.py
 
+      - name: Test append-only research integrity guards
+        run: python tools/test_research_integrity_guards.py
+
       - name: Run deterministic mock worker
         run: |
           rm -rf research/runs/AUTO-SMOKE-001
           python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001 --run-id mock-0001
+          if python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001 --run-id mock-0001; then
+            echo "runner unexpectedly overwrote an existing research run"
+            exit 1
+          else
+            echo "runner overwrite guard: PASS"
+          fi
 
       - name: Exercise deterministic postprocessing
         run: |

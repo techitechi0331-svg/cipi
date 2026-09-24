@@ -10,6 +10,7 @@ on:
       - "research/knowledge_candidates/**"
       - "tools/validate_research_job.py"
       - "tools/validate_research_result.py"
+      - "tools/validate_evidence_candidate.py"
       - "tools/validate_research_change_scope.py"
       - ".github/workflows/auto-research-gate.yml"
   workflow_dispatch:
@@ -43,13 +44,21 @@ jobs:
           rm -rf research/runs/AUTO-SMOKE-001
           python automation/worker/runner.py automation/examples/research_job.yaml --output research/runs/AUTO-SMOKE-001/mock-0001 --run-id mock-0001
 
+      - name: Exercise deterministic postprocessing
+        run: |
+          python automation/queue/postprocess.py --job automation/examples/research_job.yaml --run-dir research/runs/AUTO-SMOKE-001/mock-0001
+          python tools/validate_research_job.py
+          python tools/validate_evidence_candidate.py
+
       - name: Run allowlisted real DSP research adapter
         run: |
           rm -rf research/runs/PEAKBODY-LEGACY-STRESS-001
           python automation/worker/runner.py automation/examples/peakbody_legacy_stress_job.yaml --output research/runs/PEAKBODY-LEGACY-STRESS-001/ci-0001 --run-id ci-0001
 
       - name: Validate research results and artifact safety
-        run: python tools/validate_research_result.py
+        run: |
+          python tools/validate_research_result.py
+          python tools/validate_evidence_candidate.py
 
       - name: Validate existing CIPI research contract
         run: python tools/validate_research.py

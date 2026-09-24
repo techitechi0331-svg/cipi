@@ -1,0 +1,33 @@
+schema_version: "1.0"
+job_id: AUTO-NEXT-SMOKE-002
+state: QUEUED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: "Can the continuation engine queue a bounded deterministic follow-up job?"
+hypothesis: "A predeclared continuation template can be queued without allowing arbitrary code generation."
+counter_hypotheses:
+  - "The continuation engine fails to preserve the research contract."
+baseline:
+  - continuation_disabled
+variants:
+  - continuation_enabled
+metrics:
+  - objective_score
+acceptance:
+  - "continuation_enabled objective_score > continuation_disabled objective_score"
+rejection:
+  - "continuation_enabled objective_score <= continuation_disabled objective_score"
+max_runs: 1
+timeout_minutes: 5
+random_seed: 6100332
+allowed_operations:
+  - mock_measurement
+prohibited_operations:
+  - network_write
+  - main_push
+mock_measurements:
+  continuation_disabled:
+    objective_score: 0.50
+  continuation_enabled:
+    objective_score: 0.60

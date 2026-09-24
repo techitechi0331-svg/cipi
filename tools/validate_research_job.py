@@ -66,6 +66,34 @@ def validate(path: Path) -> list[str]:
             max_timeout=spec.get("max_timeout_minutes")
             if isinstance(max_timeout, int) and data["timeout_minutes"] > max_timeout:
                 errors.append(f"{path}: timeout exceeds adapter maximum of {max_timeout} minutes")
+    candidate=data.get("knowledge_candidate")
+    if candidate is not None:
+        if not isinstance(candidate, dict):
+            errors.append(f"{path}: knowledge_candidate must be a mapping")
+        else:
+            required_candidate={"claim","evidence_type","scope"}
+            missing_candidate=sorted(required_candidate-set(candidate))
+            if missing_candidate:
+                errors.append(f"{path}: knowledge_candidate missing: {', '.join(missing_candidate)}")
+            if candidate.get("evidence_type") not in {"SOURCE_CANDIDATE","MEASURED","INFERRED","HYPOTHESIS"}:
+                errors.append(f"{path}: invalid knowledge_candidate evidence_type")
+            if candidate.get("promotion_requested","HYPOTHESIS") not in {"HYPOTHESIS","LIKELY","PROVISIONAL"}:
+                errors.append(f"{path}: invalid knowledge_candidate promotion_requested")
+
+    continuation=data.get("continuation")
+    if continuation is not None:
+        if not isinstance(continuation, dict):
+            errors.append(f"{path}: continuation must be a mapping")
+        else:
+            for key in ("on_accept","on_reject"):
+                values=continuation.get(key, [])
+                if not isinstance(values, list):
+                    errors.append(f"{path}: continuation.{key} must be a list")
+                    continue
+                for value in values:
+                    text=str(value)
+                    if not text.startswith("automation/job_templates/") or ".." in Path(text).parts:
+                        errors.append(f"{path}: unsafe continuation template path {text!r}")
     return errors
 
 def main() -> int:

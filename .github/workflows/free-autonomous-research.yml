@@ -16,6 +16,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 concurrency:
   group: cipi-free-autonomous-research
@@ -59,6 +60,14 @@ jobs:
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           python automation/worker/runner.py "$JOB_PATH" --output "research/runs/$JOB_ID/$RUN_ID" --run-id "$RUN_ID"
 
+      - name: Generate bounded research follow-up artifacts
+        if: steps.select.outputs.has_job == 'true'
+        env:
+          JOB_PATH: ${{ steps.select.outputs.job_path }}
+          JOB_ID: ${{ steps.select.outputs.job_id }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+        run: python automation/queue/postprocess.py --job "$JOB_PATH" --run-dir "research/runs/$JOB_ID/$RUN_ID"
+
       - name: Finalize queue state on evidence branch
         if: steps.select.outputs.has_job == 'true'
         env:
@@ -70,6 +79,8 @@ jobs:
         if: steps.select.outputs.has_job == 'true'
         run: |
           python tools/validate_research_result.py
+          python tools/validate_evidence_candidate.py
+          python tools/validate_research_job.py
           python tools/validate_research.py
 
       - name: Write trusted local gate report
@@ -95,6 +106,8 @@ jobs:
           git push --set-upstream origin "$BOT_BRANCH"
 
       - name: Open evidence pull request
+        id: open_pr
+        continue-on-error: true
         if: steps.select.outputs.has_job == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -103,6 +116,16 @@ jobs:
           RUN_ID: ${{ steps.execute.outputs.run_id }}
         run: |
           gh pr create --base main --head "$BOT_BRANCH" --title "Autonomous research evidence: $JOB_ID" --body "Free CIPI autonomous research run **$RUN_ID**. The same trusted workflow executed the allowlisted experiment, result safety validation, and the existing CIPI research contract before pushing this branch. No paid external API was used. Knowledge promotion is not automatic."
+
+      - name: Create review issue when Actions PR creation is disabled
+        if: steps.select.outputs.has_job == 'true' && steps.open_pr.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOT_BRANCH: ${{ steps.select.outputs.branch }}
+          JOB_ID: ${{ steps.select.outputs.job_id }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+        run: |
+          gh issue create --title "Autonomous research ready: $JOB_ID" --body "Free autonomous research run **$RUN_ID** completed successfully and is saved on branch `$BOT_BRANCH`. Automatic PR creation is disabled by the repository Actions setting, so this issue is the review handoff. The branch already passed the same-workflow Job, Result, Evidence Candidate, and CIPI research-contract gates. No paid external API was used."
 
       - name: Queue empty
         if: steps.select.outputs.has_job != 'true'

@@ -1,0 +1,38 @@
+id: PEAKBODY_01
+title: CIPI PeakBody 0.1
+
+status: parameter_lock
+knowledge_status: HYPOTHESIS
+confidence: 0.57
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: in_progress
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: parameter_lock
+
+completed:
+  - Crest-factor-based adaptive timing is supported by multiple AES sources.
+  - Feed-forward soft-knee architecture is already established in CIPI.
+  - Level-dependent timing behavior is documented as a major source of compressor character.
+  - Main vocal-specific failure modes have been identified.
+
+unresolved:
+  - Singing-specific crest-factor distribution is not measured.
+  - Vocal-optimal maximum attack and release values are not known.
+  - Sibilants, plosives, breath, and voiced sustain may require rejection or weighting logic.
+  - Threshold/ratio strength mapping remains a product-design hypothesis.
+
+next_stage: implementation
+why_next: "A bounded experimental parameter specification will be locked with explicit hypothesis labels, allowing a prototype without pretending the constants are final."
+next_confirmation: "Whether the literature-derived adaptive timing feature separates transient-rich and sustained vocal-like signals and remains stable in a realtime compressor."
+
+blockers:
+  - "Final parameter promotion requires measured vocal corpus and level-matched listening."

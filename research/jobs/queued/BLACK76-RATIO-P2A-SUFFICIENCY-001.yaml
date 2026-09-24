@@ -50,3 +50,5 @@ knowledge_candidate:
 continuation:
   on_accept: []
   on_reject: []
+
+retry_nonce: 1

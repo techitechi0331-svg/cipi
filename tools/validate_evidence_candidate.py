@@ -6,7 +6,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"claim", "evidence_type", "scope", "source_run", "promotion_requested"}
-EVIDENCE = {"SOURCE_CANDIDATE", "MEASURED", "INFERRED", "HYPOTHESIS"}
+EVIDENCE = {"SOURCE_CANDIDATE", "MEASURED", "INFERRED", "HYPOTHESIS", "REJECTED"}
 PROMOTION = {"HYPOTHESIS", "LIKELY", "PROVISIONAL"}
 
 def validate(path: Path) -> list[str]:
@@ -25,8 +25,13 @@ def validate(path: Path) -> list[str]:
         errors.append(f"{path}: invalid evidence_type")
     if data["promotion_requested"] not in PROMOTION:
         errors.append(f"{path}: invalid promotion_requested")
-    if not str(data["source_run"]).startswith("research/runs/"):
-        errors.append(f"{path}: source_run must point under research/runs/")
+    source_ref = str(data["source_run"])
+    valid_source = (
+        source_ref.startswith("research/runs/")
+        or (source_ref.startswith("research/plugins/") and "/evidence/" in source_ref)
+    )
+    if not valid_source:
+        errors.append(f"{path}: source_run must point under research/runs/ or a product evidence path under research/plugins/*/evidence/")
     if len(str(data["claim"]).strip()) < 10:
         errors.append(f"{path}: claim is too short")
     return errors

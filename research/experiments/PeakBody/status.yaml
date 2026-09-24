@@ -1,40 +1,39 @@
 id: PEAKBODY_01
 title: CIPI PeakBody 0.1
 
-status: measurement
-knowledge_status: PROVISIONAL
-confidence: 0.64
+status: revision
+knowledge_status: HYPOTHESIS
+confidence: 0.68
 
 stages:
   research: complete
   review: complete
-  parameter_lock: complete
+  parameter_lock: in_progress
   implementation: complete
   measurement: in_progress
   audio_ab: pending
   revision: in_progress
-  vst3_validation: in_progress
+  vst3_validation: pending
   final_review: pending
 
-current_stage: measurement
+current_stage: revision
 
 completed:
   - research
   - review
-  - parameter_lock
   - implementation
 
 unresolved:
-  - Singing-specific crest-factor distribution is not measured.
-  - Sibilants, plosives, breath, and voiced sustain may still require rejection or weighting logic.
-  - The softened 0.35 exponent / 0.25 floor remains a CIPI hypothesis until real-vocal measurement and listening.
-  - Threshold/ratio strength mapping remains a product-design hypothesis.
-  - pluginval, Steinberg validator, and Cubase Pro 14 validation are not complete for PeakBody.
-  - Level-matched vocal AB is pending.
+  - The original crest-to-fast timing direction over-compresses short synthetic bursts.
+  - The 200 ms peak-preserve alternative protects transients but holds onset memory too long.
+  - The 40 ms split-direction candidate needs implementation and full regression testing.
+  - The full raw Macro-Level vocal corpus is not directly materializable in the current Project runtime.
+  - Level-matched vocal AB is still pending.
+  - Cubase Pro 14 real-host verification is pending.
 
-next_stage: measurement
-why_next: "The revised adaptive-timing model passed deterministic C++ tests and the development branch produced a valid PeakBody VST3 bundle. Measurement must now determine whether the prototype behaviour is musically useful and whether additional vocal-event rejection is required."
-next_confirmation: "Adaptive timing trajectories, static compression behavior, consonant/noise stress behavior, and whether the softened mapping deserves retention before full host validation."
+next_stage: implementation
+why_next: "Synthetic and real-singing measurements identified a better vocal-specific timing topology: high crest should slow attack and speed release, while low crest should speed attack and slow release. The 40 ms / 6–35 ms / 120–400 ms candidate now needs implementation."
+next_confirmation: "Whether the revised mapping preserves deterministic detector behavior, builds as VST3, passes pluginval/Steinberg validation, and reproduces the measured transient/body trade-off."
 
 blockers:
-  - "Final audio-quality promotion requires real vocal material and Cubase Pro 14 host validation."
+  - "Final parameter promotion requires the full raw vocal corpus plus level-matched listening."

@@ -1,0 +1,85 @@
+schema_version: "1.0"
+job_id: VOPRIPRO-REALVOCAL-SNAPSHOT-001
+state: QUEUED
+track:
+  id: VOPRIPRO_FORMAL
+  path: research/plugins/vopripro
+research_question: "Does the imported VoPriPro v0.1 main real-vocal snapshot show bounded Natural50 dynamics control versus the simple identity-input baseline while preserving the declared safety behavior?"
+hypothesis: "Across the four imported adult HUST_Solfege recordings, Natural50 will reduce 100 ms active-window P90-P10 dynamics by a bounded 2-8 dB, keep crest-factor change within 2 dB, avoid material safety-limiter action, and the +6 dB drive stress will engage the limiter while holding the sample peak at -1.0 dBFS."
+counter_hypotheses:
+  - "Natural50 does not reduce active-window dynamics consistently across all four recordings."
+  - "Natural50 materially alters crest factor or invokes the safety limiter on one or more recordings."
+  - "The +6 dB drive stress fails to engage the limiter or fails to hold the output near the declared -1.0 dBFS ceiling."
+  - "The imported evidence is incomplete, non-finite, checksum-invalid, or contains raw audio in CIPI."
+baseline:
+  - identity_input
+variants:
+  - vopripro_natural50
+  - drive_plus6_safety_stress
+metrics:
+  - checksum_ok
+  - matrix_complete
+  - all_status_pass
+  - all_numeric_finite
+  - natural_dynamic_reduction_min_db
+  - natural_dynamic_reduction_max_db
+  - natural_crest_change_abs_max_db
+  - natural_limiter_max_db
+  - natural_gr_cap_error_max_db
+  - natural_ab_match_gain_abs_max_db
+  - drive_peak_error_max_db
+  - drive_limiter_min_db
+  - raw_audio_present
+acceptance:
+  - "Committed evidence checksums are exact and no raw WAV is present in CIPI."
+  - "The matrix contains exactly four recordings x six presets = 24 unique PASS rows with finite numeric values."
+  - "Every Natural50 case reduces 100 ms active-window P90-P10 dynamics by at least 2 dB and at most 8 dB versus identity input."
+  - "Every Natural50 case keeps absolute crest-factor change at or below 2 dB."
+  - "Natural50 limiter max GR stays at or below 0.25 dB and max compressor GR remains within 0.01 dB of the declared 6 dB cap."
+  - "Natural50 active-RMS A/B match gain remains at or below 8 dB."
+  - "Every DrivePlus6 case stays within 0.01 dB of the -1.0 dBFS sample-peak ceiling and engages at least 0.10 dB limiter GR."
+rejection:
+  - "Any committed evidence checksum fails or raw WAV audio is present in the CIPI evidence path."
+  - "The 24-case matrix is incomplete, contains a non-PASS row, or contains non-finite numeric data."
+  - "Any Natural50 case has less than 2 dB or more than 8 dB active-window dynamics reduction versus identity input."
+  - "Any Natural50 case changes crest factor by more than 2 dB absolute."
+  - "Any Natural50 case exceeds 0.25 dB limiter GR or differs from the 6 dB max-GR cap by more than 0.01 dB."
+  - "Any DrivePlus6 case differs from -1.0 dBFS sample peak by more than 0.01 dB or fails to engage at least 0.10 dB limiter GR."
+max_runs: 1
+timeout_minutes: 2
+random_seed: 20260925
+experiment_adapter: vopripro_real_vocal_snapshot_gate_v1
+allowed_operations:
+  - committed_snapshot_read
+  - sha256_verify
+  - deterministic_metric_reduce
+prohibited_operations:
+  - arbitrary_shell
+  - network_read
+  - network_write
+  - raw_audio_persist
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - product_release
+knowledge_candidate:
+  claim: "On the imported four-adult-recording VoPriPro main snapshot, Natural50 produced bounded objective dynamics reduction relative to the identity input while keeping crest change small and leaving the safety limiter inactive; subjective preference remains untested."
+  evidence_type: MEASURED
+  scope: "VoPriPro main@cc796d30 on man1/man4/woman1/woman3 HUST_Solfege Twinkle recordings and the declared six-case validation matrix only; no subjective preference or Cubase host claim."
+  promotion_requested: PROVISIONAL
+rejection_record:
+  reason: "If the imported snapshot fails integrity or any predeclared bounded-behavior gate, retain the failed metrics as negative evidence and return VoPriPro to measurement/revision review rather than weakening the gate."
+  retained_findings:
+    - "Preserve the complete derived CSV, metric reduction output, environment, parameters, manifest and SHA256 files."
+    - "Preserve which recording/preset or integrity condition triggered the rejection."
+  reusable_findings:
+    - "Derived real-vocal metrics can be reviewed in CIPI without committing raw vocal audio."
+    - "Identity input provides a simple baseline for bounded dynamics-change checks without claiming subjective quality."
+  revisit_if:
+    - "A corrected product build or corrected evidence import changes the failed metric."
+    - "A broader predeclared corpus is introduced with the same or stricter measurement protocol."
+  scope: "Objective imported-snapshot gate only; final product rejection requires separate review."
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []

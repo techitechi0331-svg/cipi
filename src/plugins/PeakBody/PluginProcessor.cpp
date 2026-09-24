@@ -76,7 +76,7 @@ void PeakBodyAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
         crestDetector.process (linkedMagnitude);
 
-        const auto timingScale = crestDetector.getTimingScale (0.10f);
+        const auto timingScale = crestDetector.getTimingScale (0.25f, 0.35f);
         const auto attackMs = 40.0f * timingScale;
         const auto releaseMs = 400.0f * timingScale;
 

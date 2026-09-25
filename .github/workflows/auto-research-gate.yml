@@ -20,11 +20,17 @@ on:
       - "tools/test_research_integrity_guards.py"
       - "tools/test_review_lineage.py"
       - "tools/test_no_wait_scheduler.py"
+      - "tools/validate_cross_repo.py"
+      - "tools/test_cross_repo_orchestrator.py"
+      - "RULES/CROSS_REPO_ORCHESTRATION.md"
+      - "RULES/AUTO_EVIDENCE_INTAKE.md"
       - "RULES/NO_WAIT_WORK_STEALING.md"
       - ".github/workflows/auto-research-gate.yml"
       - ".github/workflows/free-autonomous-review.yml"
       - ".github/workflows/free-autonomous-research.yml"
       - ".github/workflows/no-wait-orchestrator.yml"
+      - ".github/workflows/cross-repo-orchestrator.yml"
+      - ".github/workflows/auto-evidence-intake.yml"
   workflow_dispatch:
 
 permissions:
@@ -59,6 +65,11 @@ jobs:
 
       - name: Test No-Wait work-stealing scheduler
         run: python tools/test_no_wait_scheduler.py
+
+      - name: Validate and test Cross-Repo orchestration
+        run: |
+          python tools/validate_cross_repo.py
+          python tools/test_cross_repo_orchestrator.py
 
       - name: Run deterministic mock worker
         run: |

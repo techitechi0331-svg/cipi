@@ -286,21 +286,50 @@ def main() -> int:
     }
 
     out_dir = root / "research" / "reviews" / args.job_id
-    yaml_path = out_dir / f"{run_id}-triage.yaml"
-    md_path = out_dir / f"{run_id}-triage.md"
-    yaml_text = yaml.safe_dump(payload, sort_keys=False, allow_unicode=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    base_triage_id = str(payload["triage_id"])
+    revision = 1
+    supersedes = None
+
+    while True:
+        suffix = "" if revision == 1 else f"-r{revision}"
+        yaml_path = out_dir / f"{run_id}-triage{suffix}.yaml"
+        md_path = out_dir / f"{run_id}-triage{suffix}.md"
+        active = dict(payload)
+        if revision > 1:
+            active["triage_id"] = f"{base_triage_id}-r{revision}"
+            active["triage_revision"] = revision
+            active["supersedes_triage_id"] = supersedes
+            active["correction_reason"] = "A newer authoritative review history changed or clarified deterministic routing; prior triage remains preserved."
+        yaml_text = yaml.safe_dump(active, sort_keys=False, allow_unicode=True)
+
+        if yaml_path.exists():
+            existing = load_yaml(yaml_path)
+            if existing == active:
+                payload = active
+                break
+            if isinstance(existing, dict):
+                supersedes = str(existing.get("triage_id", "")) or supersedes
+            revision += 1
+            continue
+
+        payload = active
+        write_immutable(yaml_path, yaml_text)
+        break
 
     human_lines = "\n".join(f"- {x}" for x in required_human_gates) or "- none explicitly declared by the job"
     signal_lines = "\n".join(f"- {x}" for x in downstream_signals) or "- none detected in the track status"
     reason_lines = "\n".join(f"- {x}" for x in reasons)
     gap_lines = "\n".join(f"- {x}" for x in review_gaps) or "- none"
+    revision_line = f"- Triage revision: **{revision}**\n" if revision > 1 else ""
+    supersedes_line = f"- Supersedes: `{payload.get('supersedes_triage_id')}`\n" if revision > 1 else ""
     md_text = f"""# CIPI Automated Review Triage
 
 <!-- cipi-review-triage:v1 -->
 
 - Job: `{args.job_id}`
 - Run: `{run_id}`
-- Candidate class: **{candidate_class}**
+{revision_line}{supersedes_line}- Candidate class: **{candidate_class}**
 - Routing: **{route}**
 - Final decision made: **{str(bool(confirmed)).lower()}**
 - Promotion requested: **{promotion_requested or 'none'}**
@@ -330,7 +359,6 @@ def main() -> int:
 This is deterministic triage only. It does not PROMOTE, ARCHIVE or finally REJECT research, and it does not approve a product release.
 """
 
-    write_immutable(yaml_path, yaml_text)
     write_immutable(md_path, md_text)
 
     output_github(args.github_output, {
@@ -340,6 +368,7 @@ This is deterministic triage only. It does not PROMOTE, ARCHIVE or finally REJEC
         "markdown_path": md_path.relative_to(root).as_posix(),
         "reviewed": "true" if confirmed else "false",
         "run_id": run_id,
+        "triage_revision": str(revision),
     })
     print(f"{candidate_class} -> {route}: {md_path.relative_to(root).as_posix()}")
     return 0

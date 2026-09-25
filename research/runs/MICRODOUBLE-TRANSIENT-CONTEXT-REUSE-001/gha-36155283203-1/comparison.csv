@@ -1,0 +1,12 @@
+metric,value
+snapshot_checksum_ok,True
+baseline_generic_transient_must_remain,True
+candidate_context_separation_supported,True
+known_growl_false_positive_risk_retained,True
+candidate_processing_bounded,True
+downstream_compressor_proxy_supported,True
+baseline_contextual_evidence_gap,True
+candidate_plosive_burst_max_probability,0.96
+candidate_growl_onset_max_probability,0.83
+candidate_fry_max_probability,0.69
+candidate_body_region_mean_movement_db,0.2

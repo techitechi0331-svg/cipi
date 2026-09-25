@@ -1,0 +1,132 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:review-brief-v1
+job_id: MICRODOUBLE-SIBILANCE-R3-GATE-001
+run_id: gha-36089834243-1
+source_run: research/runs/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1
+route: HUMAN_GATE_REVIEW
+candidate_class: PROMOTION_CANDIDATE
+triage_path: research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-triage.yaml
+triage_id: MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:triage-v1
+job_path: research/jobs/completed/000-MICRODOUBLE-SIBILANCE-R3-GATE-001.yaml
+research_question: Does the predeclared MicroDouble sibilance R3 study preserve its
+  R1/R2 negative results, deterministically select activation 0.62 as the highest
+  passing candidate, and reproduce every gate on a disjoint holdout set strongly enough
+  to authorize development integration?
+hypothesis: The exact source transfer and R2 remain rejected, but activation 0.62
+  is the highest passing predeclared candidate and independently passes the frozen
+  holdout criteria, justifying implementation on a development branch.
+counter_hypotheses:
+- The snapshot hides or overwrites the earlier R1/R2 failures.
+- Activation 0.64 actually passed and the 0.62 choice violates the conservative selection
+  rule.
+- The 0.62 candidate only passes the selection corpus and fails the disjoint holdout.
+- Recall recovery requires unacceptable false/event occupancy or excessive onset latency.
+acceptance_criteria:
+- Committed metrics snapshot SHA256 must match.
+- R1 and R2 must remain failed evidence and the 0.64 R3 candidate must remain failed.
+- Both 0.62 and 0.60 must pass selection so the highest-passing rule deterministically
+  freezes 0.62.
+- Frozen activation must equal 0.62.
+- Holdout clean candidate occupancy must be at most 5 percent.
+- Holdout candidate detection recall must be at least 75 percent.
+- Holdout recall gap versus baseline must be at most 5 percentage points.
+- Holdout candidate non-event occupancy must be at most 6 percent and at least 2 percentage
+  points below baseline.
+- Holdout event strength mean must be at least 0.10 and p90 at least 0.20.
+- Holdout maximum onset latency must be at most 25 ms.
+rejection_criteria:
+- Any declared acceptance condition fails.
+- Negative results are missing or rewritten.
+- The frozen threshold differs from the predeclared highest-passing rule.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: ca57efa206c0afc76dbe6318c3d84972f0a41e77
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: holdout_baseline_non_event_pct
+  value: 10.08347
+- path: holdout_baseline_recall_pct
+  value: 97.464097
+- path: holdout_candidate_clean_pct
+  value: 0.0
+- path: holdout_candidate_non_event_pct
+  value: 0.364273
+- path: holdout_candidate_recall_pct
+  value: 94.744268
+- path: holdout_gate_ok
+  value: true
+- path: holdout_max_onset_ms
+  value: 23.310658
+- path: holdout_pass
+  value: 1.0
+- path: holdout_recall_gap_pp
+  value: 2.719829
+- path: holdout_strength_mean
+  value: 0.381149
+- path: holdout_strength_p90
+  value: 0.443423
+- path: r1_r2_and_064_negative_evidence_preserved
+  value: true
+- path: r2_recall_gap_pp
+  value: 5.728143
+- path: r3_060_pass
+  value: 1.0
+- path: r3_062_pass
+  value: 1.0
+- path: r3_064_pass
+  value: 0.0
+- path: r3_selected_activation
+  value: 0.62
+- path: selection_rule_ok
+  value: true
+- path: snapshot_checksum_ok
+  value: true
+knowledge_candidate:
+  claim: In the controlled MicroDouble transfer study, separating detection from protection
+    strength and calibrating only the hybrid detector activation threshold to 0.62
+    produced a candidate that passed predeclared selection and disjoint holdout gates
+    while preserving prior negative results.
+  evidence_type: MEASURED
+  scope: Controlled public-vocal plus deterministic injected-event protocol only;
+    product integration, subjective naturalness, multilingual sibilance generalization,
+    Cubase verification and release remain unproven.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Review R1/R2 negative-result preservation before development integration.
+- Product regressions and listening after integration.
+downstream_gate_signals:
+- Broader target-machine listening across additional vocal styles/settings is still
+  desirable; first target-machine 50% checkpoint is complete and was reported as slightly
+  strong but acceptable.
+- v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline
+  render and latency-compensation confirmation.
+- Final release evidence requires Cubase Pro 14 and target-machine listening.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

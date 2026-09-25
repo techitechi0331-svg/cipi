@@ -1,0 +1,28 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed MicroDouble sibilance R1/R2/R3 snapshot",
+    "verify committed SHA256 ledger",
+    "verify negative-result preservation",
+    "verify predeclared highest-passing-threshold selection",
+    "verify frozen holdout gates"
+  ],
+  "completed_at": "2026-09-25T03:18:47.744628Z",
+  "environment": {
+    "experiment_adapter": "microdouble_sibilance_r3_snapshot_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001",
+  "random_seed": 20260925,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36089834243-1",
+  "schema_version": "1.0",
+  "source_commit": "ca57efa206c0afc76dbe6318c3d84972f0a41e77",
+  "started_at": "2026-09-25T03:18:47.742649Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

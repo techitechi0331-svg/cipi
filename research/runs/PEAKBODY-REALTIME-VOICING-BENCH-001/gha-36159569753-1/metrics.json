@@ -1,0 +1,50 @@
+{
+  "analysis_rate_hz": 12000,
+  "detectors": {
+    "autocorr_baseline": {
+      "all_finite": true,
+      "bright_high_confidence_min": 1.0,
+      "bright_noise_margin": 0.8688035913929744,
+      "clean_pitch_relative_error_max": 0.8571428571428571,
+      "clean_voiced_confidence_min": 0.999098687116719,
+      "noise_like_confidence_max": 0.1311964086070257,
+      "noisy_voiced_confidence": 0.8024948679764111,
+      "operation_ratio_vs_autocorr": 1.0,
+      "pair_ops": 169200.0,
+      "silence_confidence": 0.0
+    },
+    "mpm_nsdf": {
+      "all_finite": true,
+      "bright_high_confidence_min": 1.0,
+      "bright_noise_margin": 0.8688102579898715,
+      "clean_pitch_relative_error_max": 0.857151689012097,
+      "clean_voiced_confidence_min": 0.9990986633415923,
+      "noise_like_confidence_max": 0.13118974201012842,
+      "noisy_voiced_confidence": 0.8024906278608374,
+      "operation_ratio_vs_autocorr": 1.0,
+      "pair_ops": 169200.0,
+      "silence_confidence": 0.0
+    },
+    "yin_cmnd": {
+      "all_finite": true,
+      "bright_high_confidence_min": 0.985657604980387,
+      "bright_noise_margin": 0.704505007319446,
+      "clean_pitch_relative_error_max": 0.0033930283407695634,
+      "clean_voiced_confidence_min": 0.9804520734293245,
+      "noise_like_confidence_max": 0.28115259766094103,
+      "noisy_voiced_confidence": 0.8300184135379082,
+      "operation_ratio_vs_autocorr": 0.7171985815602837,
+      "pair_ops": 121350.0,
+      "silence_confidence": 0.0
+    }
+  },
+  "frame_samples": 480,
+  "lag_range": [
+    10,
+    150
+  ],
+  "qualified_candidates": [
+    "yin_cmnd",
+    "mpm_nsdf"
+  ]
+}

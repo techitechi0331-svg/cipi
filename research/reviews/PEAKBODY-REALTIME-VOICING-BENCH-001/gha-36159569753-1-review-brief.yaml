@@ -1,0 +1,151 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:review-brief-v1
+job_id: PEAKBODY-REALTIME-VOICING-BENCH-001
+run_id: gha-36159569753-1
+source_run: research/runs/PEAKBODY-REALTIME-VOICING-BENCH-001/gha-36159569753-1
+route: PROMOTION_REVIEW
+candidate_class: PROMOTION_CANDIDATE
+triage_path: research/reviews/PEAKBODY-REALTIME-VOICING-BENCH-001/gha-36159569753-1-triage.yaml
+triage_id: PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:triage-v1
+job_path: research/jobs/completed/PEAKBODY-REALTIME-VOICING-BENCH-001.yaml
+research_question: Can YIN-CMND confidence or MPM-NSDF clarity provide a bounded realtime-oriented
+  periodicity signal for PeakBody that protects clean/bright/noisy voiced material
+  while rejecting sibilant/breath-like noise at acceptable model complexity?
+hypothesis: At least one established candidate periodicity family will satisfy the
+  predeclared voiced/noise confidence separation gates with an operation proxy no
+  more than 2.5 times the current normalized-autocorrelation baseline.
+counter_hypotheses:
+- YIN or MPM will lose confidence on bright high-register harmonic material.
+- Noise-like sibilance or breath will produce excessive candidate confidence.
+- A candidate will protect voiced material but require disproportionate pairwise computation.
+- The current normalized-autocorrelation baseline will remain the safest simple mechanism.
+acceptance_criteria:
+- at least one of YIN-CMND or MPM-NSDF satisfies every hard gate
+- clean voiced confidence minimum is at least 0.75
+- bright-high confidence minimum is at least 0.75
+- 6 dB SNR noisy-voiced confidence is at least 0.55
+- sibilant/breath-like confidence maximum is no more than 0.35
+- silence confidence is no more than 0.05
+- bright-vs-noise confidence margin is at least 0.45
+- candidate pair-operation proxy is no more than 2.5 times normalized-autocorrelation
+  baseline
+- all outputs are finite
+rejection_criteria:
+- neither candidate satisfies all predeclared confidence/safety/complexity gates
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 8b5ff281a6bd4f31c7f216f11ef9d1cf0f784e20
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: analysis_rate_hz
+  value: 12000
+- path: detectors.autocorr_baseline.all_finite
+  value: true
+- path: detectors.autocorr_baseline.bright_high_confidence_min
+  value: 1.0
+- path: detectors.autocorr_baseline.bright_noise_margin
+  value: 0.8688035913929744
+- path: detectors.autocorr_baseline.clean_pitch_relative_error_max
+  value: 0.8571428571428571
+- path: detectors.autocorr_baseline.clean_voiced_confidence_min
+  value: 0.999098687116719
+- path: detectors.autocorr_baseline.noise_like_confidence_max
+  value: 0.1311964086070257
+- path: detectors.autocorr_baseline.noisy_voiced_confidence
+  value: 0.8024948679764111
+- path: detectors.autocorr_baseline.operation_ratio_vs_autocorr
+  value: 1.0
+- path: detectors.autocorr_baseline.pair_ops
+  value: 169200.0
+- path: detectors.autocorr_baseline.silence_confidence
+  value: 0.0
+- path: detectors.mpm_nsdf.all_finite
+  value: true
+- path: detectors.mpm_nsdf.bright_high_confidence_min
+  value: 1.0
+- path: detectors.mpm_nsdf.bright_noise_margin
+  value: 0.8688102579898715
+- path: detectors.mpm_nsdf.clean_pitch_relative_error_max
+  value: 0.857151689012097
+- path: detectors.mpm_nsdf.clean_voiced_confidence_min
+  value: 0.9990986633415923
+- path: detectors.mpm_nsdf.noise_like_confidence_max
+  value: 0.13118974201012842
+- path: detectors.mpm_nsdf.noisy_voiced_confidence
+  value: 0.8024906278608374
+- path: detectors.mpm_nsdf.operation_ratio_vs_autocorr
+  value: 1.0
+- path: detectors.mpm_nsdf.pair_ops
+  value: 169200.0
+- path: detectors.mpm_nsdf.silence_confidence
+  value: 0.0
+- path: detectors.yin_cmnd.all_finite
+  value: true
+- path: detectors.yin_cmnd.bright_high_confidence_min
+  value: 0.985657604980387
+- path: detectors.yin_cmnd.bright_noise_margin
+  value: 0.704505007319446
+- path: detectors.yin_cmnd.clean_pitch_relative_error_max
+  value: 0.0033930283407695634
+- path: detectors.yin_cmnd.clean_voiced_confidence_min
+  value: 0.9804520734293245
+- path: detectors.yin_cmnd.noise_like_confidence_max
+  value: 0.28115259766094103
+- path: detectors.yin_cmnd.noisy_voiced_confidence
+  value: 0.8300184135379082
+- path: detectors.yin_cmnd.operation_ratio_vs_autocorr
+  value: 0.7171985815602837
+- path: detectors.yin_cmnd.pair_ops
+  value: 121350.0
+- path: detectors.yin_cmnd.silence_confidence
+  value: 0.0
+- path: frame_samples
+  value: 480
+knowledge_candidate:
+  claim: An established causal frame-wise periodicity family may reproduce PeakBody
+    harmonic protection with bounded complexity; synthetic qualification does not
+    establish a product winner.
+  evidence_type: MEASURED
+  scope: Synthetic 12 kHz, 40 ms PeakBody periodicity-family benchmark only.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Spectral-only crest guarding is REJECTED; periodicity-protected guarding passed
+  synthetic confounder gates but private real-vocal validation is still pending.
+- '{''Private same-performance real-vocal guard study was INCONCLUSIVE'': ''processing
+  invariance and low-frequency/body preservation passed, but bright-voiced proxy count
+  was 0 and noise-like suppression missed the locked target.''}'
+- Level-matched vocal AB is still pending.
+- Cubase Pro 14 real-host verification is pending.
+- Final parameter promotion requires the full raw vocal corpus plus level-matched
+  listening.
+allowed_review_actions:
+- PROMOTE
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

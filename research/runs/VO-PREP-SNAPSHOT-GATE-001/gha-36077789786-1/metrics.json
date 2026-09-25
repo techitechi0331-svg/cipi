@@ -1,0 +1,16 @@
+{
+  "corrected_program_name": true,
+  "cubase_still_pending": true,
+  "dsp_ci_success": true,
+  "expected_rejected_marker_count": 6,
+  "expected_unresolved_marker_count": 4,
+  "missing_parameter_section_count": 0,
+  "missing_required_metric_count": 0,
+  "official_validator_still_pending": true,
+  "plosive_subjective_still_pending": true,
+  "raw_audio_present": false,
+  "retained_rejected_marker_count": 6,
+  "retained_unresolved_marker_count": 4,
+  "sibilance_subjective_still_pending": true,
+  "snapshot_says_raw_audio_committed": false
+}

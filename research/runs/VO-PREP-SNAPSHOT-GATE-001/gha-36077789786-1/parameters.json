@@ -1,0 +1,21 @@
+{
+  "baseline": [
+    "required_snapshot_contract"
+  ],
+  "experiment_adapter": "vo_prep_snapshot_gate_v1",
+  "job_file": "research/jobs/queued/VO-PREP-SNAPSHOT-GATE-001.yaml",
+  "metrics": [
+    "missing_required_metric_count",
+    "missing_parameter_section_count",
+    "retained_rejected_marker_count",
+    "retained_unresolved_marker_count",
+    "raw_audio_present",
+    "dsp_ci_success",
+    "corrected_program_name",
+    "official_validator_still_pending",
+    "cubase_still_pending"
+  ],
+  "variants": [
+    "imported_vo_prep_snapshot_20260925"
+  ]
+}

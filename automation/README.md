@@ -72,3 +72,17 @@ If a newly discovered topic has no reviewed pilot adapter, the proposal is emitt
 
 The Plugin Incubator performs duplicate/overlap routing before any standalone prototype. Existing-product overlap can produce `MERGE_EXISTING`; low-evidence ideas remain `ITERATE`. Only an explicitly reviewed `INCUBATE` proposal may invoke an allowlisted isolated prototype adapter. Production adoption remains a human/assistant gate.
 
+
+
+## Autonomous Research Architect and Plugin Incubator
+
+A separate bounded architect layer may discover Research Gaps and write Research Proposals. It does not replace the existing Research Worker.
+
+- deterministic catalog-backed gaps may become allowlisted pilot experiments;
+- unresolved/blocker text can be emitted as non-executable Research Gap Signals;
+- themes without an allowlisted pilot are marked `NEEDS_ADAPTER` instead of generating arbitrary code;
+- product-relevant proposals are routed through an isolated Plugin Incubator overlap check;
+- automation may propose `MERGE_EXISTING`, `ITERATE`, `REJECT`, `ARCHIVE` or `INCUBATE`, but production adoption, official repo creation, release, Cubase approval and subjective listening remain review gates;
+- architect-bot branches have their own append-only path allowlist and cannot change automation, governance or existing product source.
+
+The first implementation deliberately separates autonomous **problem discovery** from autonomous **code execution**. Unknown research topics can be surfaced automatically without granting arbitrary-code authority.

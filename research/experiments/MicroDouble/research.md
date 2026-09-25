@@ -342,3 +342,24 @@ Key CIPI-reduced measurements:
 - pluginval 1.0.4 strictness-5 flag: PASS.
 
 This promotes only the **technical snapshot finding** to PROVISIONAL reusable knowledge. It does not confirm subjective naturalness, universal default calibration, the whole product, or Cubase v0.3 release readiness.
+
+
+## Target-machine listening checkpoint — 2026-09-25
+
+### SOURCE_FACT
+
+The user evaluated the v0.3 DOUBLE calibration on the target system and reported that the 50% setting feels **slightly strong, but still within an acceptable range**.
+
+This is subjective listening evidence, not a numeric measurement. The report supports keeping 50% as the current default candidate rather than reducing the global mapping again.
+
+### INFERRED
+
+- The v0.3 midpoint correction moved the control into a practically usable lead-vocal region.
+- The current 50% default is near the upper side of the user's preferred standard range rather than clearly over-strength.
+- A further global downward remap is not justified from this single listening checkpoint because it risks making the midpoint too subtle for other material.
+
+### HYPOTHESIS
+
+A broader target-machine AB may place the user's personal sweet spot slightly below 50% (roughly the high-40% region), while 50% remains an acceptable product default.
+
+No product parameter mapping is changed from this report alone.

@@ -1,0 +1,115 @@
+name: vocal-rider-research
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "CMakeLists.txt"
+      - "src/dsp/VocalRiderCore.h"
+      - "src/plugins/VocalRider/**"
+      - "tests/VocalRiderTests.cpp"
+      - "research/experiments/VocalRider/**"
+      - ".github/workflows/vocal-rider-research.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: vocal-rider-research-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test-validate:
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        shell: pwsh
+        run: cmake -S . -B build -G "Visual Studio 18 2026" -A x64
+
+      - name: Build Vocal Rider tests
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRiderTests --parallel 4
+
+      - name: Run Vocal Rider deterministic gate
+        shell: pwsh
+        run: |
+          $testExe = Get-ChildItem -Path build -Recurse -File -Filter CIPIVocalRiderTests.exe | Select-Object -First 1
+          if (-not $testExe) {
+            throw "CIPIVocalRiderTests.exe was not produced."
+          }
+
+          Write-Host "Running $($testExe.FullName)"
+          & $testExe.FullName
+          if ($LASTEXITCODE -ne 0) {
+            throw "Vocal Rider deterministic tests failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Build Vocal Rider VST3
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRider_VST3 --parallel 4
+
+      - name: Collect Vocal Rider VST3
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts | Out-Null
+          $bundle = Get-ChildItem -Path build -Recurse -Directory -Filter "CIPI Vocal Rider.vst3" | Select-Object -First 1
+          if (-not $bundle) {
+            throw "CIPI Vocal Rider.vst3 was not produced."
+          }
+
+          Copy-Item -LiteralPath $bundle.FullName -Destination (Join-Path artifacts $bundle.Name) -Recurse -Force
+
+      - name: Download pinned pluginval
+        shell: pwsh
+        run: |
+          $url = "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip"
+          $expected = "c08e61ce3b96db41636f8ec7e76f4c7e2c13ebdac7fa1b5a1f52b4f32ec715ab"
+
+          Invoke-WebRequest -Uri $url -OutFile pluginval.zip
+          $actual = (Get-FileHash pluginval.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+
+          if ($actual -ne $expected) {
+            throw "pluginval checksum mismatch. Expected $expected, got $actual."
+          }
+
+          Expand-Archive pluginval.zip -DestinationPath pluginval -Force
+
+      - name: Run pluginval strictness 5
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path pluginval-logs | Out-Null
+
+          $pluginval = Get-ChildItem -Path pluginval -Recurse -File -Filter pluginval.exe | Select-Object -First 1
+          if (-not $pluginval) {
+            throw "pluginval.exe was not found."
+          }
+
+          $bundle = Get-ChildItem -Path artifacts -Directory -Filter "CIPI Vocal Rider.vst3" | Select-Object -First 1
+          if (-not $bundle) {
+            throw "Vocal Rider bundle was not found for pluginval."
+          }
+
+          & $pluginval.FullName --validate $bundle.FullName --strictness-level 5 2>&1 |
+            Tee-Object -FilePath pluginval-logs/vocal-rider.log
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "pluginval failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Upload Vocal Rider artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-Windows-VST3
+          path: artifacts
+          if-no-files-found: error
+
+      - name: Upload pluginval log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-pluginval
+          path: pluginval-logs
+          if-no-files-found: ignore

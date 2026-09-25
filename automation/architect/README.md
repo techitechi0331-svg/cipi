@@ -38,3 +38,9 @@ Automation may never mark that candidate executable or add it to `automation/ada
 The scheduled architect also extracts stable, non-executable signals from formal track `unresolved` and `blockers` lists. These records live under `research/architect/signals/`.
 
 A signal is not a Research Proposal and cannot execute code. It exists so important gaps outside the reviewed topic catalog are visible for later classification instead of being silently ignored.
+
+### Signal pressure
+
+Gap discovery does not equate "many mentions" with "solved". Non-human unresolved/data-gap signals are matched against the reviewed topic catalog and add **signal pressure** to ranking.
+
+This means a well-documented area can still generate a Research Gap when current tracks explicitly say the question remains unresolved. Human-only items such as Cubase or subjective listening are recorded but do not create autonomous research pressure.

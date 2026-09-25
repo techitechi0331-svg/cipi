@@ -506,3 +506,63 @@ Requirements:
 - reject seed-specific gains.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.9 — Fixed-Hz Transfer Consistency Review
+
+Run: `VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001 / gha-36172028692-1`
+
+## MEASURED
+
+Seed 20261003:
+- static conditional Top-5: 26.67%
+- transfer conditional Top-5: 33.33%
+- oracle-gap closure: 9.09%
+- static strong-effect conditional Top-5: 36.36%
+- transfer strong-effect conditional Top-5: 18.18%
+- external clean false-trigger: 17.5% -> 30.0%
+
+Seed 20261013:
+- static conditional Top-5: 40.74%
+- transfer conditional Top-5: 48.15%
+- oracle-gap closure: 14.29%
+- static strong-effect conditional Top-5: 28.57%
+- transfer strong-effect conditional Top-5: 42.86%
+- external clean false-trigger: 25.0% -> 15.0%
+
+## DECISION
+
+**REJECT the tested fixed-Hz temporal transfer-consistency feature family.**
+
+Reasons:
+- neither seed reached the predeclared +0.08 conditional Top-5 improvement;
+- neither seed reached 15% R7-oracle-gap closure;
+- seed 20261003 materially regressed strong-effect ranking and clean false-trigger performance;
+- behavior was not stable across seeds.
+
+## INFERRED
+
+The remaining information gap is unlikely to be solved by adding more within-excerpt local geometry or simple fixed-Hz stationarity alone.
+
+A new information source is required.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.10 — Singer-Disjoint Clean Normative Prior.**
+
+Research question:
+Can a lightweight prior learned only from clean training singers provide a deployable estimate of how unusual a candidate is relative to ordinary vocal spectral structure?
+
+Constraints:
+- final inference uses only current audio + a frozen trained prior;
+- no paired clean reference;
+- no deep model required;
+- singer-disjoint training/validation/test;
+- compare against frozen static R2;
+- compare gap closure against R7 oracle;
+- preserve independent clean-negative evaluation;
+- reject seed-specific gains.
+
+No production suppressor or VST3 is authorized.

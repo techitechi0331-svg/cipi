@@ -525,3 +525,31 @@ Decision:
 - **Peak calibration v3 -> integration candidate**
 - current v0 calibration -> superseded for final integration
 - no T4 timing change.
+
+
+## 2026-09-25 Peak Reduction midpoint specification change
+
+New product requirement:
+- real vocal approximately -18 dBFS peak
+- mode = COMP
+- Peak Reduction = 50
+- target GR = approximately 5..7 dB
+
+This new operating-point requirement supersedes the previous Peak calibration
+v3 integration decision for the final product.
+
+Previous selected v3 measured only about 1.94 dB GR at -18 dBFS / PR50 in the
+1 kHz calibration context and is therefore no longer acceptable as the final
+VL2A Peak curve.
+
+Current status:
+- prior Peak v3: **SUPERSEDED**
+- T4 timing: unchanged / still provisionally KEEP
+- COMP/LIMIT topology: unchanged
+- R37: unchanged
+- Phase 03B optical v3: remains integration candidate
+- new active research branch:
+  `research/vl2a-peak-calibration-v4-midpoint`
+
+The final calibration gate is now based on normalized real VocalSet material,
+not only a sine-wave proxy.

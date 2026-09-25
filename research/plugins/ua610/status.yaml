@@ -19,7 +19,7 @@ stages:
   parameter_lock: in_progress
   implementation: in_progress
   measurement: in_progress
-  audio_ab: pending
+  audio_ab: in_progress
   revision: in_progress
   vst3_validation: pending
   final_review: pending
@@ -40,6 +40,10 @@ milestones:
   - high-level HF collapse detection and fail-fast regression
   - latest-branch high-level HF overload regression pass
   - robust-solver extended shortlist refresh
+  - automation-safety smoothing candidate
+  - CPU simple-baseline harness
+  - level-matched vocal AB renderer and licensed source protocol
+  - self-hosted runner shell/cache hardening
 
 unresolved:
   - Final Character/Drive mapping is not locked.
@@ -48,8 +52,9 @@ unresolved:
   - Vocal-aware dynamic protection has not yet been justified.
   - Level-matched real-vocal AB is pending.
   - Windows VST3/Cubase Pro 14 RC validation is pending.
-  - Final CPU/latency tradeoff is not locked.
+  - Final CPU/latency tradeoff is not locked; DSP-only vs oversampling-only benchmark is pending Windows execution.
   - Final shortlist profile is not locked; refreshed solver-corrected measurements now require level-matched vocal comparison.
+  - Input/Character automation smoothing is PROVISIONAL until the dedicated Windows automation regression passes.
 
 historical_nonblocking_unknowns:
   - Exact modern 2-610 transformer magnetic parameters are not public.
@@ -57,9 +62,10 @@ historical_nonblocking_unknowns:
   - A hardware Golden Dataset is still absent for clone-fidelity research.
 
 next_stage: measurement
-why_next: "The high-level HF solver collapse is closed and the corrected solver has now passed refreshed frequency, THD, IMD, alias and overload measurements without breaking the preserved 610 baseline. The next discriminator is candidate narrowing plus level-matched real-vocal AB, while CPU/latency and Cubase host validation remain open."
-next_confirmation: "Narrow the refreshed shortlist for listening, measure robust-solver CPU/latency cost, then run level-matched Bypass vs preserved 610 vs Original vocal AB before parameter lock."
+why_next: "The high-level HF solver collapse is closed and corrected-solver measurements are refreshed. Independent next gates are now automation regression, DSP-only vs oversampling-only CPU/latency measurement, and level-matched real-vocal AB preparation/rendering; none should block the others."
+next_confirmation: "Pass the automation transition gate, quantify robust-solver cost against the oversampling-only simple baseline, render the licensed level-matched vocal shortlist, and then use listening plus Cubase validation before parameter lock."
 
 blockers:
-  - Real-vocal material or an approved open singing corpus is required before the audio_ab gate can be closed.
-  - Cubase Pro 14 validation ultimately requires a Windows host run.
+  - Current automation/CPU/AB measurements depend on a Windows workflow reaching the relevant analyzer/render steps; independent review and preparation continue under No-Wait / Work-Stealing.
+  - Final perceptual audio_ab closure requires listening evidence from the rendered vocal set; a CC0 a-cappella source is already selected, so source acquisition is no longer the blocker.
+  - Cubase Pro 14 validation ultimately requires the user-side Windows host run and must remain unconfirmed until performed.

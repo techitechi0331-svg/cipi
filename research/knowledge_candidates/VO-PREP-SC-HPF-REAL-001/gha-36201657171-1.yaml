@@ -1,0 +1,7 @@
+claim: The 40 Hz detector-only HPF selected synthetically may reduce LF false drive
+  on real vocals while preserving clean-vocal compression.
+evidence_type: HYPOTHESIS
+scope: Frozen Vo.Prep transparent compressor, VocalSet validation f1/f2/m1/m2 and
+  gated confirmation f3/f4/m3/m4.
+source_run: research/runs/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1
+promotion_requested: HYPOTHESIS

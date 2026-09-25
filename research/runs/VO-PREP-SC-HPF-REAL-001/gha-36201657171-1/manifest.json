@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vo-prep/experiments/sidechain_hpf_real_vocal.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T23:38:37.985551Z",
+  "environment": {
+    "experiment_adapter": "voprep_sidechain_hpf_real_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-SC-HPF-REAL-001",
+  "random_seed": 20260926,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36201657171-1",
+  "schema_version": "1.0",
+  "source_commit": "b1c30f93d9a1901b8438a5dddd4a300b4aea5950",
+  "started_at": "2026-09-25T23:36:48.464056Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -1,0 +1,35 @@
+schema_version: '1.0'
+triage_id: VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:triage-v1
+job_id: VO-PREP-SC-HPF-REAL-001
+run_id: gha-36201657171-1
+source_run: research/runs/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1
+source_decision_id: VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:auto
+source_decision_path: research/decisions/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-auto.yaml
+job_path: research/jobs/completed/VO-PREP-SC-HPF-REAL-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1.yaml
+candidate_class: RESEARCH_MORE
+route: HUMAN_GATE_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates:
+- Level-matched real-vocal listening before product adoption.
+downstream_gate_signals:
+- Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard
+  are not all formally closed.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Transparent compressor core level-matched blind listening is pending.
+- Transparent compressor final VST3 / Cubase Pro 14 host validation is pending.
+- Representative real-vocal listening is still required.
+reasons:
+- The research job explicitly requires human gates before further promotion.
+recommended_action: Resolve the listed review gaps or required human gates before
+  a final knowledge decision.
+created_at: '2026-09-25T23:38:37.985551Z'
+triage_version: '1.0'
+immutable: true

@@ -1,0 +1,45 @@
+{
+  "acceptance_met": true,
+  "candidate_hpf_hz": 40.0,
+  "confirmation_accessed": true,
+  "confirmation_aggregate": {
+    "clean_abs_mean_delta_db": 0.0041768211447698045,
+    "clean_abs_p95_delta_db": 0.0025319484806010095,
+    "clean_abs_ripple_delta_db": 0.00013960896953969847,
+    "file_count": 8,
+    "male_clean_abs_mean_delta_db": 0.0035907352824853245,
+    "plosive_positive_fraction": 1.0,
+    "plosive_reduction_mean": 0.20211374555654038,
+    "rumble_positive_fraction": 1.0,
+    "rumble_reduction_mean": 0.737451385518135,
+    "solver_max_residual_db": 5.58192105293287e-06
+  },
+  "confirmation_passes": true,
+  "confirmation_singers": [
+    "f3",
+    "f4",
+    "m3",
+    "m4"
+  ],
+  "decision": "GO_TO_BLIND",
+  "raw_audio_persisted": false,
+  "validation_aggregate": {
+    "clean_abs_mean_delta_db": 0.005159873647465674,
+    "clean_abs_p95_delta_db": 0.005970168204070481,
+    "clean_abs_ripple_delta_db": 7.031695051045242e-05,
+    "file_count": 8,
+    "male_clean_abs_mean_delta_db": 0.006825389634820822,
+    "plosive_positive_fraction": 1.0,
+    "plosive_reduction_mean": 0.17034021959672924,
+    "rumble_positive_fraction": 1.0,
+    "rumble_reduction_mean": 0.7351043887229355,
+    "solver_max_residual_db": 4.367938575722263e-06
+  },
+  "validation_passes": true,
+  "validation_singers": [
+    "f1",
+    "f2",
+    "m1",
+    "m2"
+  ]
+}

@@ -20,6 +20,7 @@ on:
       - "tools/validate_review_brief.py"
       - "tools/validate_research_change_scope.py"
       - "tools/validate_architect.py"
+      - "tools/validate_incubator.py"
       - "tools/validate_architect_change_scope.py"
       - "tools/test_research_integrity_guards.py"
       - "tools/test_review_lineage.py"
@@ -50,7 +51,9 @@ jobs:
       - name: Validate research jobs
         run: python tools/validate_research_job.py
       - name: Validate architect/incubator artifacts
-        run: python tools/validate_architect.py
+        run: |
+          python tools/validate_architect.py
+          python tools/validate_incubator.py
       - name: Test append-only research integrity guards
         run: python tools/test_research_integrity_guards.py
       - name: Test legacy review lineage matching
@@ -132,6 +135,7 @@ jobs:
           python tools/validate_review_triage.py
           python tools/validate_review_brief.py
           python tools/validate_architect.py
+          python tools/validate_incubator.py
       - name: Validate existing CIPI research contract
         run: python tools/validate_research.py
       - name: Enforce research-worker branch path allowlist

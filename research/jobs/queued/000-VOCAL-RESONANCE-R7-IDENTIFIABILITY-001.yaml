@@ -1,0 +1,53 @@
+schema_version: "1.0"
+job_id: VOCAL-RESONANCE-R7-IDENTIFIABILITY-001
+state: QUEUED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: "When candidate discovery hits the injected resonance, does a research-only paired clean/injected causal oracle rank that target near the top, and how large is the gap versus single-view inference features?"
+hypothesis: "If single-view feature information is the main blocker, the causal oracle will achieve conditional Top-5 >= 0.80 and strong-effect conditional Top-5 >= 0.85 on both seeds, with at least a 0.20 conditional Top-5 gain over the frozen static ranker."
+counter_hypotheses:
+  - "Even paired clean/injected deltas cannot reliably rank the target, indicating candidate alignment, label construction, or object representation is the main blocker."
+  - "The oracle improves only one seed, indicating unstable candidate geometry rather than a stable single-view feature gap."
+  - "Audit coverage is too sparse to distinguish these explanations."
+baseline:
+  - prominence_only
+  - frozen_static_r2_single_view
+variants:
+  - research_only_paired_causal_delta_oracle
+metrics:
+  - top5_given_generator_hit
+  - strong_top5_given_generator_hit
+  - oracle_gap_vs_static
+  - generator_ceiling
+  - target_row_count
+  - target_new_candidate_fraction
+  - causal_delta_separation
+acceptance:
+  - "for each seed: generator ceiling >= 0.80"
+  - "for each seed: at least 24 locked test cases"
+  - "for each seed: at least 20 target candidate rows"
+rejection:
+  - "audit coverage is insufficient on either seed"
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20261031
+experiment_adapter: vocal_resonance_identifiability_oracle_v1
+allowed_operations:
+  - stream_public_vocalset_in_runner_memory
+  - controlled_eq_injection
+  - paired_clean_injected_research_analysis
+  - derived_metric_write
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - raw_audio_write
+  - paid_api
+  - product_release
+knowledge_candidate:
+  claim: "A paired clean/injected causal oracle can diagnose whether poor vocal-resonance semantic ranking is caused primarily by missing single-view information versus candidate/label alignment."
+  evidence_type: HYPOTHESIS
+  scope: "Research-only identifiability diagnosis for vocal resonance candidate ranking; paired clean reference is not available to the final plugin."
+  promotion_requested: HYPOTHESIS

@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - "CMakeLists.txt"
-      - "src/dsp/VocalRiderCore.h"
+      - "src/dsp/VocalRider*.h"
       - "src/plugins/VocalRider/**"
       - "tests/VocalRider*.cpp"
       - "research/experiments/VocalRider/**"

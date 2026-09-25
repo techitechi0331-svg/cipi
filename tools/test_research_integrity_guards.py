@@ -45,7 +45,9 @@ def main() -> int:
         (root / "research/jobs/completed").mkdir(parents=True)
         (root / "research/jobs/completed/JOB.yaml").write_text("job_id: JOB\nstate: COMPLETED\n", encoding="utf-8")
         (root / "research/jobs/queued/JOB.yaml").unlink()
-        allowed = commit(root, "allowed append and finalize")
+        (root / "research/cross_repo/actions/queued").mkdir(parents=True)
+        (root / "research/cross_repo/actions/queued/ACTION.yaml").write_text("action_id: ACTION-001\nstate: QUEUED\n", encoding="utf-8")
+        allowed = commit(root, "allowed append, finalize and cross-repo continuation")
         check(root, base, allowed, True, "append-only addition and queue finalization")
 
         git(root, "reset", "--hard", base)

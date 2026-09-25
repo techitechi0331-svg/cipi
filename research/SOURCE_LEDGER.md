@@ -56,6 +56,7 @@
 | RES-PROD-003 | Baby Audio, **Smooth Operator Pro** product documentation. https://babyaud.io/smooth-operator-plugin | official product documentation | simplified spectral-balancing product behavior / usability reference | E3 |
 | RES-PROD-004 | Waves, **Curves Equator** product documentation. https://www.waves.com/plugins/curves-equator | official product documentation | learned/source-relative suppression-curve product behavior reference; proprietary internals unknown | E3 |
 | DATA-VOX-001 | Wilkins et al., **VocalSet: A Singing Voice Dataset**, ISMIR / Zenodo. https://zenodo.org/records/1442513 | research dataset / paper | 20 professional singers, technique-diverse monophonic singing corpus used for real-vocal controlled-injection validation | E5 |
+| DATA-VOX-002 | Faghih, Timoney, **Annotated-VocalSet: A Singing Voice Dataset**, 2022. https://zenodo.org/records/7061507 | research dataset / peer-reviewed companion | Adds F0 contour, note onset/offset, transitions, note F0/duration, MIDI pitch and lyrics to VocalSet; candidate for high-register/event-targeted PeakBody validation | E5 |
 
 A repeated quotation of one original source does not count as independent corroboration.
 

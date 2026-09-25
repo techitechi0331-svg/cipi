@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"CIPI Incubator Candidate",
+  "type":"object",
+  "required":["schema_version","plugin_proposal_id","state","source_incubator_decision","source_run","prototype_adapter","automatic_production_allowed"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "state":{"const":"INCUBATE"},
+    "source_incubator_decision":{"type":"string","pattern":"^research/incubator/decisions/"},
+    "source_run":{"type":"string","pattern":"^research/runs/"},
+    "prototype_adapter":{"type":"string","minLength":3},
+    "automatic_production_allowed":{"const":false}
+  },
+  "additionalProperties":true
+}

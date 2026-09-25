@@ -162,3 +162,34 @@ target_link_libraries(CIPIVocalRiderPluginTests
 )
 
 set_target_properties(CIPIVocalRiderPluginTests PROPERTIES OUTPUT_NAME "CIPIVocalRiderPluginTests")
+
+
+juce_add_console_app(CIPIVocalRiderRealVocal
+    PRODUCT_NAME "CIPI Vocal Rider Real Vocal Validation"
+)
+
+juce_generate_juce_header(CIPIVocalRiderRealVocal)
+
+target_sources(CIPIVocalRiderRealVocal PRIVATE
+    tests/VocalRiderRealVocal.cpp
+)
+target_include_directories(CIPIVocalRiderRealVocal PRIVATE src)
+
+target_compile_definitions(CIPIVocalRiderRealVocal
+    PRIVATE
+        JUCE_WEB_BROWSER=0
+        JUCE_USE_CURL=0
+)
+
+target_link_libraries(CIPIVocalRiderRealVocal
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_audio_formats
+        juce::juce_core
+        juce::juce_data_structures
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderRealVocal PROPERTIES OUTPUT_NAME "CIPIVocalRiderRealVocal")

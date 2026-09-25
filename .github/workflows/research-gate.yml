@@ -5,13 +5,27 @@ on:
     paths:
       - "RULES/**"
       - "research/**"
+      - "automation/architect/**"
+      - "automation/incubator/**"
+      - "automation/schemas/research_gap.schema.json"
+      - "automation/schemas/research_proposal.schema.json"
+      - "automation/schemas/plugin_proposal.schema.json"
+      - "automation/schemas/incubator_decision.schema.json"
       - "tools/validate_research.py"
+      - "tools/validate_architect.py"
       - ".github/workflows/research-gate.yml"
   pull_request:
     paths:
       - "RULES/**"
       - "research/**"
+      - "automation/architect/**"
+      - "automation/incubator/**"
+      - "automation/schemas/research_gap.schema.json"
+      - "automation/schemas/research_proposal.schema.json"
+      - "automation/schemas/plugin_proposal.schema.json"
+      - "automation/schemas/incubator_decision.schema.json"
       - "tools/validate_research.py"
+      - "tools/validate_architect.py"
       - ".github/workflows/research-gate.yml"
   workflow_dispatch:
 
@@ -19,18 +33,16 @@ jobs:
   validate-research-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install pinned validator dependency
         run: python -m pip install PyYAML==6.0.2
-
       - name: Validate research state contract
         run: python tools/validate_research.py
+      - name: Validate architect and incubator artifacts
+        run: python tools/validate_architect.py

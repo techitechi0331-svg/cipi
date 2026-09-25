@@ -1,0 +1,51 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:review-01"
+job_id: VO-PREP-SC-HPF-PILOT-001
+source_run: research/runs/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The synthetic detector-side HPF pilot passed every predeclared gate and
+  supports advancing the lowest passing candidate, 40 Hz second-order
+  Butterworth, to real-vocal validation. Across 44.1/48/96 kHz synthetic
+  stresses it reduced rumble-driven excess GR by about 71.79% and plosive
+  excess GR by about 22.15%, while low-male body change was about 0.0458 dB,
+  female-body change about 0.0054 dB, consonant retention about 99.20% and
+  sibilant retention about 99.47%. This is sufficient to continue research but
+  not to adopt the HPF in product DSP, because the evidence is synthetic and
+  the required real-vocal/listening gates remain open.
+scope: >-
+  Synthetic sidechain-only HPF pilot for the frozen Vo.Prep transparent
+  compressor. The review authorizes real-vocal comparison of OFF versus 40 Hz;
+  it does not authorize product adoption or alter the existing frozen core.
+declared_rejection_criteria:
+  - No cutoff passes every preservation and false-trigger reduction gate.
+  - Any candidate is non-finite or unstable across the declared sample rates.
+  - Passing requires relaxing a predeclared preservation gate.
+triggered_criteria: []
+retained_findings:
+  - "40 Hz was the lowest candidate that passed every declared synthetic gate."
+  - "Mean rumble-driven excess-GR reduction was 0.7179301600637237."
+  - "Mean plosive excess-GR reduction was 0.22150306428323516."
+  - "Mean low-male body delta was 0.0457614202540683 dB."
+  - "Mean female-body delta was 0.00544445236416428 dB."
+  - "Consonant retention was 0.9920443963571205 and sibilant retention was 0.9947121399655207."
+reusable_findings:
+  - "A low cutoff detector-only HPF can be a low-complexity false-LF-drive guard, but synthetic preservation is not sufficient evidence for vocal-product adoption."
+  - "Selecting the lowest cutoff that passes all preservation gates is a useful complexity-minimizing policy."
+revisit_if:
+  - "Real-vocal material shows body under-compression, consonant weakening, or inconsistent benefit."
+  - "Level-matched listening finds audible pumping or unnatural low-vocal behavior."
+  - "A lower-complexity OFF baseline is perceptually indistinguishable in realistic recordings."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions:
+    - "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:auto"
+parent_decision_id: "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

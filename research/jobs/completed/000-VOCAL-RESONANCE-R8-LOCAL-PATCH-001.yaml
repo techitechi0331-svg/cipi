@@ -1,0 +1,66 @@
+schema_version: '1.0'
+job_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001
+state: COMPLETED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: Can deployable single-view local spectro-temporal patch/context
+  features recover a material fraction of the R7 causal-oracle ranking gap without
+  increasing independent clean-vocal false triggers?
+hypothesis: Across both predeclared seeds, local multi-scale curvature/shoulder/coherence
+  features will improve conditional Top-5 by at least 0.08 over the frozen static
+  ranker, close at least 15 percent of the R7 oracle gap, preserve strong-effect conditional
+  Top-5 within 0.05, and not worsen external clean false-trigger by more than 0.05.
+counter_hypotheses:
+- The causal information exposed by R7 is not recoverable from local single-view patch
+  shape, so conditional ranking will remain near the static baseline.
+- Patch features improve one seed only, indicating unstable geometry rather than reusable
+  information.
+- Patch features learn natural narrow harmonic/formant structure and increase clean-vocal
+  false triggers.
+baseline:
+- prominence_only
+- frozen_static_r2_single_view
+variants:
+- local_patch_multiscale_single_view
+metrics:
+- top5_given_generator_hit
+- strong_top5_given_generator_hit
+- oracle_gap_closure
+- external_clean_false_trigger
+- generator_ceiling
+- mrr
+acceptance:
+- 'for each seed: conditional Top-5 >= static + 0.08'
+- 'for each seed: R7 oracle gap closure >= 0.15'
+- 'for each seed: strong-effect conditional Top-5 >= static - 0.05'
+- 'for each seed: external clean false-trigger <= static + 0.05'
+- 'for each seed: generator ceiling >= 0.80'
+rejection:
+- any seed conditional Top-5 improvement < 0.08
+- any seed oracle gap closure < 0.15
+- any seed strong-effect conditional Top-5 regresses by more than 0.05
+- any seed external clean false-trigger worsens by more than 0.05
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20261101
+experiment_adapter: vocal_resonance_local_patch_proxy_v1
+allowed_operations:
+- stream_public_vocalset_in_runner_memory
+- controlled_eq_injection
+- derived_metric_write
+prohibited_operations:
+- arbitrary_shell
+- main_push
+- confidence_change
+- current_stage_change
+- raw_audio_write
+- paid_api
+- product_release
+knowledge_candidate:
+  claim: Single-view multi-scale local spectro-temporal patch shape may recover part
+    of the causal resonance information revealed by the paired R7 oracle.
+  evidence_type: HYPOTHESIS
+  scope: Deployable vocal-resonance semantic ranking without a clean reference.
+  promotion_requested: HYPOTHESIS
+latest_run: gha-36155951333-1

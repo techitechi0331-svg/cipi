@@ -38,6 +38,7 @@ milestones:
   - R5b multi-seed/same-C/ablation stability audit rejected the full Temporal Morphology bundle as unstable across seeds.
   - R6 run-length post-ranker veto failed its predeclared two-seed retention gate and is rejected as a validated abstention stage.
   - R7 identifiability oracle passed its diagnostic gate and isolated a large single-view information gap.
+  - R8 local-patch single-view proxy failed its predeclared two-seed retention gate and is rejected.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -54,11 +55,13 @@ unresolved:
   - R7 oracle conditional Top-5 reached 100.0 percent and 92.59 percent across the two seeds versus 26.67 percent and 40.74 percent for the frozen single-view static ranker.
   - R7 oracle strong-effect conditional Top-5 reached 100 percent on both seeds, while the frozen static ranker reached 36.36 percent and 28.57 percent.
   - The R7 paired clean/injected oracle is research-only and cannot be used directly in the final plugin; the unresolved blocker is finding deployable single-view proxies for the causal delta signal.
+  - R8 local-patch conditional Top-5 was unchanged at 26.67 percent on seed 20261003 and regressed from 40.74 to 37.04 percent on seed 20261013.
+  - R8 local-patch external clean false-trigger worsened from 17.5 to 32.5 percent and from 25.0 to 42.5 percent, so raw local patch/curvature/shoulder features are rejected for this scope.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R7 showed that candidate discovery plus paired causal-delta information is sufficient for near-ceiling ranking, while the frozen single-view ranker remains far behind. The next bounded question is which deployable single-view feature families can recover part of that causal information without access to a clean reference."
-next_confirmation: "Whether richer single-view local spectro-temporal patch/context features can materially close the conditional Top-5 gap to the research-only causal oracle across both seeds while preserving clean-vocal false-trigger discipline."
+why_next: "R8 showed that static local patch shape does not recover the R7 causal-information gap and substantially worsens clean-vocal false triggers. The next bounded question is whether a fixed-Hz resonance leaves a more distinctive time-consistent relative-gain signature against its local spectral neighborhood than natural moving harmonics/formants do."
+next_confirmation: "Whether single-view temporal transfer-consistency features at a fixed candidate frequency improve conditional Top-5 across both seeds, close part of the R7 oracle gap, and preserve external clean false-trigger performance."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

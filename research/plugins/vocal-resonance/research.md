@@ -437,3 +437,72 @@ Requirements:
 - do not promote seed-specific gains.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.8 — Local Patch Proxy Review
+
+Run: `VOCAL-RESONANCE-R8-LOCAL-PATCH-001 / gha-36155951333-1`
+
+## MEASURED
+
+Seed 20261003:
+- static conditional Top-5: 26.67%
+- local-patch conditional Top-5: 26.67%
+- oracle conditional Top-5: 100.0%
+- oracle-gap closure: 0%
+- static strong-effect conditional Top-5: 36.36%
+- local-patch strong-effect conditional Top-5: 45.45%
+- external clean false-trigger: 17.5% -> 32.5%
+
+Seed 20261013:
+- static conditional Top-5: 40.74%
+- local-patch conditional Top-5: 37.04%
+- oracle conditional Top-5: 92.59%
+- oracle-gap closure: -7.14%
+- static strong-effect conditional Top-5: 28.57%
+- local-patch strong-effect conditional Top-5: 28.57%
+- external clean false-trigger: 25.0% -> 42.5%
+
+## DECISION
+
+**REJECT the tested single-view local patch / multi-scale curvature feature bundle.**
+
+Reasons:
+- no conditional Top-5 improvement on either seed;
+- no meaningful R7 oracle-gap closure;
+- one seed regressed ranking;
+- independent clean-vocal false triggers materially worsened on both seeds.
+
+## INFERRED
+
+Static local narrowness/curvature/shoulder geometry is not enough to distinguish injected fixed resonance from legitimate narrow vocal structure and may actively overfit natural harmonics/formants.
+
+The next proxy should use a different information axis rather than more local patch detail.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.9 — Fixed-Hz Temporal Transfer Consistency.**
+
+Research question:
+Does a fixed resonance create a time-consistent relative-gain signature between a candidate frequency and its neighboring spectral context that natural moving vocal structure does not?
+
+Candidate deployable features:
+- center-vs-shoulder relative level over time;
+- median relative gain and MAD;
+- positive-support fraction;
+- temporal sign consistency;
+- center-vs-neighborhood regression residual bias;
+- residual variance / robust SNR;
+- correlation of candidate energy with broader local energy.
+
+Requirements:
+- no clean reference at inference;
+- candidate ordering baseline remains frozen;
+- two predeclared seeds;
+- compare against static R2 baseline and R7 oracle ceiling;
+- preserve external clean-negative evaluation;
+- reject seed-specific gains.
+
+No production suppressor or VST3 is authorized.

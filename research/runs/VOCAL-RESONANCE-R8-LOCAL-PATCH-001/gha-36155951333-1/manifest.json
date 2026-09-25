@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/local_patch_proxy.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T15:55:27.591080Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_local_patch_proxy_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001",
+  "random_seed": 20261101,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36155951333-1",
+  "schema_version": "1.0",
+  "source_commit": "474b802584a4277daf57a3ee1f878445df31f16d",
+  "started_at": "2026-09-25T15:42:47.338577Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

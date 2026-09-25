@@ -566,3 +566,81 @@ Constraints:
 - reject seed-specific gains.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.10 — Clean Normative Prior Review
+
+Run: `VOCAL-RESONANCE-R10-CLEAN-PRIOR-001 / gha-36177223221-1`
+
+## MEASURED
+
+### Seed 20261003
+Frozen static:
+- conditional Top-5: 26.67%
+- strong-effect conditional Top-5: 36.36%
+- external clean false-trigger: 17.5%
+
+Static + clean normative prior:
+- conditional Top-5: 26.67%
+- strong-effect conditional Top-5: 36.36%
+- external clean false-trigger: 22.5%
+- R7 oracle-gap closure: 0%
+
+Prior-only:
+- conditional Top-5: 36.67%
+- external clean false-trigger: 50.0%
+
+### Seed 20261013
+Frozen static:
+- conditional Top-5: 40.74%
+- strong-effect conditional Top-5: 28.57%
+- external clean false-trigger: 25.0%
+
+Static + clean normative prior:
+- conditional Top-5: 44.44%
+- strong-effect conditional Top-5: 42.86%
+- external clean false-trigger: 32.5%
+- R7 oracle-gap closure: 7.14%
+
+Prior-only:
+- conditional Top-5: 33.33%
+- external clean false-trigger: 50.0%
+
+The prior was correctly fit only on the predeclared training singers and each of the eight frequency bins had roughly 57–62 clean candidate rows.
+
+## DECISION
+
+**REJECT the tested singer-disjoint clean normative prior as a deployable feature family.**
+
+Reason:
+- conditional Top-5 improvement missed the predeclared +0.08 criterion on both seeds;
+- oracle-gap closure missed 15% on both seeds;
+- external clean false-trigger worsened on both seeds.
+
+The result does not support a simple population-level notion of “unusual vocal resonance” for this task.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.11 — Self-Counterfactual Spectral Inpainting Proxy.**
+
+Instead of comparing to another singer or to raw local patch geometry, construct a pseudo-clean reference from the *same observation*:
+
+1. remove a narrow candidate band from the STFT magnitude;
+2. reconstruct that band from robust left/right spectral context;
+3. recompute candidate evidence on the inpainted counterfactual;
+4. use observed-minus-counterfactual deltas as deployable single-view proxy features.
+
+This directly targets the type of difference that made the R7 paired clean/injected oracle strong, while requiring no real clean reference at inference.
+
+Requirements:
+- no paired clean reference in model features;
+- compare against the frozen static R2 ranker;
+- two predeclared seeds;
+- report R7 oracle-gap closure;
+- preserve independent clean-negative evaluation;
+- include a simple shoulder/interpolation-only baseline;
+- reject seed-specific gains.
+
+No production suppressor or VST3 is authorized.

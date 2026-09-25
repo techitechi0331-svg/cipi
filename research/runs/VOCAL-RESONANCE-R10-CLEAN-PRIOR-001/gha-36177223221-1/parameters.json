@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "frozen_static_r2_single_view",
+    "prior_only_anomaly_score"
+  ],
+  "experiment_adapter": "vocal_resonance_clean_normative_prior_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R10-CLEAN-PRIOR-001.yaml",
+  "metrics": [
+    "top5_given_generator_hit",
+    "strong_top5_given_generator_hit",
+    "oracle_gap_closure",
+    "external_clean_false_trigger",
+    "generator_ceiling",
+    "mrr",
+    "prior_fit_singer_isolation"
+  ],
+  "variants": [
+    "static_plus_clean_normative_prior"
+  ]
+}

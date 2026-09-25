@@ -125,3 +125,20 @@ The Vo.Prep fixed 8 ms attack / 70 ms release pair is not suitable as a direct r
 
 The current VoPriPro Character mapping remains the protected production baseline.
 
+## 2026-09-26 Amount-transfer assessment
+
+Existing CIPI Vo.Prep Amount research was reviewed before starting any new VoPriPro Amount experiment.
+
+Assessment:
+- deterministic DesiredGR scaling remains a reusable mathematical principle;
+- Vo.Prep R2 failed its untouched final-holdout ripple gate;
+- Vo.Prep R3 failed selection strength gates before holdout;
+- Vo.Prep R4 failed high-Amount ripple and also exposed its planned holdout before selection completed.
+
+Therefore no existing Vo.Prep Amount mapping is eligible for direct VoPriPro transfer. Current VoPriPro AMOUNT remains the protected product baseline.
+
+Detailed assessment:
+- `research/plugins/vopripro/amount_transfer_assessment_v1.md`
+
+A future Amount study must be designed specifically around the current VoPriPro architecture rather than copying a rejected Vo.Prep product mapping.
+

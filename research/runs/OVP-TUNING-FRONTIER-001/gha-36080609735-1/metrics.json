@@ -1,0 +1,41 @@
+{
+  "balanced_profile": {
+    "char100_1k_thd": 0.654414,
+    "char100_stress_thd": 5.91336,
+    "char50_100_thd": 0.257395,
+    "char50_1k_thd": 0.231231,
+    "char50_lf_mid_ratio": 1.11315,
+    "drive_db": 6.0,
+    "flux_multiplier": 8.0,
+    "full_to_baseline_lf_ratio": 1.00558,
+    "nonlinear_scale": 0.125
+  },
+  "checksum_ok": true,
+  "color_contrast_profile": {
+    "char100_1k_thd": 0.654657,
+    "char100_stress_thd": 6.88262,
+    "char50_100_thd": 0.356973,
+    "char50_1k_thd": 0.231247,
+    "char50_lf_mid_ratio": 1.54369,
+    "drive_db": 6.0,
+    "flux_multiplier": 2.0,
+    "full_to_baseline_lf_ratio": 1.3946,
+    "nonlinear_scale": 0.5
+  },
+  "conservative_profile": {
+    "char100_1k_thd": 0.514087,
+    "char100_stress_thd": 3.03226,
+    "char50_100_thd": 0.210315,
+    "char50_1k_thd": 0.205818,
+    "char50_lf_mid_ratio": 1.02185,
+    "drive_db": 4.0,
+    "flux_multiplier": 8.0,
+    "full_to_baseline_lf_ratio": 1.00501,
+    "nonlinear_scale": 0.125
+  },
+  "drive2_hard_pass_count": 0,
+  "drive4_hard_pass_count": 9,
+  "drive6_hard_pass_count": 9,
+  "hard_pass_count": 18,
+  "total_candidates": 27
+}

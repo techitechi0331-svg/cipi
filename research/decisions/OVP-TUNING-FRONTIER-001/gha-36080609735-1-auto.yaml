@@ -1,0 +1,30 @@
+schema_version: '1.0'
+decision_id: OVP-TUNING-FRONTIER-001:gha-36080609735-1:auto
+job_id: OVP-TUNING-FRONTIER-001
+source_run: research/runs/OVP-TUNING-FRONTIER-001/gha-36080609735-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for OVP-TUNING-FRONTIER-001; promotion requires
+  review.
+declared_rejection_criteria:
+- Any committed measurement checksum fails.
+- The 27-point grid is incomplete.
+- Any required profile is absent.
+- 2 dB Drive produces a hard-pass candidate.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T01:11:07.505410Z'
+immutable: true

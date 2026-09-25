@@ -1,0 +1,32 @@
+schema_version: '1.0'
+triage_id: OVP-TUNING-FRONTIER-001:gha-36080609735-1:triage-v1
+job_id: OVP-TUNING-FRONTIER-001
+run_id: gha-36080609735-1
+source_run: research/runs/OVP-TUNING-FRONTIER-001/gha-36080609735-1
+source_decision_id: OVP-TUNING-FRONTIER-001:gha-36080609735-1:auto
+source_decision_path: research/decisions/OVP-TUNING-FRONTIER-001/gha-36080609735-1-auto.yaml
+job_path: research/jobs/completed/A-OVP-TUNING-FRONTIER-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/OVP-TUNING-FRONTIER-001/gha-36080609735-1.yaml
+candidate_class: RESEARCH_MORE
+route: CONTINUE_RESEARCH
+final_decision_made: false
+existing_review_decision_id: null
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates: []
+downstream_gate_signals:
+- Level-matched real-vocal AB is pending.
+- Windows VST3/Cubase Pro 14 RC validation is pending.
+- Real-vocal material or an approved open singing corpus is required before the audio_ab
+  gate can be closed.
+- Cubase Pro 14 validation ultimately requires a Windows host run.
+reasons:
+- The run passed as evidence, but it does not yet request a bounded LIKELY/PROVISIONAL
+  promotion review.
+recommended_action: Continue the declared research path or use a predeclared continuation;
+  no promotion decision is warranted yet.
+created_at: '2026-09-25T01:11:07.505410Z'
+triage_version: '1.0'
+immutable: true

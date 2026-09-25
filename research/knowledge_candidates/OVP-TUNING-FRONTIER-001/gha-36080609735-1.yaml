@@ -1,0 +1,8 @@
+claim: The Original Vocal Pre v0.2 sweep contains multiple numerically valid transformer/Drive
+  regions; 2 dB Drive is too weak for the existing Character-100 minimum-THD gate,
+  while 4 dB and 6 dB regions contain hard-pass candidates suitable for deeper measurement
+  rather than immediate parameter lock.
+evidence_type: MEASURED
+scope: Original Vocal Pre 27-point Windows tuning sweep at source SHA 989b9540ac7dd273908678416ddc5d9afc246413.
+source_run: research/runs/OVP-TUNING-FRONTIER-001/gha-36080609735-1
+promotion_requested: HYPOTHESIS

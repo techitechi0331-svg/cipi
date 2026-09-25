@@ -134,6 +134,7 @@ def main() -> int:
             "rejection": list(topic.get("rejection") or []),
             "pilot_adapter": topic.get("pilot_adapter"),
             "pilot_job_id": f"ARCHITECT-{sid}-PILOT-001",
+            "prototype_adapter": topic.get("prototype_adapter"),
             "plugin_opportunity": bool(topic.get("plugin_opportunity", False)),
             "overlap_hints": list(topic.get("overlap_hints") or []),
             "expected_reuse": topic.get("expected_reuse", ""),

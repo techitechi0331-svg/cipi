@@ -1,0 +1,16 @@
+schema_version: '1.0'
+gap_id: GAP-MASKING-AWARE-PRESENCE-001
+topic_id: masking_aware_presence
+title: Masking-aware vocal presence
+state: OPEN
+score: 22
+support_path_count: 1
+minimum_support_paths: 3
+support_paths:
+- experiments/VocalForward
+why_gap: Only 1 materially distinct evidence path(s) were detected against a target
+  of 3.
+question: Can vocal presence be increased from masking context without becoming a
+  static high-mid boost?
+human_only: false
+plugin_opportunity: true

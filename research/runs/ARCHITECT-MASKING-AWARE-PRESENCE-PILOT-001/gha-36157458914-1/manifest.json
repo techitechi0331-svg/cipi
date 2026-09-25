@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/MaskingAwarePresence/synthetic_pilot.py"
+  ],
+  "completed_at": "2026-09-25T15:56:00.164505Z",
+  "environment": {
+    "experiment_adapter": "rp_masking_aware_presence_001_pilot_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001",
+  "random_seed": 0,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36157458914-1",
+  "schema_version": "1.0",
+  "source_commit": "477d8b1a0414317035263a31e601838785e88223",
+  "started_at": "2026-09-25T15:56:00.143143Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

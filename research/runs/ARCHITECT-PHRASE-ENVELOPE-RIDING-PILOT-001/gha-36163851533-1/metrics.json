@@ -1,0 +1,19 @@
+{
+  "all_numeric_finite": true,
+  "baseline_downstream_macro_variance_db2": 0.7494877903102624,
+  "baseline_phrase_mae_db": 0.76480259997371,
+  "baseline_short_event_max_movement_db": 7.41493148388567,
+  "baseline_short_event_mean_movement_db": 3.3709651979949173,
+  "candidate_downstream_macro_variance_db2": 0.209355110042001,
+  "candidate_phrase_contrast_error_db": 0.6247641953445822,
+  "candidate_phrase_mae_db": 0.3419317564846489,
+  "candidate_short_event_max_movement_db": 2.4315577335876277,
+  "candidate_short_event_mean_movement_db": 0.7836297139265382,
+  "downstream_macro_variance_ratio": 0.27933091472422134,
+  "matrix_complete": true,
+  "phrase_count": 5,
+  "phrase_mae_ratio": 0.44708498179321404,
+  "sample_count": 2500,
+  "short_event_count": 37,
+  "short_event_movement_ratio": 0.3279272018725938
+}

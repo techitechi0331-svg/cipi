@@ -1,0 +1,117 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001:gha-36163851533-1:review-brief-v1
+job_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001
+run_id: gha-36163851533-1
+source_run: research/runs/ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001/gha-36163851533-1
+route: HUMAN_GATE_REVIEW
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001/gha-36163851533-1-triage.yaml
+triage_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001:gha-36163851533-1:triage-v1
+job_path: research/jobs/completed/000-ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001.yaml
+research_question: Can a causal dual-timescale phrase estimator reduce phrase-scale
+  vocal level error without chasing short consonant/breath events more than a bounded
+  one-timescale baseline?
+hypothesis: A clipped-innovation dual-timescale estimator will reduce steady phrase-level
+  error and downstream macro-level variance while materially reducing short-event
+  movement and preserving phrase contrast.
+counter_hypotheses:
+- The one-timescale baseline performs equivalently once phrase transitions are excluded
+  from the steady-state error metric.
+- The slower candidate only appears stable because it flattens true phrase-to-phrase
+  contrast.
+- Short-event protection comes at the cost of excessive phrase tracking error.
+acceptance_criteria:
+- Synthetic phrase/event matrix is complete and all outputs are finite.
+- Candidate phrase-level MAE is <= 65 percent of baseline.
+- Candidate maximum short-event movement is <= 3.0 dB and <= 50 percent of baseline.
+- Candidate downstream macro-level variance is <= 50 percent of baseline.
+- Candidate phrase-contrast error is <= 0.8 dB.
+rejection_criteria:
+- Candidate phrase-level MAE exceeds 65 percent of baseline.
+- Candidate maximum short-event movement exceeds 3.0 dB or 50 percent of baseline.
+- Candidate downstream macro-level variance exceeds 50 percent of baseline.
+- Candidate phrase-contrast error exceeds 0.8 dB.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: cc06260a0517a6cff1998b9d04ad28660b3832f9
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: all_numeric_finite
+  value: true
+- path: baseline_downstream_macro_variance_db2
+  value: 0.7494877903102624
+- path: baseline_phrase_mae_db
+  value: 0.76480259997371
+- path: baseline_short_event_max_movement_db
+  value: 7.41493148388567
+- path: baseline_short_event_mean_movement_db
+  value: 3.3709651979949173
+- path: candidate_downstream_macro_variance_db2
+  value: 0.209355110042001
+- path: candidate_phrase_contrast_error_db
+  value: 0.6247641953445822
+- path: candidate_phrase_mae_db
+  value: 0.3419317564846489
+- path: candidate_short_event_max_movement_db
+  value: 2.4315577335876277
+- path: candidate_short_event_mean_movement_db
+  value: 0.7836297139265382
+- path: downstream_macro_variance_ratio
+  value: 0.27933091472422134
+- path: matrix_complete
+  value: true
+- path: phrase_count
+  value: 5
+- path: phrase_mae_ratio
+  value: 0.44708498179321404
+- path: sample_count
+  value: 2500
+- path: short_event_count
+  value: 37
+- path: short_event_movement_ratio
+  value: 0.3279272018725938
+knowledge_candidate:
+  claim: A causal dual-timescale clipped-innovation phrase estimator can outperform
+    a bounded one-timescale level estimator on the declared synthetic phrase/event
+    matrix while preserving macro phrase contrast.
+  evidence_type: MEASURED
+  scope: Deterministic synthetic phrase/syllable/consonant/breath pilot only; this
+    does not establish singer generalization, subjective naturalness, standalone product
+    value, or release readiness.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001:gha-36163851533-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Passing this pilot authorizes deeper public/real-vocal research only.
+- Level-matched listening is required before subjective naturalness claims.
+- Standalone Vocal Rider value versus Vo.Prep integration must be measured before
+  INCUBATE.
+- Cubase Pro 14 remains a separate target-host gate.
+downstream_gate_signals: []
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

@@ -61,14 +61,14 @@ def classify_failure(run: dict[str, Any], jobs: list[dict[str, Any]]) -> dict[st
         category = "TIMEOUT_UNKNOWN"
         retry_safe = False
         reason = "timeout may be infrastructure or product behavior; no blind retry"
-    elif any(any(token in step for token in PRODUCT_TOKENS) for step in lowered):
-        category = "PRODUCT_OR_TEST_FAILURE"
-        retry_safe = False
-        reason = "a build/test/measurement/validation stage failed"
     elif lowered and all(any(token in step for token in TRANSIENT_TOKENS) for step in lowered):
         category = "INFRA_TRANSIENT"
         retry_safe = True
         reason = "only setup/download/cache/tooling stages failed"
+    elif any(any(token in step for token in PRODUCT_TOKENS) for step in lowered):
+        category = "PRODUCT_OR_TEST_FAILURE"
+        retry_safe = False
+        reason = "a build/test/measurement/validation stage failed"
     else:
         category = "UNKNOWN_FAILURE"
         retry_safe = False

@@ -1,0 +1,22 @@
+{
+  "baseline": [
+    "current_peakbody_proportional_periodicity_guard"
+  ],
+  "experiment_adapter": "peakbody_contextual_noise_guard_v1",
+  "job_file": "research/jobs/queued/PEAKBODY-CONTEXTUAL-NOISE-GUARD-001.yaml",
+  "metrics": [
+    "standard_voiced_retention_min",
+    "bright_high_retention_min",
+    "noisy_voiced_retention_min",
+    "noise_false_preserve_ratio_max",
+    "plosive_retention_min",
+    "steady_mean_t_delta_max",
+    "all_finite",
+    "context_incremental_noise_improvement",
+    "qualified_candidates"
+  ],
+  "variants": [
+    "strong_periodicity_veto_simple",
+    "voprep_context_plus_strong_periodicity_veto"
+  ]
+}

@@ -1,0 +1,7 @@
+claim: A strong-periodicity veto may be safer than proportional weak-periodicity protection
+  for PeakBody; contextual sibilance evidence must beat the simple veto enough to
+  justify complexity.
+evidence_type: MEASURED
+scope: Deterministic synthetic PeakBody contextual-noise-guard matrix only.
+source_run: research/runs/PEAKBODY-CONTEXTUAL-NOISE-GUARD-001/gha-36182923889-1
+promotion_requested: PROVISIONAL

@@ -1,0 +1,74 @@
+schema_version: '1.0'
+job_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-001
+state: COMPLETED
+track:
+  id: PEAKBODY_01
+  path: research/experiments/PeakBody
+research_question: Can replacing proportional periodicity discount with a strong-periodicity
+  veto improve PeakBody noise-like rejection without harming bright/noisy voiced or
+  plosive preservation, and does adding Vo.Prep contextual sibilance probability justify
+  its extra complexity?
+hypothesis: The simple strong-periodicity veto will satisfy the locked synthetic safety
+  gates; contextual sibilance evidence will only be retained if it adds at least a
+  meaningful extra improvement without harming another hard gate.
+counter_hypotheses:
+- Strong-periodicity veto will over-suppress plosives or noisy voiced material.
+- Contextual sibilance evidence will suppress bright vowels or noisy voiced material.
+- The complex contextual detector will not materially improve on the simpler veto.
+baseline:
+- current_peakbody_proportional_periodicity_guard
+variants:
+- strong_periodicity_veto_simple
+- voprep_context_plus_strong_periodicity_veto
+metrics:
+- standard_voiced_retention_min
+- bright_high_retention_min
+- noisy_voiced_retention_min
+- noise_false_preserve_ratio_max
+- plosive_retention_min
+- steady_mean_t_delta_max
+- all_finite
+- context_incremental_noise_improvement
+- qualified_candidates
+acceptance:
+- at least one candidate satisfies every locked synthetic hard gate
+- standard voiced retention minimum is at least 0.90
+- bright/startup voiced retention minimum is at least 0.95
+- 6 dB SNR noisy-voiced retention minimum is at least 0.90
+- sibilant/breath/long-S false-preservation maximum is no more than 0.25
+- plosive retention minimum is at least 0.85
+- steady-vowel mean transient-factor delta is no more than 0.03
+- all outputs are finite
+rejection:
+- neither simple_veto nor context_veto satisfies every locked synthetic hard gate
+max_runs: 1
+timeout_minutes: 5
+random_seed: 2026092602
+experiment_adapter: peakbody_contextual_noise_guard_v1
+allowed_operations:
+- read_repo_measurement_script
+- execute_allowlisted_adapter
+- write_derived_measurements
+prohibited_operations:
+- arbitrary_shell
+- network_write
+- raw_audio_commit
+- main_push
+- confidence_change
+- stage_change
+- knowledge_promotion
+- product_release
+knowledge_candidate:
+  claim: A strong-periodicity veto may be safer than proportional weak-periodicity
+    protection for PeakBody; contextual sibilance evidence must beat the simple veto
+    enough to justify complexity.
+  evidence_type: MEASURED
+  scope: Deterministic synthetic PeakBody contextual-noise-guard matrix only.
+  promotion_requested: PROVISIONAL
+lineage:
+  related_jobs:
+  - PEAKBODY-CONFOUNDER-PERIODICITY-002
+  - PEAKBODY-REALTIME-VOICING-BENCH-001
+  - PEAKBODY-YIN-PRIVATE-REPLAY-001
+  - PEAKBODY-MPM-PRIVATE-REPLAY-001
+latest_run: gha-36182923889-1

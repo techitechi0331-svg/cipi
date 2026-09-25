@@ -307,6 +307,7 @@ void FactoryPluginAudioProcessorEditor::resized()
     block_sizes_cpp = ", ".join(str(int(size)) for size in block_sizes)
     validation_cpp = r'''#include "../Source/PluginProcessor.h"
 
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <iostream>
@@ -360,10 +361,6 @@ float maxAbsError(const juce::AudioBuffer<float>& buffer, float expected)
 
 void fill(juce::AudioBuffer<float>& buffer, float value)
 {
-    for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
-        buffer.clear(channel, 0, buffer.getNumSamples()),
-        buffer.addFrom(channel, 0, &value, 1, 0.0f);
-
     for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
             buffer.setSample(channel, sample, value);

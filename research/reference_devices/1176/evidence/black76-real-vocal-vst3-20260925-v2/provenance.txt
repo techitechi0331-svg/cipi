@@ -1,0 +1,20 @@
+Source product repository: techitechi0331-svg/76blackCompressor
+Source product commit: 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693
+Source workflow run: 36110318053
+Source artifact: Black76-Real-Vocal-AB
+Source artifact id: 10852897794
+Source artifact sha256: 6e7297f02bedbee78af5be535b1b3676b179751882da691e2ad5defbf6055efa
+Source material repository: https://github.com/pdx-cs-sound/wavs
+Source material notes:
+- voice-note.wav: single sung note by Bart Massey
+- voice.wav: short voice sample by Bart Massey
+- upstream README states sample WAV files are CC0 unless otherwise indicated
+Processing: actual built Black76 Rev E VST3 hosted by JUCE
+Input preparation: each source peak-normalized to 0.50 (-6.02 dBFS)
+Modes:
+- color_attack_off: Input=.50 Output=.50 Attack OFF
+- moderate_ratio4: Input=.60 Output=.50 Attack=.70 Release=.65 Ratio=4
+- stress_ratio20: Input=.82 Output=.35 Attack=.90 Release=.50 Ratio=20
+Raw audio stored in CIPI: false
+Packaging revision: 2
+Packaging note: metrics.csv checksum is computed from the exact LF-normalized bytes committed in this CIPI evidence directory. Snapshot-001 is retained unchanged as evidence of the earlier checksum-packaging failure.

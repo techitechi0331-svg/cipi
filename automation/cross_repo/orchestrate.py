@@ -229,6 +229,9 @@ def dispatch_one(root: Path, registry: dict, gh: GitHubClient) -> str | None:
         path.unlink()
         return None
 
+    prior_runs = gh.list_workflow_runs(repo, workflow_file, per_page=5)
+    prior_ids = [r.get("id") for r in prior_runs if isinstance(r.get("id"), int)]
+    action["previous_run_id"] = max(prior_ids) if prior_ids else 0
     gh.dispatch_workflow(repo, workflow_file, ref, action.get("inputs", {}))
     action["state"] = "DISPATCHED"
     action["attempts"] = attempts + 1

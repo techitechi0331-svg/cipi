@@ -88,3 +88,36 @@ Key imported evidence now available to this formal track:
 - real-vocal numerical continuity checks without storing raw vocal audio in CIPI.
 
 These imports improve the evidence base but do not resolve the blocker of missing directly identified vintage Rev-E hardware transfer measurements.
+
+### Scope boundary for Black76 P2-A evidence — 2026-09-25 content audit
+
+The imported P2-A result is a **product-specific falsification result against the committed supplemental LN-era target**, not a direct hardware-identification result for a vintage Rev-E unit.
+
+What the evidence supports:
+- detector-drive correction can repair the tested threshold ordering in the Black76 model;
+- detector drive alone did not recover the required deep high-ratio slopes against that supplemental target;
+- detector-gain plus detector-bias-only optimization was also insufficient in that bounded model study.
+
+What it does **not** support:
+- that the supplemental target is a complete or uniquely correct Rev-E hardware truth;
+- that one particular missing FET/control-loop mechanism has already been identified;
+- that the measured Black76 static curve can be generalized to all 1176 revisions.
+
+The formal 1176 track therefore remains in contradiction-resolution/review until directly identified revision measurements or stronger independent evidence constrain the FET law, rectifier/control loop, ratio network and revision-specific amplifier behavior.
+
+## 2026-09-25 timing/revision source-fact spot check
+
+Current UA documentation reinforces two scope constraints that are easy to lose in a simplified digital model:
+
+- nominal control ranges remain approximately 20..800 us attack and 50..1100 ms release for the standard 1176LN family;
+- UA explicitly describes release as materially program dependent, with fast-release, slow-release and transition-time behavior, and notes revision/model differences in the slow-release/transition behavior;
+- ratio selection and multi-button modes change more than a single ideal static-ratio number; UA documents altered bias/timing behavior in All-Button operation.
+
+Implication:
+- a fixed one-pole release should remain a simple baseline, not be promoted as the final 1176 reference model;
+- ratio/revision validation must include timing/control-loop behavior rather than only static I/O slope.
+
+References:
+- https://help.uaudio.com/hc/en-us/articles/4419447352980-UA-1176-Classic-Limiter-Collection-Manual
+- https://media.uaudio.com/assetlibrary/1/1/1176ln_manual.pdf
+

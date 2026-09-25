@@ -3,7 +3,7 @@
 ## Provenance
 - **Source kind:** repository_verified
 - **Source:** https://github.com/techitechi0331-svg/610
-- Research origin: Universal Audio 610-B / 2-610, 12AX7-family input stage, 12AT7/6072-family output stage, transformer coupling, negative feedback and class-A tube behavior.
+- Research origin: Universal Audio 610-B / 2-610 and related 610-family hardware. Current UA 2-610 specifications list one 12AX7A and one 12AT7 per channel; UA service documentation also records 6072/12AT7 use across specific 610-family units/eras. Treat these as hardware-specific tube-complement facts rather than one universal 610 tube identity. Transformer coupling, negative feedback and class-A tube behavior remain reference mechanisms, not proof of clone identity.
 - The historical 610 gray-box work is preserved as evidence and baseline material.
 
 ## Purpose
@@ -125,3 +125,21 @@ Vocal-aware analog coloration:
 ## Promotion rule
 
 Do not mark this track CONFIRMED until numerical measurement, level-matched real-vocal A/B, Windows VST3/Cubase Pro 14 validation, state recall/automation checks and final precision review are complete for the original-product scope.
+
+## 2026-09-25 source-fact spot check
+
+Authoritative UA references checked during the non-destructive content audit:
+
+- UA 2-610 support specifications: modern 2-610 tube complement is one 12AX7A and one 12AT7 per channel.
+- UA tube-replacement guidance: some 610-family units/eras use 6072 or 12AT7 in the second tube position; UA notes they are interchangeable in those units but can differ subtly in gain/distortion depending on the power circuit.
+- UA 610-B plug-in documentation: the modern 610-B model is based on the 2-610 hardware, while the vintage 610-A is a separate historical target.
+
+Implication:
+- CIPI must not silently merge vintage 610-A, modern 610-B/2-610 and every 610-family tube complement into one exact hardware topology.
+- The current product remains a reference-informed original vocal preamp, so these distinctions constrain historical claims without creating a new clone blocker.
+
+References:
+- https://help.uaudio.com/hc/en-us/articles/206356253-2-610-Dual-Channel-Tube-Preamplifier
+- https://help.uaudio.com/hc/en-us/articles/215479643-Replacing-Tubes-in-Your-UA-Analog-Hardware
+- https://help.uaudio.com/hc/en-us/articles/17475989779860-UA-610-Tube-Preamp-EQ-Collection-Manual
+

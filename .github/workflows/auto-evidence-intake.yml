@@ -102,8 +102,8 @@ jobs:
               [ -z "$number" ] || gh issue close "$number" --comment "Evidence was automatically intake-validated and merged to main. Review/promotion authority remains unchanged."
             done
 
-      - name: Continue CIPI work queue
-        run: gh workflow run free-autonomous-research.yml --ref main
+      - name: Continue No-Wait scheduler
+        run: gh workflow run no-wait-orchestrator.yml --ref main
 
       - name: Continue Cross-Repo queue
         run: gh workflow run cross-repo-orchestrator.yml --ref main

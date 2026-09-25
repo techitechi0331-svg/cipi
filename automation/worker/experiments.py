@@ -14,6 +14,7 @@ from typing import Any
 
 ADAPTERS = {
     "black76_real_vocal_snapshot_gate_v1",
+    "black76_real_vocal_snapshot_gate_v2",
     "black76_ratio_p2a_compare_v1",
     "black76_linear_detector_compare_v1",
     "peakbody_legacy_model_stress_v1",
@@ -250,11 +251,11 @@ def _original_vocal_pre_measurement_gate(repo_root: Path, timeout_seconds: int) 
 
 
 
-def _black76_real_vocal_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+def _black76_real_vocal_snapshot_gate(repo_root: Path, timeout_seconds: int, snapshot_dir: str = "black76-real-vocal-vst3-20260925") -> dict[str, Any]:
     del timeout_seconds
     root = (
         repo_root / "research" / "reference_devices" / "1176" / "evidence"
-        / "black76-real-vocal-vst3-20260925"
+        / snapshot_dir
     )
     metrics_path = root / "metrics.csv"
     manifest_path = root / "manifest.json"
@@ -2121,6 +2122,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         raise ValueError("timeout_seconds must be positive")
     if name == "black76_real_vocal_snapshot_gate_v1":
         return _black76_real_vocal_snapshot_gate(repo_root, timeout_seconds)
+    if name == "black76_real_vocal_snapshot_gate_v2":
+        return _black76_real_vocal_snapshot_gate(repo_root, timeout_seconds, "black76-real-vocal-vst3-20260925-v2")
     if name == "peakbody_legacy_model_stress_v1":
         return _peakbody_legacy_model_stress(repo_root, timeout_seconds)
     if name == "peakbody_revision02_policy_v1":

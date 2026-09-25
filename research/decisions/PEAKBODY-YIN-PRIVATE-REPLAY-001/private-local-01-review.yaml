@@ -1,0 +1,48 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-YIN-PRIVATE-REPLAY-001:private-local-01:review"
+job_id: PEAKBODY-YIN-PRIVATE-REPLAY-001
+source_run: research/runs/PEAKBODY-YIN-PRIVATE-REPLAY-001/private-local-01
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  YIN-CMND failed both predeclared real-vocal noise-like non-regression gates on
+  246 baseline-defined private frames. Median transient-factor retention rose
+  from 0.492622 for the current autocorrelation guard to 0.667187 with YIN, an
+  absolute worsening of 0.174565. Low-frequency transient preservation, body
+  invariance and processing-variant correlation passed, but those successes do
+  not override the false-protection regression. YIN is therefore rejected as the
+  immediate direct-confidence challenger for this PeakBody scope.
+declared_rejection_criteria:
+  - "YIN noise-like median retention exceeds 0.50 with adequate reference count."
+  - "YIN noise-like median retention exceeds autocorr guard median by more than 0.02 absolute."
+  - "Any low-frequency/body/processing-invariance non-regression gate fails with adequate reference count."
+triggered_criteria:
+  - "YIN noise-like median retention was 0.667187, above the locked 0.50 gate."
+  - "YIN exceeded autocorr noise-like median retention by 0.174565, above the locked +0.02 non-regression allowance."
+retained_findings:
+  - "YIN low-frequency transient median and p10 retention were both 1.0 across 11,969 pooled baseline-defined frames."
+  - "YIN periodic-body mean absolute transient-factor delta was 0.0 across 10,612 pooled frames."
+  - "YIN guard processing-variant correlation median was 0.908642, slightly above the autocorr guard 0.904205."
+  - "Median YIN confidence on the baseline noise-like mask was 0.406017 versus autocorr 0.228648."
+  - "Bright-voiced reference count remained zero, so high-register real-vocal safety remains untested."
+reusable_findings:
+  - "Pitch-estimator accuracy and dynamics-safe voicing confidence are not interchangeable objectives."
+  - "Synthetic periodicity qualification must be followed by real-vocal false-protection replay using candidate-independent masks."
+revisit_if:
+  - "YIN confidence is recalibrated or fused with an independent noise/sibilance feature under a predeclared protocol."
+  - "A broader annotated singing corpus demonstrates a different voiced/noise calibration regime."
+  - "A production-specific YIN variant changes confidence behavior without increasing false protection."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-REALTIME-VOICING-BENCH-001
+    - PEAKBODY-PRIVATE-VOCAL-GUARD-001
+  related_decisions:
+    - "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:review-01"
+parent_decision_id: "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:review-01"
+created_at: "2026-09-26"
+immutable: true
+scope: "Private same-performance four-processing-variant YIN non-regression replay using baseline-defined event masks."
+review_gaps: []

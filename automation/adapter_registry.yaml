@@ -110,3 +110,10 @@ adapters:
     max_timeout_minutes: 2
     network_required: false
     purpose: "Reduce the committed Original Vocal Pre v0.2 tuning sweep into deterministic conservative, balanced, and color-contrast profiles without selecting a product winner."
+
+  microdouble_sibilance_reuse_gate_v1:
+    tracks:
+      - MICRODOUBLE_01
+    max_timeout_minutes: 3
+    network_required: false
+    purpose: "Gate reuse of the measured Vo.Prep hybrid sibilance detector as a MicroDouble product-experiment candidate against the simpler current detector evidence. This gate authorizes an A/B experiment only; it does not adopt the candidate."

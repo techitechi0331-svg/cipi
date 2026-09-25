@@ -363,3 +363,21 @@ This is subjective listening evidence, not a numeric measurement. The report sup
 A broader target-machine AB may place the user's personal sweet spot slightly below 50% (roughly the high-40% region), while 50% remains an acceptable product default.
 
 No product parameter mapping is changed from this report alone.
+
+
+## Sibilance-protection reuse gate queued
+
+CIPI reuse candidate: Vo.Prep Sibilance Guard v2.3.
+
+Reason for reuse rather than zero-based redesign:
+
+- Vo.Prep already measured an 11-stem precision-biased detector using primarily high-to-broad and high-to-mid energy ratios;
+- measured reference recall was 64%;
+- low-confidence false-trigger rate was 0.02%;
+- active occupancy was 3.1%;
+- corpus maximum reduction was 1.33 dB;
+- body-region mean movement was 0.14 dB.
+
+MicroDouble v0.3's current simpler detector remains the product baseline and passes its existing synthetic neutral/high-frequency sanity tests. It does **not** yet have equivalent labelled real-vocal recall evidence.
+
+Research Job `MICRODOUBLE-SIBILANCE-REUSE-001` therefore asks only whether the Vo.Prep detector has enough evidence to justify a direct MicroDouble product A/B. Passing the job must not be interpreted as detector adoption.

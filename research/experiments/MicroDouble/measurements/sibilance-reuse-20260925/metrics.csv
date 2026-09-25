@@ -1,0 +1,13 @@
+metric,value,unit,source
+baseline_current_detector_real_vocal_labeled_recall_available,0,bool,product_v03
+baseline_current_detector_public_neutral_corpus_available,1,bool,product_v03
+baseline_neutral_1p8k_sibilance_state,3.00882e-08,ratio,product_v03
+baseline_synthetic_7p2k_sibilance_state,0.999996,ratio,product_v03
+candidate_voprep_real_vocal_stem_count,11,count,cipi_voprep
+candidate_reference_recall_pct,64,percent,cipi_voprep
+candidate_low_conf_false_trigger_pct,0.02,percent,cipi_voprep
+candidate_active_occupancy_pct,3.1,percent,cipi_voprep
+candidate_active_mean_reduction_db,0.43,dB,cipi_voprep
+candidate_active_p90_reduction_db,0.93,dB,cipi_voprep
+candidate_corpus_max_reduction_db,1.33,dB,cipi_voprep
+candidate_body_mean_movement_db,0.14,dB,cipi_voprep

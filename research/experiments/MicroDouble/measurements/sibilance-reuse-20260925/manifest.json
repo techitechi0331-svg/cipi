@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "purpose": "CIPI evidence-reuse gate for MicroDouble sibilance detector product experiment",
+  "product_repository": "techitechi0331-svg/Vocal-One-Knob-Doubler",
+  "product_track": "v0.3-dev",
+  "product_evidence": [
+    "docs/V0_3_MEASUREMENTS.md"
+  ],
+  "cipi_evidence": [
+    "research/runs/VO-PREP-SYNC-001/manual-20260925/metrics.json",
+    "research/knowledge_candidates/VO-PREP-SYNC-001/manual-20260925-sibilance-ratio.yaml",
+    "research/knowledge_candidates/VO-PREP-SYNC-001/manual-20260925-sibilance-hybrid.yaml"
+  ],
+  "raw_audio_persisted": false,
+  "interpretation": "Passing this snapshot gate only authorizes a direct product A/B experiment."
+}

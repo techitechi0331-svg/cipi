@@ -24,6 +24,7 @@ ADAPTERS = {
     "vocal_resonance_clean_negative_audit_v1",
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
+    "microdouble_sibilance_reuse_gate_v1",
     "vo_prep_snapshot_gate_v1",
     "vocal_resonance_temporal_morphology_v1",
     "vocal_resonance_temporal_morphology_stability_v1",
@@ -1508,6 +1509,106 @@ def _original_vocal_pre_tuning_frontier(
     }
 
 
+
+def _microdouble_sibilance_reuse_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = (
+        repo_root
+        / "research"
+        / "experiments"
+        / "MicroDouble"
+        / "measurements"
+        / "sibilance-reuse-20260925"
+    )
+    metrics_path = root / "metrics.csv"
+    checksum_path = root / "checksums.sha256"
+    if not metrics_path.is_file() or not checksum_path.is_file():
+        raise FileNotFoundError(root)
+
+    expected_digest = ""
+    for line in checksum_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and line.endswith("metrics.csv"):
+            expected_digest = line.split(None, 1)[0]
+            break
+    if not expected_digest:
+        raise ValueError("metrics.csv checksum is missing")
+
+    raw = metrics_path.read_bytes()
+    actual_digest = hashlib.sha256(raw).hexdigest()
+    checksum_ok = actual_digest == expected_digest
+
+    rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
+    values = {row["metric"]: float(row["value"]) for row in rows}
+
+    candidate_has_real_vocal_evidence = values["candidate_voprep_real_vocal_stem_count"] >= 10.0
+    candidate_precision_bias_ok = (
+        values["candidate_reference_recall_pct"] >= 60.0
+        and values["candidate_low_conf_false_trigger_pct"] <= 0.10
+        and values["candidate_active_occupancy_pct"] <= 5.0
+    )
+    candidate_processing_bounded = (
+        values["candidate_corpus_max_reduction_db"] <= 1.5
+        and values["candidate_body_mean_movement_db"] <= 0.20
+    )
+    baseline_synthetic_sane = (
+        values["baseline_neutral_1p8k_sibilance_state"] <= 1.0e-3
+        and values["baseline_synthetic_7p2k_sibilance_state"] >= 0.99
+    )
+    baseline_real_labeled_gap = (
+        values["baseline_current_detector_real_vocal_labeled_recall_available"] == 0.0
+    )
+
+    metrics = {
+        "snapshot_checksum_ok": checksum_ok,
+        "candidate_has_real_vocal_evidence": candidate_has_real_vocal_evidence,
+        "candidate_real_vocal_stem_count": values["candidate_voprep_real_vocal_stem_count"],
+        "candidate_reference_recall_pct": values["candidate_reference_recall_pct"],
+        "candidate_low_conf_false_trigger_pct": values["candidate_low_conf_false_trigger_pct"],
+        "candidate_active_occupancy_pct": values["candidate_active_occupancy_pct"],
+        "candidate_corpus_max_reduction_db": values["candidate_corpus_max_reduction_db"],
+        "candidate_body_mean_movement_db": values["candidate_body_mean_movement_db"],
+        "candidate_precision_bias_ok": candidate_precision_bias_ok,
+        "candidate_processing_bounded": candidate_processing_bounded,
+        "baseline_synthetic_sane": baseline_synthetic_sane,
+        "baseline_real_labeled_gap": baseline_real_labeled_gap,
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and candidate_has_real_vocal_evidence
+        and candidate_precision_bias_ok
+        and candidate_processing_bounded
+        and baseline_synthetic_sane
+        and baseline_real_labeled_gap
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"comparison.csv": output.getvalue()},
+        "commands": [
+            "read committed MicroDouble/Vo.Prep detector evidence snapshot",
+            "verify committed SHA256 ledger",
+            "apply predeclared reuse-to-product-experiment gates",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic evidence-reuse gate. Passing means the measured Vo.Prep "
+            "hybrid high/broad + high/mid detector has enough bounded real-vocal evidence "
+            "to justify a direct MicroDouble baseline-vs-candidate product experiment. "
+            "It does not establish superiority, change product DSP, promote knowledge, "
+            "or authorize release."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1533,6 +1634,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
     if name == "microdouble_product_v03_gate_v1":
         return _microdouble_product_v03_gate(repo_root, timeout_seconds)
+    if name == "microdouble_sibilance_reuse_gate_v1":
+        return _microdouble_sibilance_reuse_gate(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_reaudit_v2":
         return _vocal_resonance_clean_negative_reaudit(repo_root, timeout_seconds)
     if name == "vo_prep_snapshot_gate_v1":

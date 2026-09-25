@@ -193,3 +193,50 @@ The current periodicity proxy is analysis-oriented. A production implementation 
 ### Next gate
 
 Validate the synthetic result on private real-vocal material without committing raw audio to GitHub. Only derived, non-reversible measurements may be returned to CIPI.
+
+## PeakBody private real-vocal guard study 01
+
+### MEASURED
+
+The synthetic periodicity-protected guard was evaluated on four private processing variants of the **same** approximately 68.36 s singing performance under a protocol locked before detailed measurement.
+
+Raw audio remained private. CIPI stores only source SHA-256 bindings and aggregate non-reversible metrics.
+
+Results:
+
+- active analysis frames per source: 9,665–9,951;
+- pooled low-frequency transient proxy frames: **11,969**;
+- low-frequency transient retention median / p10: **1.0 / 1.0**;
+- pooled strong periodic-body frames: **10,612**;
+- periodic-body mean absolute candidate-vs-baseline transient-factor delta: **0.0**;
+- median pairwise processing-variant candidate correlation: **0.90420**;
+- baseline correlation median: **0.91121**;
+- correlation change: **-0.00700**;
+- pooled noise-like high-band proxy frames: **246**;
+- noise-like median candidate/baseline transient-factor retention: **0.49262**;
+- locked target: <= **0.35**;
+- pooled bright voiced crest proxy frames: **0**.
+
+### Decision
+
+**INCONCLUSIVE.**
+
+The predeclared protocol requires at least 30 pooled bright voiced proxy frames. With zero such frames, the study cannot validate the synthetic bright-high-F0 protection result and must not trigger threshold tuning.
+
+The weaker-than-target noise-like suppression is retained as an adverse measurement, but the locked insufficient-coverage rule prevents converting this study into a REJECT decision.
+
+### INFERRED
+
+The periodicity-protected guard appears robust to the tested dereverb/clarity/compression-style processing differences and does not disturb the tested low-frequency transient/body proxies.
+
+However, the synthetic separation strength does **not** transfer directly to this private processed vocal.
+
+### Research rule reinforced
+
+A detector study that lacks the event class needed to test its most important safety property must return **INCONCLUSIVE**, not optimize thresholds against the available classes.
+
+### Next gate
+
+Use a broader multi-singer/high-register corpus with enough bright periodic and noise-like vocal events. VocalSet plus Annotated-VocalSet are strong source candidates because they provide professional multi-singer monophonic singing plus technique and F0/note annotations.
+
+Do not change Revision 02 guard thresholds before that corpus gate.

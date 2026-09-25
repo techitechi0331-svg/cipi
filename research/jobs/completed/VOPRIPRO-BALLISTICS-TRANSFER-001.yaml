@@ -1,0 +1,93 @@
+schema_version: '1.0'
+job_id: VOPRIPRO-BALLISTICS-TRANSFER-001
+state: COMPLETED
+track:
+  id: VOPRIPRO_FORMAL
+  path: research/plugins/vopripro
+research_question: Should the Vo.Prep fixed 8 ms attack / 70 ms release pair advance
+  to same-corpus real-vocal VoPriPro testing against current Natural50 20/110 ms timing?
+hypothesis: The 8/70 ms candidate will improve 100 ms body convergence and release
+  recovery without materially increasing 10-30 ms transient GR, long-body deviation,
+  repeated-phrase ripple, or sample-rate dependence.
+counter_hypotheses:
+- The faster attack over-compresses 10-30 ms transients.
+- The faster release increases phrase-to-phrase GR modulation.
+- The candidate does not improve 100 ms body control enough to justify the timing
+  change.
+baseline:
+- current_vopripro_natural50_20_110
+variants:
+- voprep_fixed_8_70
+metrics:
+- all_finite
+- burst_10ms_max_extra_peak_gr_db
+- burst_30ms_max_extra_peak_gr_db
+- burst_100ms_min_extra_peak_gr_db
+- body_800ms_max_abs_active_mean_delta_db
+- repeated_phrase_max_extra_ripple_db
+- release_200ms_max_candidate_minus_baseline_residual_db
+- candidate_max_peak_gr_sample_rate_spread_db
+acceptance:
+- All trajectories are finite.
+- 10 ms extra peak GR <= 0.35 dB.
+- 30 ms extra peak GR <= 0.50 dB.
+- 100 ms extra peak GR >= 0.25 dB.
+- 800 ms active mean GR difference <= 0.15 dB.
+- Repeated-phrase ripple increase <= 0.10 dB.
+- 200 ms release residual is no more than 0.05 dB above baseline.
+- Peak-GR sample-rate spread <= 0.10 dB.
+rejection:
+- Any acceptance condition fails.
+max_runs: 1
+timeout_minutes: 3
+random_seed: 20260926
+reproduction_conditions:
+  product_repo: techitechi0331-svg/VocalPrepComp
+  product_main: 58049696815fcc24067870edd6a1b89c3cfd2163
+  source_repo: techitechi0331-svg/Vo.Prep
+  source_ref: research/integrated-vocal-compressor-core
+  sample_rates:
+  - 44100
+  - 48000
+  - 96000
+  - 192000
+  detector: Current Natural50 detector held fixed.
+  curve: 2.7:1, 12 dB knee, 3 dB calibration, 6 dB cap.
+  baseline_timing: 20/110 ms
+  candidate_timing: 8/70 ms
+  mode: deterministic_synthetic_screen
+experiment_adapter: vopripro_ballistics_transfer_screen_v1
+allowed_operations:
+- deterministic_synthetic_generation
+- detector_simulation
+- gain_reduction_measurement
+prohibited_operations:
+- network_write
+- raw_audio_persist
+- product_repo_write
+- confidence_change
+- current_stage_change
+- product_release
+knowledge_candidate:
+  claim: Fixed 8/70 ms ballistics should advance only if faster body convergence is
+    obtained without excessive short-transient control or modulation.
+  evidence_type: HYPOTHESIS
+  scope: Synthetic VoPriPro timing-transfer eligibility screen only.
+  promotion_requested: HYPOTHESIS
+rejection_record:
+  reason: Preserve the failed metrics and reject the direct fixed 8/70 ms transfer
+    if the predeclared gate fails.
+  retained_findings:
+  - Keep all transient, body, release and sample-rate metrics.
+  reusable_findings:
+  - Timing transfer should separate short-transient protection from body convergence.
+  revisit_if:
+  - A materially different timing pair or Character-linked mapping is proposed.
+  scope: VoPriPro 8/70 ms transfer v1.
+lineage:
+  supersedes: []
+  related_jobs:
+  - VOPRIPRO-DETECTOR-TRANSFER-001
+  related_decisions:
+  - VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926
+latest_run: gha-36186421812-1

@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vopripro/experiments/ballistics_transfer_screen.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T20:33:14.332011Z",
+  "environment": {
+    "experiment_adapter": "vopripro_ballistics_transfer_screen_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+  "random_seed": 20260926,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36186421812-1",
+  "schema_version": "1.0",
+  "source_commit": "9ea3d396d844e3b9841c354ab2cc2495c1a7f27b",
+  "started_at": "2026-09-25T20:33:04.707782Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

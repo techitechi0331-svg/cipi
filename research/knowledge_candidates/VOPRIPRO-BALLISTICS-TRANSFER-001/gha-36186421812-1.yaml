@@ -1,0 +1,6 @@
+claim: Fixed 8/70 ms ballistics should advance only if faster body convergence is
+  obtained without excessive short-transient control or modulation.
+evidence_type: HYPOTHESIS
+scope: Synthetic VoPriPro timing-transfer eligibility screen only.
+source_run: research/runs/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1
+promotion_requested: HYPOTHESIS

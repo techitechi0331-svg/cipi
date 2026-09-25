@@ -1,0 +1,152 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:review-brief-v1
+job_id: VOPRIPRO-BALLISTICS-TRANSFER-001
+run_id: gha-36186421812-1
+source_run: research/runs/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-triage.yaml
+triage_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:triage-v1
+job_path: research/jobs/completed/VOPRIPRO-BALLISTICS-TRANSFER-001.yaml
+research_question: Should the Vo.Prep fixed 8 ms attack / 70 ms release pair advance
+  to same-corpus real-vocal VoPriPro testing against current Natural50 20/110 ms timing?
+hypothesis: The 8/70 ms candidate will improve 100 ms body convergence and release
+  recovery without materially increasing 10-30 ms transient GR, long-body deviation,
+  repeated-phrase ripple, or sample-rate dependence.
+counter_hypotheses:
+- The faster attack over-compresses 10-30 ms transients.
+- The faster release increases phrase-to-phrase GR modulation.
+- The candidate does not improve 100 ms body control enough to justify the timing
+  change.
+acceptance_criteria:
+- All trajectories are finite.
+- 10 ms extra peak GR <= 0.35 dB.
+- 30 ms extra peak GR <= 0.50 dB.
+- 100 ms extra peak GR >= 0.25 dB.
+- 800 ms active mean GR difference <= 0.15 dB.
+- Repeated-phrase ripple increase <= 0.10 dB.
+- 200 ms release residual is no more than 0.05 dB above baseline.
+- Peak-GR sample-rate spread <= 0.10 dB.
+rejection_criteria:
+- Any acceptance condition fails.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 9ea3d396d844e3b9841c354ab2cc2495c1a7f27b
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance.all_finite
+  value: true
+- path: acceptance.body_800ms_active_mean_delta_le_0_15db
+  value: false
+- path: acceptance.burst_100ms_control_gain_ge_0_25db
+  value: false
+- path: acceptance.burst_10ms_extra_peak_gr_le_0_35db
+  value: false
+- path: acceptance.burst_30ms_extra_peak_gr_le_0_50db
+  value: false
+- path: acceptance.candidate_peak_gr_sample_rate_spread_le_0_10db
+  value: true
+- path: acceptance.release_200ms_not_slower_than_baseline
+  value: true
+- path: acceptance.repeated_phrase_ripple_extra_le_0_10db
+  value: false
+- path: acceptance_met
+  value: false
+- path: aggregate_metrics.all_finite
+  value: true
+- path: aggregate_metrics.body_800ms_max_abs_active_mean_delta_db
+  value: 0.17794757722294463
+- path: aggregate_metrics.burst_100ms_min_extra_peak_gr_db
+  value: 0.09469343302365996
+- path: aggregate_metrics.burst_10ms_max_extra_peak_gr_db
+  value: 1.1187655219084456
+- path: aggregate_metrics.burst_30ms_max_extra_peak_gr_db
+  value: 1.1877726046296955
+- path: aggregate_metrics.candidate_max_peak_gr_sample_rate_spread_db
+  value: 0.006671343211695824
+- path: aggregate_metrics.release_200ms_max_candidate_minus_baseline_residual_db
+  value: -0.7083725165973689
+- path: aggregate_metrics.repeated_phrase_max_extra_ripple_db
+  value: 0.11777022040764296
+- path: baseline.attack_ms
+  value: 20.0
+- path: baseline.release_ms
+  value: 110.0
+- path: candidate.attack_ms
+  value: 8.0
+- path: candidate.release_ms
+  value: 70.0
+- path: experiment
+  value: VOPRIPRO_BALLISTICS_TRANSFER_SCREEN_V1
+- path: interpretation
+  value: Passing authorizes only a real-vocal timing comparison. It does not establish
+    that 8/70 ms is perceptually superior or suitable for replacing the current Character
+    mapping.
+- path: sample_rates[0]
+  value: 44100
+- path: sample_rates[1]
+  value: 48000
+- path: sample_rates[2]
+  value: 96000
+- path: sample_rates[3]
+  value: 192000
+- path: seed
+  value: 20260926
+- path: shared_conditions.calibration_gr_db
+  value: 3.0
+- path: shared_conditions.detector
+  value: current VoPriPro Natural50 35/65 Peak/RMS
+- path: shared_conditions.knee_db
+  value: 12.0
+- path: shared_conditions.max_gr_db
+  value: 6.0
+knowledge_candidate:
+  claim: Fixed 8/70 ms ballistics should advance only if faster body convergence is
+    obtained without excessive short-transient control or modulation.
+  evidence_type: HYPOTHESIS
+  scope: Synthetic VoPriPro timing-transfer eligibility screen only.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:auto
+  decision: REJECT
+  rationale: Preserve the failed metrics and reject the direct fixed 8/70 ms transfer
+    if the predeclared gate fails.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  retained_findings:
+  - Keep all transient, body, release and sample-rate metrics.
+  reusable_findings:
+  - Timing transfer should separate short-transient protection from body convergence.
+  revisit_if:
+  - A materially different timing pair or Character-linked mapping is proposed.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current
+  main Natural50 A/B pack.
+- The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle
+  recordings and does not establish universal singer/generalisation claims.
+- Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally
+  complete on the user's actual machine.
+- Final precision review remains pending after subjective and target-host evidence.
+- Human listening is required to convert the generated gain-matched A/B pack into
+  perceptual evidence.
+- Cubase Pro 14 validation ultimately requires the user's Windows host.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

@@ -103,3 +103,25 @@ The direct `max(25 ms RMS, instantaneous Peak - 6 dB)` fusion from Vo.Prep is no
 
 The current VoPriPro Natural50 detector remains the protected production baseline. The next independent transfer question is ballistics rather than weakening this detector gate after seeing the result.
 
+## 2026-09-26 ballistics transfer screen v1
+
+Autonomous job:
+- `VOPRIPRO-BALLISTICS-TRANSFER-001`
+- run: `research/runs/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1`
+
+Result:
+- **REJECT for direct fixed 8/70 ms substitution**
+- 10 ms extra peak GR: about **+1.119 dB**;
+- 30 ms extra peak GR: about **+1.188 dB**;
+- 100 ms extra peak GR: only about **+0.095 dB**, below the required body-control gain;
+- 800 ms active-mean GR difference: about **0.178 dB**;
+- repeated-phrase ripple increase: about **0.118 dB**;
+- 200 ms release residual improved by about **0.708 dB**;
+- sample-rate spread remained very small at about **0.0067 dB**.
+
+Interpretation:
+
+The Vo.Prep fixed 8 ms attack / 70 ms release pair is not suitable as a direct replacement for VoPriPro Natural50 20/110 ms timing. The negative result is specific to the fixed pair; Character-linked timing and materially different adaptive/intermediate timing remain separate hypotheses.
+
+The current VoPriPro Character mapping remains the protected production baseline.
+

@@ -1,0 +1,30 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:auto
+job_id: VOPRIPRO-BALLISTICS-TRANSFER-001
+source_run: research/runs/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Preserve the failed metrics and reject the direct fixed 8/70 ms transfer
+  if the predeclared gate fails.
+scope: VoPriPro 8/70 ms transfer v1.
+declared_rejection_criteria:
+- Any acceptance condition fails.
+triggered_criteria: []
+retained_findings:
+- Keep all transient, body, release and sample-rate metrics.
+reusable_findings:
+- Timing transfer should separate short-transient protection from body convergence.
+revisit_if:
+- A materially different timing pair or Character-linked mapping is proposed.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+lineage:
+  supersedes: []
+  related_jobs:
+  - VOPRIPRO-DETECTOR-TRANSFER-001
+  related_decisions:
+  - VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926
+created_at: '2026-09-25T20:33:14.332011Z'
+immutable: true

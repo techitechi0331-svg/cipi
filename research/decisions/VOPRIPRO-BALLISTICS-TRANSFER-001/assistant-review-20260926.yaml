@@ -1,0 +1,61 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926
+job_id: VOPRIPRO-BALLISTICS-TRANSFER-001
+source_run: research/runs/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+parent_decision_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:auto
+rationale: >-
+  The direct fixed 8 ms attack / 70 ms release transfer failed five locked
+  eligibility conditions against the current VoPriPro Natural50 20/110 ms
+  baseline. It added about 1.119 dB and 1.188 dB peak GR on the 10 ms and
+  30 ms bursts, delivered only about 0.095 dB extra peak GR on the 100 ms
+  body-like burst, changed long-body active mean GR by about 0.178 dB, and
+  increased repeated-phrase ripple by about 0.118 dB. Faster 200 ms recovery
+  and low sample-rate spread were retained as positive evidence, but they are
+  insufficient to justify this direct timing substitution.
+scope: >-
+  Reject only direct substitution of Vo.Prep fixed 8/70 ms ballistics for the
+  current VoPriPro Natural50 20/110 ms timing under the v1 matched synthetic
+  screen. This does not reject Character-linked timing, intermediate timing
+  pairs, or CIPI adaptive-ballistics research.
+declared_rejection_criteria:
+  - Candidate adds more than 0.35 dB peak GR on the 10 ms transient.
+  - Candidate adds more than 0.50 dB peak GR on the 30 ms transient.
+  - Candidate fails to add at least 0.25 dB peak GR on the 100 ms body-like burst.
+  - Candidate long-body active mean GR differs by more than 0.15 dB.
+  - Candidate repeated-phrase ripple exceeds baseline by more than 0.10 dB.
+  - Candidate residual GR at 200 ms after offset exceeds baseline by more than 0.05 dB.
+  - Candidate peak-GR sample-rate spread exceeds 0.10 dB.
+triggered_criteria:
+  - Candidate adds more than 0.35 dB peak GR on the 10 ms transient.
+  - Candidate adds more than 0.50 dB peak GR on the 30 ms transient.
+  - Candidate fails to add at least 0.25 dB peak GR on the 100 ms body-like burst.
+  - Candidate long-body active mean GR differs by more than 0.15 dB.
+  - Candidate repeated-phrase ripple exceeds baseline by more than 0.10 dB.
+retained_findings:
+  - All trajectories were finite.
+  - Candidate residual GR at 200 ms was about 0.708 dB lower than baseline, confirming faster recovery.
+  - Candidate maximum peak-GR sample-rate spread was about 0.0067 dB across 44.1/48/96/192 kHz.
+  - Faster attack materially increased short-burst compression without delivering the required 100 ms body-control benefit.
+  - Repeated-phrase active-GR ripple increased beyond the locked tolerance.
+reusable_findings:
+  - Direct timing transfer must separate short-transient protection from body convergence rather than assuming faster attack is better control.
+  - Faster recovery alone does not justify a compressor timing change when short-event compression and modulation worsen.
+  - Current VoPriPro Character timing remains the safer production baseline for this tested comparison.
+revisit_if:
+  - A materially different intermediate timing pair is proposed with a new predeclared screen.
+  - Character-linked or feature-adaptive timing is compared against the current baseline without copying the rejected fixed pair.
+  - New evidence identifies a flaw in the current burst/recovery matrix.
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOPRIPRO-DETECTOR-TRANSFER-001
+  related_decisions:
+    - VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:auto
+    - VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926
+created_at: '2026-09-26'
+immutable: true
+review_gaps: []

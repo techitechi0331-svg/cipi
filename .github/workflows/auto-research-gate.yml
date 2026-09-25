@@ -19,9 +19,12 @@ on:
       - "tools/validate_research_change_scope.py"
       - "tools/test_research_integrity_guards.py"
       - "tools/test_review_lineage.py"
+      - "tools/test_no_wait_scheduler.py"
+      - "RULES/NO_WAIT_WORK_STEALING.md"
       - ".github/workflows/auto-research-gate.yml"
       - ".github/workflows/free-autonomous-review.yml"
       - ".github/workflows/free-autonomous-research.yml"
+      - ".github/workflows/no-wait-orchestrator.yml"
   workflow_dispatch:
 
 permissions:
@@ -53,6 +56,9 @@ jobs:
 
       - name: Test legacy review lineage matching
         run: python tools/test_review_lineage.py
+
+      - name: Test No-Wait work-stealing scheduler
+        run: python tools/test_no_wait_scheduler.py
 
       - name: Run deterministic mock worker
         run: |

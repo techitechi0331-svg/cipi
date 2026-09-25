@@ -237,3 +237,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Run leak-free Vo.Prep Amount Revision 3 on streaming VocalSet with disjoint singer selection/final-holdout splits and unchanged product ripple gate."
+
+  voprep_sidechain_hpf_pilot_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare OFF versus 40/60/70/80/100 Hz 12 dB/oct detector-only high-pass candidates on a deterministic vocal/plosive/rumble stress matrix; passing authorizes real-vocal research only."

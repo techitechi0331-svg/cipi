@@ -262,3 +262,25 @@ Engineering interpretation:
 - R37 / sidechain emphasis remains a later dedicated gate.
 
 No production DSP constant was changed by Phase 02.
+
+
+## 2026-09-25 R37 / Limit Response product decision
+
+Decision: **KEEP factory-flat / no front-panel control**.
+
+Evidence:
+- the 1966 circuit contains R37 = 1 MOhm and C12 = 0.001 uF;
+- Universal Audio documents the sidechain equalization as normally set flat
+  for musical applications;
+- Phase 02 measured the current VL2A at about 5.11..5.16 dB GR from
+  100 Hz through 15 kHz under the representative -12 dBFS / PR75 condition.
+
+Interpretation:
+- the current flat product response is compatible with the normal music/vocal
+  hardware use case;
+- an adjustable R37 network remains historically real, but is not a required
+  front-panel feature for VL2A;
+- the internal hook may remain for future research/broadcast modes.
+
+Status: **closed unless new original-hardware measurements contradict the
+factory-flat assumption**.

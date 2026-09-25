@@ -143,6 +143,115 @@ Scenario measureScenario (double sampleRate, float amount)
     result.realtimeFactor = elapsed > 0.0 ? programSeconds / elapsed : 0.0;
     return result;
 }
+
+float medianValue (std::vector<float> values)
+{
+    if (values.empty())
+        return 0.0f;
+
+    std::sort (values.begin(), values.end());
+    const auto middle = values.size() / 2;
+
+    if ((values.size() & 1U) != 0U)
+        return values[middle];
+
+    return 0.5f * (values[middle - 1] + values[middle]);
+}
+
+float standardDeviation (const std::vector<float>& values)
+{
+    if (values.empty())
+        return 0.0f;
+
+    double mean = 0.0;
+    for (const auto value : values)
+        mean += value;
+    mean /= static_cast<double> (values.size());
+
+    double variance = 0.0;
+    for (const auto value : values)
+    {
+        const auto delta = static_cast<double> (value) - mean;
+        variance += delta * delta;
+    }
+
+    variance /= static_cast<double> (values.size());
+    return static_cast<float> (std::sqrt (variance));
+}
+
+struct SectionDynamicsResult
+{
+    float inputSectionContrastDb { 6.0f };
+    float outputSectionContrastDb { 0.0f };
+    float sectionContrastPreservedRatio { 0.0f };
+    float inputWithinSectionPhraseStdDb { 0.0f };
+    float outputWithinSectionPhraseStdDb { 0.0f };
+    float withinSectionLevelingReduction { 0.0f };
+    bool finite { true };
+};
+
+SectionDynamicsResult measureSectionDynamics (double sampleRate, float amount)
+{
+    cipi::dsp::VocalRiderCore rider;
+    rider.prepare (sampleRate);
+
+    const std::array<float, 4> sectionBaseDb { -24.0f, -18.0f, -24.0f, -18.0f };
+    const std::array<float, 3> phraseOffsetDb { -2.0f, 0.0f, 2.0f };
+
+    std::array<std::vector<float>, 4> outputPhraseLevels;
+    std::array<float, 4> outputSectionMedians {};
+    std::vector<float> verseMedians;
+    std::vector<float> chorusMedians;
+
+    for (std::size_t section = 0; section < sectionBaseDb.size(); ++section)
+    {
+        for (const auto offsetDb : phraseOffsetDb)
+        {
+            const auto inputLevelDb = sectionBaseDb[section] + offsetDb;
+            const auto phrase = runSegment (rider, sampleRate, 2.8, inputLevelDb, amount, true);
+
+            if (! phrase.finite || ! std::isfinite (phrase.meanTailGainDb))
+            {
+                SectionDynamicsResult bad;
+                bad.finite = false;
+                return bad;
+            }
+
+            outputPhraseLevels[section].push_back (inputLevelDb + phrase.meanTailGainDb);
+            runSegment (rider, sampleRate, 0.7, -120.0f, amount, false);
+        }
+
+        outputSectionMedians[section] = medianValue (outputPhraseLevels[section]);
+
+        if ((section & 1U) == 0U)
+            verseMedians.push_back (outputSectionMedians[section]);
+        else
+            chorusMedians.push_back (outputSectionMedians[section]);
+    }
+
+    SectionDynamicsResult result;
+    result.outputSectionContrastDb = medianValue (chorusMedians) - medianValue (verseMedians);
+    result.sectionContrastPreservedRatio = result.outputSectionContrastDb / result.inputSectionContrastDb;
+
+    const std::vector<float> inputOffsets { -2.0f, 0.0f, 2.0f };
+    result.inputWithinSectionPhraseStdDb = standardDeviation (inputOffsets);
+
+    float outputStdSum = 0.0f;
+    for (const auto& section : outputPhraseLevels)
+        outputStdSum += standardDeviation (section);
+
+    result.outputWithinSectionPhraseStdDb = outputStdSum / static_cast<float> (outputPhraseLevels.size());
+
+    if (result.inputWithinSectionPhraseStdDb > 1.0e-6f)
+        result.withinSectionLevelingReduction =
+            1.0f - result.outputWithinSectionPhraseStdDb / result.inputWithinSectionPhraseStdDb;
+
+    result.finite = std::isfinite (result.outputSectionContrastDb)
+                 && std::isfinite (result.sectionContrastPreservedRatio)
+                 && std::isfinite (result.outputWithinSectionPhraseStdDb)
+                 && std::isfinite (result.withinSectionLevelingReduction);
+    return result;
+}
 } // namespace
 
 int main (int argc, char** argv)
@@ -214,6 +323,9 @@ int main (int argc, char** argv)
     quietSpread = nominalQuietMax - nominalQuietMin;
     loudSpread = nominalLoudMax - nominalLoudMin;
 
+    const auto sectionDynamics = measureSectionDynamics (48000.0, 0.50f);
+    allFinite = allFinite && sectionDynamics.finite;
+
     std::ofstream summary (outputDir / "summary.md");
     summary << "# Vocal Rider core deterministic measurement\n\n";
     summary << "Measurement maturity: **DSP_MEASURED** for the standalone core only.\n\n";
@@ -231,6 +343,14 @@ int main (int argc, char** argv)
     summary << "- quiet-phrase tail ride spread, 44.1-192 kHz: " << quietSpread << " dB\n";
     summary << "- loud-phrase tail ride spread, 44.1-192 kHz: " << loudSpread << " dB\n";
     summary << "- all matrix values finite: " << (allFinite ? "yes" : "no") << "\n\n";
+    summary << "## Intentional section-dynamics probe (48 kHz / Amount 50%)\n\n";
+    summary << "- input verse-to-chorus contrast: " << sectionDynamics.inputSectionContrastDb << " dB\n";
+    summary << "- output verse-to-chorus contrast: " << sectionDynamics.outputSectionContrastDb << " dB\n";
+    summary << "- section contrast preserved: " << (100.0f * sectionDynamics.sectionContrastPreservedRatio) << "%\n";
+    summary << "- input within-section phrase std: " << sectionDynamics.inputWithinSectionPhraseStdDb << " dB\n";
+    summary << "- output within-section phrase std: " << sectionDynamics.outputWithinSectionPhraseStdDb << " dB\n";
+    summary << "- within-section leveling reduction: " << (100.0f * sectionDynamics.withinSectionLevelingReduction) << "%\n\n";
+    summary << "This probe is diagnostic, not yet a promotion gate. It exists to detect over-correction of intentional macro dynamics.\n\n";
     summary << "The CSV contains the full 5 sample-rate x 5 Amount matrix.\n";
 
     std::ofstream json (outputDir / "metrics.json");
@@ -248,6 +368,12 @@ int main (int argc, char** argv)
          << "  \"burst_delta_db\": " << nominalIt->burstDelta << ",\n"
          << "  \"amount50_quiet_sample_rate_spread_db\": " << quietSpread << ",\n"
          << "  \"amount50_loud_sample_rate_spread_db\": " << loudSpread << ",\n"
+         << "  \"section_input_contrast_db\": " << sectionDynamics.inputSectionContrastDb << ",\n"
+         << "  \"section_output_contrast_db\": " << sectionDynamics.outputSectionContrastDb << ",\n"
+         << "  \"section_contrast_preserved_ratio\": " << sectionDynamics.sectionContrastPreservedRatio << ",\n"
+         << "  \"section_input_phrase_std_db\": " << sectionDynamics.inputWithinSectionPhraseStdDb << ",\n"
+         << "  \"section_output_phrase_std_db\": " << sectionDynamics.outputWithinSectionPhraseStdDb << ",\n"
+         << "  \"section_within_leveling_reduction\": " << sectionDynamics.withinSectionLevelingReduction << ",\n"
          << "  \"all_finite\": " << (allFinite ? "true" : "false") << "\n"
          << "}\n";
 

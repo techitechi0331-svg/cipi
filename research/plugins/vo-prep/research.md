@@ -77,3 +77,21 @@ The research calibration threshold near -27.75 dBFS is not a product default.
 Next transparent-core research target:
 - user-facing Amount / operating-point mapping while keeping the frozen core unchanged.
 
+
+## 2026-09-26 product-boundary correction
+
+Formal decision:
+- `research/decisions/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926-review.yaml`
+
+Vo.Prep is now explicitly scoped as a **Problem / Event Preparation Plugin**.
+Broadband vocal dynamics preparation belongs to **VoPriPro / VocalPrepComp**.
+
+The transparent-compressor research remains preserved as reusable Dynamics evidence, including the 25 ms Slow RMS, instantaneous Fast peak, Fast-6 dB fusion, 1.5:1 / 18 dB curve, 8/70 ms fixed ballistics, operating-point work, Amount studies, stereo-link work and objective GO_FOR_BLIND result.
+
+The product decision is **scope rejection only**:
+- do not integrate the broadband compressor into Vo.Prep main;
+- do not add product-facing compressor Amount/Threshold/Ratio/Knee/Character controls;
+- do not delete or downgrade the research as algorithmically failed;
+- reuse the knowledge in VoPriPro research or a future dedicated transparent-compressor product when appropriate.
+
+Macro Level remains in Vo.Prep pending a dedicated Macro/Phrase boundary study against VoPriPro. The next high-value measurement is whether Macro reduces 1–2 s phrase spread while leaving 50–100 ms dynamics and downstream VoPriPro GR substantially intact.

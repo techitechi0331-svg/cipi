@@ -657,3 +657,22 @@ Decision:
 - PDC code path: PASS
 - CPU safety: PASS
 - Cubase Pro 14 host PDC: still UNVERIFIED until real-host confirmation.
+
+
+## 2026-09-25 Phase03F residual-modulation HP
+
+Phase03F tested 8 ms mean tau with residual HP off / 25 / 50 / 75 Hz.
+
+MEASURED max real-vocal band shift:
+- HP off: ~0.768085 dB
+- 25 Hz: ~0.809483 dB
+- 50 Hz: ~0.850192 dB
+- 75 Hz: ~0.891880 dB
+
+The HP direction worsened the controlling forte 20..80 Hz metric while
+preserving ~0.782% 1 kHz THD and stable control.
+
+Decision:
+- residual HP direction: REJECTED
+- 8 ms / HP off retained only as Simple Baseline
+- next: Phase03G minimal coloration-amount trim.

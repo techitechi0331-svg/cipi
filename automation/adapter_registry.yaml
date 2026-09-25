@@ -278,3 +278,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Compare the rejected R3 fixed-offset Amount baseline against an explicit-Learn one-time Threshold solver on fresh singer-disjoint VocalSet cohorts; passing authorizes red-team only."
+
+  vopripro_detector_transfer_screen_v1:
+    tracks:
+      - VOPRIPRO_FORMAL
+    max_timeout_minutes: 3
+    network_required: false
+    purpose: "Falsify or qualify transfer of the Vo.Prep Slow-RMS/Fast-Peak fusion into VoPriPro against the current Natural50 detector on a deterministic synthetic stress matrix."

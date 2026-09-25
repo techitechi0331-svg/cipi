@@ -1,0 +1,45 @@
+{
+  "contract_version": 1,
+  "plugin": {
+    "id": "GoldenGain",
+    "name": "JUCE Factory Golden Gain",
+    "vendor": "CIPI Audio",
+    "version": "0.1.0",
+    "bundle_id": "audio.cipi.factory.goldengain",
+    "manufacturer_code": "Cipi",
+    "plugin_code": "JFG1"
+  },
+  "target": {
+    "formats": ["VST3"],
+    "os": "windows_x64"
+  },
+  "audio": {
+    "layouts": ["mono", "stereo"]
+  },
+  "parameters": [
+    {
+      "id": "gain_db",
+      "name": "Gain",
+      "type": "float",
+      "min": -24.0,
+      "max": 24.0,
+      "default": 0.0
+    }
+  ],
+  "dsp": {
+    "template": "golden_gain_v1",
+    "source_revision": "factory-golden-gain-v1"
+  },
+  "ui": {
+    "width": 420,
+    "height": 300,
+    "show_version": true
+  },
+  "validation": {
+    "pluginval": true,
+    "state_restore": true,
+    "automation": true,
+    "silence": true,
+    "nan_inf": true
+  }
+}

@@ -1,0 +1,125 @@
+name: juce-factory
+
+on:
+  pull_request:
+    paths:
+      - "juce_factory/**"
+      - ".github/workflows/juce-factory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: juce-factory-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract-and-generator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Contract and generator tests
+        run: python -m unittest discover -s juce_factory/tests -v
+
+      - name: CLI self-test
+        run: python -m juce_factory.factory.cli self-test
+
+      - name: Validate Golden Contract
+        run: python -m juce_factory.factory.cli validate juce_factory/examples/golden_gain.contract.json
+
+  golden-vst3-windows:
+    needs: contract-and-generator
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Golden Plugin
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.cli generate juce_factory/examples/golden_gain.contract.json --output generated/GoldenGain
+          if ($LASTEXITCODE -ne 0) { throw "Factory generation failed." }
+
+      - name: Configure
+        shell: pwsh
+        run: cmake -S generated/GoldenGain -B generated/GoldenGain/build -G "Visual Studio 18 2026" -A x64
+
+      - name: Build Release
+        shell: pwsh
+        run: cmake --build generated/GoldenGain/build --config Release --parallel 4
+
+      - name: Stage VST3
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-staging | Out-Null
+          $bundle = Get-ChildItem -Path generated/GoldenGain/build -Recurse -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "Golden VST3 bundle was not produced." }
+          Copy-Item -LiteralPath $bundle.FullName -Destination factory-staging -Recurse -Force
+
+      - name: Download pinned pluginval
+        shell: pwsh
+        run: |
+          $url = "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip"
+          $expected = "c08e61ce3b96db41636f8ec7e76f4c7e2c13ebdac7fa1b5a1f52b4f32ec715ab"
+          Invoke-WebRequest -Uri $url -OutFile pluginval.zip
+          $actual = (Get-FileHash pluginval.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $expected) { throw "pluginval checksum mismatch. Expected $expected, got $actual." }
+          Expand-Archive pluginval.zip -DestinationPath pluginval -Force
+
+      - name: Validate with external pluginval
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-logs | Out-Null
+          $pluginval = Get-ChildItem -Path pluginval -Recurse -File -Filter pluginval.exe | Select-Object -First 1
+          if (-not $pluginval) { throw "pluginval.exe was not found." }
+          $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "No staged VST3 found." }
+          & $pluginval.FullName --validate $bundle.FullName --strictness-level 5 2>&1 | Tee-Object -FilePath factory-logs/pluginval.log
+          if ($LASTEXITCODE -ne 0) { throw "pluginval failed with exit code $LASTEXITCODE." }
+
+      - name: Promote validation-passed artifact and write provenance
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-out/passed | Out-Null
+          $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
+          Copy-Item -LiteralPath $bundle.FullName -Destination factory-out/passed -Recurse -Force
+          Copy-Item generated/GoldenGain/factory_manifest.json factory-out/factory_manifest.json
+          Copy-Item generated/GoldenGain/plugin_contract.json factory-out/plugin_contract.json
+
+          $contractHash = (Get-FileHash generated/GoldenGain/plugin_contract.json -Algorithm SHA256).Hash.ToLowerInvariant()
+          $provenance = [ordered]@{
+            factory_status = "VALIDATION_PASS"
+            git_sha = "${{ github.sha }}"
+            juce_version = "9.0.2"
+            build_type = "Release"
+            platform = "windows-x64"
+            validator = "pluginval-1.0.4-strictness-5"
+            contract_file_sha256 = $contractHash
+            release_authority = $false
+          }
+          $provenance | ConvertTo-Json | Set-Content -Encoding utf8 factory-out/provenance.json
+
+          Get-ChildItem factory-out/passed -Recurse -File | Sort-Object FullName | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $($_.FullName.Substring((Resolve-Path factory-out).Path.Length + 1))"
+          } | Set-Content -Encoding ascii factory-out/sha256.txt
+
+      - name: Upload Factory logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JUCE-Factory-Golden-logs
+          path: factory-logs
+          if-no-files-found: ignore
+
+      - name: Upload validation-passed Factory artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: JUCE-Factory-Golden-VST3
+          path: factory-out
+          if-no-files-found: error

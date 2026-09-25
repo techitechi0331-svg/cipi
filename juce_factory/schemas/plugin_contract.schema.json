@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/juce-factory/plugin_contract.schema.json",
+  "title": "CIPI JUCE Factory Plugin Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "plugin", "target", "audio", "parameters", "dsp", "ui", "validation"],
+  "properties": {
+    "contract_version": {"const": 1},
+    "plugin": {
+      "type": "object",
+      "required": ["id", "name", "vendor", "version", "bundle_id", "manufacturer_code", "plugin_code"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"},
+        "name": {"type": "string", "minLength": 1},
+        "vendor": {"type": "string", "minLength": 1},
+        "version": {"type": "string"},
+        "bundle_id": {"type": "string", "minLength": 3},
+        "manufacturer_code": {"type": "string", "minLength": 4, "maxLength": 4},
+        "plugin_code": {"type": "string", "minLength": 4, "maxLength": 4}
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": ["formats", "os"],
+      "properties": {
+        "formats": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["VST3"]}},
+        "os": {"const": "windows_x64"}
+      }
+    },
+    "audio": {
+      "type": "object",
+      "required": ["layouts"],
+      "properties": {
+        "layouts": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["mono", "stereo"]}}
+      }
+    },
+    "parameters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type", "min", "max", "default"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"const": "float"},
+          "min": {"type": "number"},
+          "max": {"type": "number"},
+          "default": {"type": "number"}
+        }
+      }
+    },
+    "dsp": {
+      "type": "object",
+      "required": ["template", "source_revision"],
+      "properties": {
+        "template": {"enum": ["golden_gain_v1"]},
+        "source_revision": {"type": "string", "minLength": 1}
+      }
+    },
+    "ui": {
+      "type": "object",
+      "required": ["width", "height", "show_version"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 200, "maximum": 4000},
+        "height": {"type": "integer", "minimum": 200, "maximum": 4000},
+        "show_version": {"type": "boolean"}
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["pluginval", "state_restore", "automation", "silence", "nan_inf"],
+      "properties": {
+        "pluginval": {"type": "boolean"},
+        "state_restore": {"type": "boolean"},
+        "automation": {"type": "boolean"},
+        "silence": {"type": "boolean"},
+        "nan_inf": {"type": "boolean"}
+      }
+    }
+  }
+}

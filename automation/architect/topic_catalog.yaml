@@ -78,6 +78,7 @@ topics:
     rejection:
       - "Short-event chasing or macro-dynamic flattening exceeds the safety bound."
     pilot_adapter: null
+    prototype_adapter: dual_timescale_phrase_level_v1
     plugin_opportunity: true
     overlap_hints: ["Vo.Prep", "VoxLevel"]
     human_only: false

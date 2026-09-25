@@ -123,6 +123,17 @@ def collect_examples(scan_limit: int = 10000):
         if float(np.sqrt(np.mean(x*x)+1e-18)) < 1e-4:
             continue
 
+        # "Qualifying file" means it can actually supply the declared 4 s
+        # active Learn window plus at least 1 s of active post-lock evaluation.
+        # This is an eligibility check only; no Amount candidate is evaluated.
+        qslow = slow_detector(x)
+        qslow_db = db_amp(qslow)
+        qfinite = np.isfinite(qslow_db) & (qslow_db > -180.0)
+        qpeak = float(np.max(qslow_db[qfinite])) if np.any(qfinite) else -180.0
+        qactive = qfinite & (qslow_db >= qpeak - 30.0)
+        if int(np.sum(qactive)) < int((LEARN_SECONDS + 1.0) * FS):
+            continue
+
         key = f"{singer}:{Path(source_path).name}"
         selected[key] = {
             "singer": singer,
@@ -196,12 +207,15 @@ def prepare_item(ex):
         raise RuntimeError(f"{ex['source_basename']}: less than 1 s eval after Learn")
     return {**ex, "effective":effective, "ref":ref, "mask":mask}
 
-def process(item,target100,amount):
-    if amount <= 0.0:
-        return np.zeros_like(item["effective"])
+def full_amount_actual(item,target100):
     threshold = item["ref"] + TARGET100_OFFSETS[target100]
-    desired = soft_knee_gr(item["effective"],threshold)*(amount/100.0)
-    return ballistics(desired)
+    desired100 = soft_knee_gr(item["effective"],threshold)
+    return ballistics(desired100)
+
+def scaled_actual_from_full(actual100,amount):
+    if amount <= 0.0:
+        return np.zeros_like(actual100)
+    return actual100*(amount/100.0)
 
 def metrics(item,actual):
     vals = actual[item["mask"]]
@@ -216,11 +230,24 @@ def metrics(item,actual):
     }
 
 def summarize(items,target100):
+    # Exact positive-scaling homogeneity of the frozen attack/release state:
+    # B(c*d) = c*B(d). Branch selection is preserved because both DesiredGR
+    # and the previous state scale by the same positive c.
+    full={name:full_amount_actual(item,target100) for name,item in items.items()}
+
+    first_name=next(iter(items))
+    first_item=items[first_name]
+    threshold=first_item["ref"]+TARGET100_OFFSETS[target100]
+    direct50=ballistics(0.5*soft_knee_gr(first_item["effective"],threshold))
+    homogeneity_error=float(np.max(np.abs(direct50-0.5*full[first_name])))
+    if homogeneity_error>1.0e-10:
+        raise RuntimeError(f"Ballistics homogeneity assertion failed: {homogeneity_error}")
+
     by={}
     for amount in AMOUNTS:
         rows=[]
         for name,item in items.items():
-            m=metrics(item,process(item,target100,amount))
+            m=metrics(item,scaled_actual_from_full(full[name],amount))
             m["file"]=name
             m["singer"]=item["singer"]
             rows.append(m)
@@ -232,6 +259,7 @@ def summarize(items,target100):
             singer_means[r["singer"]].append(r["mean_gr"])
         per_singer=[float(np.mean(v)) for v in singer_means.values()]
         agg["cross_source_mean_gr_std"]=float(np.std(per_singer))
+        agg["ballistics_homogeneity_max_error"]=homogeneity_error
         by[str(amount)]={"aggregate":agg,"files":rows}
 
     means=np.asarray([by[str(a)]["aggregate"]["mean_gr"] for a in AMOUNTS])

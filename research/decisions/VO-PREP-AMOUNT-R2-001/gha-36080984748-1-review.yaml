@@ -1,0 +1,50 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:review-01"
+job_id: VO-PREP-AMOUNT-R2-001
+source_run: research/runs/VO-PREP-AMOUNT-R2-001/gha-36080984748-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Revision 2 is rejected as the final Vo.Prep Amount mapping because the mapping
+  selected on the disjoint HUST selection speakers failed the untouched final
+  holdout's predeclared ripple gate. The miss was narrow, but the 0.080000 dB
+  limit was declared before holdout evaluation and is not relaxed after the
+  result. The near-miss remains useful negative evidence and supports a new,
+  independently validated revision rather than adoption.
+declared_rejection_criteria:
+  - No candidate passes all unchanged gates on the selection speakers.
+  - The frozen selected candidate fails any original gate on the untouched holdout speakers.
+  - The HUST public object fails the pinned SHA256 or size check.
+  - Any required speaker WAV is missing.
+  - Any raw public audio is persisted into the CIPI evidence branch.
+triggered_criteria:
+  - "The frozen selected candidate failed the original final-holdout ripple gate: Amount 100 aggregate GR ripple was 0.08034317083146783 dB versus the unchanged 0.08000000000000000 dB ceiling."
+retained_findings:
+  - "desired_gr_scale_target100_5.5 passed the four-speaker selection split before final holdout evaluation."
+  - "On the four-speaker final holdout, every declared gate except ripple_all passed."
+  - "Final-holdout Amount 100 mean GR was 5.2004115292408954 dB, p99 GR was 7.761981367343276 dB, and fraction above 10 dB was 0."
+  - "Final-holdout Amount 50 cross-source mean-GR standard deviation was 0.3141087264685324 dB."
+  - "The R2 result is a near miss, not evidence that the original ripple limit should be weakened."
+reusable_findings:
+  - "A mathematically linear DesiredGR scaling control can still fail a real-vocal time-domain smoothness gate after gain ballistics."
+  - "Amount mapping must be validated on disjoint speakers after candidate selection; development or mathematical linearity alone is insufficient."
+  - "Narrow gate misses should be preserved as negative evidence instead of being converted into post-hoc threshold changes."
+revisit_if:
+  - "A new mapping or operating-point formulation is predeclared before evaluation."
+  - "A new independent singer corpus is used for selection and untouched holdout validation."
+  - "A changed ballistics architecture materially changes the ripple behavior and is itself independently validated first."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-MAP-001
+    - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:auto"
+    - "VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:review-01"
+parent_decision_id: "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Vo.Prep Amount Revision 2 on eight disjoint HUST_Solfege adult speakers with the frozen 4-second Learn-and-Lock operating point and unchanged 0.08 dB ripple gate."
+review_gaps: []

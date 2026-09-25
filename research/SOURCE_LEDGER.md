@@ -58,6 +58,10 @@
 | DATA-VOX-001 | Wilkins et al., **VocalSet: A Singing Voice Dataset**, ISMIR / Zenodo. https://zenodo.org/records/1442513 | research dataset / paper | 20 professional singers, technique-diverse monophonic singing corpus used for real-vocal controlled-injection validation | E5 |
 | DATA-VOX-002 | Faghih, Timoney, **Annotated-VocalSet: A Singing Voice Dataset**, 2022. https://zenodo.org/records/7061507 | research dataset / peer-reviewed companion | Adds F0 contour, note onset/offset, transitions, note F0/duration, MIDI pitch and lyrics to VocalSet; candidate for high-register/event-targeted PeakBody validation | E5 |
 
+| PITCH-001 | de Cheveigne, Kawahara, **YIN, a fundamental frequency estimator for speech and music**, JASA 111(4), 2002. https://doi.org/10.1121/1.1458024 | peer-reviewed | modified autocorrelation/difference-function F0 estimator; low-latency/efficient monophonic pitch reference | E5 |
+| PITCH-002 | Mauch, Dixon, **pYIN: A fundamental frequency estimator using probabilistic threshold distributions**, ICASSP 2014. https://doi.org/10.1109/ICASSP.2014.6853678 | peer-reviewed conference | probabilistic YIN candidates, voicing probability and temporal tracking | E5 |
+| PITCH-003 | McLeod, Wyvill, **A Smarter Way to Find Pitch**, ICMC 2005. | peer-reviewed conference | normalized square difference / clarity estimate for realtime monophonic pitch | E4 |
+
 A repeated quotation of one original source does not count as independent corroboration.
 
 | PLO-PROD-001 | iZotope, **RX De-plosive documentation / Removing Plosives from a Voice Recording**. https://www.izotope.com/en/content/download/77698/file/izotope-rx-5-help-documentation.pdf | official product documentation | public plosive detector frequency/context behavior and pre-HPF caution | E3 |

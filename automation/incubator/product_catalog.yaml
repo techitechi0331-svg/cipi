@@ -1,0 +1,30 @@
+schema_version: "1.0"
+products:
+  - name: Vo.Prep
+    roles: ["preparation", "plosive", "sibilance", "macro level", "transparent compression"]
+  - name: VL2A
+    roles: ["opto", "leveling", "compression", "analog dynamics"]
+  - name: Black76
+    roles: ["fet", "fast compression", "transient dynamics"]
+  - name: Vocal Surface
+    roles: ["surface", "harshness", "tone", "spectral shaping"]
+  - name: Vocal Control Comp
+    roles: ["control compression", "vocal dynamics"]
+  - name: VoPriPro
+    roles: ["vocal pre", "preparation", "compression"]
+  - name: MicroDouble
+    roles: ["doubler", "decorrelation", "width", "transient protection"]
+  - name: Vocal Resonance
+    roles: ["resonance", "harshness", "dynamic spectral"]
+  - name: Original Vocal Pre
+    roles: ["preamp", "tube", "transformer", "color"]
+  - name: Envelope Sculptor
+    roles: ["transient", "body", "envelope", "dynamics"]
+  - name: Vocal Finisher
+    roles: ["finish", "width", "tone", "vocal polish"]
+  - name: Master Bus Comp
+    roles: ["bus compression", "mastering"]
+  - name: Dynamic EQ
+    roles: ["dynamic eq", "spectral control"]
+  - name: Noise Gate
+    roles: ["gate", "noise"]

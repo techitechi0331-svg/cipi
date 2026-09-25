@@ -676,3 +676,34 @@ Decision:
 - residual HP direction: REJECTED
 - 8 ms / HP off retained only as Simple Baseline
 - next: Phase03G minimal coloration-amount trim.
+
+
+## 2026-09-25 Phase03F / Phase03G / State-Automation
+
+Phase03F residual-HP direction was rejected:
+- HP off max band ~0.768085 dB
+- 25 Hz ~0.809483
+- 50 Hz ~0.850192
+- 75 Hz ~0.891880
+
+Phase03G selected the least-reduced coloration amount that passes every gate:
+- **8 ms optical mean tau**
+- **amount 0.054**
+- HP OFF
+
+G054 MEASURED:
+- max real-vocal band shift ~0.742962 dB
+- 1 kHz THD ~0.767707%
+- 63 Hz THD ~1.280933%
+- H3 dominant
+- release/sample-rate/PR0/stress gates PASS
+
+State/Automation audit:
+- max automation delta ~0.008854 dB
+- state restore delta 0
+- normalized roundtrip delta ~6e-8
+- RESULT=PASS
+
+Decision:
+- Phase03G G054 -> final integration candidate
+- residual HP/LF research branches -> not part of final production path.

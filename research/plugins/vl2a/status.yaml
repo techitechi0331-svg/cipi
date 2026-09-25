@@ -1,7 +1,7 @@
 id: VL2A_PHASE01H_LINEAMP
-title: VL2A Phase 01-H Line Amplifier Formal Track
+title: VL2A Formal Research Track — Phase 01-H retained / reference-parity review reopened
 
-status: audio_ab
+status: review
 knowledge_status: PROVISIONAL
 confidence: 0.84
 
@@ -11,36 +11,37 @@ implementation_branch: "build-vocal-leveler2a-v01"
 
 stages:
   research: complete
-  review: complete
-  parameter_lock: complete
+  review: in_progress
+  parameter_lock: in_progress
   implementation: complete
-  measurement: complete
-  audio_ab: in_progress
-  revision: pending
-  vst3_validation: pending
+  measurement: in_progress
+  audio_ab: pending
+  revision: in_progress
+  vst3_validation: in_progress
   final_review: pending
 
-current_stage: audio_ab
+current_stage: review
 
 completed:
   - research
-  - review
-  - parameter_lock
   - implementation
-  - measurement
 
 unresolved:
-  - Human level-matched vocal KEEP/REVISE/ROLLBACK decision is pending.
-  - Final product Gain must be restored from the temporary -30..+30 dB research range to -18..+18 dB after the AB decision.
-  - Top-left UI text/mojibake fix is still pending on the production candidate.
-  - Cubase Pro 14 production-candidate validation is pending.
+  - Phase 01-H line amplifier is KEEP and integrated in v0.5.0; human subjective preference remains unmeasured and must not be represented as confirmed perceptual evidence.
+  - Peak Reduction user-facing operating range is REOPEN after reference-parity review; comparisons must normalize the reference context instead of mixing UAD -12 dBFS internal calibration with the separate -18 dBFS = +4 dBu laboratory condition.
+  - Gain-reduction meter presentation is REOPEN because the current UI clamps display to 20 dB while official LA-2A documentation describes up to 40 dB of Peak Reduction range; DSP must not be changed merely to fit the meter.
+  - Stereo detector/link law remains unresolved; current 0.5 * (abs(L) + abs(R)) behavior is measured, but available source material does not prove sample-by-sample max(L,R) as the historical law.
+  - Active-compression nonlinear coloration remains a priority research gap after Phase 02 showed substantially lower current-engine distortion than the controlled hardware-reference condition.
+  - R37 factory-flat musical default is KEEP unless new source or controlled evidence contradicts it.
+  - Any Peak Reduction calibration change must rerun T4 timing, COMP/LIMIT separation, sample-rate invariance, real-vocal validation and level-matched listening.
   - Final product-level oversampling/alias approval is pending.
-  - T4/R37/sidechain/Peak Reduction calibration remains later work.
+  - Strict pluginval and Cubase Pro 14 scan/load/automation/state-recall confirmation remain pending for the eventual production candidate.
+  - Final CIPI contradiction review is pending after the reopened calibration questions converge.
 
-next_stage: audio_ab
-why_next: "Compiled Phase 01-H measurements pass and the objective VocalSet AB pack is complete; the remaining line-amplifier uncertainty is perceptual rather than numeric."
-next_confirmation: "KEEP, REVISE, or ROLLBACK of the Phase 01-H line-amplifier candidate under strict level-matched vocal listening."
+next_stage: parameter_lock
+why_next: "Phase 01-H integration and the Phase 02 current-engine baseline are complete, but strict reference-parity review reopened the user-facing Peak Reduction range, meter presentation, stereo-link law and active-GR coloration. Those contradictions must converge before new product constants are locked."
+next_confirmation: "Which Peak Reduction mapping, meter range, stereo-link law and active-GR nonlinearity model are supported strongly enough to lock without disturbing the retained T4 timing, R37 flat default and Phase 01-H line amplifier."
 
 blockers:
-  - A human listener must perform the blind/level-matched AB before subjective preference can be claimed.
-  - Cubase Pro 14 confirmation ultimately requires a Windows real-host run.
+  - Final subjective product claims still require level-matched human listening.
+  - Cubase Pro 14 release-candidate confirmation requires the user's Windows host.

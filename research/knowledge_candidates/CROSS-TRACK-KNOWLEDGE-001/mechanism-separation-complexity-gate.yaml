@@ -1,0 +1,5 @@
+claim: Reference-informed analog DSP should keep detector/control, nonlinear device, feedback/load and transformer contributions separable during validation, and should add nonlinear or hysteretic complexity only when source evidence or reproducible measurements justify improvement over a simpler baseline.
+evidence_type: INFERRED
+scope: Cross-track synthesis from VL2A tube/cathode-follower/A-24 research, Original Vocal Pre 610-derived ablation goals, and LA-2A/1176 formal tracks that explicitly separate control-path and audio-path mechanisms. This is a modeling discipline, not proof that any one reduced model is hardware-identical.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-001/manual-20260925
+promotion_requested: LIKELY

@@ -1,0 +1,5 @@
+claim: Cross-product reuse should preferentially transfer mechanisms, measurement methods and failure boundaries rather than exact knob values or numeric calibrations unless those constants independently reproduce under the new product, dataset and reference-level context.
+evidence_type: INFERRED
+scope: Cross-track synthesis from MicroDouble activation calibration, Vo.Prep Amount mapping, Vocal Resonance K=20 candidate budget, VL2A Peak Reduction reference-level reopening, and multiple product tracks that explicitly scope their defaults as product calibration rather than universal constants.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-001/manual-20260925
+promotion_requested: LIKELY

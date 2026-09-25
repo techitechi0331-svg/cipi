@@ -1,0 +1,5 @@
+claim: In adaptive vocal DSP, detection or candidate-recall quality should be evaluated separately from semantic decision quality and processing strength because a detector can retain high event recall while downstream ranking or action calibration still fails.
+evidence_type: INFERRED
+scope: Cross-track synthesis from Vocal Resonance candidate-discovery versus semantic-ranking failures, MicroDouble R1/R2/R3 detector-recall versus protection-strength separation, and Vo.Prep detector/action designs. This is an architecture and evaluation principle, not a universal detector topology or threshold.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-001/manual-20260925
+promotion_requested: LIKELY

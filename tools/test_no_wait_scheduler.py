@@ -104,6 +104,7 @@ def main() -> int:
         assert selected is not None and selected[1] == "READY-001"
         assert stats["skipped_claimed"] == 1
         assert stats["claimed_jobs"] == ["HIGH-BLOCKED-001"]
+        assert stats["claimed_branches"] == [claimed_branch]
         assert stats["work_steal"] is True
 
     print("CIPI no-wait scheduler tests: PASS")

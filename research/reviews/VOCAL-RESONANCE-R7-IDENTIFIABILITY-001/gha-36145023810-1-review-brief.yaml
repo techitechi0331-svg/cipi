@@ -1,0 +1,138 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOCAL-RESONANCE-R7-IDENTIFIABILITY-001:gha-36145023810-1:review-brief-v1
+job_id: VOCAL-RESONANCE-R7-IDENTIFIABILITY-001
+run_id: gha-36145023810-1
+source_run: research/runs/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-triage.yaml
+triage_id: VOCAL-RESONANCE-R7-IDENTIFIABILITY-001:gha-36145023810-1:triage-v1
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R7-IDENTIFIABILITY-001.yaml
+research_question: When candidate discovery hits the injected resonance, does a research-only
+  paired clean/injected causal oracle rank that target near the top, and how large
+  is the gap versus single-view inference features?
+hypothesis: If single-view feature information is the main blocker, the causal oracle
+  will achieve conditional Top-5 >= 0.80 and strong-effect conditional Top-5 >= 0.85
+  on both seeds, with at least a 0.20 conditional Top-5 gain over the frozen static
+  ranker.
+counter_hypotheses:
+- Even paired clean/injected deltas cannot reliably rank the target, indicating candidate
+  alignment, label construction, or object representation is the main blocker.
+- The oracle improves only one seed, indicating unstable candidate geometry rather
+  than a stable single-view feature gap.
+- Audit coverage is too sparse to distinguish these explanations.
+acceptance_criteria:
+- 'for each seed: generator ceiling >= 0.80'
+- 'for each seed: at least 24 locked test cases'
+- 'for each seed: at least 20 target candidate rows'
+rejection_criteria:
+- audit coverage is insufficient on either seed
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 0ad6ca4ec019f54fba4028ac46778ac19d1cf6cc
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: candidate_budget
+  value: 20
+- path: diagnostic_gate.accepted
+  value: true
+- path: diagnostic_gate.criteria.20261003.coverage_sufficient
+  value: true
+- path: diagnostic_gate.criteria.20261003.oracle_gap_vs_static_gte_0_20
+  value: true
+- path: diagnostic_gate.criteria.20261003.oracle_strong_given_hit_gte_0_85
+  value: true
+- path: diagnostic_gate.criteria.20261003.oracle_top5_given_hit_gte_0_80
+  value: true
+- path: diagnostic_gate.criteria.20261013.coverage_sufficient
+  value: true
+- path: diagnostic_gate.criteria.20261013.oracle_gap_vs_static_gte_0_20
+  value: true
+- path: diagnostic_gate.criteria.20261013.oracle_strong_given_hit_gte_0_85
+  value: true
+- path: diagnostic_gate.criteria.20261013.oracle_top5_given_hit_gte_0_80
+  value: true
+- path: diagnostic_gate.meaning
+  value: Acceptance means the audit has enough coverage to diagnose the next research
+    direction. It is not product or knowledge promotion.
+- path: diagnostic_gate.route
+  value: SINGLE_VIEW_FEATURE_INFORMATION_GAP
+- path: experiment
+  value: VOCAL_RESONANCE_R7_IDENTIFIABILITY_ORACLE
+- path: oracle_is_research_only
+  value: true
+- path: per_seed.20261003.diagnostics.injected_candidate_rows
+  value: 640
+- path: per_seed.20261003.diagnostics.safe_abs_delta_local_median
+  value: 0.0030180987453819474
+- path: per_seed.20261003.diagnostics.safe_negative_new_candidate_fraction
+  value: 0.0
+- path: per_seed.20261003.diagnostics.safe_negative_rows
+  value: 537
+- path: per_seed.20261003.diagnostics.target_abs_delta_local_median
+  value: 0.2196879492563002
+- path: per_seed.20261003.diagnostics.target_new_candidate_fraction
+  value: 0.3333333333333333
+- path: per_seed.20261003.diagnostics.target_rows
+  value: 30
+- path: per_seed.20261003.oracle.generator_ceiling
+  value: 0.9375
+- path: per_seed.20261003.oracle.mrr
+  value: 0.5546875
+- path: per_seed.20261003.oracle.n_cases
+  value: 32
+- path: per_seed.20261003.oracle.n_high_f0_cases
+  value: 0
+- path: per_seed.20261003.oracle.strong_hit_cases
+  value: 11
+- path: per_seed.20261003.oracle.strong_top5_given_generator_hit
+  value: 1.0
+- path: per_seed.20261003.oracle.top1
+  value: 0.28125
+- path: per_seed.20261003.oracle.top1_given_generator_hit
+  value: 0.3
+- path: per_seed.20261003.oracle.top3
+  value: 0.90625
+- path: per_seed.20261003.oracle.top3_given_generator_hit
+  value: 0.9666666666666667
+- path: per_seed.20261003.oracle.top5
+  value: 0.9375
+knowledge_candidate:
+  claim: A paired clean/injected causal oracle can diagnose whether poor vocal-resonance
+    semantic ranking is caused primarily by missing single-view information versus
+    candidate/label alignment.
+  evidence_type: HYPOTHESIS
+  scope: Research-only identifiability diagnosis for vocal resonance candidate ranking;
+    paired clean reference is not available to the final plugin.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOCAL-RESONANCE-R7-IDENTIFIABILITY-001:gha-36145023810-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

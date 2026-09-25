@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/identifiability_oracle.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T14:12:16.781767Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_identifiability_oracle_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001",
+  "random_seed": 20261031,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36145023810-1",
+  "schema_version": "1.0",
+  "source_commit": "0ad6ca4ec019f54fba4028ac46778ac19d1cf6cc",
+  "started_at": "2026-09-25T14:04:49.435968Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

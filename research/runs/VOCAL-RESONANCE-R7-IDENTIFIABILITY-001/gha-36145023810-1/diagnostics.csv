@@ -1,0 +1,3 @@
+seed,injected_candidate_rows,target_rows,safe_negative_rows,target_new_candidate_fraction,safe_negative_new_candidate_fraction,target_abs_delta_local_median,safe_abs_delta_local_median
+20261003,640,30,537,0.3333333333333333,0.0,0.2196879492563002,0.0030180987453819474
+20261013,640,27,547,0.2962962962962963,0.0,0.24909569109995422,0.0024354062854181624

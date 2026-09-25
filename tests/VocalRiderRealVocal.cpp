@@ -324,8 +324,11 @@ bool writeWav (const juce::File& file,
                double sampleRate)
 {
     file.deleteFile();
-    auto stream = std::make_unique<juce::FileOutputStream> (file);
-    if (! stream->openedOk())
+    std::unique_ptr<juce::OutputStream> stream =
+        std::make_unique<juce::FileOutputStream> (file);
+
+    auto* fileStream = dynamic_cast<juce::FileOutputStream*> (stream.get());
+    if (fileStream == nullptr || ! fileStream->openedOk())
         return false;
 
     juce::WavAudioFormat wav;

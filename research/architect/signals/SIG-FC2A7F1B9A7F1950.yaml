@@ -1,0 +1,10 @@
+schema_version: '1.0'
+signal_id: SIG-FC2A7F1B9A7F1950
+source_path: research/experiments/AirGuard/status.yaml
+kind: BLOCKERS
+text_hash: fc2a7f1b9a7f1950
+text: Corpus validation requires labelled vocal/sibilance material.
+state: UNCLASSIFIED
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

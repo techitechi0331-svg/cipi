@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-C3E5A3DD6BFDF5F7
+source_path: research/experiments/BreathKeeper/status.yaml
+kind: UNRESOLVED
+text_hash: c3e5a3dd6bfdf5f7
+text: Singing-specific false positives on sibilance, fricatives, room noise, and consonants
+  are not measured.
+state: UNCLASSIFIED
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -1,0 +1,10 @@
+schema_version: '1.0'
+signal_id: SIG-F7970916EC976579
+source_path: research/experiments/BreathKeeper/status.yaml
+kind: UNRESOLVED
+text_hash: f7970916ec976579
+text: Breath events and breathy voiced phonation must be separated reliably.
+state: UNCLASSIFIED
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

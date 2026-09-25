@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-C4F7AD48F6ACC272
+source_path: research/experiments/AirGuard/status.yaml
+kind: UNRESOLVED
+text_hash: c4f7ad48f6acc272
+text: Split-band topology has not yet been compared with dynamic shelf / narrow dynamic
+  EQ.
+state: UNCLASSIFIED
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -7,7 +7,7 @@ import yaml
 
 REQUIRED = {
     "schema_version", "brief_version", "brief_id", "job_id", "run_id",
-    "source_run", "route", "candidate_class", "triage_path", "research_question",
+    "source_run", "route", "candidate_class", "triage_path", "triage_id", "research_question",
     "hypothesis", "counter_hypotheses", "acceptance_criteria", "rejection_criteria",
     "manifest_summary", "metric_snapshot", "source_proposal", "required_human_gates",
     "downstream_gate_signals", "allowed_review_actions", "required_precision_checks",
@@ -58,6 +58,8 @@ def validate(root: Path, path: Path) -> list[str]:
             errors.append(f"{path}: route differs from triage")
         if str(triage.get("candidate_class")) != str(data.get("candidate_class")):
             errors.append(f"{path}: candidate_class differs from triage")
+        if str(triage.get("triage_id")) != str(data.get("triage_id")):
+            errors.append(f"{path}: triage_id differs from triage")
     if not isinstance(data.get("allowed_review_actions"), list) or not data.get("allowed_review_actions"):
         errors.append(f"{path}: allowed_review_actions must be non-empty")
     checks = data.get("required_precision_checks")
@@ -74,20 +76,30 @@ def main() -> int:
     args = p.parse_args()
     root = Path(args.root).resolve()
     review_root = root / "research" / "reviews"
-    files = list(review_root.rglob("*-review-brief.yaml")) + list(review_root.rglob("*-review-brief.yml")) if review_root.exists() else []
+    files = list(review_root.rglob("*-review-brief*.yaml")) + list(review_root.rglob("*-review-brief*.yml")) if review_root.exists() else []
     errors = []
-    ids = set()
+    ids = {}
+    parsed = []
     for path in files:
         errors.extend(validate(root, path))
         try:
             data = load_yaml(path)
         except Exception:
             data = {}
+        if isinstance(data, dict):
+            parsed.append((path, data))
         bid = data.get("brief_id") if isinstance(data, dict) else None
         if bid in ids:
             errors.append(f"{path}: duplicate brief_id {bid!r}")
         elif bid:
-            ids.add(bid)
+            ids[bid] = path
+    for path, data in parsed:
+        supersedes = data.get("supersedes_brief_id")
+        if supersedes and supersedes not in ids:
+            errors.append(f"{path}: supersedes_brief_id does not reference an existing Review Brief")
+        revision = data.get("brief_revision")
+        if revision is not None and (not isinstance(revision, int) or revision < 2):
+            errors.append(f"{path}: brief_revision must be integer >=2 when present")
     if errors:
         print("CIPI review brief gate: FAIL")
         for error in errors:

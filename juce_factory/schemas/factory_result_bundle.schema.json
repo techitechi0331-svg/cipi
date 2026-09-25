@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/juce-factory/factory_result_bundle.schema.json",
+  "title": "CIPI JUCE Factory Result Bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bundle_kind",
+    "factory_status",
+    "plugin_id",
+    "plugin_version",
+    "contract_version",
+    "contract_sha256",
+    "generated_source_sha256",
+    "factory_version",
+    "factory_revision",
+    "dsp_source_revision",
+    "juce_version",
+    "platform",
+    "formats",
+    "validation_matrix",
+    "validators",
+    "artifact_hashes",
+    "failure_class",
+    "raw_audio_persisted",
+    "automatic_final_decision",
+    "promotion_authority",
+    "product_release_authority",
+    "cubase_confirmed",
+    "listening_confirmed",
+    "bundle_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "bundle_kind": {
+      "const": "JUCE_FACTORY_RESULT"
+    },
+    "factory_status": {
+      "enum": [
+        "VALIDATION_PASS",
+        "QUARANTINED"
+      ]
+    },
+    "plugin_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+    },
+    "plugin_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "generated_source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "factory_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "factory_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dsp_source_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "juce_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "platform": {
+      "type": "string",
+      "minLength": 1
+    },
+    "formats": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_matrix": {
+      "type": "object"
+    },
+    "validators": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "PASS",
+          "FAIL",
+          "NOT_RUN",
+          "UNKNOWN"
+        ]
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "failure_class": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "raw_audio_persisted": {
+      "const": false
+    },
+    "automatic_final_decision": {
+      "const": false
+    },
+    "promotion_authority": {
+      "const": false
+    },
+    "product_release_authority": {
+      "const": false
+    },
+    "cubase_confirmed": {
+      "const": false
+    },
+    "listening_confirmed": {
+      "const": false
+    },
+    "bundle_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

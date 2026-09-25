@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/raw_patch_sufficiency_v2.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T23:26:03.311194Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_raw_patch_sufficiency_v2",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+  "random_seed": 20261129,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36200636072-1",
+  "schema_version": "1.0",
+  "source_commit": "d6e454c15d217a6170b5c86bf582648bbf1b26dc",
+  "started_at": "2026-09-25T23:21:10.121071Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

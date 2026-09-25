@@ -1,0 +1,21 @@
+schema_version: '1.0'
+adapter_candidate_id: AC-RP-MASKING-AWARE-PRESENCE-001
+source_candidate: research/architect/adapter_candidates/AC-RP-MASKING-AWARE-PRESENCE-001.yaml
+review_authority: ASSISTANT_REVIEW
+decision: APPROVE_FOR_IMPLEMENTATION
+implementation_adapter: rp_masking_aware_presence_001_pilot_v1
+implementation_scope: deterministic synthetic target/masker presence matrix only
+network_required: false
+timeout_minutes: 5
+arbitrary_shell_from_yaml: false
+raw_audio_persisted: false
+production_plugin_mutation: false
+automatic_registry_promotion: false
+reasoning:
+  - The metric directly tests the declared question by comparing masked-case proxy benefit and unmasked/non-target movement against a static presence-EQ baseline.
+  - The counter-hypotheses remain competitive because the candidate must preserve at least 80 percent of baseline masked improvement and demonstrate non-static gain variation.
+  - The first implementation is intentionally oracle-style and synthetic; it cannot claim a deployable masking estimator or perceptual benefit.
+  - The adapter has no network dependency and writes derived evidence only.
+next_gate:
+  - Auto Research Gate must execute the adapter successfully before merge.
+  - The formal queued job must run through the ordinary Research Worker after merge.

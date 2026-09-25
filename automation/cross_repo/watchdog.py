@@ -32,9 +32,9 @@ def assess_wait(
             "workflow_key": workflow_key,
             "runner_class": runner_class,
             "state": state,
-            "age_minutes": round(age_minutes, 2),
             "run_id": None,
             "since": action.get("dispatched_at"),
+            "wait_threshold_minutes": 10,
             "blocks_only_dependent_work": True,
         }
 
@@ -60,10 +60,10 @@ def assess_wait(
         "workflow_key": workflow_key,
         "runner_class": runner_class,
         "state": state,
-        "age_minutes": round(age_minutes, 2),
         "run_id": run.get("id"),
         "run_status": status,
         "run_conclusion": run.get("conclusion"),
         "since": created_at,
+        "wait_threshold_minutes": runner_wait_minutes,
         "blocks_only_dependent_work": True,
     }

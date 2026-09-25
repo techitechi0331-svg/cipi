@@ -306,3 +306,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Test whether a simple post-ballistics Soft Range repairs high-Amount ripple while keeping the frozen Vo.Prep detector/curve/8/70 core and explicit Learn solve unchanged."
+
+  voprep_sidechain_hpf_real_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Validate the synthetic-pilot 40 Hz detector-only HPF on real VocalSet vocals, measuring clean preservation plus controlled LF rumble/plosive stress; confirmation singers remain unopened until validation passes."

@@ -1,0 +1,40 @@
+schema_version: '1.0'
+decision_id: VO-PREP-AMOUNT-R2-001:gha-36080984748-1:auto
+job_id: VO-PREP-AMOUNT-R2-001
+source_run: research/runs/VO-PREP-AMOUNT-R2-001/gha-36080984748-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Declared rejection criteria were triggered; detailed rationale requires
+  review.
+scope: Automated rejection evidence for VO-PREP-AMOUNT-R2-001; final rejection requires
+  review.
+declared_rejection_criteria:
+- No candidate passes all unchanged gates on the selection speakers.
+- The frozen selected candidate fails any original gate on the untouched holdout speakers.
+- The HUST public object fails the pinned SHA256 or size check.
+- Any required speaker WAV is missing.
+- Any raw public audio is persisted into the CIPI evidence branch.
+triggered_criteria: []
+retained_findings:
+- All run artifacts, measurements, parameters, environment data and checksums are
+  retained as negative evidence.
+reusable_findings: []
+revisit_if:
+- New evidence, a changed model, or a changed baseline materially affects the failed
+  criteria.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+lineage:
+  supersedes: []
+  related_jobs:
+  - VO-PREP-AMOUNT-MAP-001
+  - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions:
+  - VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:review-01
+created_at: '2026-09-25T01:15:03.564460Z'
+immutable: true

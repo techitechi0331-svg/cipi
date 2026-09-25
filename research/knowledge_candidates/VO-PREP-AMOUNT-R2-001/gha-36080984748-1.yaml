@@ -1,0 +1,9 @@
+claim: A bounded one-knob Amount mapping can retain the frozen Vo.Prep transparent
+  compressor behavior while satisfying the original real-vocal ripple and gain-reduction
+  safety limits on disjoint new speakers.
+evidence_type: HYPOTHESIS
+scope: Vo.Prep Amount Revision 2 on eight disjoint HUST_Solfege adult speakers using
+  the frozen 4-second Learn-and-Lock operating point and unchanged 0.08 dB ripple
+  gate.
+source_run: research/runs/VO-PREP-AMOUNT-R2-001/gha-36080984748-1
+promotion_requested: PROVISIONAL

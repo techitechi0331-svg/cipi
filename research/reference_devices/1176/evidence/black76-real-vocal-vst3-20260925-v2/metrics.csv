@@ -1,0 +1,7 @@
+file,mode,sample_rate,source_original_peak,input_normalization_db,input_peak,input_rms,input_crest_db,output_peak,output_rms,output_crest_db,gain_db,max_step,clipped_samples,nonfinite_samples,latency_samples
+voice-note.wav,color_attack_off,48000,0.707916,-3.02024,0.5,0.134959,11.3753,0.473835,0.13037,11.209,-0.300513,0.0754675,0,0,6
+voice-note.wav,moderate_ratio4,48000,0.707916,-3.02024,0.5,0.134959,11.3753,0.0910227,0.0279747,10.2477,-13.6688,0.0520949,0,0,6
+voice-note.wav,stress_ratio20,48000,0.707916,-3.02024,0.5,0.134959,11.3753,0.083275,0.0242247,10.7251,-14.9189,0.0424207,0,0,6
+voice.wav,color_attack_off,48000,0.60498,-1.65543,0.5,0.0524489,19.5847,0.504726,0.052421,19.671,-0.00462832,0.284703,0,0,6
+voice.wav,moderate_ratio4,48000,0.60498,-1.65543,0.5,0.0524489,19.5847,0.107134,0.0150395,17.0539,-10.8501,0.0771252,0,0,6
+voice.wav,stress_ratio20,48000,0.60498,-1.65543,0.5,0.0524489,19.5847,0.0935843,0.0114546,18.2445,-13.2151,0.0608584,0,0,6

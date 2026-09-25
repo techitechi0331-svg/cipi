@@ -1,0 +1,138 @@
+name: Free Autonomous Research Architect
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "automation/architect/**"
+      - "automation/incubator/**"
+      - ".github/workflows/free-autonomous-architect.yml"
+  schedule:
+    - cron: "43 3,15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: cipi-free-autonomous-architect
+  cancel-in-progress: false
+
+jobs:
+  discover-one-bounded-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Discover bounded research gaps
+        id: discover
+        run: python automation/architect/discover.py --max-gaps 3 --github-output "$GITHUB_OUTPUT"
+
+      - name: Run one allowlisted Pilot when available
+        id: pilot
+        if: steps.discover.outputs.top_pilot_proposal != ''
+        env:
+          PROPOSAL: ${{ steps.discover.outputs.top_pilot_proposal }}
+        run: |
+          RUN_ID="architect-${GITHUB_SHA:0:12}"
+          python automation/architect/pilot.py --proposal "$PROPOSAL" --run-id "$RUN_ID" --github-output "$GITHUB_OUTPUT"
+
+      - name: Route one product opportunity through Incubator
+        id: incubator
+        if: steps.discover.outputs.top_plugin_proposal != ''
+        env:
+          PROPOSAL: ${{ steps.discover.outputs.top_plugin_proposal }}
+        run: python automation/incubator/discover.py --proposal "$PROPOSAL" --github-output "$GITHUB_OUTPUT"
+
+      - name: Run isolated prototype only after an INCUBATE decision
+        if: steps.incubator.outputs.incubator_decision == 'INCUBATE'
+        env:
+          PLUGIN_PROPOSAL: ${{ steps.incubator.outputs.plugin_proposal_path }}
+        run: python automation/incubator/prototype.py --proposal "$PLUGIN_PROPOSAL"
+
+      - name: Validate Architect, Incubator and existing research contracts
+        run: |
+          python tools/validate_architect.py
+          python tools/validate_incubator.py
+          python tools/validate_research_result.py
+          python tools/validate_evidence_candidate.py
+          python tools/validate_decision_records.py
+          python tools/validate_research_job.py
+          python tools/validate_research.py
+
+      - name: Detect generated work and duplicate branch
+        id: changes
+        env:
+          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "skip_submit=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          BOT_BRANCH="architect-bot/${TOP_GAP}/auto-v1"
+          echo "bot_branch=$BOT_BRANCH" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --heads origin "$BOT_BRANCH" >/dev/null 2>&1; then
+            echo "skip_submit=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip_submit=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit bounded Architect evidence
+        if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true'
+        env:
+          BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
+          PILOT_JOB: ${{ steps.pilot.outputs.pilot_job_id }}
+        run: |
+          git config user.name "cipi-architect-bot"
+          git config user.email "cipi-architect-bot@users.noreply.github.com"
+          git switch -c "$BOT_BRANCH"
+          git add -A research/architect research/incubator
+          if [ -n "$PILOT_JOB" ]; then
+            git add -A "research/runs/$PILOT_JOB"
+            git add -A "research/knowledge_candidates/$PILOT_JOB"
+            git add -A "research/decisions/$PILOT_JOB"
+          fi
+          git commit -m "submit autonomous architect evidence: ${{ steps.discover.outputs.top_gap_id }}"
+          python tools/validate_architect_change_scope.py --base origin/main --head HEAD
+          git push --set-upstream origin "$BOT_BRANCH"
+
+      - name: Open Architect review PR
+        id: open_pr
+        continue-on-error: true
+        if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
+          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+        run: |
+          gh pr create --base main --head "$BOT_BRANCH" --title "Autonomous architect evidence: $TOP_GAP" --body "Bounded zero-paid CIPI Research Architect pass. It discovered at most three gaps, ran at most one allowlisted pilot, routed at most one product opportunity through the isolated Plugin Incubator, and passed Architect/Incubator plus existing CIPI research gates. No production plug-in repository, release, adapter-registry mutation, PROMOTE or CONFIRMED action was performed."
+
+      - name: Create review issue when Actions PR creation is disabled
+        if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true' && steps.open_pr.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
+          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+        run: |
+          gh issue create --title "Autonomous architect ready: $TOP_GAP" --body "A bounded Research Architect pass is ready on branch `$BOT_BRANCH`. It may contain Research Gap/Proposal artifacts, at most one allowlisted pilot run and one Plugin Incubator routing decision. All local Architect/Incubator and existing CIPI research validators passed. Production mutation and automatic final promotion are prohibited."
+
+      - name: No new architect work
+        if: steps.changes.outputs.has_changes != 'true'
+        run: echo "No new bounded Research Gap or Incubator work was generated."

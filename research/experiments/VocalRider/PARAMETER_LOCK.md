@@ -12,21 +12,20 @@ This file freezes the first compiled prototype constants so measurement can fals
 - peak envelope for transient confidence: 1 ms attack / 50 ms release;
 - transient freeze threshold: crest proxy > 10 dB and body above -60 dBFS;
 - target sample cadence: 50 ms;
-- target active-history capacity: 400 samples (up to ~20 s);
+- target active-history capacity: 160 accepted samples (up to ~8 s of active 50 ms observations);
 - target statistic: median;
-- target smoothing: 2.5 s;
+- target smoothing after the rolling median changes: 0.20 s;
 - target bootstrap: minimum 6 accepted samples;
-- persistent section evidence threshold: >2.5 dB from effective target;
-- persistent section hold: 4.0 s;
-- section offset tracking speed: up to 1.5 dB/s;
-- section offset bound: ±6 dB;
-- active no-evidence section-offset relaxation: 0.05 dB/s;
-- inactive section-offset relaxation: 0.01 dB/s.
+- no explicit section-offset state in the current candidate;
+- local section behavior is produced by the bounded 8 s rolling active median itself;
+- body-drop protection threshold: recent active Body level > current Body level by 5 dB;
+- recent-Body high reference decays at 4 dB/s;
+- while body-drop protection is active, positive ride is suppressed and the sample is excluded from Auto Target learning.
 
 ## Activity
 
-- enter: -58 dBFS body level;
-- remain active: > -62 dBFS;
+- enter: -66 dBFS body level;
+- remain active: > -74 dBFS;
 - hangover: 180 ms;
 - idle desired gain: 0 dB.
 
@@ -34,13 +33,13 @@ This is deliberately simple. Adaptive noise-floor logic remains a separate resea
 
 ## Gain target
 
-Effective target:
+Local target:
 
-`EffectiveTarget = RobustBaseTarget + SectionOffset`
+`LocalTarget = smoothed_median(last <=8 s accepted active PhraseLevel observations)`
 
 Error:
 
-`e = EffectiveTarget - PhraseLevel`
+`e = LocalTarget - PhraseLevel`
 
 Dead-zone mapping:
 

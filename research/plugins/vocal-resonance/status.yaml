@@ -32,7 +32,9 @@ milestones:
   - Semantic Ranker v0.4 measured NO-GO.
   - Pairwise Semantic Ranker v0.4R.1 measured and rejected.
   - Causal safe-negative Ranker v0.4R.2 improved Top-5 but remained NO-GO.
-  - Motion-coherence Ranker v0.4R.3 measured and rejected.\n  - Clean-negative Audit-001 measured strong technique/singer variation; the earlier lip-trill-specific failure clue did not reproduce.\n  - Temporal Morphology R5 preserved Top-5/strong-effect Top-5 while materially reducing measured clean false triggers; retained only as a falsification candidate.
+  - Motion-coherence Ranker v0.4R.3 measured and rejected.
+  - Clean-negative Audit-001 measured strong technique/singer variation; the earlier lip-trill-specific failure clue did not reproduce.
+  - Temporal Morphology R5 preserved Top-5/strong-effect Top-5 while materially reducing measured clean false triggers; retained only as a falsification candidate.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -41,7 +43,11 @@ unresolved:
   - Clean hard-negative false-trigger behavior remains too high to authorize suppression DSP.
   - Strong-effect target ranking remains below the research gate.
   - The tested v0.4R.3 motion-coherence bundle regressed ranking and is rejected; other temporal evidence remains unproven.
-  - Legacy ACF upper-quantile pitch estimates are not accepted as high-pitch ground truth; Re-audit-002 obtained a usable YIN-style high-pitch subset and did not find elevated false triggers there.\n  - Technique-specific protection is not supported by the independent re-audit; the remaining false-trigger problem is treated as a generic candidate-context problem.\n  - R5 temporal morphology has not yet passed source-overlap, multi-seed, same-C or feature-family ablation checks.\n  - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.\n  - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
+  - Legacy ACF upper-quantile pitch estimates are not accepted as high-pitch ground truth; Re-audit-002 obtained a usable YIN-style high-pitch subset and did not find elevated false triggers there.
+  - Technique-specific protection is not supported by the independent re-audit; the remaining false-trigger problem is treated as a generic candidate-context problem.
+  - R5 temporal morphology has not yet passed source-overlap, multi-seed, same-C or feature-family ablation checks.
+  - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
+  - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
 why_next: "R5 morphology materially reduced measured clean false triggers without lowering Top-5/strong-effect Top-5, but ranking did not improve and the effect may be confounded by source overlap, selected C/threshold, feature bundling or one injection seed. R5b must falsify those alternatives before promotion."

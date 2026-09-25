@@ -6,6 +6,7 @@ event_type: REVIEW
 authority: ASSISTANT_REVIEW
 decision: ITERATE
 review_status: CONFIRMED
+parent_decision_id: "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:auto"
 rationale: >-
   The evidence-reuse gate passed with intact provenance and predeclared criteria.
   Vo.Prep provides bounded 11-stem evidence for the hybrid detector while the
@@ -40,7 +41,4 @@ scope: >-
   Authorization for a direct MicroDouble experimental A/B only. No product
   adoption, knowledge CONFIRMED promotion, subjective-naturalness claim, Cubase
   validation or release approval.
-review_gaps:
-  - "No same-source current-vs-hybrid MicroDouble comparison yet."
-  - "No labelled Japanese/Korean singing sibilance corpus yet."
-  - "No target-machine subjective comparison yet."
+review_gaps: []

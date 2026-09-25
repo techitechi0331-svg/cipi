@@ -1,0 +1,27 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed Vo.Prep manual evidence snapshot",
+    "verify required metric/parameter fields",
+    "verify rejected and unresolved findings remain present",
+    "verify no raw audio is stored under the Vo.Prep CIPI track"
+  ],
+  "completed_at": "2026-09-25T00:30:19.035898Z",
+  "environment": {
+    "experiment_adapter": "vo_prep_snapshot_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-SNAPSHOT-GATE-001",
+  "random_seed": 20260925,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36077789786-1",
+  "schema_version": "1.0",
+  "source_commit": "1d40cd90a7210eb19eaee2434dd6efe7e6868dbb",
+  "started_at": "2026-09-25T00:30:19.033357Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

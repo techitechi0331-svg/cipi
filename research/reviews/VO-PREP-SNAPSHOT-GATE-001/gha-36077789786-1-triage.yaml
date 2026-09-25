@@ -1,0 +1,32 @@
+schema_version: '1.0'
+triage_id: VO-PREP-SNAPSHOT-GATE-001:gha-36077789786-1:triage-v1
+job_id: VO-PREP-SNAPSHOT-GATE-001
+run_id: gha-36077789786-1
+source_run: research/runs/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1
+source_decision_id: VO-PREP-SNAPSHOT-GATE-001:gha-36077789786-1:auto
+source_decision_path: research/decisions/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1-auto.yaml
+job_path: research/jobs/completed/VO-PREP-SNAPSHOT-GATE-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1.yaml
+candidate_class: PROMOTION_CANDIDATE
+route: PROMOTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: PROVISIONAL
+review_gaps: []
+required_human_gates: []
+downstream_gate_signals:
+- Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard
+  are not all formally closed.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Representative real-vocal listening is still required.
+reasons:
+- The declared experiment gate passed and the bounded knowledge candidate requests
+  PROVISIONAL review.
+recommended_action: Review the bounded knowledge claim and evidence scope for PROMOTE/ITERATE/ARCHIVE;
+  do not treat this as product release approval.
+created_at: '2026-09-25T00:30:19.035898Z'
+triage_version: '1.0'
+immutable: true

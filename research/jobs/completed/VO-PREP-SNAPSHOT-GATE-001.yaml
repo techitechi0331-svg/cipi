@@ -1,0 +1,69 @@
+schema_version: '1.0'
+job_id: VO-PREP-SNAPSHOT-GATE-001
+state: COMPLETED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Does the imported Vo.Prep snapshot preserve the required measured
+  fields, negative results, unresolved gates, and no-raw-audio boundary?
+hypothesis: The committed derived-evidence snapshot is internally complete for its
+  declared scope and retains all listed rejected and unresolved findings without raw
+  client audio.
+counter_hypotheses:
+- Required measurement or parameter fields are missing.
+- Rejected or unresolved findings were lost during import.
+- Raw client audio was stored in the CIPI Vo.Prep track.
+baseline:
+- required_snapshot_contract
+variants:
+- imported_vo_prep_snapshot_20260925
+metrics:
+- missing_required_metric_count
+- missing_parameter_section_count
+- retained_rejected_marker_count
+- retained_unresolved_marker_count
+- raw_audio_present
+- dsp_ci_success
+- corrected_program_name
+- official_validator_still_pending
+- cubase_still_pending
+acceptance:
+- No required metric or parameter section is missing.
+- Every predeclared rejected and unresolved marker remains present.
+- No raw audio is stored under the CIPI Vo.Prep track.
+- The imported snapshot preserves validator/Cubase/subjective gates as pending rather
+  than silently closing them.
+rejection:
+- Any required metric or parameter section is missing.
+- Any predeclared rejected or unresolved marker is absent.
+- Any raw audio file is present in the CIPI Vo.Prep track.
+- A pending validator, Cubase, Plosive subjective, or Sibilance subjective gate is
+  silently marked closed.
+max_runs: 1
+timeout_minutes: 2
+random_seed: 20260925
+experiment_adapter: vo_prep_snapshot_gate_v1
+allowed_operations:
+- read_committed_evidence
+- deterministic_snapshot_validation
+prohibited_operations:
+- network_write
+- main_push
+- arbitrary_shell
+- raw_audio_persistence
+- product_dsp_mutation
+- confidence_change
+- current_stage_change
+- automatic_promotion
+- product_release
+knowledge_candidate:
+  claim: The 2026-09-25 Vo.Prep repository evidence can be retained as a bounded derived
+    snapshot without erasing negative or unresolved findings.
+  evidence_type: MEASURED
+  scope: Evidence-integrity of the imported Vo.Prep CIPI snapshot only; not subjective
+    product quality or release readiness.
+  promotion_requested: PROVISIONAL
+continuation:
+  on_accept: []
+  on_reject: []
+latest_run: gha-36077789786-1

@@ -1,0 +1,7 @@
+claim: The 2026-09-25 Vo.Prep repository evidence can be retained as a bounded derived
+  snapshot without erasing negative or unresolved findings.
+evidence_type: MEASURED
+scope: Evidence-integrity of the imported Vo.Prep CIPI snapshot only; not subjective
+  product quality or release readiness.
+source_run: research/runs/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1
+promotion_requested: PROVISIONAL

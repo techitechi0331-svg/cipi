@@ -1,0 +1,15 @@
+metric,value
+missing_required_metric_count,0
+missing_parameter_section_count,0
+retained_rejected_marker_count,6
+expected_rejected_marker_count,6
+retained_unresolved_marker_count,4
+expected_unresolved_marker_count,4
+raw_audio_present,False
+snapshot_says_raw_audio_committed,False
+dsp_ci_success,True
+corrected_program_name,True
+official_validator_still_pending,True
+cubase_still_pending,True
+plosive_subjective_still_pending,True
+sibilance_subjective_still_pending,True

@@ -195,3 +195,31 @@ Next:
 **MODULE 1 v0.4R.4b — Independent Clean-Negative Re-audit.**
 
 No new semantic model family is authorized before that replication.
+
+
+---
+
+# MODULE 1 v0.4R.4b Independent Clean-Negative Re-audit
+
+Run: `VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002 / gha-36072656461-2`
+
+Measured:
+- 40 clean excerpts / 4 singers / 9 techniques / 3 exercise families;
+- zero basename overlap with Audit-001;
+- overall clean false-trigger: 20.0%;
+- fast_piano + fast_forte: 25.0%;
+- other techniques: 18.75%;
+- fast-minus-other: +6.25 points;
+- YIN p90 >=400 Hz: 16 cases with 12.5% false-trigger.
+
+Review:
+- Audit-001 fast-technique concentration **did not replicate**;
+- high pitch was not the dominant false-trigger subgroup;
+- technique-specific and high-pitch-specific protection are not authorized;
+- legacy ACF upper-quantile saturation remains unsuitable as high-pitch ground truth.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.5 — Generic Temporal Morphology.**
+
+Test technique-independent candidate run-length / fragmentation evidence against the unchanged static R2-style ranker and simple prominence baseline.

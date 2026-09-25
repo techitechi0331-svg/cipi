@@ -1,0 +1,52 @@
+schema_version: "1.0"
+decision_id: "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:review-01"
+job_id: MICRODOUBLE-SIBILANCE-R3-GATE-001
+source_run: research/runs/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The predeclared threshold family preserved R1/R2 negative evidence, selected
+  activation 0.62 by the declared highest-passing rule, and reproduced every
+  technical gate on a disjoint five-file holdout. This is sufficient to
+  authorize development-branch integration of the sibilance detector only.
+  It is not sufficient for product release or CONFIRMED shared knowledge.
+declared_rejection_criteria:
+  - Any declared acceptance condition fails.
+  - Negative results are missing or rewritten.
+  - The frozen threshold differs from the predeclared highest-passing rule.
+triggered_criteria: []
+retained_findings:
+  - "R1 remains MEASURED FAIL because processing strength was incorrectly used as a recall proxy."
+  - "R2 activation 0.65 remains MEASURED FAIL: 5.728143 percentage-point recall gap exceeded the fixed 5-point limit."
+  - "R3 activation 0.64 remains failed evidence."
+  - "R3 activation 0.62 and 0.60 passed selection; the conservative highest-passing rule froze 0.62."
+  - "Frozen 0.62 holdout recall was 94.744268% versus baseline 97.464097%."
+  - "Frozen 0.62 holdout non-event occupancy was 0.364273% versus baseline 10.083470%."
+  - "Frozen 0.62 holdout maximum onset was 23.310658 ms."
+reusable_findings:
+  - "Detector event recall and processing strength must be evaluated as separate quantities for precision-biased adaptive vocal protection."
+  - "When a transfer candidate narrowly misses a gate, a small predeclared parameter family plus disjoint holdout can test calibration without silently weakening the original acceptance criterion."
+revisit_if:
+  - "Post-integration product regressions fail."
+  - "Real-vocal renders reveal dulling, air loss, consonant pumping or worse phase/level behavior."
+  - "Target-machine listening rejects the candidate."
+  - "A broader labelled multilingual corpus contradicts the controlled injected-event result."
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-SIBILANCE-REUSE-001
+  related_decisions:
+    - "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:auto"
+created_at: "2026-09-25T12:25:00+09:00"
+immutable: true
+scope: >-
+  Development integration authorization for the MicroDouble sibilance detector
+  at activation 0.62 only. No product release, no knowledge CONFIRMED status,
+  no universal sibilance claim, and no closure of Cubase/listening gates.
+review_gaps:
+  - "No post-integration full product regression yet."
+  - "No post-integration real-vocal render comparison yet."
+  - "No target-machine listening of the integrated detector yet."
+  - "No labelled Japanese/Korean singing sibilance corpus yet."

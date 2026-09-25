@@ -450,3 +450,23 @@ Disjoint holdout for frozen 0.62:
 - all predeclared holdout checks: PASS.
 
 Research Job `MICRODOUBLE-SIBILANCE-R3-GATE-001` independently gates this imported snapshot before any product integration. No raw audio is stored in CIPI.
+
+
+## Review — MICRODOUBLE-SIBILANCE-R3-GATE-001
+
+CIPI run `gha-36089834243-1` passed the snapshot-integrity, negative-result-preservation, deterministic selection and disjoint holdout gates.
+
+Review decision: **ITERATE — authorize product development integration**.
+
+The exact source configuration remains rejected:
+
+- R1 remains a measured protocol failure and reusable metric-semantics lesson;
+- R2 activation 0.65 remains rejected by its fixed relative-recall gate;
+- R3 activation 0.64 remains a negative result;
+- 0.62 and 0.60 passed selection;
+- the predeclared conservative rule chose the highest passing activation: **0.62**;
+- frozen 0.62 independently passed the disjoint five-file holdout.
+
+This review authorizes replacing only the MicroDouble sibilance detector on a development branch. Pitch, human timing, transient protection, Mud Protection, DOUBLE mapping and stereo topology are outside this revision.
+
+The candidate remains **PROVISIONAL** until post-integration regression, VST3/pluginval, real-vocal render comparison and target-machine listening are complete.

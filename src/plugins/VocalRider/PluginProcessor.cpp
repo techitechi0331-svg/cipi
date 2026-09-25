@@ -34,6 +34,18 @@ void VocalRiderAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     rider.prepare (sampleRate);
 
+    amountSmooth.reset (sampleRate, 0.050);
+    outputGainSmooth.reset (sampleRate, 0.020);
+
+    const auto initialAmount = juce::jlimit (
+        0.0f, 1.0f, apvts.getRawParameterValue ("amount")->load() * 0.01f);
+    const auto initialOutputGain = juce::Decibels::decibelsToGain (
+        apvts.getRawParameterValue ("output")->load());
+
+    amountSmooth.setCurrentAndTargetValue (initialAmount);
+    outputGainSmooth.setCurrentAndTargetValue (initialOutputGain);
+    controlsPrimed = true;
+
     lookaheadSamples = juce::jmax (1, static_cast<int> (std::lround (sampleRate * 0.050)));
     delayBuffer.setSize (juce::jmax (1, getTotalNumInputChannels()), lookaheadSamples, false, true, true);
     delayBuffer.clear();
@@ -52,9 +64,22 @@ void VocalRiderAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     if (channels <= 0 || samples <= 0 || delayBuffer.getNumSamples() <= 0)
         return;
 
-    const auto amount = juce::jlimit (0.0f, 1.0f,
-        apvts.getRawParameterValue ("amount")->load() * 0.01f);
-    const auto outputDb = apvts.getRawParameterValue ("output")->load();
+    const auto requestedAmount = juce::jlimit (
+        0.0f, 1.0f, apvts.getRawParameterValue ("amount")->load() * 0.01f);
+    const auto requestedOutputGain = juce::Decibels::decibelsToGain (
+        apvts.getRawParameterValue ("output")->load());
+
+    if (! controlsPrimed)
+    {
+        amountSmooth.setCurrentAndTargetValue (requestedAmount);
+        outputGainSmooth.setCurrentAndTargetValue (requestedOutputGain);
+        controlsPrimed = true;
+    }
+    else
+    {
+        amountSmooth.setTargetValue (requestedAmount);
+        outputGainSmooth.setTargetValue (requestedOutputGain);
+    }
 
     for (int i = 0; i < samples; ++i)
     {
@@ -66,8 +91,10 @@ void VocalRiderAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
             linkedAbs = juce::jmax (linkedAbs, std::abs (input));
         }
 
+        const auto amount = amountSmooth.getNextValue();
+        const auto outputGain = outputGainSmooth.getNextValue();
         const auto rideDb = rider.processSample (linkedAbs, amount);
-        const auto totalGain = juce::Decibels::decibelsToGain (rideDb + outputDb);
+        const auto totalGain = juce::Decibels::decibelsToGain (rideDb) * outputGain;
 
         for (int ch = 0; ch < channels; ++ch)
         {

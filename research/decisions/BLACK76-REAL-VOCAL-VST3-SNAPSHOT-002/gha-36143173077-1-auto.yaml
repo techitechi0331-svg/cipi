@@ -1,0 +1,31 @@
+schema_version: '1.0'
+decision_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:auto
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002; promotion
+  requires review.
+declared_rejection_criteria:
+- Checksum verification still fails.
+- Any previously passing finite-state, clipping, latency, matrix-integrity, provenance,
+  working-unity or raw-audio-safety gate regresses.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001
+  related_decisions:
+  - BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:assistant-review-20260925
+created_at: '2026-09-25T13:57:25.117857Z'
+immutable: true

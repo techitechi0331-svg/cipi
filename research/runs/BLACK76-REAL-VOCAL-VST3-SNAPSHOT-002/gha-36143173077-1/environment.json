@@ -1,0 +1,6 @@
+{
+  "experiment_adapter": "black76_real_vocal_snapshot_gate_v2",
+  "mode": "allowlisted_adapter",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14"
+}

@@ -1,0 +1,17 @@
+metric,value
+checksum_ok,True
+row_count,6
+matrix_complete,True
+all_numeric_finite,True
+sample_rates,[48000]
+latencies,[6]
+input_peak_max_abs_error,0.0
+clip_total,0
+nonfinite_total,0
+max_output_peak,0.504726
+max_sample_step,0.284703
+color_gain_abs_max_db,0.300513
+compression_active_all_cases,True
+provenance_ok,True
+actual_vst3,True
+raw_audio_present_in_cipi,False

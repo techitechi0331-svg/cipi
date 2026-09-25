@@ -1,0 +1,27 @@
+{
+  "baseline": [
+    "black76-real-vocal-vst3-20260925"
+  ],
+  "experiment_adapter": "black76_real_vocal_snapshot_gate_v2",
+  "job_file": "research/jobs/queued/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002.yaml",
+  "metrics": [
+    "checksum_ok",
+    "matrix_complete",
+    "all_numeric_finite",
+    "sample_rates",
+    "latencies",
+    "input_peak_max_abs_error",
+    "clip_total",
+    "nonfinite_total",
+    "max_output_peak",
+    "max_sample_step",
+    "color_gain_abs_max_db",
+    "compression_active_all_cases",
+    "provenance_ok",
+    "actual_vst3",
+    "raw_audio_present_in_cipi"
+  ],
+  "variants": [
+    "black76-real-vocal-vst3-20260925-v2"
+  ]
+}

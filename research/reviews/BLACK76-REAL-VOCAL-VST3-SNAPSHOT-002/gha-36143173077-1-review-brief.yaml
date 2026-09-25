@@ -1,0 +1,118 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:review-brief-v1
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002
+run_id: gha-36143173077-1
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1
+route: HUMAN_GATE_REVIEW
+candidate_class: PROMOTION_CANDIDATE
+triage_path: research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-triage.yaml
+triage_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:triage-v1
+job_path: research/jobs/completed/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002.yaml
+research_question: Does the append-only Black76 actual-VST3 real-vocal Snapshot-002
+  pass the same continuity, clipping, latency, working-unity, provenance, raw-audio-safety
+  and checksum-integrity gates after correcting only the CIPI byte-level packaging?
+hypothesis: Snapshot-002 will preserve every previously passing Black76 DSP/host-derived
+  metric while also passing SHA256 verification because its checksum was computed
+  from the exact bytes committed to CIPI.
+counter_hypotheses:
+- Snapshot-002 still fails checksum verification, indicating the evidence packaging
+  repair is incomplete.
+- A supposedly unchanged behavioral metric differs, indicating Snapshot-002 is not
+  a pure packaging repair.
+acceptance_criteria:
+- The Snapshot-002 committed checksum ledger verifies the exact committed metrics.csv
+  bytes.
+- The six-case two-source by three-mode matrix remains complete.
+- All numerical fields remain finite at 48 kHz with exactly 6 samples of latency.
+- Input peak normalization error remains <= 1e-6 from 0.5.
+- Total clipped and non-finite sample counts remain zero and maximum output peak remains
+  below 1.0.
+- Attack-OFF color gain remains within +/-0.5 dB on both sources.
+- Both compression modes retain at least 3 dB attenuation on every source.
+- Provenance identifies actual VST3 processing and no raw WAV audio exists in the
+  CIPI evidence directory.
+rejection_criteria:
+- Checksum verification still fails.
+- Any previously passing finite-state, clipping, latency, matrix-integrity, provenance,
+  working-unity or raw-audio-safety gate regresses.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 0d98ac7f1812c55ab1ba408a76a4986bbbf4238a
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: actual_vst3
+  value: true
+- path: all_numeric_finite
+  value: true
+- path: checksum_ok
+  value: true
+- path: clip_total
+  value: 0
+- path: color_gain_abs_max_db
+  value: 0.300513
+- path: compression_active_all_cases
+  value: true
+- path: input_peak_max_abs_error
+  value: 0.0
+- path: latencies[0]
+  value: 6
+- path: matrix_complete
+  value: true
+- path: max_output_peak
+  value: 0.504726
+- path: max_sample_step
+  value: 0.284703
+- path: nonfinite_total
+  value: 0
+- path: provenance_ok
+  value: true
+- path: raw_audio_present_in_cipi
+  value: false
+- path: row_count
+  value: 6
+- path: sample_rates[0]
+  value: 48000
+knowledge_candidate:
+  claim: The append-only Black76 actual-VST3 real-vocal Snapshot-002 preserves the
+    previously measured finite clipping-free six-sample-latency behavior while correcting
+    CIPI byte-level checksum integrity.
+  evidence_type: MEASURED
+  scope: Evidence-packaging revision for Black76 Rev E product commit 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693
+    on the same two public pdx-cs-sound/wavs clips and six derived cases; no subjective
+    listening or ratio-fidelity claim.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Subjective level-matched vocal preference remains a human listening gate.
+- Cubase Pro 14 scan, instantiate, automation, preset recall and session behavior
+  remain separate host gates.
+downstream_gate_signals:
+- Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

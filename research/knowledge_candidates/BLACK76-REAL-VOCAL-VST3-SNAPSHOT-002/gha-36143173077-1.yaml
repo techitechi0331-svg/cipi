@@ -1,0 +1,9 @@
+claim: The append-only Black76 actual-VST3 real-vocal Snapshot-002 preserves the previously
+  measured finite clipping-free six-sample-latency behavior while correcting CIPI
+  byte-level checksum integrity.
+evidence_type: MEASURED
+scope: Evidence-packaging revision for Black76 Rev E product commit 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693
+  on the same two public pdx-cs-sound/wavs clips and six derived cases; no subjective
+  listening or ratio-fidelity claim.
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1
+promotion_requested: PROVISIONAL

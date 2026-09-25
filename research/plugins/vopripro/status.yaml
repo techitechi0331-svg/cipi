@@ -30,6 +30,7 @@ completed:
   - revision
 
 unresolved:
+  - Product boundary is now fixed: VoPriPro owns broadband dynamics; Vo.Prep owns problem/event preparation. Transfer candidates still require same-corpus comparison before adoption.
   - Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current main Natural50 A/B pack.
   - The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle recordings and does not establish universal singer/generalisation claims.
   - Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally complete on the user's actual machine.
@@ -37,8 +38,8 @@ unresolved:
   - Final precision review remains pending after subjective and target-host evidence.
 
 next_stage: audio_ab
-why_next: "Current main has passed DSP regression, Windows Debug/Release VST3 build, pluginval Strictness 10, and a registered 24-case public real-vocal engineering gate. The remaining decisive audio question is perceptual naturalness under level-matched listening rather than another unbounded theory search."
-next_confirmation: "Whether Natural50 on the current main candidate should be kept, revised, or rolled back after strict level-matched listening; if kept, proceed to Cubase Pro 14 target-host confirmation."
+why_next: "Current main remains the protected production baseline and has passed the existing objective gates. Human level-matched listening remains the decisive product gate, while independent detector/ballistics/Amount transfer screens may proceed in parallel under No-Wait / Work-Stealing without changing product main."
+next_confirmation: "Whether Natural50 should be kept, revised, or rolled back after strict level-matched listening, and whether any Vo.Prep-derived transfer candidate earns a separate same-corpus product experiment."
 
 blockers:
   - Human listening is required to convert the generated gain-matched A/B pack into perceptual evidence.

@@ -53,6 +53,10 @@ jobs:
         shell: pwsh
         run: cmake --build generated/GoldenGain/build --config Release --parallel 4
 
+      - name: Run Factory-owned DSP matrix
+        shell: pwsh
+        run: ctest --test-dir generated/GoldenGain/build -C Release --output-on-failure
+
       - name: Stage VST3
         shell: pwsh
         run: |
@@ -82,6 +86,31 @@ jobs:
           & $pluginval.FullName --validate $bundle.FullName --strictness-level 5 2>&1 | Tee-Object -FilePath factory-logs/pluginval.log
           if ($LASTEXITCODE -ne 0) { throw "pluginval failed with exit code $LASTEXITCODE." }
 
+      - name: Fetch pinned Steinberg VST3 SDK
+        shell: pwsh
+        run: |
+          git clone https://github.com/steinbergmedia/vst3sdk.git vst3sdk
+          git -C vst3sdk checkout 3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96
+          git -C vst3sdk submodule update --init --recursive
+
+      - name: Configure Steinberg official validator
+        shell: pwsh
+        run: cmake -S vst3sdk -B vst3sdk-build -G "Visual Studio 18 2026" -A x64 -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=ON -DSMTG_ENABLE_VSTGUI_SUPPORT=OFF -DSMTG_CREATE_PLUGIN_LINK=0
+
+      - name: Build Steinberg official validator
+        shell: pwsh
+        run: cmake --build vst3sdk-build --config Release --target validator --parallel 4
+
+      - name: Validate with Steinberg official validator
+        shell: pwsh
+        run: |
+          $validator = Get-ChildItem -Path vst3sdk-build -Recurse -File -Filter validator.exe | Select-Object -First 1
+          if (-not $validator) { throw "Steinberg validator.exe was not produced." }
+          $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "No staged VST3 found for Steinberg validator." }
+          & $validator.FullName $bundle.FullName 2>&1 | Tee-Object -FilePath factory-logs/steinberg-validator.log
+          if ($LASTEXITCODE -ne 0) { throw "Steinberg validator failed with exit code $LASTEXITCODE." }
+
       - name: Promote validation-passed artifact and write provenance
         shell: pwsh
         run: |
@@ -98,7 +127,11 @@ jobs:
             juce_version = "9.0.2"
             build_type = "Release"
             platform = "windows-x64"
-            validator = "pluginval-1.0.4-strictness-5"
+            validators = @(
+              "pluginval-1.0.4-strictness-5",
+              "steinberg-vst3-sdk-3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96"
+            )
+            dsp_matrix = "PASS"
             contract_file_sha256 = $contractHash
             release_authority = $false
           }

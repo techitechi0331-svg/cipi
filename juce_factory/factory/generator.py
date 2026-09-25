@@ -40,7 +40,9 @@ def generate_project(contract: dict[str, Any], output_dir: str | Path) -> Path:
     out = Path(output_dir)
     _refuse_nonempty(out)
     source = out / "Source"
+    tests = out / "Tests"
     source.mkdir(parents=True, exist_ok=True)
+    tests.mkdir(parents=True, exist_ok=True)
 
     plugin = contract["plugin"]
     ui = contract["ui"]
@@ -108,10 +110,17 @@ target_link_libraries({target}
         juce::juce_recommended_config_flags
         juce::juce_recommended_warning_flags
 )
+
+enable_testing()
+add_executable({target}FactoryTests Tests/DspTests.cpp)
+target_include_directories({target}FactoryTests PRIVATE Source)
+add_test(NAME {target}.DSPMatrix COMMAND {target}FactoryTests)
 '''
     processor_h = r'''#pragma once
 
 #include <JuceHeader.h>
+#include <array>
+#include "GoldenGainDSP.h"
 
 class FactoryPluginAudioProcessor final : public juce::AudioProcessor
 {
@@ -146,7 +155,7 @@ public:
 
 private:
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> smoothedGain { 1.0f };
+    GoldenGainDSP dsp;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FactoryPluginAudioProcessor)
 };
@@ -176,9 +185,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout FactoryPluginAudioProcessor:
 
 void FactoryPluginAudioProcessor::prepareToPlay(double sampleRate, int)
 {{
-    smoothedGain.reset(sampleRate, 0.02);
-    const auto db = apvts.getRawParameterValue("gain_db")->load();
-    smoothedGain.setCurrentAndTargetValue(juce::Decibels::decibelsToGain(db));
+    dsp.prepare(sampleRate);
+    dsp.setGainDb(apvts.getRawParameterValue("gain_db")->load());
 }}
 
 bool FactoryPluginAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
@@ -193,18 +201,14 @@ bool FactoryPluginAudioProcessor::isBusesLayoutSupported(const BusesLayout& layo
 void FactoryPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
 {{
     juce::ScopedNoDenormals noDenormals;
-    const auto db = apvts.getRawParameterValue("gain_db")->load();
-    smoothedGain.setTargetValue(juce::Decibels::decibelsToGain(db));
+    dsp.setGainDb(apvts.getRawParameterValue("gain_db")->load());
 
-    const auto channels = buffer.getNumChannels();
-    const auto samples = buffer.getNumSamples();
+    std::array<float*, 2> channels {{ nullptr, nullptr }};
+    const auto numChannels = juce::jmin(buffer.getNumChannels(), static_cast<int>(channels.size()));
+    for (int channel = 0; channel < numChannels; ++channel)
+        channels[static_cast<size_t>(channel)] = buffer.getWritePointer(channel);
 
-    for (int sample = 0; sample < samples; ++sample)
-    {{
-        const float gain = smoothedGain.getNextValue();
-        for (int channel = 0; channel < channels; ++channel)
-            buffer.getWritePointer(channel)[sample] *= gain;
-    }}
+    dsp.process(channels.data(), numChannels, buffer.getNumSamples());
 }}
 
 juce::AudioProcessorEditor* FactoryPluginAudioProcessor::createEditor()
@@ -231,6 +235,223 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
     return new FactoryPluginAudioProcessor();
 }}
 '''
+    dsp_core_h = r'''#pragma once
+
+#include <algorithm>
+#include <cmath>
+
+class GoldenGainDSP
+{
+public:
+    void prepare(double sampleRate)
+    {
+        const auto safeRate = std::isfinite(sampleRate) && sampleRate > 1.0 ? sampleRate : 44100.0;
+        rampLengthSamples = std::max(1, static_cast<int>(std::llround(safeRate * 0.020)));
+        currentGain = targetGain;
+        step = 0.0f;
+        remaining = 0;
+    }
+
+    void setGainDb(float db)
+    {
+        if (!std::isfinite(db))
+            db = 0.0f;
+
+        db = std::clamp(db, -96.0f, 48.0f);
+        const auto nextTarget = std::pow(10.0f, db / 20.0f);
+
+        if (!std::isfinite(nextTarget))
+            return;
+
+        if (std::abs(nextTarget - targetGain) <= 1.0e-9f)
+            return;
+
+        targetGain = nextTarget;
+        remaining = rampLengthSamples;
+        step = (targetGain - currentGain) / static_cast<float>(remaining);
+    }
+
+    void process(float* const* channels, int numChannels, int numSamples)
+    {
+        if (channels == nullptr || numChannels <= 0 || numSamples <= 0)
+            return;
+
+        for (int sample = 0; sample < numSamples; ++sample)
+        {
+            if (remaining > 0)
+            {
+                currentGain += step;
+                --remaining;
+                if (remaining == 0)
+                    currentGain = targetGain;
+            }
+
+            if (!std::isfinite(currentGain))
+            {
+                currentGain = 1.0f;
+                targetGain = 1.0f;
+                step = 0.0f;
+                remaining = 0;
+            }
+
+            for (int channel = 0; channel < numChannels; ++channel)
+            {
+                auto* data = channels[channel];
+                if (data == nullptr)
+                    continue;
+
+                const auto input = std::isfinite(data[sample]) ? data[sample] : 0.0f;
+                const auto output = input * currentGain;
+                data[sample] = std::isfinite(output) ? output : 0.0f;
+            }
+        }
+    }
+
+private:
+    int rampLengthSamples = 882;
+    int remaining = 0;
+    float currentGain = 1.0f;
+    float targetGain = 1.0f;
+    float step = 0.0f;
+};
+'''
+
+    dsp_tests_cpp = r'''#include "GoldenGainDSP.h"
+
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <limits>
+#include <numeric>
+#include <stdexcept>
+#include <vector>
+
+namespace
+{
+void require(bool condition, const char* message)
+{
+    if (!condition)
+        throw std::runtime_error(message);
+}
+
+bool finiteBuffer(const std::vector<float>& buffer)
+{
+    return std::all_of(buffer.begin(), buffer.end(), [](float value) { return std::isfinite(value); });
+}
+
+void processBlocks(GoldenGainDSP& dsp, std::vector<float>& data, const std::vector<int>& blocks)
+{
+    int offset = 0;
+    size_t blockIndex = 0;
+    while (offset < static_cast<int>(data.size()))
+    {
+        const auto requested = blocks[blockIndex++ % blocks.size()];
+        const auto count = std::min(requested, static_cast<int>(data.size()) - offset);
+        float* channel = data.data() + offset;
+        dsp.process(&channel, 1, count);
+        offset += count;
+    }
+}
+
+void testSilenceAndFiniteMatrix()
+{
+    const double sampleRates[] = { 44100.0, 48000.0, 88200.0, 96000.0, 192000.0 };
+    const int blockSizes[] = { 32, 64, 127, 256, 511, 1024 };
+
+    for (auto sampleRate : sampleRates)
+    {
+        for (auto blockSize : blockSizes)
+        {
+            GoldenGainDSP dsp;
+            dsp.prepare(sampleRate);
+            dsp.setGainDb(24.0f);
+            std::vector<float> data(static_cast<size_t>(blockSize), 0.0f);
+            float* channel = data.data();
+            dsp.process(&channel, 1, blockSize);
+            require(finiteBuffer(data), "silence matrix produced non-finite output");
+            require(std::all_of(data.begin(), data.end(), [](float value) { return value == 0.0f; }),
+                    "silence matrix produced non-zero output");
+        }
+    }
+}
+
+void testSettledGain()
+{
+    GoldenGainDSP dsp;
+    dsp.prepare(48000.0);
+    dsp.setGainDb(6.0f);
+    std::vector<float> data(2200, 1.0f);
+    processBlocks(dsp, data, { 64, 127, 31, 256 });
+    const auto expected = std::pow(10.0f, 6.0f / 20.0f);
+    require(std::abs(data.back() - expected) < 1.0e-4f, "gain did not settle to expected value");
+}
+
+void testBlockSegmentationInvariant()
+{
+    std::vector<float> a(4096, 0.25f);
+    std::vector<float> b = a;
+
+    GoldenGainDSP first;
+    GoldenGainDSP second;
+    first.prepare(96000.0);
+    second.prepare(96000.0);
+    first.setGainDb(12.0f);
+    second.setGainDb(12.0f);
+
+    processBlocks(first, a, { 4096 });
+    processBlocks(second, b, { 17, 64, 255, 1024, 33 });
+
+    require(a.size() == b.size(), "block invariance size mismatch");
+    for (size_t i = 0; i < a.size(); ++i)
+        require(std::abs(a[i] - b[i]) < 1.0e-7f, "block segmentation changed DSP output");
+}
+
+void testRapidAutomationAndNonFiniteDefense()
+{
+    GoldenGainDSP dsp;
+    dsp.prepare(44100.0);
+
+    std::vector<float> data(8192, 0.5f);
+    int offset = 0;
+    bool high = false;
+    while (offset < static_cast<int>(data.size()))
+    {
+        dsp.setGainDb(high ? 24.0f : -24.0f);
+        high = !high;
+        const auto count = std::min(37, static_cast<int>(data.size()) - offset);
+        float* channel = data.data() + offset;
+        dsp.process(&channel, 1, count);
+        offset += count;
+    }
+    require(finiteBuffer(data), "rapid automation produced non-finite output");
+
+    dsp.setGainDb(std::numeric_limits<float>::quiet_NaN());
+    std::vector<float> hostile { 1.0f, std::numeric_limits<float>::infinity(), -1.0f };
+    float* channel = hostile.data();
+    dsp.process(&channel, 1, static_cast<int>(hostile.size()));
+    require(finiteBuffer(hostile), "non-finite defense failed");
+}
+}
+
+int main()
+{
+    try
+    {
+        testSilenceAndFiniteMatrix();
+        testSettledGain();
+        testBlockSegmentationInvariant();
+        testRapidAutomationAndNonFiniteDefense();
+        std::cout << "JUCE Factory DSP matrix: PASS\n";
+        return 0;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "JUCE Factory DSP matrix: FAIL: " << e.what() << "\n";
+        return 1;
+    }
+}
+'''
+
     editor_h = r'''#pragma once
 
 #include <JuceHeader.h>
@@ -311,6 +532,8 @@ void FactoryPluginAudioProcessorEditor::resized()
     }
 
     (out / "CMakeLists.txt").write_text(cmake, encoding="utf-8")
+    (source / "GoldenGainDSP.h").write_text(dsp_core_h, encoding="utf-8")
+    (tests / "DspTests.cpp").write_text(dsp_tests_cpp, encoding="utf-8")
     (source / "PluginProcessor.h").write_text(processor_h, encoding="utf-8")
     (source / "PluginProcessor.cpp").write_text(processor_cpp, encoding="utf-8")
     (source / "PluginEditor.h").write_text(editor_h, encoding="utf-8")

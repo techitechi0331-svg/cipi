@@ -131,3 +131,6 @@ def validate_contract(data: dict[str, Any]) -> None:
     for key in ("pluginval", "state_restore", "automation", "silence", "nan_inf"):
         if not isinstance(validation.get(key), bool):
             raise ContractError(f"validation.{key} must be boolean")
+    for key in ("dsp_matrix", "official_vst3_validator"):
+        if key in validation and not isinstance(validation.get(key), bool):
+            raise ContractError(f"validation.{key} must be boolean when present")

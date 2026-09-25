@@ -34,6 +34,12 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_contract(bad)
 
+    def test_optional_validation_gate_must_be_boolean(self):
+        bad = copy.deepcopy(self.contract)
+        bad["validation"]["official_vst3_validator"] = "yes"
+        with self.assertRaises(ContractError):
+            validate_contract(bad)
+
     def test_contract_hash_is_stable(self):
         a = contract_sha256(self.contract)
         b = contract_sha256(json.loads(json.dumps(self.contract, sort_keys=True)))
@@ -54,6 +60,11 @@ class ContractTests(unittest.TestCase):
             self.assertTrue((out / "CMakeLists.txt").exists())
             self.assertTrue((out / "factory_manifest.json").exists())
             self.assertTrue((out / "Source" / "PluginProcessor.cpp").exists())
+            self.assertTrue((out / "Source" / "GoldenGainDSP.h").exists())
+            self.assertTrue((out / "Tests" / "DspTests.cpp").exists())
+            cmake = (out / "CMakeLists.txt").read_text(encoding="utf-8")
+            self.assertIn("FactoryTests", cmake)
+            self.assertIn("add_test", cmake)
             processor = (out / "Source" / "PluginProcessor.cpp").read_text(encoding="utf-8")
             self.assertIn("NormalisableRange<float>(-24.0f, 24.0f, 0.01f)", processor)
             self.assertIn("\n        0.0f,\n", processor)

@@ -1,0 +1,38 @@
+schema_version: '1.0'
+triage_id: MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:triage-v1
+job_id: MICRODOUBLE-TRANSIENT-NECESSITY-001
+run_id: gha-36172074567-1
+source_run: research/runs/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1
+source_decision_id: MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:auto
+source_decision_path: research/decisions/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-auto.yaml
+job_path: research/jobs/completed/000-MICRODOUBLE-TRANSIENT-NECESSITY-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1.yaml
+candidate_class: REJECT_CANDIDATE
+route: REJECTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: false
+rejection_triggered: true
+promotion_requested: PROVISIONAL
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+required_human_gates:
+- Human review before any augment-only candidate implementation.
+downstream_gate_signals:
+- Broader target-machine listening across additional vocal styles/settings is still
+  desirable; first target-machine 50% checkpoint is complete and was reported as slightly
+  strong but acceptable.
+- v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline
+  render and latency-compensation confirmation.
+- Final release evidence requires Cubase Pro 14 and target-machine listening.
+reasons:
+- The automated proposal is REJECT; final rejection still requires review authority.
+recommended_action: Review the triggered rejection criteria, retained findings, reusable
+  findings and revisit conditions; confirm or supersede with a new REVIEW decision.
+created_at: '2026-09-25T18:22:21.855581Z'
+triage_version: '1.0'
+immutable: true

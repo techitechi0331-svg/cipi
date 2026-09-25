@@ -1,0 +1,26 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "simulate exact current MicroDouble generic transient equations",
+    "simulate Vo.Prep plosive-context equations",
+    "run deterministic six-case necessity matrix at 48 kHz"
+  ],
+  "completed_at": "2026-09-25T18:22:21.855581Z",
+  "environment": {
+    "experiment_adapter": "microdouble_transient_necessity_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001",
+  "random_seed": 20260926,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36172074567-1",
+  "schema_version": "1.0",
+  "source_commit": "bdb429c33803a195bdb597ea1869af65ed103230",
+  "started_at": "2026-09-25T18:22:20.146589Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

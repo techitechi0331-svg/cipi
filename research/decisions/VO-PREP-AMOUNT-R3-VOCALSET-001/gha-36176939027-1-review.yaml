@@ -1,0 +1,54 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-AMOUNT-R3-VOCALSET-001:gha-36176939027-1:review-01"
+job_id: VO-PREP-AMOUNT-R3-VOCALSET-001
+source_run: research/runs/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Revision 3 is rejected as the final Vo.Prep Amount mapping. All five predeclared
+  DesiredGR-scaling candidates failed the selection split before final holdout was
+  opened. The common failure was insufficient mean gain reduction at Amount 50,
+  75 and 100 on the VocalSet selection singers, while ripple, peak-safety,
+  monotonicity and cross-source consistency remained comfortably inside their
+  declared limits. This falsifies the tested fixed relative-offset family as a
+  corpus-robust intensity mapping. It does not by itself falsify the explicit
+  4-second Learn / P50 reference architecture.
+declared_rejection_criteria:
+  - No candidate passes all selection-margin gates.
+  - The frozen selected candidate fails any unchanged original gate on the untouched final holdout singers.
+  - Any required singer has fewer than two qualifying files.
+  - Any selection/final-holdout singer overlap occurs.
+  - Raw public audio is persisted into the evidence branch.
+triggered_criteria:
+  - "No candidate passed all selection-margin gates; every target100 candidate from 5.0 through 5.5 dB failed Amount 50, 75 and 100 mean-GR lower bounds."
+retained_findings:
+  - "The final holdout singers f3, f4, m3 and m4 were never opened because selection produced no passing candidate."
+  - "The strongest tested candidate, desired_gr_scale_target100_5.5, produced selection mean GR of 2.438650414005983 dB at Amount 50, 3.6579756210089736 dB at Amount 75, and 4.877300828011966 dB at Amount 100."
+  - "The same 5.5 dB candidate had only 0.013386127527060143 dB aggregate GR ripple at Amount 100, far below both the 0.075 dB selection margin and 0.080 dB final product gate."
+  - "The 5.5 dB candidate's Amount-50 cross-source mean-GR standard deviation was 0.45616606353987904 dB, within the 1.0 dB gate."
+  - "Ballistics homogeneity diagnostic error was 0 for the evaluated Amount points, so the failure is not explained by the cached linear scaling implementation."
+reusable_findings:
+  - "A fixed threshold offset relative to the learned P50 vocal reference is not sufficient by itself to make user-facing compression intensity transfer across the tested HUST-to-VocalSet corpus change."
+  - "For this VocalSet cohort the limiting failure mode was under-strength, not GR ripple or high-GR safety."
+  - "Selection-before-holdout preserved final-holdout integrity and prevented post-hoc tuning to the untouched singers."
+  - "The explicit Learn/P50 reference remains a viable setup architecture; the next revision should change the Amount operating-point calibration rather than reintroduce hidden continuous auto-threshold behavior."
+revisit_if:
+  - "A predeclared Learn-time self-calibration derives compression intensity from the learned EffectiveLevel distribution instead of a corpus-calibrated fixed offset."
+  - "A new candidate family is selected on previously unused singers and evaluated once on different untouched singers."
+  - "A changed frozen core materially changes the static-curve or ballistics relationship and is independently revalidated first."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-R2-001
+    - VO-PREP-AMOUNT-MAP-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R3-VOCALSET-001:gha-36176939027-1:auto"
+    - "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:review-01"
+    - "VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:review-01"
+parent_decision_id: "VO-PREP-AMOUNT-R3-VOCALSET-001:gha-36176939027-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Vo.Prep Amount Revision 3 on eight singer-disjoint VocalSet subjects with two qualifying files per singer, explicit 4-second Learn/P50 reference, frozen 8/70 ms core and unchanged product gates."
+review_gaps: []

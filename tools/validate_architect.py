@@ -43,6 +43,8 @@ def validate_root(root: Path) -> list[str]:
             errors.append(f"{path}: invalid signal state")
         if data.get("executable") is not False:
             errors.append(f"{path}: research-gap signal must be non-executable")
+        if "signal_class" in data and data.get("signal_class") not in {"RESEARCH_GAP","DATA_GAP","HUMAN_GATE"}:
+            errors.append(f"{path}: invalid signal_class")
 
     for path in sorted((base/"gaps").glob("*.yaml")) if (base/"gaps").exists() else []:
         try: data=load(path)

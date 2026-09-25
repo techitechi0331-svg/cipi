@@ -1,0 +1,18 @@
+{
+  "baseline": [
+    "current_vopripro_natural50_detector"
+  ],
+  "experiment_adapter": "vopripro_detector_transfer_screen_v1",
+  "job_file": "research/jobs/queued/VOPRIPRO-DETECTOR-TRANSFER-001.yaml",
+  "metrics": [
+    "all_finite",
+    "sustained_body_max_abs_active_mean_delta_db",
+    "short_transient_max_extra_peak_gr_db",
+    "problem_event_max_extra_peak_gr_db",
+    "body_plus_transient_min_peak_gr_ratio",
+    "candidate_max_peak_gr_sample_rate_spread_db"
+  ],
+  "variants": [
+    "voprep_slow_rms_fast_peak_minus6_fusion"
+  ]
+}

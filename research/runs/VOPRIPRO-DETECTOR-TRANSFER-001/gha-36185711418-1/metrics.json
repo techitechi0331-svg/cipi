@@ -1,0 +1,137 @@
+{
+  "acceptance": {
+    "body_plus_transient_peak_retention_ge_50pct": true,
+    "candidate_peak_gr_sample_rate_spread_le_0_10db": true,
+    "event_extra_peak_gr_le_0_50db": true,
+    "finite": true,
+    "short_transient_extra_peak_gr_le_0_25db": false,
+    "sustained_body_mean_delta_le_0_25db": false
+  },
+  "acceptance_met": false,
+  "aggregate_metrics": {
+    "all_finite": true,
+    "body_plus_transient_min_peak_gr_ratio": 1.032765343568673,
+    "candidate_max_peak_gr_sample_rate_spread_db": 0.005098105745271475,
+    "problem_event_max_extra_peak_gr_db": 0.0969375204379368,
+    "short_transient_max_extra_peak_gr_db": 1.142993087118624,
+    "sustained_body_max_abs_active_mean_delta_db": 0.4861421462459137
+  },
+  "baseline": "VoPriPro Natural50 35/65 instantaneous-peak + 25 ms RMS amplitude blend",
+  "by_case": {
+    "body_plus_transient": {
+      "baseline_peak_gr_mean_db": 4.799527564663055,
+      "candidate_active_mean_sr_spread_db": 0.00016420949371509508,
+      "candidate_peak_gr_mean_db": 4.957397914759579,
+      "candidate_peak_gr_sr_spread_db": 0.0009210719064931538,
+      "delta_peak_gr_max_db": 0.15813046169943412,
+      "delta_peak_gr_min_db": 0.15725769600187345
+    },
+    "body_step": {
+      "baseline_peak_gr_mean_db": 5.787392992906276,
+      "candidate_active_mean_sr_spread_db": 0.0009858668092199707,
+      "candidate_peak_gr_mean_db": 5.493574082162606,
+      "candidate_peak_gr_sr_spread_db": 3.0212426587183927e-06,
+      "delta_peak_gr_max_db": -0.2938019059659487,
+      "delta_peak_gr_min_db": -0.29383832607306104
+    },
+    "breath_noise": {
+      "baseline_peak_gr_mean_db": 0.017727811119389286,
+      "candidate_active_mean_sr_spread_db": 0.0,
+      "candidate_peak_gr_mean_db": 0.0,
+      "candidate_peak_gr_sr_spread_db": 0.0,
+      "delta_peak_gr_max_db": -0.01686498033228273,
+      "delta_peak_gr_min_db": -0.01867697703131552
+    },
+    "plosive_low": {
+      "baseline_peak_gr_mean_db": 1.8377247571054662,
+      "candidate_active_mean_sr_spread_db": 0.00029620523263584886,
+      "candidate_peak_gr_mean_db": 1.8806315348974216,
+      "candidate_peak_gr_sr_spread_db": 0.00019073673914249412,
+      "delta_peak_gr_max_db": 0.043298898064832336,
+      "delta_peak_gr_min_db": 0.04258453961276798
+    },
+    "sibilant_high": {
+      "baseline_peak_gr_mean_db": 5.831326411753699,
+      "candidate_active_mean_sr_spread_db": 0.0666002837313644,
+      "candidate_peak_gr_mean_db": 5.925569212145653,
+      "candidate_peak_gr_sr_spread_db": 0.005098105745271475,
+      "delta_peak_gr_max_db": 0.0969375204379368,
+      "delta_peak_gr_min_db": 0.09155624110785965
+    },
+    "sustained_body": {
+      "baseline_peak_gr_mean_db": 3.546326367002867,
+      "candidate_active_mean_sr_spread_db": 5.2687176235632904e-05,
+      "candidate_peak_gr_mean_db": 3.0177479607493565,
+      "candidate_peak_gr_sr_spread_db": 2.8362769310952274e-06,
+      "delta_peak_gr_max_db": -0.5283901108368214,
+      "delta_peak_gr_min_db": -0.5287320028924767
+    },
+    "transient_10ms": {
+      "baseline_peak_gr_mean_db": 2.280123484187284,
+      "candidate_active_mean_sr_spread_db": 0.003650701668476364,
+      "candidate_peak_gr_mean_db": 3.422274842141194,
+      "candidate_peak_gr_sr_spread_db": 0.0013564071726577254,
+      "delta_peak_gr_max_db": 1.142993087118624,
+      "delta_peak_gr_min_db": 1.1398971619338267
+    },
+    "transient_30ms": {
+      "baseline_peak_gr_mean_db": 4.478944488631501,
+      "candidate_active_mean_sr_spread_db": 0.0025098035673316588,
+      "candidate_peak_gr_mean_db": 5.263718031934949,
+      "candidate_peak_gr_sr_spread_db": 0.0010438145251230324,
+      "delta_peak_gr_max_db": 0.7854723134334058,
+      "delta_peak_gr_min_db": 0.7829048674155041
+    }
+  },
+  "candidate": "Vo.Prep-derived max(25 ms RMS, instantaneous peak - 6 dB) fusion",
+  "experiment": "VOPRIPRO_DETECTOR_TRANSFER_SCREEN_V1",
+  "interpretation": "Passing is only an eligibility screen for real-vocal comparison. It does not prove perceptual superiority or authorize product integration.",
+  "reference_calibration": [
+    {
+      "baseline_reference_db": -21.5113418154811,
+      "baseline_threshold_db": -26.204935279629183,
+      "candidate_reference_db": -21.08578685770098,
+      "candidate_threshold_db": -25.77938032184906,
+      "sample_rate": 44100
+    },
+    {
+      "baseline_reference_db": -21.51133174234361,
+      "baseline_threshold_db": -26.204925206491694,
+      "candidate_reference_db": -21.08579015221075,
+      "candidate_threshold_db": -25.779383616358828,
+      "sample_rate": 48000
+    },
+    {
+      "baseline_reference_db": -21.511272712072653,
+      "baseline_threshold_db": -26.204866176220733,
+      "candidate_reference_db": -21.085803531417067,
+      "candidate_threshold_db": -25.77939699556515,
+      "sample_rate": 96000
+    },
+    {
+      "baseline_reference_db": -21.511239642355708,
+      "baseline_threshold_db": -26.20483310650379,
+      "candidate_reference_db": -21.085806876459845,
+      "candidate_threshold_db": -25.77940034060793,
+      "sample_rate": 192000
+    }
+  ],
+  "sample_rates": [
+    44100,
+    48000,
+    96000,
+    192000
+  ],
+  "seed": 20260926,
+  "shared_conditions": {
+    "attack_ms": 20.0,
+    "calibration_gr_db": 3.0,
+    "knee_db": 12.0,
+    "max_gr_db": 6.0,
+    "ratio": 2.7,
+    "release_ms": 110.0,
+    "rms_tau_ms": 25.0,
+    "sidechain_hpf_hz": 80.0,
+    "sidechain_hpf_q": 0.70710678
+  }
+}

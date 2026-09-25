@@ -1,0 +1,43 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-DETECTOR-TRANSFER-001:gha-36185711418-1:auto
+job_id: VOPRIPRO-DETECTOR-TRANSFER-001
+source_run: research/runs/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: If any predeclared detector-transfer gate fails, retain the failed case
+  metrics and reject this transfer formulation for VoPriPro until a materially different
+  detector formulation is proposed.
+scope: VoPriPro detector transfer v1 only.
+declared_rejection_criteria:
+- Any numeric trajectory is non-finite.
+- Sustained-body active mean GR differs by more than 0.25 dB after equal reference
+  calibration.
+- Candidate adds more than 0.25 dB peak GR on either short-transient proxy.
+- Candidate adds more than 0.50 dB peak GR on a problem-event proxy.
+- Candidate body-plus-transient peak GR falls below 50 percent of the current detector.
+- Candidate peak-GR sample-rate spread exceeds 0.10 dB.
+triggered_criteria: []
+retained_findings:
+- Preserve all per-case baseline/candidate GR measurements and the exact common compressor
+  conditions.
+- Preserve which transient/event/sample-rate gate caused rejection.
+reusable_findings:
+- Detector transfers should be calibrated to the same sustained-body operating point
+  before transient/event comparison.
+- A more complex detector must be screened against problem-event proxies before real-vocal
+  product experiments.
+revisit_if:
+- A materially different fusion rule or peak allowance is proposed with a new predeclared
+  job.
+- New evidence shows this synthetic matrix is missing a critical detector failure
+  mode.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T20:26:20.606134Z'
+immutable: true

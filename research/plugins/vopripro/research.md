@@ -83,3 +83,23 @@ Immediate transfer-research order:
 
 The scope explicitly excludes Plosive Guard, Sibilance Guard / de-essing, Macro/Phrase Rider, resonance/noise cleanup, analog coloration, channel-strip and finisher functions from VoPriPro.
 
+## 2026-09-26 detector transfer screen v1
+
+Autonomous job:
+- `VOPRIPRO-DETECTOR-TRANSFER-001`
+- run: `research/runs/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1`
+
+Result:
+- **REJECT for the direct transfer formulation**
+- all numeric trajectories finite;
+- sustained-body active mean GR difference reached about **0.486 dB**, exceeding the locked 0.25 dB limit;
+- short-transient extra peak GR reached about **+1.143 dB**, exceeding the locked +0.25 dB limit;
+- problem-event extra peak GR stayed within the locked +0.50 dB limit;
+- candidate peak-GR sample-rate spread was only about **0.0051 dB** across 44.1/48/96/192 kHz.
+
+Interpretation:
+
+The direct `max(25 ms RMS, instantaneous Peak - 6 dB)` fusion from Vo.Prep is not eligible for direct VoPriPro product transfer. The result does **not** invalidate Vo.Prep's source research and does not reject a materially different limited Fast-Peak assist design.
+
+The current VoPriPro Natural50 detector remains the protected production baseline. The next independent transfer question is ballistics rather than weakening this detector gate after seeing the result.
+

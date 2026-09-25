@@ -1,0 +1,8 @@
+claim: A Vo.Prep-derived Slow-RMS/Fast-Peak fusion is eligible for same-corpus real-vocal
+  VoPriPro comparison only if it preserves body control without increasing short-transient
+  or problem-event gain reduction under the fixed synthetic screen.
+evidence_type: HYPOTHESIS
+scope: Synthetic detector-transfer eligibility screen only; no perceptual superiority
+  or product-integration claim.
+source_run: research/runs/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1
+promotion_requested: HYPOTHESIS

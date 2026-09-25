@@ -44,6 +44,12 @@ jobs:
       - name: Install pinned dependency
         run: python -m pip install PyYAML==6.0.2
 
+      - name: Validate scheduler contracts
+        run: |
+          python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
+          python tools/test_autonomy_stack.py
+
       - name: Build DAG and health dashboard
         id: dag
         shell: bash
@@ -53,6 +59,10 @@ jobs:
           python automation/orchestrator/global_dag.py \
             --cross-repo-enabled "$ENABLED" \
             --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate generated health dashboard
+        if: steps.dag.outputs.dashboard_changed == 'true'
+        run: python tools/validate_autonomy_state.py
 
       - name: Commit health dashboard when changed
         if: steps.dag.outputs.dashboard_changed == 'true'

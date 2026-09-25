@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "automation" / "queue"))
 
 from select_job import choose_job  # noqa: E402
+from validate_research_job import validate as validate_research_job  # noqa: E402
 
 
 def write_job(root: Path, name: str, job_id: str, *, state: str = "QUEUED", priority: int = 0, deps: list[str] | None = None) -> None:
@@ -73,6 +74,17 @@ def main() -> int:
         write_job(queued, "001-high.yaml", "HIGH-BLOCKED-001", priority=100, deps=["DEP-001"])
         write_job(queued, "002-explicit.yaml", "EXTERNAL-001", state="BLOCKED_EXTERNAL", priority=90)
         write_job(queued, "003-ready.yaml", "READY-001", priority=10)
+
+        for path in queued.glob("*.yaml"):
+            assert validate_research_job(path) == []
+
+        invalid = queued / "004-invalid-blocked.yaml"
+        write_job(queued, invalid.name, "INVALID-BLOCKED-001", state="BLOCKED_EXTERNAL", priority=-10)
+        invalid_data = yaml.safe_load(invalid.read_text(encoding="utf-8"))
+        invalid_data.pop("external_wait")
+        invalid.write_text(yaml.safe_dump(invalid_data, sort_keys=False), encoding="utf-8")
+        assert any("BLOCKED_EXTERNAL requires" in error for error in validate_research_job(invalid))
+        invalid.unlink()
 
         selected, stats = choose_job(queued, completed, branch_exists=lambda _: False)
         assert selected is not None and selected[1] == "READY-001"

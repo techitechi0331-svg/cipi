@@ -122,3 +122,28 @@ Before a broad reusable principle is promoted:
 
 Cross-track synthesis itself is review evidence, not a new measurement. Shared candidates should therefore remain below CONFIRMED until their stated scope is independently challenged and survives contradiction review.
 
+## Autonomous gap discovery
+
+CIPI may now discover bounded research gaps from a reviewed topic catalog instead of requiring every Research Job to be hand-authored first.
+
+The autonomous path is:
+
+`EVIDENCE SCAN -> GAP -> RESEARCH PROPOSAL -> ALLOWLISTED PILOT OR NEEDS_ADAPTER -> REVIEW -> FORMAL RESEARCH`
+
+Rules:
+- gap scoring ranks work; it does not establish truth;
+- the proposal must contain a counter-hypothesis, baseline, metrics, acceptance and rejection conditions before any pilot;
+- missing execution support becomes `NEEDS_ADAPTER`, never arbitrary code execution;
+- pilot success creates only pending research evidence;
+- formal Research Jobs and existing review authority remain the route for deeper promotion.
+
+## Plugin Incubator
+
+Product-oriented research can additionally flow through:
+
+`RESEARCH PROPOSAL -> PRODUCT OVERLAP REVIEW -> MERGE_EXISTING | ITERATE | INCUBATE | ARCHIVE | REJECT`
+
+The Incubator is deliberately conservative. A new plug-in is not justified merely because a DSP idea is measurable. Existing product overlap, user problem, baseline advantage, CPU/latency, holdout evidence and negative knowledge must be considered first.
+
+Official repository creation, product naming, release, subjective naturalness and Cubase Pro 14 approval remain outside autonomous authority.
+

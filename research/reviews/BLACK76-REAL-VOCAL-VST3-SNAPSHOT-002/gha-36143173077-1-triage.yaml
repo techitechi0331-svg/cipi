@@ -1,0 +1,31 @@
+schema_version: '1.0'
+triage_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:triage-v1
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002
+run_id: gha-36143173077-1
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1
+source_decision_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:auto
+source_decision_path: research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-auto.yaml
+job_path: research/jobs/completed/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002.yaml
+knowledge_candidate_path: research/knowledge_candidates/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1.yaml
+candidate_class: PROMOTION_CANDIDATE
+route: HUMAN_GATE_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: PROVISIONAL
+review_gaps: []
+required_human_gates:
+- Subjective level-matched vocal preference remains a human listening gate.
+- Cubase Pro 14 scan, instantiate, automation, preset recall and session behavior
+  remain separate host gates.
+downstream_gate_signals:
+- Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+reasons:
+- The research job explicitly requires human gates before further promotion.
+recommended_action: Resolve the listed review gaps or required human gates before
+  a final knowledge decision.
+created_at: '2026-09-25T13:57:25.117857Z'
+triage_version: '1.0'
+immutable: true

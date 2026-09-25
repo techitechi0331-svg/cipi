@@ -1,0 +1,22 @@
+{
+  "actual_vst3": true,
+  "all_numeric_finite": true,
+  "checksum_ok": true,
+  "clip_total": 0,
+  "color_gain_abs_max_db": 0.300513,
+  "compression_active_all_cases": true,
+  "input_peak_max_abs_error": 0.0,
+  "latencies": [
+    6
+  ],
+  "matrix_complete": true,
+  "max_output_peak": 0.504726,
+  "max_sample_step": 0.284703,
+  "nonfinite_total": 0,
+  "provenance_ok": true,
+  "raw_audio_present_in_cipi": false,
+  "row_count": 6,
+  "sample_rates": [
+    48000
+  ]
+}

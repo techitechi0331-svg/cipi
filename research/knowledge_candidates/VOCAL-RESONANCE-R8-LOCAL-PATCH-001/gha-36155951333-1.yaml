@@ -1,0 +1,6 @@
+claim: Single-view multi-scale local spectro-temporal patch shape may recover part
+  of the causal resonance information revealed by the paired R7 oracle.
+evidence_type: HYPOTHESIS
+scope: Deployable vocal-resonance semantic ranking without a clean reference.
+source_run: research/runs/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1
+promotion_requested: HYPOTHESIS

@@ -1,0 +1,191 @@
+{
+  "candidate_budget": 20,
+  "experiment": "VOCAL_RESONANCE_R8_SINGLE_VIEW_LOCAL_PATCH",
+  "feature_family": [
+    "ms_resid_s2_q80",
+    "ms_resid_s4_q80",
+    "ms_resid_s8_q80",
+    "ms_resid_s12_q80",
+    "narrow_minus_broad",
+    "shoulder_drop_2_q80",
+    "shoulder_drop_4_q80",
+    "shoulder_drop_8_q80",
+    "shoulder_asym_4_median",
+    "center_neighbor_corr_4",
+    "center_neighbor_corr_8",
+    "patch_stationarity_4"
+  ],
+  "per_seed": {
+    "20261003": {
+      "conditional_top5_gap_closure": 0.0,
+      "external_clean_n": 40,
+      "external_clean_patch_fpr": 0.325,
+      "external_clean_static_fpr": 0.175,
+      "oracle_conditional_top5": 1.0,
+      "oracle_strong_conditional_top5": 1.0,
+      "patch_C": 0.03,
+      "patch_test": {
+        "generator_ceiling": 0.9375,
+        "mrr": 0.1826531509157767,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 11,
+        "strong_top5_given_generator_hit": 0.45454545454545453,
+        "top1": 0.0625,
+        "top1_given_generator_hit": 0.06666666666666667,
+        "top3": 0.09375,
+        "top3_given_generator_hit": 0.1,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.4166666666666667,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      },
+      "patch_validation": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.19267214097177332,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.09375,
+        "top1_given_generator_hit": 0.1111111111111111,
+        "top3": 0.125,
+        "top3_given_generator_hit": 0.14814814814814814,
+        "top5": 0.28125,
+        "top5_effect_gte3": 0.3125,
+        "top5_given_generator_hit": 0.3333333333333333,
+        "top5_high_f0": null
+      },
+      "seed": 20261003,
+      "static_C": 0.03,
+      "static_test": {
+        "generator_ceiling": 0.9375,
+        "mrr": 0.17148762051287206,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 11,
+        "strong_top5_given_generator_hit": 0.36363636363636365,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.125,
+        "top3_given_generator_hit": 0.13333333333333333,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.3333333333333333,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      },
+      "static_validation": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.22097617201017933,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.0625,
+        "top1_given_generator_hit": 0.07407407407407407,
+        "top3": 0.28125,
+        "top3_given_generator_hit": 0.3333333333333333,
+        "top5": 0.375,
+        "top5_effect_gte3": 0.4375,
+        "top5_given_generator_hit": 0.4444444444444444,
+        "top5_high_f0": null
+      }
+    },
+    "20261013": {
+      "conditional_top5_gap_closure": -0.07142857142857141,
+      "external_clean_n": 40,
+      "external_clean_patch_fpr": 0.425,
+      "external_clean_static_fpr": 0.25,
+      "oracle_conditional_top5": 0.9259259259259259,
+      "oracle_strong_conditional_top5": 1.0,
+      "patch_C": 0.3,
+      "patch_test": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.2705397594643918,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 14,
+        "strong_top5_given_generator_hit": 0.2857142857142857,
+        "top1": 0.125,
+        "top1_given_generator_hit": 0.14814814814814814,
+        "top3": 0.3125,
+        "top3_given_generator_hit": 0.37037037037037035,
+        "top5": 0.3125,
+        "top5_effect_gte3": 0.2857142857142857,
+        "top5_given_generator_hit": 0.37037037037037035,
+        "top5_high_f0": null
+      },
+      "patch_validation": {
+        "generator_ceiling": 0.75,
+        "mrr": 0.26537811147186147,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.15625,
+        "top1_given_generator_hit": 0.20833333333333334,
+        "top3": 0.25,
+        "top3_given_generator_hit": 0.3333333333333333,
+        "top5": 0.4375,
+        "top5_effect_gte3": 0.46153846153846156,
+        "top5_given_generator_hit": 0.5833333333333334,
+        "top5_high_f0": null
+      },
+      "seed": 20261013,
+      "static_C": 1.0,
+      "static_test": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.22565239721900907,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 14,
+        "strong_top5_given_generator_hit": 0.2857142857142857,
+        "top1": 0.09375,
+        "top1_given_generator_hit": 0.1111111111111111,
+        "top3": 0.21875,
+        "top3_given_generator_hit": 0.25925925925925924,
+        "top5": 0.34375,
+        "top5_effect_gte3": 0.2857142857142857,
+        "top5_given_generator_hit": 0.4074074074074074,
+        "top5_high_f0": null
+      },
+      "static_validation": {
+        "generator_ceiling": 0.75,
+        "mrr": 0.2461705203336395,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.125,
+        "top1_given_generator_hit": 0.16666666666666666,
+        "top3": 0.28125,
+        "top3_given_generator_hit": 0.375,
+        "top5": 0.375,
+        "top5_effect_gte3": 0.46153846153846156,
+        "top5_given_generator_hit": 0.5,
+        "top5_high_f0": null
+      }
+    }
+  },
+  "product_gate": {
+    "passed": false,
+    "reason": "R8 is an information-gap experiment. Product semantic-ranking criteria remain unchanged and downstream."
+  },
+  "raw_audio_persisted": false,
+  "retention_gate": {
+    "accepted": false,
+    "criteria": {
+      "20261003": {
+        "conditional_top5_improves_by_0_08": false,
+        "external_clean_fpr_not_worse_by_0_05": false,
+        "generator_ceiling_gte_0_80": true,
+        "oracle_gap_closure_gte_0_15": false,
+        "strong_conditional_top5_not_worse_by_0_05": true
+      },
+      "20261013": {
+        "conditional_top5_improves_by_0_08": false,
+        "external_clean_fpr_not_worse_by_0_05": false,
+        "generator_ceiling_gte_0_80": true,
+        "oracle_gap_closure_gte_0_15": false,
+        "strong_conditional_top5_not_worse_by_0_05": true
+      }
+    },
+    "meaning": "Whether the local-patch feature family is worth retaining for further single-view research. Passing is not a product gate."
+  },
+  "seeds": [
+    20261003,
+    20261013
+  ]
+}

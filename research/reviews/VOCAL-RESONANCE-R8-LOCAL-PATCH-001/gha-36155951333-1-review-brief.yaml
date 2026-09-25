@@ -1,0 +1,148 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:review-brief-v1
+job_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001
+run_id: gha-36155951333-1
+source_run: research/runs/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-triage.yaml
+triage_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:triage-v1
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R8-LOCAL-PATCH-001.yaml
+research_question: Can deployable single-view local spectro-temporal patch/context
+  features recover a material fraction of the R7 causal-oracle ranking gap without
+  increasing independent clean-vocal false triggers?
+hypothesis: Across both predeclared seeds, local multi-scale curvature/shoulder/coherence
+  features will improve conditional Top-5 by at least 0.08 over the frozen static
+  ranker, close at least 15 percent of the R7 oracle gap, preserve strong-effect conditional
+  Top-5 within 0.05, and not worsen external clean false-trigger by more than 0.05.
+counter_hypotheses:
+- The causal information exposed by R7 is not recoverable from local single-view patch
+  shape, so conditional ranking will remain near the static baseline.
+- Patch features improve one seed only, indicating unstable geometry rather than reusable
+  information.
+- Patch features learn natural narrow harmonic/formant structure and increase clean-vocal
+  false triggers.
+acceptance_criteria:
+- 'for each seed: conditional Top-5 >= static + 0.08'
+- 'for each seed: R7 oracle gap closure >= 0.15'
+- 'for each seed: strong-effect conditional Top-5 >= static - 0.05'
+- 'for each seed: external clean false-trigger <= static + 0.05'
+- 'for each seed: generator ceiling >= 0.80'
+rejection_criteria:
+- any seed conditional Top-5 improvement < 0.08
+- any seed oracle gap closure < 0.15
+- any seed strong-effect conditional Top-5 regresses by more than 0.05
+- any seed external clean false-trigger worsens by more than 0.05
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 474b802584a4277daf57a3ee1f878445df31f16d
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: candidate_budget
+  value: 20
+- path: experiment
+  value: VOCAL_RESONANCE_R8_SINGLE_VIEW_LOCAL_PATCH
+- path: feature_family[0]
+  value: ms_resid_s2_q80
+- path: feature_family[1]
+  value: ms_resid_s4_q80
+- path: feature_family[2]
+  value: ms_resid_s8_q80
+- path: feature_family[3]
+  value: ms_resid_s12_q80
+- path: feature_family[4]
+  value: narrow_minus_broad
+- path: feature_family[5]
+  value: shoulder_drop_2_q80
+- path: feature_family[6]
+  value: shoulder_drop_4_q80
+- path: feature_family[7]
+  value: shoulder_drop_8_q80
+- path: feature_family[8]
+  value: shoulder_asym_4_median
+- path: feature_family[9]
+  value: center_neighbor_corr_4
+- path: feature_family[10]
+  value: center_neighbor_corr_8
+- path: feature_family[11]
+  value: patch_stationarity_4
+- path: per_seed.20261003.conditional_top5_gap_closure
+  value: 0.0
+- path: per_seed.20261003.external_clean_n
+  value: 40
+- path: per_seed.20261003.external_clean_patch_fpr
+  value: 0.325
+- path: per_seed.20261003.external_clean_static_fpr
+  value: 0.175
+- path: per_seed.20261003.oracle_conditional_top5
+  value: 1.0
+- path: per_seed.20261003.oracle_strong_conditional_top5
+  value: 1.0
+- path: per_seed.20261003.patch_C
+  value: 0.03
+- path: per_seed.20261003.patch_test.generator_ceiling
+  value: 0.9375
+- path: per_seed.20261003.patch_test.mrr
+  value: 0.1826531509157767
+- path: per_seed.20261003.patch_test.n_cases
+  value: 32
+- path: per_seed.20261003.patch_test.n_high_f0_cases
+  value: 0
+- path: per_seed.20261003.patch_test.strong_hit_cases
+  value: 11
+- path: per_seed.20261003.patch_test.strong_top5_given_generator_hit
+  value: 0.45454545454545453
+- path: per_seed.20261003.patch_test.top1
+  value: 0.0625
+- path: per_seed.20261003.patch_test.top1_given_generator_hit
+  value: 0.06666666666666667
+- path: per_seed.20261003.patch_test.top3
+  value: 0.09375
+- path: per_seed.20261003.patch_test.top3_given_generator_hit
+  value: 0.1
+- path: per_seed.20261003.patch_test.top5
+  value: 0.25
+knowledge_candidate:
+  claim: Single-view multi-scale local spectro-temporal patch shape may recover part
+    of the causal resonance information revealed by the paired R7 oracle.
+  evidence_type: HYPOTHESIS
+  scope: Deployable vocal-resonance semantic ranking without a clean reference.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

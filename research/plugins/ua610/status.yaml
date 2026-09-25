@@ -36,6 +36,8 @@ milestones:
   - reusable-asset audit
   - first original DSP hypothesis
   - original measurement harness design
+  - dedicated Original VST3 artifact build
+  - high-level HF collapse detection and fail-fast regression
 
 unresolved:
   - Final Character/Drive mapping is not locked.
@@ -45,6 +47,7 @@ unresolved:
   - Level-matched real-vocal AB is pending.
   - Windows VST3/Cubase Pro 14 RC validation is pending.
   - Final CPU/latency tradeoff is not locked.
+  - High-level HF fundamental collapse regression is under Windows validation.
 
 historical_nonblocking_unknowns:
   - Exact modern 2-610 transformer magnetic parameters are not public.
@@ -53,7 +56,7 @@ historical_nonblocking_unknowns:
 
 next_stage: measurement
 why_next: "The clone-fidelity blocker was removed from the original-product scope. The first original candidate and ablation/measurement harness now need numerical evidence before parameter lock."
-next_confirmation: "Which nonlinear stages, feedback modulation, transformer blocks and spectral-drive protection survive measurement and are worth carrying into real-vocal AB."
+next_confirmation: "First close the high-level HF fundamental-collapse regression without breaking the preserved 610 baseline; then determine which nonlinear stages, feedback modulation, transformer blocks and spectral-drive protection are worth carrying into real-vocal AB."
 
 blockers:
   - Real-vocal material or an approved open singing corpus is required before the audio_ab gate can be closed.

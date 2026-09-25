@@ -1,0 +1,140 @@
+name: vocal-rider-real-vocal
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "CMakeLists.txt"
+      - "src/dsp/VocalRiderCore.h"
+      - "tests/VocalRiderRealVocal.cpp"
+      - ".github/workflows/vocal-rider-real-vocal.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: vocal-rider-real-vocal-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-vocal:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout JUCE 9.0.2
+        uses: actions/checkout@v4
+        with:
+          repository: juce-framework/JUCE
+          ref: 9.0.2
+          path: JUCE
+
+      - name: Setup portable CMake
+        shell: powershell -NoProfile -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          $cmakeUrl = "https://github.com/Kitware/CMake/releases/download/v4.4.3/cmake-4.4.3-windows-x86_64.zip"
+          $zip = Join-Path $env:RUNNER_TEMP "cmake-4.4.3.zip"
+          $root = Join-Path $env:RUNNER_TEMP "cmake-4.4.3"
+
+          if (-not (Test-Path $zip)) {
+            Invoke-WebRequest -Uri $cmakeUrl -OutFile $zip
+          }
+
+          if (-not (Test-Path $root)) {
+            Expand-Archive -Path $zip -DestinationPath $root -Force
+          }
+
+          $bin = Join-Path $root "cmake-4.4.3-windows-x86_64\bin"
+          Add-Content -Path $env:GITHUB_PATH -Value $bin
+          & (Join-Path $bin "cmake.exe") --version
+
+      - name: Configure
+        shell: powershell -NoProfile -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: cmake -S . -B build-real-vocal -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+
+      - name: Build real-vocal validator
+        shell: powershell -NoProfile -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: cmake --build build-real-vocal --config Release --target CIPIVocalRiderRealVocal --parallel 4
+
+      - name: Prepare free real-vocal corpus
+        shell: powershell -NoProfile -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          $baseCache = if ($env:RUNNER_TOOL_CACHE) { $env:RUNNER_TOOL_CACHE } else { Join-Path $env:USERPROFILE ".vopripro-cache" }
+          $cacheRoot = Join-Path $baseCache "VoPriPro-HUST-Solfege"
+          $zip = Join-Path $cacheRoot "HUST_Solfege.zip"
+          $extract = Join-Path $cacheRoot "extracted"
+          New-Item -ItemType Directory -Force -Path $cacheRoot | Out-Null
+
+          if (-not (Test-Path $zip) -or (Get-Item $zip).Length -lt 200000000) {
+            Write-Host "Downloading HUST_Solfege real-singing corpus..."
+            Invoke-WebRequest -Uri "https://media.githubusercontent.com/media/itec-hust/HUST_Solfege/master/wav/HUST_Solfege.zip" -OutFile $zip
+          } else {
+            Write-Host "Using cached HUST_Solfege.zip"
+          }
+
+          if (-not (Test-Path $extract)) {
+            New-Item -ItemType Directory -Force -Path $extract | Out-Null
+            Expand-Archive -Path $zip -DestinationPath $extract -Force
+          }
+
+          $wanted = @(
+            "man1_twinkle.wav",
+            "man4_twinkle.wav",
+            "woman1_twinkle.wav",
+            "woman3_twinkle.wav"
+          )
+
+          $found = @()
+          foreach ($name in $wanted) {
+            $file = Get-ChildItem -Path $extract -Recurse -File -Filter $name | Select-Object -First 1
+            if (-not $file) { throw "Required HUST_Solfege sample not found: $name" }
+            $found += $file.FullName
+            Write-Host "Selected: $($file.FullName)"
+          }
+
+          $manifest = Join-Path $env:RUNNER_TEMP "vocal-rider-real-vocals.txt"
+          $found | Set-Content -Path $manifest
+          Add-Content -Path $env:GITHUB_ENV -Value "VOCAL_RIDER_MANIFEST=$manifest"
+
+      - name: Run real-vocal validation and render level-matched A/B
+        shell: powershell -NoProfile -ExecutionPolicy Bypass -Command ". '{0}'"
+        run: |
+          $out = Join-Path $env:GITHUB_WORKSPACE "vocal-rider-real-vocal-results"
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          $files = Get-Content $env:VOCAL_RIDER_MANIFEST
+
+          $exe = Get-ChildItem -Path build-real-vocal -Recurse -File -Filter CIPIVocalRiderRealVocal.exe | Select-Object -First 1
+          if (-not $exe) {
+            throw "CIPIVocalRiderRealVocal.exe was not produced."
+          }
+
+          & $exe.FullName $out @files
+          if ($LASTEXITCODE -ne 0) {
+            throw "Real-vocal validation failed with exit code $LASTEXITCODE"
+          }
+
+          @"
+          Real-vocal source:
+          HUST_Solfege — https://github.com/itec-hust/HUST_Solfege
+          Repository license: MIT
+
+          Selected files:
+          - man1_twinkle.wav
+          - man4_twinkle.wav
+          - woman1_twinkle.wav
+          - woman3_twinkle.wav
+
+          Objective metrics use the CIPI Vocal Rider standalone core.
+          Amount50 A/B files are delay-aligned and active-RMS matched only for listening.
+          "@ | Set-Content -Path (Join-Path $out "SOURCES.txt")
+
+          Get-Content (Join-Path $out "summary.txt")
+
+      - name: Upload real-vocal evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-Real-Vocal
+          path: vocal-rider-real-vocal-results
+          if-no-files-found: error

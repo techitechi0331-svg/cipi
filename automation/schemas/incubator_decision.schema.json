@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"CIPI Incubator Decision",
+  "type":"object",
+  "required":["schema_version","plugin_proposal_id","decision","authority","final","reason","matched_existing_products","next_action"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "decision":{"enum":["REJECT","ITERATE","MERGE_EXISTING","INCUBATE","ARCHIVE"]},
+    "authority":{"enum":["AUTOMATION","ASSISTANT_REVIEW","HUMAN_REVIEW"]},
+    "final":{"type":"boolean"}
+  },
+  "additionalProperties":true
+}

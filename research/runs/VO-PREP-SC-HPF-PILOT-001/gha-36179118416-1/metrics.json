@@ -1,0 +1,24 @@
+{
+  "candidate_count": 5,
+  "decision": "GO_TO_REAL_VOCAL",
+  "raw_audio_persisted": false,
+  "selected_aggregate": {
+    "consonant_retention": 0.9920443963571205,
+    "female_body_delta_db": 0.00544445236416428,
+    "male_body_delta_db": 0.0457614202540683,
+    "plosive_reduction": 0.22150306428323516,
+    "proximity_body_delta_db": -0.004121146621899996,
+    "rumble_reduction": 0.7179301600637237,
+    "sibilant_retention": 0.9947121399655207
+  },
+  "selected_cutoff_hz": 40,
+  "selected_gates": {
+    "consonant_retention_ge_90pct": true,
+    "female_body_abs_delta_le_0_15db": true,
+    "male_body_loss_le_0_30db": true,
+    "plosive_reduction_ge_15pct": true,
+    "rumble_reduction_ge_50pct": true,
+    "sample_rate_body_delta_spread_le_0_10db": true,
+    "sibilant_retention_ge_90pct": true
+  }
+}

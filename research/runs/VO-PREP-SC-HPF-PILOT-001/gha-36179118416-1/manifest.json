@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vo-prep/experiments/sidechain_hpf_pilot.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T19:21:36.017427Z",
+  "environment": {
+    "experiment_adapter": "voprep_sidechain_hpf_pilot_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-SC-HPF-PILOT-001",
+  "random_seed": 20260926,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36179118416-1",
+  "schema_version": "1.0",
+  "source_commit": "dd6189ba84edfc1c6d32682e52324a4c45b3f2c6",
+  "started_at": "2026-09-25T19:21:31.732309Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

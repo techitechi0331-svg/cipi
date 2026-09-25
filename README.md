@@ -24,9 +24,11 @@ The canonical rule is `RULES/NO_WAIT_WORK_STEALING.md`. Autonomous queue selecti
 
 CIPI can also coordinate allowlisted GitHub Actions workflows in the plug-in repositories through `automation/cross_repo/registry.yaml`. External workflow results are evidence, not automatic product or knowledge decisions.
 
-Validated research-bot branches are automatically intake-checked and merged into CIPI main so completed evidence and continuations do not remain permanently claimed. A successful intake re-dispatches both the local Research Worker and the Cross-Repo Orchestrator.
+Validated research-bot branches are automatically intake-checked and merged into CIPI main so completed evidence and continuations do not remain permanently claimed. The Global DAG Orchestrator then selects between evidence intake, local research, and external workflow reconciliation instead of requiring repeated manual status checks.
 
-Cross-repository API access is intentionally disabled unless the CIPI Actions secret `CIPI_CROSS_REPO_TOKEN` is configured. See `RULES/CROSS_REPO_ORCHESTRATION.md` and `RULES/AUTO_EVIDENCE_INTAKE.md`.
+External workflow artifacts are ingested conservatively: metadata is retained, while only bounded text evidence such as measurements, metrics, reports and logs is extracted. Infrastructure-only failures may receive one bounded retry; DSP/build/test failures are never blindly retried. Self-hosted runner stalls are surfaced by the Runner Watchdog without blocking unrelated work. Current operational state is written to `research/health/automation-status.md`.
+
+Cross-repository API access is intentionally disabled unless the CIPI Actions secret `CIPI_CROSS_REPO_TOKEN` is configured. See `RULES/CROSS_REPO_ORCHESTRATION.md`, `RULES/AUTO_EVIDENCE_INTAKE.md`, and `RULES/AUTONOMY_STACK.md`.
 
 ## Initial experimental plug-ins
 

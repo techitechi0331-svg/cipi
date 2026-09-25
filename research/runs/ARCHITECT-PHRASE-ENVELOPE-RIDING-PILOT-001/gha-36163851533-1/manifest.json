@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/PhraseEnvelope/synthetic_pilot.py"
+  ],
+  "completed_at": "2026-09-25T16:55:37.329778Z",
+  "environment": {
+    "experiment_adapter": "rp_phrase_envelope_riding_001_pilot_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001",
+  "random_seed": 0,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36163851533-1",
+  "schema_version": "1.0",
+  "source_commit": "cc06260a0517a6cff1998b9d04ad28660b3832f9",
+  "started_at": "2026-09-25T16:55:37.299177Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "bounded_one_timescale_level_estimator"
+  ],
+  "experiment_adapter": "rp_phrase_envelope_riding_001_pilot_v1",
+  "job_file": "research/jobs/queued/000-ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001.yaml",
+  "metrics": [
+    "matrix_complete",
+    "all_numeric_finite",
+    "phrase_mae_ratio",
+    "candidate_short_event_max_movement_db",
+    "short_event_movement_ratio",
+    "downstream_macro_variance_ratio",
+    "candidate_phrase_contrast_error_db"
+  ],
+  "variants": [
+    "clipped_innovation_dual_timescale_phrase_estimator"
+  ]
+}

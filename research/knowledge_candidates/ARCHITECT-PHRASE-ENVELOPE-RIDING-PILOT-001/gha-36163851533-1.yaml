@@ -1,0 +1,9 @@
+claim: A causal dual-timescale clipped-innovation phrase estimator can outperform
+  a bounded one-timescale level estimator on the declared synthetic phrase/event matrix
+  while preserving macro phrase contrast.
+evidence_type: MEASURED
+scope: Deterministic synthetic phrase/syllable/consonant/breath pilot only; this does
+  not establish singer generalization, subjective naturalness, standalone product
+  value, or release readiness.
+source_run: research/runs/ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001/gha-36163851533-1
+promotion_requested: HYPOTHESIS

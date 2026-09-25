@@ -1,0 +1,32 @@
+schema_version: '1.0'
+triage_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001:gha-36163851533-1:triage-v1
+job_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001
+run_id: gha-36163851533-1
+source_run: research/runs/ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001/gha-36163851533-1
+source_decision_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001:gha-36163851533-1:auto
+source_decision_path: research/decisions/ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001/gha-36163851533-1-auto.yaml
+job_path: research/jobs/completed/000-ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001/gha-36163851533-1.yaml
+candidate_class: RESEARCH_MORE
+route: HUMAN_GATE_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates:
+- Passing this pilot authorizes deeper public/real-vocal research only.
+- Level-matched listening is required before subjective naturalness claims.
+- Standalone Vocal Rider value versus Vo.Prep integration must be measured before
+  INCUBATE.
+- Cubase Pro 14 remains a separate target-host gate.
+downstream_gate_signals: []
+reasons:
+- The research job explicitly requires human gates before further promotion.
+recommended_action: Resolve the listed review gaps or required human gates before
+  a final knowledge decision.
+created_at: '2026-09-25T16:55:37.329778Z'
+triage_version: '1.0'
+immutable: true

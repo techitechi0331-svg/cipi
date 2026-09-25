@@ -11,6 +11,7 @@ from .contract import canonical_json
 RESULT_BUNDLE_VERSION = "1.0"
 _BUNDLE_KIND = "JUCE_FACTORY_RESULT"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_GIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 _SHA_LINE = re.compile(r"^([0-9a-fA-F]{64})  (.+)$")
 
 
@@ -33,6 +34,12 @@ def _require_false(data: dict[str, Any], key: str) -> None:
 def _require_sha256(value: Any, label: str) -> str:
     if not isinstance(value, str) or not _SHA256.fullmatch(value):
         raise ResultBundleError(f"{label} must be a lowercase SHA-256 hex digest")
+    return value
+
+
+def _require_git_sha(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not _GIT_SHA.fullmatch(value):
+        raise ResultBundleError(f"{label} must be a lowercase 40-character Git SHA")
     return value
 
 
@@ -74,7 +81,8 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
     required = {
         "schema_version", "bundle_kind", "factory_status", "plugin_id", "plugin_version",
         "contract_version", "contract_sha256", "generated_source_sha256",
-        "factory_version", "factory_revision", "dsp_source_revision", "juce_version",
+        "factory_version", "factory_revision", "validation_revision",
+        "validation_base_revision", "dsp_source_revision", "juce_version",
         "platform", "formats", "validation_matrix", "validators", "artifact_hashes",
         "failure_class", "raw_audio_persisted", "automatic_final_decision",
         "promotion_authority", "product_release_authority", "cubase_confirmed",
@@ -92,12 +100,15 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
         raise ResultBundleError("unexpected Factory Result Bundle kind")
     if data["factory_status"] not in {"VALIDATION_PASS", "QUARANTINED"}:
         raise ResultBundleError("unsupported factory_status")
-    for key in ("plugin_id", "plugin_version", "factory_version", "factory_revision",
+    for key in ("plugin_id", "plugin_version", "factory_version",
                 "dsp_source_revision", "juce_version", "platform"):
         if not isinstance(data[key], str) or not data[key].strip():
             raise ResultBundleError(f"{key} must be a non-empty string")
     if not isinstance(data["contract_version"], int) or isinstance(data["contract_version"], bool):
         raise ResultBundleError("contract_version must be an integer")
+    _require_git_sha(data["factory_revision"], "factory_revision")
+    _require_git_sha(data["validation_revision"], "validation_revision")
+    _require_git_sha(data["validation_base_revision"], "validation_base_revision")
     _require_sha256(data["contract_sha256"], "contract_sha256")
     _require_sha256(data["generated_source_sha256"], "generated_source_sha256")
     _require_sha256(data["bundle_hash"], "bundle_hash")
@@ -189,7 +200,18 @@ def build_pass_bundle(
         "contract_sha256": contract_hash,
         "generated_source_sha256": generated_hash,
         "factory_version": manifest.get("factory_version"),
-        "factory_revision": provenance.get("git_sha"),
+        "factory_revision": _require_git_sha(
+            provenance.get("source_revision", provenance.get("git_sha")),
+            "provenance.source_revision",
+        ),
+        "validation_revision": _require_git_sha(
+            provenance.get("validation_revision", provenance.get("git_sha")),
+            "provenance.validation_revision",
+        ),
+        "validation_base_revision": _require_git_sha(
+            provenance.get("validation_base_revision", provenance.get("validation_revision", provenance.get("git_sha"))),
+            "provenance.validation_base_revision",
+        ),
         "dsp_source_revision": manifest.get("dsp_source_revision"),
         "juce_version": manifest.get("juce_version"),
         "platform": provenance.get("platform"),
@@ -238,7 +260,18 @@ def build_quarantine_bundle(
             manifest.get("generated_source_sha256"), "manifest.generated_source_sha256"
         ),
         "factory_version": manifest.get("factory_version"),
-        "factory_revision": failure.get("git_sha"),
+        "factory_revision": _require_git_sha(
+            failure.get("source_revision", failure.get("git_sha")),
+            "failure.source_revision",
+        ),
+        "validation_revision": _require_git_sha(
+            failure.get("validation_revision", failure.get("git_sha")),
+            "failure.validation_revision",
+        ),
+        "validation_base_revision": _require_git_sha(
+            failure.get("validation_base_revision", failure.get("validation_revision", failure.get("git_sha"))),
+            "failure.validation_base_revision",
+        ),
         "dsp_source_revision": manifest.get("dsp_source_revision"),
         "juce_version": manifest.get("juce_version"),
         "platform": manifest.get("target_os"),

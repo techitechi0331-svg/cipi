@@ -159,7 +159,8 @@ def append_event(
         return False
     run_attempt = int(run.get("run_attempt") or 1)
     path = event_path(root, repo_key, run_id, run_attempt)
-    if path.exists():
+    legacy = root / "research" / "cross_repo" / "events" / repo_key / f"{run_id}.yaml"
+    if path.exists() or (run_attempt == 1 and legacy.exists()):
         return False
     event = {
         "schema_version": "1.0",

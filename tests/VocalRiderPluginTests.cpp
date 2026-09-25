@@ -124,6 +124,66 @@ void testBoostHeadroomGuard()
             "Positive ride allowed a near-full-scale future peak to exceed the safety ceiling.");
 }
 
+void testBypassTransition()
+{
+    constexpr double sampleRate = 48000.0;
+    constexpr int blockSize = 256;
+
+    VocalRiderAudioProcessor processor;
+    processor.prepareToPlay (sampleRate, blockSize);
+
+    juce::AudioBuffer<float> block (2, blockSize);
+    juce::MidiBuffer midi;
+
+    const auto processConstant = [&] (double seconds, float value, bool bypassed,
+                                      float* firstOutput, float* lastOutput)
+    {
+        const auto totalSamples = static_cast<int> (std::lround (seconds * sampleRate));
+        int rendered = 0;
+        bool firstCaptured = false;
+
+        while (rendered < totalSamples)
+        {
+            const auto n = std::min (blockSize, totalSamples - rendered);
+            block.setSize (2, n, false, false, true);
+
+            for (int ch = 0; ch < 2; ++ch)
+                for (int i = 0; i < n; ++i)
+                    block.setSample (ch, i, value);
+
+            if (bypassed)
+                processor.processBlockBypassed (block, midi);
+            else
+                processor.processBlock (block, midi);
+
+            if (! firstCaptured && firstOutput != nullptr)
+            {
+                *firstOutput = block.getSample (0, 0);
+                firstCaptured = true;
+            }
+
+            if (lastOutput != nullptr)
+                *lastOutput = block.getSample (0, n - 1);
+
+            rendered += n;
+        }
+    };
+
+    processConstant (5.0, 0.10f, false, nullptr, nullptr);
+    processConstant (2.0, 0.04f, false, nullptr, nullptr);
+
+    float lastBypassed = 0.0f;
+    processConstant (0.6, 0.04f, true, nullptr, &lastBypassed);
+
+    float firstRestored = 0.0f;
+    processConstant (0.02, 0.04f, false, &firstRestored, nullptr);
+
+    expect (std::isfinite (lastBypassed) && std::isfinite (firstRestored),
+            "Bypass transition produced non-finite output.");
+    expect (std::abs (firstRestored - lastBypassed) < 0.005f,
+            "Host bypass restore created an excessive first-sample level jump.");
+}
+
 } // namespace
 
 int main()
@@ -134,6 +194,7 @@ int main()
 
     runStateRoundTrip();
     testBoostHeadroomGuard();
+    testBypassTransition();
 
     if (failures == 0)
     {

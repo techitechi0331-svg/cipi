@@ -1,0 +1,13 @@
+metric,value
+checksum_ok,True
+baseline_gamma,1.0
+baseline_onset_mae_db,0.5
+baseline_ratio_log_rmse,0.446926
+baseline_max_relative_ratio_error,0.630159
+baseline_deep_ratio_fraction_min,0.422243
+candidate_gamma,2.35
+candidate_onset_mae_db,0.5
+candidate_ratio_log_rmse,0.384355
+candidate_max_relative_ratio_error,0.52155
+candidate_deep_ratio_fraction_min,0.547092
+ratio_log_rmse_improvement_percent,14.000304300935722

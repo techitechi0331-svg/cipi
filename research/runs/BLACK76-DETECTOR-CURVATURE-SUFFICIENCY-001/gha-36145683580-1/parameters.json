@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "gamma_1_linear_full_wave"
+  ],
+  "experiment_adapter": "black76_detector_curvature_compare_v1",
+  "job_file": "research/jobs/queued/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001.yaml",
+  "metrics": [
+    "checksum_ok",
+    "baseline_ratio_log_rmse",
+    "candidate_ratio_log_rmse",
+    "ratio_log_rmse_improvement_percent",
+    "candidate_onset_mae_db",
+    "candidate_max_relative_ratio_error",
+    "candidate_deep_ratio_fraction_min"
+  ],
+  "variants": [
+    "best_shared_gamma_gt_1"
+  ]
+}

@@ -1,5 +1,5 @@
 source_repo: techitechi0331-svg/vocal_rider
-source_head: c1a2a4f4d0bb408c9eeb37c077b735f59e744414
+source_head: d32c70f3df8313358c6a13d4d03eca6c702f4f26
 id: VOCAL_RIDER_01
 title: CIPI Vocal Rider 0.1
 
@@ -35,6 +35,7 @@ unresolved:
   - Post-prepare 50 ms latency/state processor gate passed at 44.1/48/88.2/96/192 kHz and buffer sizes 32–1024.
   - Headroom Guard was corrected to boost-only behavior after review found that the previous -24 dB emergency floor could attenuate Amount 0% / neutral ride.
   - A regression test now requires neutral and already-negative ride to remain unchanged by the Headroom Guard.
+  - A processor-level regression now requires Amount 0% / Output 0 dB to be delayed unity and the actual first non-zero sample to equal the reported 50 ms latency; dedicated-Repo CI confirmation is pending.
   - Steinberg validator is pending on the dedicated-repo runner.
   - Cubase Pro 14 host verification is pending.
 

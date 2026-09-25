@@ -18,6 +18,7 @@ on:
       - "tools/validate_review_brief.py"
       - "tools/validate_research_change_scope.py"
       - "tools/test_research_integrity_guards.py"
+      - "tools/test_adapter_registry_worker_sync.py"
       - "tools/test_review_lineage.py"
       - "tools/test_no_wait_scheduler.py"
       - "tools/validate_cross_repo.py"
@@ -64,6 +65,9 @@ jobs:
 
       - name: Test append-only research integrity guards
         run: python tools/test_research_integrity_guards.py
+
+      - name: Test adapter registry / worker dispatch sync
+        run: python tools/test_adapter_registry_worker_sync.py
 
       - name: Test legacy review lineage matching
         run: python tools/test_review_lineage.py

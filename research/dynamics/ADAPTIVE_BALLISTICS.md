@@ -156,3 +156,40 @@ The following remain PeakBody product hypotheses until broader real-vocal AB and
 ### Next reusable research question
 
 Broadband crest may still confuse sibilance, breath, plosives, noisy consonants, and sparse high-register harmonics. Before this mechanism is treated as mature vocal-event knowledge, CIPI should compare the broadband baseline against a simple guarded/band-aware alternative using predeclared false-trigger and transient-preservation metrics.
+
+
+## PeakBody confounder guard — synthetic review
+
+### REJECTED
+
+A simple normalized high-band/broadband guard was tested as a crest-confounder filter.
+
+It successfully reduced sibilant/breath false peak-preservation, but failed hard preservation criteria:
+
+- bright high-F0 harmonic transient retention reached **0%** in the worst tested condition;
+- low-frequency plosive-like transient retention reached about **5.46%**.
+
+Therefore a spectral-only guard is **REJECTED** for the tested PeakBody scope.
+
+### MEASURED
+
+Adding analysis-only periodicity/voicing protection repaired the synthetic failure:
+
+- bright high-F0 harmonic retention minimum: **100%**;
+- ordinary voiced transient retention minimum: **100%**;
+- plosive-like transient retention minimum: **92.08%**;
+- sibilant/breath false-preservation maximum: **0.094%** of the broadband-crest baseline;
+- steady-vowel mean transient-factor change: effectively zero;
+- complete finite matrix at 44.1 / 48 / 96 / 192 kHz.
+
+### INFERRED
+
+A useful vocal transient guard should not treat spectral brightness as sufficient evidence that a crest event is noise-like. Spectral evidence should be conditioned by periodicity/voicing or an equivalent harmonic-protection mechanism.
+
+### HYPOTHESIS
+
+The current periodicity proxy is analysis-oriented. A production implementation still needs a realtime-safe voicing/periodicity feature that reproduces the same protection behavior with acceptable CPU, latency, and high-register robustness.
+
+### Next gate
+
+Validate the synthetic result on private real-vocal material without committing raw audio to GitHub. Only derived, non-reversible measurements may be returned to CIPI.

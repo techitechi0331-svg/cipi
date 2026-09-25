@@ -16,7 +16,7 @@ stages:
   vst3_validation: pending
   final_review: pending
 
-current_stage: revision
+current_stage: measurement
 
 completed:
   - research
@@ -26,15 +26,16 @@ completed:
 unresolved:
   - The original crest-to-fast timing direction over-compresses short synthetic bursts.
   - The 200 ms peak-preserve alternative protects transients but holds onset memory too long.
-  - Revision 02 uses an 80 ms split-direction detector with 6–40 ms attack and 120–400 ms release and needs final branch/full-gate validation.
+  - Revision 02 uses an 80 ms split-direction detector with 6–40 ms attack and 120–400 ms release; deterministic model replay and prototype branch gates have passed.
   - The full raw Macro-Level vocal corpus is not directly materializable in the current Project runtime.
+  - Spectral-only crest guarding is REJECTED; periodicity-protected guarding passed synthetic confounder gates but private real-vocal validation is still pending.
   - Level-matched vocal AB is still pending.
   - Cubase Pro 14 real-host verification is pending.
   - A dedicated PeakBody product repository is not currently available; product implementation must not be merged into CIPI main.
 
-next_stage: implementation
-why_next: "Revision 02 prototype implementation and branch CI are measured, but the formal product implementation must move to a dedicated PeakBody repository while CIPI continues autonomous research replay and measurement."
-next_confirmation: "Whether autonomous Revision 02 replay reproduces the declared policy across sample rates, and whether the future dedicated product repository reproduces the validated prototype behavior through product VST3 gates."
+next_stage: measurement
+why_next: "Revision 02 and the periodicity-protected guard have passed deterministic synthetic gates. The highest-value unresolved question is whether the same detector behavior survives private real-vocal material without suppressing legitimate breathy, sibilant-adjacent, plosive, or high-register singing."
+next_confirmation: "Whether private real-vocal measurements reproduce the synthetic guard result, after which product-repository implementation and VST3/Cubase gates can be justified."
 
 blockers:
   - "Final parameter promotion requires the full raw vocal corpus plus level-matched listening."

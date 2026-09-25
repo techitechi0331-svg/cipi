@@ -1,0 +1,45 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:review-01"
+job_id: PEAKBODY-CONFOUNDER-PERIODICITY-002
+source_run: research/runs/PEAKBODY-CONFOUNDER-PERIODICITY-002/gha-36154735970-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The periodicity-protected spectral guard passed every predeclared synthetic
+  preservation/noise-rejection criterion and directly repaired both hard failures
+  of the spectral-only guard. The result is strong enough to justify the next
+  research stage, but not to promote the detector as production-safe before
+  private real-vocal validation and product-repository implementation checks.
+declared_rejection_criteria:
+  - any acceptance invariant fails
+  - the required confounder/sample-rate matrix is incomplete
+triggered_criteria: []
+retained_findings:
+  - "Bright high-F0 harmonic transient retention minimum was 1.0."
+  - "Ordinary voiced transient retention minimum was 1.0."
+  - "Low-frequency plosive-like transient retention minimum was 0.920833333."
+  - "Sibilant/breath false-preservation maximum was 0.000944822 of broadband-crest baseline."
+  - "Steady-vowel mean transient-factor delta maximum was approximately 4.72e-7."
+  - "All 28 rows across seven cases and four sample rates were finite and present."
+reusable_findings:
+  - "Periodicity/voicing protection can resolve a major failure mode of a spectral-only crest guard in the tested synthetic scope."
+  - "A detector guard should be evaluated jointly on noise rejection, bright harmonic preservation, plosive preservation, and steady-body invariance."
+revisit_if:
+  - "Private real-vocal analysis shows false suppression on sibilant-adjacent voiced material, breathy phonation, or high-register singing."
+  - "A production realtime periodicity detector cannot reproduce the analysis-only proxy behavior at acceptable CPU/latency."
+  - "Cubase or product VST3 testing reveals detector instability under automation or block-size changes."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-REV02-POLICY-001
+    - PEAKBODY-CONFOUNDER-SPECTRAL-001
+  related_decisions:
+    - "PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:auto"
+    - "PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:review-01"
+parent_decision_id: "PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Synthetic PeakBody confounder stress only; next action is real-vocal validation."
+review_gaps: []

@@ -12,6 +12,11 @@ Frozen research-core baseline:
 
 Priority-0 integration branch:
 - `integration/vocal-compressor-vst3-v1`
+- latest reviewed HEAD: `fee5207b43f104c5385c96de22c8e02f4b2fac77`
+
+Post-integration hardening already present on that branch:
+- `3ff2c936686a98b4aae276a6cf07cff3ceff136c` — non-empty Default program name
+- `fee5207b43f104c5385c96de22c8e02f4b2fac77` — runner-compatible CMake generator
 
 ## Implemented product-side integration work
 
@@ -54,20 +59,67 @@ This is useful wiring evidence but is **not** a replacement for repository CI, V
 
 ## CI / host blocker
 
-Vo.Prep GitHub Actions run:
-- run: `36173066852`
+Vo.Prep GitHub Actions runs:
+- original integration run: `36173066852`
+- latest run after Default-program and generator fixes: `36181089099`
 
-Both jobs:
-- core-path
-- windows-vst3
+In both runs, both jobs:
+- `core-path`
+- `windows-vst3`
 
-failed before any workflow step was created/executed (0 steps). Re-running failed jobs produced the same pre-step failure.
+failed before any workflow step was created/executed (**0 steps**).
+
+The latest run therefore still did not reach checkout, compiler invocation, CMake configure, JUCE generation, or VST3 build.
 
 Interpretation:
-- no C++ compiler diagnostic was produced by that run;
+- no C++ compiler diagnostic was produced by either run;
 - no JUCE/VST3 compiler diagnostic was produced;
-- this run does **not** establish a DSP or source-code failure;
+- the latest source-side hardening was therefore not actually exercised by CI;
+- these runs do **not** establish a DSP or source-code failure;
 - actual Windows VST3 build remains unverified.
+
+## No-Wait blocker checkpoint
+
+[BLOCKED対象]
+
+Repository-backed CI execution for the research compressor target:
+- core-path CI
+- Windows VST3 compile
+- downstream pluginval / Steinberg validator
+
+[待っている結果]
+
+A runner allocation that creates workflow steps and reaches at least checkout / compile, or an available authorized self-hosted runner capable of executing the same workflow.
+
+[再開条件]
+
+Any new `Vocal Compressor VST3 Integration` run where either job contains real workflow steps and produces build/test output.
+
+[再開直後の処理]
+
+1. inspect the first real compiler/test failure if any;
+2. apply the smallest source/build correction;
+3. rerun AudioPath equivalence and Windows VST3 build;
+4. if build passes, run pluginval and Steinberg validator;
+5. preserve Cubase Pro 14 as a separate human-only host gate.
+
+[checkpoint]
+
+- DSP wiring: PASS by local exact-equivalence evidence;
+- current core: 25 ms RMS / instantaneous peak / 6 dB fusion / 1.5:1 / 18 dB / 8 ms / 70 ms;
+- separate research VST3 path implemented without replacing MacroLevel;
+- current integration branch HEAD: `fee5207b43f104c5385c96de22c8e02f4b2fac77`;
+- latest GitHub-hosted CI run: `36181089099`, zero workflow steps in both jobs;
+- no source/compiler failure has yet been observed.
+
+[未完了Task]
+
+- repository-backed AudioPath CI;
+- Windows VST3 compile;
+- pluginval;
+- Steinberg validator;
+- VST3 render parity / automation / state recall;
+- Cubase Pro 14 validation.
 
 ## JUCE Factory assessment
 

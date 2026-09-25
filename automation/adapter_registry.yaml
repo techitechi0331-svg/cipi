@@ -38,6 +38,13 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Test whether periodicity protection resolves bright-harmonic false suppression left by the simple spectral guard."
+  peakbody_realtime_voicing_bench_v1:
+    tracks:
+      - PEAKBODY_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare normalized autocorrelation, YIN-CMND confidence, and MPM-NSDF clarity for PeakBody periodicity protection on a deterministic synthetic voicing/noise matrix; no product winner selection."
+
   original_vocal_pre_measurement_gate_v1:
     tracks:
       - UA610_ORIGINAL_VOCAL_PRE

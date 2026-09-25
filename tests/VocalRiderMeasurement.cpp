@@ -514,9 +514,15 @@ int main (int argc, char** argv)
     summary << "- section-dynamics gate: " << (sectionDynamicsPass ? "PASS" : "FAIL") << "\n\n";
     summary << "Gate thresholds are provisional research criteria: preserve >=70% of a sustained 6 dB section contrast while reducing within-section phrase spread by >=20%.\n\n";
     float lowestFunctionalBaseDb = 100.0f;
+    bool inputCoveragePass = false;
     for (const auto& row : inputSweep)
+    {
         if (row.functional)
             lowestFunctionalBaseDb = std::min (lowestFunctionalBaseDb, row.baseLevelDb);
+
+        if (std::abs (row.baseLevelDb - (-60.0f)) < 1.0e-4f)
+            inputCoveragePass = row.functional;
+    }
 
     summary << "## Input-level activity sweep (48 kHz / Amount 50%)\n\n";
     if (lowestFunctionalBaseDb < 99.0f)
@@ -526,7 +532,14 @@ int main (int argc, char** argv)
         summary << "- no tested base level passed the full directional-riding criterion\n";
 
     summary << "- detailed rows: input_level_sweep.csv\n";
-    summary << "- this is diagnostic evidence for whether the fixed -58/-62 dBFS activity thresholds require an adaptive replacement.\n\n";
+    summary << "- input-level coverage gate (-60 dBFS base): "
+            << (inputCoveragePass ? "PASS" : "FAIL") << "\n\n";
+
+    const bool eventProtectionPass =
+        eventProbe.breathMaxBoostDb <= 1.0f
+        && eventProbe.tailMaxBoostDb <= 1.5f
+        && eventProbe.silenceNoiseMaxAbsGainDb <= 1.0f;
+
     summary << "## Event-protection diagnostic (48 kHz / Amount 50%)\n\n";
     summary << "- 0.8 s breath-like noise at -36 dBFS RMS: max boost "
             << eventProbe.breathMaxBoostDb << " dB, end boost "
@@ -536,7 +549,9 @@ int main (int argc, char** argv)
             << eventProbe.tailEndBoostDb << " dB\n";
     summary << "- 2.0 s -72 dBFS noise-floor segment: max |ride| "
             << eventProbe.silenceNoiseMaxAbsGainDb << " dB\n";
-    summary << "- these are diagnostics only; they decide whether explicit breath/tail protection is justified before adding spectral complexity.\n\n";
+    summary << "- event-protection gate: "
+            << (eventProtectionPass ? "PASS" : "FAIL") << "\n";
+    summary << "- provisional gate limits: breath <=1.0 dB boost, tail <=1.5 dB boost, -72 dBFS noise-floor |ride| <=1.0 dB.\n\n";
     summary << "The core CSV contains the full 5 sample-rate x 5 Amount matrix.\n";
 
     std::ofstream json (outputDir / "metrics.json");
@@ -566,6 +581,8 @@ int main (int argc, char** argv)
          << "  \"event_tail_max_boost_db\": " << eventProbe.tailMaxBoostDb << ",\n"
          << "  \"event_tail_end_boost_db\": " << eventProbe.tailEndBoostDb << ",\n"
          << "  \"event_noise_floor_max_abs_gain_db\": " << eventProbe.silenceNoiseMaxAbsGainDb << ",\n"
+         << "  \"input_level_coverage_pass\": " << (inputCoveragePass ? "true" : "false") << ",\n"
+         << "  \"event_protection_pass\": " << (eventProtectionPass ? "true" : "false") << ",\n"
          << "  \"all_finite\": " << (allFinite ? "true" : "false") << "\n"
          << "}\n";
 
@@ -574,6 +591,12 @@ int main (int argc, char** argv)
 
     if (! sectionDynamicsPass)
         return 4;
+
+    if (! inputCoveragePass)
+        return 5;
+
+    if (! eventProtectionPass)
+        return 6;
 
     return 0;
 }

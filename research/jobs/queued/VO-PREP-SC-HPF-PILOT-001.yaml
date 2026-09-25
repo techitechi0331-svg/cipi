@@ -1,0 +1,74 @@
+schema_version: '1.0'
+job_id: VO-PREP-SC-HPF-PILOT-001
+state: QUEUED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Can a simple detector-only 12 dB/oct high-pass reduce low-frequency rumble/plosive-driven gain reduction without materially under-compressing low male vowels or weakening consonant/sibilant event capture in the frozen Vo.Prep transparent compressor?
+hypothesis: At least one cutoff among 40, 60, 70, 80, or 100 Hz will reduce synthetic rumble-driven excess GR by at least 50 percent and plosive excess GR by at least 15 percent while preserving low-male body GR within 0.30 dB, female body GR within 0.15 dB, and consonant/sibilant event GR to at least 90 percent of the OFF baseline.
+counter_hypotheses:
+  - OFF remains the best evidence/complexity trade-off because useful low-frequency vocal body is reduced before false LF triggering is meaningfully improved.
+  - HPF ringing/transient behavior increases event GR or creates sample-rate instability.
+  - Only cutoffs high enough to damage low male vocals meet the rumble/plosive goals.
+baseline:
+  - Full-band detector with sidechain HPF OFF.
+variants:
+  - 40 Hz second-order Butterworth high-pass in the detector path only.
+  - 60 Hz second-order Butterworth high-pass in the detector path only.
+  - 70 Hz second-order Butterworth high-pass in the detector path only.
+  - 80 Hz second-order Butterworth high-pass in the detector path only.
+  - 100 Hz second-order Butterworth high-pass in the detector path only.
+metrics:
+  - selected_cutoff_hz
+  - selected_gates
+  - selected_aggregate
+  - candidate_count
+  - raw_audio_persisted
+acceptance:
+  - Synthetic matrix is evaluated at 44.1, 48, and 96 kHz.
+  - Mean rumble-driven excess-GR reduction is at least 50 percent versus OFF.
+  - Mean plosive excess-GR reduction is at least 15 percent versus OFF.
+  - Mean low-male body-GR loss is no more than 0.30 dB versus OFF.
+  - Mean female body-GR absolute change is no more than 0.15 dB versus OFF.
+  - Consonant event-GR retention is at least 90 percent of OFF.
+  - Sibilant event-GR retention is at least 90 percent of OFF.
+  - Low-male body-GR delta sample-rate spread is no more than 0.10 dB.
+  - The selected cutoff is the lowest cutoff that passes every gate.
+rejection:
+  - No cutoff passes every preservation and false-trigger reduction gate.
+  - Any candidate is non-finite or unstable across the declared sample rates.
+  - Passing requires relaxing a predeclared preservation gate.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 20260926
+experiment_adapter: voprep_sidechain_hpf_pilot_v1
+allowed_operations:
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: A low-order detector-only high-pass can reduce low-frequency false compressor drive while preserving useful vocal-body and short-event behavior in the frozen Vo.Prep compressor.
+  evidence_type: HYPOTHESIS
+  scope: Deterministic synthetic stress matrix only; OFF versus 40/60/70/80/100 Hz second-order high-pass at 44.1/48/96 kHz. Passing authorizes real-vocal research, not product adoption.
+  promotion_requested: HYPOTHESIS
+review_policy:
+  required_human_gates:
+    - Public/real-vocal validation before any product HPF adoption.
+    - Level-matched listening before subjective naturalness claims.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions: []

@@ -44,6 +44,7 @@ ADAPTERS = {
     "vocal_resonance_local_patch_proxy_v1",
     "rp_masking_aware_presence_001_pilot_v1",
     "rp_phrase_envelope_riding_001_pilot_v1",
+    "vocal_resonance_transfer_consistency_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -2590,6 +2591,55 @@ def _phrase_envelope_riding_pilot(
         "summary": payload["scope"],
     }
 
+
+def _vocal_resonance_transfer_consistency(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = repo_root / "research/experiments/VocalResonance/transfer_consistency.py"
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-transfer-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {}
+        for name in [
+            "comparison.csv",
+            "feature_diagnostics.csv",
+            "summary.json",
+        ]:
+            raw_files[name] = (out / name).read_text(encoding="utf-8")
+
+    accepted = bool(summary["retention_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/transfer_consistency.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Research-only two-seed comparison of deployable fixed-Hz temporal "
+            "transfer-consistency features against the frozen static semantic ranker. "
+            "No clean reference is used at inference and no raw vocal audio is persisted."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -2657,4 +2707,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _masking_aware_presence_pilot(repo_root, timeout_seconds)
     if name == "rp_phrase_envelope_riding_001_pilot_v1":
         return _phrase_envelope_riding_pilot(repo_root, timeout_seconds)
+    if name == "vocal_resonance_transfer_consistency_v1":
+        return _vocal_resonance_transfer_consistency(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

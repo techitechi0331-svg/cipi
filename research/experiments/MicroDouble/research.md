@@ -534,3 +534,10 @@ The following risks remain explicit:
 - no labelled multilingual plosive corpus exists for the product context.
 
 The product experiment must therefore compare current generic transient baseline against baseline + bounded plosive-context augmentation with fixed false-positive and scope-containment gates before any integration decision.
+
+
+## Transient Context necessity gate queued
+
+Private product Actions could not start the product-side necessity workflow (jobs failed before any step/log was created), so no DSP result is inferred from those infrastructure failures.
+
+The necessity experiment is reproduced inside CIPI with the exact current generic transient equations and the Vo.Prep plosive-context equations. Research Job `MICRODOUBLE-TRANSIENT-NECESSITY-001` decides whether extra P/B context is justified at all before additional product complexity is introduced.

@@ -221,3 +221,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Compare deployable fixed-Hz temporal transfer-consistency features against the frozen static vocal-resonance ranker."
+
+  microdouble_transient_necessity_v1:
+    tracks:
+      - MICRODOUBLE_01
+    max_timeout_minutes: 3
+    network_required: false
+    purpose: "Reproduce the current MicroDouble generic transient detector and the Vo.Prep plosive-context detector on deterministic stress signals to decide whether augment-only context is necessary before adding product complexity."

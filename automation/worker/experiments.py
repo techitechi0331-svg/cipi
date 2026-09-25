@@ -34,6 +34,7 @@ ADAPTERS = {
     "microdouble_sibilance_reuse_gate_v1",
     "microdouble_sibilance_r3_snapshot_gate_v1",
     "microdouble_transient_context_reuse_gate_v1",
+    "microdouble_transient_necessity_v1",
     "vo_prep_snapshot_gate_v1",
     "vocal_resonance_temporal_morphology_v1",
     "vocal_resonance_temporal_morphology_stability_v1",
@@ -2640,6 +2641,303 @@ def _vocal_resonance_transfer_consistency(
         ),
     }
 
+
+def _microdouble_transient_necessity(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del repo_root, timeout_seconds
+
+    sr = 48000.0
+    total_samples = int(1.5 * sr)
+    event_start = int(0.50 * sr)
+    event_end = int(0.62 * sr)
+
+    class GenericTransient:
+        def __init__(self) -> None:
+            self.prev = 0.0
+            self.env = 0.0
+            self.deriv_env = 0.0
+            self.current = 0.0
+            self.target = 0.0
+            self.coeff = math.exp(-1.0 / (sr * 0.010))
+
+        @staticmethod
+        def clamp01(x: float) -> float:
+            return max(0.0, min(1.0, x))
+
+        def process(self, x: float) -> float:
+            ax = abs(x)
+            self.env = 0.995 * self.env + 0.005 * ax
+            deriv = abs(x - self.prev)
+            self.prev = x
+            self.deriv_env = 0.96 * self.deriv_env + 0.04 * deriv
+            self.target = self.clamp01(
+                (self.deriv_env / (self.env + 1.0e-4) - 0.35) * 1.25
+            )
+            self.current = self.target + self.coeff * (self.current - self.target)
+            return self.current
+
+    class Band:
+        def __init__(self, hp_hz: float, lp_hz: float) -> None:
+            dt = 1.0 / sr
+            rc = 1.0 / (2.0 * math.pi * max(1.0, hp_hz))
+            self.hp_a = rc / (rc + dt)
+            self.lp_alpha = 1.0 - math.exp(-2.0 * math.pi * max(1.0, lp_hz) / sr)
+            self.prev_x = 0.0
+            self.prev_high = 0.0
+            self.low = 0.0
+
+        def process(self, x: float) -> float:
+            high = self.hp_a * (self.prev_high + x - self.prev_x)
+            self.prev_x = x
+            self.prev_high = high
+            self.low += self.lp_alpha * (high - self.low)
+            return self.low
+
+    class PlosiveContext:
+        def __init__(self) -> None:
+            self.sub = Band(20.0, 80.0)
+            self.mid = Band(250.0, 1000.0)
+            self.broad = Band(80.0, 4000.0)
+            self.fast_c = 1.0 - math.exp(-1.0 / (0.008 * sr))
+            self.sub_slow_c = 1.0 - math.exp(-1.0 / (0.250 * sr))
+            self.broad_slow_c = 1.0 - math.exp(-1.0 / (0.080 * sr))
+            self.sub_fast = self.mid_fast = self.broad_fast = 1.0e-12
+            self.sub_slow = self.broad_slow = 1.0e-12
+            self.probability = 0.0
+            self.divider = 0
+            self.event_samples = 0
+            self.active = False
+            self.suppress = False
+
+        @staticmethod
+        def sigmoid(x: float) -> float:
+            x = max(-12.0, min(12.0, x))
+            return 1.0 / (1.0 + math.exp(-x))
+
+        @staticmethod
+        def follow(value: float, state: float, coeff: float) -> float:
+            return state + coeff * (value - state)
+
+        def process(self, x: float) -> float:
+            if not math.isfinite(x):
+                x = 0.0
+            x = max(-64.0, min(64.0, x))
+
+            sub = self.sub.process(x)
+            mid = self.mid.process(x)
+            broad = self.broad.process(x)
+
+            self.sub_fast = self.follow(sub * sub, self.sub_fast, self.fast_c)
+            self.mid_fast = self.follow(mid * mid, self.mid_fast, self.fast_c)
+            self.broad_fast = self.follow(broad * broad, self.broad_fast, self.fast_c)
+            self.sub_slow = self.follow(sub * sub, self.sub_slow, self.sub_slow_c)
+            self.broad_slow = self.follow(broad * broad, self.broad_slow, self.broad_slow_c)
+
+            self.divider += 1
+            if self.divider >= 8:
+                self.divider = 0
+                sub_db = 10.0 * math.log10(max(self.sub_fast, 1.0e-12))
+                mid_db = 10.0 * math.log10(max(self.mid_fast, 1.0e-12))
+                broad_db = 10.0 * math.log10(max(self.broad_fast, 1.0e-12))
+                sub_slow_db = 10.0 * math.log10(max(self.sub_slow, 1.0e-12))
+                broad_slow_db = 10.0 * math.log10(max(self.broad_slow, 1.0e-12))
+
+                if broad_db < -90.0:
+                    self.probability = 0.0
+                else:
+                    c1 = self.sigmoid(((sub_db - sub_slow_db) - 7.0) / 2.0)
+                    c2 = self.sigmoid(((sub_db - mid_db) - 12.0) / 3.5)
+                    c3 = self.sigmoid(((sub_db - broad_db) - 2.5) / 1.8)
+                    c4 = self.sigmoid(((broad_db - broad_slow_db) - 1.0) / 3.0)
+                    self.probability = math.exp(
+                        0.44 * math.log(max(c1, 1.0e-6))
+                        + 0.30 * math.log(max(c2, 1.0e-6))
+                        + 0.20 * math.log(max(c3, 1.0e-6))
+                        + 0.06 * math.log(max(c4, 1.0e-6))
+                    )
+                    self.probability = max(0.0, min(1.0, self.probability))
+
+                if self.suppress:
+                    if self.probability < 0.45:
+                        self.suppress = False
+                elif not self.active:
+                    if self.probability >= 0.75:
+                        self.active = True
+                        self.event_samples = 0
+                elif self.probability < 0.55:
+                    self.active = False
+
+            if self.active:
+                self.event_samples += 1
+                if self.event_samples > int(0.120 * sr):
+                    self.active = False
+                    self.suppress = True
+
+            return self.probability
+
+    def base_vowel(i: int, f0: float = 120.0) -> float:
+        t = i / sr
+        return (
+            0.06 * math.sin(2.0 * math.pi * f0 * t)
+            + 0.035 * math.sin(2.0 * math.pi * 2.0 * f0 * t)
+            + 0.018 * math.sin(2.0 * math.pi * 3.0 * f0 * t)
+        )
+
+    def sample_for(case: str, i: int) -> float:
+        t = i / sr
+        event = event_start <= i < event_end
+
+        if case == "plosive":
+            x = base_vowel(i, 125.0)
+            if event:
+                u = (i - event_start) / sr
+                env = math.exp(-u / 0.030)
+                x += env * (
+                    0.65 * math.sin(2.0 * math.pi * 48.0 * t)
+                    + 0.28 * math.sin(2.0 * math.pi * 68.0 * t)
+                )
+        elif case == "low_vowel":
+            x = 0.0 if i < event_start else base_vowel(i, 95.0) * 1.3
+        elif case == "proximity":
+            x = (
+                0.10 * math.sin(2.0 * math.pi * 90.0 * t)
+                + 0.04 * math.sin(2.0 * math.pi * 180.0 * t)
+            )
+        elif case == "fry":
+            carrier = math.sin(2.0 * math.pi * 42.0 * t)
+            gate = 1.0 if carrier > 0.82 else 0.15
+            x = 0.11 * gate + 0.035 * math.sin(2.0 * math.pi * 84.0 * t)
+        elif case == "growl":
+            if i < event_start:
+                x = 0.02 * math.sin(2.0 * math.pi * 120.0 * t)
+            else:
+                a = math.sin(2.0 * math.pi * 72.0 * t)
+                b = math.sin(2.0 * math.pi * 145.0 * t)
+                x = 0.18 * math.tanh(3.0 * (0.20 * a + 0.12 * b))
+        elif case == "bright":
+            x = base_vowel(i, 160.0) * 0.6
+            if event:
+                u = (i - event_start) / sr
+                env = math.exp(-u / 0.018)
+                x += env * (
+                    0.10 * math.sin(2.0 * math.pi * 3200.0 * t)
+                    + 0.08 * math.sin(2.0 * math.pi * 6100.0 * t)
+                    + 0.06 * math.sin(2.0 * math.pi * 8700.0 * t)
+                )
+        else:
+            raise ValueError(case)
+
+        return max(-0.95, min(0.95, x))
+
+    cases = ["plosive", "low_vowel", "proximity", "fry", "growl", "bright"]
+    rows: list[dict[str, float | str]] = []
+    by_case: dict[str, dict[str, float]] = {}
+
+    for case in cases:
+        generic = GenericTransient()
+        context = PlosiveContext()
+        generic_peak = 0.0
+        context_peak = 0.0
+        event_frames = 0
+        generic_active = 0
+        context_active = 0
+        generic_integral = 0.0
+
+        for i in range(total_samples):
+            x = sample_for(case, i)
+            g = generic.process(x)
+            p = context.process(x)
+            generic_peak = max(generic_peak, g)
+            context_peak = max(context_peak, p)
+
+            if event_start <= i < event_end:
+                event_frames += 1
+                generic_integral += g
+                if g > 0.50:
+                    generic_active += 1
+                if context.active:
+                    context_active += 1
+
+        metrics = {
+            "generic_peak": generic_peak,
+            "generic_event_occupancy_pct": 100.0 * generic_active / max(1, event_frames),
+            "generic_event_mean": generic_integral / max(1, event_frames),
+            "context_peak": context_peak,
+            "context_event_occupancy_pct": 100.0 * context_active / max(1, event_frames),
+        }
+        by_case[case] = metrics
+        rows.append({"case": case, **metrics})
+
+    p = by_case["plosive"]
+    low = by_case["low_vowel"]
+    prox = by_case["proximity"]
+    fry = by_case["fry"]
+    growl = by_case["growl"]
+    bright = by_case["bright"]
+
+    acceptance_met = (
+        p["generic_peak"] >= 0.50
+        and p["generic_event_occupancy_pct"] < 70.0
+        and p["context_peak"] >= 0.90
+        and low["context_peak"] <= 0.40
+        and prox["context_peak"] <= 0.40
+        and fry["context_peak"] < 0.75
+        and growl["context_peak"] >= 0.75
+        and bright["generic_peak"] >= 0.70
+        and bright["context_peak"] < 0.75
+    )
+
+    output = io.StringIO()
+    writer = csv.DictWriter(
+        output,
+        fieldnames=[
+            "case",
+            "generic_peak",
+            "generic_event_occupancy_pct",
+            "generic_event_mean",
+            "context_peak",
+            "context_event_occupancy_pct",
+        ],
+        lineterminator="\n",
+    )
+    writer.writeheader()
+    writer.writerows(rows)
+
+    metrics = {
+        "product_source_commit": "ee5725fa33b9b8ed0637575a86903d4c6bd0bd73",
+        "plosive_generic_peak": p["generic_peak"],
+        "plosive_generic_occupancy_pct": p["generic_event_occupancy_pct"],
+        "plosive_generic_mean": p["generic_event_mean"],
+        "plosive_context_peak": p["context_peak"],
+        "low_vowel_context_peak": low["context_peak"],
+        "proximity_context_peak": prox["context_peak"],
+        "fry_context_peak": fry["context_peak"],
+        "growl_context_peak": growl["context_peak"],
+        "bright_generic_peak": bright["generic_peak"],
+        "bright_context_peak": bright["context_peak"],
+        "augmentation_needed_by_declared_gate": acceptance_met,
+    }
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"stress_matrix.csv": output.getvalue()},
+        "commands": [
+            "simulate exact current MicroDouble generic transient equations",
+            "simulate Vo.Prep plosive-context equations",
+            "run deterministic six-case necessity matrix at 48 kHz",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic necessity gate. PASS means the current generic detector "
+            "detects the P/B onset but does not cover enough of the controlled burst, "
+            "while the specialist context detector separates the declared stress cases "
+            "well enough to justify a later augment-only candidate experiment. FAIL "
+            "means added plosive context is not justified under the fixed gate. No "
+            "product DSP is mutated by this adapter."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -2685,6 +2983,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _microdouble_sibilance_r3_snapshot_gate(repo_root, timeout_seconds)
     if name == "microdouble_transient_context_reuse_gate_v1":
         return _microdouble_transient_context_reuse_gate(repo_root, timeout_seconds)
+    if name == "microdouble_transient_necessity_v1":
+        return _microdouble_transient_necessity(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_reaudit_v2":
         return _vocal_resonance_clean_negative_reaudit(repo_root, timeout_seconds)
     if name == "vo_prep_snapshot_gate_v1":

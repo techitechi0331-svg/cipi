@@ -15,10 +15,13 @@ on:
       - "tools/validate_evidence_candidate.py"
       - "tools/validate_decision_records.py"
       - "tools/validate_review_triage.py"
+      - "tools/validate_review_brief.py"
       - "tools/validate_research_change_scope.py"
       - "tools/test_research_integrity_guards.py"
+      - "tools/test_review_lineage.py"
       - ".github/workflows/auto-research-gate.yml"
       - ".github/workflows/free-autonomous-review.yml"
+      - ".github/workflows/free-autonomous-research.yml"
   workflow_dispatch:
 
 permissions:
@@ -48,6 +51,9 @@ jobs:
       - name: Test append-only research integrity guards
         run: python tools/test_research_integrity_guards.py
 
+      - name: Test legacy review lineage matching
+        run: python tools/test_review_lineage.py
+
       - name: Run deterministic mock worker
         run: |
           rm -rf research/runs/AUTO-SMOKE-001
@@ -66,7 +72,9 @@ jobs:
           python tools/validate_evidence_candidate.py
           python tools/validate_decision_records.py
           python automation/review/triage.py --job-id AUTO-SMOKE-001 --run-id mock-0001
+          python automation/review/brief.py --job-id AUTO-SMOKE-001 --run-id mock-0001 --triage-path research/reviews/AUTO-SMOKE-001/mock-0001-triage.yaml
           python tools/validate_review_triage.py
+          python tools/validate_review_brief.py
           python - <<'PY'
           import yaml
           p=yaml.safe_load(open("research/reviews/AUTO-SMOKE-001/mock-0001-triage.yaml", encoding="utf-8"))
@@ -82,7 +90,9 @@ jobs:
           python automation/queue/postprocess.py --job automation/examples/rejection_job.yaml --run-dir research/runs/AUTO-REJECT-SMOKE-001/mock-reject-0001
           python tools/validate_decision_records.py
           python automation/review/triage.py --job-id AUTO-REJECT-SMOKE-001 --run-id mock-reject-0001
+          python automation/review/brief.py --job-id AUTO-REJECT-SMOKE-001 --run-id mock-reject-0001 --triage-path research/reviews/AUTO-REJECT-SMOKE-001/mock-reject-0001-triage.yaml
           python tools/validate_review_triage.py
+          python tools/validate_review_brief.py
           python - <<'PY'
           import yaml
           p=yaml.safe_load(open("research/reviews/AUTO-REJECT-SMOKE-001/mock-reject-0001-triage.yaml", encoding="utf-8"))
@@ -102,6 +112,7 @@ jobs:
           python tools/validate_evidence_candidate.py
           python tools/validate_decision_records.py
           python tools/validate_review_triage.py
+          python tools/validate_review_brief.py
 
       - name: Validate existing CIPI research contract
         run: python tools/validate_research.py

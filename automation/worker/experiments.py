@@ -17,6 +17,7 @@ ADAPTERS = {
     "peakbody_legacy_model_stress_v1",
     "peakbody_revision02_policy_v1",
     "original_vocal_pre_measurement_gate_v1",
+    "original_vocal_pre_tuning_frontier_v1",
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
     "vl2a_phase01h_checksum_diagnosis_v1",
@@ -1472,6 +1473,41 @@ def _voprep_amount_mapping_r2(repo_root: Path, timeout_seconds: int) -> dict[str
         ),
     }
 
+
+def _original_vocal_pre_tuning_frontier(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "experiments" / "OriginalVocalPre"
+        / "tuning_frontier.py"
+    )
+    completed = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=timeout_seconds,
+    )
+    payload = json.loads(completed.stdout)
+    return {
+        "metrics": payload["metrics"],
+        "raw_files": {"measurement.csv": payload["measurement_csv"]},
+        "commands": [
+            "python research/experiments/OriginalVocalPre/tuning_frontier.py"
+        ],
+        "acceptance_met": bool(payload["acceptance_met"]),
+        "rejection_triggered": not bool(payload["acceptance_met"]),
+        "summary": (
+            "Deterministic frontier reduction of the committed 27-point Original "
+            "Vocal Pre tuning sweep. It identifies conservative, balanced and "
+            "color-contrast profiles for deeper measurement only; no product "
+            "winner, knowledge promotion, stage/confidence mutation, raw audio "
+            "storage or release action is performed."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1485,6 +1521,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":
         return _original_vocal_pre_measurement_gate(repo_root, timeout_seconds)
+    if name == "original_vocal_pre_tuning_frontier_v1":
+        return _original_vocal_pre_tuning_frontier(repo_root, timeout_seconds)
     if name == "vocal_resonance_motion_coherence_v1":
         return _vocal_resonance_motion(repo_root, timeout_seconds)
     if name == "vl2a_phase01h_snapshot_gate_v1":

@@ -104,3 +104,9 @@ adapters:
     max_timeout_minutes: 12
     network_required: true
     purpose: "Run leak-free Vo.Prep Amount Revision 2 on a pinned public HUST_Solfege LFS object with disjoint selection and final-holdout speakers; persist derived evidence only."
+  original_vocal_pre_tuning_frontier_v1:
+    tracks:
+      - UA610_ORIGINAL_VOCAL_PRE
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: "Reduce the committed Original Vocal Pre v0.2 tuning sweep into deterministic conservative, balanced, and color-contrast profiles without selecting a product winner."

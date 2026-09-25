@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "source_repo": "techitechi0331-svg/610",
+  "source_branch": "original-vocal-pre-v0.1",
+  "source_sha": "989b9540ac7dd273908678416ddc5d9afc246413",
+  "source_workflow_run": 36069962074,
+  "measurement_maturity": "DSP_MEASURED",
+  "tuning_artifact_sha256": "a94700ca44994d1aa2d7f58796e23c7fef49e67c564da93617e29c903657dcf9",
+  "research_artifact_sha256": "a6eb5037a3c912b909cf4b1a64352b09df2e642362a7e87a55f29d4f18e4af32",
+  "baseline_artifact_sha256": "93094d5d3f1a5c62a2375e6f3bdb7388c7eebe172a4ffcb9550f53ebd980a2fb",
+  "notes": "Windows Run 10 passed the preserved 610 baseline regression and evaluated the predeclared 27-point Original v0.2 transformer/Drive tuning grid."
+}

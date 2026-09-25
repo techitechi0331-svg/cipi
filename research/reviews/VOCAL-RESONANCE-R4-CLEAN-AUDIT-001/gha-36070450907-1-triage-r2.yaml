@@ -1,0 +1,31 @@
+schema_version: '1.0'
+triage_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:triage-v1-r2
+job_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001
+run_id: gha-36070450907-1
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1
+source_decision_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:auto-backfill
+source_decision_path: research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1-auto-backfill.yaml
+job_path: research/jobs/completed/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1.yaml
+candidate_class: ALREADY_REVIEWED
+route: DONE
+final_decision_made: true
+existing_review_decision_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:assistant-review-20260925
+existing_review_source_run_match: true
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates: []
+downstream_gate_signals: []
+reasons:
+- A confirmed REVIEW decision already exists for the automated proposal.
+recommended_action: No review handoff remains for this proposal; preserve the issue
+  as historical context and close it.
+created_at: '2026-09-24T23:06:00.964460Z'
+triage_version: '1.0'
+immutable: true
+triage_revision: 2
+supersedes_triage_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:triage-v1
+correction_reason: A newer authoritative review history changed or clarified deterministic
+  routing; prior triage remains preserved.

@@ -1,0 +1,147 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:review-brief-v1
+job_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001
+run_id: gha-36070450907-1
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1
+route: DONE
+candidate_class: ALREADY_REVIEWED
+triage_path: research/reviews/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1-triage-r2.yaml
+triage_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:triage-v1-r2
+job_path: research/jobs/completed/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001.yaml
+research_question: Which vocal techniques and pitch regimes dominate clean false triggers
+  for the current static safe-negative resonance ranker, and does the current benchmark
+  under-cover high-pitch singing?
+hypothesis: Clean false triggers will concentrate in one or more specific vocal-technique
+  or high-pitch stress subgroups rather than being uniformly distributed, and a broader
+  disjoint clean cohort will contain enough p90-F0 >=400 Hz cases to measure that
+  behavior.
+counter_hypotheses:
+- False triggers are broadly distributed across techniques and singers, implying the
+  current feature space is globally miscalibrated rather than subgroup-specific.
+- The available VocalSet audit cohort still does not provide enough high-pitch cases,
+  so a dedicated high-note stress cohort must be designed before high-F0 claims can
+  be tested.
+acceptance_criteria:
+- audit contains at least 24 disjoint clean excerpts
+- dataset label IDs are resolved to technique names
+- at least 4 technique categories are represented
+- at least 6 excerpts have voiced F0 p90 >= 400 Hz
+rejection_criteria:
+- fewer than 24 usable clean excerpts
+- label mapping cannot be resolved
+- fewer than 4 technique categories
+- fewer than 6 high-pitch stress excerpts under the predeclared p90 >=400 Hz definition
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 309c2ff9ad18b17613db56ab1b0b683e4a114b70
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: audit.f0_p90_median_across_cases
+  value: 537.5757575757577
+- path: audit.label_mapping.0
+  value: belt
+- path: audit.label_mapping.1
+  value: breathy
+- path: audit.label_mapping.2
+  value: fast_forte
+- path: audit.label_mapping.3
+  value: fast_piano
+- path: audit.label_mapping.6
+  value: lip_trill
+- path: audit.label_names_resolved
+  value: true
+- path: audit.n_cases
+  value: 32
+- path: audit.n_labels
+  value: 5
+- path: audit.n_singers
+  value: 4
+- path: audit.overall_clean_false_trigger
+  value: 0.3125
+- path: audit.p90_ge_400_count
+  value: 24
+- path: audit.p90_ge_400_false_trigger
+  value: 0.375
+- path: audit.technique_false_trigger_spread
+  value: 0.625
+- path: dataset
+  value: Bill13579/vocalset-mirror
+- path: diagnostic_gate.accepted
+  value: true
+- path: diagnostic_gate.criteria.at_least_24_clean_cases
+  value: true
+- path: diagnostic_gate.criteria.at_least_4_techniques
+  value: true
+- path: diagnostic_gate.criteria.at_least_6_p90_ge_400_cases
+  value: true
+- path: diagnostic_gate.criteria.label_names_resolved
+  value: true
+- path: diagnostic_gate.meaning
+  value: Sufficient adversarial clean-negative and pitch coverage to choose the next
+    ranker research question. This is not a product gate.
+- path: experiment
+  value: VOCAL_RESONANCE_R4_CLEAN_NEGATIVE_AUDIT
+- path: hypothesis_readout.high_pitch_false_trigger_elevated_by_0_15
+  value: false
+- path: hypothesis_readout.supported
+  value: true
+- path: hypothesis_readout.technique_concentration_ge_0_20
+  value: true
+- path: raw_audio_persisted
+  value: false
+- path: seed
+  value: 20260930
+- path: selected_C
+  value: 0.3
+- path: skip_per_singer
+  value: 4
+- path: static_validation_metrics.generator_ceiling
+  value: 0.875
+- path: static_validation_metrics.mrr
+  value: 0.2392980958830901
+- path: static_validation_metrics.n_cases
+  value: 32
+knowledge_candidate:
+  claim: Clean-vocal false triggers for resonance ranking may be concentrated by vocal
+    technique or pitch regime rather than uniformly distributed.
+  evidence_type: HYPOTHESIS
+  scope: Vocal resonance semantic-ranker hard-negative design and subgroup measurement.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:auto-backfill
+  decision: ITERATE
+  rationale: Legacy manifest passed its declared experiment gate. This deterministic
+    backfill does not promote knowledge.
+  review_gaps: []
+  retained_findings:
+  - The complete legacy run evidence is retained; this backfill reconstructs only
+    the pending automated proposal.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review:
+  decision_id: VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:assistant-review-20260925
+  decision: ITERATE
+  scope: Audit-001 clean-negative subgroup evidence only; no product or semantic-ranker
+    promotion.
+  rationale: The cohort establishes substantial subgroup variation, but the earlier
+    lip-trill clue did not reproduce and the legacy ACF pitch proxy saturates at its
+    1000 Hz boundary often enough that high-F0 coverage cannot be accepted.
+  path: research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/assistant-review-20260925.yaml
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- ITERATE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

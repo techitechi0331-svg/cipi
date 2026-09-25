@@ -53,3 +53,27 @@ CIPI reuse back into the product during this sync:
 - pluginval and Steinberg official-validator gates were added to the product repository.
 
 The track remains PROVISIONAL. This sync does not close the Plosive/Sibilance human naturalness gates, corrected-product validator gate, CPU characterization, or Cubase Pro 14 release-candidate gate.
+
+## 2026-09-25 transparent compressor core evidence sync
+
+Product evidence source:
+- repository: `techitechi0331-svg/Vo.Prep`
+- research branch: `research/integrated-vocal-compressor-core`
+- reviewed product SHA: `a832458c87884f5cf9a7f152879785c4ee9277ca`
+- detailed CIPI evidence: `research/plugins/vo-prep/evidence/transparent-compressor-core-2026-09-25.md`
+
+Current transparent-core lock:
+- Slow body detector: 25 ms exponential RMS.
+- Fast detector: instantaneous sample peak `abs(x)`.
+- Fusion: `EffectiveLevel_dB = max(Slow_dB, Fast_dB - 6 dB)`.
+- Static curve: 1.5:1 / 18 dB soft knee.
+- Ballistics: 8 ms attack / 70 ms fixed release.
+- Single gain cell, zero lookahead, no Hold.
+- The earlier 80 ms release remains retained as a historical measured baseline.
+
+Integrated objective validation reached `GO_FOR_BLIND`; this is not final listening sign-off.
+The research calibration threshold near -27.75 dBFS is not a product default.
+
+Next transparent-core research target:
+- user-facing Amount / operating-point mapping while keeping the frozen core unchanged.
+

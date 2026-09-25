@@ -1,0 +1,25 @@
+{
+  "baseline": [
+    "Revision-1 Gentle anchor Threshold mapping with 5.5 dB 100-percent target"
+  ],
+  "experiment_adapter": "voprep_amount_mapping_r2_v1",
+  "job_file": "research/jobs/queued/VO-PREP-AMOUNT-R2-001.yaml",
+  "metrics": [
+    "selected_candidate",
+    "selected_kind",
+    "selected_target100_db",
+    "selection_speaker_count",
+    "holdout_speaker_count",
+    "holdout_passes",
+    "holdout_gates"
+  ],
+  "variants": [
+    "Anchor Threshold with 5.0 dB 100-percent target",
+    "Anchor Threshold with 5.2 dB 100-percent target",
+    "Anchor Threshold with 5.4 dB 100-percent target",
+    "DesiredGR scaling with 5.0 dB calibrated 100-percent operating point",
+    "DesiredGR scaling with 5.2 dB calibrated 100-percent operating point",
+    "DesiredGR scaling with 5.4 dB calibrated 100-percent operating point",
+    "DesiredGR scaling with 5.5 dB Revision-1 baseline operating point"
+  ]
+}

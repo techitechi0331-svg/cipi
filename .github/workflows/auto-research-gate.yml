@@ -108,7 +108,7 @@ jobs:
           rm -rf /tmp/cipi-architect-smoke
           mkdir -p /tmp/cipi-architect-smoke
           python automation/architect/discover.py --topic nonlinear_continuity_replication --output-root /tmp/cipi-architect-smoke --max-gaps 1
-          python automation/architect/pilot.py --proposal /tmp/cipi-architect-smoke/research/architect/proposals/RP-NONLINEAR-CONTINUITY-REPLICATION-001.yaml --output-root research --run-id ci-smoke-architect
+          python automation/architect/pilot.py --proposal /tmp/cipi-architect-smoke/research/architect/proposals/RP-NONLINEAR-CONTINUITY-REPLICATION-001.yaml --output-root . --run-id ci-smoke-architect
           test -f research/runs/ARCHITECT-NONLINEAR-CONTINUITY-REPLICATION-PILOT-001/ci-smoke-architect/manifest.json
       - name: Smoke-test Plugin Incubator overlap routing
         run: |

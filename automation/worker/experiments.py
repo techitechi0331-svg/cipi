@@ -55,6 +55,7 @@ ADAPTERS = {
     "vopripro_ballistics_transfer_screen_v1",
     "vocal_resonance_raw_patch_sufficiency_v2",
     "voprep_amount_mapping_r5_v1",
+    "vocal_resonance_action_equivalence_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3479,6 +3480,57 @@ def _vocal_resonance_raw_patch_sufficiency_v2(
         ),
     }
 
+
+def _vocal_resonance_action_equivalence(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root
+        / "research/experiments/VocalResonance/action_equivalence_audit.py"
+    )
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-action-equiv-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "comparison.csv": (out / "comparison.csv").read_text(encoding="utf-8"),
+            "case_actions.csv": (out / "case_actions.csv").read_text(encoding="utf-8"),
+            "summary.json": (out / "summary.json").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary["diagnostic_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/action_equivalence_audit.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Research-only metric/action-equivalence audit comparing exact target "
+            "membership with analytical narrow-band attenuation from nearby Top-K "
+            "candidate frequencies. No suppressor DSP is implemented and no audio "
+            "render or raw vocal audio is persisted."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3568,4 +3620,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vopripro_ballistics_transfer_screen(repo_root, timeout_seconds)
     if name == "vocal_resonance_raw_patch_sufficiency_v2":
         return _vocal_resonance_raw_patch_sufficiency_v2(repo_root, timeout_seconds)
+    if name == "vocal_resonance_action_equivalence_v1":
+        return _vocal_resonance_action_equivalence(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

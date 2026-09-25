@@ -1,0 +1,30 @@
+schema_version: '1.0'
+decision_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001:gha-36157458914-1:auto
+job_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
+source_run: research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/gha-36157458914-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001;
+  promotion requires review.
+declared_rejection_criteria:
+- Candidate retains less than 80 percent of static-EQ masked proxy improvement.
+- Candidate non-target movement exceeds 1.0 dB or 35 percent of the static baseline.
+- Candidate collapses toward a static gain law or exceeds the declared 3 dB movement
+  budget.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T15:56:00.164505Z'
+immutable: true

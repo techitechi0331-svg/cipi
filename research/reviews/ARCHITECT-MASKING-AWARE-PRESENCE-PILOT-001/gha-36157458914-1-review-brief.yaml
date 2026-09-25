@@ -1,0 +1,111 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001:gha-36157458914-1:review-brief-v1
+job_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
+run_id: gha-36157458914-1
+source_run: research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/gha-36157458914-1
+route: HUMAN_GATE_REVIEW
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/gha-36157458914-1-triage.yaml
+triage_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001:gha-36157458914-1:triage-v1
+job_path: research/jobs/completed/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml
+research_question: Can vocal presence be increased from masking context without becoming
+  a static high-mid boost?
+hypothesis: A bounded context-dependent presence law can retain most of a static presence-EQ
+  masking-proxy benefit while avoiding unnecessary movement when the vocal is already
+  unmasked.
+counter_hypotheses:
+- Level-matched static presence EQ is equally selective once the movement budget is
+  matched.
+- The contextual law collapses toward a near-static boost across the declared matrix.
+- Reducing non-target movement sacrifices too much masked-case proxy improvement.
+acceptance_criteria:
+- Synthetic matrix is complete and all numeric outputs are finite.
+- Candidate retains at least 80 percent of static-EQ masked proxy improvement.
+- Candidate mean non-target movement is <= 1.0 dB.
+- Candidate non-target movement is <= 35 percent of static-EQ non-target movement.
+- Candidate masked-case mean gain is >= 0.50 dB.
+- Candidate gain standard deviation is >= 0.50 dB so the law has not collapsed to
+  a static boost.
+- Candidate maximum gain is <= 3.0 dB.
+rejection_criteria:
+- Candidate retains less than 80 percent of static-EQ masked proxy improvement.
+- Candidate non-target movement exceeds 1.0 dB or 35 percent of the static baseline.
+- Candidate collapses toward a static gain law or exceeds the declared 3 dB movement
+  budget.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 477d8b1a0414317035263a31e601838785e88223
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: all_numeric_finite
+  value: true
+- path: baseline_masked_proxy_improvement_db
+  value: 2.0
+- path: baseline_non_target_movement_db
+  value: 3.0
+- path: candidate_gain_std_db
+  value: 1.076903998610007
+- path: candidate_masked_mean_gain_db
+  value: 2.3333333333333335
+- path: candidate_masked_proxy_improvement_db
+  value: 2.0
+- path: candidate_max_gain_db
+  value: 3.0
+- path: candidate_non_target_movement_db
+  value: 0.5
+- path: masked_case_count
+  value: 6
+- path: masked_proxy_improvement_ratio
+  value: 1.0
+- path: matrix_complete
+  value: true
+- path: non_target_movement_ratio
+  value: 0.16666666666666666
+- path: row_count
+  value: 12
+- path: unmasked_case_count
+  value: 6
+knowledge_candidate:
+  claim: A bounded masking-context presence law is more selective than a static 3
+    dB presence boost in the declared synthetic matrix when judged by retained masking-proxy
+    improvement and non-target movement.
+  evidence_type: MEASURED
+  scope: Deterministic oracle-style synthetic target/masker-band pilot only; this
+    does not establish a deployable masking estimator, perceptual preference, real-vocal
+    generalization, or product readiness.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001:gha-36157458914-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Passing this pilot authorizes deeper research only, not product integration.
+- Real-vocal level-matched listening remains required before any product claim.
+- Existing Vocal Surface and Vocal Finisher overlap must be revisited before standalone
+  product incubation.
+downstream_gate_signals: []
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

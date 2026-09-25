@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# CIPI contract: candidate values and gates are fixed before HUST evaluation.
 from __future__ import annotations
 
 import argparse

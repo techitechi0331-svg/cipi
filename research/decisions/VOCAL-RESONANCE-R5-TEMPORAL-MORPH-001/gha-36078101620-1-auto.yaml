@@ -1,0 +1,29 @@
+schema_version: '1.0'
+decision_id: VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001:gha-36078101620-1:auto
+job_id: VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001
+source_run: research/runs/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001; promotion
+  requires review.
+declared_rejection_criteria:
+- overall Top-5 regresses
+- strong-effect Top-5 regresses
+- independent clean false-trigger improvement is < 0.10
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T00:38:46.253037Z'
+immutable: true

@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "prominence_only",
+    "static_r2_style_safe_negative"
+  ],
+  "experiment_adapter": "vocal_resonance_temporal_morphology_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001.yaml",
+  "metrics": [
+    "top5",
+    "top5_effect_gte3",
+    "mrr",
+    "external_clean_false_trigger",
+    "external_clean_false_trigger_by_technique",
+    "generator_ceiling"
+  ],
+  "variants": [
+    "temporal_morphology_r5"
+  ]
+}

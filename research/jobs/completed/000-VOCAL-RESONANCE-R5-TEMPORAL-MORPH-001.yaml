@@ -1,0 +1,64 @@
+schema_version: '1.0'
+job_id: VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001
+state: COMPLETED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: Can technique-independent, F0-independent temporal candidate morphology
+  reduce clean-vocal false triggers without degrading injected-resonance ranking versus
+  the unchanged v0.4R.2-style static ranker?
+hypothesis: Continuous-run and fragmentation features will reduce independent clean
+  false-trigger rate by at least 10 percentage points while preserving overall Top-5
+  and strong-effect Top-5 ranking.
+counter_hypotheses:
+- The current static persistence/variability features already contain the useful temporal
+  information, so run-length morphology adds no benefit.
+- Temporal morphology over-protects intermittent real resonances and degrades strong-effect
+  ranking.
+- False triggers are primarily a calibration/feature-separability problem rather than
+  temporal morphology, so clean false-trigger rate will not materially improve.
+baseline:
+- prominence_only
+- static_r2_style_safe_negative
+variants:
+- temporal_morphology_r5
+metrics:
+- top5
+- top5_effect_gte3
+- mrr
+- external_clean_false_trigger
+- external_clean_false_trigger_by_technique
+- generator_ceiling
+acceptance:
+- temporal morphology Top-5 >= static R2-style Top-5
+- temporal morphology strong-effect Top-5 >= static R2-style strong-effect Top-5
+- temporal morphology independent clean false-trigger <= static R2-style clean false-trigger
+  - 0.10
+rejection:
+- overall Top-5 regresses
+- strong-effect Top-5 regresses
+- independent clean false-trigger improvement is < 0.10
+max_runs: 1
+timeout_minutes: 12
+random_seed: 20261003
+experiment_adapter: vocal_resonance_temporal_morphology_v1
+allowed_operations:
+- stream_public_vocalset_in_runner_memory
+- controlled_eq_injection
+- derived_metric_write
+prohibited_operations:
+- arbitrary_shell
+- main_push
+- confidence_change
+- current_stage_change
+- raw_audio_write
+- paid_api
+- product_release
+knowledge_candidate:
+  claim: Generic candidate run-length and fragmentation morphology may separate persistent
+    resonant emphasis from legitimate time-varying vocal spectral peaks without technique
+    labels or F0 dependence.
+  evidence_type: HYPOTHESIS
+  scope: Vocal resonance semantic ranking and clean-vocal false-trigger control.
+  promotion_requested: HYPOTHESIS
+latest_run: gha-36078101620-1

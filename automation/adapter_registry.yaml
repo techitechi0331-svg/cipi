@@ -26,6 +26,18 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Replay PeakBody Revision 02 model policy across sample rates against a fixed-timing simple baseline."
+  peakbody_spectral_guard_stress_v1:
+    tracks:
+      - PEAKBODY_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Falsify or support a simple AirGuard-style normalized high-band guard against PeakBody crest confounders."
+  peakbody_periodicity_guard_stress_v1:
+    tracks:
+      - PEAKBODY_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Test whether periodicity protection resolves bright-harmonic false suppression left by the simple spectral guard."
   original_vocal_pre_measurement_gate_v1:
     tracks:
       - UA610_ORIGINAL_VOCAL_PRE

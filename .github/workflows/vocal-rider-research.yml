@@ -46,6 +46,26 @@ jobs:
             throw "Vocal Rider deterministic tests failed with exit code $LASTEXITCODE."
           }
 
+      - name: Build Vocal Rider measurement renderer
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRiderMeasurement --parallel 4
+
+      - name: Run Vocal Rider measurement matrix
+        shell: pwsh
+        run: |
+          $measureExe = Get-ChildItem -Path build -Recurse -File -Filter CIPIVocalRiderMeasurement.exe | Select-Object -First 1
+          if (-not $measureExe) {
+            throw "CIPIVocalRiderMeasurement.exe was not produced."
+          }
+
+          New-Item -ItemType Directory -Force -Path measurements | Out-Null
+          & $measureExe.FullName measurements
+          if ($LASTEXITCODE -ne 0) {
+            throw "Vocal Rider measurement renderer failed with exit code $LASTEXITCODE."
+          }
+
+          Get-Content measurements/summary.md
+
       - name: Build Vocal Rider VST3
         shell: pwsh
         run: cmake --build build --config Release --target CIPIVocalRider_VST3 --parallel 4
@@ -104,6 +124,14 @@ jobs:
         with:
           name: CIPI-Vocal-Rider-Windows-VST3
           path: artifacts
+          if-no-files-found: error
+
+      - name: Upload Vocal Rider measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-measurements
+          path: measurements
           if-no-files-found: error
 
       - name: Upload pluginval log

@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "static_presence_eq_3db"
+  ],
+  "experiment_adapter": "rp_masking_aware_presence_001_pilot_v1",
+  "job_file": "research/jobs/queued/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml",
+  "metrics": [
+    "matrix_complete",
+    "all_numeric_finite",
+    "masked_proxy_improvement_ratio",
+    "candidate_non_target_movement_db",
+    "non_target_movement_ratio",
+    "candidate_masked_mean_gain_db",
+    "candidate_gain_std_db",
+    "candidate_max_gain_db"
+  ],
+  "variants": [
+    "bounded_masking_context_presence"
+  ]
+}

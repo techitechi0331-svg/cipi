@@ -1,0 +1,13 @@
+case,vocal_presence_db,masker_presence_db,masking_deficit_db,baseline_gain_db,candidate_gain_db,baseline_proxy_improvement_db,candidate_proxy_improvement_db,masked
+heavy_mask_1,-8.0,-3.0,5.0,3.0,3.0,3.0,3.0,1
+heavy_mask_2,-7.0,-2.5,4.5,3.0,3.0,3.0,3.0,1
+moderate_mask_1,-6.0,-3.5,2.5,3.0,3.0,2.5,2.5,1
+moderate_mask_2,-5.0,-3.0,2.0,3.0,2.5,2.0,2.0,1
+mild_mask_1,-4.0,-3.0,1.0,3.0,1.5,1.0,1.0,1
+mild_mask_2,-3.5,-3.0,0.5,3.0,1.0,0.5,0.5,1
+balanced_1,-3.0,-3.0,0.0,3.0,0.5,0.0,0.0,0
+balanced_2,-2.5,-3.0,0.0,3.0,0.5,0.0,0.0,0
+vocal_forward_1,-2.0,-4.0,0.0,3.0,0.5,0.0,0.0,0
+vocal_forward_2,-1.0,-4.0,0.0,3.0,0.5,0.0,0.0,0
+bright_unmasked_1,-1.5,-5.0,0.0,3.0,0.5,0.0,0.0,0
+bright_unmasked_2,-0.5,-5.0,0.0,3.0,0.5,0.0,0.0,0

@@ -1,0 +1,39 @@
+{
+  "acceptance_met": true,
+  "file_count": 11,
+  "predeclared_gates": {
+    "median_crest10_p95_change_max_db": 0.05,
+    "max_crest10_p95_change_max_db": 0.2,
+    "max_gain_excursion_10ms_p99_db": 0.02,
+    "max_gain_excursion_50ms_p99_db": 0.08,
+    "max_gain_excursion_100ms_p99_db": 0.16,
+    "max_cut_rate_p99_db_s": 1.55,
+    "max_boost_rate_p99_db_s": 0.65
+  },
+  "aggregate": {
+    "median_crest10_p95_change_db": 0.0017095733843603966,
+    "max_crest10_p95_change_db": 0.0034907223059228443,
+    "max_gain_excursion_10ms_p99_db": 0.01496875286102295,
+    "max_gain_excursion_10ms_max_db": 0.014968812465667725,
+    "max_gain_excursion_50ms_p99_db": 0.07496875524520874,
+    "max_gain_excursion_50ms_max_db": 0.07496881484985352,
+    "max_gain_excursion_100ms_p99_db": 0.14996875822544098,
+    "max_gain_excursion_100ms_max_db": 0.14996886253356934,
+    "max_cut_rate_p99_db_s": 1.5035390853881836,
+    "max_boost_rate_p99_db_s": 0.6019413471221924,
+    "median_cut_ceiling_occupancy": 0.0035372685185185186,
+    "max_cut_ceiling_occupancy": 0.05255202821869488,
+    "all_finite": true
+  },
+  "gates": {
+    "crest_median": true,
+    "crest_worst": true,
+    "excursion_10ms": true,
+    "excursion_50ms": true,
+    "excursion_100ms": true,
+    "cut_rate": true,
+    "boost_rate": true,
+    "finite": true
+  },
+  "raw_audio_persisted": false
+}

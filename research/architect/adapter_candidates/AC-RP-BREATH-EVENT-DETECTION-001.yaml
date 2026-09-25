@@ -1,0 +1,54 @@
+schema_version: '1.0'
+adapter_candidate_id: AC-RP-BREATH-EVENT-DETECTION-001
+source_research_proposal: research/architect/proposals/RP-BREATH-EVENT-DETECTION-001.yaml
+state: DRAFT_REVIEW
+executable: false
+proposed_adapter_name: rp_breath_event_detection_001_pilot_v1
+track:
+  id: ARCHITECT_BREATH_EVENT_DETECTION
+  path: research/architect
+research_question: Can intentional vocal breath be distinguished from hiss-like excess
+  and consonant noise with bounded false activation across singer conditions?
+baseline:
+- high_frequency_energy_rule
+variants:
+- contextual_breath_features
+metrics:
+- event_recall
+- false_trigger_rate
+- onset_latency
+acceptance:
+- Holdout recall improves without increasing false-trigger rate beyond the predeclared
+  bound.
+rejection:
+- Holdout false triggers erase the selection-set gain.
+required_operations:
+- read_committed_research_evidence
+- generate_deterministic_synthetic_inputs
+- calculate_declared_metrics
+- write_derived_json_csv_markdown_sha256
+network_required: false
+public_dataset_review_recommended: true
+timeout_minutes: 5
+dependency_policy: standard-library or explicitly pinned existing CIPI dependency
+  only
+allowed_output_prefixes:
+- research/runs/ARCHITECT-
+- research/knowledge_candidates/ARCHITECT-
+- research/decisions/ARCHITECT-
+forbidden_operations:
+- arbitrary_shell_from_yaml
+- production_plugin_mutation
+- adapter_registry_self_registration
+- raw_client_audio_persistence
+- secret_access
+- automatic_promote_or_confirm
+- official_repo_or_release_creation
+review_requirements:
+- Confirm the metric really tests the research question.
+- Confirm baseline and counter-hypotheses remain competitive.
+- Confirm dependencies, network access and timeout are bounded.
+- Implement the adapter separately and pass Architect/Auto Research gates before registry
+  consideration.
+implementation_status: NOT_IMPLEMENTED
+automatic_registry_promotion_allowed: false

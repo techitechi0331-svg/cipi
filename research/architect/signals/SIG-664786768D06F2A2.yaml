@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-664786768D06F2A2
+source_path: research/experiments/BreathKeeper/status.yaml
+kind: UNRESOLVED
+text_hash: 664786768d06f2a2
+text: Accompanied-vocal / bleed robustness is unknown.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

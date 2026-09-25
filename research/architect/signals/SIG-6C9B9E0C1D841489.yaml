@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-6C9B9E0C1D841489
+source_path: research/experiments/BreathKeeper/status.yaml
+kind: UNRESOLVED
+text_hash: 6c9b9e0c1d841489
+text: Intentional expressive breaths need a preservation rule rather than blanket
+  removal.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -1,0 +1,43 @@
+schema_version: '1.0'
+proposal_id: RP-BREATH-EVENT-DETECTION-001
+source_gap: research/architect/gaps/GAP-BREATH-EVENT-DETECTION-001.yaml
+state: NEEDS_ADAPTER
+track:
+  id: ARCHITECT_BREATH_EVENT_DETECTION
+  path: research/architect
+research_question: Can intentional vocal breath be distinguished from hiss-like excess
+  and consonant noise with bounded false activation across singer conditions?
+hypothesis: Contextual spectral and temporal features can separate intentional breath
+  events from steady hiss and voiced consonants better than a high-frequency-energy-only
+  rule.
+counter_hypotheses:
+- Breath and hiss are not separable robustly enough without singer-specific calibration.
+- Any improvement over a simple energy rule collapses on unseen singers.
+baseline:
+- high_frequency_energy_rule
+variants:
+- contextual_breath_features
+metrics:
+- event_recall
+- false_trigger_rate
+- onset_latency
+acceptance:
+- Holdout recall improves without increasing false-trigger rate beyond the predeclared
+  bound.
+rejection:
+- Holdout false triggers erase the selection-set gain.
+pilot_adapter: null
+pilot_job_id: ARCHITECT-BREATH-EVENT-DETECTION-PILOT-001
+prototype_adapter: null
+plugin_opportunity: true
+overlap_hints:
+- Vo.Prep
+- Vocal Surface
+expected_reuse: Vo.Prep, Surface, Finisher, rider and future event-aware processors.
+external_validity:
+- Pilot evidence is not a product claim.
+- Public/real vocal and host validation remain separate when applicable.
+budget:
+  max_pilot_runs: 2
+  max_formal_iterations: 5
+  max_same_failure: 2

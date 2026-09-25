@@ -1,0 +1,13 @@
+schema_version: '1.0'
+plugin_proposal_id: PLUGIN-RP-BREATH-EVENT-DETECTION-001
+decision: MERGE_EXISTING
+authority: AUTOMATION
+final: false
+reason: Existing products already cover adjacent user problems; a new product is not
+  justified until an independent advantage over merge/feature-extension alternatives
+  is measured.
+matched_existing_products:
+- Vo.Prep
+- Vocal Surface
+next_action: Route the mechanism to the relevant existing product review before any
+  standalone prototype.

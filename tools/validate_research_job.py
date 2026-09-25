@@ -11,7 +11,8 @@ REQUIRED = {
     "counter_hypotheses","baseline","variants","metrics","acceptance","rejection",
     "max_runs","timeout_minutes",
 }
-STATES = {"QUEUED","CLAIMED","RUNNING","COMPLETED","FAILED","REJECTED","CANCELLED"}
+STATES = {"QUEUED","CLAIMED","RUNNING","BLOCKED_EXTERNAL","BLOCKED_DEPENDENCY","COMPLETED","FAILED","REJECTED","CANCELLED"}
+WAIT_KINDS = {"GITHUB_ACTIONS","EXTERNAL_TOOL","CUBASE_HOST","HUMAN_LISTENING","RUNNER","OTHER"}
 ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._-]{2,95}$")
 
 def load_registry() -> dict:
@@ -40,6 +41,45 @@ def validate(path: Path) -> list[str]:
         errors.append(f"{path}: invalid job_id")
     if data["state"] not in STATES:
         errors.append(f"{path}: invalid state {data['state']!r}")
+    priority=data.get("priority", 0)
+    if isinstance(priority, bool) or not isinstance(priority, int) or not -100 <= priority <= 100:
+        errors.append(f"{path}: priority must be an integer from -100 to 100")
+
+    deps=data.get("depends_on_jobs", [])
+    if not isinstance(deps, list):
+        errors.append(f"{path}: depends_on_jobs must be a list")
+        deps=[]
+    else:
+        normalized=[]
+        for dep in deps:
+            if not isinstance(dep, str) or not ID_RE.fullmatch(dep):
+                errors.append(f"{path}: invalid depends_on_jobs entry {dep!r}")
+            else:
+                normalized.append(dep)
+        if len(normalized) != len(set(normalized)):
+            errors.append(f"{path}: depends_on_jobs contains duplicates")
+        if data.get("job_id") in normalized:
+            errors.append(f"{path}: job may not depend on itself")
+
+    waits=data.get("external_wait", [])
+    if not isinstance(waits, list):
+        errors.append(f"{path}: external_wait must be a list")
+        waits=[]
+    else:
+        for i, wait in enumerate(waits):
+            if not isinstance(wait, dict):
+                errors.append(f"{path}: external_wait[{i}] must be a mapping")
+                continue
+            if wait.get("kind") not in WAIT_KINDS:
+                errors.append(f"{path}: external_wait[{i}].kind is invalid")
+            for key in ("ref","resume_when","resume_step"):
+                if len(str(wait.get(key, "")).strip()) < 3:
+                    errors.append(f"{path}: external_wait[{i}].{key} is required")
+    if data.get("state") == "BLOCKED_EXTERNAL" and not waits:
+        errors.append(f"{path}: BLOCKED_EXTERNAL requires at least one external_wait entry")
+    if data.get("state") == "BLOCKED_DEPENDENCY" and not deps:
+        errors.append(f"{path}: BLOCKED_DEPENDENCY requires depends_on_jobs")
+
     track=data["track"]
     if not isinstance(track, dict) or not {"id","path"} <= set(track):
         errors.append(f"{path}: track requires id and path")

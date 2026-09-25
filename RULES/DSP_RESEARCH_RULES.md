@@ -14,6 +14,14 @@ A stage may return to any earlier stage when a contradiction, failed measurement
 
 No track is considered complete merely because it compiles or sounds promising.
 
+## No-Wait scheduling rule
+
+The lifecycle above defines scientific order, not a requirement to idle while one dependency is running.
+
+If GitHub Actions, a runner, external tool, Cubase check, listening gate, or another prerequisite is unavailable, only the dependent task is blocked. The active work pass must apply `RULES/NO_WAIT_WORK_STEALING.md`, search for independent READY work, and continue without inventing the missing result.
+
+`queued`, `in_progress`, or `waiting for runner` is not by itself a valid reason to end a work pass when authorized READY work exists.
+
 ## Stage definitions
 
 ### 1. Research

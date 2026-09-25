@@ -45,6 +45,12 @@ jobs:
         id: select
         run: python automation/queue/select_job.py --github-output "$GITHUB_OUTPUT"
 
+      - name: Report No-Wait selection
+        run: |
+          echo "has_job=${{ steps.select.outputs.has_job }}"
+          echo "work_steal=${{ steps.select.outputs.work_steal }}"
+          echo "blocked=${{ steps.select.outputs.skipped_blocked }} dependency=${{ steps.select.outputs.skipped_dependency }} claimed=${{ steps.select.outputs.skipped_claimed }}"
+
       - name: Install pinned scientific stack when required
         if: steps.select.outputs.has_job == 'true' && (startsWith(steps.select.outputs.job_id, 'VOCAL-RESONANCE') || startsWith(steps.select.outputs.job_id, 'VO-PREP-AMOUNT-R') || startsWith(steps.select.outputs.job_id, 'VO-PREP-SC-HPF'))
         run: python -m pip install -r automation/worker/requirements-scientific.txt
@@ -153,6 +159,8 @@ jobs:
         run: |
           gh issue create --title "Autonomous research ready: $JOB_ID" --body "Free autonomous research run **$RUN_ID** completed successfully and is saved on branch $BOT_BRANCH. Deterministic review triage: **${{ steps.triage.outputs.candidate_class }} → ${{ steps.triage.outputs.route }}**. Review Brief: `${{ steps.brief.outputs.brief_markdown_path }}`. Automatic PR creation is disabled by the repository Actions setting, so this issue is the review handoff. The branch already passed Job, Result, Evidence Candidate, Decision Record, Review Triage, Review Brief, and CIPI research-contract gates. No paid external API was used."
 
-      - name: Queue empty
+      - name: Queue has no READY work
         if: steps.select.outputs.has_job != 'true'
-        run: echo "No unclaimed queued research job. Nothing to do."
+        run: |
+          echo "No READY autonomous research job. Nothing executable in this queue pass."
+          echo "blocked=${{ steps.select.outputs.skipped_blocked }} dependency=${{ steps.select.outputs.skipped_dependency }} claimed=${{ steps.select.outputs.skipped_claimed }}"

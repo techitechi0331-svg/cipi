@@ -192,3 +192,11 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Compare deployable single-view local multi-scale spectro-temporal patch/context features against the frozen static vocal-resonance ranker."
+
+  rp_masking_aware_presence_001_pilot_v1:
+    tracks:
+      - ARCHITECT_MASKING_AWARE_PRESENCE
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Run the reviewed deterministic synthetic masking-aware presence pilot against a static presence-EQ baseline; this is an oracle-style selectivity test only and cannot establish a deployable masking estimator or product claim."
+

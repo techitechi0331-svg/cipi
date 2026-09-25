@@ -1,0 +1,47 @@
+source_repo: techitechi0331-svg/vocal_rider
+source_head: c1a2a4f4d0bb408c9eeb37c077b735f59e744414
+id: VOCAL_RIDER_01
+title: CIPI Vocal Rider 0.1
+
+status: measurement
+knowledge_status: HYPOTHESIS
+confidence: 0.64
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: pending
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: measurement
+
+completed:
+  - research
+  - review
+  - implementation
+
+unresolved:
+  - Band-aware breath / consonant / plosive protection is not validated.
+  - Adaptive noise-floor tracking is not numerically locked.
+  - Auto-target history and section adaptation require intentional section-dynamics and real-song validation.
+  - Lookahead choice needs real-vocal comparison.
+  - Amount upper-half mapping is provisional.
+  - Dedicated-repo research and real-vocal CI are queued/pending on the self-hosted Windows runner; runner-dependent validation is BLOCKED, while independent review/test work continues.
+  - Post-prepare 50 ms latency/state processor gate passed at 44.1/48/88.2/96/192 kHz and buffer sizes 32–1024.
+  - Headroom Guard was corrected to boost-only behavior after review found that the previous -24 dB emergency floor could attenuate Amount 0% / neutral ride.
+  - A regression test now requires neutral and already-negative ride to remain unchanged by the Headroom Guard.
+  - Steinberg validator is pending on the dedicated-repo runner.
+  - Cubase Pro 14 host verification is pending.
+
+next_stage: measurement
+why_next: "The compiled core, VST3 build and pluginval gate pass. The next evidence must falsify musical over-riding and host-latency risks before real-vocal promotion."
+next_confirmation: "Intentional section contrast preservation, within-section leveling, explicit post-prepare latency reporting, then real-vocal objective metrics and level-matched A/B renders."
+
+blockers:
+  - "Dedicated-repo Windows CI requires an eligible self-hosted runner to pick up the queued/pending jobs."
+  - "Human listening and Cubase Pro 14 confirmation remain unavoidable final gates."

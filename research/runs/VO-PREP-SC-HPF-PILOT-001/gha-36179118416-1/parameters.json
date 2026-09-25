@@ -1,0 +1,21 @@
+{
+  "baseline": [
+    "Full-band detector with sidechain HPF OFF."
+  ],
+  "experiment_adapter": "voprep_sidechain_hpf_pilot_v1",
+  "job_file": "research/jobs/queued/VO-PREP-SC-HPF-PILOT-001.yaml",
+  "metrics": [
+    "selected_cutoff_hz",
+    "selected_gates",
+    "selected_aggregate",
+    "candidate_count",
+    "raw_audio_persisted"
+  ],
+  "variants": [
+    "40 Hz second-order Butterworth high-pass in the detector path only.",
+    "60 Hz second-order Butterworth high-pass in the detector path only.",
+    "70 Hz second-order Butterworth high-pass in the detector path only.",
+    "80 Hz second-order Butterworth high-pass in the detector path only.",
+    "100 Hz second-order Butterworth high-pass in the detector path only."
+  ]
+}

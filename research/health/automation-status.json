@@ -20,6 +20,12 @@
         "Level-matched blind real-vocal listening before final Amount adoption."
       ],
       "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001"
+    },
+    {
+      "gates": [
+        "Level-matched real-vocal listening before product adoption."
+      ],
+      "job_id": "VO-PREP-SC-HPF-REAL-001"
     }
   ],
   "local": {
@@ -32,7 +38,12 @@
       "VO-PREP-AMOUNT-R5-SOFT-RANGE-001"
     ],
     "dependency_blocked_count": 0,
-    "ready_job": null
+    "ready_job": {
+      "branch": "research-bot/VO-PREP-SC-HPF-REAL-001/auto-4906c82b6acd",
+      "job_id": "VO-PREP-SC-HPF-REAL-001",
+      "kind": "LOCAL_RESEARCH",
+      "priority": 0
+    }
   },
   "schema_version": "1.0",
   "selected": {

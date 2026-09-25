@@ -24,22 +24,21 @@
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [],
-    "claimed_count": 0,
-    "claimed_jobs": [],
+    "claimed_branches": [
+      "research-bot/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/auto-292c7f261b8e"
+    ],
+    "claimed_count": 1,
+    "claimed_jobs": [
+      "VO-PREP-AMOUNT-R5-SOFT-RANGE-001"
+    ],
     "dependency_blocked_count": 0,
-    "ready_job": {
-      "branch": "research-bot/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/auto-292c7f261b8e",
-      "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
-      "kind": "LOCAL_RESEARCH",
-      "priority": 0
-    }
+    "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
     "branch": "research-bot/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/auto-292c7f261b8e",
     "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
-    "kind": "LOCAL_RESEARCH",
-    "priority": 0
+    "kind": "EVIDENCE_INTAKE",
+    "priority": 90
   }
 }

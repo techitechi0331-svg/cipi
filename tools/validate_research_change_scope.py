@@ -10,6 +10,7 @@ ALLOWED_PREFIXES = (
     "research/knowledge_candidates/",
     "research/decisions/",
     "research/reviews/",
+    "research/cross_repo/actions/queued/",
 )
 
 APPEND_ONLY_PREFIXES = (
@@ -23,6 +24,7 @@ APPEND_ONLY_PREFIXES = (
 )
 
 QUEUE_PREFIX = "research/jobs/queued/"
+CROSS_REPO_QUEUE_PREFIX = "research/cross_repo/actions/queued/"
 
 def allowed(path: str) -> bool:
     return path.startswith(ALLOWED_PREFIXES)
@@ -79,6 +81,9 @@ def main() -> int:
 
         if target.startswith(QUEUE_PREFIX) and code == "M":
             errors.append(f"queued jobs may be added or consumed, but not modified in place: {target}")
+
+        if target.startswith(CROSS_REPO_QUEUE_PREFIX) and code != "A":
+            errors.append(f"worker cross-repo actions may only be added to the queue: {status} {target}")
 
         if source.startswith(QUEUE_PREFIX) and code == "D":
             pass

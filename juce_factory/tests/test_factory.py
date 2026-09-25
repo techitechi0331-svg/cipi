@@ -43,6 +43,14 @@ class ContractTests(unittest.TestCase):
             self.assertEqual(manifest["validation_matrix"]["sample_rates"], [44100, 48000, 88200, 96000])
             self.assertEqual(manifest["validation_matrix"]["block_sizes"], [32, 64, 128, 257, 512, 1024])
 
+    def test_mandatory_factory_gates_cannot_be_disabled(self):
+        for key in ("pluginval", "nan_inf", "official_vst3_validator"):
+            bad = copy.deepcopy(self.contract)
+            bad["validation"][key] = False
+            with self.subTest(key=key):
+                with self.assertRaises(ContractError):
+                    validate_contract(bad)
+
     def test_validation_matrix_rejects_duplicate_sample_rate(self):
         bad = copy.deepcopy(self.contract)
         bad["validation"]["sample_rates"] = [48000, 48000]

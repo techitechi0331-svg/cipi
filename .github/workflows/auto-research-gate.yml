@@ -22,6 +22,10 @@ on:
       - "tools/test_no_wait_scheduler.py"
       - "tools/validate_cross_repo.py"
       - "tools/test_cross_repo_orchestrator.py"
+      - "tools/test_autonomy_stack.py"
+      - "tools/validate_autonomy_state.py"
+      - "automation/orchestrator/**"
+      - "RULES/AUTONOMY_STACK.md"
       - "RULES/CROSS_REPO_ORCHESTRATION.md"
       - "RULES/AUTO_EVIDENCE_INTAKE.md"
       - "RULES/NO_WAIT_WORK_STEALING.md"
@@ -31,6 +35,7 @@ on:
       - ".github/workflows/no-wait-orchestrator.yml"
       - ".github/workflows/cross-repo-orchestrator.yml"
       - ".github/workflows/auto-evidence-intake.yml"
+      - ".github/workflows/global-dag-orchestrator.yml"
   workflow_dispatch:
 
 permissions:
@@ -70,6 +75,9 @@ jobs:
         run: |
           python tools/validate_cross_repo.py
           python tools/test_cross_repo_orchestrator.py
+          python tools/validate_autonomy_state.py
+          python tools/test_autonomy_stack.py
+          python automation/orchestrator/global_dag.py --cross-repo-enabled false --github-output /tmp/cipi-global-dag-output
 
       - name: Run deterministic mock worker
         run: |

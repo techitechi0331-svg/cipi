@@ -24,7 +24,8 @@ ADAPTERS = {
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
     "vo_prep_snapshot_gate_v1",
-    "vocal_resonance_temporal_morphology_v1",\n    "vocal_resonance_temporal_morphology_stability_v1",
+    "vocal_resonance_temporal_morphology_v1",
+    "vocal_resonance_temporal_morphology_stability_v1",
     "voprep_amount_mapping_v1",
 }
 
@@ -1444,4 +1445,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_temporal_morphology(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_v1":
         return _voprep_amount_mapping(repo_root, timeout_seconds)
-    if name == "vocal_resonance_temporal_morphology_stability_v1":\n        return _vocal_resonance_temporal_morphology_stability(repo_root, timeout_seconds)\n    raise AssertionError(f"adapter dispatch missing for {name}")
+    if name == "vocal_resonance_temporal_morphology_stability_v1":
+        return _vocal_resonance_temporal_morphology_stability(repo_root, timeout_seconds)
+    raise AssertionError(f"adapter dispatch missing for {name}")

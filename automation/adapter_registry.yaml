@@ -306,3 +306,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Test whether a simple post-ballistics Soft Range repairs high-Amount ripple while keeping the frozen Vo.Prep detector/curve/8/70 core and explicit Learn solve unchanged."
+
+  vocal_resonance_action_equivalence_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 10
+    network_required: true
+    purpose: "Audit whether exact injected-target Top-K understates practical frequency-placement utility using analytical fixed peaking-cut responses; no suppressor implementation or audio rendering."

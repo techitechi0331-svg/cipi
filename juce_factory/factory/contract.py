@@ -128,6 +128,31 @@ def validate_contract(data: dict[str, Any]) -> None:
         raise ContractError("ui.show_version must be boolean")
 
     validation = _require_object(data, "validation")
+    required_validation_flags = (
+        "pluginval", "state_restore", "automation", "silence", "nan_inf",
+        "official_vst3_validator", "latency", "mono_stereo_layouts", "denormal", "bypass",
+    )
+    for key in required_validation_flags:
+        if key in validation and not isinstance(validation.get(key), bool):
+            raise ContractError(f"validation.{key} must be boolean")
     for key in ("pluginval", "state_restore", "automation", "silence", "nan_inf"):
         if not isinstance(validation.get(key), bool):
             raise ContractError(f"validation.{key} must be boolean")
+
+    sample_rates = validation.get("sample_rates", [44100, 48000, 88200, 96000])
+    if not isinstance(sample_rates, list) or not sample_rates:
+        raise ContractError("validation.sample_rates must be a non-empty array")
+    if len(set(sample_rates)) != len(sample_rates):
+        raise ContractError("validation.sample_rates must not contain duplicates")
+    for rate in sample_rates:
+        if not isinstance(rate, (int, float)) or isinstance(rate, bool) or not 8000 <= float(rate) <= 384000:
+            raise ContractError("validation.sample_rates entries must be numeric values in [8000, 384000]")
+
+    block_sizes = validation.get("block_sizes", [32, 64, 128, 257, 512, 1024])
+    if not isinstance(block_sizes, list) or not block_sizes:
+        raise ContractError("validation.block_sizes must be a non-empty array")
+    if len(set(block_sizes)) != len(block_sizes):
+        raise ContractError("validation.block_sizes must not contain duplicates")
+    for size in block_sizes:
+        if not isinstance(size, int) or isinstance(size, bool) or not 1 <= size <= 8192:
+            raise ContractError("validation.block_sizes entries must be integers in [1, 8192]")

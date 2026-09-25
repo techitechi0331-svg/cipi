@@ -1,0 +1,27 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/PeakBody/confounder_guard_model.py --mode spectral_only"
+  ],
+  "completed_at": "2026-09-25T15:28:53.627281Z",
+  "environment": {
+    "experiment_adapter": "peakbody_spectral_guard_stress_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "PEAKBODY-CONFOUNDER-SPECTRAL-001",
+  "random_seed": 2026092501,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36154409726-1",
+  "schema_version": "1.0",
+  "source_commit": "c1ce92325a64d24030890a90d468fb8e5bdd1314",
+  "started_at": "2026-09-25T15:28:42.378435Z",
+  "triggered_criteria": [
+    "bright high-F0 harmonic transient retention fell below 85 percent of baseline",
+    "low-frequency plosive transient retention fell below 85 percent of baseline"
+  ],
+  "worker_version": "cipi-research-worker/0.2"
+}

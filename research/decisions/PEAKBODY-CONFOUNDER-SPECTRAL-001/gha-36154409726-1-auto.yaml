@@ -1,0 +1,36 @@
+schema_version: '1.0'
+decision_id: PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:auto
+job_id: PEAKBODY-CONFOUNDER-SPECTRAL-001
+source_run: research/runs/PEAKBODY-CONFOUNDER-SPECTRAL-001/gha-36154409726-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: If the declared gate fails, the simple normalized high-band guard is insufficient
+  for the tested PeakBody confounder scope and must not be promoted as a vocal-safe
+  detector guard.
+scope: Synthetic PeakBody confounder stress only.
+declared_rejection_criteria:
+- any acceptance invariant fails
+- the required confounder/sample-rate matrix is incomplete
+triggered_criteria:
+- bright high-F0 harmonic transient retention fell below 85 percent of baseline
+- low-frequency plosive transient retention fell below 85 percent of baseline
+retained_findings:
+- Preserve the full per-case/per-sample-rate measurements, including whichever voiced
+  or noise-like class caused rejection.
+- A successful noise reduction result does not override a bright-voiced false suppression.
+reusable_findings:
+- Spectral balance alone may be insufficient to distinguish noise-like sibilance from
+  bright harmonic high-register singing.
+revisit_if:
+- A periodicity/voicing protection term is added.
+- A stronger harmonic-motion or F0-aware feature becomes available.
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - PEAKBODY-REV02-POLICY-001
+  related_decisions: []
+created_at: '2026-09-25T15:28:53.627281Z'
+immutable: true

@@ -1,4 +1,4 @@
-# CIPI Cross-Repository Orchestration Rule v1.0
+# CIPI Cross-Repository Orchestration Rule v2.0
 
 ## Purpose
 
@@ -45,11 +45,13 @@ Cross-repository actions live under:
 
 Only one active action per repository/workflow pair is dispatched at a time.
 
-Every action records a bounded `max_attempts` value. v1 does not blindly retry failed DSP/test results; failed actions remain evidence and require a reviewed retry decision. `QUARANTINED` is available for future bounded retry policy.
+Every action records bounded dispatch/retry state. Only failures classified as `INFRA_TRANSIENT` may receive the configured automatic retry, normally once. Build, DSP test, measurement, render, reference, pluginval, validator, timeout-unknown and manually cancelled outcomes are not blindly retried. `QUARANTINED` remains the terminal automation state when a bounded dispatch budget is exhausted.
+
+Cross-Repo actions may declare `depends_on_jobs` and `depends_on_actions`. A queued action is READY only when those dependencies are completed.
 
 ## External evidence
 
-Observed runs are stored under `research/cross_repo/events/<repo-key>/<run-id>.yaml`.
+Observed runs are stored under `research/cross_repo/events/<repo-key>/<run-id>-attempt-<n>.yaml`. Legacy single-attempt records remain valid.
 
 An event is evidence of GitHub workflow state only. It does not establish subjective quality, reference fidelity, or product approval.
 
@@ -66,3 +68,12 @@ with an external wait reference of:
 When that action reaches `COMPLETED`, the Cross-Repo Orchestrator may return the job to `QUEUED` and preserve the resolved wait in `external_wait_history`.
 
 This integrates with the No-Wait / Work-Stealing rule: the blocked job sleeps while unrelated READY work continues, then automatically re-enters the queue when its declared action completes.
+
+
+## Artifact evidence
+
+CIPI-dispatched runs may produce artifact manifests under `research/cross_repo/artifacts/`. Artifact ingestion follows `RULES/AUTONOMY_STACK.md`: metadata is retained, text extraction is bounded and sanitized, and binary plug-in/audio payloads are not committed to CIPI.
+
+## Runner health
+
+Current external-run health is stored under `research/cross_repo/health/`. `RUNNER_WAIT` and `DISPATCH_UNOBSERVED` are operational blockers only; they do not constitute research evidence or a failed experiment.

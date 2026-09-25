@@ -1,0 +1,116 @@
+name: Global DAG Orchestrator
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "research/jobs/**"
+      - "research/cross_repo/actions/**"
+      - "research/cross_repo/health/**"
+      - "automation/orchestrator/**"
+      - "automation/cross_repo/**"
+      - ".github/workflows/global-dag-orchestrator.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: cipi-global-dag-orchestrator
+  cancel-in-progress: false
+
+jobs:
+  coordinate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CIPI_CROSS_REPO_TOKEN: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Validate scheduler contracts
+        run: |
+          python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
+          python tools/test_autonomy_stack.py
+
+      - name: Build DAG and health dashboard
+        id: dag
+        shell: bash
+        run: |
+          ENABLED=false
+          if [ -n "$CIPI_CROSS_REPO_TOKEN" ]; then ENABLED=true; fi
+          python automation/orchestrator/global_dag.py \
+            --cross-repo-enabled "$ENABLED" \
+            --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate generated health dashboard
+        if: steps.dag.outputs.dashboard_changed == 'true'
+        run: python tools/validate_autonomy_state.py
+
+      - name: Commit health dashboard when changed
+        if: steps.dag.outputs.dashboard_changed == 'true'
+        run: |
+          git config user.name "cipi-health-bot"
+          git config user.email "cipi-health-bot@users.noreply.github.com"
+          git add research/health/automation-status.json research/health/automation-status.md
+          if git diff --cached --quiet; then
+            echo "Health dashboard unchanged."
+          else
+            git commit -m "update automation health dashboard"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Dispatch evidence intake
+        if: steps.dag.outputs.next_kind == 'EVIDENCE_INTAKE'
+        run: |
+          ACTIVE="$(gh run list --workflow auto-evidence-intake.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress")] | length')"
+          if [ "$ACTIVE" = "0" ]; then
+            gh workflow run auto-evidence-intake.yml --ref main \
+              -f branch="${{ steps.dag.outputs.branch }}" \
+              -f job_id="${{ steps.dag.outputs.job_id }}" \
+              -f run_id="global-dag-${GITHUB_RUN_ID}"
+          else
+            echo "Auto Evidence Intake already active; skipping duplicate dispatch."
+          fi
+
+      - name: Dispatch local No-Wait work
+        if: steps.dag.outputs.next_kind == 'LOCAL_RESEARCH'
+        run: |
+          ACTIVE="$(gh run list --workflow no-wait-orchestrator.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress")] | length')"
+          if [ "$ACTIVE" = "0" ]; then
+            gh workflow run no-wait-orchestrator.yml --ref main
+          else
+            echo "No-Wait Orchestrator already active; skipping duplicate dispatch."
+          fi
+
+      - name: Dispatch Cross-Repo work
+        if: steps.dag.outputs.next_kind == 'CROSS_REPO'
+        run: |
+          ACTIVE="$(gh run list --workflow cross-repo-orchestrator.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress")] | length')"
+          if [ "$ACTIVE" = "0" ]; then
+            gh workflow run cross-repo-orchestrator.yml --ref main
+          else
+            echo "Cross-Repo Orchestrator already active; skipping duplicate dispatch."
+          fi
+
+      - name: No executable DAG node
+        if: steps.dag.outputs.next_kind == 'IDLE'
+        run: echo "No executable node. Blocked/human-gate states remain visible in the health dashboard."

@@ -84,6 +84,7 @@ jobs:
           python tools/validate_review_triage.py
           python tools/validate_review_brief.py
           python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
           python tools/validate_research.py
 
       - name: Push evidence intake to main

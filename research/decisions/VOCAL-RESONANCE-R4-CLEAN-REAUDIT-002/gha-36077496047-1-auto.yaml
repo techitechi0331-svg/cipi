@@ -1,0 +1,32 @@
+schema_version: '1.0'
+decision_id: VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002:gha-36077496047-1:auto
+job_id: VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36077496047-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002; promotion
+  requires review.
+declared_rejection_criteria:
+- fewer than 24 usable clean excerpts
+- fewer than 4 techniques
+- fewer than 2 exercise families
+- fewer than 20 YIN-resolved excerpts
+- fewer than 6 YIN-proxy p90-F0 >=400 Hz excerpts
+- any basename overlaps Audit-001
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T00:30:02.966143Z'
+immutable: true

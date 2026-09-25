@@ -29,8 +29,8 @@ unresolved:
   - Auto-target history and section adaptation require intentional section-dynamics and real-song validation.
   - Lookahead choice needs real-vocal comparison.
   - Amount upper-half mapping is provisional.
-  - Real-vocal level-matched listening is pending.
-  - pluginval passed, but post-prepare 50 ms host latency reporting is not yet explicitly confirmed.
+  - Real-vocal objective validation and level-matched listening are pending; hosted Windows fallback is enabled so self-hosted Runner availability is not a blocker.
+  - Post-prepare 50 ms latency/state processor gate passed at 44.1/48/88.2/96/192 kHz and buffer sizes 32–1024.
   - Steinberg validator is pending.
   - Cubase Pro 14 host verification is pending.
 

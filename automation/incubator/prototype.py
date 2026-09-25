@@ -61,7 +61,9 @@ def main() -> int:
     if proposal is None:
         raise SystemExit("--proposal is required outside --self-test")
     if proposal.get("state") != "INCUBATE":
-        raise SystemExit("prototype generation requires an INCUBATE proposal")
+        raise SystemExit("prototype generation requires an INCUBATE candidate")
+    if proposal.get("automatic_production_allowed") is not False:
+        raise SystemExit("incubator candidates may never authorize production automatically")
 
     root = Path(args.output_root)
     out = root / "research/incubator/prototypes" / proposal["plugin_proposal_id"]

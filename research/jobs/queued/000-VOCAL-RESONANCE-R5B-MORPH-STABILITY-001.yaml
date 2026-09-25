@@ -66,3 +66,5 @@ knowledge_candidate:
   evidence_type: HYPOTHESIS
   scope: "Vocal resonance semantic-ranker candidate context."
   promotion_requested: HYPOTHESIS
+
+# rerun after R5 review-decision lineage fix

@@ -228,3 +228,5 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Reproduce the current MicroDouble generic transient detector and the Vo.Prep plosive-context detector on deterministic stress signals to decide whether augment-only context is necessary before adding product complexity."
+
+# queue-trigger: VO-PREP-AMOUNT-R2-001

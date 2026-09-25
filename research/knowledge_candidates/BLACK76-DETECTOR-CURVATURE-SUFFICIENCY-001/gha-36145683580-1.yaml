@@ -1,0 +1,9 @@
+claim: A single shared power-law detector curvature plus per-ratio gain and bias is
+  insufficient to reproduce the committed supplemental LN-era low/mid/deep static-ratio
+  curvature in the tested Black76 architecture.
+evidence_type: MEASURED
+scope: Black76 Rev E Priority-2 research-only shared-power detector ablation against
+  the committed supplemental LN-era proxy curves; not direct vintage Rev-E hardware
+  truth.
+source_run: research/runs/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1
+promotion_requested: PROVISIONAL

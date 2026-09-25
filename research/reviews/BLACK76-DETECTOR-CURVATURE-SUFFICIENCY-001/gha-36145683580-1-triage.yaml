@@ -1,0 +1,36 @@
+schema_version: '1.0'
+triage_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:triage-v1
+job_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001
+run_id: gha-36145683580-1
+source_run: research/runs/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1
+source_decision_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:auto
+source_decision_path: research/decisions/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-auto.yaml
+job_path: research/jobs/completed/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1.yaml
+candidate_class: REJECT_CANDIDATE
+route: REJECTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: false
+rejection_triggered: true
+promotion_requested: PROVISIONAL
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+required_human_gates:
+- Final interpretation must retain the distinction between supplemental LN-era proxy
+  targets and exact vintage Rev-E hardware truth.
+- A diagnostic power-law transfer must not be promoted directly into Production without
+  a physically justified circuit/loop interpretation.
+downstream_gate_signals:
+- Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+reasons:
+- The automated proposal is REJECT; final rejection still requires review authority.
+recommended_action: Review the triggered rejection criteria, retained findings, reusable
+  findings and revisit conditions; confirm or supersede with a new REVIEW decision.
+created_at: '2026-09-25T14:12:35.663015Z'
+triage_version: '1.0'
+immutable: true

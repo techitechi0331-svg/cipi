@@ -1,0 +1,26 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed Black76 detector-curvature derived evidence",
+    "verify committed SHA256 ledger",
+    "deterministically compare gamma=1 baseline against best shared-gamma candidate"
+  ],
+  "completed_at": "2026-09-25T14:12:35.663015Z",
+  "environment": {
+    "experiment_adapter": "black76_detector_curvature_compare_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001",
+  "random_seed": 7602504,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36145683580-1",
+  "schema_version": "1.0",
+  "source_commit": "09995584e95f44c28b799caa1dc964798963eaf8",
+  "started_at": "2026-09-25T14:12:35.660710Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

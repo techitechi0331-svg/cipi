@@ -1,0 +1,114 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:review-brief-v1
+job_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001
+run_id: gha-36145683580-1
+source_run: research/runs/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-triage.yaml
+triage_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:triage-v1
+job_path: research/jobs/completed/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001.yaml
+research_question: Is one shared superlinear detector power exponent plus per-ratio
+  detector gain and bias sufficient to reproduce the committed supplemental LN-era
+  onset and low/mid/deep static-ratio curvature materially better than the gamma=1
+  diagnostic baseline?
+hypothesis: A shared superlinear detector curvature is the dominant missing mechanism
+  and will pass all predeclared static-curve gates after per-ratio gain and bias retuning.
+counter_hypotheses:
+- A shared scalar curvature improves some regions but cannot fit low-, mid-, and deep-GR
+  behavior across all ratios simultaneously.
+- Ratio-dependent source/loading, diode-bias operating point, or control-loop behavior
+  is required beyond one shared exponent.
+acceptance_criteria:
+- Committed detector-curvature evidence checksums pass.
+- Candidate onset MAE is <= 1.0 dB.
+- Candidate ratio log-RMSE is <= 0.20.
+- Candidate ratio log-RMSE improves by at least 30 percent versus gamma=1.
+- Candidate maximum relative ratio error is <= 0.35.
+- Candidate minimum deep-GR ratio fraction is >= 0.80 of target.
+rejection_criteria:
+- A shared-gamma candidate improves selected regions but any predeclared ratio-curvature
+  gate still fails.
+- Minimum deep-GR ratio fraction remains below 0.80 or maximum relative ratio error
+  remains above 0.35.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 09995584e95f44c28b799caa1dc964798963eaf8
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: baseline_deep_ratio_fraction_min
+  value: 0.422243
+- path: baseline_gamma
+  value: 1.0
+- path: baseline_max_relative_ratio_error
+  value: 0.630159
+- path: baseline_onset_mae_db
+  value: 0.5
+- path: baseline_ratio_log_rmse
+  value: 0.446926
+- path: candidate_deep_ratio_fraction_min
+  value: 0.547092
+- path: candidate_gamma
+  value: 2.35
+- path: candidate_max_relative_ratio_error
+  value: 0.52155
+- path: candidate_onset_mae_db
+  value: 0.5
+- path: candidate_ratio_log_rmse
+  value: 0.384355
+- path: checksum_ok
+  value: true
+- path: ratio_log_rmse_improvement_percent
+  value: 14.000304300935722
+knowledge_candidate:
+  claim: A single shared power-law detector curvature plus per-ratio gain and bias
+    is insufficient to reproduce the committed supplemental LN-era low/mid/deep static-ratio
+    curvature in the tested Black76 architecture.
+  evidence_type: MEASURED
+  scope: Black76 Rev E Priority-2 research-only shared-power detector ablation against
+    the committed supplemental LN-era proxy curves; not direct vintage Rev-E hardware
+    truth.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates:
+- Final interpretation must retain the distinction between supplemental LN-era proxy
+  targets and exact vintage Rev-E hardware truth.
+- A diagnostic power-law transfer must not be promoted directly into Production without
+  a physically justified circuit/loop interpretation.
+downstream_gate_signals:
+- Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

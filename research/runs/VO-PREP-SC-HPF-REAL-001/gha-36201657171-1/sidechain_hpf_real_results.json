@@ -1,0 +1,670 @@
+{
+  "decision": "GO_TO_BLIND",
+  "candidate": {
+    "hpf_hz": 40.0,
+    "order": 2
+  },
+  "validation_singers": [
+    "f1",
+    "f2",
+    "m1",
+    "m2"
+  ],
+  "confirmation_singers": [
+    "f3",
+    "f4",
+    "m3",
+    "m4"
+  ],
+  "validation": {
+    "aggregate": {
+      "file_count": 8,
+      "clean_abs_mean_delta_db": 0.005159873647465674,
+      "clean_abs_p95_delta_db": 0.005970168204070481,
+      "clean_abs_ripple_delta_db": 7.031695051045242e-05,
+      "male_clean_abs_mean_delta_db": 0.006825389634820822,
+      "rumble_reduction_mean": 0.7351043887229355,
+      "rumble_positive_fraction": 1.0,
+      "plosive_reduction_mean": 0.17034021959672924,
+      "plosive_positive_fraction": 1.0,
+      "solver_max_residual_db": 4.367938575722263e-06
+    },
+    "gates": {
+      "clean_mean_preservation": true,
+      "clean_p95_preservation": true,
+      "clean_ripple_preservation": true,
+      "male_body_preservation": true,
+      "rumble_reduction_ge_50pct": true,
+      "rumble_consistency_ge_75pct": true,
+      "plosive_reduction_ge_15pct": true,
+      "plosive_consistency_ge_75pct": true,
+      "solver_residual": true
+    },
+    "passes": true,
+    "detail": {
+      "f1:f1_arpeggios_belt_c_a.wav": {
+        "singer": "f1",
+        "threshold_db": -32.85837173461914,
+        "solver_residual_db": 2.9203706866098855e-06,
+        "clean_off": {
+          "mean_gr": 2.9999970796293134,
+          "p95_gr": 6.054250144783511,
+          "p99_gr": 6.23266167088609,
+          "ripple": 0.01533742129106405
+        },
+        "clean_hpf": {
+          "mean_gr": 3.002103542615204,
+          "p95_gr": 6.055281576726228,
+          "p99_gr": 6.233644850282559,
+          "ripple": 0.01529783401018124
+        },
+        "clean_mean_delta_db": 0.002106462985890456,
+        "clean_p95_delta_db": 0.0010314319427164875,
+        "clean_ripple_delta_db": -3.9587280882810716e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.2726699156322874,
+            "hpf_excess_mean_gr": 0.07418382104326593,
+            "reduction": 0.7279354384540628
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.8100994123420948,
+            "hpf_excess_mean_gr": 0.2618913474780169,
+            "reduction": 0.6767170257279196
+          }
+        ],
+        "plosive_off_excess_gr": 4.827536662852923,
+        "plosive_hpf_excess_gr": 4.269392151537293,
+        "plosive_reduction": 0.11561683531281242
+      },
+      "f1:f1_arpeggios_breathy_a.wav": {
+        "singer": "f1",
+        "threshold_db": -47.36825942993164,
+        "solver_residual_db": 2.0017312292175404e-06,
+        "clean_off": {
+          "mean_gr": 3.000002001731229,
+          "p95_gr": 5.328619546774159,
+          "p99_gr": 5.697035104315819,
+          "ripple": 0.010425018630162673
+        },
+        "clean_hpf": {
+          "mean_gr": 3.0051524397846183,
+          "p95_gr": 5.345973757416675,
+          "p99_gr": 5.69688802433442,
+          "ripple": 0.010374555698065118
+        },
+        "clean_mean_delta_db": 0.005150438053389106,
+        "clean_p95_delta_db": 0.017354210642515966,
+        "clean_ripple_delta_db": -5.046293209755477e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.2076641829489052,
+            "hpf_excess_mean_gr": 0.053637014467387445,
+            "reduction": 0.7417127320382226
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.6516695881798467,
+            "hpf_excess_mean_gr": 0.19890196527044468,
+            "reduction": 0.6947809612751914
+          }
+        ],
+        "plosive_off_excess_gr": 3.2469924839656326,
+        "plosive_hpf_excess_gr": 2.7109372226501627,
+        "plosive_reduction": 0.16509285560796005
+      },
+      "f2:f2_arpeggios_belt_a.wav": {
+        "singer": "f2",
+        "threshold_db": -28.363819122314453,
+        "solver_residual_db": 3.943965545261108e-07,
+        "clean_off": {
+          "mean_gr": 3.0000003943965545,
+          "p95_gr": 5.262180258057679,
+          "p99_gr": 5.714672041085506,
+          "ripple": 0.010643966878907982
+        },
+        "clean_hpf": {
+          "mean_gr": 3.0048710126120395,
+          "p95_gr": 5.263210586917585,
+          "p99_gr": 5.717736779530888,
+          "ripple": 0.010658952835160513
+        },
+        "clean_mean_delta_db": 0.0048706182154849564,
+        "clean_p95_delta_db": 0.001030328859905616,
+        "clean_ripple_delta_db": 1.498595625253063e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.15815690496586,
+            "hpf_excess_mean_gr": 0.039802400414023165,
+            "reduction": 0.7483359931542983
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.5256045775193892,
+            "hpf_excess_mean_gr": 0.15047110382175255,
+            "reduction": 0.7137180491617736
+          }
+        ],
+        "plosive_off_excess_gr": 3.3941151451341702,
+        "plosive_hpf_excess_gr": 2.853451628240264,
+        "plosive_reduction": 0.15929439449601634
+      },
+      "f2:f2_arpeggios_breathy_a.wav": {
+        "singer": "f2",
+        "threshold_db": -51.71884536743164,
+        "solver_residual_db": 4.367938575722263e-06,
+        "clean_off": {
+          "mean_gr": 3.0000043679385757,
+          "p95_gr": 4.70775496586368,
+          "p99_gr": 4.903907650031006,
+          "ripple": 0.0179544947797802
+        },
+        "clean_hpf": {
+          "mean_gr": 2.998154456552898,
+          "p95_gr": 4.7091107317286465,
+          "p99_gr": 4.905512467830235,
+          "ripple": 0.01786833345061276
+        },
+        "clean_mean_delta_db": -0.0018499113856775828,
+        "clean_p95_delta_db": 0.0013557658649663296,
+        "clean_ripple_delta_db": -8.61613291674411e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.14331604950624932,
+            "hpf_excess_mean_gr": 0.029379096424468454,
+            "reduction": 0.7950048405207585
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.4867582149412448,
+            "hpf_excess_mean_gr": 0.13681593785241652,
+            "reduction": 0.7189242345526081
+          }
+        ],
+        "plosive_off_excess_gr": 3.141627586316333,
+        "plosive_hpf_excess_gr": 2.5975620641681063,
+        "plosive_reduction": 0.1731795087737189
+      },
+      "m1:m1_arpeggios_belt_a.wav": {
+        "singer": "m1",
+        "threshold_db": -44.03615951538086,
+        "solver_residual_db": 4.3743709055021895e-07,
+        "clean_off": {
+          "mean_gr": 2.9999995625629094,
+          "p95_gr": 5.1364095748901235,
+          "p99_gr": 5.424149110886314,
+          "ripple": 0.011878892800765832
+        },
+        "clean_hpf": {
+          "mean_gr": 3.0019606508598256,
+          "p95_gr": 5.1351561966376735,
+          "p99_gr": 5.423169432754692,
+          "ripple": 0.011819754414190474
+        },
+        "clean_mean_delta_db": 0.0019610882969161025,
+        "clean_p95_delta_db": -0.001253378252449977,
+        "clean_ripple_delta_db": -5.9138386575358776e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.12843494621243368,
+            "hpf_excess_mean_gr": 0.03161061844148749,
+            "reduction": 0.7538783689822007
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.445729164614483,
+            "hpf_excess_mean_gr": 0.12136297045827105,
+            "reduction": 0.7277203735069939
+          }
+        ],
+        "plosive_off_excess_gr": 3.551075064152587,
+        "plosive_hpf_excess_gr": 3.0038560718746985,
+        "plosive_reduction": 0.15409952828143725
+      },
+      "m1:m1_arpeggios_breathy_a.wav": {
+        "singer": "m1",
+        "threshold_db": -54.18771743774414,
+        "solver_residual_db": 3.1568436296147695e-06,
+        "clean_off": {
+          "mean_gr": 2.9999968431563704,
+          "p95_gr": 4.643020028662988,
+          "p99_gr": 4.993197907888764,
+          "ripple": 0.02219402557642343
+        },
+        "clean_hpf": {
+          "mean_gr": 2.9948754321661153,
+          "p95_gr": 4.642692430499961,
+          "p99_gr": 4.993240453471738,
+          "ripple": 0.0221296666204942
+        },
+        "clean_mean_delta_db": -0.005121410990255093,
+        "clean_p95_delta_db": -0.00032759816302707634,
+        "clean_ripple_delta_db": -6.43589559292286e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.12007469719690889,
+            "hpf_excess_mean_gr": 0.02809617807882603,
+            "reduction": 0.7660108354655979
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.4248910760280493,
+            "hpf_excess_mean_gr": 0.11670461230056262,
+            "reduction": 0.7253305167255188
+          }
+        ],
+        "plosive_off_excess_gr": 2.9257915661948264,
+        "plosive_hpf_excess_gr": 2.383427401975134,
+        "plosive_reduction": 0.18537347994514553
+      },
+      "m2:m2_arpeggios_breathy_a.wav": {
+        "singer": "m2",
+        "threshold_db": -46.03879928588867,
+        "solver_residual_db": 2.1625675974412673e-06,
+        "clean_off": {
+          "mean_gr": 2.9999978374324026,
+          "p95_gr": 5.453294567850499,
+          "p99_gr": 5.686090423783876,
+          "ripple": 0.014769929029414819
+        },
+        "clean_hpf": {
+          "mean_gr": 3.016916561200479,
+          "p95_gr": 5.47807174688254,
+          "p99_gr": 5.70303868572436,
+          "ripple": 0.014919325722355084
+        },
+        "clean_mean_delta_db": 0.01691872376807657,
+        "clean_p95_delta_db": 0.02477717903204102,
+        "clean_ripple_delta_db": 0.0001493966929402655,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.14181028742406498,
+            "hpf_excess_mean_gr": 0.034063072519753046,
+            "reduction": 0.7597982971581468
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.4838398711680636,
+            "hpf_excess_mean_gr": 0.13111332319480562,
+            "reduction": 0.7290150502101491
+          }
+        ],
+        "plosive_off_excess_gr": 2.408879441471462,
+        "plosive_hpf_excess_gr": 1.8744408794566563,
+        "plosive_reduction": 0.22186189678647605
+      },
+      "m2:m2_arpeggios_lip_trill_a.wav": {
+        "singer": "m2",
+        "threshold_db": -40.11808395385742,
+        "solver_residual_db": 2.018702224493296e-06,
+        "clean_off": {
+          "mean_gr": 3.0000020187022245,
+          "p95_gr": 4.997737526786814,
+          "p99_gr": 5.129123757707754,
+          "ripple": 0.05106060524753564
+        },
+        "clean_hpf": {
+          "mean_gr": 2.996701683218189,
+          "p95_gr": 4.997106073911873,
+          "p99_gr": 5.124458021099128,
+          "ripple": 0.05115904931777407
+        },
+        "clean_mean_delta_db": -0.0033003354840355215,
+        "clean_p95_delta_db": -0.0006314528749413739,
+        "clean_ripple_delta_db": 9.844407023842927e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.11258526932925728,
+            "hpf_excess_mean_gr": 0.02727836388375282,
+            "reduction": 0.7577092985053235
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.3978329983460509,
+            "hpf_excess_mean_gr": 0.10937296236235827,
+            "reduction": 0.7250782041282022
+          }
+        ],
+        "plosive_off_excess_gr": 2.928512377624817,
+        "plosive_hpf_excess_gr": 2.3773568083209775,
+        "plosive_reduction": 0.18820325757026746
+      }
+    }
+  },
+  "confirmation": {
+    "aggregate": {
+      "file_count": 8,
+      "clean_abs_mean_delta_db": 0.0041768211447698045,
+      "clean_abs_p95_delta_db": 0.0025319484806010095,
+      "clean_abs_ripple_delta_db": 0.00013960896953969847,
+      "male_clean_abs_mean_delta_db": 0.0035907352824853245,
+      "rumble_reduction_mean": 0.737451385518135,
+      "rumble_positive_fraction": 1.0,
+      "plosive_reduction_mean": 0.20211374555654038,
+      "plosive_positive_fraction": 1.0,
+      "solver_max_residual_db": 5.58192105293287e-06
+    },
+    "gates": {
+      "clean_mean_preservation": true,
+      "clean_p95_preservation": true,
+      "clean_ripple_preservation": true,
+      "male_body_preservation": true,
+      "rumble_reduction_ge_50pct": true,
+      "rumble_consistency_ge_75pct": true,
+      "plosive_reduction_ge_15pct": true,
+      "plosive_consistency_ge_75pct": true,
+      "solver_residual": true
+    },
+    "passes": true,
+    "detail": {
+      "f3:f3_arpeggios_belt_a.wav": {
+        "singer": "f3",
+        "threshold_db": -31.385669708251953,
+        "solver_residual_db": 1.8282007037129233e-06,
+        "clean_off": {
+          "mean_gr": 2.9999981717992963,
+          "p95_gr": 4.616378148896783,
+          "p99_gr": 4.836145736573684,
+          "ripple": 0.024017650763448712
+        },
+        "clean_hpf": {
+          "mean_gr": 3.000489485405498,
+          "p95_gr": 4.616161841236763,
+          "p99_gr": 4.83564275521148,
+          "ripple": 0.023957776176305887
+        },
+        "clean_mean_delta_db": 0.0004913136062016932,
+        "clean_p95_delta_db": -0.0002163076600201208,
+        "clean_ripple_delta_db": -5.987458714282537e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.1379295588177225,
+            "hpf_excess_mean_gr": 0.03523359083234645,
+            "reduction": 0.7445537335553393
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.4560156386091707,
+            "hpf_excess_mean_gr": 0.13190614611466955,
+            "reduction": 0.7107420558712022
+          }
+        ],
+        "plosive_off_excess_gr": 2.3098453278223525,
+        "plosive_hpf_excess_gr": 1.7781335414836068,
+        "plosive_reduction": 0.23019367571248872
+      },
+      "f3:f3_arpeggios_breathy_a.wav": {
+        "singer": "f3",
+        "threshold_db": -34.9787712097168,
+        "solver_residual_db": 2.104122312385215e-06,
+        "clean_off": {
+          "mean_gr": 3.0000021041223124,
+          "p95_gr": 5.091227379757315,
+          "p99_gr": 5.247156048725428,
+          "ripple": 0.006150748416570744
+        },
+        "clean_hpf": {
+          "mean_gr": 3.005650353763565,
+          "p95_gr": 5.094963490364019,
+          "p99_gr": 5.249523044500921,
+          "ripple": 0.00617775150827419
+        },
+        "clean_mean_delta_db": 0.005648249641252434,
+        "clean_p95_delta_db": 0.0037361106067033134,
+        "clean_ripple_delta_db": 2.7003091703445455e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.1901349191449757,
+            "hpf_excess_mean_gr": 0.04987037177435205,
+            "reduction": 0.737710610977637
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.5873740382488726,
+            "hpf_excess_mean_gr": 0.17945294212928653,
+            "reduction": 0.6944826797856332
+          }
+        ],
+        "plosive_off_excess_gr": 3.361418077832709,
+        "plosive_hpf_excess_gr": 2.8274502545710125,
+        "plosive_reduction": 0.15885195203268943
+      },
+      "f4:f4_arpeggios_breathy_e.wav": {
+        "singer": "f4",
+        "threshold_db": -65.06582260131836,
+        "solver_residual_db": 3.848133188544267e-06,
+        "clean_off": {
+          "mean_gr": 2.9999961518668115,
+          "p95_gr": 4.610416402209353,
+          "p99_gr": 4.889000491799143,
+          "ripple": 0.018226607248874347
+        },
+        "clean_hpf": {
+          "mean_gr": 2.993227604581001,
+          "p95_gr": 4.608328299683066,
+          "p99_gr": 4.886466637380902,
+          "ripple": 0.018299142556072505
+        },
+        "clean_mean_delta_db": -0.0067685472858105555,
+        "clean_p95_delta_db": -0.0020881025262866615,
+        "clean_ripple_delta_db": 7.253530719815784e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.1668488855861554,
+            "hpf_excess_mean_gr": 0.027555823877066565,
+            "reduction": 0.834845622251174
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.5282951881068279,
+            "hpf_excess_mean_gr": 0.14848652909887106,
+            "reduction": 0.7189326489401126
+          }
+        ],
+        "plosive_off_excess_gr": 2.7339609663929187,
+        "plosive_hpf_excess_gr": 2.195738095112857,
+        "plosive_reduction": 0.19686560192195135
+      },
+      "f4:f4_arpeggios_lip_trill_a.wav": {
+        "singer": "f4",
+        "threshold_db": -56.5681266784668,
+        "solver_residual_db": 2.7293941369244124e-06,
+        "clean_off": {
+          "mean_gr": 3.000002729394137,
+          "p95_gr": 4.763145154968047,
+          "p99_gr": 5.09704064724545,
+          "ripple": 0.044465220338137795
+        },
+        "clean_hpf": {
+          "mean_gr": 3.0061462468890894,
+          "p95_gr": 4.7654573780946,
+          "p99_gr": 5.098021005465679,
+          "ripple": 0.04377776447741942
+        },
+        "clean_mean_delta_db": 0.006143517494952455,
+        "clean_p95_delta_db": 0.0023122231265526594,
+        "clean_ripple_delta_db": -0.0006874558607183751,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.1311060823566912,
+            "hpf_excess_mean_gr": 0.033970737171488796,
+            "reduction": 0.7408912190735211
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.4439116551657025,
+            "hpf_excess_mean_gr": 0.12581394937838652,
+            "reduction": 0.716578855467485
+          }
+        ],
+        "plosive_off_excess_gr": 2.4841425239742576,
+        "plosive_hpf_excess_gr": 1.9352613761717428,
+        "plosive_reduction": 0.22095396802128198
+      },
+      "m3:m3_arpeggios_belt_a.wav": {
+        "singer": "m3",
+        "threshold_db": -29.732074737548828,
+        "solver_residual_db": 1.9035438416636907e-06,
+        "clean_off": {
+          "mean_gr": 2.9999980964561583,
+          "p95_gr": 4.152300531427353,
+          "p99_gr": 4.54405145921679,
+          "ripple": 0.012011296309630375
+        },
+        "clean_hpf": {
+          "mean_gr": 2.9969355405112528,
+          "p95_gr": 4.151448931487934,
+          "p99_gr": 4.5416278973646405,
+          "ripple": 0.011888731181848657
+        },
+        "clean_mean_delta_db": -0.003062555944905565,
+        "clean_p95_delta_db": -0.0008515999394189677,
+        "clean_ripple_delta_db": -0.00012256512778171733,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.10863039649863016,
+            "hpf_excess_mean_gr": 0.026610573544280758,
+            "reduction": 0.7550356585081937
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.3806930941011619,
+            "hpf_excess_mean_gr": 0.10443446846003868,
+            "reduction": 0.7256728055269445
+          }
+        ],
+        "plosive_off_excess_gr": 2.0091245783368006,
+        "plosive_hpf_excess_gr": 1.587334912853687,
+        "plosive_reduction": 0.20993703926128893
+      },
+      "m3:m3_arpeggios_breathy_a.wav": {
+        "singer": "m3",
+        "threshold_db": -57.779483795166016,
+        "solver_residual_db": 4.527303406387517e-06,
+        "clean_off": {
+          "mean_gr": 2.9999954726965936,
+          "p95_gr": 3.8577942757229198,
+          "p99_gr": 4.102177914226957,
+          "ripple": 0.014768249209078835
+        },
+        "clean_hpf": {
+          "mean_gr": 3.006898515697661,
+          "p95_gr": 3.861745627517139,
+          "p99_gr": 4.103834272129256,
+          "ripple": 0.014768964951487808
+        },
+        "clean_mean_delta_db": 0.006903043001067477,
+        "clean_p95_delta_db": 0.003951351794219349,
+        "clean_ripple_delta_db": 7.157424089729303e-07,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.10309601992936157,
+            "hpf_excess_mean_gr": 0.025871625902754047,
+            "reduction": 0.7490531067981039
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.3637091572504181,
+            "hpf_excess_mean_gr": 0.09884425192726587,
+            "reduction": 0.7282327102388284
+          }
+        ],
+        "plosive_off_excess_gr": 2.415813449655145,
+        "plosive_hpf_excess_gr": 1.9168502507061462,
+        "plosive_reduction": 0.20654045080352768
+      },
+      "m4:m4_arpeggios_belt_a.wav": {
+        "singer": "m4",
+        "threshold_db": -35.773067474365234,
+        "solver_residual_db": 1.9383144835849464e-06,
+        "clean_off": {
+          "mean_gr": 3.0000019383144836,
+          "p95_gr": 4.9667066045796275,
+          "p99_gr": 5.104783080110327,
+          "ripple": 0.022415633111460873
+        },
+        "clean_hpf": {
+          "mean_gr": 3.001194511670726,
+          "p95_gr": 4.96443628726572,
+          "p99_gr": 5.104393896202002,
+          "ripple": 0.02246767455327547
+        },
+        "clean_mean_delta_db": 0.0011925733562425656,
+        "clean_p95_delta_db": -0.0022703173139078103,
+        "clean_ripple_delta_db": 5.2041441814597994e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.134349381750535,
+            "hpf_excess_mean_gr": 0.03337950937259038,
+            "reduction": 0.7515469819238119
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.4587037404166803,
+            "hpf_excess_mean_gr": 0.12792918579256796,
+            "reduction": 0.721107166738255
+          }
+        ],
+        "plosive_off_excess_gr": 2.4682543095617477,
+        "plosive_hpf_excess_gr": 1.9384607442689719,
+        "plosive_reduction": 0.2146430224958642
+      },
+      "m4:m4_arpeggios_breathy_a.wav": {
+        "singer": "m4",
+        "threshold_db": -55.785274505615234,
+        "solver_residual_db": 5.58192105293287e-06,
+        "clean_off": {
+          "mean_gr": 3.000005581921053,
+          "p95_gr": 5.1980357590088655,
+          "p99_gr": 5.474645972481741,
+          "ripple": 0.016999671881099493
+        },
+        "clean_hpf": {
+          "mean_gr": 2.9968008130933272,
+          "p95_gr": 5.193206184131166,
+          "p99_gr": 5.47227471344188,
+          "ripple": 0.01709435247864899
+        },
+        "clean_mean_delta_db": -0.0032047688277256903,
+        "clean_p95_delta_db": -0.004829574877699194,
+        "clean_ripple_delta_db": 9.468059754949576e-05,
+        "rumble": [
+          {
+            "rel_db": -12.0,
+            "off_excess_mean_gr": 0.13031646889895576,
+            "hpf_excess_mean_gr": 0.032752948900294676,
+            "reduction": 0.7486660805267021
+          },
+          {
+            "rel_db": -6.0,
+            "off_excess_mean_gr": 0.452712183804461,
+            "hpf_excess_mean_gr": 0.12622963313243263,
+            "reduction": 0.7211702321072173
+          }
+        ],
+        "plosive_off_excess_gr": 2.990714740607128,
+        "plosive_hpf_excess_gr": 2.4556033361093887,
+        "plosive_reduction": 0.17892425420323088
+      }
+    }
+  },
+  "confirmation_accessed": true,
+  "acceptance_met": true,
+  "raw_audio_persisted": false
+}

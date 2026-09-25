@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "Detector sidechain HPF OFF using the same frozen 25 ms RMS / instantaneous peak / 6 dB fusion / 1.5:1 / 18 dB / 8 ms / 70 ms compressor."
+  ],
+  "experiment_adapter": "voprep_sidechain_hpf_real_v1",
+  "job_file": "research/jobs/queued/VO-PREP-SC-HPF-REAL-001.yaml",
+  "metrics": [
+    "candidate_hpf_hz",
+    "validation_passes",
+    "validation_aggregate",
+    "confirmation_accessed",
+    "confirmation_passes",
+    "confirmation_aggregate",
+    "raw_audio_persisted"
+  ],
+  "variants": [
+    "Detector-only 40 Hz second-order Butterworth HPF selected by VO-PREP-SC-HPF-PILOT-001."
+  ]
+}

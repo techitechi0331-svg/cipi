@@ -1,0 +1,162 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:review-brief-v1
+job_id: VO-PREP-SC-HPF-REAL-001
+run_id: gha-36201657171-1
+source_run: research/runs/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1
+route: HUMAN_GATE_REVIEW
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-triage.yaml
+triage_id: VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-SC-HPF-REAL-001.yaml
+research_question: Does the synthetic-pilot winner, a detector-only 40 Hz second-order
+  high-pass, reduce low-frequency false compressor drive on real singing vocals without
+  materially changing clean-vocal compression?
+hypothesis: On real VocalSet vocals, 40 Hz HPF will preserve clean mean/p95/ripple
+  behavior within tight bounds, reduce added 30 Hz rumble-driven excess GR by at least
+  50 percent and added low-frequency plosive excess GR by at least 15 percent, first
+  on f1/f2/m1/m2 and then on untouched confirmation f3/f4/m3/m4.
+counter_hypotheses:
+- Synthetic benefit does not transfer to real vocal spectra.
+- The HPF under-compresses useful male low-frequency body.
+- Clean-vocal p95/ripple changes are too large to justify added complexity.
+- Benefit is inconsistent across singers or stress cases.
+acceptance_criteria:
+- Candidate remains fixed at 40 Hz / second order; no cutoff reselection occurs on
+  real vocals.
+- Validation uses f1, f2, m1 and m2 with two qualifying files per singer.
+- Confirmation uses f3, f4, m3 and m4 with two qualifying files per singer.
+- Confirmation audio is not streamed or decoded until every validation gate passes.
+- Per-file clean OFF threshold is calibrated to 3.0 dB mean GR before comparing OFF
+  versus HPF, isolating detector behavior from unresolved Amount mapping.
+- Mean absolute clean-vocal mean-GR delta is no more than 0.15 dB.
+- Mean absolute clean-vocal p95-GR delta is no more than 0.25 dB.
+- Mean absolute clean-vocal GR-ripple delta is no more than 0.015 dB.
+- Male clean-vocal mean-GR absolute delta is no more than 0.20 dB.
+- Mean controlled-rumble excess-GR reduction is at least 50 percent.
+- At least 75 percent of controlled-rumble cases show positive excess-GR reduction.
+- Mean controlled-plosive excess-GR reduction is at least 15 percent.
+- At least 75 percent of controlled-plosive cases show positive excess-GR reduction.
+- Clean-threshold calibration residual is no more than 0.02 dB.
+- The confirmation cohort passes the same unchanged gates.
+- Raw public audio is not persisted into CIPI artifacts.
+rejection_criteria:
+- Validation fails any clean-preservation or LF-stress benefit gate.
+- Confirmation fails any unchanged gate.
+- Confirmation audio is accessed before validation passes.
+- Passing requires changing the candidate cutoff or relaxing a criterion.
+- Raw public audio is persisted.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: b1c30f93d9a1901b8438a5dddd4a300b4aea5950
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: true
+- path: candidate_hpf_hz
+  value: 40.0
+- path: confirmation_accessed
+  value: true
+- path: confirmation_aggregate.clean_abs_mean_delta_db
+  value: 0.0041768211447698045
+- path: confirmation_aggregate.clean_abs_p95_delta_db
+  value: 0.0025319484806010095
+- path: confirmation_aggregate.clean_abs_ripple_delta_db
+  value: 0.00013960896953969847
+- path: confirmation_aggregate.file_count
+  value: 8
+- path: confirmation_aggregate.male_clean_abs_mean_delta_db
+  value: 0.0035907352824853245
+- path: confirmation_aggregate.plosive_positive_fraction
+  value: 1.0
+- path: confirmation_aggregate.plosive_reduction_mean
+  value: 0.20211374555654038
+- path: confirmation_aggregate.rumble_positive_fraction
+  value: 1.0
+- path: confirmation_aggregate.rumble_reduction_mean
+  value: 0.737451385518135
+- path: confirmation_aggregate.solver_max_residual_db
+  value: 5.58192105293287e-06
+- path: confirmation_passes
+  value: true
+- path: confirmation_singers[0]
+  value: f3
+- path: confirmation_singers[1]
+  value: f4
+- path: confirmation_singers[2]
+  value: m3
+- path: confirmation_singers[3]
+  value: m4
+- path: decision
+  value: GO_TO_BLIND
+- path: raw_audio_persisted
+  value: false
+- path: validation_aggregate.clean_abs_mean_delta_db
+  value: 0.005159873647465674
+- path: validation_aggregate.clean_abs_p95_delta_db
+  value: 0.005970168204070481
+- path: validation_aggregate.clean_abs_ripple_delta_db
+  value: 7.031695051045242e-05
+- path: validation_aggregate.file_count
+  value: 8
+- path: validation_aggregate.male_clean_abs_mean_delta_db
+  value: 0.006825389634820822
+- path: validation_aggregate.plosive_positive_fraction
+  value: 1.0
+- path: validation_aggregate.plosive_reduction_mean
+  value: 0.17034021959672924
+- path: validation_aggregate.rumble_positive_fraction
+  value: 1.0
+- path: validation_aggregate.rumble_reduction_mean
+  value: 0.7351043887229355
+- path: validation_aggregate.solver_max_residual_db
+  value: 4.367938575722263e-06
+- path: validation_passes
+  value: true
+- path: validation_singers[0]
+  value: f1
+knowledge_candidate:
+  claim: The 40 Hz detector-only HPF selected synthetically may reduce LF false drive
+    on real vocals while preserving clean-vocal compression.
+  evidence_type: HYPOTHESIS
+  scope: Frozen Vo.Prep transparent compressor, VocalSet validation f1/f2/m1/m2 and
+    gated confirmation f3/f4/m3/m4.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Level-matched real-vocal listening before product adoption.
+downstream_gate_signals:
+- Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard
+  are not all formally closed.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Transparent compressor core level-matched blind listening is pending.
+- Transparent compressor final VST3 / Cubase Pro 14 host validation is pending.
+- Representative real-vocal listening is still required.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

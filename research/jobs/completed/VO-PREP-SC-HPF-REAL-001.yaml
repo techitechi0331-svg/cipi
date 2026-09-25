@@ -1,0 +1,93 @@
+schema_version: '1.0'
+job_id: VO-PREP-SC-HPF-REAL-001
+state: COMPLETED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Does the synthetic-pilot winner, a detector-only 40 Hz second-order
+  high-pass, reduce low-frequency false compressor drive on real singing vocals without
+  materially changing clean-vocal compression?
+hypothesis: On real VocalSet vocals, 40 Hz HPF will preserve clean mean/p95/ripple
+  behavior within tight bounds, reduce added 30 Hz rumble-driven excess GR by at least
+  50 percent and added low-frequency plosive excess GR by at least 15 percent, first
+  on f1/f2/m1/m2 and then on untouched confirmation f3/f4/m3/m4.
+counter_hypotheses:
+- Synthetic benefit does not transfer to real vocal spectra.
+- The HPF under-compresses useful male low-frequency body.
+- Clean-vocal p95/ripple changes are too large to justify added complexity.
+- Benefit is inconsistent across singers or stress cases.
+baseline:
+- Detector sidechain HPF OFF using the same frozen 25 ms RMS / instantaneous peak
+  / 6 dB fusion / 1.5:1 / 18 dB / 8 ms / 70 ms compressor.
+variants:
+- Detector-only 40 Hz second-order Butterworth HPF selected by VO-PREP-SC-HPF-PILOT-001.
+metrics:
+- candidate_hpf_hz
+- validation_passes
+- validation_aggregate
+- confirmation_accessed
+- confirmation_passes
+- confirmation_aggregate
+- raw_audio_persisted
+acceptance:
+- Candidate remains fixed at 40 Hz / second order; no cutoff reselection occurs on
+  real vocals.
+- Validation uses f1, f2, m1 and m2 with two qualifying files per singer.
+- Confirmation uses f3, f4, m3 and m4 with two qualifying files per singer.
+- Confirmation audio is not streamed or decoded until every validation gate passes.
+- Per-file clean OFF threshold is calibrated to 3.0 dB mean GR before comparing OFF
+  versus HPF, isolating detector behavior from unresolved Amount mapping.
+- Mean absolute clean-vocal mean-GR delta is no more than 0.15 dB.
+- Mean absolute clean-vocal p95-GR delta is no more than 0.25 dB.
+- Mean absolute clean-vocal GR-ripple delta is no more than 0.015 dB.
+- Male clean-vocal mean-GR absolute delta is no more than 0.20 dB.
+- Mean controlled-rumble excess-GR reduction is at least 50 percent.
+- At least 75 percent of controlled-rumble cases show positive excess-GR reduction.
+- Mean controlled-plosive excess-GR reduction is at least 15 percent.
+- At least 75 percent of controlled-plosive cases show positive excess-GR reduction.
+- Clean-threshold calibration residual is no more than 0.02 dB.
+- The confirmation cohort passes the same unchanged gates.
+- Raw public audio is not persisted into CIPI artifacts.
+rejection:
+- Validation fails any clean-preservation or LF-stress benefit gate.
+- Confirmation fails any unchanged gate.
+- Confirmation audio is accessed before validation passes.
+- Passing requires changing the candidate cutoff or relaxing a criterion.
+- Raw public audio is persisted.
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20260926
+experiment_adapter: voprep_sidechain_hpf_real_v1
+allowed_operations:
+- stream_public_audio_to_runner_memory
+- execute_allowlisted_adapter
+- write_derived_measurements
+prohibited_operations:
+- arbitrary_shell
+- raw_audio_persistence
+- main_push
+- confidence_change
+- current_stage_change
+- automatic_promotion
+- product_dsp_mutation
+- product_release
+knowledge_candidate:
+  claim: The 40 Hz detector-only HPF selected synthetically may reduce LF false drive
+    on real vocals while preserving clean-vocal compression.
+  evidence_type: HYPOTHESIS
+  scope: Frozen Vo.Prep transparent compressor, VocalSet validation f1/f2/m1/m2 and
+    gated confirmation f3/f4/m3/m4.
+  promotion_requested: HYPOTHESIS
+review_policy:
+  required_human_gates:
+  - Level-matched real-vocal listening before product adoption.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - VO-PREP-SC-HPF-PILOT-001
+  related_decisions:
+  - VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:review-01
+latest_run: gha-36201657171-1

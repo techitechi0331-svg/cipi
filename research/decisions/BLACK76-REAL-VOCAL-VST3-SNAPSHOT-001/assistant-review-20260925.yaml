@@ -6,7 +6,8 @@ event_type: REVIEW
 authority: ASSISTANT_REVIEW
 decision: ITERATE
 review_status: CONFIRMED
-rationale: The run failed only the committed snapshot checksum gate. All product-behavior gates passed: the six-case matrix was complete, all values were finite, clipping and non-finite counts were zero, latency was consistently six samples, the Attack-OFF gain stayed within the declared +/-0.5 dB tolerance, compression was active, provenance was correct, and no raw audio was present in CIPI. Review traced checksum failure to using the source artifact CSV SHA256 for a line-ending-normalized CIPI copy. This is an evidence-packaging defect, not a Black76 DSP failure. Preserve this failed run and repeat with a new append-only snapshot whose checksum is computed from the committed CIPI bytes.
+rationale: >-
+  The run failed only the committed snapshot checksum gate. All product-behavior gates passed: the six-case matrix was complete, all values were finite, clipping and non-finite counts were zero, latency was consistently six samples, the Attack-OFF gain stayed within the declared +/-0.5 dB tolerance, compression was active, provenance was correct, and no raw audio was present in CIPI. Review traced checksum failure to using the source artifact CSV SHA256 for a line-ending-normalized CIPI copy. This is an evidence-packaging defect, not a Black76 DSP failure. Preserve this failed run and repeat with a new append-only snapshot whose checksum is computed from the committed CIPI bytes.
 scope: Evidence-integrity review for Black76 actual-VST3 real-vocal snapshot revision 1 only; no subjective listening, ratio-fidelity, vintage-hardware, or Cubase conclusion.
 declared_rejection_criteria:
 - Any finite-state, clipping, latency, matrix-integrity, provenance, or raw-audio-safety gate fails.

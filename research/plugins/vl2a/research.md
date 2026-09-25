@@ -284,3 +284,88 @@ Interpretation:
 
 Status: **closed unless new original-hardware measurements contradict the
 factory-flat assumption**.
+
+
+## 2026-09-25 strict reference-parity re-audit
+
+Trigger:
+- real-use comparison reported substantially deeper gain reduction near maximum
+  Peak Reduction in both UAD and Waves LA-2A-family plug-ins than current VL2A
+  under ordinary vocal use.
+
+Policy change:
+- internal consistency is no longer sufficient for KEEP;
+- every user-facing control and meter must be cross-checked against original
+  source material, controlled current-engine measurement, and at least one
+  commercial reference when the comparison is operational/UX rather than
+  circuit-physical.
+
+### REOPEN — Peak Reduction operating range
+Phase 02 explained the current VL2A curve but did not prove that the available
+user-facing range is appropriate. UAD officially documents:
+- 0..100 front-panel values are arbitrary;
+- Peak Reduction lowers trigger threshold;
+- available Peak Reduction range is described as 0 to -40 dB;
+- LA-2A Leveler Collection internal reference is -12 dBFS.
+
+Current VL2A Phase 02 examples:
+- -18 dBFS / PR80 COMP: ~2.92 dB GR
+- -18 dBFS / PR100 COMP: ~6.22 dB GR
+- -12 dBFS / PR100 COMP: ~10.28 dB GR
+
+Status: **REOPEN / calibration candidates required**.
+T4 timing must remain fixed while sidechain-drive mapping is studied.
+
+### REOPEN — Gain Reduction meter
+Current white-digital UI clamps displayed GR to 20 dB and labels the display
+0/5/10/15/20. This is a UI limitation, not a DSP limit.
+
+Official hardware documentation supports up to 40 dB gain limiting.
+Status: **REOPEN**. Do not alter DSP merely to satisfy the meter.
+
+### UNRESOLVED — stereo detector/link law
+Current stereo detector:
+`0.5 * (abs(L) + abs(R))`.
+
+This means a one-sided event generates less detector level than the same event
+present equally in both channels.
+
+Historical/UA linked operation supports linked gain reduction that preserves the
+stereo image, but available documentation does not prove that sample-by-sample
+max(L,R) is the correct historical law.
+
+Status: **UNRESOLVED / measure before changing**.
+Previous informal claims that max detection is necessarily correct are
+withdrawn.
+
+### NORMALIZATION RULE — reference levels
+Never mix:
+- UAD Leveler Collection internal reference: -12 dBFS;
+- Moore 2026 laboratory calibration: -18 dBFS = +4 dBu.
+
+Every comparison must state its reference context.
+
+### KEEP PROVISIONALLY
+- T4 60 ms first-stage recovery behavior;
+- program-dependent long release;
+- R37 factory-flat musical default;
+- main Phase 01-H line amplifier;
+- sample-rate stability.
+
+All provisional KEEP items must be rerun after any Peak Reduction calibration
+change.
+
+### ACTIVE
+Phase 03 active-GR nonlinearity candidate research continues separately.
+Reference-parity audit branch:
+`research/vl2a-reference-parity-audit`.
+
+Completion now requires:
+- normalized Peak Reduction range validation;
+- meter decision;
+- stereo-link measurement;
+- active-GR nonlinearity decision;
+- real-vocal validation;
+- strict pluginval;
+- Cubase Pro 14 host confirmation;
+- final CIPI contradiction review.

@@ -180,10 +180,10 @@ jobs:
       - name: Build Factory Result Bundle and bounded CIPI evidence preview
         shell: pwsh
         run: |
-          python -m juce_factory.factory.cli bundle-pass `--manifest generated/GoldenGain/factory_manifest.json `--validation-report factory-out/validation_report.json `--provenance factory-out/provenance.json `--sha256 factory-out/sha256.txt `--output factory-out/factory_result_bundle.json
+          python -m juce_factory.factory.cli bundle-pass --manifest generated/GoldenGain/factory_manifest.json --validation-report factory-out/validation_report.json --provenance factory-out/provenance.json --sha256 factory-out/sha256.txt --output factory-out/factory_result_bundle.json
           if ($LASTEXITCODE -ne 0) { throw "Factory Result Bundle generation failed." }
 
-          python -m automation.factory.intake factory-out/factory_result_bundle.json `--output-root factory-out/cipi-evidence-preview
+          python -m automation.factory.intake factory-out/factory_result_bundle.json --output-root factory-out/cipi-evidence-preview
           if ($LASTEXITCODE -ne 0) { throw "Factory evidence preview intake failed." }
 
       - name: Quarantine failed Factory candidate
@@ -227,10 +227,10 @@ jobs:
         shell: pwsh
         run: |
           if ((Test-Path factory-quarantine/factory_manifest.json) -and (Test-Path factory-quarantine/failure.json)) {
-            python -m juce_factory.factory.cli bundle-quarantine `--manifest factory-quarantine/factory_manifest.json `--failure factory-quarantine/failure.json `--output factory-quarantine/factory_result_bundle.json
+            python -m juce_factory.factory.cli bundle-quarantine --manifest factory-quarantine/factory_manifest.json --failure factory-quarantine/failure.json --output factory-quarantine/factory_result_bundle.json
             if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory Result Bundle generation failed." }
 
-            python -m automation.factory.intake factory-quarantine/factory_result_bundle.json `--output-root factory-quarantine/cipi-evidence-preview
+            python -m automation.factory.intake factory-quarantine/factory_result_bundle.json --output-root factory-quarantine/cipi-evidence-preview
             if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory evidence preview failed." }
           } else {
             Write-Host "No generated Factory manifest exists; retaining infrastructure failure logs only."

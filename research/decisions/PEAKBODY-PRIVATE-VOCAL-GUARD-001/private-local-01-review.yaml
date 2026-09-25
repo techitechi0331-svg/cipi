@@ -1,7 +1,7 @@
 schema_version: "1.0"
 decision_id: "PEAKBODY-PRIVATE-VOCAL-GUARD-001:private-local-01:review"
 job_id: PEAKBODY-PRIVATE-VOCAL-GUARD-001
-source_run: research/runs/PEAKBODY-REV02-POLICY-001/gha-36071157266-1
+source_run: research/runs/PEAKBODY-PRIVATE-VOCAL-GUARD-001/private-local-01
 event_type: REVIEW
 authority: ASSISTANT_REVIEW
 decision: ITERATE

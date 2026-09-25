@@ -63,6 +63,28 @@ jobs:
           PROPOSAL: ${{ steps.discover.outputs.top_plugin_proposal }}
         run: python automation/incubator/discover.py --proposal "$PROPOSAL" --output-root . --github-output "$GITHUB_OUTPUT"
 
+      - name: Evaluate bounded product incubation
+        if: steps.discover.outputs.top_plugin_proposal != ''
+        id: incubator_eval
+        env:
+          RESEARCH_PROPOSAL: ${{ steps.discover.outputs.top_plugin_proposal }}
+          PILOT_PROPOSAL: ${{ steps.discover.outputs.top_pilot_proposal }}
+          PILOT_JOB: ${{ steps.pilot.outputs.pilot_job_id }}
+          PILOT_RUN: ${{ steps.pilot.outputs.pilot_run_id }}
+          PLUGIN_PROPOSAL: ${{ steps.incubator.outputs.plugin_proposal_path }}
+        run: |
+          if [ "$RESEARCH_PROPOSAL" = "$PILOT_PROPOSAL" ] && [ -n "$PILOT_JOB" ] && [ -n "$PILOT_RUN" ]; then
+            python automation/incubator/evaluate.py --proposal "$PLUGIN_PROPOSAL" --evidence-manifest "research/runs/$PILOT_JOB/$PILOT_RUN/manifest.json" --output-root . --github-output "$GITHUB_OUTPUT"
+          else
+            python automation/incubator/evaluate.py --proposal "$PLUGIN_PROPOSAL" --output-root . --github-output "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build isolated allowlisted DSP prototype
+        if: steps.incubator_eval.outputs.incubator_candidate_path != ''
+        env:
+          CANDIDATE: ${{ steps.incubator_eval.outputs.incubator_candidate_path }}
+        run: python automation/incubator/prototype.py --proposal "$CANDIDATE" --output-root .
+
       - name: Validate generated evidence
         run: |
           python tools/validate_architect.py

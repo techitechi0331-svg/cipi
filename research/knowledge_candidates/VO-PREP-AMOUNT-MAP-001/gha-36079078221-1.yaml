@@ -1,0 +1,8 @@
+claim: Scaling DesiredGR after the frozen static curve can provide an exact-null,
+  endpoint-preserving and mathematically linear Amount control while preserving the
+  peak-extra/body gain-reduction relationship better than changing threshold.
+evidence_type: HYPOTHESIS
+scope: Deterministic level-domain Vo.Prep transparent-core Amount mapping across Amount
+  0/25/50/75/100 and input shifts -12/-6/0/+6/+12 dB.
+source_run: research/runs/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1
+promotion_requested: PROVISIONAL

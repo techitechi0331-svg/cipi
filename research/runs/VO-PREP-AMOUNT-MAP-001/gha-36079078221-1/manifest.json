@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vo-prep/experiments/amount_mapping_model.py"
+  ],
+  "completed_at": "2026-09-25T00:46:37.132300Z",
+  "environment": {
+    "experiment_adapter": "voprep_amount_mapping_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-AMOUNT-MAP-001",
+  "random_seed": 20260925,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36079078221-1",
+  "schema_version": "1.0",
+  "source_commit": "5f453ac032b08fbae01903262dd0b9a77a084386",
+  "started_at": "2026-09-25T00:46:36.929844Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

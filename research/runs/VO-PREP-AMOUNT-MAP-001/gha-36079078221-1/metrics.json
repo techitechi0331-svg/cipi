@@ -1,0 +1,12 @@
+{
+  "all_numeric_finite": true,
+  "desired_gr_scale_event_extra_linearity_rmse_max_db": 0.0,
+  "desired_gr_scale_full_match_max_error_db": 0.0,
+  "desired_gr_scale_linearity_rmse_max_db": 0.0,
+  "desired_gr_scale_monotonic": true,
+  "desired_gr_scale_zero_null_max_gr_db": 0.0,
+  "matrix_complete": true,
+  "ratio_interp_linearity_rmse_max_db": 0.551673086,
+  "row_count": 75,
+  "threshold_sweep_linearity_rmse_max_db": 2.638720624
+}

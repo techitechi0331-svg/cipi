@@ -1,0 +1,23 @@
+{
+  "baseline": [
+    "threshold_sweep_from_no_compression_to_research_calibration_threshold"
+  ],
+  "experiment_adapter": "voprep_amount_mapping_v1",
+  "job_file": "research/jobs/queued/VO-PREP-AMOUNT-MAP-001.yaml",
+  "metrics": [
+    "row_count",
+    "matrix_complete",
+    "all_numeric_finite",
+    "desired_gr_scale_zero_null_max_gr_db",
+    "desired_gr_scale_full_match_max_error_db",
+    "desired_gr_scale_linearity_rmse_max_db",
+    "desired_gr_scale_event_extra_linearity_rmse_max_db",
+    "desired_gr_scale_monotonic",
+    "threshold_sweep_linearity_rmse_max_db",
+    "ratio_interp_linearity_rmse_max_db"
+  ],
+  "variants": [
+    "ratio_interpolation_1_to_1_5",
+    "desired_gr_scale_0_to_1"
+  ]
+}

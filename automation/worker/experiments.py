@@ -48,6 +48,7 @@ ADAPTERS = {
     "vocal_resonance_transfer_consistency_v1",
     "voprep_amount_mapping_r3_v1",
     "voprep_sidechain_hpf_pilot_v1",
+    "vocal_resonance_clean_normative_prior_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3070,6 +3071,52 @@ def _voprep_sidechain_hpf_pilot(repo_root: Path, timeout_seconds: int) -> dict[s
         ),
     }
 
+
+def _vocal_resonance_clean_normative_prior(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = repo_root / "research/experiments/VocalResonance/clean_normative_prior.py"
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-prior-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {}
+        for name in ["comparison.csv", "prior_bin_counts.csv", "summary.json"]:
+            raw_files[name] = (out / name).read_text(encoding="utf-8")
+
+    accepted = bool(summary["retention_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/clean_normative_prior.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Research-only two-seed test of a singer-disjoint clean-vocal normative "
+            "prior. The prior is fit only from clean training singers and inference "
+            "uses current-audio features plus frozen statistics; no paired clean "
+            "reference or raw-audio persistence is used."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3145,4 +3192,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _voprep_amount_mapping_r3(repo_root, timeout_seconds)
     if name == "voprep_sidechain_hpf_pilot_v1":
         return _voprep_sidechain_hpf_pilot(repo_root, timeout_seconds)
+    if name == "vocal_resonance_clean_normative_prior_v1":
+        return _vocal_resonance_clean_normative_prior(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

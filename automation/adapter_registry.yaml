@@ -248,3 +248,10 @@ adapters:
 # queue-trigger: VO-PREP-AMOUNT-R3-VOCALSET-001 / eligibility-cache-fix
 
 # queue-trigger: VO-PREP-AMOUNT-R3-VOCALSET-001 / csv-schema-fix
+
+  vocal_resonance_clean_normative_prior_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Evaluate a singer-disjoint clean-vocal normative prior as deployable single-view context for Vocal Resonance semantic ranking."

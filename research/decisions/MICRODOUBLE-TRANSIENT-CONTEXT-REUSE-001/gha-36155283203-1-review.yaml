@@ -1,0 +1,45 @@
+schema_version: "1.0"
+decision_id: "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:review-01"
+job_id: MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001
+source_run: research/runs/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The reuse gate passed with intact provenance, bounded processing evidence and
+  explicit preservation of the growl-onset false-positive risk. The evidence is
+  sufficient only for an augment-only MicroDouble product experiment. The
+  current generic transient detector remains mandatory.
+declared_rejection_criteria:
+  - Any declared acceptance condition fails.
+  - The candidate is interpreted as permission to replace the generic transient detector.
+  - The known growl-onset risk is omitted or reclassified away.
+triggered_criteria: []
+retained_findings:
+  - "Current generic transient detector remains mandatory."
+  - "Vo.Prep plosive burst probability 0.96 supports P/B context sensitivity."
+  - "Growl onset probability 0.83 remains above the 0.75 source activation threshold and is an explicit false-positive risk."
+  - "Source-scope body-region mean movement was 0.2 dB and downstream compressor proxy improvements were 0.36–0.44 dB."
+reusable_findings:
+  - "A specialised plosive detector should be evaluated as contextual augmentation, not assumed to replace a generic onset detector."
+  - "Known false-positive classes must remain explicit and become direct negative-test cases in transfer experiments."
+revisit_if:
+  - "Direct MicroDouble experiment fails false-positive, onset, or scope-containment gates."
+  - "Target-machine listening reports dulling, softened articulation, or growl pumping."
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-SIBILANCE-R3-GATE-001
+  related_decisions:
+    - "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:auto"
+created_at: "2026-09-26T03:10:00+09:00"
+immutable: true
+scope: >-
+  Authorization for an augment-only development experiment. No product
+  integration approval, no replacement of the generic transient detector,
+  no knowledge CONFIRMED status, no Cubase closure, and no release approval.
+review_gaps:
+  - "No direct MicroDouble augment-only A/B yet."
+  - "No target-machine listening yet."
+  - "No labelled multilingual plosive corpus yet."

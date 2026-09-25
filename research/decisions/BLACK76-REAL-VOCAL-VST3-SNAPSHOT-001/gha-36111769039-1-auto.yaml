@@ -1,0 +1,35 @@
+schema_version: '1.0'
+decision_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:auto
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Declared rejection criteria were triggered; detailed rationale requires
+  review.
+scope: Automated rejection evidence for BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001; final
+  rejection requires review.
+declared_rejection_criteria:
+- Any finite-state, clipping, latency, matrix-integrity, provenance, or raw-audio-safety
+  gate fails.
+- Attack-OFF working-point gain leaves the +/-0.5 dB real-audio tolerance.
+triggered_criteria: []
+retained_findings:
+- All run artifacts, measurements, parameters, environment data and checksums are
+  retained as negative evidence.
+reusable_findings: []
+revisit_if:
+- New evidence, a changed model, or a changed baseline materially affects the failed
+  criteria.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T08:13:45.868959Z'
+immutable: true

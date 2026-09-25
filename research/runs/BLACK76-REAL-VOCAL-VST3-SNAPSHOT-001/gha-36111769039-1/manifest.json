@@ -1,0 +1,26 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed Black76 derived real-vocal VST3 snapshot",
+    "verify committed metrics SHA256",
+    "apply predeclared continuity/host/provenance gates"
+  ],
+  "completed_at": "2026-09-25T08:13:45.868959Z",
+  "environment": {
+    "experiment_adapter": "black76_real_vocal_snapshot_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001",
+  "random_seed": 7602502,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36111769039-1",
+  "schema_version": "1.0",
+  "source_commit": "334447f3efb1c4ec7e63b8f2cc23c609653c8fbb",
+  "started_at": "2026-09-25T08:13:45.866297Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

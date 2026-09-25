@@ -1,6 +1,6 @@
 schema_version: '1.0'
 job_id: PEAKBODY-CONFOUNDER-PERIODICITY-002
-state: QUEUED
+state: COMPLETED
 track:
   id: PEAKBODY_01
   path: research/experiments/PeakBody
@@ -75,3 +75,4 @@ lineage:
   related_jobs:
   - PEAKBODY-REV02-POLICY-001
   - PEAKBODY-CONFOUNDER-SPECTRAL-001
+latest_run: gha-36154735970-1

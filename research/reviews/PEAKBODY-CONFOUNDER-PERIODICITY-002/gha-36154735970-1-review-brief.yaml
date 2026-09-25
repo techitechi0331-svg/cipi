@@ -1,0 +1,105 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:review-brief-v1
+job_id: PEAKBODY-CONFOUNDER-PERIODICITY-002
+run_id: gha-36154735970-1
+source_run: research/runs/PEAKBODY-CONFOUNDER-PERIODICITY-002/gha-36154735970-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/PEAKBODY-CONFOUNDER-PERIODICITY-002/gha-36154735970-1-triage.yaml
+triage_id: PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:triage-v1
+job_path: research/jobs/completed/PEAKBODY-CONFOUNDER-PERIODICITY-002.yaml
+research_question: Can a periodicity-protected normalized high-band guard reduce noise-like
+  crest confounders without suppressing bright high-F0 harmonic transients?
+hypothesis: Adding a periodicity/voicing protection term to the normalized high-band
+  guard will retain at least 85 percent of bright high-F0 transient activation while
+  still reducing sibilant/breath false peak-preservation to 25 percent or less of
+  the broadband-crest baseline.
+counter_hypotheses:
+- Periodicity protection restores bright harmonic transients but also protects noise-like
+  events too strongly.
+- The periodicity proxy is unstable across sample rates.
+- The combined guard materially changes steady-vowel behavior.
+- Low-frequency plosive-like transients are incorrectly suppressed.
+acceptance_criteria:
+- all numeric outputs are finite
+- all seven synthetic confounder cases are present at 44.1/48/96/192 kHz
+- sibilant/breath candidate high-transient activation is no more than 25 percent of
+  broadband-crest baseline
+- standard low/high voiced transient activation retains at least 90 percent of broadband-crest
+  baseline
+- bright high-F0 harmonic transient activation retains at least 85 percent of broadband-crest
+  baseline
+- steady-vowel mean transient factor changes by no more than 0.05
+- low-frequency plosive-like transient activation retains at least 85 percent of broadband-crest
+  baseline
+rejection_criteria:
+- any acceptance invariant fails
+- the required confounder/sample-rate matrix is incomplete
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: b25add8ac7480b6eeb5e9909a2d99e910d2a4b95
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: all_numeric_finite
+  value: true
+- path: bright_high_f0_retention_min
+  value: 1.0
+- path: matrix_complete
+  value: true
+- path: noise_false_preserve_ratio_max
+  value: 0.000944822
+- path: noise_periodicity_max
+  value: 0.116312811
+- path: plosive_retention_min
+  value: 0.920833333
+- path: row_count
+  value: 28
+- path: standard_voiced_retention_min
+  value: 1.0
+- path: steady_mean_t_delta_max
+  value: 4.7199999997360464e-07
+- path: voiced_periodicity_min
+  value: 0.980584895
+knowledge_candidate:
+  claim: In the tested synthetic scope, periodicity protection can prevent an AirGuard-style
+    high-band guard from mistaking bright harmonic vocal transients for sibilant/breath-like
+    noise while retaining noise rejection.
+  evidence_type: HYPOTHESIS
+  scope: PeakBody synthetic confounder model across 44.1/48/96/192 kHz; not a real-vocal
+    or product detector claim.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Level-matched vocal AB is still pending.
+- Cubase Pro 14 real-host verification is pending.
+- Final parameter promotion requires the full raw vocal corpus plus level-matched
+  listening.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

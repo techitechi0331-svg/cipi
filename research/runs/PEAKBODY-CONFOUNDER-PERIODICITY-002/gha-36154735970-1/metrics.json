@@ -1,0 +1,12 @@
+{
+  "all_numeric_finite": true,
+  "bright_high_f0_retention_min": 1.0,
+  "matrix_complete": true,
+  "noise_false_preserve_ratio_max": 0.000944822,
+  "noise_periodicity_max": 0.116312811,
+  "plosive_retention_min": 0.920833333,
+  "row_count": 28,
+  "standard_voiced_retention_min": 1.0,
+  "steady_mean_t_delta_max": 4.7199999997360464e-07,
+  "voiced_periodicity_min": 0.980584895
+}

@@ -1,0 +1,22 @@
+{
+  "baseline": [
+    "peakbody_revision02_broadband_crest",
+    "spectral_only_highband_guard"
+  ],
+  "experiment_adapter": "peakbody_periodicity_guard_stress_v1",
+  "job_file": "research/jobs/queued/PEAKBODY-CONFOUNDER-PERIODICITY-002.yaml",
+  "metrics": [
+    "noise_false_preserve_ratio_max",
+    "standard_voiced_retention_min",
+    "bright_high_f0_retention_min",
+    "steady_mean_t_delta_max",
+    "plosive_retention_min",
+    "voiced_periodicity_min",
+    "noise_periodicity_max",
+    "matrix_complete",
+    "all_numeric_finite"
+  ],
+  "variants": [
+    "spectral_highband_guard_with_periodicity_protection"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"CIPI Research Architect Proposal",
+  "type":"object",
+  "required":["schema_version","proposal_id","source_gap","state","track","research_question","hypothesis","counter_hypotheses","baseline","variants","metrics","acceptance","rejection","pilot_job_id","plugin_opportunity","overlap_hints","external_validity","budget"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "proposal_id":{"type":"string","pattern":"^RP-[A-Z0-9._-]+$"},
+    "source_gap":{"type":"string","pattern":"^research/architect/gaps/"},
+    "state":{"enum":["PILOT_READY","NEEDS_ADAPTER","RESEARCH_MORE","HUMAN_GATE","CLOSED"]},
+    "research_question":{"type":"string","minLength":10},
+    "hypothesis":{"type":"string","minLength":10},
+    "counter_hypotheses":{"type":"array","minItems":1,"items":{"type":"string","minLength":5}},
+    "baseline":{"type":"array","minItems":1},
+    "variants":{"type":"array","minItems":1},
+    "metrics":{"type":"array","minItems":1},
+    "acceptance":{"type":"array","minItems":1},
+    "rejection":{"type":"array","minItems":1},
+    "pilot_adapter":{"type":["string","null"]},
+    "pilot_job_id":{"type":"string","minLength":5},
+    "plugin_opportunity":{"type":"boolean"},
+    "overlap_hints":{"type":"array","items":{"type":"string"}},
+    "external_validity":{"type":"array","minItems":1},
+    "budget":{"type":"object","required":["max_pilot_runs","max_formal_iterations","max_same_failure"]}
+  },
+  "additionalProperties": true
+}

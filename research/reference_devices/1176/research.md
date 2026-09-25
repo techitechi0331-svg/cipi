@@ -105,3 +105,19 @@ What it does **not** support:
 
 The formal 1176 track therefore remains in contradiction-resolution/review until directly identified revision measurements or stronger independent evidence constrain the FET law, rectifier/control loop, ratio network and revision-specific amplifier behavior.
 
+## 2026-09-25 timing/revision source-fact spot check
+
+Current UA documentation reinforces two scope constraints that are easy to lose in a simplified digital model:
+
+- nominal control ranges remain approximately 20..800 us attack and 50..1100 ms release for the standard 1176LN family;
+- UA explicitly describes release as materially program dependent, with fast-release, slow-release and transition-time behavior, and notes revision/model differences in the slow-release/transition behavior;
+- ratio selection and multi-button modes change more than a single ideal static-ratio number; UA documents altered bias/timing behavior in All-Button operation.
+
+Implication:
+- a fixed one-pole release should remain a simple baseline, not be promoted as the final 1176 reference model;
+- ratio/revision validation must include timing/control-loop behavior rather than only static I/O slope.
+
+References:
+- https://help.uaudio.com/hc/en-us/articles/4419447352980-UA-1176-Classic-Limiter-Collection-Manual
+- https://media.uaudio.com/assetlibrary/1/1/1176ln_manual.pdf
+

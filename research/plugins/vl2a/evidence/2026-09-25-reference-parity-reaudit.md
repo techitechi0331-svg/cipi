@@ -149,3 +149,35 @@ All future comparison tables must explicitly label the reference context.
 8. final contradiction review.
 
 No control should be retuned merely to copy one commercial plug-in's GUI meter.
+
+
+## SOURCE_FACT update — Waves CLA-2A User Guide v16
+
+Official Waves manual:
+- modeled hardware reference level is **-18 dBFS = +4 dBu**;
+- Peak Reduction 0..100 scale is explicitly **non-linear** and adjusted to
+  conform to the modeled unit;
+- Waves identifies approximately **30..50** as the most common Peak Reduction
+  operating range;
+- CLA-2A Stereo uses **one detector for both channel paths**;
+- Waves reports that depleted T4 devices can produce substantially less
+  compression than newer components and warns that its plug-in may therefore
+  feel more aggressive than a worn hardware unit.
+
+Source:
+https://assets.wavescdn.com/pdf/plugins/cla-2a-compressor-limiter-v16-update.pdf
+
+### Consequence for VL2A audit
+
+The earlier Phase 05 idea of preserving current PR50 response is withdrawn.
+Current VL2A at the Waves hardware-reference context (-18 dBFS) produces only
+about 0.6 dB GR at PR50 in the Phase 02 sine baseline. That may be too
+conservative for a control region Waves identifies as the normal-use range.
+
+This still does not create an exact target GR at PR50. It just means PR30..50
+must be included in the parity study rather than locked to the current model.
+
+Stereo status remains UNRESOLVED:
+"one detector for both channel paths" corroborates a shared detector topology,
+but does not by itself publish the exact one-sided-vs-centered detector
+amplitude law.

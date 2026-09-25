@@ -1,0 +1,385 @@
+{
+  "decision": "GO_TO_REAL_VOCAL",
+  "baseline_cutoff_hz": 0,
+  "candidates": [
+    {
+      "cutoff_hz": 40,
+      "aggregate": {
+        "rumble_reduction": 0.7179301600637237,
+        "plosive_reduction": 0.22150306428323516,
+        "male_body_delta_db": 0.0457614202540683,
+        "female_body_delta_db": 0.00544445236416428,
+        "proximity_body_delta_db": -0.004121146621899996,
+        "consonant_retention": 0.9920443963571205,
+        "sibilant_retention": 0.9947121399655207
+      },
+      "spread": {
+        "rumble_reduction": 6.495185433819106e-05,
+        "plosive_reduction": 0.003184607944570983,
+        "male_body_delta_db": 8.959190140300777e-05,
+        "female_body_delta_db": 1.0378418418888202e-05,
+        "proximity_body_delta_db": 1.809852947243229e-05,
+        "consonant_retention": 0.0005761401771577912,
+        "sibilant_retention": 0.0014681765530192292
+      },
+      "per_sr": [
+        {
+          "sr": 44100,
+          "rumble_reduction": 0.7179041989856392,
+          "plosive_reduction": 0.22210361813494506,
+          "male_body_delta_db": 0.04572193004467673,
+          "female_body_delta_db": 0.005440541909695895,
+          "proximity_body_delta_db": -0.004126725131537334,
+          "consonant_retention": 0.9917506125457265,
+          "sibilant_retention": 0.9940819397764993
+        },
+        {
+          "sr": 48000,
+          "rumble_reduction": 0.7179171303655547,
+          "plosive_reduction": 0.2196104833850947,
+          "male_body_delta_db": 0.04575080877144844,
+          "female_body_delta_db": 0.005441894854682161,
+          "proximity_body_delta_db": -0.004127406631817543,
+          "consonant_retention": 0.9923267527228843,
+          "sibilant_retention": 0.9955501163295185
+        },
+        {
+          "sr": 96000,
+          "rumble_reduction": 0.7179691508399774,
+          "plosive_reduction": 0.22279509132966568,
+          "male_body_delta_db": 0.045811521946079736,
+          "female_body_delta_db": 0.005450920328114783,
+          "proximity_body_delta_db": -0.004109308102345111,
+          "consonant_retention": 0.9920558238027507,
+          "sibilant_retention": 0.9945043637905439
+        }
+      ],
+      "gates": {
+        "rumble_reduction_ge_50pct": true,
+        "plosive_reduction_ge_15pct": true,
+        "male_body_loss_le_0_30db": true,
+        "female_body_abs_delta_le_0_15db": true,
+        "consonant_retention_ge_90pct": true,
+        "sibilant_retention_ge_90pct": true,
+        "sample_rate_body_delta_spread_le_0_10db": true
+      },
+      "passes": true
+    },
+    {
+      "cutoff_hz": 60,
+      "aggregate": {
+        "rumble_reduction": 0.9420993601494175,
+        "plosive_reduction": 0.5307262896533046,
+        "male_body_delta_db": 0.005429155226395939,
+        "female_body_delta_db": 0.02477749953555408,
+        "proximity_body_delta_db": -0.10696352175291841,
+        "consonant_retention": 0.9802221781414425,
+        "sibilant_retention": 0.9830081849863374
+      },
+      "spread": {
+        "rumble_reduction": 6.820412434305201e-05,
+        "plosive_reduction": 0.005759993797067264,
+        "male_body_delta_db": 8.293532709613416e-05,
+        "female_body_delta_db": 4.660289108304738e-05,
+        "proximity_body_delta_db": 6.0575725169709216e-05,
+        "consonant_retention": 0.0006431244262613545,
+        "sibilant_retention": 0.002157903159865082
+      },
+      "per_sr": [
+        {
+          "sr": 44100,
+          "rumble_reduction": 0.9421407652796097,
+          "plosive_reduction": 0.5310834045438271,
+          "male_body_delta_db": 0.005416119396802532,
+          "female_body_delta_db": 0.024759986242923304,
+          "proximity_body_delta_db": -0.10699291108085696,
+          "consonant_retention": 0.9799459230705057,
+          "sibilant_retention": 0.982018304406251
+        },
+        {
+          "sr": 48000,
+          "rumble_reduction": 0.9420725611552666,
+          "plosive_reduction": 0.5276677353095097,
+          "male_body_delta_db": 0.005394205477644576,
+          "female_body_delta_db": 0.02476592322973259,
+          "proximity_body_delta_db": -0.10696531882221105,
+          "consonant_retention": 0.980589047496767,
+          "sibilant_retention": 0.9841762075661161
+        },
+        {
+          "sr": 96000,
+          "rumble_reduction": 0.942084754013376,
+          "plosive_reduction": 0.533427729106577,
+          "male_body_delta_db": 0.00547714080474071,
+          "female_body_delta_db": 0.02480658913400635,
+          "proximity_body_delta_db": -0.10693233535568725,
+          "consonant_retention": 0.9801315638570549,
+          "sibilant_retention": 0.9828300429866449
+        }
+      ],
+      "gates": {
+        "rumble_reduction_ge_50pct": true,
+        "plosive_reduction_ge_15pct": true,
+        "male_body_loss_le_0_30db": true,
+        "female_body_abs_delta_le_0_15db": true,
+        "consonant_retention_ge_90pct": true,
+        "sibilant_retention_ge_90pct": true,
+        "sample_rate_body_delta_spread_le_0_10db": true
+      },
+      "passes": true
+    },
+    {
+      "cutoff_hz": 70,
+      "aggregate": {
+        "rumble_reduction": 0.9669003696887466,
+        "plosive_reduction": 0.6728222322309753,
+        "male_body_delta_db": -0.08580873006282112,
+        "female_body_delta_db": 0.04509671461297193,
+        "proximity_body_delta_db": -0.20505550065649278,
+        "consonant_retention": 0.9723284132075266,
+        "sibilant_retention": 0.9736265987962572
+      },
+      "spread": {
+        "rumble_reduction": 1.2325129480017516e-05,
+        "plosive_reduction": 0.007042231617664707,
+        "male_body_delta_db": 9.27538191337618e-05,
+        "female_body_delta_db": 5.535157925429246e-05,
+        "proximity_body_delta_db": 6.474680533274935e-05,
+        "consonant_retention": 0.0007013562678533924,
+        "sibilant_retention": 0.002875190160221641
+      },
+      "per_sr": [
+        {
+          "sr": 44100,
+          "rumble_reduction": 0.966907252802603,
+          "plosive_reduction": 0.6732223946927256,
+          "male_body_delta_db": -0.08584292090467427,
+          "female_body_delta_db": 0.04507597035707889,
+          "proximity_body_delta_db": -0.20506515923591717,
+          "consonant_retention": 0.9720367946183082,
+          "sibilant_retention": 0.9721883420723404
+        },
+        {
+          "sr": 48000,
+          "rumble_reduction": 0.9668989285905136,
+          "plosive_reduction": 0.6691010351912676,
+          "male_body_delta_db": -0.08583310219824858,
+          "female_body_delta_db": 0.04508285154550373,
+          "proximity_body_delta_db": -0.20508304476944694,
+          "consonant_retention": 0.9727381508861616,
+          "sibilant_retention": 0.975063532232562
+        },
+        {
+          "sr": 96000,
+          "rumble_reduction": 0.966894927673123,
+          "plosive_reduction": 0.6761432668089323,
+          "male_body_delta_db": -0.08575016708554051,
+          "female_body_delta_db": 0.04513132193633318,
+          "proximity_body_delta_db": -0.2050182979641142,
+          "consonant_retention": 0.9722102941181101,
+          "sibilant_retention": 0.9736279220838692
+        }
+      ],
+      "gates": {
+        "rumble_reduction_ge_50pct": true,
+        "plosive_reduction_ge_15pct": true,
+        "male_body_loss_le_0_30db": true,
+        "female_body_abs_delta_le_0_15db": true,
+        "consonant_retention_ge_90pct": true,
+        "sibilant_retention_ge_90pct": true,
+        "sample_rate_body_delta_spread_le_0_10db": true
+      },
+      "passes": true
+    },
+    {
+      "cutoff_hz": 80,
+      "aggregate": {
+        "rumble_reduction": 0.9789449225425798,
+        "plosive_reduction": 0.7841385408538882,
+        "male_body_delta_db": -0.2188663655257582,
+        "female_body_delta_db": 0.06319766030515621,
+        "proximity_body_delta_db": -0.3387887448325624,
+        "consonant_retention": 0.9643118487136135,
+        "sibilant_retention": 0.9626788319930742
+      },
+      "spread": {
+        "rumble_reduction": 3.111913920739173e-05,
+        "plosive_reduction": 0.008648941134789423,
+        "male_body_delta_db": 8.227508615998858e-05,
+        "female_body_delta_db": 5.841049382393493e-05,
+        "proximity_body_delta_db": 5.775624164705562e-05,
+        "consonant_retention": 0.0006303824333933061,
+        "sibilant_retention": 0.003925867500650715
+      },
+      "per_sr": [
+        {
+          "sr": 44100,
+          "rumble_reduction": 0.9789315975339291,
+          "plosive_reduction": 0.7841027516014631,
+          "male_body_delta_db": -0.21889087457853895,
+          "female_body_delta_db": 0.06317593480464945,
+          "proximity_body_delta_db": -0.3388110580790955,
+          "consonant_retention": 0.964069672555706,
+          "sibilant_retention": 0.9605835339402845
+        },
+        {
+          "sr": 48000,
+          "rumble_reduction": 0.9789627166731365,
+          "plosive_reduction": 0.779831964912706,
+          "male_body_delta_db": -0.2188952485424478,
+          "female_body_delta_db": 0.06318270081234578,
+          "proximity_body_delta_db": -0.3388018745811432,
+          "consonant_retention": 0.9647000549890993,
+          "sibilant_retention": 0.9645094014409352
+        },
+        {
+          "sr": 96000,
+          "rumble_reduction": 0.9789404534206735,
+          "plosive_reduction": 0.7884809060474954,
+          "male_body_delta_db": -0.2188129734562878,
+          "female_body_delta_db": 0.06323434529847338,
+          "proximity_body_delta_db": -0.33875330183744845,
+          "consonant_retention": 0.9641658185960356,
+          "sibilant_retention": 0.9629435605980029
+        }
+      ],
+      "gates": {
+        "rumble_reduction_ge_50pct": true,
+        "plosive_reduction_ge_15pct": true,
+        "male_body_loss_le_0_30db": true,
+        "female_body_abs_delta_le_0_15db": true,
+        "consonant_retention_ge_90pct": true,
+        "sibilant_retention_ge_90pct": true,
+        "sample_rate_body_delta_spread_le_0_10db": true
+      },
+      "passes": true
+    },
+    {
+      "cutoff_hz": 100,
+      "aggregate": {
+        "rumble_reduction": 0.9897354441953579,
+        "plosive_reduction": 0.9143975103820784,
+        "male_body_delta_db": -0.5482774943467285,
+        "female_body_delta_db": 0.08775460216470436,
+        "proximity_body_delta_db": -0.6446967754480247,
+        "consonant_retention": 0.9503833581525115,
+        "sibilant_retention": 0.9404297641427136
+      },
+      "spread": {
+        "rumble_reduction": 7.991337529367204e-05,
+        "plosive_reduction": 0.010786325013242948,
+        "male_body_delta_db": 8.978984386631694e-05,
+        "female_body_delta_db": 6.788304850724458e-05,
+        "proximity_body_delta_db": 8.776043843727876e-05,
+        "consonant_retention": 0.0005508992492156972,
+        "sibilant_retention": 0.006441761461998152
+      },
+      "per_sr": [
+        {
+          "sr": 44100,
+          "rumble_reduction": 0.989778939010992,
+          "plosive_reduction": 0.9145083761901215,
+          "male_body_delta_db": -0.5482931568229734,
+          "female_body_delta_db": 0.08772826935179134,
+          "proximity_body_delta_db": -0.6447428897512784,
+          "consonant_retention": 0.9501793015487969,
+          "sibilant_retention": 0.9367794082639479
+        },
+        {
+          "sr": 48000,
+          "rumble_reduction": 0.9897283679393833,
+          "plosive_reduction": 0.9089489149714354,
+          "male_body_delta_db": -0.5483145580305391,
+          "female_body_delta_db": 0.08773938474202314,
+          "proximity_body_delta_db": -0.6446923072799549,
+          "consonant_retention": 0.9507302007980126,
+          "sibilant_retention": 0.943221169725946
+        },
+        {
+          "sr": 96000,
+          "rumble_reduction": 0.9896990256356983,
+          "plosive_reduction": 0.9197352399846783,
+          "male_body_delta_db": -0.5482247681866728,
+          "female_body_delta_db": 0.08779615240029859,
+          "proximity_body_delta_db": -0.6446551293128411,
+          "consonant_retention": 0.950240572110725,
+          "sibilant_retention": 0.9412887144382468
+        }
+      ],
+      "gates": {
+        "rumble_reduction_ge_50pct": true,
+        "plosive_reduction_ge_15pct": true,
+        "male_body_loss_le_0_30db": false,
+        "female_body_abs_delta_le_0_15db": true,
+        "consonant_retention_ge_90pct": true,
+        "sibilant_retention_ge_90pct": true,
+        "sample_rate_body_delta_spread_le_0_10db": true
+      },
+      "passes": false
+    }
+  ],
+  "selected": {
+    "cutoff_hz": 40,
+    "aggregate": {
+      "rumble_reduction": 0.7179301600637237,
+      "plosive_reduction": 0.22150306428323516,
+      "male_body_delta_db": 0.0457614202540683,
+      "female_body_delta_db": 0.00544445236416428,
+      "proximity_body_delta_db": -0.004121146621899996,
+      "consonant_retention": 0.9920443963571205,
+      "sibilant_retention": 0.9947121399655207
+    },
+    "spread": {
+      "rumble_reduction": 6.495185433819106e-05,
+      "plosive_reduction": 0.003184607944570983,
+      "male_body_delta_db": 8.959190140300777e-05,
+      "female_body_delta_db": 1.0378418418888202e-05,
+      "proximity_body_delta_db": 1.809852947243229e-05,
+      "consonant_retention": 0.0005761401771577912,
+      "sibilant_retention": 0.0014681765530192292
+    },
+    "per_sr": [
+      {
+        "sr": 44100,
+        "rumble_reduction": 0.7179041989856392,
+        "plosive_reduction": 0.22210361813494506,
+        "male_body_delta_db": 0.04572193004467673,
+        "female_body_delta_db": 0.005440541909695895,
+        "proximity_body_delta_db": -0.004126725131537334,
+        "consonant_retention": 0.9917506125457265,
+        "sibilant_retention": 0.9940819397764993
+      },
+      {
+        "sr": 48000,
+        "rumble_reduction": 0.7179171303655547,
+        "plosive_reduction": 0.2196104833850947,
+        "male_body_delta_db": 0.04575080877144844,
+        "female_body_delta_db": 0.005441894854682161,
+        "proximity_body_delta_db": -0.004127406631817543,
+        "consonant_retention": 0.9923267527228843,
+        "sibilant_retention": 0.9955501163295185
+      },
+      {
+        "sr": 96000,
+        "rumble_reduction": 0.7179691508399774,
+        "plosive_reduction": 0.22279509132966568,
+        "male_body_delta_db": 0.045811521946079736,
+        "female_body_delta_db": 0.005450920328114783,
+        "proximity_body_delta_db": -0.004109308102345111,
+        "consonant_retention": 0.9920558238027507,
+        "sibilant_retention": 0.9945043637905439
+      }
+    ],
+    "gates": {
+      "rumble_reduction_ge_50pct": true,
+      "plosive_reduction_ge_15pct": true,
+      "male_body_loss_le_0_30db": true,
+      "female_body_abs_delta_le_0_15db": true,
+      "consonant_retention_ge_90pct": true,
+      "sibilant_retention_ge_90pct": true,
+      "sample_rate_body_delta_spread_le_0_10db": true
+    },
+    "passes": true
+  },
+  "raw_audio_persisted": false
+}

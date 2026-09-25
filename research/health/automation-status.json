@@ -14,51 +14,18 @@
       "queued": 0
     }
   },
-  "human_gates": [
-    {
-      "gates": [
-        "Human review before any augment-only candidate implementation."
-      ],
-      "job_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001"
-    },
-    {
-      "gates": [
-        "Final interpretation must retain the distinction between supplemental LN-era proxy targets and exact vintage Rev-E hardware truth.",
-        "A diagnostic power-law transfer must not be promoted directly into Production without a physically justified circuit/loop interpretation."
-      ],
-      "job_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001"
-    },
-    {
-      "gates": [
-        "Subjective level-matched vocal preference remains a human listening gate.",
-        "Cubase Pro 14 scan, instantiate, automation, preset recall and session behavior remain separate host gates."
-      ],
-      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002"
-    }
-  ],
+  "human_gates": [],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [
-      "research-bot/MICRODOUBLE-TRANSIENT-NECESSITY-001/auto-018dfbc00119",
-      "research-bot/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/auto-43c119b9c6af",
-      "research-bot/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/auto-65a73cf05823",
-      "research-bot/VL2A-PHASE01H-CHECKSUM-DIAG-001/auto-bf145dd090c9"
-    ],
-    "claimed_count": 4,
-    "claimed_jobs": [
-      "MICRODOUBLE-TRANSIENT-NECESSITY-001",
-      "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001",
-      "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002",
-      "VL2A-PHASE01H-CHECKSUM-DIAG-001"
-    ],
+    "claimed_branches": [],
+    "claimed_count": 0,
+    "claimed_jobs": [],
     "dependency_blocked_count": 0,
     "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/MICRODOUBLE-TRANSIENT-NECESSITY-001/auto-018dfbc00119",
-    "job_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001",
-    "kind": "EVIDENCE_INTAKE",
-    "priority": 90
+    "kind": "IDLE",
+    "priority": -999
   }
 }

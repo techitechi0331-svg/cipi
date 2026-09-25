@@ -112,9 +112,10 @@ def backfill_auto_decision(root: Path, job: dict, manifest: dict):
     write_immutable(path, content)
     return path, payload
 
-def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str):
+def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str, source_run: str | None = None):
     base = root / "research" / "decisions" / job_id
-    found = []
+    exact = []
+    lineage = []
     if base.exists():
         for path in sorted(list(base.glob("*.yaml")) + list(base.glob("*.yml"))):
             data = load_yaml(path)
@@ -122,9 +123,13 @@ def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str):
                 continue
             if data.get("event_type") != "REVIEW" or data.get("review_status") != "CONFIRMED":
                 continue
-            if str(data.get("parent_decision_id", "")) != parent_decision_id:
+            item = (str(data.get("created_at", "")), str(data.get("decision_id", "")), path, data)
+            if str(data.get("parent_decision_id", "")) == parent_decision_id:
+                exact.append(item)
                 continue
-            found.append((str(data.get("created_at", "")), str(data.get("decision_id", "")), path, data))
+            if source_run and str(data.get("source_run", "")) == source_run:
+                lineage.append(item)
+    found = exact if exact else lineage
     if not found:
         return None
     found.sort()
@@ -197,10 +202,10 @@ def main() -> int:
     source_run = str(decision["source_run"])
     run_dir = root / source_run
 
-    confirmed = find_confirmed_review(root, args.job_id, str(decision["decision_id"]))
+    confirmed = find_confirmed_review(root, args.job_id, str(decision["decision_id"]), source_run)
     review_root = Path(args.review_root).resolve() if args.review_root else None
     if review_root is not None and review_root != root:
-        main_confirmed = find_confirmed_review(review_root, args.job_id, str(decision["decision_id"]))
+        main_confirmed = find_confirmed_review(review_root, args.job_id, str(decision["decision_id"]), source_run)
         if main_confirmed is not None:
             confirmed = main_confirmed
     candidate_path, candidate = find_candidate(root, args.job_id, source_run)
@@ -266,6 +271,7 @@ def main() -> int:
         "route": route,
         "final_decision_made": bool(confirmed),
         "existing_review_decision_id": str(confirmed[3].get("decision_id")) if confirmed else None,
+        "existing_review_source_run_match": bool(confirmed and str(confirmed[3].get("source_run", "")) == source_run),
         "acceptance_met": bool(manifest.get("acceptance_met")),
         "rejection_triggered": bool(manifest.get("rejection_triggered")),
         "promotion_requested": promotion_requested,

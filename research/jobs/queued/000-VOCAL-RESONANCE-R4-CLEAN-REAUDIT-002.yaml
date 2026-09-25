@@ -62,3 +62,5 @@ knowledge_candidate:
   evidence_type: HYPOTHESIS
   scope: Vocal resonance semantic-ranker hard-negative design and subgroup measurement.
   promotion_requested: HYPOTHESIS
+
+# rerun after Audit-001 checksum restoration

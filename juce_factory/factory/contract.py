@@ -139,6 +139,15 @@ def validate_contract(data: dict[str, Any]) -> None:
         if not isinstance(validation.get(key), bool):
             raise ContractError(f"validation.{key} must be boolean")
 
+    if validation["pluginval"] is not True:
+        raise ContractError("validation.pluginval is a mandatory VST3 Factory gate and cannot be disabled")
+    if validation["nan_inf"] is not True:
+        raise ContractError("validation.nan_inf is a mandatory Factory safety gate and cannot be disabled")
+    if validation.get("official_vst3_validator", True) is not True:
+        raise ContractError(
+            "validation.official_vst3_validator is a mandatory VST3 Factory gate and cannot be disabled"
+        )
+
     sample_rates = validation.get("sample_rates", [44100, 48000, 88200, 96000])
     if not isinstance(sample_rates, list) or not sample_rates:
         raise ContractError("validation.sample_rates must be a non-empty array")

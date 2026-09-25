@@ -75,6 +75,7 @@ jobs:
           Copy-Item -LiteralPath $bundle.FullName -Destination factory-staging -Recurse -Force
 
       - name: Download pinned pluginval
+        id: pluginval_fetch
         shell: pwsh
         run: |
           $url = "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip"
@@ -187,6 +188,7 @@ jobs:
           elseif ("${{ steps.build.outcome }}" -eq "failure") { $failureClass = "BUILD_ERROR" }
           elseif ("${{ steps.factory_validation.outcome }}" -eq "failure") { $failureClass = "FACTORY_DSP_VALIDATION_ERROR" }
           elseif ("${{ steps.stage.outcome }}" -eq "failure") { $failureClass = "PACKAGING_ERROR" }
+          elseif ("${{ steps.pluginval_fetch.outcome }}" -eq "failure") { $failureClass = "PLUGINVAL_FETCH_ERROR" }
           elseif ("${{ steps.pluginval.outcome }}" -eq "failure") { $failureClass = "PLUGINVAL_ERROR" }
           elseif ("${{ steps.steinberg_fetch.outcome }}" -eq "failure") { $failureClass = "STEINBERG_FETCH_ERROR" }
           elseif ("${{ steps.steinberg_configure.outcome }}" -eq "failure") { $failureClass = "STEINBERG_CONFIGURE_ERROR" }

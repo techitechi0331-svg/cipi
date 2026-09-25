@@ -129,8 +129,13 @@ public:
     bool isBusesLayoutSupported(const BusesLayout& layouts) const override;
     void processBlock(juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
 
+#if defined(JUCE_FACTORY_HEADLESS_TEST)
+    juce::AudioProcessorEditor* createEditor() override { return nullptr; }
+    bool hasEditor() const override { return false; }
+#else
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override { return true; }
+#endif
 
     const juce::String getName() const override { return "__PRODUCT_NAME__"; }
     bool acceptsMidi() const override { return false; }
@@ -160,7 +165,10 @@ private:
 };
 '''
     processor_cpp = f'''#include "PluginProcessor.h"
+
+#if ! defined(JUCE_FACTORY_HEADLESS_TEST)
 #include "PluginEditor.h"
+#endif
 
 FactoryPluginAudioProcessor::FactoryPluginAudioProcessor()
     : juce::AudioProcessor(BusesProperties()
@@ -215,10 +223,12 @@ void FactoryPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     }}
 }}
 
+#if ! defined(JUCE_FACTORY_HEADLESS_TEST)
 juce::AudioProcessorEditor* FactoryPluginAudioProcessor::createEditor()
 {{
     return new FactoryPluginAudioProcessorEditor(*this);
 }}
+#endif
 
 void FactoryPluginAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
 {{
@@ -372,8 +382,6 @@ void fill(juce::AudioBuffer<float>& buffer, float value)
 
 int main()
 {
-    juce::ScopedJuceInitialiser_GUI initialiseJuce;
-
     constexpr std::array<double, __SAMPLE_RATE_COUNT__> sampleRates { __SAMPLE_RATES__ };
     constexpr std::array<int, __BLOCK_SIZE_COUNT__> blockSizes { __BLOCK_SIZES__ };
 
@@ -400,6 +408,25 @@ int main()
 
         if constexpr (__RUN_LATENCY__)
             require(processor.getLatencySamples() == 0, "Golden Gain reports zero latency");
+
+        if constexpr (__RUN_LAYOUT__)
+        {
+            FactoryPluginAudioProcessor monoProcessor;
+            juce::AudioProcessor::BusesLayout monoApplied;
+            monoApplied.inputBuses.add(juce::AudioChannelSet::mono());
+            monoApplied.outputBuses.add(juce::AudioChannelSet::mono());
+            require(monoProcessor.setBusesLayout(monoApplied), "mono layout can be applied");
+            monoProcessor.setRateAndBufferSizeDetails(48000.0, 257);
+            monoProcessor.prepareToPlay(48000.0, 257);
+            setGainDb(monoProcessor, 0.0f);
+            juce::AudioBuffer<float> monoBuffer(1, 257);
+            fill(monoBuffer, 0.2f);
+            juce::MidiBuffer monoMidi;
+            monoProcessor.processBlock(monoBuffer, monoMidi);
+            require(isFinite(monoBuffer) && maxAbsError(monoBuffer, 0.2f) < 0.00001f,
+                    "applied mono layout processes audio correctly");
+            monoProcessor.releaseResources();
+        }
 
         if constexpr (__RUN_STATE__)
         {
@@ -493,6 +520,31 @@ int main()
         }
     }
 
+    {
+        FactoryPluginAudioProcessor processor;
+        setGainDb(processor, 6.0f);
+        processor.setRateAndBufferSizeDetails(44100.0, 64);
+        processor.prepareToPlay(44100.0, 64);
+        juce::MidiBuffer midi;
+        juce::AudioBuffer<float> bufferA(2, 64);
+        fill(bufferA, 0.1f);
+        processor.processBlock(bufferA, midi);
+        const float expectedA = 0.1f * juce::Decibels::decibelsToGain(6.0f);
+        require(isFinite(bufferA) && maxAbsError(bufferA, expectedA) < 0.00001f,
+                "first prepare cycle applies expected gain");
+        processor.releaseResources();
+
+        setGainDb(processor, 0.0f);
+        processor.setRateAndBufferSizeDetails(96000.0, 257);
+        processor.prepareToPlay(96000.0, 257);
+        juce::AudioBuffer<float> bufferB(2, 257);
+        fill(bufferB, 0.2f);
+        processor.processBlock(bufferB, midi);
+        require(isFinite(bufferB) && maxAbsError(bufferB, 0.2f) < 0.00001f,
+                "same processor instance reprepares sample-rate/block-size safely");
+        processor.releaseResources();
+    }
+
     if constexpr (__RUN_BYPASS__)
     {
         FactoryPluginAudioProcessor processor;
@@ -535,12 +587,11 @@ target_sources({target}FactoryValidation
         Tests/FactoryValidation.cpp
         Source/PluginProcessor.cpp
         Source/PluginProcessor.h
-        Source/PluginEditor.cpp
-        Source/PluginEditor.h
 )
 
 target_compile_definitions({target}FactoryValidation
     PUBLIC
+        JUCE_FACTORY_HEADLESS_TEST=1
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0
@@ -548,7 +599,7 @@ target_compile_definitions({target}FactoryValidation
 
 target_link_libraries({target}FactoryValidation
     PRIVATE
-        juce::juce_audio_utils
+        juce::juce_audio_processors
         juce::juce_dsp
     PUBLIC
         juce::juce_recommended_config_flags

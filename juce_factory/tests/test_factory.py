@@ -28,6 +28,29 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_contract(bad)
 
+    def test_phase1_contract_remains_compatible(self):
+        legacy = copy.deepcopy(self.contract)
+        for key in (
+            "official_vst3_validator", "latency", "mono_stereo_layouts",
+            "denormal", "bypass", "sample_rates", "block_sizes",
+        ):
+            legacy["validation"].pop(key, None)
+
+        validate_contract(legacy)
+        with tempfile.TemporaryDirectory() as td:
+            out = generate_project(legacy, Path(td) / "legacy")
+            manifest = json.loads((out / "factory_manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["validation_matrix"]["sample_rates"], [44100, 48000, 88200, 96000])
+            self.assertEqual(manifest["validation_matrix"]["block_sizes"], [32, 64, 128, 257, 512, 1024])
+
+    def test_mandatory_factory_gates_cannot_be_disabled(self):
+        for key in ("pluginval", "nan_inf", "official_vst3_validator"):
+            bad = copy.deepcopy(self.contract)
+            bad["validation"][key] = False
+            with self.subTest(key=key):
+                with self.assertRaises(ContractError):
+                    validate_contract(bad)
+
     def test_validation_matrix_rejects_duplicate_sample_rate(self):
         bad = copy.deepcopy(self.contract)
         bad["validation"]["sample_rates"] = [48000, 48000]

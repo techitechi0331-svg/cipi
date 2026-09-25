@@ -15,7 +15,13 @@ This file freezes the first compiled prototype constants so measurement can fals
 - target active-history capacity: 400 samples (up to ~20 s);
 - target statistic: median;
 - target smoothing: 2.5 s;
-- target bootstrap: minimum 6 accepted samples.
+- target bootstrap: minimum 6 accepted samples;
+- persistent section evidence threshold: >2.5 dB from effective target;
+- persistent section hold: 4.0 s;
+- section offset tracking speed: up to 1.5 dB/s;
+- section offset bound: ±6 dB;
+- active no-evidence section-offset relaxation: 0.05 dB/s;
+- inactive section-offset relaxation: 0.01 dB/s.
 
 ## Activity
 
@@ -28,9 +34,13 @@ This is deliberately simple. Adaptive noise-floor logic remains a separate resea
 
 ## Gain target
 
+Effective target:
+
+`EffectiveTarget = RobustBaseTarget + SectionOffset`
+
 Error:
 
-`e = AutoTarget - PhraseLevel`
+`e = EffectiveTarget - PhraseLevel`
 
 Dead-zone mapping:
 
@@ -73,6 +83,12 @@ During a detected short transient:
 - the desired ride target is held from the previous sample;
 - existing gain velocity may continue so the control path does not create a discontinuity.
 
+## Control smoothing
+
+- Amount parameter smoothing: 50 ms linear;
+- Output gain smoothing: 20 ms linear gain domain;
+- smoothing is host-automation protection only and does not alter the internal ride ballistics.
+
 ## Lookahead
 
 Research VST3 latency:
@@ -104,7 +120,8 @@ Revise this lock if any of the following is observed:
 - phrase-level variance reduction is too small to be useful;
 - quiet gaps or noise are materially boosted;
 - phrase tails rise unnaturally;
-- the target chases section changes and cancels useful riding;
+- persistent-section adaptation fails to preserve at least 70% of the synthetic 6 dB section contrast;
+- within-section phrase spread reduction falls below 20% in the section probe;
 - the target adapts too slowly across a genuine song section;
 - Amount 100% produces unstable or obviously unnatural movement;
 - sample-rate or block-size changes alter the gain trajectory materially;

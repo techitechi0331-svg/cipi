@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -18,6 +19,16 @@ def _cpp_float(value: float | int) -> str:
     if "." not in text and "e" not in text.lower():
         text += ".0"
     return text + "f"
+
+
+def _content_tree_sha256(files: dict[str, str]) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(files):
+        digest.update(path.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(files[path].encode("utf-8"))
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 def _target_name(plugin_id: str) -> str:
@@ -607,6 +618,16 @@ target_link_libraries({target}FactoryValidation
 )
 '''
 
+    generated_sources = {
+        "CMakeLists.txt": cmake,
+        "Source/PluginProcessor.h": processor_h,
+        "Source/PluginProcessor.cpp": processor_cpp,
+        "Source/PluginEditor.h": editor_h,
+        "Source/PluginEditor.cpp": editor_cpp,
+        "Tests/FactoryValidation.cpp": validation_cpp,
+    }
+    generated_source_sha256 = _content_tree_sha256(generated_sources)
+
     manifest = {
         "factory_version": FACTORY_VERSION,
         "contract_version": contract["contract_version"],
@@ -615,6 +636,7 @@ target_link_libraries({target}FactoryValidation
         "plugin_version": plugin["version"],
         "dsp_template": contract["dsp"]["template"],
         "dsp_source_revision": contract["dsp"]["source_revision"],
+        "generated_source_sha256": generated_source_sha256,
         "juce_version": "9.0.2",
         "target_os": contract["target"]["os"],
         "formats": contract["target"]["formats"],

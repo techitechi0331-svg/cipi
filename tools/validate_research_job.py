@@ -187,6 +187,21 @@ def validate(path: Path) -> list[str]:
                     text=str(value)
                     if not text.startswith("automation/job_templates/") or ".." in Path(text).parts:
                         errors.append(f"{path}: unsafe continuation template path {text!r}")
+    cross_repo_continuation=data.get("cross_repo_continuation")
+    if cross_repo_continuation is not None:
+        if not isinstance(cross_repo_continuation, dict):
+            errors.append(f"{path}: cross_repo_continuation must be a mapping")
+        else:
+            for key in ("on_accept","on_reject"):
+                values=cross_repo_continuation.get(key, [])
+                if not isinstance(values, list):
+                    errors.append(f"{path}: cross_repo_continuation.{key} must be a list")
+                    continue
+                for value in values:
+                    text=str(value)
+                    if not text.startswith("automation/cross_repo/action_templates/") or ".." in Path(text).parts:
+                        errors.append(f"{path}: unsafe cross-repo action template path {text!r}")
+
     return errors
 
 def main() -> int:

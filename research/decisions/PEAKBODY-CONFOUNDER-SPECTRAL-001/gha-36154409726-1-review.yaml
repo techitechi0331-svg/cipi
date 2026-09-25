@@ -1,0 +1,43 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:review-01"
+job_id: PEAKBODY-CONFOUNDER-SPECTRAL-001
+source_run: research/runs/PEAKBODY-CONFOUNDER-SPECTRAL-001/gha-36154409726-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  The spectral-only high-band guard is rejected for the tested synthetic PeakBody
+  confounder scope. It strongly reduced sibilant/breath false preservation, but
+  violated predeclared preservation gates for bright high-F0 harmonic transients
+  and low-frequency plosive-like transients. Those failures are disqualifying and
+  cannot be outweighed by noise rejection.
+declared_rejection_criteria:
+  - any acceptance invariant fails
+  - the required confounder/sample-rate matrix is incomplete
+triggered_criteria:
+  - bright high-F0 harmonic transient retention fell below 85 percent of baseline
+  - low-frequency plosive transient retention fell below 85 percent of baseline
+retained_findings:
+  - "Noise-like sibilant/breath false-preservation was reduced to at most 0.000944822 of the broadband-crest baseline."
+  - "Ordinary voiced transient retention remained at least 0.997915942."
+  - "Bright high-F0 harmonic transient retention reached 0.0 in the worst tested condition."
+  - "Low-frequency plosive-like transient retention reached 0.054583333 in the worst tested condition."
+reusable_findings:
+  - "A normalized high-band/broadband ratio by itself is not a vocal-safe guard for PeakBody crest logic in the tested synthetic scope."
+  - "Noise-rejection metrics must be paired with bright-voiced and plosive preservation gates."
+revisit_if:
+  - "A periodicity/voicing protection term is added."
+  - "A stronger harmonic-motion or F0-aware protection term becomes available."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-REV02-POLICY-001
+    - PEAKBODY-CONFOUNDER-PERIODICITY-002
+  related_decisions:
+    - "PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:auto"
+parent_decision_id: "PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Synthetic PeakBody confounder stress across 44.1/48/96/192 kHz."
+review_gaps: []

@@ -41,6 +41,19 @@ def validate_root(root:Path)->list[str]:
             if data.get("final") is not False:errors.append(f"{path}: automation decision must not be final")
             if data.get("plugin_proposal_id") not in proposals:
                 errors.append(f"{path}: matching proposal not found")
+    cdir=base/"candidates"
+    if cdir.exists():
+        for path in sorted(cdir.glob("*.yaml")):
+            try:data=yaml.safe_load(path.read_text(encoding="utf-8"))
+            except Exception as exc:errors.append(f"{path}: YAML parse error: {exc}");continue
+            if not isinstance(data,dict):errors.append(f"{path}: root must be mapping");continue
+            if data.get("state")!="INCUBATE":errors.append(f"{path}: candidate state must be INCUBATE")
+            if data.get("automatic_production_allowed") is not False:
+                errors.append(f"{path}: candidate automatic production must be false")
+            if not str(data.get("source_run","")).startswith("research/runs/"):
+                errors.append(f"{path}: candidate source_run must point under research/runs/")
+            if not str(data.get("source_incubator_decision","")).startswith("research/incubator/decisions/"):
+                errors.append(f"{path}: candidate source decision missing")
     proto=base/"prototypes"
     if proto.exists():
         for path in proto.rglob("metrics.json"):

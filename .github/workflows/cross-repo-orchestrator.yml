@@ -1,8 +1,6 @@
 name: Cross-Repo Orchestrator
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -65,11 +63,11 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Re-dispatch CIPI worker when an external wait resumed
+      - name: Re-dispatch No-Wait scheduler when an external wait resumed
         if: steps.orchestrate.outputs.configured == 'true' && steps.orchestrate.outputs.resumed_jobs != '0'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run free-autonomous-research.yml --ref main
+        run: gh workflow run no-wait-orchestrator.yml --ref main
 
       - name: Token not configured
         if: steps.orchestrate.outputs.configured != 'true'

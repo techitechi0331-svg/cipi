@@ -47,6 +47,8 @@ def main() -> int:
                     out / "CMakeLists.txt",
                     out / "factory_manifest.json",
                     out / "plugin_contract.json",
+                    out / "Source" / "GoldenGainDSP.h",
+                    out / "Tests" / "DspTests.cpp",
                     out / "Source" / "PluginProcessor.cpp",
                     out / "Source" / "PluginProcessor.h",
                     out / "Source" / "PluginEditor.cpp",

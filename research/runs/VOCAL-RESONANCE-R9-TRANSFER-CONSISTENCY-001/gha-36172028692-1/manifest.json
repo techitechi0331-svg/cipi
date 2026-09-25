@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/transfer_consistency.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T18:21:59.225711Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_transfer_consistency_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001",
+  "random_seed": 20261109,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36172028692-1",
+  "schema_version": "1.0",
+  "source_commit": "6a360c5853a970913bf580237d6667938a142a4a",
+  "started_at": "2026-09-25T18:13:51.709232Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

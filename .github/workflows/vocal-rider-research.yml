@@ -46,6 +46,23 @@ jobs:
             throw "Vocal Rider deterministic tests failed with exit code $LASTEXITCODE."
           }
 
+      - name: Build Vocal Rider processor tests
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRiderPluginTests --parallel 4
+
+      - name: Run Vocal Rider processor latency/state gate
+        shell: pwsh
+        run: |
+          $processorTest = Get-ChildItem -Path build -Recurse -File -Filter CIPIVocalRiderPluginTests.exe | Select-Object -First 1
+          if (-not $processorTest) {
+            throw "CIPIVocalRiderPluginTests.exe was not produced."
+          }
+
+          & $processorTest.FullName
+          if ($LASTEXITCODE -ne 0) {
+            throw "Vocal Rider processor tests failed with exit code $LASTEXITCODE."
+          }
+
       - name: Build Vocal Rider measurement renderer
         shell: pwsh
         run: cmake --build build --config Release --target CIPIVocalRiderMeasurement --parallel 4

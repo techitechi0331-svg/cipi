@@ -37,6 +37,7 @@ milestones:
   - Temporal Morphology R5 preserved Top-5/strong-effect Top-5 while materially reducing measured clean false triggers; retained only as a falsification candidate.
   - R5b multi-seed/same-C/ablation stability audit rejected the full Temporal Morphology bundle as unstable across seeds.
   - R6 run-length post-ranker veto failed its predeclared two-seed retention gate and is rejected as a validated abstention stage.
+  - R7 identifiability oracle passed its diagnostic gate and isolated a large single-view information gap.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -50,11 +51,14 @@ unresolved:
   - R5b found zero source overlap, but the full morphology benefit did not survive the second injection seed and therefore is rejected as a full ranker feature bundle.
   - Run-length-only morphology reduced clean false triggers in R5b, but R6 veto reproduced only a 2.5-point external-clean reduction on seed 20261003 and therefore failed the 5-point minimum.
   - R6 target-action retention was underpowered: locked-test baseline target actions were 1 and 0 across the two seeds, with 0 strong-effect actions in both; the apparent 100-percent retention is not accepted as meaningful protection evidence.
+  - R7 oracle conditional Top-5 reached 100.0 percent and 92.59 percent across the two seeds versus 26.67 percent and 40.74 percent for the frozen single-view static ranker.
+  - R7 oracle strong-effect conditional Top-5 reached 100 percent on both seeds, while the frozen static ranker reached 36.36 percent and 28.57 percent.
+  - The R7 paired clean/injected oracle is research-only and cannot be used directly in the final plugin; the unresolved blocker is finding deployable single-view proxies for the causal delta signal.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R6 rejected run-length-only veto as a validated abstention stage and also exposed an underpowered action-retention metric caused by the current static actuation threshold. Rather than tuning another veto, the next bounded question is whether the current candidate representation contains enough information to distinguish the injected causal target at all."
-next_confirmation: "Whether a research-only paired clean/injected oracle can rank the injected target near the top when candidate discovery hits, and how large the gap is between that oracle and single-view inference features. This determines whether the blocker is feature identifiability, label/candidate alignment, or model choice."
+why_next: "R7 showed that candidate discovery plus paired causal-delta information is sufficient for near-ceiling ranking, while the frozen single-view ranker remains far behind. The next bounded question is which deployable single-view feature families can recover part of that causal information without access to a clean reference."
+next_confirmation: "Whether richer single-view local spectro-temporal patch/context features can materially close the conditional Top-5 gap to the research-only causal oracle across both seeds while preserving clean-vocal false-trigger discipline."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

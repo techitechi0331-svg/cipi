@@ -1,0 +1,55 @@
+schema_version: '1.0'
+adapter_candidate_id: AC-RP-MASKING-AWARE-PRESENCE-001
+source_research_proposal: research/architect/proposals/RP-MASKING-AWARE-PRESENCE-001.yaml
+state: DRAFT_REVIEW
+executable: false
+proposed_adapter_name: rp_masking_aware_presence_001_pilot_v1
+track:
+  id: ARCHITECT_MASKING_AWARE_PRESENCE
+  path: research/architect
+research_question: Can vocal presence be increased from masking context without becoming
+  a static high-mid boost?
+baseline:
+- static_presence_eq
+variants:
+- masking_aware_presence
+metrics:
+- target_band_movement
+- non_target_movement
+- masking_proxy_improvement
+acceptance:
+- The contextual candidate improves the masking proxy with less non-target movement
+  than static EQ.
+rejection:
+- The contextual candidate collapses to a static boost or becomes unstable across
+  mixes.
+required_operations:
+- read_committed_research_evidence
+- generate_deterministic_synthetic_inputs
+- calculate_declared_metrics
+- write_derived_json_csv_markdown_sha256
+network_required: false
+public_dataset_review_recommended: true
+timeout_minutes: 5
+dependency_policy: standard-library or explicitly pinned existing CIPI dependency
+  only
+allowed_output_prefixes:
+- research/runs/ARCHITECT-
+- research/knowledge_candidates/ARCHITECT-
+- research/decisions/ARCHITECT-
+forbidden_operations:
+- arbitrary_shell_from_yaml
+- production_plugin_mutation
+- adapter_registry_self_registration
+- raw_client_audio_persistence
+- secret_access
+- automatic_promote_or_confirm
+- official_repo_or_release_creation
+review_requirements:
+- Confirm the metric really tests the research question.
+- Confirm baseline and counter-hypotheses remain competitive.
+- Confirm dependencies, network access and timeout are bounded.
+- Implement the adapter separately and pass Architect/Auto Research gates before registry
+  consideration.
+implementation_status: NOT_IMPLEMENTED
+automatic_registry_promotion_allowed: false

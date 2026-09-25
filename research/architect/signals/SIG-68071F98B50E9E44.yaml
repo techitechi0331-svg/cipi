@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-68071F98B50E9E44
+source_path: research/experiments/Density/status.yaml
+kind: UNRESOLVED
+text_hash: 68071f98b50e9e44
+text: Cubase Pro 14 verification is pending.
+state: UNCLASSIFIED
+signal_class: HUMAN_GATE
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

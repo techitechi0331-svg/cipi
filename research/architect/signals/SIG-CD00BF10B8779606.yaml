@@ -1,0 +1,13 @@
+schema_version: '1.0'
+signal_id: SIG-CD00BF10B8779606
+source_path: research/experiments/MicroDouble/status.yaml
+kind: UNRESOLVED
+text_hash: cd00bf10b8779606
+text: Broader target-machine listening across additional vocal styles/settings is
+  still desirable; first target-machine 50% checkpoint is complete and was reported
+  as slightly strong but acceptable.
+state: UNCLASSIFIED
+signal_class: HUMAN_GATE
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

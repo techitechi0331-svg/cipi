@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-C7FC5C0A85C5F8F2
+source_path: research/experiments/Density/status.yaml
+kind: BLOCKERS
+text_hash: c7fc5c0a85c5f8f2
+text: Audio-quality promotion requires real-vocal AB material.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

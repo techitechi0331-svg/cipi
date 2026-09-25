@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-681EBD660506E386
+source_path: research/experiments/MicroDouble/status.yaml
+kind: UNRESOLVED
+text_hash: 681ebd660506e386
+text: Exact-mono side-only topology remains an unresolved alternative to the implemented
+  protected-center two-voice topology.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

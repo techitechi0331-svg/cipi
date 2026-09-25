@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-17B763D2F12D438A
+source_path: research/experiments/MicroDouble/status.yaml
+kind: UNRESOLVED
+text_hash: 17b763d2f12d438a
+text: Sibilance false-positive/negative performance is not yet measured on a labelled
+  multilingual singing corpus.
+state: UNCLASSIFIED
+signal_class: DATA_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-480348C295BA42A4
+source_path: research/experiments/MicroDouble/status.yaml
+kind: UNRESOLVED
+text_hash: 480348c295ba42a4
+text: Target-machine CPU behaviour is not yet recorded.
+state: UNCLASSIFIED
+signal_class: HUMAN_GATE
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

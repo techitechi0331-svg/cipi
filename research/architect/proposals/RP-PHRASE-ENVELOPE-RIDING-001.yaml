@@ -1,0 +1,43 @@
+schema_version: '1.0'
+proposal_id: RP-PHRASE-ENVELOPE-RIDING-001
+source_gap: research/architect/gaps/GAP-PHRASE-ENVELOPE-RIDING-001.yaml
+state: NEEDS_ADAPTER
+track:
+  id: ARCHITECT_PHRASE_ENVELOPE_RIDING
+  path: research/architect
+research_question: Can phrase-scale vocal level be estimated without chasing consonants,
+  breaths and short syllabic transients?
+hypothesis: A dual-timescale/contextual phrase estimator can reduce phrase-level variance
+  while preserving short-event dynamics better than a simple RMS normalizer.
+counter_hypotheses:
+- A simple bounded RMS normalizer performs equivalently after level matching.
+- Phrase estimation reduces natural macro dynamics more than it improves downstream
+  stability.
+baseline:
+- bounded_rms_normalizer
+variants:
+- dual_timescale_phrase_estimator
+metrics:
+- phrase_level_error
+- short_event_gain_movement
+- downstream_gr_variance
+acceptance:
+- Phrase error improves while short-event movement remains below the predeclared safety
+  bound.
+rejection:
+- Short-event chasing or macro-dynamic flattening exceeds the safety bound.
+pilot_adapter: null
+pilot_job_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001
+prototype_adapter: dual_timescale_phrase_level_v1
+plugin_opportunity: true
+overlap_hints:
+- Vo.Prep
+- VoxLevel
+expected_reuse: Vocal rider, prep leveling and downstream compressor stabilization.
+external_validity:
+- Pilot evidence is not a product claim.
+- Public/real vocal and host validation remain separate when applicable.
+budget:
+  max_pilot_runs: 2
+  max_formal_iterations: 5
+  max_same_failure: 2

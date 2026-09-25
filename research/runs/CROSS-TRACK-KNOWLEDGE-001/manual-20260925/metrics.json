@@ -1,0 +1,17 @@
+{
+  "candidate_records_reviewed": 32,
+  "new_cross_track_candidates": 4,
+  "formal_confirmed_promotions": 0,
+  "product_numeric_constants_promoted": 0,
+  "negative_evidence_deleted": 0,
+  "existing_schema_changes": 0,
+  "workflow_changes": 0,
+  "queue_changes": 0,
+  "cross_track_rule_min_independent_support_paths": 2,
+  "shared_candidate_levels": {
+    "detection_decision_action_separation": "LIKELY",
+    "level_normalized_character_features": "LIKELY",
+    "mechanism_separation_complexity_gate": "LIKELY",
+    "reuse_mechanism_not_calibration_constant": "LIKELY"
+  }
+}

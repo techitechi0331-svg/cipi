@@ -372,3 +372,18 @@ Main branch protection/rulesets are a security-hardening concern, not a content-
 The current CIPI architecture remains the operating baseline.
 
 This audit improves the accuracy of the current summaries, scope boundaries and negative-knowledge semantics without redesigning the Research OS or invalidating currently running research.
+
+## Compatibility blocker discovered during PR validation
+
+During this audit PR's Auto Research Gate, an unrelated decision-record defect already present on newer main was exposed:
+
+- `MICRODOUBLE-SIBILANCE-REUSE-001` confirmed review lacked `parent_decision_id`;
+- the same confirmed review retained non-empty `review_gaps`, which violates the current Decision Record contract.
+
+This was repaired separately in PR #97 and merged before this audit PR:
+- parent proposal linkage restored;
+- unresolved experiment concerns remain preserved in `revisit_if` / scope;
+- `review_gaps` is empty for the confirmed review as required.
+
+This repair changed no research conclusion and confirms the audit's compatibility principle: when validation reveals an operational contract defect, fix the smallest content record rather than redesigning the workflow or schema.
+

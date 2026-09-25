@@ -131,7 +131,7 @@ jobs:
           BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
           TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
         run: |
-          gh issue create --title "Autonomous architect ready: $TOP_GAP" --body "A bounded Research Architect pass is ready on branch `$BOT_BRANCH`. It may contain Research Gap/Proposal artifacts, at most one allowlisted pilot run and one Plugin Incubator routing decision. All local Architect/Incubator and existing CIPI research validators passed. Production mutation and automatic final promotion are prohibited."
+          gh issue create --title "Autonomous architect ready: $TOP_GAP" --body "A bounded Research Architect pass is ready on branch $BOT_BRANCH. It may contain Research Gap/Proposal artifacts, at most one allowlisted pilot run and one Plugin Incubator routing decision. All local Architect/Incubator and existing CIPI research validators passed. Production mutation and automatic final promotion are prohibited."
 
       - name: No new architect work
         if: steps.changes.outputs.has_changes != 'true'

@@ -1,0 +1,30 @@
+schema_version: '1.0'
+decision_id: VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:auto
+job_id: VO-PREP-AMOUNT-MAP-001
+source_run: research/runs/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for VO-PREP-AMOUNT-MAP-001; promotion requires
+  review.
+declared_rejection_criteria:
+- Any acceptance invariant fails.
+- Any required mapping, Amount, or input-shift case is missing.
+- Any non-finite output is produced.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions: []
+created_at: '2026-09-25T00:46:37.132300Z'
+immutable: true

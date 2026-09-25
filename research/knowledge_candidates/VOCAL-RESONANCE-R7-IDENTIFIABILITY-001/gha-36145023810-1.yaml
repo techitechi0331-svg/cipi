@@ -1,0 +1,8 @@
+claim: A paired clean/injected causal oracle can diagnose whether poor vocal-resonance
+  semantic ranking is caused primarily by missing single-view information versus candidate/label
+  alignment.
+evidence_type: HYPOTHESIS
+scope: Research-only identifiability diagnosis for vocal resonance candidate ranking;
+  paired clean reference is not available to the final plugin.
+source_run: research/runs/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1
+promotion_requested: HYPOTHESIS

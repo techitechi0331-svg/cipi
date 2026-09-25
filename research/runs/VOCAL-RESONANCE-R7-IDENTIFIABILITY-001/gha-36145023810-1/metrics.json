@@ -1,0 +1,187 @@
+{
+  "candidate_budget": 20,
+  "diagnostic_gate": {
+    "accepted": true,
+    "criteria": {
+      "20261003": {
+        "coverage_sufficient": true,
+        "oracle_gap_vs_static_gte_0_20": true,
+        "oracle_strong_given_hit_gte_0_85": true,
+        "oracle_top5_given_hit_gte_0_80": true
+      },
+      "20261013": {
+        "coverage_sufficient": true,
+        "oracle_gap_vs_static_gte_0_20": true,
+        "oracle_strong_given_hit_gte_0_85": true,
+        "oracle_top5_given_hit_gte_0_80": true
+      }
+    },
+    "meaning": "Acceptance means the audit has enough coverage to diagnose the next research direction. It is not product or knowledge promotion.",
+    "route": "SINGLE_VIEW_FEATURE_INFORMATION_GAP"
+  },
+  "experiment": "VOCAL_RESONANCE_R7_IDENTIFIABILITY_ORACLE",
+  "oracle_is_research_only": true,
+  "per_seed": {
+    "20261003": {
+      "diagnostics": {
+        "injected_candidate_rows": 640,
+        "safe_abs_delta_local_median": 0.0030180987453819474,
+        "safe_negative_new_candidate_fraction": 0.0,
+        "safe_negative_rows": 537,
+        "target_abs_delta_local_median": 0.2196879492563002,
+        "target_new_candidate_fraction": 0.3333333333333333,
+        "target_rows": 30
+      },
+      "oracle": {
+        "generator_ceiling": 0.9375,
+        "mrr": 0.5546875,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 11,
+        "strong_top5_given_generator_hit": 1.0,
+        "top1": 0.28125,
+        "top1_given_generator_hit": 0.3,
+        "top3": 0.90625,
+        "top3_given_generator_hit": 0.9666666666666667,
+        "top5": 0.9375,
+        "top5_effect_gte3": 0.9166666666666666,
+        "top5_given_generator_hit": 1.0,
+        "top5_high_f0": null
+      },
+      "oracle_C": 0.03,
+      "oracle_validation": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.4536458333333333,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.21875,
+        "top1_given_generator_hit": 0.25925925925925924,
+        "top3": 0.75,
+        "top3_given_generator_hit": 0.8888888888888888,
+        "top5": 0.78125,
+        "top5_effect_gte3": 0.875,
+        "top5_given_generator_hit": 0.9259259259259259,
+        "top5_high_f0": null
+      },
+      "prominence": {
+        "generator_ceiling": 0.9375,
+        "mrr": 0.17371686473248973,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 11,
+        "strong_top5_given_generator_hit": 0.18181818181818182,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.1875,
+        "top3_given_generator_hit": 0.2,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.16666666666666666,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      },
+      "seed": 20261003,
+      "static": {
+        "clean_false_trigger": 0.375,
+        "generator_ceiling": 0.9375,
+        "mrr": 0.17148762051287206,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 11,
+        "strong_top5_given_generator_hit": 0.36363636363636365,
+        "threshold_from_valid_95pct": 0.7941223642156156,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.125,
+        "top3_given_generator_hit": 0.13333333333333333,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.3333333333333333,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      },
+      "static_C": 0.03
+    },
+    "20261013": {
+      "diagnostics": {
+        "injected_candidate_rows": 640,
+        "safe_abs_delta_local_median": 0.0024354062854181624,
+        "safe_negative_new_candidate_fraction": 0.0,
+        "safe_negative_rows": 547,
+        "target_abs_delta_local_median": 0.24909569109995422,
+        "target_new_candidate_fraction": 0.2962962962962963,
+        "target_rows": 27
+      },
+      "oracle": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.5088848039215685,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 14,
+        "strong_top5_given_generator_hit": 1.0,
+        "top1": 0.28125,
+        "top1_given_generator_hit": 0.3333333333333333,
+        "top3": 0.78125,
+        "top3_given_generator_hit": 0.9259259259259259,
+        "top5": 0.78125,
+        "top5_effect_gte3": 1.0,
+        "top5_given_generator_hit": 0.9259259259259259,
+        "top5_high_f0": null
+      },
+      "oracle_C": 3.0,
+      "oracle_validation": {
+        "generator_ceiling": 0.75,
+        "mrr": 0.4458333333333333,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.25,
+        "top1_given_generator_hit": 0.3333333333333333,
+        "top3": 0.65625,
+        "top3_given_generator_hit": 0.875,
+        "top5": 0.65625,
+        "top5_effect_gte3": 0.7692307692307693,
+        "top5_given_generator_hit": 0.875,
+        "top5_high_f0": null
+      },
+      "prominence": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.23357676263902075,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 14,
+        "strong_top5_given_generator_hit": 0.35714285714285715,
+        "top1": 0.09375,
+        "top1_given_generator_hit": 0.1111111111111111,
+        "top3": 0.25,
+        "top3_given_generator_hit": 0.2962962962962963,
+        "top5": 0.375,
+        "top5_effect_gte3": 0.35714285714285715,
+        "top5_given_generator_hit": 0.4444444444444444,
+        "top5_high_f0": null
+      },
+      "seed": 20261013,
+      "static": {
+        "clean_false_trigger": 0.25,
+        "generator_ceiling": 0.84375,
+        "mrr": 0.22565239721900907,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "strong_hit_cases": 14,
+        "strong_top5_given_generator_hit": 0.2857142857142857,
+        "threshold_from_valid_95pct": 0.8218928113165732,
+        "top1": 0.09375,
+        "top1_given_generator_hit": 0.1111111111111111,
+        "top3": 0.21875,
+        "top3_given_generator_hit": 0.25925925925925924,
+        "top5": 0.34375,
+        "top5_effect_gte3": 0.2857142857142857,
+        "top5_given_generator_hit": 0.4074074074074074,
+        "top5_high_f0": null
+      },
+      "static_C": 1.0
+    }
+  },
+  "raw_audio_persisted": false,
+  "seeds": [
+    20261003,
+    20261013
+  ]
+}

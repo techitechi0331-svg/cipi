@@ -43,6 +43,7 @@ ADAPTERS = {
     "vocal_resonance_identifiability_oracle_v1",
     "vocal_resonance_local_patch_proxy_v1",
     "rp_masking_aware_presence_001_pilot_v1",
+    "rp_phrase_envelope_riding_001_pilot_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -2559,6 +2560,36 @@ def _peakbody_realtime_voicing_bench(
         "summary": payload["scope"],
     }
 
+
+def _phrase_envelope_riding_pilot(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "experiments" / "PhraseEnvelope"
+        / "synthetic_pilot.py"
+    )
+    completed = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=timeout_seconds,
+    )
+    payload = json.loads(completed.stdout)
+    accepted = bool(payload["acceptance_met"])
+    return {
+        "metrics": payload["metrics"],
+        "raw_files": {"measurement.csv": payload["measurement_csv"]},
+        "commands": [
+            "python research/experiments/PhraseEnvelope/synthetic_pilot.py"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "triggered_criteria": list(payload.get("triggered_criteria", [])),
+        "summary": payload["scope"],
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -2624,4 +2655,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_local_patch_proxy(repo_root, timeout_seconds)
     if name == "rp_masking_aware_presence_001_pilot_v1":
         return _masking_aware_presence_pilot(repo_root, timeout_seconds)
+    if name == "rp_phrase_envelope_riding_001_pilot_v1":
+        return _phrase_envelope_riding_pilot(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

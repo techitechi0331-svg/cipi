@@ -129,8 +129,13 @@ public:
     bool isBusesLayoutSupported(const BusesLayout& layouts) const override;
     void processBlock(juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
 
+#if defined(JUCE_FACTORY_HEADLESS_TEST)
+    juce::AudioProcessorEditor* createEditor() override { return nullptr; }
+    bool hasEditor() const override { return false; }
+#else
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override { return true; }
+#endif
 
     const juce::String getName() const override { return "__PRODUCT_NAME__"; }
     bool acceptsMidi() const override { return false; }
@@ -160,7 +165,10 @@ private:
 };
 '''
     processor_cpp = f'''#include "PluginProcessor.h"
+
+#if ! defined(JUCE_FACTORY_HEADLESS_TEST)
 #include "PluginEditor.h"
+#endif
 
 FactoryPluginAudioProcessor::FactoryPluginAudioProcessor()
     : juce::AudioProcessor(BusesProperties()
@@ -215,10 +223,12 @@ void FactoryPluginAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     }}
 }}
 
+#if ! defined(JUCE_FACTORY_HEADLESS_TEST)
 juce::AudioProcessorEditor* FactoryPluginAudioProcessor::createEditor()
 {{
     return new FactoryPluginAudioProcessorEditor(*this);
 }}
+#endif
 
 void FactoryPluginAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
 {{
@@ -372,8 +382,6 @@ void fill(juce::AudioBuffer<float>& buffer, float value)
 
 int main()
 {
-    juce::ScopedJuceInitialiser_GUI initialiseJuce;
-
     constexpr std::array<double, __SAMPLE_RATE_COUNT__> sampleRates { __SAMPLE_RATES__ };
     constexpr std::array<int, __BLOCK_SIZE_COUNT__> blockSizes { __BLOCK_SIZES__ };
 
@@ -579,12 +587,11 @@ target_sources({target}FactoryValidation
         Tests/FactoryValidation.cpp
         Source/PluginProcessor.cpp
         Source/PluginProcessor.h
-        Source/PluginEditor.cpp
-        Source/PluginEditor.h
 )
 
 target_compile_definitions({target}FactoryValidation
     PUBLIC
+        JUCE_FACTORY_HEADLESS_TEST=1
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0
@@ -592,7 +599,7 @@ target_compile_definitions({target}FactoryValidation
 
 target_link_libraries({target}FactoryValidation
     PRIVATE
-        juce::juce_audio_utils
+        juce::juce_audio_processors
         juce::juce_dsp
     PUBLIC
         juce::juce_recommended_config_flags

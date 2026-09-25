@@ -1,14 +1,8 @@
 name: Free Autonomous Research Architect
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - "automation/architect/**"
-      - "automation/incubator/**"
-      - ".github/workflows/free-autonomous-architect.yml"
   schedule:
-    - cron: "43 3,15 * * *"
+    - cron: "43 3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -21,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  discover-one-bounded-batch:
+  discover-one-bounded-wave:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -39,33 +33,37 @@ jobs:
       - name: Install pinned dependency
         run: python -m pip install PyYAML==6.0.2
 
-      - name: Discover bounded research gaps
+      - name: Validate current contracts
+        run: |
+          python tools/validate_research.py
+          python tools/validate_architect.py
+          python tools/validate_incubator.py
+
+      - name: Extract unresolved research-gap signals
+        id: signals
+        run: python automation/architect/scan_signals.py --max-signals 8 --github-output "$GITHUB_OUTPUT"
+
+      - name: Discover bounded Research Gaps
         id: discover
         run: python automation/architect/discover.py --max-gaps 3 --github-output "$GITHUB_OUTPUT"
 
-      - name: Run one allowlisted Pilot when available
-        id: pilot
+      - name: Run one allowlisted architect pilot
         if: steps.discover.outputs.top_pilot_proposal != ''
+        id: pilot
         env:
           PROPOSAL: ${{ steps.discover.outputs.top_pilot_proposal }}
         run: |
-          RUN_ID="architect-${GITHUB_SHA:0:12}"
-          python automation/architect/pilot.py --proposal "$PROPOSAL" --run-id "$RUN_ID" --github-output "$GITHUB_OUTPUT"
+          RUN_ID="gha-architect-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          python automation/architect/pilot.py --proposal "$PROPOSAL" --output-root . --run-id "$RUN_ID" --github-output "$GITHUB_OUTPUT"
 
-      - name: Route one product opportunity through Incubator
-        id: incubator
+      - name: Route one product-relevant opportunity
         if: steps.discover.outputs.top_plugin_proposal != ''
+        id: incubator
         env:
           PROPOSAL: ${{ steps.discover.outputs.top_plugin_proposal }}
-        run: python automation/incubator/discover.py --proposal "$PROPOSAL" --github-output "$GITHUB_OUTPUT"
+        run: python automation/incubator/discover.py --proposal "$PROPOSAL" --output-root . --github-output "$GITHUB_OUTPUT"
 
-      - name: Run isolated prototype only after an INCUBATE decision
-        if: steps.incubator.outputs.incubator_decision == 'INCUBATE'
-        env:
-          PLUGIN_PROPOSAL: ${{ steps.incubator.outputs.plugin_proposal_path }}
-        run: python automation/incubator/prototype.py --proposal "$PLUGIN_PROPOSAL"
-
-      - name: Validate Architect, Incubator and existing research contracts
+      - name: Validate generated evidence
         run: |
           python tools/validate_architect.py
           python tools/validate_incubator.py
@@ -75,29 +73,20 @@ jobs:
           python tools/validate_research_job.py
           python tools/validate_research.py
 
-      - name: Detect generated work and duplicate branch
-        id: changes
-        env:
-          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+      - name: Detect generated changes
+        id: changed
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "has_changes=false" >> "$GITHUB_OUTPUT"
-            echo "skip_submit=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          BOT_BRANCH="architect-bot/${TOP_GAP}/auto-v1"
-          echo "bot_branch=$BOT_BRANCH" >> "$GITHUB_OUTPUT"
-          if git ls-remote --exit-code --heads origin "$BOT_BRANCH" >/dev/null 2>&1; then
-            echo "skip_submit=true" >> "$GITHUB_OUTPUT"
+          if git status --porcelain -- research/architect research/incubator research/runs research/knowledge_candidates research/decisions | grep -q .; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
           else
-            echo "skip_submit=false" >> "$GITHUB_OUTPUT"
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit bounded Architect evidence
-        if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true'
+      - name: Commit append-only architect evidence
+        if: steps.changed.outputs.has_changes == 'true'
+        id: commit
         env:
-          BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
+          BOT_BRANCH: architect-bot/discovery/gha-${{ github.run_id }}-${{ github.run_attempt }}
           PILOT_JOB: ${{ steps.pilot.outputs.pilot_job_id }}
         run: |
           git config user.name "cipi-architect-bot"
@@ -109,30 +98,29 @@ jobs:
             git add -A "research/knowledge_candidates/$PILOT_JOB"
             git add -A "research/decisions/$PILOT_JOB"
           fi
-          git commit -m "submit autonomous architect evidence: ${{ steps.discover.outputs.top_gap_id }}"
+          git commit -m "submit autonomous research architecture wave"
           python tools/validate_architect_change_scope.py --base origin/main --head HEAD
           git push --set-upstream origin "$BOT_BRANCH"
+          echo "branch=$BOT_BRANCH" >> "$GITHUB_OUTPUT"
 
-      - name: Open Architect review PR
+      - name: Open architect evidence pull request
         id: open_pr
         continue-on-error: true
-        if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true'
+        if: steps.changed.outputs.has_changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
-          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+          BOT_BRANCH: ${{ steps.commit.outputs.branch }}
         run: |
-          gh pr create --base main --head "$BOT_BRANCH" --title "Autonomous architect evidence: $TOP_GAP" --body "Bounded zero-paid CIPI Research Architect pass. It discovered at most three gaps, ran at most one allowlisted pilot, routed at most one product opportunity through the isolated Plugin Incubator, and passed Architect/Incubator plus existing CIPI research gates. No production plug-in repository, release, adapter-registry mutation, PROMOTE or CONFIRMED action was performed."
+          gh pr create --base main --head "$BOT_BRANCH"             --title "Autonomous Research Architect discovery wave"             --body "Bounded zero-paid CIPI Research Architect wave. It extracted unresolved/blocker signals, created at most three executable-or-NEEDS_ADAPTER Research Gap/Proposal candidates, executed at most one allowlisted pilot, and routed at most one product opportunity through the Plugin Incubator. Unknown topics never execute arbitrary generated code. Production plug-in source, official repositories, releases, Cubase gates and knowledge CONFIRMED states remain review-only."
 
       - name: Create review issue when Actions PR creation is disabled
-        if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true' && steps.open_pr.outcome != 'success'
+        if: steps.changed.outputs.has_changes == 'true' && steps.open_pr.outcome != 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-          BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
-          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+          BOT_BRANCH: ${{ steps.commit.outputs.branch }}
         run: |
-          gh issue create --title "Autonomous architect ready: $TOP_GAP" --body "A bounded Research Architect pass is ready on branch `$BOT_BRANCH`. It may contain Research Gap/Proposal artifacts, at most one allowlisted pilot run and one Plugin Incubator routing decision. All local Architect/Incubator and existing CIPI research validators passed. Production mutation and automatic final promotion are prohibited."
+          gh issue create             --title "Autonomous Research Architect ready: discovery wave"             --body "A bounded Research Architect wave is available on branch $BOT_BRANCH. Review the new Research Gap Signals, Gap/Proposal candidates, optional allowlisted pilot evidence and Plugin Incubator routing. Unknown research code was not generated or executed. Production adoption remains review-only."
 
       - name: No new architect work
-        if: steps.changes.outputs.has_changes != 'true'
-        run: echo "No new bounded Research Gap or Incubator work was generated."
+        if: steps.changed.outputs.has_changes != 'true'
+        run: echo "No new bounded Research Gap, signal or Incubator evidence was generated."

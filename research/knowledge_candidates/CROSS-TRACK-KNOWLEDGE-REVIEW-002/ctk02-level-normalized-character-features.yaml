@@ -1,0 +1,5 @@
+claim: When the target is signal character rather than absolute loudness, level-normalized features can provide useful gain-invariant cues and should be evaluated alongside absolute-level features; whether they outperform absolute features is task-specific and must be measured.
+evidence_type: INFERRED
+scope: Precision-review synthesis from PeakBody crest-feature gain invariance and Vo.Prep ratio/context detector evidence. Vo.Prep provides event-specific comparative evidence, while PeakBody provides invariance evidence rather than a direct absolute-feature superiority test. Near-silence behavior, singer/language variation and event-specific context remain separate validation problems.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-REVIEW-002/manual-20260925
+promotion_requested: LIKELY

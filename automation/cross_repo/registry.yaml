@@ -1,9 +1,16 @@
 schema_version: "1.0"
 owner: techitechi0331-svg
+defaults:
+  artifact_ingest: metadata_and_text
+  auto_retry_transient: true
+  max_retries: 1
+  runner_wait_minutes: 30
 repositories:
   black76:
     repository: techitechi0331-svg/76blackCompressor
     default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
     workflows:
       final_vst3:
         file: windows-vst3-final.yml
@@ -33,6 +40,8 @@ repositories:
   vl2a:
     repository: techitechi0331-svg/VocalPrepComp
     default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
     workflows:
       build:
         file: build-windows.yml
@@ -46,6 +55,7 @@ repositories:
   pre610:
     repository: techitechi0331-svg/610
     default_ref: main
+    runner_class: github-hosted
     workflows:
       build:
         file: build-windows.yml
@@ -55,6 +65,7 @@ repositories:
   surface:
     repository: techitechi0331-svg/VocalSurfaceProcessor
     default_ref: main
+    runner_class: github-hosted
     workflows:
       vst3:
         file: windows-vst3.yml
@@ -64,6 +75,8 @@ repositories:
   vocal_rider:
     repository: techitechi0331-svg/vocal_rider
     default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
     workflows:
       research:
         file: vocal-rider-research.yml
@@ -77,6 +90,7 @@ repositories:
   doubler:
     repository: techitechi0331-svg/Vocal-One-Knob-Doubler
     default_ref: main
+    runner_class: github-hosted
     workflows:
       build:
         file: build-windows-vst3.yml
@@ -86,6 +100,7 @@ repositories:
   vo_prep:
     repository: techitechi0331-svg/Vo.Prep
     default_ref: main
+    runner_class: github-hosted
     workflows:
       build:
         file: build-windows.yml
@@ -99,6 +114,7 @@ repositories:
   control_comp:
     repository: techitechi0331-svg/VocalControlComp
     default_ref: main
+    runner_class: github-hosted
     workflows:
       build:
         file: build-windows.yml
@@ -108,6 +124,7 @@ repositories:
   master_bus:
     repository: techitechi0331-svg/MasterBusComp
     default_ref: main
+    runner_class: github-hosted
     workflows:
       build:
         file: build-windows-vst3.yml
@@ -117,6 +134,7 @@ repositories:
   vocal_resonance:
     repository: techitechi0331-svg/Vocal_resonance
     default_ref: main
+    runner_class: github-hosted
     workflows:
       real_confirm:
         file: vocalset-real-confirm.yml

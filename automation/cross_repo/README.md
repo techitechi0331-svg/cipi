@@ -8,7 +8,7 @@ Create a fine-grained GitHub token limited to the approved plug-in repositories 
 
 `CIPI_CROSS_REPO_TOKEN`
 
-The token needs permission to read Actions runs and dispatch workflows in those repositories. Do not grant release, package, administration, or unrelated repository access.
+The token needs **Actions read/write** permission on the allowlisted plug-in repositories so CIPI can read runs/jobs/artifacts, dispatch reviewed workflows, and retry only narrowly classified transient failures. Do not grant release, package, administration, contents-write, or unrelated repository access.
 
 Without this secret, the workflow stays installed but exits in safe DISABLED mode.
 
@@ -31,6 +31,10 @@ inputs: {}
 priority: 50
 attempts: 0
 max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
 reason: "Run the reviewed final VST3 validation workflow after the current CIPI measurement gate."
 ```
 
@@ -50,3 +54,16 @@ external_wait:
 ```
 
 Once the action succeeds, the scheduled orchestrator returns the job to `QUEUED` automatically.
+
+
+## Artifact intake and retry
+
+Completed CIPI-dispatched workflows are checked for GitHub artifacts. CIPI records artifact metadata and may extract only bounded text evidence from measurement/result/report/log-style artifacts. VST3 bundles, audio and other large binaries stay in GitHub Actions artifacts.
+
+Failure retry is limited to `INFRA_TRANSIENT` classifications. Build, DSP test, render, measurement, pluginval and validator failures are recorded and not blindly retried.
+
+## Runner watchdog and Global DAG
+
+Self-hosted runs that remain queued past their configured threshold become `RUNNER_WAIT`. This blocks only that dependent action.
+
+The Global DAG Orchestrator runs the operational scheduler and writes the current health view to `research/health/automation-status.md`.

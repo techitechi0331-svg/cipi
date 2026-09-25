@@ -401,6 +401,25 @@ int main()
         if constexpr (__RUN_LATENCY__)
             require(processor.getLatencySamples() == 0, "Golden Gain reports zero latency");
 
+        if constexpr (__RUN_LAYOUT__)
+        {
+            FactoryPluginAudioProcessor monoProcessor;
+            juce::AudioProcessor::BusesLayout monoApplied;
+            monoApplied.inputBuses.add(juce::AudioChannelSet::mono());
+            monoApplied.outputBuses.add(juce::AudioChannelSet::mono());
+            require(monoProcessor.setBusesLayout(monoApplied), "mono layout can be applied");
+            monoProcessor.setRateAndBufferSizeDetails(48000.0, 257);
+            monoProcessor.prepareToPlay(48000.0, 257);
+            setGainDb(monoProcessor, 0.0f);
+            juce::AudioBuffer<float> monoBuffer(1, 257);
+            fill(monoBuffer, 0.2f);
+            juce::MidiBuffer monoMidi;
+            monoProcessor.processBlock(monoBuffer, monoMidi);
+            require(isFinite(monoBuffer) && maxAbsError(monoBuffer, 0.2f) < 0.00001f,
+                    "applied mono layout processes audio correctly");
+            monoProcessor.releaseResources();
+        }
+
         if constexpr (__RUN_STATE__)
         {
             setGainDb(processor, -12.0f);
@@ -491,6 +510,30 @@ int main()
 
             processor.releaseResources();
         }
+    }
+
+    {
+        FactoryPluginAudioProcessor processor;
+        setGainDb(processor, 6.0f);
+        processor.setRateAndBufferSizeDetails(44100.0, 64);
+        processor.prepareToPlay(44100.0, 64);
+        juce::MidiBuffer midi;
+        juce::AudioBuffer<float> bufferA(2, 64);
+        fill(bufferA, 0.1f);
+        for (int i = 0; i < 64; ++i)
+            processor.processBlock(bufferA, midi);
+        require(isFinite(bufferA), "first prepare cycle remains finite");
+        processor.releaseResources();
+
+        setGainDb(processor, 0.0f);
+        processor.setRateAndBufferSizeDetails(96000.0, 257);
+        processor.prepareToPlay(96000.0, 257);
+        juce::AudioBuffer<float> bufferB(2, 257);
+        fill(bufferB, 0.2f);
+        processor.processBlock(bufferB, midi);
+        require(isFinite(bufferB) && maxAbsError(bufferB, 0.2f) < 0.00001f,
+                "same processor instance reparses sample-rate/block-size safely");
+        processor.releaseResources();
     }
 
     if constexpr (__RUN_BYPASS__)

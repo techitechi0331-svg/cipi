@@ -74,7 +74,7 @@ Boundary record:
 The current `VocalPrepComp/main@cc796d30` remains the simple production baseline. Vo.Prep transparent-compressor results are retained as transfer candidates only; they do not replace the current detector, Amount map, Character mapping, knee, operating point, or limiter by default.
 
 Immediate transfer-research order:
-1. detector transfer;
+1. detector transfer — queued as `VOPRIPRO-DETECTOR-TRANSFER-001`;
 2. ballistics transfer;
 3. Amount mapping comparison;
 4. knee / sidechain HPF only if still material;

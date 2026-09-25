@@ -23,3 +23,13 @@ Triage does not:
 - invent a new research experiment.
 
 Continuation jobs remain predeclared by the Research Job contract.
+
+## Review Brief
+
+After triage, CIPI creates an immutable bounded Review Brief for the run. The brief gathers the research question, predeclared acceptance/rejection criteria, a capped scalar metric snapshot, Knowledge Candidate scope, retained reusable findings, human-only gates, existing confirmed review state and a final precision checklist.
+
+The brief is a review accelerator only. `automatic_final_decision` is permanently false.
+
+## Legacy review lineage
+
+Old evidence branches may contain a reconstructed `auto-backfill` proposal while main contains a later confirmed REVIEW linked to the original proposal ID. Triage resolves this safely by preferring exact parent-decision matches and then, only within the same job, accepting a confirmed REVIEW for the exact same `source_run`. A review from another run is never treated as equivalent.

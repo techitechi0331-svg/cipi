@@ -131,9 +131,20 @@ jobs:
           JOB_ID: ${{ matrix.item.job_id }}
         run: python tooling/automation/review/triage.py --root evidence --review-root tooling --job-id "$JOB_ID" --github-output "$GITHUB_OUTPUT"
 
-      - name: Validate triage
+      - name: Generate bounded Review Brief
         if: steps.branch.outputs.found == 'true'
-        run: python tooling/tools/validate_review_triage.py --root evidence
+        id: brief
+        env:
+          JOB_ID: ${{ matrix.item.job_id }}
+          RUN_ID: ${{ steps.triage.outputs.run_id }}
+          TRIAGE_PATH: ${{ steps.triage.outputs.yaml_path }}
+        run: python tooling/automation/review/brief.py --root evidence --review-root tooling --job-id "$JOB_ID" --run-id "$RUN_ID" --triage-path "$TRIAGE_PATH" --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate triage and Review Brief
+        if: steps.branch.outputs.found == 'true'
+        run: |
+          python tooling/tools/validate_review_triage.py --root evidence
+          python tooling/tools/validate_review_brief.py --root evidence
 
       - name: Commit append-only triage artifacts
         if: steps.branch.outputs.found == 'true'
@@ -157,7 +168,7 @@ jobs:
           ISSUE_NUMBER: ${{ matrix.item.issue_number }}
           ROUTE: ${{ steps.triage.outputs.route }}
         run: |
-          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "evidence/${{ steps.triage.outputs.markdown_path }}"
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "evidence/${{ steps.brief.outputs.brief_markdown_path }}"
 
           case "$ROUTE" in
             PROMOTION_REVIEW) LABEL="cipi-route-promotion" ;;

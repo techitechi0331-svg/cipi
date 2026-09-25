@@ -112,9 +112,10 @@ def backfill_auto_decision(root: Path, job: dict, manifest: dict):
     write_immutable(path, content)
     return path, payload
 
-def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str):
+def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str, source_run: str | None = None):
     base = root / "research" / "decisions" / job_id
-    found = []
+    exact = []
+    lineage = []
     if base.exists():
         for path in sorted(list(base.glob("*.yaml")) + list(base.glob("*.yml"))):
             data = load_yaml(path)
@@ -122,9 +123,13 @@ def find_confirmed_review(root: Path, job_id: str, parent_decision_id: str):
                 continue
             if data.get("event_type") != "REVIEW" or data.get("review_status") != "CONFIRMED":
                 continue
-            if str(data.get("parent_decision_id", "")) != parent_decision_id:
+            item = (str(data.get("created_at", "")), str(data.get("decision_id", "")), path, data)
+            if str(data.get("parent_decision_id", "")) == parent_decision_id:
+                exact.append(item)
                 continue
-            found.append((str(data.get("created_at", "")), str(data.get("decision_id", "")), path, data))
+            if source_run and str(data.get("source_run", "")) == source_run:
+                lineage.append(item)
+    found = exact if exact else lineage
     if not found:
         return None
     found.sort()
@@ -197,10 +202,10 @@ def main() -> int:
     source_run = str(decision["source_run"])
     run_dir = root / source_run
 
-    confirmed = find_confirmed_review(root, args.job_id, str(decision["decision_id"]))
+    confirmed = find_confirmed_review(root, args.job_id, str(decision["decision_id"]), source_run)
     review_root = Path(args.review_root).resolve() if args.review_root else None
     if review_root is not None and review_root != root:
-        main_confirmed = find_confirmed_review(review_root, args.job_id, str(decision["decision_id"]))
+        main_confirmed = find_confirmed_review(review_root, args.job_id, str(decision["decision_id"]), source_run)
         if main_confirmed is not None:
             confirmed = main_confirmed
     candidate_path, candidate = find_candidate(root, args.job_id, source_run)
@@ -266,6 +271,7 @@ def main() -> int:
         "route": route,
         "final_decision_made": bool(confirmed),
         "existing_review_decision_id": str(confirmed[3].get("decision_id")) if confirmed else None,
+        "existing_review_source_run_match": bool(confirmed and str(confirmed[3].get("source_run", "")) == source_run),
         "acceptance_met": bool(manifest.get("acceptance_met")),
         "rejection_triggered": bool(manifest.get("rejection_triggered")),
         "promotion_requested": promotion_requested,
@@ -280,21 +286,50 @@ def main() -> int:
     }
 
     out_dir = root / "research" / "reviews" / args.job_id
-    yaml_path = out_dir / f"{run_id}-triage.yaml"
-    md_path = out_dir / f"{run_id}-triage.md"
-    yaml_text = yaml.safe_dump(payload, sort_keys=False, allow_unicode=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    base_triage_id = str(payload["triage_id"])
+    revision = 1
+    supersedes = None
+
+    while True:
+        suffix = "" if revision == 1 else f"-r{revision}"
+        yaml_path = out_dir / f"{run_id}-triage{suffix}.yaml"
+        md_path = out_dir / f"{run_id}-triage{suffix}.md"
+        active = dict(payload)
+        if revision > 1:
+            active["triage_id"] = f"{base_triage_id}-r{revision}"
+            active["triage_revision"] = revision
+            active["supersedes_triage_id"] = supersedes
+            active["correction_reason"] = "A newer authoritative review history changed or clarified deterministic routing; prior triage remains preserved."
+        yaml_text = yaml.safe_dump(active, sort_keys=False, allow_unicode=True)
+
+        if yaml_path.exists():
+            existing = load_yaml(yaml_path)
+            if existing == active:
+                payload = active
+                break
+            if isinstance(existing, dict):
+                supersedes = str(existing.get("triage_id", "")) or supersedes
+            revision += 1
+            continue
+
+        payload = active
+        write_immutable(yaml_path, yaml_text)
+        break
 
     human_lines = "\n".join(f"- {x}" for x in required_human_gates) or "- none explicitly declared by the job"
     signal_lines = "\n".join(f"- {x}" for x in downstream_signals) or "- none detected in the track status"
     reason_lines = "\n".join(f"- {x}" for x in reasons)
     gap_lines = "\n".join(f"- {x}" for x in review_gaps) or "- none"
+    revision_line = f"- Triage revision: **{revision}**\n" if revision > 1 else ""
+    supersedes_line = f"- Supersedes: `{payload.get('supersedes_triage_id')}`\n" if revision > 1 else ""
     md_text = f"""# CIPI Automated Review Triage
 
 <!-- cipi-review-triage:v1 -->
 
 - Job: `{args.job_id}`
 - Run: `{run_id}`
-- Candidate class: **{candidate_class}**
+{revision_line}{supersedes_line}- Candidate class: **{candidate_class}**
 - Routing: **{route}**
 - Final decision made: **{str(bool(confirmed)).lower()}**
 - Promotion requested: **{promotion_requested or 'none'}**
@@ -324,7 +359,6 @@ def main() -> int:
 This is deterministic triage only. It does not PROMOTE, ARCHIVE or finally REJECT research, and it does not approve a product release.
 """
 
-    write_immutable(yaml_path, yaml_text)
     write_immutable(md_path, md_text)
 
     output_github(args.github_output, {
@@ -333,6 +367,8 @@ This is deterministic triage only. It does not PROMOTE, ARCHIVE or finally REJEC
         "yaml_path": yaml_path.relative_to(root).as_posix(),
         "markdown_path": md_path.relative_to(root).as_posix(),
         "reviewed": "true" if confirmed else "false",
+        "run_id": run_id,
+        "triage_revision": str(revision),
     })
     print(f"{candidate_class} -> {route}: {md_path.relative_to(root).as_posix()}")
     return 0

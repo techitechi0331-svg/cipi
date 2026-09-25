@@ -373,3 +373,67 @@ Required outputs:
 - feature-family separability diagnostics.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.7 — Identifiability / Causal Oracle Review
+
+Run: `VOCAL-RESONANCE-R7-IDENTIFIABILITY-001 / gha-36145023810-1`
+
+## MEASURED
+
+Seed 20261003:
+- generator ceiling: 93.75%
+- static conditional Top-5: 26.67%
+- static strong-effect conditional Top-5: 36.36%
+- oracle conditional Top-5: 100.0%
+- oracle strong-effect conditional Top-5: 100.0%
+
+Seed 20261013:
+- generator ceiling: 84.375%
+- static conditional Top-5: 40.74%
+- static strong-effect conditional Top-5: 28.57%
+- oracle conditional Top-5: 92.59%
+- oracle strong-effect conditional Top-5: 100.0%
+
+Causal-delta diagnostics:
+- target median absolute local-score delta: 0.2197 / 0.2491
+- safe-negative median absolute local-score delta: 0.0030 / 0.0024
+- target new-candidate fraction: 33.33% / 29.63%
+- safe-negative new-candidate fraction: 0% / 0%
+
+## DECISION
+
+Diagnostic route:
+**SINGLE_VIEW_FEATURE_INFORMATION_GAP**
+
+Candidate discovery is not the primary blocker for the covered cases. When a research-only paired clean reference is available, candidate ranking becomes near-ceiling conditional on generator hit.
+
+The current production-feasible single-view feature set does not recover enough of that information.
+
+## Important scope limit
+
+The paired clean/injected oracle is research-only and cannot be deployed in the final plugin.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.8 — Single-View Causal Proxy / Local Patch Context.**
+
+Test bounded deployable feature families such as:
+- local 2D spectro-temporal patch contrast;
+- multi-scale spectral curvature;
+- shoulder/asymmetry shape;
+- candidate-vs-broad-envelope residual at several bandwidths;
+- local temporal stationarity/covariance;
+- within-excerpt contextual percentiles.
+
+Requirements:
+- no clean reference at inference;
+- compare against frozen static R2 baseline;
+- quantify gap to the R7 oracle ceiling;
+- use both predeclared seeds;
+- preserve external clean-negative evaluation;
+- do not promote seed-specific gains.
+
+No production suppressor or VST3 is authorized.

@@ -516,3 +516,28 @@ Real-vocal scope-containment AB at DOUBLE 50%:
 - injected mono-minus-stereo delta: **0.0001024 dB**.
 
 Interpretation remains PROVISIONAL: objective integration safety is supported, but target-machine subjective naturalness and Cubase verification of this v0.4 build remain open.
+
+
+## Review — MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001
+
+CIPI run `gha-36155283203-1` passed the evidence-reuse gate.
+
+Review decision: **ITERATE — authorize augment-only product experiment**.
+
+The existing generic transient detector remains mandatory. The Vo.Prep-derived plosive-context probability may only be evaluated as an auxiliary context signal for stronger/earlier protection of P/B-like events.
+
+The following risks remain explicit:
+
+- growl onset exceeded the source activation threshold (0.83 vs 0.75);
+- the candidate is not authorized to replace generic transient detection;
+- no target-machine listening evidence exists for the augmented MicroDouble;
+- no labelled multilingual plosive corpus exists for the product context.
+
+The product experiment must therefore compare current generic transient baseline against baseline + bounded plosive-context augmentation with fixed false-positive and scope-containment gates before any integration decision.
+
+
+## Transient Context necessity gate queued
+
+Private product Actions could not start the product-side necessity workflow (jobs failed before any step/log was created), so no DSP result is inferred from those infrastructure failures.
+
+The necessity experiment is reproduced inside CIPI with the exact current generic transient equations and the Vo.Prep plosive-context equations. Research Job `MICRODOUBLE-TRANSIENT-NECESSITY-001` decides whether extra P/B context is justified at all before additional product complexity is introduced.

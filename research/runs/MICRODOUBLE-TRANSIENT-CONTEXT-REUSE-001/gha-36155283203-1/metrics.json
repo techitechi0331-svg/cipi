@@ -1,0 +1,13 @@
+{
+  "baseline_contextual_evidence_gap": true,
+  "baseline_generic_transient_must_remain": true,
+  "candidate_body_region_mean_movement_db": 0.2,
+  "candidate_context_separation_supported": true,
+  "candidate_fry_max_probability": 0.69,
+  "candidate_growl_onset_max_probability": 0.83,
+  "candidate_plosive_burst_max_probability": 0.96,
+  "candidate_processing_bounded": true,
+  "downstream_compressor_proxy_supported": true,
+  "known_growl_false_positive_risk_retained": true,
+  "snapshot_checksum_ok": true
+}

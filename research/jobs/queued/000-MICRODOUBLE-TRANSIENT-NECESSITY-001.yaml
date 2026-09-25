@@ -1,0 +1,75 @@
+schema_version: "1.0"
+job_id: MICRODOUBLE-TRANSIENT-NECESSITY-001
+state: QUEUED
+track:
+  id: MICRODOUBLE_01
+  path: research/experiments/MicroDouble
+research_question: "Does the current MicroDouble generic transient detector leave enough controlled P/B burst coverage unprotected to justify adding a specialised plosive-context augmentation experiment?"
+hypothesis: "The generic detector will detect the P/B onset but cover less than 70% of the 120 ms controlled burst, while the Vo.Prep-derived context detector will strongly identify the burst and preserve the declared negative stress separations."
+counter_hypotheses:
+  - "The generic transient detector already covers at least 70% of the controlled P/B burst, so augmentation is unnecessary complexity."
+  - "The specialist context detector fails the declared low-vowel/proximity/fry separation checks."
+  - "The specialist context detector also fires on the bright consonant case, making P/B specificity too weak."
+baseline:
+  - MicroDouble v0.4 generic transient detector equations at product commit ee5725fa33b9b8ed0637575a86903d4c6bd0bd73
+variants:
+  - Vo.Prep-derived plosive-context detector used only as a measurement context
+metrics:
+  - plosive_generic_peak
+  - plosive_generic_occupancy_pct
+  - plosive_generic_mean
+  - plosive_context_peak
+  - low_vowel_context_peak
+  - proximity_context_peak
+  - fry_context_peak
+  - growl_context_peak
+  - bright_generic_peak
+  - bright_context_peak
+  - augmentation_needed_by_declared_gate
+acceptance:
+  - "Generic plosive peak must be at least 0.50, proving baseline onset detection exists."
+  - "Generic plosive event occupancy above 0.50 must be below 70 percent; otherwise augmentation is unnecessary."
+  - "Plosive-context peak on the controlled burst must be at least 0.90."
+  - "Low-vowel and proximity context peaks must each be at most 0.40."
+  - "Fry context peak must remain below 0.75."
+  - "Growl context peak must remain at or above 0.75, preserving the known false-positive risk explicitly."
+  - "Bright consonant generic transient peak must be at least 0.70."
+  - "Bright consonant plosive-context peak must remain below 0.75."
+rejection:
+  - "Any declared acceptance condition fails."
+  - "The current generic detector already provides at least 70 percent controlled burst coverage."
+  - "The known growl false-positive risk is omitted."
+max_runs: 1
+timeout_minutes: 3
+random_seed: 20260926
+experiment_adapter: microdouble_transient_necessity_v1
+allowed_operations:
+  - deterministic_model_simulation
+  - write_research_evidence
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: "A specialised plosive-context augmentation should only be explored if the current generic transient detector shows a measurable P/B burst-coverage gap under the fixed necessity protocol."
+  evidence_type: MEASURED
+  scope: "Deterministic synthetic necessity protocol only; no product integration or subjective claim."
+  promotion_requested: PROVISIONAL
+review_policy:
+  required_human_gates:
+    - Human review before any augment-only candidate implementation.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001
+  related_decisions:
+    - "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:review-01"

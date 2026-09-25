@@ -1,0 +1,31 @@
+schema_version: '1.0'
+triage_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:triage-v1
+job_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001
+run_id: gha-36155951333-1
+source_run: research/runs/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1
+source_decision_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:auto
+source_decision_path: research/decisions/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-auto.yaml
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R8-LOCAL-PATCH-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1.yaml
+candidate_class: REJECT_CANDIDATE
+route: REJECTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: false
+rejection_triggered: true
+promotion_requested: HYPOTHESIS
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+required_human_gates: []
+downstream_gate_signals: []
+reasons:
+- The automated proposal is REJECT; final rejection still requires review authority.
+recommended_action: Review the triggered rejection criteria, retained findings, reusable
+  findings and revisit conditions; confirm or supersede with a new REVIEW decision.
+created_at: '2026-09-25T15:55:27.591080Z'
+triage_version: '1.0'
+immutable: true

@@ -47,6 +47,13 @@ adapters:
     network_required: false
     purpose: "Gate whether the Black76 diagnostic linear full-wave detector plus per-ratio gain/bias can reproduce onset and low/mid/deep static-ratio curvature against committed supplemental evidence."
 
+  black76_detector_curvature_compare_v1:
+    tracks:
+      - 1176_FAMILY_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Gate whether one shared superlinear detector power exponent plus per-ratio gain/bias materially and sufficiently improves Black76 static-ratio curvature over the gamma=1 diagnostic baseline."
+
   vocal_resonance_motion_coherence_v1:
     tracks:
       - VOCAL_RESONANCE_FORMAL

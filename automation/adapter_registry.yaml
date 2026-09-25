@@ -230,3 +230,10 @@ adapters:
     purpose: "Reproduce the current MicroDouble generic transient detector and the Vo.Prep plosive-context detector on deterministic stress signals to decide whether augment-only context is necessary before adding product complexity."
 
 # queue-trigger: VO-PREP-AMOUNT-R2-001
+
+  voprep_amount_mapping_r3_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Run leak-free Vo.Prep Amount Revision 3 on streaming VocalSet with disjoint singer selection/final-holdout splits and unchanged product ripple gate."

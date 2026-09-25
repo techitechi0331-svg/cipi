@@ -209,3 +209,56 @@ Current stage now advances to **Phase 02 baseline measurement of the existing
 T4 / sidechain / Peak Reduction / COMP-LIMIT subsystem**.
 
 No optical/sidechain production constants are yet approved for change.
+
+
+## 2026-09-25 Phase 02 exact current-engine baseline
+
+Status: **MEASURED / hard correctness gate PASS**.
+
+Product source:
+- repo: `techitechi0331-svg/VocalPrepComp`
+- branch: `research/vl2a-phase02-t4-sidechain-baseline`
+- measured SHA: `76d84dbccc9339348c7fd2a2b0e456e49f7285e9`
+- workflow run: `36084297057`
+- artifact id: `10842459304`
+- artifact digest:
+  `sha256:2f7698d1353dcf131afd4be06c5778036be558c9f9a2ce1a552e6503300733e8`
+
+Key measured facts:
+- PR0: 0 dB GR in both COMP and LIMIT across the sweep.
+- COMP / -18 dBFS / PR80: 2.9216 dB GR.
+- COMP / -12 dBFS / PR75: 5.1614 dB GR.
+- COMP / -6 dBFS / PR100: 14.7671 dB GR.
+- LIMIT / -6 dBFS / PR100: 16.1580 dB GR.
+- LIMIT / 0 dBFS / PR100: 22.1558 dB GR.
+- 60 ms retained GR after 0.1..15 s exposure:
+  47.47% .. 53.49%.
+- representative 44.1..192 kHz GR spread:
+  about 0.014 dB.
+- sidechain frequency sensitivity at -12 dBFS / PR75:
+  about 5.11..5.16 dB GR from 100 Hz to 15 kHz, confirming the present
+  factory-flat emphasis implementation.
+
+Static I/O slope diagnostic:
+- PR100 COMP implied ratio rises from ~1.45:1 at the lower step to ~4.48:1
+  in the strongest measured step.
+- PR100 LIMIT reaches ~7.81:1 before the final step effectively becomes
+  horizontal under the study's ratio clamp.
+- therefore COMP/LIMIT topology is meaningfully separated and should not be
+  rewritten merely because equal-input GR values initially looked similar.
+
+Exact Moore-style reference-condition clue:
+- current VL2A at -18 dBFS / about 6 dB GR / 1 kHz produces only a few
+  hundredths of a percent THD.
+- this is far below the 2026 six-unit hardware measurements under the same
+  nominal +4 dBu / 6 dB GR condition.
+
+Engineering interpretation:
+- Peak Reduction calibration: **KEEP for now**.
+- current release trajectory: **KEEP for now**.
+- COMP/LIMIT topology: **KEEP for now**.
+- sample-rate behavior: **KEEP**.
+- active-compression nonlinear coloration: **priority research gap**.
+- R37 / sidechain emphasis remains a later dedicated gate.
+
+No production DSP constant was changed by Phase 02.

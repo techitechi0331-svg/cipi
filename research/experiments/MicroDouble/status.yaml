@@ -26,7 +26,7 @@ completed:
   - measurement
 
 unresolved:
-  - v0.3 requires target-machine subjective listening on the user's own vocal material.
+  - Broader target-machine listening across additional vocal styles/settings is still desirable; first target-machine 50% checkpoint is complete and was reported as slightly strong but acceptable.
   - v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline render and latency-compensation confirmation.
   - Exact-mono side-only topology remains an unresolved alternative to the implemented protected-center two-voice topology.
   - Sibilance false-positive/negative performance is not yet measured on a labelled multilingual singing corpus.
@@ -35,7 +35,7 @@ unresolved:
 
 next_stage: audio_ab
 why_next: "v0.3 product core, Windows VST3/pluginval, detector-corpus and objective real-vocal gates pass; remaining release-critical evidence is target-host subjective/Cubase verification and broader listening diversity."
-next_confirmation: "Whether public DOUBLE 50% is a natural lead-vocal default on target material while 75–100% remains useful for stronger doubles, without audible phase, consonant, mud or transport artifacts."
+next_confirmation: "Whether the current acceptable-but-slightly-strong 50% midpoint remains robust across additional target vocals, while 75–100% stays useful for stronger doubles and Cubase host behavior remains clean."
 
 blockers:
   - "Final release evidence requires Cubase Pro 14 and target-machine listening."

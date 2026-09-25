@@ -1,0 +1,48 @@
+{
+  "schema": "peakbody-contextual-noise-guard-private-01",
+  "active_counts": [9900, 9665, 9876, 9951],
+  "bright_voiced_reference_count": 0,
+  "current": {
+    "noise_count": 246,
+    "noise_median": 0.4926222216898596,
+    "noise_p10": 0.3891791967429558,
+    "noise_p90": 0.6864908499598067,
+    "low_count": 11969,
+    "low_median": 1.0,
+    "low_p10": 1.0,
+    "body_count": 10612,
+    "body_mean_abs_delta": 0.0,
+    "pairwise_correlation_median": 0.9042047987281352
+  },
+  "simple_veto": {
+    "noise_count": 246,
+    "noise_median": 0.29589760355423367,
+    "noise_p10": 0.25,
+    "noise_p90": 0.593857593232463,
+    "low_count": 11969,
+    "low_median": 1.0,
+    "low_p10": 1.0,
+    "body_count": 10612,
+    "body_mean_abs_delta": 0.0,
+    "pairwise_correlation_median": 0.899241549174566,
+    "context_probability_noise_median": 0.5577882201370306
+  },
+  "context_veto": {
+    "noise_count": 246,
+    "noise_median": 0.29589760355423367,
+    "noise_p10": 0.25,
+    "noise_p90": 0.5898186279805879,
+    "low_count": 11969,
+    "low_median": 1.0,
+    "low_p10": 0.9997588320771028,
+    "body_count": 10612,
+    "body_mean_abs_delta": 0.0,
+    "pairwise_correlation_median": 0.9066346674947594,
+    "context_probability_noise_median": 0.5577882201370306
+  },
+  "private_simple_pass": true,
+  "private_context_safety_pass": true,
+  "private_context_incremental_noise_improvement": 0.0,
+  "private_context_complexity_justified": false,
+  "privacy": "aggregate non-reversible metrics only"
+}

@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "has_job=${{ steps.select.outputs.has_job }}"
           echo "work_steal=${{ steps.select.outputs.work_steal }}"
-          echo "blocked=${{ steps.select.outputs.skipped_blocked }} dependency=${{ steps.select.outputs.skipped_dependency }} claimed=${{ steps.select.outputs.skipped_claimed }}"
+          echo "blocked=${{ steps.select.outputs.skipped_blocked }} dependency=${{ steps.select.outputs.skipped_dependency }} claimed=${{ steps.select.outputs.skipped_claimed }}"\n          echo "blocked_jobs=${{ steps.select.outputs.blocked_jobs }}"\n          echo "dependency_jobs=${{ steps.select.outputs.dependency_jobs }}"\n          echo "claimed_jobs=${{ steps.select.outputs.claimed_jobs }}"\n          echo "blocked_jobs=${{ steps.select.outputs.blocked_jobs }}"\n          echo "dependency_jobs=${{ steps.select.outputs.dependency_jobs }}"\n          echo "claimed_jobs=${{ steps.select.outputs.claimed_jobs }}"
 
       - name: Install pinned scientific stack when required
         if: steps.select.outputs.has_job == 'true' && (startsWith(steps.select.outputs.job_id, 'VOCAL-RESONANCE') || startsWith(steps.select.outputs.job_id, 'VO-PREP-AMOUNT-R') || startsWith(steps.select.outputs.job_id, 'VO-PREP-SC-HPF'))

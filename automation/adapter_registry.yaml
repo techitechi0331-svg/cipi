@@ -271,3 +271,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Compare the rejected R3 fixed-offset Amount baseline against an explicit-Learn one-time Threshold solver on fresh singer-disjoint VocalSet cohorts; passing authorizes red-team only."
+
+  vocal_resonance_raw_patch_sufficiency_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Audit whether in-memory candidate-centered raw 2D local-residual patches contain deployable single-view resonance information discarded by hand-crafted summaries."

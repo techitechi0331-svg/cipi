@@ -8,6 +8,14 @@ ROOT=Path(__file__).resolve().parents[2]
 def norm(text:str)->str:
     return re.sub(r"\s+"," ",text.strip())
 
+def classify_signal(text:str)->str:
+    low=text.lower()
+    if any(token in low for token in ("cubase","subjective","listening","target-machine","real-host","real host","windows host")):
+        return "HUMAN_GATE"
+    if any(token in low for token in ("corpus","dataset","labelled","labeled","language","japanese","korean","public vocal")):
+        return "DATA_GAP"
+    return "RESEARCH_GAP"
+
 def main()->int:
     p=argparse.ArgumentParser()
     p.add_argument("--root",default=str(ROOT))
@@ -45,6 +53,7 @@ def main()->int:
             "text_hash":sid[4:].lower(),
             "text":text,
             "state":"UNCLASSIFIED",
+            "signal_class":classify_signal(text),
             "executable":False,
             "note":"Gap signal only. It may seed a future reviewed topic/proposal but cannot execute code."
         }

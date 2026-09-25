@@ -53,9 +53,17 @@ jobs:
         run: |
           rm -rf /tmp/cipi-signal-smoke
           mkdir -p /tmp/cipi-signal-smoke
-          python automation/architect/scan_signals.py --root /tmp/cipi-signal-smoke --max-signals 2
+          python automation/architect/scan_signals.py --root /tmp/cipi-signal-smoke --max-signals 20
           python tools/validate_architect.py --root /tmp/cipi-signal-smoke
           test "$(find /tmp/cipi-signal-smoke/research/architect/signals -name '*.yaml' | wc -l)" -ge 1
+          python automation/architect/discover.py --output-root /tmp/cipi-signal-smoke --max-gaps 10
+          test -f /tmp/cipi-signal-smoke/research/architect/gaps/GAP-BREATH-EVENT-DETECTION-001.yaml
+          python - <<'PY'
+          import yaml
+          p=yaml.safe_load(open("/tmp/cipi-signal-smoke/research/architect/gaps/GAP-BREATH-EVENT-DETECTION-001.yaml",encoding="utf-8"))
+          assert p["unresolved_signal_count"] >= 1
+          print("signal-pressure discovery: PASS")
+          PY
 
       - name: Smoke Research Gap discovery and Pilot
         run: |

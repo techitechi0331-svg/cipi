@@ -1,0 +1,153 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOCAL-RESONANCE-R10-CLEAN-PRIOR-001:gha-36177223221-1:review-brief-v1
+job_id: VOCAL-RESONANCE-R10-CLEAN-PRIOR-001
+run_id: gha-36177223221-1
+source_run: research/runs/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-triage.yaml
+triage_id: VOCAL-RESONANCE-R10-CLEAN-PRIOR-001:gha-36177223221-1:triage-v1
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R10-CLEAN-PRIOR-001.yaml
+research_question: Can a lightweight normative prior learned only from clean training
+  singers provide deployable single-view information that materially closes the R7
+  causal-oracle ranking gap without increasing independent clean-vocal false triggers?
+hypothesis: Across both predeclared seeds, adding clean-trained frequency-conditioned
+  robust rarity features to the frozen static candidate representation will improve
+  conditional Top-5 by at least 0.08, close at least 15 percent of the R7 oracle gap,
+  preserve strong-effect conditional Top-5 within 0.05, and not worsen external clean
+  false-trigger by more than 0.025.
+counter_hypotheses:
+- Natural singer-to-singer spectral diversity is too large for a lightweight normative
+  prior to add stable information.
+- The prior learns corpus-specific normality and worsens unseen-singer clean false
+  triggers.
+- The R7 information gap requires an actual within-source counterfactual and cannot
+  be approximated by population priors.
+acceptance_criteria:
+- 'for each seed: prior is fit only on predeclared training singers'
+- 'for each seed: conditional Top-5 >= static + 0.08'
+- 'for each seed: R7 oracle gap closure >= 0.15'
+- 'for each seed: strong-effect conditional Top-5 >= static - 0.05'
+- 'for each seed: external clean false-trigger <= static + 0.025'
+- 'for each seed: generator ceiling >= 0.80'
+rejection_criteria:
+- any seed has prior singer leakage
+- any seed conditional Top-5 improvement < 0.08
+- any seed oracle gap closure < 0.15
+- any seed strong-effect conditional Top-5 regresses by more than 0.05
+- any seed external clean false-trigger worsens by more than 0.025
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 56117ebdcfcd505e8a2a364bb5a74dbfe9a43d2a
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: candidate_budget
+  value: 20
+- path: experiment
+  value: VOCAL_RESONANCE_R10_CLEAN_NORMATIVE_PRIOR
+- path: per_seed.20261003.combined_C
+  value: 0.03
+- path: per_seed.20261003.combined_test.generator_ceiling
+  value: 0.9375
+- path: per_seed.20261003.combined_test.mrr
+  value: 0.17700546934897748
+- path: per_seed.20261003.combined_test.n_cases
+  value: 32
+- path: per_seed.20261003.combined_test.n_high_f0_cases
+  value: 0
+- path: per_seed.20261003.combined_test.strong_hit_cases
+  value: 11
+- path: per_seed.20261003.combined_test.strong_top5_given_generator_hit
+  value: 0.36363636363636365
+- path: per_seed.20261003.combined_test.top1
+  value: 0.03125
+- path: per_seed.20261003.combined_test.top1_given_generator_hit
+  value: 0.03333333333333333
+- path: per_seed.20261003.combined_test.top3
+  value: 0.15625
+- path: per_seed.20261003.combined_test.top3_given_generator_hit
+  value: 0.16666666666666666
+- path: per_seed.20261003.combined_test.top5
+  value: 0.25
+- path: per_seed.20261003.combined_test.top5_effect_gte3
+  value: 0.3333333333333333
+- path: per_seed.20261003.combined_test.top5_given_generator_hit
+  value: 0.26666666666666666
+- path: per_seed.20261003.combined_test.top5_high_f0
+  value: null
+- path: per_seed.20261003.combined_validation.generator_ceiling
+  value: 0.84375
+- path: per_seed.20261003.combined_validation.mrr
+  value: 0.2652990206710214
+- path: per_seed.20261003.combined_validation.n_cases
+  value: 32
+- path: per_seed.20261003.combined_validation.n_high_f0_cases
+  value: 0
+- path: per_seed.20261003.combined_validation.top1
+  value: 0.125
+- path: per_seed.20261003.combined_validation.top1_given_generator_hit
+  value: 0.14814814814814814
+- path: per_seed.20261003.combined_validation.top3
+  value: 0.28125
+- path: per_seed.20261003.combined_validation.top3_given_generator_hit
+  value: 0.3333333333333333
+- path: per_seed.20261003.combined_validation.top5
+  value: 0.4375
+- path: per_seed.20261003.combined_validation.top5_effect_gte3
+  value: 0.5625
+- path: per_seed.20261003.combined_validation.top5_given_generator_hit
+  value: 0.5185185185185185
+- path: per_seed.20261003.combined_validation.top5_high_f0
+  value: null
+- path: per_seed.20261003.conditional_top5_gap_closure
+  value: 0.0
+- path: per_seed.20261003.external_clean_combined_fpr
+  value: 0.225
+- path: per_seed.20261003.external_clean_n
+  value: 40
+knowledge_candidate:
+  claim: Singer-disjoint clean-vocal normative priors may provide deployable context
+    for distinguishing unusual candidate resonances from ordinary vocal spectral structure
+    without a paired clean reference.
+  evidence_type: HYPOTHESIS
+  scope: Deployable vocal-resonance semantic ranking with a frozen offline statistical
+    prior.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOCAL-RESONANCE-R10-CLEAN-PRIOR-001:gha-36177223221-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

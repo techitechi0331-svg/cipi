@@ -119,6 +119,7 @@ add_test(NAME {target}.DSPMatrix COMMAND {target}FactoryTests)
     processor_h = r'''#pragma once
 
 #include <JuceHeader.h>
+#include <array>
 #include "GoldenGainDSP.h"
 
 class FactoryPluginAudioProcessor final : public juce::AudioProcessor

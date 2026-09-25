@@ -644,3 +644,97 @@ Requirements:
 - reject seed-specific gains.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.11 — Self-Counterfactual Inpainting Review
+
+Run: `VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001 / gha-36179619006-1`
+
+## MEASURED
+
+### Seed 20261003
+Frozen static:
+- conditional Top-5: 26.67%
+- strong-effect conditional Top-5: 36.36%
+- external clean false-trigger: 17.5%
+
+Static + self-counterfactual:
+- conditional Top-5: 26.67%
+- strong-effect conditional Top-5: 27.27%
+- external clean false-trigger: 30.0%
+- R7 oracle-gap closure: 0%
+
+Simple inpaint delta:
+- conditional Top-5: 23.33%
+- strong-effect conditional Top-5: 18.18%
+- external clean false-trigger: 20.0%
+
+### Seed 20261013
+Frozen static:
+- conditional Top-5: 40.74%
+- strong-effect conditional Top-5: 28.57%
+- external clean false-trigger: 25.0%
+
+Static + self-counterfactual:
+- conditional Top-5: 37.04%
+- strong-effect conditional Top-5: 28.57%
+- external clean false-trigger: 37.5%
+- R7 oracle-gap closure: -7.14%
+
+Simple inpaint delta:
+- conditional Top-5: 37.04%
+- strong-effect conditional Top-5: 35.71%
+- external clean false-trigger: 20.0%
+
+### Proxy-vs-oracle diagnostics
+
+Best observed correlations with absolute R7 true local-score delta were weak:
+- cf_delta_local_s4: about 0.20
+- cf_delta_local_s8: about 0.20–0.21
+- raw-boost proxies: about -0.10 to +0.18
+- log-delta proxies: about -0.08 to -0.09
+
+## DECISION
+
+**REJECT the tested same-observation spectral-inpainting feature family.**
+
+It failed ranking, strong-effect, oracle-gap and clean-negative requirements.
+
+The result is also diagnostic:
+the hand-crafted counterfactual summary only weakly correlates with the R7 paired causal delta.
+
+## Research route update
+
+R8 through R11 have now tested four different hand-crafted deployable single-view information sources:
+1. local 2D patch summaries;
+2. fixed-Hz transfer consistency;
+3. singer-disjoint population normality;
+4. same-observation spectral inpainting.
+
+None closed the R7 information gap robustly.
+
+Before inventing another summary feature, test whether the *raw candidate-aligned local spectro-temporal field* contains separability that these summaries discard.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.12 — Raw 2D Patch Sufficiency Audit.**
+
+Use a fixed-size, candidate-centered, loudness-normalized local-residual patch available from the current observation only.
+
+Compare:
+- frozen static R2 baseline;
+- raw-patch linear/logistic model;
+- static + raw-patch linear model;
+- tiny shallow nonlinear patch model as a diagnostic upper bound only.
+
+Required:
+- singer-disjoint split;
+- both predeclared seeds;
+- independent external-clean false-trigger;
+- R7 oracle-gap closure;
+- no raw patch persistence in GitHub artifacts;
+- no deep/model-complexity product claim from a diagnostic pass.
+
+No production suppressor or VST3 is authorized.

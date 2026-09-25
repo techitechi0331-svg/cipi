@@ -41,6 +41,7 @@ milestones:
   - R8 local-patch single-view proxy failed its predeclared two-seed retention gate and is rejected.
   - R9 transfer-consistency single-view proxy failed its predeclared two-seed retention gate and is rejected.
   - R10 singer-disjoint clean normative-prior proxy failed its predeclared two-seed retention gate and is rejected.
+  - R11 same-observation self-counterfactual spectral-inpainting proxy failed its predeclared two-seed retention gate and is rejected.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -66,11 +67,15 @@ unresolved:
   - R10 seed 20261013 improved conditional Top-5 only from 40.74 to 44.44 percent and strong-effect conditional Top-5 from 28.57 to 42.86 percent, while worsening external clean false-trigger from 25.0 to 32.5 percent.
   - R10 oracle-gap closure was 0 percent and 7.14 percent, below the predeclared 15-percent minimum; prior-only clean false-trigger was 50 percent on both seeds.
   - Singer-disjoint population normality is therefore not retained as a deployable information source for this scope.
+  - R11 seed 20261003 left conditional Top-5 unchanged at 26.67 percent, regressed strong-effect conditional Top-5 from 36.36 to 27.27 percent, and worsened external clean false-trigger from 17.5 to 30.0 percent.
+  - R11 seed 20261013 regressed conditional Top-5 from 40.74 to 37.04 percent and worsened external clean false-trigger from 25.0 to 37.5 percent.
+  - R11 proxy-to-true-delta Spearman correlations were only about 0.18 to 0.21 for the best local-delta proxies, so simple spectral inpainting did not approximate the R7 paired causal signal sufficiently.
+  - Hand-crafted single-view summaries from R8 through R11 are therefore exhausted as the current primary route.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R7 showed that paired causal deltas contain enough information, while R8 raw local geometry, R9 fixed-Hz transfer consistency, and R10 singer-disjoint population priors all failed to recover that information robustly. The next bounded question is whether a same-observation self-counterfactual reconstruction can approximate the missing clean-reference delta by inpainting the candidate band from its surrounding spectrum."
-next_confirmation: "Whether a deployable single-view spectral-inpainting counterfactual produces proxy deltas that improve conditional Top-5 and close a material fraction of the R7 oracle gap on both seeds without worsening independent clean-vocal false triggers."
+why_next: "R7 proved that the candidate objects are identifiable with paired causal information, while four different hand-crafted single-view proxy families (R8 local patch summaries, R9 transfer consistency, R10 population prior, R11 self-counterfactual inpainting) all failed robustly. The next bounded question is whether candidate-aligned raw spectro-temporal patches contain useful single-view information that the summaries discarded."
+next_confirmation: "Whether a fixed-size normalized raw 2D local-residual patch can materially improve conditional Top-5 across both seeds under a simple linear classifier, and whether a tiny nonlinear diagnostic upper bound shows additional separability without worsening independent clean-vocal false triggers."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

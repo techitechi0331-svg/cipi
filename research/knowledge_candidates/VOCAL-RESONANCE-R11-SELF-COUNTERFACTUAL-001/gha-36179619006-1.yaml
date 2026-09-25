@@ -1,0 +1,6 @@
+claim: Same-observation spectral inpainting may provide a deployable self-counterfactual
+  proxy for the causal resonance delta revealed by a paired clean/injected oracle.
+evidence_type: HYPOTHESIS
+scope: Vocal resonance semantic ranking without a real clean-reference input.
+source_run: research/runs/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1
+promotion_requested: HYPOTHESIS

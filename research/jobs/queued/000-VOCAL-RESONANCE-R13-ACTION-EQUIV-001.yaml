@@ -1,0 +1,56 @@
+schema_version: "1.0"
+job_id: VOCAL-RESONANCE-R13-ACTION-EQUIV-001
+state: QUEUED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: "Does exact injected-target Top-K materially overstate the candidate-frequency accuracy needed for a narrow resonance-suppression action?"
+hypothesis: "Across both predeclared seeds, static Top-5 candidates will produce action-equivalent target attenuation substantially more often than they exactly contain the injected target: at Q=12 a fixed -2 dB candidate-centered cut will yield >=1 dB target attenuation in at least 70 percent of generator-hit cases, exceed exact Top-5 hit rate by at least 20 percentage points, preserve at least 70 percent action-equivalent coverage on strong-effect cases, and achieve at least 60 percent median attenuation relative to the nearest-candidate oracle. Q=8 and Q=20 must each retain at least a 10-point action-equivalence gain over exact hit rate."
+counter_hypotheses:
+  - "Exact target membership is a good proxy for useful frequency placement; action-equivalent hit rate is not materially higher."
+  - "Only broad Q settings make near misses useful, so exact semantic ranking remains necessary for selective suppression."
+  - "Strong-effect cases still require exact target ranking even if weak cases tolerate nearby candidates."
+baseline:
+  - local_prominence_topk
+  - frozen_static_r2_topk
+variants:
+  - analytical_action_equivalence_q8_q12_q20
+metrics:
+  - exact_hit_rate
+  - action_equivalent_rate
+  - action_minus_exact
+  - strong_action_equivalent_rate
+  - median_action_attenuation_db
+  - median_oracle_relative_attenuation
+acceptance:
+  - "for each seed at static Top-5 Q=12: action-equivalent rate >= 0.70"
+  - "for each seed at static Top-5 Q=12: action-equivalent minus exact hit >= 0.20"
+  - "for each seed at static Top-5 Q=12: strong action-equivalent rate >= 0.70"
+  - "for each seed at static Top-5 Q=12: median oracle-relative attenuation >= 0.60"
+  - "for each seed at static Top-5 Q=8: action-equivalent minus exact hit >= 0.10"
+  - "for each seed at static Top-5 Q=20: action-equivalent minus exact hit >= 0.10"
+rejection:
+  - "any seed fails any primary or Q-sensitivity criterion"
+max_runs: 1
+timeout_minutes: 10
+random_seed: 20261201
+experiment_adapter: vocal_resonance_action_equivalence_v1
+allowed_operations:
+  - stream_public_vocalset_in_runner_memory
+  - controlled_eq_injection
+  - analytical_filter_response
+  - derived_metric_write
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - raw_audio_write
+  - audio_render_write
+  - paid_api
+  - product_release
+knowledge_candidate:
+  claim: "Exact candidate-label Top-K may understate the practical frequency-placement utility of a resonance suppressor when nearby candidates produce equivalent narrow-band attenuation at the causal target."
+  evidence_type: HYPOTHESIS
+  scope: "Research-only metric/action-equivalence audit with analytical fixed peaking-cut responses; not a product suppressor result."
+  promotion_requested: HYPOTHESIS

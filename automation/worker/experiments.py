@@ -24,6 +24,7 @@ ADAPTERS = {
     "peakbody_periodicity_guard_stress_v1",
     "peakbody_realtime_voicing_bench_v1",
     "peakbody_contextual_noise_guard_v1",
+    "peakbody_plosive_protection_v1",
     "original_vocal_pre_measurement_gate_v1",
     "original_vocal_pre_tuning_frontier_v1",
     "vocal_resonance_motion_coherence_v1",
@@ -3288,6 +3289,36 @@ def _peakbody_contextual_noise_guard(
         "summary": payload["scope"],
     }
 
+
+def _peakbody_plosive_protection(
+    repo_root: Path,
+    timeout_seconds: int,
+) -> dict[str, Any]:
+    script = repo_root / "research/experiments/PeakBody/plosive_protection_model.py"
+    completed = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=timeout_seconds,
+    )
+    payload = json.loads(completed.stdout)
+    return {
+        "metrics": payload["metrics"],
+        "raw_files": {
+            "measurement.csv": payload["measurement_csv"],
+            "benchmark.json": completed.stdout,
+        },
+        "commands": [
+            "python research/experiments/PeakBody/plosive_protection_model.py"
+        ],
+        "acceptance_met": bool(payload["acceptance_met"]),
+        "rejection_triggered": bool(payload["rejection_triggered"]),
+        "triggered_criteria": list(payload.get("triggered_criteria", [])),
+        "summary": payload["scope"],
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3309,6 +3340,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _peakbody_realtime_voicing_bench(repo_root, timeout_seconds)
     if name == "peakbody_contextual_noise_guard_v1":
         return _peakbody_contextual_noise_guard(repo_root, timeout_seconds)
+    if name == "peakbody_plosive_protection_v1":
+        return _peakbody_plosive_protection(repo_root, timeout_seconds)
     if name == "black76_ratio_p2a_compare_v1":
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "black76_linear_detector_compare_v1":

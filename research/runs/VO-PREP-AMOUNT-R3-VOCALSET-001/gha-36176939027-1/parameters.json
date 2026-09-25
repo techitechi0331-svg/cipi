@@ -1,0 +1,25 @@
+{
+  "baseline": [
+    "DesiredGR scaling target100 5.5 dB, the R2 selection winner that failed final HUST holdout ripple by 0.00034317083146783 dB."
+  ],
+  "experiment_adapter": "voprep_amount_mapping_r3_v1",
+  "job_file": "research/jobs/queued/VO-PREP-AMOUNT-R3-VOCALSET-001.yaml",
+  "metrics": [
+    "selected_candidate",
+    "selected_target100_db",
+    "selection_singer_count",
+    "holdout_singer_count",
+    "files_per_singer",
+    "selection_ripple_margin_db",
+    "final_ripple_gate_db",
+    "holdout_passes",
+    "holdout_gates",
+    "raw_audio_persisted"
+  ],
+  "variants": [
+    "DesiredGR scaling target100 5.0 dB.",
+    "DesiredGR scaling target100 5.2 dB.",
+    "DesiredGR scaling target100 5.3 dB.",
+    "DesiredGR scaling target100 5.4 dB."
+  ]
+}

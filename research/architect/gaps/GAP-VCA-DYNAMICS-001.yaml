@@ -1,0 +1,15 @@
+schema_version: '1.0'
+gap_id: GAP-VCA-DYNAMICS-001
+topic_id: vca_dynamics
+title: VCA vocal dynamics control law
+state: OPEN
+score: 25
+support_path_count: 0
+minimum_support_paths: 2
+support_paths: []
+why_gap: Only 0 materially distinct evidence path(s) were detected against a target
+  of 2.
+question: Which detector, gain-computer and timing properties are actually required
+  for a reusable VCA vocal-compression baseline?
+human_only: false
+plugin_opportunity: false

@@ -1,0 +1,39 @@
+schema_version: '1.0'
+proposal_id: RP-VCA-DYNAMICS-001
+source_gap: research/architect/gaps/GAP-VCA-DYNAMICS-001.yaml
+state: NEEDS_ADAPTER
+track:
+  id: ARCHITECT_VCA_DYNAMICS
+  path: research/architect
+research_question: Which detector, gain-computer and timing properties are actually
+  required for a reusable VCA vocal-compression baseline?
+hypothesis: A separated detector/gain-computer VCA model can produce reproducible
+  control behavior without importing FET/opto assumptions.
+counter_hypotheses:
+- Existing generic compressor research already covers the required behavior.
+baseline:
+- generic_feedforward_compressor
+variants:
+- vca_control_model
+metrics:
+- static_curve
+- step_response
+- release_shape
+acceptance:
+- The VCA model yields a distinct, reproducible behavior justified by source or measurement
+  evidence.
+rejection:
+- No meaningful behavior remains after removing unsupported topology assumptions.
+pilot_adapter: null
+pilot_job_id: ARCHITECT-VCA-DYNAMICS-PILOT-001
+prototype_adapter: null
+plugin_opportunity: false
+overlap_hints: []
+expected_reuse: Control Comp, bus compression and transparent vocal dynamics.
+external_validity:
+- Pilot evidence is not a product claim.
+- Public/real vocal and host validation remain separate when applicable.
+budget:
+  max_pilot_runs: 2
+  max_formal_iterations: 5
+  max_same_failure: 2

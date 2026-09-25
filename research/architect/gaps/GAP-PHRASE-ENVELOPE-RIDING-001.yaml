@@ -1,0 +1,17 @@
+schema_version: '1.0'
+gap_id: GAP-PHRASE-ENVELOPE-RIDING-001
+topic_id: phrase_envelope_riding
+title: Phrase-level vocal envelope estimation
+state: OPEN
+score: 27
+support_path_count: 2
+minimum_support_paths: 3
+support_paths:
+- knowledge_candidates/VO-PREP-SYNC-001
+- plugins/vo-prep
+why_gap: Only 2 materially distinct evidence path(s) were detected against a target
+  of 3.
+question: Can phrase-scale vocal level be estimated without chasing consonants, breaths
+  and short syllabic transients?
+human_only: false
+plugin_opportunity: true

@@ -1,0 +1,40 @@
+schema_version: '1.0'
+proposal_id: RP-ADAA-ALIAS-CONTROL-001
+source_gap: research/architect/gaps/GAP-ADAA-ALIAS-CONTROL-001.yaml
+state: NEEDS_ADAPTER
+track:
+  id: ARCHITECT_ADAA_ALIAS_CONTROL
+  path: research/architect
+research_question: When does ADAA reduce alias energy enough to justify its complexity
+  versus oversampling for CIPI nonlinear stages?
+hypothesis: For compatible memoryless nonlinearities, ADAA can reduce alias energy
+  at lower oversampling cost than a naive 1x baseline.
+counter_hypotheses:
+- Oversampling alone is simpler and equally effective at the target CPU budget.
+- Stateful nonlinear stages reduce the practical value of ADAA.
+baseline:
+- naive_1x_waveshaper
+- oversampled_waveshaper
+variants:
+- adaa_candidate
+metrics:
+- alias_energy_dbc
+- cpu_relative
+- band_error
+acceptance:
+- ADAA materially reduces alias energy at a declared CPU/error budget.
+rejection:
+- ADAA provides no practical advantage over the matched oversampling baseline.
+pilot_adapter: null
+pilot_job_id: ARCHITECT-ADAA-ALIAS-CONTROL-PILOT-001
+prototype_adapter: null
+plugin_opportunity: false
+overlap_hints: []
+expected_reuse: Density, preamps, saturation and future nonlinear products.
+external_validity:
+- Pilot evidence is not a product claim.
+- Public/real vocal and host validation remain separate when applicable.
+budget:
+  max_pilot_runs: 2
+  max_formal_iterations: 5
+  max_same_failure: 2

@@ -1,0 +1,16 @@
+schema_version: '1.0'
+gap_id: GAP-ADAA-ALIAS-CONTROL-001
+topic_id: adaa_alias_control
+title: ADAA applicability to vocal nonlinear stages
+state: OPEN
+score: 25
+support_path_count: 1
+minimum_support_paths: 2
+support_paths:
+- experiments/Density
+why_gap: Only 1 materially distinct evidence path(s) were detected against a target
+  of 2.
+question: When does ADAA reduce alias energy enough to justify its complexity versus
+  oversampling for CIPI nonlinear stages?
+human_only: false
+plugin_opportunity: false

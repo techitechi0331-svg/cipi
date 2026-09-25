@@ -141,7 +141,10 @@ public:
     int getNumPrograms() override { return 1; }
     int getCurrentProgram() override { return 0; }
     void setCurrentProgram(int) override {}
-    const juce::String getProgramName(int) override { return {}; }
+    const juce::String getProgramName(int index) override
+    {
+        return index == 0 ? juce::String("Default") : juce::String();
+    }
     void changeProgramName(int, const juce::String&) override {}
 
     void getStateInformation(juce::MemoryBlock&) override;
@@ -175,7 +178,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FactoryPluginAudioProcessor:
         "{_cpp_string(gain.get("name", "Gain"))}",
         juce::NormalisableRange<float>({_cpp_float(gain["min"])}, {_cpp_float(gain["max"])}, 0.01f),
         {_cpp_float(gain["default"])},
-        "dB"));
+        juce::AudioParameterFloatAttributes().withLabel("dB")));
     return layout;
 }}
 

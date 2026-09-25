@@ -50,6 +50,7 @@ ADAPTERS = {
     "voprep_sidechain_hpf_pilot_v1",
     "vocal_resonance_clean_normative_prior_v1",
     "vocal_resonance_self_counterfactual_inpainting_v1",
+    "voprep_amount_mapping_r4_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3183,6 +3184,80 @@ def _vocal_resonance_self_counterfactual_inpainting(
         ),
     }
 
+
+def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "amount_mapping_r4_learn_solve.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-amount-r4-") as td:
+        out = Path(td)
+        try:
+            completed = subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Amount R4 subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+
+        result = json.loads((out / "amount_r4_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "amount_r4_results.json": (out / "amount_r4_results.json").read_text(encoding="utf-8"),
+            "amount_r4_report.md": (out / "amount_r4_report.md").read_text(encoding="utf-8"),
+            "amount_r4_metrics.csv": (out / "amount_r4_metrics.csv").read_text(encoding="utf-8"),
+            "gain_invariance.csv": (out / "gain_invariance.csv").read_text(encoding="utf-8"),
+        }
+
+    cand = result.get("candidate") or {}
+    holdout = result.get("holdout") or {}
+    base = result.get("baseline") or {}
+    metrics = {
+        "decision": result.get("decision"),
+        "acceptance_met": bool(result.get("acceptance_met", False)),
+        "selection_passes": bool(cand.get("passes_selection", False)),
+        "selection_mapping_rmse_db": cand.get("mapping_rmse_db"),
+        "baseline_selection_mapping_rmse_db": base.get("mapping_rmse_db"),
+        "selection_solver_max_residual_db": (cand.get("solver") or {}).get("max_residual_db"),
+        "selection_relative_threshold_std_db": (cand.get("solver") or {}).get("std_relative_threshold_db"),
+        "gain_invariance_max_threshold_error_db": (cand.get("gain_invariance_probe") or {}).get("max_threshold_shift_error_db"),
+        "gain_invariance_max_gr_error_db": (cand.get("gain_invariance_probe") or {}).get("max_eval_mean_gr_error_db"),
+        "holdout_opened": holdout is not None,
+        "holdout_passes": bool(holdout.get("passes", False)) if holdout else False,
+        "holdout_mapping_rmse_db": holdout.get("candidate_mapping_rmse_db") if holdout else None,
+        "selection_singers": result.get("selection_singers", []),
+        "holdout_singers": result.get("holdout_singers", []),
+        "files_per_singer": result.get("files_per_singer"),
+        "learn_target_actual_mean_gr_db": result.get("learn_target_actual_mean_gr_db"),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/amount_mapping_r4_learn_solve.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Leak-free Vo.Prep Amount Revision 4. The rejected R3 fixed-offset "
+            "architecture is the simple baseline. The candidate uses only the "
+            "explicit four-second Learn buffer to solve one locked Threshold whose "
+            "frozen-core active Learn ActualGR mean is 5.5 dB. Threshold stays fixed "
+            "during normal playback. Selection uses fresh VocalSet singers f5/f6/m5/m6 "
+            "and holdout uses f7/f8/m7/m8. Passing authorizes a separate red-team only."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3262,4 +3337,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_clean_normative_prior(repo_root, timeout_seconds)
     if name == "vocal_resonance_self_counterfactual_inpainting_v1":
         return _vocal_resonance_self_counterfactual_inpainting(repo_root, timeout_seconds)
+    if name == "voprep_amount_mapping_r4_v1":
+        return _voprep_amount_mapping_r4(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

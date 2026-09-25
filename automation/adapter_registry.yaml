@@ -264,3 +264,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Evaluate same-observation spectral inpainting as a deployable self-counterfactual proxy for the R7 causal resonance delta."
+
+  voprep_amount_mapping_r4_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Compare the rejected R3 fixed-offset Amount baseline against an explicit-Learn one-time Threshold solver on fresh singer-disjoint VocalSet cohorts; passing authorizes red-team only."

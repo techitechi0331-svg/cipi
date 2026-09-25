@@ -35,8 +35,11 @@ def vowel(sr,f0,secs=1.2):
 def make_cases(sr):
     n=int(1.5*sr); t=np.arange(n)/sr
     male=np.zeros(n); female=np.zeros(n)
-    male[int(.2*sr):int(1.4*sr)]=vowel(sr,90,1.2)
-    female[int(.2*sr):int(1.4*sr)]=vowel(sr,220,1.2)
+    start_body=int(round(.2*sr))
+    male_body=vowel(sr,90,1.2)
+    female_body=vowel(sr,220,1.2)
+    male[start_body:start_body+len(male_body)]=male_body
+    female[start_body:start_body+len(female_body)]=female_body
 
     rumble=male.copy()
     rumble += (10**(-20/20))*np.sin(2*np.pi*30*t)
@@ -45,7 +48,7 @@ def make_cases(sr):
     base=vowel(sr,120,1.2)
     tb=np.arange(len(base))/sr
     base += scale_rms(np.sin(2*np.pi*80*tb),-20.0)
-    prox[int(.2*sr):int(1.4*sr)]=base
+    prox[start_body:start_body+len(base)]=base
 
     plosive=male.copy()
     start=int(.18*sr); m=int(.09*sr)

@@ -3029,14 +3029,24 @@ def _voprep_sidechain_hpf_pilot(repo_root: Path, timeout_seconds: int) -> dict[s
     )
     with tempfile.TemporaryDirectory(prefix="cipi-voprep-sc-hpf-") as td:
         out = Path(td)
-        completed = subprocess.run(
-            [sys.executable, str(script), "--out-dir", str(out)],
-            cwd=repo_root,
-            check=True,
-            capture_output=True,
-            text=True,
-            timeout=timeout_seconds,
-        )
+        try:
+            completed = subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            stdout_tail = (exc.stdout or "")[-8000:]
+            stderr_tail = (exc.stderr or "")[-12000:]
+            raise RuntimeError(
+                "Vo.Prep Sidechain HPF pilot subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{stdout_tail}\n"
+                f"stderr_tail:\n{stderr_tail}"
+            ) from exc
         result = json.loads((out / "sidechain_hpf_pilot.json").read_text(encoding="utf-8"))
         raw_files = {
             "sidechain_hpf_pilot.json": (out / "sidechain_hpf_pilot.json").read_text(encoding="utf-8"),

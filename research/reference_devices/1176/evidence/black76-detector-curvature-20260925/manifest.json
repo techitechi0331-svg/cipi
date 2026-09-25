@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "evidence_id": "black76-detector-curvature-20260925",
+  "product_repo": "techitechi0331-svg/76blackCompressor",
+  "product_source_commit": "fee91abab74109a01f76a2fc80dfc69d00658fbc",
+  "product_workflow_run_id": 36143879178,
+  "artifact_id": 10869168117,
+  "artifact_name": "Black76-Detector-Curvature-Research",
+  "artifact_sha256": "3317a135a56c9774cc9a4aa3b395741afee3a185fdaa7ab564fbf106b037e8ff",
+  "sample_rate_hz": 48000,
+  "test_signal": "1 kHz sine",
+  "production_dsp_modified": false,
+  "diagnostic_only": true,
+  "target_scope": "Committed supplemental LN-era UA proxy static curves; not direct vintage Rev-E hardware truth.",
+  "raw_audio_persisted_in_cipi": false
+}

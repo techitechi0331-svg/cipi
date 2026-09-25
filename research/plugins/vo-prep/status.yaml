@@ -30,6 +30,10 @@ unresolved:
   - Cross-module interaction needs broader real-vocal validation.
   - Cubase Pro 14 release-candidate validation is pending.
   - Only derived measurements, never client recordings, may be committed.
+  - Transparent compressor core level-matched blind listening is pending.
+  - Transparent compressor user-facing Amount / operating-point mapping is not locked.
+  - Transparent compressor stereo-link regression on the final 8 ms / 70 ms core is pending.
+  - Transparent compressor final VST3 / Cubase Pro 14 host validation is pending.
 
 next_stage: measurement
 why_next: "Three modules have locked baselines and integration tests; remaining work is broader corpus/subjective validation and host confirmation."

@@ -59,6 +59,71 @@ void runStateRoundTrip()
     expect (restored.getLatencySamples() == 2400,
             "State restore must not disturb the 48 kHz / 50 ms latency contract.");
 }
+void testBoostHeadroomGuard()
+{
+    constexpr double sampleRate = 48000.0;
+    constexpr int blockSize = 256;
+
+    VocalRiderAudioProcessor processor;
+    processor.prepareToPlay (sampleRate, blockSize);
+
+    juce::AudioBuffer<float> block (2, blockSize);
+    juce::MidiBuffer midi;
+
+    double phase = 0.0;
+    const auto increment = 2.0 * 3.14159265358979323846 * 190.0 / sampleRate;
+    float observedPeak = 0.0f;
+
+    const auto processSeconds = [&] (double seconds, float levelDb, bool injectPeak)
+    {
+        const auto totalSamples = static_cast<int> (std::lround (seconds * sampleRate));
+        int rendered = 0;
+
+        while (rendered < totalSamples)
+        {
+            const auto n = std::min (blockSize, totalSamples - rendered);
+            block.setSize (2, n, false, false, true);
+
+            const auto amplitude = juce::Decibels::decibelsToGain (levelDb);
+
+            for (int i = 0; i < n; ++i)
+            {
+                float sample = amplitude * static_cast<float> (std::sin (phase));
+                phase += increment;
+                if (phase >= 2.0 * 3.14159265358979323846)
+                    phase -= 2.0 * 3.14159265358979323846;
+
+                if (injectPeak && rendered + i == totalSamples / 3)
+                    sample = 0.99f;
+
+                block.setSample (0, i, sample);
+                block.setSample (1, i, sample);
+            }
+
+            processor.processBlock (block, midi);
+
+            for (int ch = 0; ch < block.getNumChannels(); ++ch)
+                for (int i = 0; i < n; ++i)
+                {
+                    const auto y = block.getSample (ch, i);
+                    expect (std::isfinite (y), "Headroom-guard scenario produced non-finite output.");
+                    observedPeak = std::max (observedPeak, std::abs (y));
+                }
+
+            rendered += n;
+        }
+    };
+
+    processSeconds (5.0, -20.0f, false);
+    processSeconds (2.5, -28.0f, false);
+    processSeconds (1.0, -28.0f, true);
+    processSeconds (0.2, -28.0f, false);
+
+    const auto ceiling = juce::Decibels::decibelsToGain (-0.20f);
+    expect (observedPeak <= ceiling + 1.0e-4f,
+            "Positive ride allowed a near-full-scale future peak to exceed the safety ceiling.");
+}
+
 } // namespace
 
 int main()
@@ -68,6 +133,7 @@ int main()
             runLatencyCase (sampleRate, blockSize);
 
     runStateRoundTrip();
+    testBoostHeadroomGuard();
 
     if (failures == 0)
     {

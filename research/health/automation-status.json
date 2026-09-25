@@ -21,11 +21,18 @@
     "claimed_count": 0,
     "claimed_jobs": [],
     "dependency_blocked_count": 0,
-    "ready_job": null
+    "ready_job": {
+      "branch": "research-bot/VOCAL-RESONANCE-R12-RAW-PATCH-001/auto-6f644e1c659d",
+      "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+      "kind": "LOCAL_RESEARCH",
+      "priority": 0
+    }
   },
   "schema_version": "1.0",
   "selected": {
-    "kind": "IDLE",
-    "priority": -999
+    "branch": "research-bot/VOCAL-RESONANCE-R12-RAW-PATCH-001/auto-6f644e1c659d",
+    "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+    "kind": "LOCAL_RESEARCH",
+    "priority": 0
   }
 }

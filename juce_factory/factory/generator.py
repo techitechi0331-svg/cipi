@@ -520,9 +520,10 @@ int main()
         juce::MidiBuffer midi;
         juce::AudioBuffer<float> bufferA(2, 64);
         fill(bufferA, 0.1f);
-        for (int i = 0; i < 64; ++i)
-            processor.processBlock(bufferA, midi);
-        require(isFinite(bufferA), "first prepare cycle remains finite");
+        processor.processBlock(bufferA, midi);
+        const float expectedA = 0.1f * juce::Decibels::decibelsToGain(6.0f);
+        require(isFinite(bufferA) && maxAbsError(bufferA, expectedA) < 0.00001f,
+                "first prepare cycle applies expected gain");
         processor.releaseResources();
 
         setGainDb(processor, 0.0f);
@@ -532,7 +533,7 @@ int main()
         fill(bufferB, 0.2f);
         processor.processBlock(bufferB, midi);
         require(isFinite(bufferB) && maxAbsError(bufferB, 0.2f) < 0.00001f,
-                "same processor instance reparses sample-rate/block-size safely");
+                "same processor instance reprepares sample-rate/block-size safely");
         processor.releaseResources();
     }
 

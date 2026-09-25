@@ -123,6 +123,17 @@ def collect_examples(scan_limit: int = 10000):
         if float(np.sqrt(np.mean(x*x)+1e-18)) < 1e-4:
             continue
 
+        # "Qualifying file" means it can actually supply the declared 4 s
+        # active Learn window plus at least 1 s of active post-lock evaluation.
+        # This is an eligibility check only; no Amount candidate is evaluated.
+        qslow = slow_detector(x)
+        qslow_db = db_amp(qslow)
+        qfinite = np.isfinite(qslow_db) & (qslow_db > -180.0)
+        qpeak = float(np.max(qslow_db[qfinite])) if np.any(qfinite) else -180.0
+        qactive = qfinite & (qslow_db >= qpeak - 30.0)
+        if int(np.sum(qactive)) < int((LEARN_SECONDS + 1.0) * FS):
+            continue
+
         key = f"{singer}:{Path(source_path).name}"
         selected[key] = {
             "singer": singer,

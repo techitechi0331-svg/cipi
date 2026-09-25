@@ -44,6 +44,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run free-autonomous-research.yml --ref main
 
+      - name: Recover one claimed evidence branch
+        if: steps.select.outputs.has_job != 'true' && steps.select.outputs.first_claimed_branch != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOT_BRANCH: ${{ steps.select.outputs.first_claimed_branch }}
+          JOB_ID: ${{ steps.select.outputs.first_claimed_job }}
+        run: |
+          gh workflow run auto-evidence-intake.yml --ref main \
+            -f branch="$BOT_BRANCH" \
+            -f job_id="$JOB_ID" \
+            -f run_id="no-wait-claim-recovery-${GITHUB_RUN_ID}"
+
       - name: No READY work remains
         if: steps.select.outputs.has_job != 'true'
         run: |

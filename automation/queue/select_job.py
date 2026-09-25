@@ -66,6 +66,7 @@ def choose_job(
         "blocked_jobs": [],
         "dependency_jobs": [],
         "claimed_jobs": [],
+        "claimed_branches": [],
         "work_steal": False,
     }
 
@@ -100,8 +101,11 @@ def choose_job(
         if branch_exists(branch):
             stats["skipped_claimed"] = int(stats["skipped_claimed"]) + 1
             claimed_jobs = stats["claimed_jobs"]
+            claimed_branches = stats["claimed_branches"]
             assert isinstance(claimed_jobs, list)
+            assert isinstance(claimed_branches, list)
             claimed_jobs.append(job_id)
+            claimed_branches.append(branch)
             skipped_before_selection = True
             continue
 
@@ -136,6 +140,13 @@ def main() -> int:
         h.write(f"blocked_jobs={_csv(stats['blocked_jobs'])}\n")
         h.write(f"dependency_jobs={_csv(stats['dependency_jobs'])}\n")
         h.write(f"claimed_jobs={_csv(stats['claimed_jobs'])}\n")
+        h.write(f"claimed_branches={_csv(stats['claimed_branches'])}\n")
+        claimed_jobs = stats["claimed_jobs"]
+        claimed_branches = stats["claimed_branches"]
+        assert isinstance(claimed_jobs, list)
+        assert isinstance(claimed_branches, list)
+        h.write(f"first_claimed_job={claimed_jobs[0] if claimed_jobs else ''}\n")
+        h.write(f"first_claimed_branch={claimed_branches[0] if claimed_branches else ''}\n")
         h.write(f"work_steal={'true' if stats['work_steal'] else 'false'}\n")
         if selected is None:
             h.write("has_job=false\n")

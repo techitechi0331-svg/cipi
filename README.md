@@ -20,6 +20,14 @@ CIPI uses a No-Wait / Work-Stealing rule for CI and external dependencies. A Git
 
 The canonical rule is `RULES/NO_WAIT_WORK_STEALING.md`. Autonomous queue selection skips explicit blockers, unresolved `depends_on_jobs`, and already-claimed research-bot branches, then steals the next READY job. Successful worker completion can chain into the next READY job through the No-Wait Queue Orchestrator.
 
+## Cross-repository automation
+
+CIPI can also coordinate allowlisted GitHub Actions workflows in the plug-in repositories through `automation/cross_repo/registry.yaml`. External workflow results are evidence, not automatic product or knowledge decisions.
+
+Validated research-bot branches are automatically intake-checked and merged into CIPI main so completed evidence and continuations do not remain permanently claimed. A successful intake re-dispatches both the local Research Worker and the Cross-Repo Orchestrator.
+
+Cross-repository API access is intentionally disabled unless the CIPI Actions secret `CIPI_CROSS_REPO_TOKEN` is configured. See `RULES/CROSS_REPO_ORCHESTRATION.md` and `RULES/AUTO_EVIDENCE_INTAKE.md`.
+
 ## Initial experimental plug-ins
 
 - **CIPI VoxLevel** — dual-detector vocal leveler / compressor.

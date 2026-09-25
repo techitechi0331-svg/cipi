@@ -225,6 +225,26 @@
       },
       "additionalProperties": false
     },
+    "cross_repo_continuation": {
+      "type": "object",
+      "properties": {
+        "on_accept": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^automation/cross_repo/action_templates/"
+          }
+        },
+        "on_reject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^automation/cross_repo/action_templates/"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "rejection_record": {
       "type": "object",
       "properties": {

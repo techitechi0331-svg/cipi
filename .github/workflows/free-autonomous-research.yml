@@ -137,6 +137,7 @@ jobs:
           if [ -d research/knowledge_candidates ]; then git add -A research/knowledge_candidates; fi
           if [ -d research/decisions ]; then git add -A research/decisions; fi
           if [ -d research/reviews ]; then git add -A research/reviews; fi
+          if [ -d research/cross_repo/actions/queued ]; then git add -A research/cross_repo/actions/queued; fi
           git commit -m "submit autonomous research evidence: $JOB_ID"
           git push --set-upstream origin "$BOT_BRANCH"
 

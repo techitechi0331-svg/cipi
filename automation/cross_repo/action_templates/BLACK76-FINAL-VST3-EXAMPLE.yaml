@@ -1,0 +1,11 @@
+schema_version: "1.0"
+action_id: BLACK76-FINAL-VST3-EXAMPLE-001
+state: QUEUED
+repo_key: black76
+workflow_key: final_vst3
+ref: main
+inputs: {}
+priority: 50
+attempts: 0
+max_attempts: 2
+reason: Example reviewed Cross-Repo continuation. Do not reference this template from a Research Job unless the final-VST3 action is actually required.

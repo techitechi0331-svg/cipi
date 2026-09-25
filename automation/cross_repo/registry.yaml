@@ -1,0 +1,132 @@
+schema_version: "1.0"
+owner: techitechi0331-svg
+repositories:
+  black76:
+    repository: techitechi0331-svg/76blackCompressor
+    default_ref: main
+    workflows:
+      final_vst3:
+        file: windows-vst3-final.yml
+        dispatch: true
+        monitor: true
+      vocal_ab:
+        file: windows-vocal-ab.yml
+        dispatch: true
+        monitor: true
+      vocal_safety:
+        file: windows-vocal-safety.yml
+        dispatch: true
+        monitor: true
+      characterization:
+        file: windows-characterization.yml
+        dispatch: true
+        monitor: true
+      detector_curvature:
+        file: windows-detector-curvature.yml
+        dispatch: true
+        monitor: true
+      bias_ladder_refine:
+        file: windows-bias-ladder-refine.yml
+        dispatch: true
+        monitor: true
+
+  vl2a:
+    repository: techitechi0331-svg/VocalPrepComp
+    default_ref: main
+    workflows:
+      build:
+        file: build-windows.yml
+        dispatch: true
+        monitor: true
+      real_vocal:
+        file: real-vocal-validation.yml
+        dispatch: true
+        monitor: true
+
+  pre610:
+    repository: techitechi0331-svg/610
+    default_ref: main
+    workflows:
+      build:
+        file: build-windows.yml
+        dispatch: true
+        monitor: true
+
+  surface:
+    repository: techitechi0331-svg/VocalSurfaceProcessor
+    default_ref: main
+    workflows:
+      vst3:
+        file: windows-vst3.yml
+        dispatch: true
+        monitor: true
+
+  vocal_rider:
+    repository: techitechi0331-svg/vocal_rider
+    default_ref: main
+    workflows:
+      research:
+        file: vocal-rider-research.yml
+        dispatch: true
+        monitor: true
+      real_vocal:
+        file: vocal-rider-real-vocal.yml
+        dispatch: true
+        monitor: true
+
+  doubler:
+    repository: techitechi0331-svg/Vocal-One-Knob-Doubler
+    default_ref: main
+    workflows:
+      build:
+        file: build-windows-vst3.yml
+        dispatch: true
+        monitor: true
+
+  vo_prep:
+    repository: techitechi0331-svg/Vo.Prep
+    default_ref: main
+    workflows:
+      build:
+        file: build-windows.yml
+        dispatch: true
+        monitor: true
+      validation:
+        file: vst3-validation.yml
+        dispatch: false
+        monitor: true
+
+  control_comp:
+    repository: techitechi0331-svg/VocalControlComp
+    default_ref: main
+    workflows:
+      build:
+        file: build-windows.yml
+        dispatch: true
+        monitor: true
+
+  master_bus:
+    repository: techitechi0331-svg/MasterBusComp
+    default_ref: main
+    workflows:
+      build:
+        file: build-windows-vst3.yml
+        dispatch: true
+        monitor: true
+
+  vocal_resonance:
+    repository: techitechi0331-svg/Vocal_resonance
+    default_ref: main
+    workflows:
+      real_confirm:
+        file: vocalset-real-confirm.yml
+        dispatch: true
+        monitor: true
+      real_gate:
+        file: vocalset-real-gate.yml
+        dispatch: true
+        monitor: true
+      semantic_ranker:
+        file: vocalset-semantic-ranker.yml
+        dispatch: true
+        monitor: true

@@ -145,3 +145,10 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Gate whether Vo.Prep plosive-context evidence is sufficient to justify a MicroDouble development experiment as an augmenting context signal, never as a replacement for the current generic transient detector."
+
+  vocal_resonance_run_length_veto_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Evaluate run-length-only morphology strictly as a post-ranker veto/abstention gate over the frozen static vocal-resonance ranker."

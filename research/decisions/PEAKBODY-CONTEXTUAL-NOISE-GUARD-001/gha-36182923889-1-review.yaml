@@ -1,0 +1,51 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-CONTEXTUAL-NOISE-GUARD-001:gha-36182923889-1:review-01"
+job_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-001
+source_run: research/runs/PEAKBODY-CONTEXTUAL-NOISE-GUARD-001/gha-36182923889-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Both the simple strong-periodicity veto and the Vo.Prep-sibilance-context
+  extension failed the predeclared synthetic plosive-retention gate by a very
+  large margin. Their minimum plosive retention was 0.054583 and 0.045417
+  respectively, versus the locked minimum 0.85. Standard voiced, bright/startup
+  voiced, 6 dB noisy voiced, steady-body and noise-like rejection metrics passed,
+  so the failure is localized to weakly periodic low-frequency transient
+  protection. The private positive result is retained but does not override this
+  synthetic hard failure.
+declared_rejection_criteria:
+  - "neither simple_veto nor context_veto satisfies every locked synthetic hard gate"
+triggered_criteria:
+  - "simple_veto plosive retention minimum was 0.054583333, below 0.85"
+  - "context_veto plosive retention minimum was 0.045416667, below 0.85"
+retained_findings:
+  - "Simple veto standard voiced retention minimum was 1.0."
+  - "Simple veto bright/startup voiced retention minimum was 1.0."
+  - "Simple veto 6 dB noisy-voiced retention minimum was 1.0."
+  - "Simple veto synthetic noise false-preservation maximum was 0.000944822."
+  - "Simple veto steady-body mean transient-factor delta was 0.0."
+  - "Contextual sibilance evidence did not repair the plosive failure and slightly worsened minimum plosive retention."
+  - "Private same-performance evidence had favored the simple veto on the available low-frequency proxy, demonstrating a real-vocal/synthetic coverage contradiction that must be preserved rather than averaged away."
+reusable_findings:
+  - "Strong periodicity alone is insufficient protection for weakly periodic low-frequency vocal transients such as plosive-like events."
+  - "A detector architecture should separate harmonic/voiced protection from plosive/transient-context protection instead of forcing both through one periodicity confidence."
+  - "Passing private proxy classes cannot override a predeclared synthetic hard failure in an uncovered event condition."
+revisit_if:
+  - "An independent plosive-context protection term is added and passes the same bright/noisy-voiced/noise/plosive gates."
+  - "The synthetic plosive model is superseded by stronger real-event evidence under a predeclared protocol."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-CONFOUNDER-PERIODICITY-002
+    - PEAKBODY-PRIVATE-VOCAL-GUARD-001
+    - PEAKBODY-YIN-PRIVATE-REPLAY-001
+    - PEAKBODY-MPM-PRIVATE-REPLAY-001
+  related_decisions:
+    - "PEAKBODY-CONTEXTUAL-NOISE-GUARD-001:gha-36182923889-1:auto"
+parent_decision_id: "PEAKBODY-CONTEXTUAL-NOISE-GUARD-001:gha-36182923889-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Synthetic strong-periodicity-veto/contextual-noise comparison plus retained private contradiction; both tested candidates rejected."
+review_gaps: []

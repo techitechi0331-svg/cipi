@@ -97,3 +97,23 @@ Study mechanisms rather than copying code:
 - **MicroDouble** — mono-safe vocal doubler with controlled decorrelation.
 
 Names are provisional. Each item must earn implementation through a research hypothesis and measurable target.
+
+## Cross-track knowledge promotion discipline
+
+Current synthesis:
+`research/reports/cross-track-knowledge-review-2026-09-25.md`
+
+CIPI separates **product evidence strength** from **knowledge generality**.
+
+A result may be strongly MEASURED for one product and still remain product-scoped.
+
+Before a broad reusable principle is promoted:
+- require materially independent cross-track support, or authoritative mechanism evidence plus measured implementation support;
+- do not count same-code/same-dataset reruns as independent confirmation;
+- transfer mechanisms, metrics and failure boundaries before transferring numeric constants;
+- keep exact thresholds, timings, knob positions, candidate counts and reference-level mappings product-scoped until independently reproduced;
+- retain negative evidence as a boundary on the generalized claim;
+- never use shared-knowledge promotion to close product listening, Cubase or release gates.
+
+Cross-track synthesis itself is review evidence, not a new measurement. Shared candidates should therefore remain below CONFIRMED until their stated scope is independently challenged and survives contradiction review.
+

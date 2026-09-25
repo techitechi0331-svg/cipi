@@ -97,3 +97,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Falsify the positive R5 morphology result with overlap checks, two injection seeds, feature-family ablation, same-C control and paired external-clean bootstrap."
+
+  voprep_amount_mapping_r2_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 12
+    network_required: true
+    purpose: "Run leak-free Vo.Prep Amount Revision 2 on a pinned public HUST_Solfege LFS object with disjoint selection and final-holdout speakers; persist derived evidence only."

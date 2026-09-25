@@ -3,7 +3,7 @@
 ## Provenance
 - Product repo: `techitechi0331-svg/VocalPrepComp`
 - Current baseline for this later study: Phase 01-H KEEP candidate
-- Research PR prepared in product repo: #13 (Draft)
+- Obsolete research PR #13 was closed after re-audit because it targeted the older `feature/vocal2a-v0.3-reference` engine rather than the current Phase 01-H VL2A engine.
 - Current source-side clue: Peak Reduction around 80 produced approximately 3 dB GR on one Cubase vocal test.
 
 ## SOURCE_FACT
@@ -18,10 +18,7 @@
 
 ## HYPOTHESIS
 The current side-chain sensitivity may be conservative at lower vocal levels.
-Product PR #13 contains a bounded synthetic sweep comparing:
-- baseline calibration;
-- minimal side-chain gain adjustment;
-- an audio-taper-informed candidate.
+The next bounded sensitivity study must be rebuilt from the Phase 01-H KEEP / v0.5.0 production-candidate engine. The old PR #13 synthetic sweep is not eligible for calibration promotion and is retained only as discarded exploratory work.
 
 ## REJECTED
 - adding a user Threshold control to conceal calibration;
@@ -37,3 +34,21 @@ Product PR #13 contains a bounded synthetic sweep comparing:
 5. only then promote or reject a new Peak Reduction calibration.
 
 Status: **QUEUED / not yet product-approved**.
+
+
+## 2026-09-25 architecture re-audit
+
+The earlier Peak Reduction study PR #13 is **REJECTED as a production research base**.
+Reason: it was created from `feature/vocal2a-v0.3-reference`, while the actual
+current VL2A product path is `build-vocal-leveler2a-v01` plus the retained
+Phase 01-H line-amplifier integration.
+
+This prevents numerical constants from crossing between two different detector /
+T4 / side-chain implementations.
+
+Required new baseline:
+- Phase 01-H KEEP engine;
+- final Gain -18..+18 dB integration;
+- current `LA2AEngine::sidechainDrive()`, `sidechainExcitation()`, T4 cell and COMP/LIMIT path.
+
+Old PR #13 status: **OBSOLETE / CLOSED / DO NOT MERGE**.

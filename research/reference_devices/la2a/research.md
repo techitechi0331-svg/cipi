@@ -80,3 +80,25 @@ Parameter lock after review convergence.
 - Level-matched vocal AB registered: no.
 - Cubase Pro 14 VST3 validation registered: no.
 - Final review complete: no.
+
+## 2026-09-25 reference-normalization spot check
+
+Current Universal Audio documentation was checked to prevent product-calibration values from being mistaken for original-hardware constants.
+
+SOURCE_FACT / scope notes:
+- UA documents the LA-2A Peak Reduction front-panel values 0..100 as arbitrary rather than dB.
+- UA describes the available Peak Reduction threshold-control range as 0 to -40 dB.
+- UA documents the Leveler Collection plug-ins as operating at an internal reference level of **-12 dBFS**. This is a plug-in calibration/reference-level fact, not an original-hardware dBu identity and must not be mixed with unrelated laboratory calibration conventions.
+- UA documents R37/Emphasis factory-flat (fully clockwise) as the normal sidechain response; changing it increases high-frequency sensitivity.
+- UA documentation continues to describe the T4 response as program dependent and multi-stage.
+
+Implication:
+- digital Peak Reduction mapping must be calibrated and compared in an explicitly stated reference context;
+- the -12 dBFS UAD internal reference must not be generalized into a universal LA-2A input target;
+- R37 flat is a defensible product default, but the historically adjustable network remains a real reference feature.
+
+References:
+- https://help.uaudio.com/hc/en-us/articles/4419496124180-Teletronix-LA-2A-Leveler-Collection-Manual
+- https://help.uaudio.com/hc/en-us/articles/19378009641748-LA-2A-Tube-Compressor-Manual
+- https://media.uaudio.com/assetlibrary/l/a/la-2a_manual.pdf
+

@@ -1,0 +1,24 @@
+{
+  "baseline": [
+    "current MicroDouble v0.3 high-band to broadband energy-ratio detector"
+  ],
+  "experiment_adapter": "microdouble_sibilance_reuse_gate_v1",
+  "job_file": "research/jobs/queued/000-MICRODOUBLE-SIBILANCE-REUSE-001.yaml",
+  "metrics": [
+    "snapshot_checksum_ok",
+    "candidate_has_real_vocal_evidence",
+    "candidate_real_vocal_stem_count",
+    "candidate_reference_recall_pct",
+    "candidate_low_conf_false_trigger_pct",
+    "candidate_active_occupancy_pct",
+    "candidate_corpus_max_reduction_db",
+    "candidate_body_mean_movement_db",
+    "candidate_precision_bias_ok",
+    "candidate_processing_bounded",
+    "baseline_synthetic_sane",
+    "baseline_real_labeled_gap"
+  ],
+  "variants": [
+    "Vo.Prep Sibilance Guard v2.3 hybrid high/broad + high/mid evidence candidate"
+  ]
+}

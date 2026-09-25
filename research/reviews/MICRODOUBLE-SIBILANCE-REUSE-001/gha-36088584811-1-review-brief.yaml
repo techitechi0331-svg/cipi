@@ -1,0 +1,118 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:review-brief-v1
+job_id: MICRODOUBLE-SIBILANCE-REUSE-001
+run_id: gha-36088584811-1
+source_run: research/runs/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1
+route: HUMAN_GATE_REVIEW
+candidate_class: PROMOTION_CANDIDATE
+triage_path: research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-triage.yaml
+triage_id: MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:triage-v1
+job_path: research/jobs/completed/000-MICRODOUBLE-SIBILANCE-REUSE-001.yaml
+research_question: Is the measured Vo.Prep hybrid high/broad + high/mid sibilance
+  detector sufficiently evidenced and bounded to justify a direct MicroDouble product
+  A/B against the current simpler high/broad detector?
+hypothesis: The Vo.Prep hybrid detector has enough real-vocal precision-biased evidence
+  and bounded processing to justify implementation as an experimental MicroDouble
+  candidate, while the current detector remains the simple baseline.
+counter_hypotheses:
+- The hybrid detector does not have enough real-vocal recall evidence to justify added
+  complexity.
+- Its false-trigger or occupancy behavior is too high for a subtle doubler protection
+  stage.
+- Its measured processing moves vocal body too much for a wet-only protective role.
+- The current simple detector already has sufficient labelled real-vocal evidence,
+  making reuse unnecessary.
+acceptance_criteria:
+- Committed metrics snapshot SHA256 must match.
+- Candidate evidence must contain at least 10 real-vocal stems.
+- Candidate reference recall must be at least 60 percent.
+- Candidate low-confidence false-trigger rate must be at most 0.10 percent.
+- Candidate active occupancy must be at most 5 percent.
+- Candidate corpus maximum reduction must be at most 1.5 dB in its source Vo.Prep
+  scope.
+- Candidate body-region mean movement must be at most 0.20 dB in its source Vo.Prep
+  scope.
+- Current MicroDouble baseline must still pass its synthetic neutral/high-frequency
+  discrimination sanity checks.
+- Current MicroDouble baseline must still lack equivalent labelled real-vocal recall
+  evidence; otherwise this reuse gate is not sufficient to choose between them.
+rejection_criteria:
+- Any declared acceptance condition fails.
+- The snapshot checksum fails.
+- Evidence would be interpreted as product adoption rather than permission to run
+  a direct A/B.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: c19dadfc16b604e6b6376596239320347865e50f
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: baseline_real_labeled_gap
+  value: true
+- path: baseline_synthetic_sane
+  value: true
+- path: candidate_active_occupancy_pct
+  value: 3.1
+- path: candidate_body_mean_movement_db
+  value: 0.14
+- path: candidate_corpus_max_reduction_db
+  value: 1.33
+- path: candidate_has_real_vocal_evidence
+  value: true
+- path: candidate_low_conf_false_trigger_pct
+  value: 0.02
+- path: candidate_precision_bias_ok
+  value: true
+- path: candidate_processing_bounded
+  value: true
+- path: candidate_real_vocal_stem_count
+  value: 11.0
+- path: candidate_reference_recall_pct
+  value: 64.0
+- path: snapshot_checksum_ok
+  value: true
+knowledge_candidate:
+  claim: The Vo.Prep hybrid high/broad + high/mid detector has enough bounded real-vocal
+    evidence to be tested as a MicroDouble sibilance-protection candidate against
+    the current simple detector.
+  evidence_type: HYPOTHESIS
+  scope: Evidence-reuse decision only; direct MicroDouble A/B, subjective naturalness,
+    multilingual generalization and product adoption remain unproven.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Direct MicroDouble baseline-vs-candidate product experiment before adoption.
+downstream_gate_signals:
+- Broader target-machine listening across additional vocal styles/settings is still
+  desirable; first target-machine 50% checkpoint is complete and was reported as slightly
+  strong but acceptable.
+- v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline
+  render and latency-compensation confirmation.
+- Final release evidence requires Cubase Pro 14 and target-machine listening.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

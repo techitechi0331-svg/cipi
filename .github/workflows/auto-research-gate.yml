@@ -108,17 +108,18 @@ jobs:
 
       - name: Smoke reviewed masking-aware presence adapter
         run: |
-          rm -rf research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
+          rm -rf /tmp/cipi-masking-presence-smoke
+          mkdir -p /tmp/cipi-masking-presence-smoke
           JOB_PATH="research/jobs/queued/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml"
           if [ ! -f "$JOB_PATH" ]; then
             JOB_PATH="research/jobs/completed/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml"
           fi
           test -f "$JOB_PATH"
-          python automation/worker/runner.py "$JOB_PATH" --output research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001 --run-id ci-0001
+          python automation/worker/runner.py "$JOB_PATH" --output /tmp/cipi-masking-presence-smoke --run-id ci-0001
           python - <<'PY'
           import json
-          p=json.load(open("research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001/manifest.json", encoding="utf-8"))
-          m=json.load(open("research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001/metrics.json", encoding="utf-8"))
+          p=json.load(open("/tmp/cipi-masking-presence-smoke/manifest.json", encoding="utf-8"))
+          m=json.load(open("/tmp/cipi-masking-presence-smoke/metrics.json", encoding="utf-8"))
           assert p["acceptance_met"] is True
           assert m["masked_proxy_improvement_ratio"] >= 0.80
           assert m["non_target_movement_ratio"] <= 0.35

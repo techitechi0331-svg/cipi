@@ -46,6 +46,7 @@ ADAPTERS = {
     "rp_masking_aware_presence_001_pilot_v1",
     "rp_phrase_envelope_riding_001_pilot_v1",
     "vocal_resonance_transfer_consistency_v1",
+    "voprep_amount_mapping_r3_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -2938,6 +2939,66 @@ def _microdouble_transient_necessity(repo_root: Path, timeout_seconds: int) -> d
     }
 
 
+
+def _voprep_amount_mapping_r3(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "amount_mapping_r3_vocalset.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-amount-r3-") as td:
+        out = Path(td)
+        completed = subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        result = json.loads((out / "amount_r3_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "amount_r3_results.json": (out / "amount_r3_results.json").read_text(encoding="utf-8"),
+            "amount_r3_report.md": (out / "amount_r3_report.md").read_text(encoding="utf-8"),
+            "selection.csv": (out / "selection.csv").read_text(encoding="utf-8"),
+            "holdout.csv": (out / "holdout.csv").read_text(encoding="utf-8"),
+        }
+
+    selected = result.get("selected_before_holdout") or {}
+    holdout = result.get("final_holdout") or {}
+    metrics = {
+        "decision": result.get("decision"),
+        "acceptance_met": bool(result.get("acceptance_met", False)),
+        "selected_candidate": selected.get("id"),
+        "selected_target100_db": selected.get("target100"),
+        "selection_singer_count": len(result.get("selection_singers", [])),
+        "holdout_singer_count": len(result.get("holdout_singers", [])),
+        "files_per_singer": result.get("files_per_singer"),
+        "selection_ripple_margin_db": result.get("selection_ripple_margin_db"),
+        "final_ripple_gate_db": result.get("final_ripple_gate_db"),
+        "holdout_passes": bool(holdout.get("passes", False)),
+        "holdout_gates": holdout.get("gates", {}),
+        "selection_singers": result.get("selection_singers", []),
+        "holdout_singers": result.get("holdout_singers", []),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/amount_mapping_r3_vocalset.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Leak-free Vo.Prep Amount Revision 3 on VocalSet. Five predeclared "
+            "DesiredGR-scaling maxima are selected using four singers and a stricter "
+            "0.075 dB selection ripple margin, then evaluated once on four different "
+            "final-holdout singers with the unchanged 0.080 dB product gate. Raw "
+            "public audio is streamed and decoded in runner memory only."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3009,4 +3070,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _phrase_envelope_riding_pilot(repo_root, timeout_seconds)
     if name == "vocal_resonance_transfer_consistency_v1":
         return _vocal_resonance_transfer_consistency(repo_root, timeout_seconds)
+    if name == "voprep_amount_mapping_r3_v1":
+        return _voprep_amount_mapping_r3(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

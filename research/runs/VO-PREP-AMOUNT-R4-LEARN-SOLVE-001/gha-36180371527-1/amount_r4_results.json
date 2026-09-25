@@ -1,0 +1,1862 @@
+{
+  "decision": "REVISE",
+  "dataset": "Bill13579/vocalset-mirror",
+  "selection_singers": [
+    "f5",
+    "f6",
+    "m5",
+    "m6"
+  ],
+  "holdout_singers": [
+    "f7",
+    "f8",
+    "m7",
+    "m8"
+  ],
+  "files_per_singer": 2,
+  "learn_seconds": 4.0,
+  "learn_target_actual_mean_gr_db": 5.5,
+  "baseline": {
+    "id": "r3_fixed_offset",
+    "fixed_offset_db": -16.43438160419464,
+    "response": {
+      "0.0": {
+        "aggregate": {
+          "mean_gr": 0.0,
+          "p95_gr": 0.0,
+          "p99_gr": 0.0,
+          "max_gr": 0.0,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.0,
+          "cross_source_mean_gr_std": 0.0,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "12.5": {
+        "aggregate": {
+          "mean_gr": 0.681767400113572,
+          "p95_gr": 0.9611444446112836,
+          "p99_gr": 0.9922475749489034,
+          "max_gr": 0.9951409029617737,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.01130717448471435,
+          "cross_source_mean_gr_std": 0.061647032251440484,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 0.6642572884800988,
+            "p95_gr": 0.885372401255245,
+            "p99_gr": 0.8920800405989162,
+            "max_gr": 0.8962564154653684,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.010136650636712978,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.7150089197967787,
+            "p95_gr": 0.9930996202670536,
+            "p99_gr": 1.0027326016748674,
+            "max_gr": 1.0061458171137267,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.010436564042629277,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.7492265039979589,
+            "p95_gr": 0.9751260810311722,
+            "p99_gr": 1.1257977965805277,
+            "max_gr": 1.131876831066666,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.01517523513123138,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.7983562070995193,
+            "p95_gr": 1.2644202455742426,
+            "p99_gr": 1.2680469814932527,
+            "max_gr": 1.2697318961236002,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.012933889381090037,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.5512821729193524,
+            "p95_gr": 0.7053567052568198,
+            "p99_gr": 0.7338485512652108,
+            "max_gr": 0.7361245248587097,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.009884065577045438,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.6543599225073724,
+            "p95_gr": 0.8440990117330144,
+            "p99_gr": 0.8500228445051784,
+            "max_gr": 0.8522464728158132,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.011492652843633213,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.6636712011871019,
+            "p95_gr": 0.948459642123186,
+            "p99_gr": 0.969365896265458,
+            "max_gr": 0.9712088325194774,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.008588058623484659,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 0.6579769849203936,
+            "p95_gr": 1.0732218496495363,
+            "p99_gr": 1.0960858872078163,
+            "max_gr": 1.0975364337308282,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.011810279641887808,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "25.0": {
+        "aggregate": {
+          "mean_gr": 1.363534800227144,
+          "p95_gr": 1.9222888892225671,
+          "p99_gr": 1.9844951498978067,
+          "max_gr": 1.9902818059235474,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.0226143489694287,
+          "cross_source_mean_gr_std": 0.12329406450288097,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 1.3285145769601976,
+            "p95_gr": 1.77074480251049,
+            "p99_gr": 1.7841600811978324,
+            "max_gr": 1.7925128309307368,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.020273301273425956,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 1.4300178395935574,
+            "p95_gr": 1.9861992405341071,
+            "p99_gr": 2.005465203349735,
+            "max_gr": 2.0122916342274535,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.020873128085258555,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 1.4984530079959177,
+            "p95_gr": 1.9502521620623443,
+            "p99_gr": 2.2515955931610554,
+            "max_gr": 2.263753662133332,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03035047026246276,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 1.5967124141990385,
+            "p95_gr": 2.528840491148485,
+            "p99_gr": 2.5360939629865054,
+            "max_gr": 2.5394637922472003,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.025867778762180074,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 1.1025643458387049,
+            "p95_gr": 1.4107134105136396,
+            "p99_gr": 1.4676971025304215,
+            "max_gr": 1.4722490497174194,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.019768131154090877,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.3087198450147448,
+            "p95_gr": 1.6881980234660288,
+            "p99_gr": 1.7000456890103568,
+            "max_gr": 1.7044929456316265,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.022985305687266425,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.3273424023742038,
+            "p95_gr": 1.896919284246372,
+            "p99_gr": 1.938731792530916,
+            "max_gr": 1.9424176650389549,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.017176117246969318,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 1.3159539698407872,
+            "p95_gr": 2.1464436992990725,
+            "p99_gr": 2.1921717744156326,
+            "max_gr": 2.1950728674616564,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.023620559283775617,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "37.5": {
+        "aggregate": {
+          "mean_gr": 2.0453022003407164,
+          "p95_gr": 2.8834333338338514,
+          "p99_gr": 2.9767427248467104,
+          "max_gr": 2.985422708885321,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.03392152345414386,
+          "cross_source_mean_gr_std": 0.18494109675432166,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 1.9927718654402962,
+            "p95_gr": 2.656117203765735,
+            "p99_gr": 2.6762401217967486,
+            "max_gr": 2.688769246396105,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.030409951910139753,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.1450267593903365,
+            "p95_gr": 2.9792988608011606,
+            "p99_gr": 3.008197805024602,
+            "max_gr": 3.01843745134118,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0313096921278878,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.2476795119938773,
+            "p95_gr": 2.9253782430935167,
+            "p99_gr": 3.3773933897415835,
+            "max_gr": 3.395630493199998,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.045525705393693466,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 2.395068621298558,
+            "p95_gr": 3.793260736722728,
+            "p99_gr": 3.8041409444797583,
+            "max_gr": 3.8091956883708002,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03880166814327022,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 1.6538465187580575,
+            "p95_gr": 2.1160701157704596,
+            "p99_gr": 2.2015456537956326,
+            "max_gr": 2.2083735745761293,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.029652196731138093,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.9630797675221177,
+            "p95_gr": 2.532297035199043,
+            "p99_gr": 2.5500685335155353,
+            "max_gr": 2.5567394184474397,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03447795853090051,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.991013603561306,
+            "p95_gr": 2.845378926369558,
+            "p99_gr": 2.908097688796374,
+            "max_gr": 2.9136264975584325,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.025764175870454323,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 1.9739309547611807,
+            "p95_gr": 3.2196655489486083,
+            "p99_gr": 3.288257661623449,
+            "max_gr": 3.292609301192485,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03543083892566674,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "50.0": {
+        "aggregate": {
+          "mean_gr": 2.727069600454288,
+          "p95_gr": 3.8445777784451343,
+          "p99_gr": 3.9689902997956135,
+          "max_gr": 3.980563611847095,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.0452286979388574,
+          "cross_source_mean_gr_std": 0.24658812900576194,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 2.657029153920395,
+            "p95_gr": 3.54148960502098,
+            "p99_gr": 3.568320162395665,
+            "max_gr": 3.5850256618614735,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04054660254685191,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.860035679187115,
+            "p95_gr": 3.9723984810682142,
+            "p99_gr": 4.01093040669947,
+            "max_gr": 4.024583268454907,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04174625617051711,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.9969060159918355,
+            "p95_gr": 3.9005043241246886,
+            "p99_gr": 4.503191186322111,
+            "max_gr": 4.527507324266664,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06070094052492552,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.193424828398077,
+            "p95_gr": 5.05768098229697,
+            "p99_gr": 5.072187925973011,
+            "max_gr": 5.078927584494401,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05173555752436015,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 2.2051286916774098,
+            "p95_gr": 2.8214268210272793,
+            "p99_gr": 2.935394205060843,
+            "max_gr": 2.944498099434839,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.039536262308181754,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 2.6174396900294896,
+            "p95_gr": 3.3763960469320575,
+            "p99_gr": 3.4000913780207136,
+            "max_gr": 3.408985891263253,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04597061137453285,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 2.6546848047484075,
+            "p95_gr": 3.793838568492744,
+            "p99_gr": 3.877463585061832,
+            "max_gr": 3.8848353300779097,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.034352234493938635,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 2.6319079396815743,
+            "p95_gr": 4.292887398598145,
+            "p99_gr": 4.384343548831265,
+            "max_gr": 4.390145734923313,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.047241118567551234,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "62.5": {
+        "aggregate": {
+          "mean_gr": 3.40883700056786,
+          "p95_gr": 4.805722223056418,
+          "p99_gr": 4.961237874744517,
+          "max_gr": 4.975704514808869,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.05653587242357402,
+          "cross_source_mean_gr_std": 0.3082351612572027,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 3.3212864424004938,
+            "p95_gr": 4.426862006276225,
+            "p99_gr": 4.460400202994581,
+            "max_gr": 4.481282077326842,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05068325318356747,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 3.575044598983894,
+            "p95_gr": 4.9654981013352675,
+            "p99_gr": 5.013663008374337,
+            "max_gr": 5.030729085568634,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05218282021314421,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 3.746132519989795,
+            "p95_gr": 4.875630405155861,
+            "p99_gr": 5.628988982902638,
+            "max_gr": 5.65938415533333,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07587617565615733,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.9917810354975964,
+            "p95_gr": 6.3221012278712125,
+            "p99_gr": 6.340234907466264,
+            "max_gr": 6.348659480618001,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06466944690545234,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 2.756410864596763,
+            "p95_gr": 3.5267835262840994,
+            "p99_gr": 3.669242756326054,
+            "max_gr": 3.6806226242935485,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04942032788522925,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.2717996125368622,
+            "p95_gr": 4.2204950586650725,
+            "p99_gr": 4.250114222525892,
+            "max_gr": 4.261232364079066,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.057463264218166235,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.3183560059355095,
+            "p95_gr": 4.74229821061593,
+            "p99_gr": 4.84682948132729,
+            "max_gr": 4.856044162597387,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.042940293117426594,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 3.2898849246019672,
+            "p95_gr": 5.366109248247681,
+            "p99_gr": 5.480429436039081,
+            "max_gr": 5.487682168654141,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.059051398209448706,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "75.0": {
+        "aggregate": {
+          "mean_gr": 4.090604400681433,
+          "p95_gr": 5.766866667667703,
+          "p99_gr": 5.953485449693421,
+          "max_gr": 5.970845417770642,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.06784304690828773,
+          "cross_source_mean_gr_std": 0.3698821935086433,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 3.9855437308805923,
+            "p95_gr": 5.31223440753147,
+            "p99_gr": 5.352480243593497,
+            "max_gr": 5.37753849279221,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.060819903820279506,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 4.290053518780673,
+            "p95_gr": 5.958597721602321,
+            "p99_gr": 6.016395610049204,
+            "max_gr": 6.03687490268236,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0626193842557756,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 4.4953590239877546,
+            "p95_gr": 5.850756486187033,
+            "p99_gr": 6.754786779483167,
+            "max_gr": 6.791260986399996,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.09105141078738693,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 4.790137242597116,
+            "p95_gr": 7.586521473445456,
+            "p99_gr": 7.6082818889595165,
+            "max_gr": 7.6183913767416005,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07760333628654044,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.307693037516115,
+            "p95_gr": 4.232140231540919,
+            "p99_gr": 4.403091307591265,
+            "max_gr": 4.4167471491522585,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.059304393462276186,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.9261595350442353,
+            "p95_gr": 5.064594070398086,
+            "p99_gr": 5.100137067031071,
+            "max_gr": 5.113478836894879,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06895591706180101,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.982027207122612,
+            "p95_gr": 5.690757852739116,
+            "p99_gr": 5.816195377592748,
+            "max_gr": 5.827252995116865,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05152835174090865,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 3.9478619095223615,
+            "p95_gr": 6.439331097897217,
+            "p99_gr": 6.576515323246898,
+            "max_gr": 6.58521860238497,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07086167785133347,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "87.5": {
+        "aggregate": {
+          "mean_gr": 4.772371800795003,
+          "p95_gr": 6.7280111122789865,
+          "p99_gr": 6.945733024642324,
+          "max_gr": 6.965986320732416,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.0791502213930026,
+          "cross_source_mean_gr_std": 0.4315292257600838,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 4.649801019360692,
+            "p95_gr": 6.197606808786714,
+            "p99_gr": 6.2445602841924135,
+            "max_gr": 6.273794908257579,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07095655445699048,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.005062438577451,
+            "p95_gr": 6.951697341869375,
+            "p99_gr": 7.019128211724071,
+            "max_gr": 7.043020719796087,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07305594829840295,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.244585527985714,
+            "p95_gr": 6.825882567218205,
+            "p99_gr": 7.880584576063694,
+            "max_gr": 7.923137817466662,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.10622664591861955,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 5.588493449696635,
+            "p95_gr": 8.850941719019698,
+            "p99_gr": 8.876328870452769,
+            "max_gr": 8.8881232728652,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.09053722566763796,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.8589752104354673,
+            "p95_gr": 4.937496936797738,
+            "p99_gr": 5.136939858856476,
+            "max_gr": 5.152871674010968,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06918845903931706,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 4.580519457551607,
+            "p95_gr": 5.908693082131101,
+            "p99_gr": 5.950159911536249,
+            "max_gr": 5.965725309710693,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08044856990543717,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 4.6456984083097135,
+            "p95_gr": 6.639217494862303,
+            "p99_gr": 6.785561273858206,
+            "max_gr": 6.798461827636342,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06011641036439543,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 4.605838894442755,
+            "p95_gr": 7.512552947546753,
+            "p99_gr": 7.672601210454715,
+            "max_gr": 7.682755036115798,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08267195749322011,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "100.0": {
+        "aggregate": {
+          "mean_gr": 5.454139200908576,
+          "p95_gr": 7.6891555568902685,
+          "p99_gr": 7.937980599591227,
+          "max_gr": 7.96112722369419,
+          "frac_gt10": 0.008918025352766236,
+          "gr_ripple": 0.0904573958777148,
+          "cross_source_mean_gr_std": 0.49317625801152387,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 5.31405830784079,
+            "p95_gr": 7.08297921004196,
+            "p99_gr": 7.13664032479133,
+            "max_gr": 7.170051323722947,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08109320509370382,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.72007135837423,
+            "p95_gr": 7.9447969621364285,
+            "p99_gr": 8.02186081339894,
+            "max_gr": 8.049166536909814,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08349251234103422,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.993812031983671,
+            "p95_gr": 7.801008648249377,
+            "p99_gr": 9.006382372644222,
+            "max_gr": 9.055014648533328,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.12140188104985104,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 6.386849656796154,
+            "p95_gr": 10.11536196459394,
+            "p99_gr": 10.144375851946021,
+            "max_gr": 10.157855168988801,
+            "frac_gt10": 0.07134420282212989,
+            "gr_ripple": 0.1034711150487203,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 4.4102573833548195,
+            "p95_gr": 5.6428536420545585,
+            "p99_gr": 5.870788410121686,
+            "max_gr": 5.888996198869678,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07907252461636351,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 5.234879380058979,
+            "p95_gr": 6.752792093864115,
+            "p99_gr": 6.800182756041427,
+            "max_gr": 6.817971782526506,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0919412227490657,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 5.309369609496815,
+            "p95_gr": 7.587677136985488,
+            "p99_gr": 7.754927170123664,
+            "max_gr": 7.769670660155819,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06870446898787727,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 5.263815879363149,
+            "p95_gr": 8.58577479719629,
+            "p99_gr": 8.76868709766253,
+            "max_gr": 8.780291469846626,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.09448223713510247,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      }
+    },
+    "solver": {
+      "max_residual_db": 0.0,
+      "mean_relative_threshold_db": -16.43438160419464,
+      "std_relative_threshold_db": 0.0,
+      "min_relative_threshold_db": -16.43438160419464,
+      "max_relative_threshold_db": -16.43438160419464,
+      "mean_learn_active_fraction": 0.9060325520833334
+    },
+    "gates": {
+      "amount0_exact_bypass": true,
+      "amount25_mean": true,
+      "amount25_p95": true,
+      "amount50_mean": true,
+      "amount50_p95": true,
+      "amount50_gt10": true,
+      "amount75_mean": true,
+      "amount75_p99": true,
+      "amount100_mean": true,
+      "amount100_p99": true,
+      "amount100_gt10": true,
+      "ripple_all": false,
+      "cross_source_50": true,
+      "monotonic": true
+    },
+    "mapping_rmse_db": 0.03139874270948164
+  },
+  "candidate": {
+    "id": "learn_actual_mean_solve",
+    "response": {
+      "0.0": {
+        "aggregate": {
+          "mean_gr": 0.0,
+          "p95_gr": 0.0,
+          "p99_gr": 0.0,
+          "max_gr": 0.0,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.0,
+          "cross_source_mean_gr_std": 0.0,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 0.0,
+            "p95_gr": 0.0,
+            "p99_gr": 0.0,
+            "max_gr": 0.0,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "12.5": {
+        "aggregate": {
+          "mean_gr": 0.6794008544183873,
+          "p95_gr": 0.95879177036551,
+          "p99_gr": 0.9898957691441762,
+          "max_gr": 0.9927581862615746,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.011269206520728468,
+          "cross_source_mean_gr_std": 0.04855114030116837,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 0.6783202218565306,
+            "p95_gr": 0.899558356656005,
+            "p99_gr": 0.9062659960001677,
+            "max_gr": 0.9104423708666294,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.010315118844620046,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.734342103000334,
+            "p95_gr": 1.012882468651716,
+            "p99_gr": 1.0225154500595284,
+            "max_gr": 1.0259286654983892,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.010657395305572082,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 0.703521585498261,
+            "p95_gr": 0.9296046568620998,
+            "p99_gr": 1.0803076496707278,
+            "max_gr": 1.0861694836803077,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.014590581426079068,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.7594544664490529,
+            "p95_gr": 1.2253372450280435,
+            "p99_gr": 1.2289639809470518,
+            "max_gr": 1.2306488955774024,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.012499013559243119,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 0.5831740565827918,
+            "p95_gr": 0.7378160201234117,
+            "p99_gr": 0.7662793334983321,
+            "max_gr": 0.7685182043660108,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.010338579632531875,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.6208651143732442,
+            "p95_gr": 0.8098909442754372,
+            "p99_gr": 0.8158189799548978,
+            "max_gr": 0.8180496243041195,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.01102074273112446,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 0.7188117855752145,
+            "p95_gr": 1.0038710822203571,
+            "p99_gr": 1.0247773363626638,
+            "max_gr": 1.0266202726166842,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.009181853932600048,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 0.6367175020116693,
+            "p95_gr": 1.0513733891070083,
+            "p99_gr": 1.0742374266600405,
+            "max_gr": 1.0756879731830538,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.01155036673405704,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "25.0": {
+        "aggregate": {
+          "mean_gr": 1.3588017088367745,
+          "p95_gr": 1.91758354073102,
+          "p99_gr": 1.9797915382883524,
+          "max_gr": 1.9855163725231493,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.022538413041456935,
+          "cross_source_mean_gr_std": 0.09710228060233674,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 1.3566404437130613,
+            "p95_gr": 1.79911671331201,
+            "p99_gr": 1.8125319920003353,
+            "max_gr": 1.8208847417332588,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.02063023768924009,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 1.468684206000668,
+            "p95_gr": 2.025764937303432,
+            "p99_gr": 2.0450309001190567,
+            "max_gr": 2.0518573309967785,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.021314790611144163,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 1.407043170996522,
+            "p95_gr": 1.8592093137241996,
+            "p99_gr": 2.1606152993414556,
+            "max_gr": 2.1723389673606155,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.029181162852158136,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 1.5189089328981058,
+            "p95_gr": 2.450674490056087,
+            "p99_gr": 2.4579279618941037,
+            "max_gr": 2.461297791154805,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.024998027118486237,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 1.1663481131655835,
+            "p95_gr": 1.4756320402468235,
+            "p99_gr": 1.5325586669966642,
+            "max_gr": 1.5370364087320216,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.02067715926506375,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.2417302287464884,
+            "p95_gr": 1.6197818885508743,
+            "p99_gr": 1.6316379599097957,
+            "max_gr": 1.636099248608239,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.02204148546224892,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.437623571150429,
+            "p95_gr": 2.0077421644407143,
+            "p99_gr": 2.0495546727253275,
+            "max_gr": 2.0532405452333684,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.018363707865200096,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 1.2734350040233386,
+            "p95_gr": 2.1027467782140166,
+            "p99_gr": 2.148474853320081,
+            "max_gr": 2.1513759463661075,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.02310073346811408,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "37.5": {
+        "aggregate": {
+          "mean_gr": 2.0382025632551617,
+          "p95_gr": 2.8763753110965293,
+          "p99_gr": 2.9696873074325287,
+          "max_gr": 2.978274558784724,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.03380761956218574,
+          "cross_source_mean_gr_std": 0.1456534209035052,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 2.0349606655695918,
+            "p95_gr": 2.698675069968015,
+            "p99_gr": 2.718797988000503,
+            "max_gr": 2.731327112599888,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.030945356533859516,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.203026309001002,
+            "p95_gr": 3.0386474059551483,
+            "p99_gr": 3.0675463501785853,
+            "max_gr": 3.0777859964951677,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03197218591671608,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.110564756494783,
+            "p95_gr": 2.7888139705862995,
+            "p99_gr": 3.2409229490121834,
+            "max_gr": 3.2585084510409232,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.043771744278238586,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 2.2783633993471586,
+            "p95_gr": 3.676011735084131,
+            "p99_gr": 3.686891942841156,
+            "max_gr": 3.6919466867322073,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03749704067772981,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 1.7495221697483752,
+            "p95_gr": 2.213448060370235,
+            "p99_gr": 2.298838000494996,
+            "max_gr": 2.3055546130980327,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.031015738897595502,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 1.8625953431197324,
+            "p95_gr": 2.4296728328263115,
+            "p99_gr": 2.4474569398646935,
+            "max_gr": 2.4541488729123584,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03306222819337218,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 2.1564353567256433,
+            "p95_gr": 3.0116132466610717,
+            "p99_gr": 3.0743320090879918,
+            "max_gr": 3.0798608178500526,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.02754556179780219,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 1.910152506035008,
+            "p95_gr": 3.1541201673210253,
+            "p99_gr": 3.2227122799801218,
+            "max_gr": 3.2270639195491615,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03465110020217204,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "50.0": {
+        "aggregate": {
+          "mean_gr": 2.717603417673549,
+          "p95_gr": 3.83516708146204,
+          "p99_gr": 3.959583076576705,
+          "max_gr": 3.9710327450462986,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.04507682608291387,
+          "cross_source_mean_gr_std": 0.19420456120467347,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 2.7132808874261225,
+            "p95_gr": 3.59823342662402,
+            "p99_gr": 3.6250639840006706,
+            "max_gr": 3.6417694834665175,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04126047537848018,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.937368412001336,
+            "p95_gr": 4.051529874606864,
+            "p99_gr": 4.0900618002381135,
+            "max_gr": 4.103714661993557,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.042629581222288326,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 2.814086341993044,
+            "p95_gr": 3.7184186274483992,
+            "p99_gr": 4.321230598682911,
+            "max_gr": 4.344677934721231,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05836232570431627,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.0378178657962116,
+            "p95_gr": 4.901348980112174,
+            "p99_gr": 4.915855923788207,
+            "max_gr": 4.92259558230961,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.049996054236972474,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 2.332696226331167,
+            "p95_gr": 2.951264080493647,
+            "p99_gr": 3.0651173339933284,
+            "max_gr": 3.0740728174640433,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.0413543185301275,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 2.483460457492977,
+            "p95_gr": 3.2395637771017487,
+            "p99_gr": 3.2632759198195913,
+            "max_gr": 3.272198497216478,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04408297092449784,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 2.875247142300858,
+            "p95_gr": 4.015484328881429,
+            "p99_gr": 4.099109345450655,
+            "max_gr": 4.106481090466737,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.03672741573040019,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 2.5468700080466773,
+            "p95_gr": 4.205493556428033,
+            "p99_gr": 4.296949706640162,
+            "max_gr": 4.302751892732215,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.04620146693622816,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "62.5": {
+        "aggregate": {
+          "mean_gr": 3.3970042720919364,
+          "p95_gr": 4.793958851827549,
+          "p99_gr": 4.949478845720881,
+          "max_gr": 4.963790931307873,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.05634603260364397,
+          "cross_source_mean_gr_std": 0.2427557015058414,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 3.391601109282653,
+            "p95_gr": 4.497791783280025,
+            "p99_gr": 4.531329980000838,
+            "max_gr": 4.552211854333147,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05157559422310465,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 3.67171051500167,
+            "p95_gr": 5.064412343258581,
+            "p99_gr": 5.112577250297642,
+            "max_gr": 5.129643327491946,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05328697652786043,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 3.517607927491305,
+            "p95_gr": 4.648023284310499,
+            "p99_gr": 5.4015382483536385,
+            "max_gr": 5.430847418401539,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07295290713039462,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.797272332245264,
+            "p95_gr": 6.126686225140217,
+            "p99_gr": 6.144819904735259,
+            "max_gr": 6.153244477887013,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06249506779622122,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 2.9158702829139593,
+            "p95_gr": 3.689080100617059,
+            "p99_gr": 3.8313966674916604,
+            "max_gr": 3.842591021830054,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.051692898162659595,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.1043255718662217,
+            "p95_gr": 4.049454721377185,
+            "p99_gr": 4.079094899774489,
+            "max_gr": 4.090248121520598,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.055103713655620896,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.594058927876072,
+            "p95_gr": 5.0193554111017855,
+            "p99_gr": 5.123886681813319,
+            "max_gr": 5.133101363083421,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.045909269663001066,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 3.1835875100583473,
+            "p95_gr": 5.256866945535041,
+            "p99_gr": 5.371187133300203,
+            "max_gr": 5.378439865915269,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.057751833670289326,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "75.0": {
+        "aggregate": {
+          "mean_gr": 4.076405126510323,
+          "p95_gr": 5.752750622193059,
+          "p99_gr": 5.9393746148650575,
+          "max_gr": 5.956549117569448,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.06761523912437148,
+          "cross_source_mean_gr_std": 0.2913068418070104,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 4.0699213311391835,
+            "p95_gr": 5.39735013993603,
+            "p99_gr": 5.437595976001006,
+            "max_gr": 5.462654225199776,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06189071306771903,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 4.406052618002004,
+            "p95_gr": 6.0772948119102965,
+            "p99_gr": 6.135092700357171,
+            "max_gr": 6.155571992990335,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06394437183343216,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 4.221129512989566,
+            "p95_gr": 5.577627941172599,
+            "p99_gr": 6.481845898024367,
+            "max_gr": 6.5170169020818465,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08754348855647717,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 4.556726798694317,
+            "p95_gr": 7.352023470168262,
+            "p99_gr": 7.373783885682312,
+            "max_gr": 7.3838933734644145,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07499408135545962,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 3.4990443394967503,
+            "p95_gr": 4.42689612074047,
+            "p99_gr": 4.597676000989992,
+            "max_gr": 4.611109226196065,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.062031477795191005,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 3.725190686239465,
+            "p95_gr": 4.859345665652623,
+            "p99_gr": 4.894913879729387,
+            "max_gr": 4.908297745824717,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06612445638674436,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 4.312870713451287,
+            "p95_gr": 6.023226493322143,
+            "p99_gr": 6.1486640181759835,
+            "max_gr": 6.159721635700105,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.05509112359560438,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 3.820305012070016,
+            "p95_gr": 6.308240334642051,
+            "p99_gr": 6.4454245599602435,
+            "max_gr": 6.454127839098323,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06930220040434408,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "87.5": {
+        "aggregate": {
+          "mean_gr": 4.755805980928711,
+          "p95_gr": 6.711542392558569,
+          "p99_gr": 6.929270384009234,
+          "max_gr": 6.949307303831022,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.07888444564509912,
+          "cross_source_mean_gr_std": 0.33985798210817847,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 4.748241552995713,
+            "p95_gr": 6.296908496592035,
+            "p99_gr": 6.343861972001173,
+            "max_gr": 6.373096596066405,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07220583191234134,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.140394721002338,
+            "p95_gr": 7.090177280562012,
+            "p99_gr": 7.157608150416699,
+            "max_gr": 7.181500658488725,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07460176713900442,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 4.924651098487828,
+            "p95_gr": 6.507232598034699,
+            "p99_gr": 7.562153547695095,
+            "max_gr": 7.603186385762154,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.10213406998254763,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 5.31618126514337,
+            "p95_gr": 8.577360715196304,
+            "p99_gr": 8.602747866629365,
+            "max_gr": 8.614542269041817,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08749309491470363,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 4.082218396079542,
+            "p95_gr": 5.164712140863882,
+            "p99_gr": 5.363955334488325,
+            "max_gr": 5.379627430562076,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07237005742772158,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 4.34605580061271,
+            "p95_gr": 5.66923660992806,
+            "p99_gr": 5.710732859684285,
+            "max_gr": 5.7263473701288365,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07714519911787171,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 5.031682499026501,
+            "p95_gr": 7.0270975755425,
+            "p99_gr": 7.173441354538647,
+            "max_gr": 7.186341908316789,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.06427297752819891,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 4.457022514081685,
+            "p95_gr": 7.359613723749058,
+            "p99_gr": 7.519661986620284,
+            "max_gr": 7.5298158122813765,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08085256713840372,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      },
+      "100.0": {
+        "aggregate": {
+          "mean_gr": 5.435206835347098,
+          "p95_gr": 7.67033416292408,
+          "p99_gr": 7.91916615315341,
+          "max_gr": 7.942065490092597,
+          "frac_gt10": 0.0,
+          "gr_ripple": 0.09015365216582774,
+          "cross_source_mean_gr_std": 0.38840912240934694,
+          "ballistics_homogeneity_max_error": 0.0
+        },
+        "files": [
+          {
+            "mean_gr": 5.426561774852245,
+            "p95_gr": 7.19646685324804,
+            "p99_gr": 7.250127968001341,
+            "max_gr": 7.283538966933035,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08252095075696037,
+            "file": "f5:f5_arpeggios_belt_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.874736824002672,
+            "p95_gr": 8.103059749213728,
+            "p99_gr": 8.180123600476227,
+            "max_gr": 8.207429323987114,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08525916244457665,
+            "file": "f5:f5_arpeggios_breathy_a.wav",
+            "singer": "f5"
+          },
+          {
+            "mean_gr": 5.628172683986088,
+            "p95_gr": 7.4368372548967985,
+            "p99_gr": 8.642461197365822,
+            "max_gr": 8.689355869442462,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.11672465140863254,
+            "file": "f6:f6_arpeggios_belt_1_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 6.075635731592423,
+            "p95_gr": 9.802697960224348,
+            "p99_gr": 9.831711847576415,
+            "max_gr": 9.84519116461922,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.09999210847394495,
+            "file": "f6:f6_arpeggios_breathy_a.wav",
+            "singer": "f6"
+          },
+          {
+            "mean_gr": 4.665392452662334,
+            "p95_gr": 5.902528160987294,
+            "p99_gr": 6.130234667986657,
+            "max_gr": 6.1481456349280865,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.082708637060255,
+            "file": "m5:m5_arpeggios_breathy_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 4.966920914985954,
+            "p95_gr": 6.479127554203497,
+            "p99_gr": 6.526551839639183,
+            "max_gr": 6.544396994432956,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.08816594184899568,
+            "file": "m5:m5_arpeggios_lip_trill_a.wav",
+            "singer": "m5"
+          },
+          {
+            "mean_gr": 5.750494284601716,
+            "p95_gr": 8.030968657762857,
+            "p99_gr": 8.19821869090131,
+            "max_gr": 8.212962180933474,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.07345483146080038,
+            "file": "m6:m6_arpeggios_belt_a.wav",
+            "singer": "m6"
+          },
+          {
+            "mean_gr": 5.093740016093355,
+            "p95_gr": 8.410987112856066,
+            "p99_gr": 8.593899413280324,
+            "max_gr": 8.60550378546443,
+            "frac_gt10": 0.0,
+            "gr_ripple": 0.09240293387245632,
+            "file": "m6:m6_arpeggios_breathy_a.wav",
+            "singer": "m6"
+          }
+        ]
+      }
+    },
+    "solver": {
+      "max_residual_db": 2.21645694198358e-05,
+      "mean_relative_threshold_db": -16.377015895351896,
+      "std_relative_threshold_db": 0.8468102804338035,
+      "min_relative_threshold_db": -17.764256166527538,
+      "max_relative_threshold_db": -15.33257503532279,
+      "mean_learn_active_fraction": 0.9060325520833334
+    },
+    "gates": {
+      "amount0_exact_bypass": true,
+      "amount25_mean": true,
+      "amount25_p95": true,
+      "amount50_mean": true,
+      "amount50_p95": true,
+      "amount50_gt10": true,
+      "amount75_mean": true,
+      "amount75_p99": true,
+      "amount100_mean": true,
+      "amount100_p99": true,
+      "amount100_gt10": true,
+      "ripple_all": false,
+      "cross_source_50": true,
+      "monotonic": true
+    },
+    "extra_gates": {
+      "mapping_rmse": true,
+      "cross_source_50_margin": true,
+      "solver_residual": true,
+      "gain_invariance_threshold": true,
+      "gain_invariance_gr": true,
+      "complexity_justified": true
+    },
+    "mapping_rmse_db": 0.04436084731567598,
+    "gain_invariance_probe": {
+      "max_threshold_shift_error_db": 6.103515625e-05,
+      "max_eval_mean_gr_error_db": 2.0173601008366404e-05,
+      "rows": [
+        {
+          "gain_db": -12.0,
+          "threshold_db": -51.08833312988281,
+          "threshold_shift_error_db": 3.0517578125e-05,
+          "eval_mean_gr_error_db": 1.008679985936567e-05
+        },
+        {
+          "gain_db": -6.0,
+          "threshold_db": -45.08842468261719,
+          "threshold_shift_error_db": 6.103515625e-05,
+          "eval_mean_gr_error_db": 2.0173601008366404e-05
+        },
+        {
+          "gain_db": 0.0,
+          "threshold_db": -39.08836364746094,
+          "threshold_shift_error_db": 0.0,
+          "eval_mean_gr_error_db": 0.0
+        },
+        {
+          "gain_db": 6.0,
+          "threshold_db": -33.08830261230469,
+          "threshold_shift_error_db": 6.103515625e-05,
+          "eval_mean_gr_error_db": 2.0173599292405697e-05
+        },
+        {
+          "gain_db": 12.0,
+          "threshold_db": -27.088394165039062,
+          "threshold_shift_error_db": 3.0517578125e-05,
+          "eval_mean_gr_error_db": 1.0086800289244024e-05
+        }
+      ]
+    },
+    "thresholds": {
+      "f5:f5_arpeggios_belt_a.wav": {
+        "threshold_db": -39.08836364746094,
+        "relative_to_ref_db": -16.774844533833082,
+        "solver_residual_db": 4.280418291813248e-06
+      },
+      "f5:f5_arpeggios_breathy_a.wav": {
+        "threshold_db": -62.00401306152344,
+        "relative_to_ref_db": -16.909169965426535,
+        "solver_residual_db": 8.018481010729772e-06
+      },
+      "f6:f6_arpeggios_belt_1_a.wav": {
+        "threshold_db": -33.89808654785156,
+        "relative_to_ref_db": -15.33257503532279,
+        "solver_residual_db": 1.1440732426315492e-05
+      },
+      "f6:f6_arpeggios_breathy_a.wav": {
+        "threshold_db": -46.86912536621094,
+        "relative_to_ref_db": -15.496389591085876,
+        "solver_residual_db": 5.236125865337726e-06
+      },
+      "m5:m5_arpeggios_breathy_a.wav": {
+        "threshold_db": -51.95793151855469,
+        "relative_to_ref_db": -17.215549483878107,
+        "solver_residual_db": 1.1887510137142954e-05
+      },
+      "m5:m5_arpeggios_lip_trill_a.wav": {
+        "threshold_db": -51.38648986816406,
+        "relative_to_ref_db": -15.613323835693265,
+        "solver_residual_db": 6.635755180006697e-06
+      },
+      "m6:m6_arpeggios_belt_a.wav": {
+        "threshold_db": -43.39591979980469,
+        "relative_to_ref_db": -17.764256166527538,
+        "solver_residual_db": 2.21645694198358e-05
+      },
+      "m6:m6_arpeggios_breathy_a.wav": {
+        "threshold_db": -59.21791076660156,
+        "relative_to_ref_db": -15.910018551047997,
+        "solver_residual_db": 7.265998476668756e-06
+      }
+    },
+    "passes_selection": false
+  },
+  "holdout": null,
+  "acceptance_met": false,
+  "raw_audio_persisted": false
+}

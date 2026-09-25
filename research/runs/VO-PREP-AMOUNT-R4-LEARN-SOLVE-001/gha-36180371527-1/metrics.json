@@ -1,0 +1,29 @@
+{
+  "acceptance_met": false,
+  "baseline_selection_mapping_rmse_db": 0.03139874270948164,
+  "decision": "REVISE",
+  "files_per_singer": 2,
+  "gain_invariance_max_gr_error_db": 2.0173601008366404e-05,
+  "gain_invariance_max_threshold_error_db": 6.103515625e-05,
+  "holdout_mapping_rmse_db": null,
+  "holdout_opened": true,
+  "holdout_passes": false,
+  "holdout_singers": [
+    "f7",
+    "f8",
+    "m7",
+    "m8"
+  ],
+  "learn_target_actual_mean_gr_db": 5.5,
+  "raw_audio_persisted": false,
+  "selection_mapping_rmse_db": 0.04436084731567598,
+  "selection_passes": false,
+  "selection_relative_threshold_std_db": 0.8468102804338035,
+  "selection_singers": [
+    "f5",
+    "f6",
+    "m5",
+    "m6"
+  ],
+  "selection_solver_max_residual_db": 2.21645694198358e-05
+}

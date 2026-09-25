@@ -1,0 +1,9 @@
+claim: A one-time Threshold solved from an explicit four-second Learn buffer can make
+  a linear one-knob Amount control more corpus-robust than a fixed relative Threshold
+  offset while leaving normal-playback compressor DSP unchanged.
+evidence_type: HYPOTHESIS
+scope: Vo.Prep Amount Revision 4 on fresh singer-disjoint VocalSet f5/f6/m5/m6 selection
+  and f7/f8/m7/m8 holdout cohorts, two files per singer, with the frozen transparent
+  compressor core and no continuous auto-threshold.
+source_run: research/runs/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1
+promotion_requested: PROVISIONAL

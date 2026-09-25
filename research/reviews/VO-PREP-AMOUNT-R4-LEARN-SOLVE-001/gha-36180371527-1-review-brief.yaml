@@ -1,0 +1,190 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-brief-v1
+job_id: VO-PREP-AMOUNT-R4-LEARN-SOLVE-001
+run_id: gha-36180371527-1
+source_run: research/runs/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-triage.yaml
+triage_id: VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001.yaml
+research_question: Can a one-time Threshold solved only from the explicit four-second
+  Learn buffer make Vo.Prep Amount intensity transfer across fresh singers more robustly
+  than the rejected R3 fixed relative-offset baseline, without adding continuous auto-threshold
+  behavior or changing the frozen compressor core?
+hypothesis: A Learn-time solver that chooses one locked Threshold so active Learn
+  ActualGR mean is 5.5 dB will pass the original Amount safety gates on fresh VocalSet
+  selection and holdout singers, materially improve target-intensity mapping relative
+  to the R3 fixed-offset baseline, and preserve exact input-gain invariance while
+  leaving normal-playback DSP unchanged.
+counter_hypotheses:
+- The R3 fixed-offset baseline is already sufficient on fresh singers, so the Learn-time
+  solver adds unjustified complexity.
+- Learn-time self-calibration overfits the four-second calibration phrase and fails
+  post-lock Amount mean-GR gates on fresh holdout singers.
+- Solving to a fixed Learn ActualGR target reduces cross-source consistency, increases
+  ripple, or pushes p95/p99 GR beyond the existing safety limits.
+- The solver is materially sensitive to input gain despite using the explicit Learn
+  buffer.
+- A four-second Learn window does not provide a stable enough operating point for
+  this target-solve architecture.
+acceptance_criteria:
+- The compressor core remains frozen at Slow RMS 25 ms, instantaneous Fast peak, max(Slow,
+  Fast-6 dB) fusion, 1.5:1 ratio, 18 dB knee, 8 ms attack and 70 ms release.
+- Learn uses only the first four seconds of the selected excerpt; Learn activity is
+  derived only from that four-second buffer and no post-Learn sample participates
+  in Threshold calibration.
+- Threshold is fixed after Learn; no continuous or hidden auto-threshold behavior
+  is introduced.
+- Selection uses exactly f5, f6, m5 and m6, with two qualifying VocalSet files per
+  singer.
+- Holdout uses exactly f7, f8, m7 and m8, with two qualifying VocalSet files per singer.
+- No singer appears in both selection and holdout.
+- Candidate selection passes the unchanged Amount safety gates, except that the selection
+  ripple ceiling is tightened from 0.080 dB to 0.075 dB.
+- Candidate selection Amount-mean mapping RMSE versus the predeclared 5.5 dB linear
+  target is no more than 0.50 dB.
+- Candidate selection cross-singer mean-GR standard deviation at Amount 50 is no more
+  than 0.75 dB.
+- Learn solver maximum residual is no more than 0.02 dB.
+- Input-gain stress at -12, -6, 0, +6 and +12 dB has maximum Threshold-shift error
+  no more than 0.005 dB and maximum post-lock mean-GR error no more than 0.005 dB.
+- Complexity is justified only if the R3 baseline fails a selection gate or the candidate
+  reduces selection mapping RMSE to no more than 70 percent of the baseline RMSE.
+- Holdout is opened only after all selection and complexity gates pass.
+- On holdout, Amount 0 produces exact zero gain reduction.
+- On holdout, Amount 25 mean GR is between 0.75 and 2.25 dB and p95 GR is no more
+  than 4.0 dB.
+- On holdout, Amount 50 mean GR is between 2.5 and 3.75 dB, p95 GR is no more than
+  6.0 dB, and fraction above 10 dB is no more than 0.5 percent.
+- On holdout, Amount 75 mean GR is between 3.75 and 5.5 dB and p99 GR is no more than
+  9.0 dB.
+- On holdout, Amount 100 mean GR is between 5.0 and 7.0 dB, p99 GR is no more than
+  10.0 dB, and fraction above 10 dB is no more than 2 percent.
+- Every nonzero holdout Amount has aggregate GR ripple no more than 0.080 dB.
+- Holdout cross-singer mean-GR standard deviation at Amount 50 is no more than 1.0
+  dB.
+- Holdout mean and p95 gain reduction remain monotonic with Amount.
+- Holdout Amount-mean mapping RMSE versus the predeclared 5.5 dB linear target is
+  no more than 0.65 dB.
+- Holdout Learn solver maximum residual is no more than 0.02 dB.
+- Raw VocalSet audio is not persisted in CIPI artifacts.
+- A passing result authorizes a separate red-team only; it does not adopt the product
+  mapping.
+rejection_criteria:
+- The candidate fails any selection gate.
+- The Learn-time solver fails the declared residual or input-gain-invariance gates.
+- The complexity-justification gate fails against the R3 simple baseline.
+- The frozen candidate fails any holdout gate.
+- Any required singer has fewer than two qualifying files.
+- Any selection/holdout singer overlap occurs.
+- Any post-Learn sample influences Learn-time Threshold calibration.
+- Raw public audio is persisted into the evidence branch.
+- Passing requires relaxing a predeclared gate.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: d5c6a994e953718e9ae6f305e2fa5bc23055be66
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: baseline_selection_mapping_rmse_db
+  value: 0.03139874270948164
+- path: decision
+  value: REVISE
+- path: files_per_singer
+  value: 2
+- path: gain_invariance_max_gr_error_db
+  value: 2.0173601008366404e-05
+- path: gain_invariance_max_threshold_error_db
+  value: 6.103515625e-05
+- path: holdout_mapping_rmse_db
+  value: null
+- path: holdout_opened
+  value: true
+- path: holdout_passes
+  value: false
+- path: holdout_singers[0]
+  value: f7
+- path: holdout_singers[1]
+  value: f8
+- path: holdout_singers[2]
+  value: m7
+- path: holdout_singers[3]
+  value: m8
+- path: learn_target_actual_mean_gr_db
+  value: 5.5
+- path: raw_audio_persisted
+  value: false
+- path: selection_mapping_rmse_db
+  value: 0.04436084731567598
+- path: selection_passes
+  value: false
+- path: selection_relative_threshold_std_db
+  value: 0.8468102804338035
+- path: selection_singers[0]
+  value: f5
+- path: selection_singers[1]
+  value: f6
+- path: selection_singers[2]
+  value: m5
+- path: selection_singers[3]
+  value: m6
+- path: selection_solver_max_residual_db
+  value: 2.21645694198358e-05
+knowledge_candidate:
+  claim: A one-time Threshold solved from an explicit four-second Learn buffer can
+    make a linear one-knob Amount control more corpus-robust than a fixed relative
+    Threshold offset while leaving normal-playback compressor DSP unchanged.
+  evidence_type: HYPOTHESIS
+  scope: Vo.Prep Amount Revision 4 on fresh singer-disjoint VocalSet f5/f6/m5/m6 selection
+    and f7/f8/m7/m8 holdout cohorts, two files per singer, with the frozen transparent
+    compressor core and no continuous auto-threshold.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates:
+- Level-matched blind real-vocal listening before final Amount adoption.
+- Cubase Pro 14 host validation before product release.
+downstream_gate_signals:
+- Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard
+  are not all formally closed.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Transparent compressor core level-matched blind listening is pending.
+- Transparent compressor final VST3 / Cubase Pro 14 host validation is pending.
+- Representative real-vocal listening is still required.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

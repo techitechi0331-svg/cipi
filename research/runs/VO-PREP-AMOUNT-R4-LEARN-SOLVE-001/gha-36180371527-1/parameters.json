@@ -1,0 +1,26 @@
+{
+  "baseline": [
+    {
+      "R3 strongest fixed-offset architecture": "explicit four-second Learn Slow-P50 reference plus -16.43438160419464 dB relative Threshold offset, with DesiredGR-scaled Amount."
+    }
+  ],
+  "experiment_adapter": "voprep_amount_mapping_r4_v1",
+  "job_file": "research/jobs/queued/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001.yaml",
+  "metrics": [
+    "decision",
+    "selection_passes",
+    "selection_mapping_rmse_db",
+    "baseline_selection_mapping_rmse_db",
+    "selection_solver_max_residual_db",
+    "selection_relative_threshold_std_db",
+    "gain_invariance_max_threshold_error_db",
+    "gain_invariance_max_gr_error_db",
+    "holdout_opened",
+    "holdout_passes",
+    "holdout_mapping_rmse_db",
+    "raw_audio_persisted"
+  ],
+  "variants": [
+    "Explicit four-second Learn-time ActualGR-mean Threshold solve targeting 5.5 dB at Amount 100, followed by a locked Threshold and the unchanged frozen compressor core."
+  ]
+}

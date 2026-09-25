@@ -255,3 +255,5 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Evaluate a singer-disjoint clean-vocal normative prior as deployable single-view context for Vocal Resonance semantic ranking."
+
+# queue-trigger: VO-PREP-SC-HPF-PILOT-001 / sample-exact-slice-fix

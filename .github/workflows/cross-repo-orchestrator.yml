@@ -44,10 +44,18 @@ jobs:
         run: |
           python tools/validate_cross_repo.py
           python tools/test_cross_repo_orchestrator.py
+          python tools/validate_autonomy_state.py
+          python tools/test_autonomy_stack.py
 
       - name: Reconcile, observe, resume and dispatch
         id: orchestrate
         run: python automation/cross_repo/orchestrate.py --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate generated autonomy state
+        if: steps.orchestrate.outputs.configured == 'true' && steps.orchestrate.outputs.changed == 'true'
+        run: |
+          python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
 
       - name: Commit append-only Cross-Repo state
         if: steps.orchestrate.outputs.configured == 'true' && steps.orchestrate.outputs.changed == 'true'

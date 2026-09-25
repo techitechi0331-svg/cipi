@@ -47,6 +47,7 @@ ADAPTERS = {
     "rp_phrase_envelope_riding_001_pilot_v1",
     "vocal_resonance_transfer_consistency_v1",
     "voprep_amount_mapping_r3_v1",
+    "voprep_sidechain_hpf_pilot_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -2999,6 +3000,56 @@ def _voprep_amount_mapping_r3(repo_root: Path, timeout_seconds: int) -> dict[str
         ),
     }
 
+
+def _voprep_sidechain_hpf_pilot(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "sidechain_hpf_pilot.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-sc-hpf-") as td:
+        out = Path(td)
+        completed = subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        result = json.loads((out / "sidechain_hpf_pilot.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "sidechain_hpf_pilot.json": (out / "sidechain_hpf_pilot.json").read_text(encoding="utf-8"),
+            "sidechain_hpf_pilot.md": (out / "sidechain_hpf_pilot.md").read_text(encoding="utf-8"),
+            "matrix.csv": (out / "matrix.csv").read_text(encoding="utf-8"),
+        }
+
+    selected = result.get("selected") or {}
+    metrics = {
+        "decision": result.get("decision"),
+        "selected_cutoff_hz": selected.get("cutoff_hz"),
+        "selected_gates": selected.get("gates", {}),
+        "selected_aggregate": selected.get("aggregate", {}),
+        "candidate_count": len(result.get("candidates", [])),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    accepted = result.get("decision") == "GO_TO_REAL_VOCAL"
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/sidechain_hpf_pilot.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Deterministic synthetic Vo.Prep sidechain-HPF pilot across 44.1, 48 "
+            "and 96 kHz. OFF is the simple baseline; 40/60/70/80/100 Hz second-order "
+            "high-pass candidates are tested against rumble/plosive reduction and "
+            "low-vocal/consonant/sibilant preservation gates. Passing authorizes "
+            "real-vocal research only and does not mutate product DSP."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3072,4 +3123,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_transfer_consistency(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r3_v1":
         return _voprep_amount_mapping_r3(repo_root, timeout_seconds)
+    if name == "voprep_sidechain_hpf_pilot_v1":
+        return _voprep_sidechain_hpf_pilot(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

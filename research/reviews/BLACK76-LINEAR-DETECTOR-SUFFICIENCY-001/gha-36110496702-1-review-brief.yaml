@@ -1,0 +1,90 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:review-brief-v1
+job_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001
+run_id: gha-36110496702-1
+source_run: research/runs/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-triage.yaml
+triage_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:triage-v1
+job_path: research/jobs/completed/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001.yaml
+research_question: Is a plain full-wave linear detector plus one optimized gain and
+  bias per ratio sufficient to reproduce Black76's committed supplemental LN-era onset
+  and low/mid/deep static-ratio curvature?
+hypothesis: The linear full-wave detector is sufficient when detector gain and total
+  bias are optimized separately for 4, 8, 12 and 20 modes.
+counter_hypotheses:
+- The linear detector can match onset and selected mid-GR slopes but cannot simultaneously
+  reproduce low-GR knee and deep-GR growth, so nonlinear detector or loop curvature
+  is required.
+acceptance_criteria:
+- Onset MAE is <= 1.0 dB.
+- Ratio log-RMSE is <= 0.20 across all modes and GR regions.
+- Maximum relative ratio error is <= 0.35.
+- Minimum deep-GR ratio fraction is >= 0.80 of target.
+rejection_criteria:
+- Onset can be matched but complete static-ratio curvature remains outside one or
+  more predeclared gates.
+- Deep-GR ratio remains below 80 percent of target in any single-button mode.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 9e808c06c312b9edb747b2aed6df5052d19252e7
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: deep_ratio_fraction_min
+  value: 0.6064053838146651
+- path: max_relative_ratio_error
+  value: 0.9707040072272052
+- path: onset_mae_db
+  value: 0.0
+- path: ratio_log_rmse
+  value: 0.40561627726016036
+knowledge_candidate:
+  claim: Plain full-wave linear detection plus per-ratio gain and bias is insufficient
+    to reproduce onset and low/mid/deep 1176-family static-ratio curvature in the
+    tested Black76 architecture.
+  evidence_type: MEASURED
+  scope: Black76 Rev E Priority-2 diagnostic linear detector against committed supplemental
+    LN-era static-curve targets.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates:
+- Final interpretation must distinguish supplemental LN-era proxy targets from exact
+  vintage Rev-E hardware truth.
+downstream_gate_signals:
+- Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

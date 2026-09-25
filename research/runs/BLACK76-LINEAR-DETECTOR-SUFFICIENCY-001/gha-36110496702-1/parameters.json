@@ -1,0 +1,16 @@
+{
+  "baseline": [
+    "supplemental_target"
+  ],
+  "experiment_adapter": "black76_linear_detector_compare_v1",
+  "job_file": "research/jobs/queued/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001.yaml",
+  "metrics": [
+    "onset_mae_db",
+    "ratio_log_rmse",
+    "max_relative_ratio_error",
+    "deep_ratio_fraction_min"
+  ],
+  "variants": [
+    "linear_detector_best"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "deterministic_read:black76_linear_detector_compare.csv"
+  ],
+  "completed_at": "2026-09-25T07:59:46.023451Z",
+  "environment": {
+    "experiment_adapter": "black76_linear_detector_compare_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+  "random_seed": 7602501,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36110496702-1",
+  "schema_version": "1.0",
+  "source_commit": "9e808c06c312b9edb747b2aed6df5052d19252e7",
+  "started_at": "2026-09-25T07:59:46.021566Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -23,7 +23,6 @@ ADAPTERS = {
     "peakbody_spectral_guard_stress_v1",
     "peakbody_periodicity_guard_stress_v1",
     "peakbody_realtime_voicing_bench_v1",
-    "peakbody_contextual_noise_guard_v1",
     "original_vocal_pre_measurement_gate_v1",
     "original_vocal_pre_tuning_frontier_v1",
     "vocal_resonance_motion_coherence_v1",
@@ -3219,7 +3218,8 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         }
 
     cand = result.get("candidate") or {}
-    holdout = result.get("holdout") or {}
+    raw_holdout = result.get("holdout")
+    holdout = raw_holdout or {}
     base = result.get("baseline") or {}
     metrics = {
         "decision": result.get("decision"),
@@ -3231,7 +3231,7 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         "selection_relative_threshold_std_db": (cand.get("solver") or {}).get("std_relative_threshold_db"),
         "gain_invariance_max_threshold_error_db": (cand.get("gain_invariance_probe") or {}).get("max_threshold_shift_error_db"),
         "gain_invariance_max_gr_error_db": (cand.get("gain_invariance_probe") or {}).get("max_eval_mean_gr_error_db"),
-        "holdout_opened": holdout is not None,
+        "holdout_opened": bool(result.get("holdout_accessed", raw_holdout is not None)),
         "holdout_passes": bool(holdout.get("passes", False)) if holdout else False,
         "holdout_mapping_rmse_db": holdout.get("candidate_mapping_rmse_db") if holdout else None,
         "selection_singers": result.get("selection_singers", []),
@@ -3259,35 +3259,6 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         ),
     }
 
-def _peakbody_contextual_noise_guard(
-    repo_root: Path,
-    timeout_seconds: int,
-) -> dict[str, Any]:
-    script = repo_root / "research/experiments/PeakBody/contextual_noise_guard_model.py"
-    completed = subprocess.run(
-        [sys.executable, str(script)],
-        cwd=repo_root,
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=timeout_seconds,
-    )
-    payload = json.loads(completed.stdout)
-    return {
-        "metrics": payload["metrics"],
-        "raw_files": {
-            "measurement.csv": payload["measurement_csv"],
-            "benchmark.json": completed.stdout,
-        },
-        "commands": [
-            "python research/experiments/PeakBody/contextual_noise_guard_model.py"
-        ],
-        "acceptance_met": bool(payload["acceptance_met"]),
-        "rejection_triggered": bool(payload["rejection_triggered"]),
-        "triggered_criteria": list(payload.get("triggered_criteria", [])),
-        "summary": payload["scope"],
-    }
-
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3307,8 +3278,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _peakbody_periodicity_guard_stress(repo_root, timeout_seconds)
     if name == "peakbody_realtime_voicing_bench_v1":
         return _peakbody_realtime_voicing_bench(repo_root, timeout_seconds)
-    if name == "peakbody_contextual_noise_guard_v1":
-        return _peakbody_contextual_noise_guard(repo_root, timeout_seconds)
     if name == "black76_ratio_p2a_compare_v1":
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "black76_linear_detector_compare_v1":

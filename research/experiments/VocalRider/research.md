@@ -103,6 +103,41 @@ The build remains a research prototype until post-prepare latency reporting is t
 
 ## REJECTED
 
+### Persistent section-offset adaptation v0.2
+
+Rejected after compiled deterministic measurement.
+
+MEASURED:
+- intentional section contrast input: 6.000 dB;
+- output: 2.390 dB;
+- preserved: 39.841%;
+- within-section phrase spread reduction: 41.826%.
+
+This was worse for macro-dynamics preservation than the already rejected global-only baseline (~47.7% preserved). The added offset state therefore failed its complexity-justification gate and is removed rather than tuned further.
+
+### Fixed -58 / -62 dBFS activity thresholds
+
+Rejected as the final activity policy after the compiled input-level sweep.
+
+MEASURED:
+- full directional reference/quiet/loud riding remained functional through a -48 dBFS sine-amplitude base;
+- at -54 dBFS the target bootstrapped but the quiet phrase no longer received useful positive ride;
+- at -57 and -60 dBFS the target did not bootstrap.
+
+Revision candidate lowers the provisional enter/remain thresholds to -66 / -74 dBFS, with event-drop protection to prevent the wider activity window from turning low-level tails/noise into boosted content.
+
+### Unprotected positive ride on falling vocal events
+
+Rejected.
+
+MEASURED baseline diagnostics at Amount 50:
+- 0.8 s breath-like noise, -36 dBFS RMS: +2.922 dB maximum/end boost;
+- 1.2 s phrase-tail ramp -20 -> -45 dBFS: +3.559 dB maximum/end boost;
+- 2.0 s -72 dBFS noise-floor segment after vocal: 3.877 dB maximum absolute ride.
+
+This is too aggressive for the product goal and justifies a lightweight event-protection stage before considering spectral/ML breath classification.
+
+
 ### Global-median-only Auto Target across sustained section changes
 
 Rejected as the complete Auto Target strategy.
@@ -170,6 +205,38 @@ Rejected.
 Reason:
 - those values define standardized loudness meters;
 - they are useful reference timescales but do not prove optimal control behaviour for sung-vocal gain automation.
+
+## HYPOTHESIS — Local Target revision
+
+The next simple-baseline candidate removes explicit section-offset state and uses a shorter robust local reference:
+
+- 50 ms accepted observations;
+- rolling active history of 160 observations, at most about 8 s;
+- median as the local section reference;
+- 0.20 s smoothing when the rolling median changes;
+- Amount 50 range/dead-zone/trajectory remain unchanged;
+- activity enter/remain become -66 / -74 dBFS;
+- recent active Body high decays at 4 dB/s;
+- if current Body falls more than 5 dB below that recent high, the event is classified as a falling-event guard condition;
+- while guarded, positive ride is suppressed and the observation is excluded from target learning.
+
+MODEL_MEASUREMENT before compiled adoption suggested approximately:
+- 72% preservation of the synthetic 6 dB section contrast;
+- 24% reduction of within-section phrase spread;
+- ~4 dB positive correction retained on a separate quiet phrase after silence;
+- breath-like boost around 0.2 dB;
+- phrase-tail maximum boost around 0.8 dB;
+- -72 dBFS noise-floor ride around 0.2 dB.
+
+These are HYPOTHESIS / MODEL_MEASUREMENT only until the same compiled gates pass.
+
+Predeclared compiled acceptance for this revision:
+- section contrast preserved >=70%;
+- within-section phrase spread reduction >=20%;
+- -60 dBFS base input-level case remains fully directional;
+- breath-like maximum boost <=1.0 dB;
+- phrase-tail maximum boost <=1.5 dB;
+- -72 dBFS noise-floor maximum absolute ride <=1.0 dB.
 
 ## INFERRED
 

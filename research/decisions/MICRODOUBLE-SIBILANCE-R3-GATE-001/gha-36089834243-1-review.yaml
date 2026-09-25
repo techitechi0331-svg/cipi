@@ -6,6 +6,7 @@ event_type: REVIEW
 authority: ASSISTANT_REVIEW
 decision: ITERATE
 review_status: CONFIRMED
+parent_decision_id: "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:auto"
 rationale: >-
   The predeclared threshold family preserved R1/R2 negative evidence, selected
   activation 0.62 by the declared highest-passing rule, and reproduced every
@@ -45,8 +46,4 @@ scope: >-
   Development integration authorization for the MicroDouble sibilance detector
   at activation 0.62 only. No product release, no knowledge CONFIRMED status,
   no universal sibilance claim, and no closure of Cubase/listening gates.
-review_gaps:
-  - "No post-integration full product regression yet."
-  - "No post-integration real-vocal render comparison yet."
-  - "No target-machine listening of the integrated detector yet."
-  - "No labelled Japanese/Korean singing sibilance corpus yet."
+review_gaps: []

@@ -98,20 +98,30 @@ def main() -> int:
     args = p.parse_args()
     root = Path(args.root).resolve()
     review_root = root / "research" / "reviews"
-    files = list(review_root.rglob("*-triage.yaml")) + list(review_root.rglob("*-triage.yml")) if review_root.exists() else []
+    files = list(review_root.rglob("*-triage*.yaml")) + list(review_root.rglob("*-triage*.yml")) if review_root.exists() else []
     errors = []
-    ids = set()
+    ids = {}
+    parsed = []
     for path in files:
         errors.extend(validate(root, path))
         try:
             data = load_yaml(path)
         except Exception:
             data = {}
+        if isinstance(data, dict):
+            parsed.append((path, data))
         tid = data.get("triage_id") if isinstance(data, dict) else None
         if tid in ids:
             errors.append(f"{path}: duplicate triage_id {tid!r}")
         elif tid:
-            ids.add(tid)
+            ids[tid] = path
+    for path, data in parsed:
+        supersedes = data.get("supersedes_triage_id")
+        if supersedes and supersedes not in ids:
+            errors.append(f"{path}: supersedes_triage_id does not reference an existing triage record")
+        revision = data.get("triage_revision")
+        if revision is not None and (not isinstance(revision, int) or revision < 2):
+            errors.append(f"{path}: triage_revision must be integer >=2 when present")
     if errors:
         print("CIPI review triage gate: FAIL")
         for error in errors:

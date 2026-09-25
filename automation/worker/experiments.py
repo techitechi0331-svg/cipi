@@ -2958,14 +2958,24 @@ def _voprep_amount_mapping_r3(repo_root: Path, timeout_seconds: int) -> dict[str
     )
     with tempfile.TemporaryDirectory(prefix="cipi-voprep-amount-r3-") as td:
         out = Path(td)
-        completed = subprocess.run(
-            [sys.executable, str(script), "--out-dir", str(out)],
-            cwd=repo_root,
-            check=True,
-            capture_output=True,
-            text=True,
-            timeout=timeout_seconds,
-        )
+        try:
+            completed = subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            stdout_tail = (exc.stdout or "")[-8000:]
+            stderr_tail = (exc.stderr or "")[-12000:]
+            raise RuntimeError(
+                "Vo.Prep Amount R3 subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{stdout_tail}\n"
+                f"stderr_tail:\n{stderr_tail}"
+            ) from exc
         result = json.loads((out / "amount_r3_results.json").read_text(encoding="utf-8"))
         raw_files = {
             "amount_r3_results.json": (out / "amount_r3_results.json").read_text(encoding="utf-8"),

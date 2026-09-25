@@ -1,0 +1,39 @@
+id: VOCAL_RIDER_01
+title: CIPI Vocal Rider 0.1
+
+status: implementation
+knowledge_status: HYPOTHESIS
+confidence: 0.52
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: provisional
+  implementation: in_progress
+  measurement: pending
+  audio_ab: pending
+  revision: pending
+  vst3_validation: pending
+  final_review: pending
+
+current_stage: implementation
+
+completed:
+  - research
+  - review
+
+unresolved:
+  - Band-aware breath / consonant / plosive protection is not validated.
+  - Adaptive noise-floor tracking is not numerically locked.
+  - Auto-target history and section adaptation require real-song validation.
+  - Lookahead choice needs real-vocal comparison.
+  - Amount upper-half mapping is provisional.
+  - Real-vocal level-matched listening is pending.
+  - Cubase Pro 14 host verification is pending.
+
+next_stage: measurement
+why_next: "A concrete multi-timescale rider hypothesis and bounded parameter set now exist; compiled deterministic measurements are needed before further promotion."
+next_confirmation: "Finite/stable gain, Amount 0 unity behaviour, range bounds, activity/idle behaviour, sample-rate consistency, phrase-level step response, and VST3 build/host-style validation."
+
+blockers:
+  - "Human listening and Cubase Pro 14 confirmation remain unavoidable final gates."

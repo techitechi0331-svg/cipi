@@ -350,8 +350,13 @@ int main (int argc, char** argv)
     summary << "- section contrast preserved: " << (100.0f * sectionDynamics.sectionContrastPreservedRatio) << "%\n";
     summary << "- input within-section phrase std: " << sectionDynamics.inputWithinSectionPhraseStdDb << " dB\n";
     summary << "- output within-section phrase std: " << sectionDynamics.outputWithinSectionPhraseStdDb << " dB\n";
-    summary << "- within-section leveling reduction: " << (100.0f * sectionDynamics.withinSectionLevelingReduction) << "%\n\n";
-    summary << "This probe is diagnostic, not yet a promotion gate. It exists to detect over-correction of intentional macro dynamics.\n\n";
+    const bool sectionDynamicsPass =
+        sectionDynamics.sectionContrastPreservedRatio >= 0.70f
+        && sectionDynamics.withinSectionLevelingReduction >= 0.20f;
+
+    summary << "- within-section leveling reduction: " << (100.0f * sectionDynamics.withinSectionLevelingReduction) << "%\n";
+    summary << "- section-dynamics gate: " << (sectionDynamicsPass ? "PASS" : "FAIL") << "\n\n";
+    summary << "Gate thresholds are provisional research criteria: preserve >=70% of a sustained 6 dB section contrast while reducing within-section phrase spread by >=20%.\n\n";
     summary << "The CSV contains the full 5 sample-rate x 5 Amount matrix.\n";
 
     std::ofstream json (outputDir / "metrics.json");
@@ -375,11 +380,15 @@ int main (int argc, char** argv)
          << "  \"section_input_phrase_std_db\": " << sectionDynamics.inputWithinSectionPhraseStdDb << ",\n"
          << "  \"section_output_phrase_std_db\": " << sectionDynamics.outputWithinSectionPhraseStdDb << ",\n"
          << "  \"section_within_leveling_reduction\": " << sectionDynamics.withinSectionLevelingReduction << ",\n"
+         << "  \"section_dynamics_pass\": " << (sectionDynamicsPass ? "true" : "false") << ",\n"
          << "  \"all_finite\": " << (allFinite ? "true" : "false") << "\n"
          << "}\n";
 
     if (! allFinite)
         return 3;
+
+    if (! sectionDynamicsPass)
+        return 4;
 
     return 0;
 }

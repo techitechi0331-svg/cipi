@@ -1,0 +1,10 @@
+label_name,n,false_trigger_rate,mean_max_score,model
+belt,8,0.0,0.7811924636489807,temporal_morphology_r5
+breathy,8,0.0,0.7390961073151305,temporal_morphology_r5
+fast_forte,4,0.0,0.7919925604332331,temporal_morphology_r5
+fast_piano,4,0.0,0.7447161297357904,temporal_morphology_r5
+forte,4,0.0,0.7584036678480994,temporal_morphology_r5
+inhaled,1,0.0,0.7909335499037432,temporal_morphology_r5
+spoken,4,0.0,0.7914878479518984,temporal_morphology_r5
+straight,4,0.0,0.7780357435746927,temporal_morphology_r5
+vibrato,3,0.0,0.7523023096845223,temporal_morphology_r5

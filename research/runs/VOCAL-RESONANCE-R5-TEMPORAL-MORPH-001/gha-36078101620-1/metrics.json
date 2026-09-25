@@ -1,0 +1,113 @@
+{
+  "candidate_budget": 20,
+  "experiment": "VOCAL_RESONANCE_R5_TEMPORAL_MORPHOLOGY",
+  "models": {
+    "prominence": {
+      "external_clean_false_trigger": 0.2,
+      "test": {
+        "clean_false_trigger": 0.0,
+        "generator_ceiling": 0.9375,
+        "mrr": 0.17371686473248973,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.1875,
+        "top3_given_generator_hit": 0.2,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.16666666666666666,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      }
+    },
+    "static_r2_style": {
+      "C": 0.03,
+      "external_clean_false_trigger": 0.175,
+      "external_clean_n": 40,
+      "test": {
+        "clean_false_trigger": 0.375,
+        "generator_ceiling": 0.9375,
+        "mrr": 0.17148762051287206,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "threshold_from_valid_95pct": 0.7941223642156156,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.125,
+        "top3_given_generator_hit": 0.13333333333333333,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.3333333333333333,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      },
+      "validation": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.22097617201017933,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.0625,
+        "top1_given_generator_hit": 0.07407407407407407,
+        "top3": 0.28125,
+        "top3_given_generator_hit": 0.3333333333333333,
+        "top5": 0.375,
+        "top5_effect_gte3": 0.4375,
+        "top5_given_generator_hit": 0.4444444444444444,
+        "top5_high_f0": null
+      }
+    },
+    "temporal_morphology_r5": {
+      "C": 0.1,
+      "external_clean_false_trigger": 0.0,
+      "external_clean_n": 40,
+      "test": {
+        "clean_false_trigger": 0.125,
+        "generator_ceiling": 0.9375,
+        "mrr": 0.1621441268354968,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "threshold_from_valid_95pct": 0.8570706390529083,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.09375,
+        "top3_given_generator_hit": 0.1,
+        "top5": 0.25,
+        "top5_effect_gte3": 0.3333333333333333,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "top5_high_f0": null
+      },
+      "validation": {
+        "generator_ceiling": 0.84375,
+        "mrr": 0.2199882696798815,
+        "n_cases": 32,
+        "n_high_f0_cases": 0,
+        "top1": 0.0625,
+        "top1_given_generator_hit": 0.07407407407407407,
+        "top3": 0.25,
+        "top3_given_generator_hit": 0.2962962962962963,
+        "top5": 0.34375,
+        "top5_effect_gte3": 0.5,
+        "top5_given_generator_hit": 0.4074074074074074,
+        "top5_high_f0": null
+      }
+    }
+  },
+  "product_gate": {
+    "criteria": {
+      "external_clean_false_trigger_max": 0.15,
+      "strong_top5": 0.92,
+      "top5": 0.85
+    },
+    "passed": false
+  },
+  "raw_audio_persisted": false,
+  "retention_gate": {
+    "accepted": true,
+    "criteria": {
+      "external_clean_fpr_improves_by_0_10": true,
+      "strong_top5_not_worse": true,
+      "top5_not_worse": true
+    },
+    "meaning": "Whether generic temporal morphology is worth retaining for further semantic-ranker research; not a product promotion."
+  },
+  "seed": 20261003
+}

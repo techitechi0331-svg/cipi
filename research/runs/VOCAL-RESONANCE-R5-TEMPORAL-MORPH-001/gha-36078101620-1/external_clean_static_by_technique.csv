@@ -1,0 +1,10 @@
+label_name,n,false_trigger_rate,mean_max_score,model
+belt,8,0.375,0.7562811117351056,static_r2_style
+breathy,8,0.125,0.7081629691195683,static_r2_style
+fast_forte,4,0.5,0.7985024729880041,static_r2_style
+fast_piano,4,0.25,0.7888812774250858,static_r2_style
+forte,4,0.0,0.7315393550582746,static_r2_style
+inhaled,1,0.0,0.786342267499723,static_r2_style
+spoken,4,0.0,0.7726986799080132,static_r2_style
+straight,4,0.0,0.6854066527635221,static_r2_style
+vibrato,3,0.0,0.722841651511243,static_r2_style

@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/temporal_morphology_ranker.py --output-dir <temporary> --seed 20261003"
+  ],
+  "completed_at": "2026-09-25T00:38:46.253037Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_temporal_morphology_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001",
+  "random_seed": 20261003,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36078101620-1",
+  "schema_version": "1.0",
+  "source_commit": "ba76c43c7434abaa55d79aa464c355133355a1a9",
+  "started_at": "2026-09-25T00:34:14.014682Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

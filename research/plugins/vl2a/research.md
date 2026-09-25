@@ -637,3 +637,23 @@ Validation-process note:
 
 Next:
 - Phase03F residual-modulation HP comparison with 8 ms as Simple Baseline.
+
+
+## 2026-09-25 latency / PDC / CPU audit
+
+Run `36179120522` passed.
+
+MEASURED:
+- JUCE 4x oversampling latency: exactly 6 samples across mono/stereo and
+  block sizes 32..2048.
+- worst full-engine + 4x oversampling CPU benchmark:
+  ~5.0115% of one realtime core.
+
+SOURCE/implementation audit:
+- Processor gets latency from `oversampling->getLatencyInSamples()`
+- Processor reports it through `setLatencySamples(latency)`.
+
+Decision:
+- PDC code path: PASS
+- CPU safety: PASS
+- Cubase Pro 14 host PDC: still UNVERIFIED until real-host confirmation.

@@ -144,8 +144,8 @@ def activity_mask(level_db: np.ndarray, minimum_fraction: float = 0.0):
         return None
     return active
 
-def collect_examples(scan_limit: int):
-    wanted=set(SELECTION_SINGERS+HOLDOUT_SINGERS)
+def collect_examples(singers, scan_limit: int):
+    wanted=set(singers)
     ds=load_dataset(DATASET,split="train",streaming=True)
     ds=ds.cast_column("audio",Audio(decode=False))
 
@@ -433,10 +433,8 @@ def main():
     out=Path(args.out_dir)
     out.mkdir(parents=True,exist_ok=True)
 
-    examples=collect_examples(args.scan_limit)
-    prepared={k:prepare_item(v) for k,v in examples.items()}
-    selection={k:v for k,v in prepared.items() if v["singer"] in SELECTION_SINGERS}
-    holdout={k:v for k,v in prepared.items() if v["singer"] in HOLDOUT_SINGERS}
+    selection_examples=collect_examples(SELECTION_SINGERS,args.scan_limit)
+    selection={k:prepare_item(v) for k,v in selection_examples.items()}
 
     base_by,base_solver,base_mono,_,base_meta=summarize(selection,"r3_fixed_offset")
     cand_by,cand_solver,cand_mono,_,cand_meta=summarize(selection,"learn_actual_mean_solve")
@@ -466,6 +464,10 @@ def main():
 
     holdout_result=None
     if selection_pass:
+        # Holdout audio is not even streamed/decoded until selection has passed.
+        # This enforces the declared data-separation gate at access time.
+        holdout_examples=collect_examples(HOLDOUT_SINGERS,args.scan_limit)
+        holdout={k:prepare_item(v) for k,v in holdout_examples.items()}
         h_base_by,h_base_solver,h_base_mono,_,_=summarize(holdout,"r3_fixed_offset")
         h_cand_by,h_cand_solver,h_cand_mono,_,h_cand_meta=summarize(holdout,"learn_actual_mean_solve")
         h_gates=original_gates(h_cand_by,h_cand_mono,FINAL_RIPPLE_GATE_DB)
@@ -533,6 +535,7 @@ def main():
             "passes_selection":selection_pass,
         },
         "holdout":holdout_result,
+        "holdout_accessed":holdout_result is not None,
         "acceptance_met":acceptance,
         "raw_audio_persisted":False,
     }

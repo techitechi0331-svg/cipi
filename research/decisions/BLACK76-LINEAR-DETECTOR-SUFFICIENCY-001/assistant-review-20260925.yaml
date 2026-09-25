@@ -1,0 +1,37 @@
+schema_version: '1.0'
+decision_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:assistant-review-20260925
+job_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001
+source_run: research/runs/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: The linear full-wave detector could be tuned to match the committed supplemental onset targets exactly, but it failed the predeclared full-curve gates by a wide margin. Ratio log-RMSE was 0.4056 versus a <=0.20 gate, maximum relative ratio error was 0.9707 versus <=0.35, and the minimum deep-GR ratio fraction was 0.6064 versus >=0.80. The evidence therefore rejects sufficiency of the plain linear detector plus one gain/bias pair per ratio for the tested Black76 architecture; it does not reject nonlinear or circuit-derived detector candidates and does not promote the supplemental target to vintage hardware truth.
+scope: Black76 Rev E Priority-2 diagnostic linear full-wave detector with per-ratio gain/bias, evaluated against the committed supplemental LN-era onset and static-ratio targets only.
+declared_rejection_criteria:
+- Onset can be matched but complete static-ratio curvature remains outside one or more predeclared gates.
+- Deep-GR ratio remains below 80 percent of target in any single-button mode.
+triggered_criteria:
+- Complete static-ratio curvature remained outside the predeclared ratio log-RMSE and maximum-relative-error gates despite zero onset MAE.
+- Minimum deep-GR ratio fraction was 0.606405, below the predeclared 0.80 requirement.
+retained_findings:
+- Per-ratio gain and bias can align the tested onset targets exactly in the diagnostic linear-detector model.
+- Matching threshold/onset does not imply matching low-, mid-, and deep-GR static slopes.
+- The detector transfer shape materially changes the compressor static curve.
+reusable_findings:
+- Compressor detector studies should gate the complete static transfer curve rather than threshold/onset alone.
+- A simple rectifier with scalar gain/bias can be a useful ablation baseline even when it is rejected as the final detector.
+- Negative evidence should preserve which sub-behavior was successfully matched; here onset was matched while curvature failed.
+revisit_if:
+- A materially different linear detector model adds circuit-derived loading or control-amplifier interactions and is no longer equivalent to the tested abs() plus scalar gain/bias hypothesis.
+- Direct vintage Rev-E hardware transfer curves materially contradict the supplemental target used by this gate.
+lineage:
+  supersedes: []
+  related_jobs:
+  - BLACK76-RATIO-P2A-SUFFICIENCY-001
+  related_decisions:
+  - "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:auto"
+parent_decision_id: "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:auto"
+created_at: '2026-09-25'
+immutable: true
+review_gaps: []

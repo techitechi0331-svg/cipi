@@ -1,0 +1,8 @@
+claim: Plain full-wave linear detection plus per-ratio gain and bias is insufficient
+  to reproduce onset and low/mid/deep 1176-family static-ratio curvature in the tested
+  Black76 architecture.
+evidence_type: MEASURED
+scope: Black76 Rev E Priority-2 diagnostic linear detector against committed supplemental
+  LN-era static-curve targets.
+source_run: research/runs/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1
+promotion_requested: PROVISIONAL

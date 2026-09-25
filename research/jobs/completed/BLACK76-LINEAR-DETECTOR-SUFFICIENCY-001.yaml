@@ -1,0 +1,64 @@
+schema_version: '1.0'
+job_id: BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001
+state: COMPLETED
+track:
+  id: 1176_FAMILY_FORMAL
+  path: research/reference_devices/1176
+research_question: Is a plain full-wave linear detector plus one optimized gain and
+  bias per ratio sufficient to reproduce Black76's committed supplemental LN-era onset
+  and low/mid/deep static-ratio curvature?
+hypothesis: The linear full-wave detector is sufficient when detector gain and total
+  bias are optimized separately for 4, 8, 12 and 20 modes.
+counter_hypotheses:
+- The linear detector can match onset and selected mid-GR slopes but cannot simultaneously
+  reproduce low-GR knee and deep-GR growth, so nonlinear detector or loop curvature
+  is required.
+baseline:
+- supplemental_target
+variants:
+- linear_detector_best
+metrics:
+- onset_mae_db
+- ratio_log_rmse
+- max_relative_ratio_error
+- deep_ratio_fraction_min
+acceptance:
+- Onset MAE is <= 1.0 dB.
+- Ratio log-RMSE is <= 0.20 across all modes and GR regions.
+- Maximum relative ratio error is <= 0.35.
+- Minimum deep-GR ratio fraction is >= 0.80 of target.
+rejection:
+- Onset can be matched but complete static-ratio curvature remains outside one or
+  more predeclared gates.
+- Deep-GR ratio remains below 80 percent of target in any single-button mode.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 7602501
+experiment_adapter: black76_linear_detector_compare_v1
+allowed_operations:
+- read_committed_linear_detector_csv
+- deterministic_numeric_comparison
+prohibited_operations:
+- arbitrary_shell
+- network_access
+- network_write
+- main_push
+- raw_audio_read
+- confidence_change
+- current_stage_change
+knowledge_candidate:
+  claim: Plain full-wave linear detection plus per-ratio gain and bias is insufficient
+    to reproduce onset and low/mid/deep 1176-family static-ratio curvature in the
+    tested Black76 architecture.
+  evidence_type: MEASURED
+  scope: Black76 Rev E Priority-2 diagnostic linear detector against committed supplemental
+    LN-era static-curve targets.
+  promotion_requested: PROVISIONAL
+continuation:
+  on_accept: []
+  on_reject: []
+review_policy:
+  required_human_gates:
+  - Final interpretation must distinguish supplemental LN-era proxy targets from exact
+    vintage Rev-E hardware truth.
+latest_run: gha-36110496702-1

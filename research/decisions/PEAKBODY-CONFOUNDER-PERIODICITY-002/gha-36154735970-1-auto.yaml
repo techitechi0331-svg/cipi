@@ -1,0 +1,30 @@
+schema_version: '1.0'
+decision_id: PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:auto
+job_id: PEAKBODY-CONFOUNDER-PERIODICITY-002
+source_run: research/runs/PEAKBODY-CONFOUNDER-PERIODICITY-002/gha-36154735970-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for PEAKBODY-CONFOUNDER-PERIODICITY-002; promotion
+  requires review.
+declared_rejection_criteria:
+- any acceptance invariant fails
+- the required confounder/sample-rate matrix is incomplete
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - PEAKBODY-REV02-POLICY-001
+  - PEAKBODY-CONFOUNDER-SPECTRAL-001
+  related_decisions: []
+created_at: '2026-09-25T15:31:45.780542Z'
+immutable: true

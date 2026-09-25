@@ -1,0 +1,8 @@
+claim: In the tested synthetic scope, periodicity protection can prevent an AirGuard-style
+  high-band guard from mistaking bright harmonic vocal transients for sibilant/breath-like
+  noise while retaining noise rejection.
+evidence_type: HYPOTHESIS
+scope: PeakBody synthetic confounder model across 44.1/48/96/192 kHz; not a real-vocal
+  or product detector claim.
+source_run: research/runs/PEAKBODY-CONFOUNDER-PERIODICITY-002/gha-36154735970-1
+promotion_requested: HYPOTHESIS

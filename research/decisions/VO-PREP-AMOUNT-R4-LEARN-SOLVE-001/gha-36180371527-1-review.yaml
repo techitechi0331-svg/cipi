@@ -1,0 +1,71 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01"
+job_id: VO-PREP-AMOUNT-R4-LEARN-SOLVE-001
+source_run: research/runs/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Revision 4 is rejected as the final Amount architecture for this frozen core.
+  On the declared f5/f6/m5/m6 selection singers, the Learn-time Threshold solver
+  passed solver-residual, input-gain-invariance, mean-GR, percentile, high-GR,
+  monotonicity and cross-singer gates, but failed the unchanged selection ripple
+  ceiling. Amount 87.5 measured 0.07888444564509912 dB ripple and Amount 100
+  measured 0.09015365216582774 dB versus the 0.075 dB selection ceiling.
+  The R3 fixed-offset baseline failed the same ripple gate at essentially the
+  same strength (0.0904573958777148 dB at Amount 100), while its selection
+  mapping RMSE (0.03139874270948164 dB) was slightly lower than the solver
+  candidate (0.04436084731567598 dB). The added Learn-time solve therefore did
+  not resolve the limiting failure on this cohort. In addition, implementation
+  review found that the script decoded/prepared the planned f7/f8/m7/m8 holdout
+  examples before selection was known to pass, violating the declared rule that
+  holdout data be opened only after selection and complexity gates pass. No
+  holdout metrics were actually computed (the holdout result is null), so the
+  rejection is based only on selection evidence; f7/f8/m7/m8 are nevertheless
+  treated as exposed and must not be represented as untouched future holdout singers.
+scope: >-
+  Vo.Prep Amount Revision 4 Learn-time Threshold solve on the declared VocalSet
+  selection singers with the frozen 25 ms / sample-peak / 6 dB fusion / 1.5:1 /
+  18 dB knee / 8 ms attack / 70 ms release core. This decision rejects this R4
+  architecture/version; it does not reject explicit Learn in all future forms.
+declared_rejection_criteria:
+  - The candidate fails any selection gate.
+  - The Learn-time solver fails the declared residual or input-gain-invariance gates.
+  - The complexity-justification gate fails against the R3 simple baseline.
+  - The frozen candidate fails any holdout gate.
+  - Any required singer has fewer than two qualifying files.
+  - Any selection/holdout singer overlap occurs.
+  - Any post-Learn sample influences Learn-time Threshold calibration.
+  - Raw public audio is persisted into the evidence branch.
+  - Passing requires relaxing a predeclared gate.
+triggered_criteria:
+  - "Selection ripple gate failed: Amount 87.5 = 0.07888444564509912 dB and Amount 100 = 0.09015365216582774 dB versus the 0.075 dB selection ceiling."
+  - "The declared holdout-isolation procedure was violated at data-access level because f7/f8/m7/m8 were decoded/prepared before selection passed, although holdout metrics were not computed."
+retained_findings:
+  - "Learn solver maximum residual was 0.0000221645694198358 dB."
+  - "Input-gain invariance maximum Threshold-shift error was 0.00006103515625 dB and post-lock mean-GR error was 0.000020173601008366404 dB."
+  - "Candidate Amount-100 mean GR was 5.435206835347098 dB with p99 7.91916615315341 dB and zero fraction above 10 dB."
+  - "R3 baseline and R4 candidate both failed the same high-Amount ripple gate at about 0.09 dB, so the failure is not uniquely explained by the Learn solver."
+  - "No final holdout metric should be interpreted from this run because the holdout result is null."
+reusable_findings:
+  - "A one-time Learn-time Threshold solver can be extremely input-gain invariant and numerically accurate yet still fail product smoothness/ripple gates after the frozen compressor ballistics."
+  - "A complexity gate should require the complex candidate to repair the limiting baseline failure, not merely observe that the baseline itself fails."
+  - "Holdout integrity must be enforced at data-access time, not only at metric-evaluation time."
+revisit_if:
+  - "A simpler strength/Range formulation repairs the high-Amount ripple failure without changing the frozen core."
+  - "If simple strength/Range candidates fail, fixed ballistics are explicitly reopened and revalidated against prior release-lag/tail evidence."
+  - "A future Learn architecture uses fresh singer-disjoint data and does not decode holdout audio until all selection gates pass."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-R3-VOCALSET-001
+    - VO-PREP-AMOUNT-R2-001
+    - VO-PREP-AMOUNT-MAP-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:auto"
+    - "VO-PREP-AMOUNT-R3-VOCALSET-001:gha-36176939027-1:review-01"
+parent_decision_id: "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

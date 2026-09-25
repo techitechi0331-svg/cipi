@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "job_id": "CROSS-TRACK-KNOWLEDGE-REVIEW-002",
+  "run_id": "manual-20260925",
+  "source_commit": "95702dc94bdd803c379a285bc18cc15a10cebfe7",
+  "worker_version": "assistant-cross-track-precision-review/1.0",
+  "started_at": "2026-09-25T07:50:00Z",
+  "completed_at": "2026-09-25T08:05:00Z",
+  "random_seed": 0,
+  "environment": {
+    "mode": "manual_cross_track_precision_review",
+    "repository": "techitechi0331-svg/cipi",
+    "input_synthesis_job": "CROSS-TRACK-KNOWLEDGE-001",
+    "candidate_count_reviewed": 4,
+    "raw_audio_persisted": false,
+    "product_dsp_mutated": false,
+    "schemas_mutated": false,
+    "workflows_mutated": false
+  },
+  "commands": [
+    "challenge each cross-track candidate for evidence independence and double counting",
+    "separate comparative evidence from invariance evidence",
+    "separate empirically tuned product constants from source-defined physical/spec constants",
+    "narrow wording where evidence does not support superiority or universality"
+  ],
+  "result": "COMPLETED",
+  "acceptance_met": true,
+  "rejection_triggered": false,
+  "import_kind": "manual_cross_track_precision_review"
+}

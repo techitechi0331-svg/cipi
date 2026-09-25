@@ -1,0 +1,43 @@
+schema_version: '1.0'
+proposal_id: RP-MASKING-AWARE-PRESENCE-001
+source_gap: research/architect/gaps/GAP-MASKING-AWARE-PRESENCE-001.yaml
+state: NEEDS_ADAPTER
+track:
+  id: ARCHITECT_MASKING_AWARE_PRESENCE
+  path: research/architect
+research_question: Can vocal presence be increased from masking context without becoming
+  a static high-mid boost?
+hypothesis: Contextual masking features can choose bounded presence movement more
+  selectively than a fixed EQ boost.
+counter_hypotheses:
+- Level-matched static EQ performs equivalently.
+- Masking estimates are too mix-dependent for a stable vocal-only processor.
+baseline:
+- static_presence_eq
+variants:
+- masking_aware_presence
+metrics:
+- target_band_movement
+- non_target_movement
+- masking_proxy_improvement
+acceptance:
+- The contextual candidate improves the masking proxy with less non-target movement
+  than static EQ.
+rejection:
+- The contextual candidate collapses to a static boost or becomes unstable across
+  mixes.
+pilot_adapter: null
+pilot_job_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
+prototype_adapter: null
+plugin_opportunity: true
+overlap_hints:
+- Vocal Surface
+- Vocal Finisher
+expected_reuse: Surface/Finisher and future mix-aware vocal processors.
+external_validity:
+- Pilot evidence is not a product claim.
+- Public/real vocal and host validation remain separate when applicable.
+budget:
+  max_pilot_runs: 2
+  max_formal_iterations: 5
+  max_same_failure: 2

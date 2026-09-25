@@ -1,0 +1,38 @@
+schema_version: '1.0'
+proposal_id: RP-VARIABLE-MU-DYNAMICS-001
+source_gap: research/architect/gaps/GAP-VARIABLE-MU-DYNAMICS-001.yaml
+state: NEEDS_ADAPTER
+track:
+  id: ARCHITECT_VARIABLE_MU_DYNAMICS
+  path: research/architect
+research_question: Which variable-mu control and timing mechanisms are necessary before
+  a reusable vocal-oriented model can be justified?
+hypothesis: A level-dependent gain law plus program-dependent control behavior will
+  outperform a fixed-ratio static baseline on declared variable-mu reference behaviors.
+counter_hypotheses:
+- A conventional soft-knee compressor is sufficient for the target behaviors.
+baseline:
+- soft_knee_compressor
+variants:
+- variable_mu_graybox
+metrics:
+- static_curve_error
+- program_dependence_error
+- thd_vs_gr
+acceptance:
+- Gray-box candidate reduces declared reference error across static and dynamic tests.
+rejection:
+- Added model complexity does not reduce reference error.
+pilot_adapter: null
+pilot_job_id: ARCHITECT-VARIABLE-MU-DYNAMICS-PILOT-001
+prototype_adapter: null
+plugin_opportunity: false
+overlap_hints: []
+expected_reuse: Dynamics topology knowledge and future color compressors.
+external_validity:
+- Pilot evidence is not a product claim.
+- Public/real vocal and host validation remain separate when applicable.
+budget:
+  max_pilot_runs: 2
+  max_formal_iterations: 5
+  max_same_failure: 2

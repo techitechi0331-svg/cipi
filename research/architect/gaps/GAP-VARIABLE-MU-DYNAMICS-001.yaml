@@ -1,0 +1,15 @@
+schema_version: '1.0'
+gap_id: GAP-VARIABLE-MU-DYNAMICS-001
+topic_id: variable_mu_dynamics
+title: Variable-mu vocal dynamics mechanisms
+state: OPEN
+score: 21
+support_path_count: 0
+minimum_support_paths: 2
+support_paths: []
+why_gap: Only 0 materially distinct evidence path(s) were detected against a target
+  of 2.
+question: Which variable-mu control and timing mechanisms are necessary before a reusable
+  vocal-oriented model can be justified?
+human_only: false
+plugin_opportunity: false

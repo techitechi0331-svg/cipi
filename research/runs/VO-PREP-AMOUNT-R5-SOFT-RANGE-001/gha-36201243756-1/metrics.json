@@ -1,0 +1,50 @@
+{
+  "acceptance_met": false,
+  "baseline_amount100_ripple_db": 0.08797198246318512,
+  "candidate_summary": [
+    {
+      "amount100_ripple_db": 0.08848596636123582,
+      "ceiling_db": 10.0,
+      "id": "soft_range_start6_ceiling10",
+      "mapping_rmse_db": 0.5184546116982374,
+      "passes_selection": false,
+      "ripple_improvement_ratio": -0.005842586283261175
+    },
+    {
+      "amount100_ripple_db": 0.08883704777112217,
+      "ceiling_db": 9.0,
+      "id": "soft_range_start6_ceiling9",
+      "mapping_rmse_db": 0.5101827911389013,
+      "passes_selection": false,
+      "ripple_improvement_ratio": -0.009833418364751045
+    },
+    {
+      "amount100_ripple_db": 0.08966973300731865,
+      "ceiling_db": 8.0,
+      "id": "soft_range_start6_ceiling8",
+      "mapping_rmse_db": 0.4926789902935472,
+      "passes_selection": false,
+      "ripple_improvement_ratio": -0.01929876418147125
+    }
+  ],
+  "decision": "REVISE",
+  "holdout_accessed": false,
+  "holdout_amount100_ripple_db": null,
+  "holdout_passes": false,
+  "holdout_singers": [
+    "f9",
+    "m9",
+    "m10",
+    "m11"
+  ],
+  "range_start_db": 6.0,
+  "raw_audio_persisted": false,
+  "selected_candidate": null,
+  "selected_ceiling_db": null,
+  "selection_singers": [
+    "f7",
+    "f8",
+    "m7",
+    "m8"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "baseline": [
+    "R4 explicit Learn-time Threshold solve with no GR Range."
+  ],
+  "experiment_adapter": "voprep_amount_mapping_r5_v1",
+  "job_file": "research/jobs/queued/VO-PREP-AMOUNT-R5-SOFT-RANGE-001.yaml",
+  "metrics": [
+    "baseline_amount100_ripple_db",
+    "selected_candidate",
+    "selected_ceiling_db",
+    "candidate_summary",
+    "holdout_accessed",
+    "holdout_passes",
+    "holdout_amount100_ripple_db",
+    "range_start_db",
+    "raw_audio_persisted"
+  ],
+  "variants": [
+    "Smooth Range start 6 dB, asymptotic ceiling 10 dB.",
+    "Smooth Range start 6 dB, asymptotic ceiling 9 dB.",
+    "Smooth Range start 6 dB, asymptotic ceiling 8 dB."
+  ]
+}

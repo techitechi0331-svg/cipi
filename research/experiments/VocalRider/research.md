@@ -23,6 +23,12 @@ The product goal is long-timescale level stabilization before downstream vocal d
    - Envelope Sculptor historical record: micro/body/trend gain-trajectory decomposition.
    - VoPriPro: robust realtime/state/regression infrastructure.
 
+5. Mansbridge, Finn and Reiss describe an autonomous fader-control method using EBU R-128 loudness, a time-varying average, a hysteresis loudness gate and selective smoothing, with the explicit goal of avoiding adjustment of intentional dynamics. This is supporting evidence for hysteresis/selective-control concepts; their multitrack algorithm is not copied as a Vocal Rider implementation.
+   - https://secure.aes.org/forum/pubs/conventions/?elib=16226
+
+6. A published breath-sound detector evaluated on speech and song used MFCC-derived breath templates plus time/frequency-domain boundary features, reporting that breath events are acoustically separable enough to support explicit detection. This does not validate any lightweight CIPI breath detector yet.
+   - https://ieeexplore.ieee.org/document/4100696/
+
 ## MEASURED / MODEL_MEASUREMENT
 
 A local deterministic synthetic-vocal model compared simple single-timescale and multi-timescale rider candidates.
@@ -54,6 +60,46 @@ Interpretation: the synthetic benefit flattened above roughly ±4 dB while withi
 A 50 ms lookahead candidate improved phrase-start / within-phrase preservation in the same model compared with 0–20 ms while remaining far below the latency of phrase-scale analysis.
 
 These are MODEL_MEASUREMENT results only. They are not VST3 measurements and are not real-vocal listening evidence.
+
+## COMPILED MEASURED — prototype 0.1 baseline
+
+Windows CI evidence from the dedicated Vocal Rider research workflow:
+
+- CMake configure: PASS on Windows / Visual Studio 18 2026.
+- `CIPIVocalRiderTests`: PASS.
+- VST3 build: PASS.
+- pluginval 1.0.4 strictness 5: SUCCESS.
+- pluginval exercised audio processing and automation at 44.1 / 48 / 96 kHz with 64 / 128 / 256 / 512 / 1024-sample blocks.
+- measurement artifact digest: `sha256:b25d990dbf70e6ddd9ac89a8499c2c5e66a7c3325db1f372d3889c1998c4c745`.
+- VST3 artifact digest: `sha256:4f3008a7e853d4089430f967f55e588e13d67a5087d94c9f529e3e691933fdbe`.
+- pluginval artifact digest: `sha256:098ff2a36d66cbbb69d1232dff7bb2d93670d245400d9eb3f61f8e3a4a0fc196`.
+
+Standalone-core deterministic matrix, nominal 48 kHz / Amount 50%:
+
+- reference-phrase tail ride: -0.610 dB;
+- sustained quiet phrase: +3.997 dB;
+- sustained loud phrase: -3.997 dB;
+- final ride after 3 s silence: +0.004 dB;
+- observed macro range: approximately -3.999 / +3.999 dB;
+- maximum observed gain speed: 16.000 dB/s;
+- 20 ms impulse-like burst immediate macro delta: 0.000 dB;
+- 44.1–192 kHz Amount-50 quiet-phrase gain spread: 0.0025 dB;
+- 44.1–192 kHz Amount-50 loud-phrase gain spread: 0.0017 dB;
+- all 5 sample-rate × 5 Amount matrix values: finite.
+
+This promotes sample-rate stability, finite-state behaviour, range bounding, silence return and the synthetic short-burst freeze from HYPOTHESIS to MEASURED for the standalone core.
+
+### VST3 latency observation
+
+pluginval's early Plugin Info phase printed `Reported latency: 0`, even though the prototype sets 50 ms-equivalent latency in `prepareToPlay`.
+
+This is **MEASURED as an observation**, but its cause is not yet classified.
+
+Current hypotheses:
+- pluginval queried latency before `prepareToPlay`; or
+- the host-facing latency contract is incomplete and needs correction.
+
+The build remains a research prototype until post-prepare latency reporting is tested explicitly and Cubase compensation is confirmed.
 
 ## REJECTED
 
@@ -137,16 +183,21 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 4. 50 ms lookahead must be compared against 0 / 20 / 100 ms on real vocals.
 5. Auto Target must be tested on first-phrase edge cases and songs with intentional section-level dynamics.
 6. A dedicated whisper condition is required so breath rejection does not reject legitimate airy singing.
-7. Real-vocal listening, CPU measurement, pluginval, Steinberg validator and Cubase Pro 14 validation remain pending.
+7. Real-vocal listening, Steinberg validator and Cubase Pro 14 validation remain pending.
+8. pluginval passed, but post-prepare 50 ms host latency reporting must be tested explicitly because the early Plugin Info phase reported 0 samples.
+9. Intentional macro-dynamics preservation is now an explicit measurement target; a verse/chorus contrast probe has been added before further parameter promotion.
 
 ## Current location
 
-Prototype implementation + deterministic model measurement.
+Compiled DSP/VST3 baseline measurement. Core stability gates and pluginval strictness 5 pass; musical-behaviour validation remains open.
 
 ## Next stage
 
-Compile the dedicated Vocal Rider core and VST3 on Windows, run deterministic tests, then generate repeatable stepped-level / silence / burst measurements.
+1. Run the intentional section-dynamics probe.
+2. If macro dynamics are over-corrected, revise Auto Target / selective smoothing before real-vocal promotion.
+3. Reuse the existing HUST_Solfege real-vocal validation infrastructure for male/female singing and render level-matched A/B evidence.
+4. Add an explicit post-prepare latency-reporting gate.
 
 ## Why next
 
-The core timescale/range hypothesis is now specific enough to implement without inventing hidden constants. Compiled evidence is required before any value is promoted.
+The implementation is stable enough that further work should target musical false positives rather than basic build/debug failures. The largest remaining risks are over-riding intentional dynamics, breath/consonant/plosive misclassification, and host latency compensation.

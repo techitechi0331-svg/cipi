@@ -292,3 +292,10 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Falsify or qualify transfer of the Vo.Prep 8 ms / 70 ms fixed ballistics into VoPriPro against the current Natural50 20 ms / 110 ms timing under matched detector and gain-computer conditions."
+
+  vocal_resonance_raw_patch_sufficiency_v2:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 12
+    network_required: true
+    purpose: "Audit in-memory candidate-centered raw 2D local-residual patch sufficiency with linear models and a tiny nonlinear diagnostic upper bound; persist derived evidence only."

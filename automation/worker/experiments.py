@@ -53,6 +53,7 @@ ADAPTERS = {
     "voprep_amount_mapping_r4_v1",
     "vopripro_detector_transfer_screen_v1",
     "vopripro_ballistics_transfer_screen_v1",
+    "vocal_resonance_raw_patch_sufficiency_v2",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3347,6 +3348,56 @@ def _vopripro_ballistics_transfer_screen(
     }
 
 
+
+def _vocal_resonance_raw_patch_sufficiency_v2(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root
+        / "research/experiments/VocalResonance/raw_patch_sufficiency_v2.py"
+    )
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-rawpatch-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "comparison.csv": (out / "comparison.csv").read_text(encoding="utf-8"),
+            "summary.json": (out / "summary.json").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary["diagnostic_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/raw_patch_sufficiency_v2.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Research-only two-seed raw 2D patch sufficiency audit. Raw patches "
+            "remain in runner memory only. Linear raw-patch models and a tiny one-layer "
+            "MLP diagnostic upper bound are compared against the frozen static ranker. "
+            "A diagnostic pass does not approve a product architecture."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3432,4 +3483,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vopripro_detector_transfer_screen(repo_root, timeout_seconds)
     if name == "vopripro_ballistics_transfer_screen_v1":
         return _vopripro_ballistics_transfer_screen(repo_root, timeout_seconds)
+    if name == "vocal_resonance_raw_patch_sufficiency_v2":
+        return _vocal_resonance_raw_patch_sufficiency_v2(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

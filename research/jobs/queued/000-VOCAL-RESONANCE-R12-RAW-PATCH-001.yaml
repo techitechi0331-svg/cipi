@@ -1,0 +1,58 @@
+schema_version: "1.0"
+job_id: VOCAL-RESONANCE-R12-RAW-PATCH-001
+state: QUEUED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: "Do candidate-centered normalized raw 2D local-residual patches contain deployable single-view resonance information that the hand-crafted R8-R11 summaries discarded?"
+hypothesis: "Across both predeclared seeds, at least one raw-patch model will improve conditional Top-5 by at least 0.08, close at least 15 percent of the R7 oracle gap, preserve strong-effect conditional Top-5 within 0.05, and not worsen external clean false-trigger by more than 0.05."
+counter_hypotheses:
+  - "The raw candidate patch contains no stable extra information beyond the frozen static features."
+  - "Only the tiny nonlinear model improves ranking, indicating raw representation information exists but simple linear separation is insufficient."
+  - "Raw patch models learn natural harmonic/formant texture and worsen unseen clean-vocal false triggers."
+baseline:
+  - frozen_static_r2_single_view
+  - raw_patch_only_linear_logistic
+variants:
+  - static_plus_raw_patch_linear
+  - tiny_mlp_diagnostic_upper_bound
+metrics:
+  - top5_given_generator_hit
+  - strong_top5_given_generator_hit
+  - oracle_gap_closure
+  - external_clean_false_trigger
+  - generator_ceiling
+  - source_overlap_count
+acceptance:
+  - "on both seeds, at least one predeclared raw-patch model satisfies all model criteria"
+  - "model criteria: source overlap count == 0"
+  - "model criteria: generator ceiling >= 0.80"
+  - "model criteria: conditional Top-5 >= static + 0.08"
+  - "model criteria: R7 oracle gap closure >= 0.15"
+  - "model criteria: strong-effect conditional Top-5 >= static - 0.05"
+  - "model criteria: external clean false-trigger <= static + 0.05"
+rejection:
+  - "no raw-patch model satisfies all criteria on both seeds"
+max_runs: 1
+timeout_minutes: 12
+random_seed: 20261129
+experiment_adapter: vocal_resonance_raw_patch_sufficiency_v2
+allowed_operations:
+  - stream_public_vocalset_in_runner_memory
+  - controlled_eq_injection
+  - in_memory_candidate_patch_learning
+  - derived_metric_write
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - raw_audio_write
+  - raw_patch_write
+  - paid_api
+  - product_release
+knowledge_candidate:
+  claim: "Candidate-centered raw local-residual spectro-temporal patches may retain deployable single-view resonance information that compact hand-crafted summaries discard."
+  evidence_type: HYPOTHESIS
+  scope: "Vocal resonance semantic-ranking representation sufficiency; tiny nonlinear model is diagnostic only."
+  promotion_requested: HYPOTHESIS

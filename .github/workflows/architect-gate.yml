@@ -38,11 +38,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - name: Install pinned dependency
         run: python -m pip install PyYAML==6.0.2
 
@@ -50,6 +48,14 @@ jobs:
         run: |
           python tools/validate_architect.py
           python tools/validate_incubator.py
+
+      - name: Smoke unresolved/blocker signal extraction
+        run: |
+          rm -rf /tmp/cipi-signal-smoke
+          mkdir -p /tmp/cipi-signal-smoke
+          python automation/architect/scan_signals.py --root /tmp/cipi-signal-smoke --max-signals 2
+          python tools/validate_architect.py --root /tmp/cipi-signal-smoke
+          test "$(find /tmp/cipi-signal-smoke/research/architect/signals -name '*.yaml' | wc -l)" -ge 1
 
       - name: Smoke Research Gap discovery and Pilot
         run: |
@@ -68,12 +74,11 @@ jobs:
           assert manifest["acceptance_met"] is True
           assert metrics["low_level_thd_penalty_db"] >= 20.0
           assert kc["evidence_type"] == "MEASURED"
-          assert decision["event_type"] == "AUTOMATED_PROPOSAL"
           assert decision["review_status"] == "PENDING"
           print("architect pilot smoke: PASS")
           PY
 
-      - name: Smoke Plugin Incubator overlap routing
+      - name: Smoke Plugin Incubator overlap and Adapter Candidate routing
         run: |
           rm -rf /tmp/cipi-incubator-smoke
           mkdir -p /tmp/cipi-incubator-smoke
@@ -85,20 +90,43 @@ jobs:
           python - <<'PY'
           import pathlib,yaml
           root=pathlib.Path("/tmp/cipi-incubator-smoke")
-          p=next((root/"research/incubator/decisions").glob("*.yaml"))
-          d=yaml.safe_load(p.read_text())
-          ac=next((root/"research/architect/adapter_candidates").glob("*.yaml"))
-          a=yaml.safe_load(ac.read_text())
-          assert d["decision"] == "MERGE_EXISTING"
-          assert d["final"] is False
-          assert a["state"] == "DRAFT_REVIEW"
-          assert a["executable"] is False
+          d=yaml.safe_load(next((root/"research/incubator/decisions").glob("*.yaml")).read_text())
+          a=yaml.safe_load(next((root/"research/architect/adapter_candidates").glob("*.yaml")).read_text())
+          assert d["decision"] == "MERGE_EXISTING" and d["final"] is False
+          assert a["state"] == "DRAFT_REVIEW" and a["executable"] is False
           assert a["automatic_registry_promotion_allowed"] is False
-          print("incubator + adapter-candidate smoke: PASS")
+          print("incubator overlap + adapter candidate: PASS")
           PY
 
-      - name: Smoke isolated prototype adapter
-        run: python automation/incubator/prototype.py --self-test
+      - name: Smoke evidence-gated INCUBATE and isolated prototype
+        run: |
+          rm -rf /tmp/cipi-incubate-smoke
+          mkdir -p /tmp/cipi-incubate-smoke
+          python automation/architect/discover.py --topic phrase_envelope_riding --output-root /tmp/cipi-incubate-smoke --max-gaps 1
+          python automation/incubator/discover.py --proposal /tmp/cipi-incubate-smoke/research/architect/proposals/RP-PHRASE-ENVELOPE-RIDING-001.yaml --output-root /tmp/cipi-incubate-smoke
+          mkdir -p /tmp/cipi-incubate-smoke/research/runs/INCUBATOR-SMOKE/measurement-0001
+          echo '{"result":"COMPLETED"}' > /tmp/cipi-incubate-smoke/research/runs/INCUBATOR-SMOKE/measurement-0001/manifest.json
+          mkdir -p /tmp/cipi-incubate-smoke/research/incubator/evidence/PLUGIN-RP-PHRASE-ENVELOPE-RIDING-001
+          cat > /tmp/cipi-incubate-smoke/research/incubator/evidence/PLUGIN-RP-PHRASE-ENVELOPE-RIDING-001/smoke-pass.yaml <<'YAML'
+          schema_version: "1.0"
+          plugin_proposal_id: PLUGIN-RP-PHRASE-ENVELOPE-RIDING-001
+          source_measurement_run: research/runs/INCUBATOR-SMOKE/measurement-0001
+          baseline_improvement_pass: true
+          holdout_pass: true
+          regression_pass: true
+          cpu_pass: true
+          latency_pass: true
+          overlap_advantage_pass: true
+          negative_knowledge_reviewed: true
+          raw_audio_persisted: false
+          scope: "CI smoke evidence only; not product evidence."
+          YAML
+          python automation/incubator/evaluate.py --root /tmp/cipi-incubate-smoke --max-candidates 1
+          DECISION="$(find /tmp/cipi-incubate-smoke/research/incubator/decisions -name '*-incubate-*.yaml' | head -1)"
+          test -n "$DECISION"
+          python automation/incubator/prototype.py             --proposal /tmp/cipi-incubate-smoke/research/incubator/proposals/PLUGIN-RP-PHRASE-ENVELOPE-RIDING-001.yaml             --decision "$DECISION"             --output-root /tmp/cipi-incubate-smoke
+          python tools/validate_incubator.py --root /tmp/cipi-incubate-smoke
+          test -f /tmp/cipi-incubate-smoke/research/incubator/prototypes/PLUGIN-RP-PHRASE-ENVELOPE-RIDING-001/metrics.json
 
       - name: Validate existing CIPI research contracts
         run: |

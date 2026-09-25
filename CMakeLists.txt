@@ -109,3 +109,24 @@ target_link_libraries(CIPIVocalRiderTests
 )
 
 set_target_properties(CIPIVocalRiderTests PROPERTIES OUTPUT_NAME "CIPIVocalRiderTests")
+
+
+juce_add_console_app(CIPIVocalRiderMeasurement
+    PRODUCT_NAME "CIPI Vocal Rider Measurement"
+)
+
+juce_generate_juce_header(CIPIVocalRiderMeasurement)
+
+target_sources(CIPIVocalRiderMeasurement PRIVATE tests/VocalRiderMeasurement.cpp)
+target_include_directories(CIPIVocalRiderMeasurement PRIVATE src)
+
+target_link_libraries(CIPIVocalRiderMeasurement
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_core
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderMeasurement PROPERTIES OUTPUT_NAME "CIPIVocalRiderMeasurement")

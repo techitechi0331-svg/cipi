@@ -1,0 +1,160 @@
+{
+  "experiment": "VOCAL_RESONANCE_R6_RUN_LENGTH_VETO",
+  "seeds": [
+    20261003,
+    20261013
+  ],
+  "candidate_budget": 20,
+  "veto_features": [
+    "rel_longest_active_run_frac",
+    "rel_active_run_count_norm",
+    "rel_median_active_run_frac"
+  ],
+  "per_seed": {
+    "20261003": {
+      "seed": 20261003,
+      "static_C": 0.03,
+      "static_threshold": 0.7941223642156119,
+      "veto_C": 0.03,
+      "veto_threshold": 0.48103510209374134,
+      "static_ranking": {
+        "n_cases": 32,
+        "generator_ceiling": 0.9375,
+        "top1": 0.03125,
+        "top1_given_generator_hit": 0.03333333333333333,
+        "top3": 0.125,
+        "top3_given_generator_hit": 0.13333333333333333,
+        "top5": 0.25,
+        "top5_given_generator_hit": 0.26666666666666666,
+        "mrr": 0.17148762051287206,
+        "top5_effect_gte3": 0.3333333333333333,
+        "top5_high_f0": null,
+        "n_high_f0_cases": 0,
+        "clean_false_trigger": 0.375,
+        "threshold_from_valid_95pct": 0.7941223642156119
+      },
+      "validation_veto": {
+        "target_action_keep": 1.0,
+        "strong_action_keep": 1.0,
+        "clean_fpr": 0.125
+      },
+      "test_action": {
+        "baseline_target_actions": 1,
+        "veto_target_actions": 1,
+        "target_action_keep": 1.0,
+        "baseline_strong_actions": 0,
+        "veto_strong_actions": 0,
+        "strong_action_keep": 1.0
+      },
+      "internal_clean": {
+        "n": 8,
+        "baseline_fpr": 0.375,
+        "veto_fpr": 0.375,
+        "veto_minus_baseline": 0.0,
+        "bootstrap_lo": 0.0,
+        "bootstrap_hi": 0.0,
+        "improvements": 0,
+        "regressions": 0
+      },
+      "external_clean": {
+        "n": 40,
+        "baseline_fpr": 0.175,
+        "veto_fpr": 0.15,
+        "veto_minus_baseline": -0.025,
+        "bootstrap_lo": -0.075,
+        "bootstrap_hi": 0.0,
+        "improvements": 1,
+        "regressions": 0
+      },
+      "source_overlap_count": 0,
+      "ranking_order_unchanged": true
+    },
+    "20261013": {
+      "seed": 20261013,
+      "static_C": 1.0,
+      "static_threshold": 0.8218928113165967,
+      "veto_C": 0.03,
+      "veto_threshold": 0.9,
+      "static_ranking": {
+        "n_cases": 32,
+        "generator_ceiling": 0.84375,
+        "top1": 0.09375,
+        "top1_given_generator_hit": 0.1111111111111111,
+        "top3": 0.21875,
+        "top3_given_generator_hit": 0.25925925925925924,
+        "top5": 0.34375,
+        "top5_given_generator_hit": 0.4074074074074074,
+        "mrr": 0.22565239721900907,
+        "top5_effect_gte3": 0.2857142857142857,
+        "top5_high_f0": null,
+        "n_high_f0_cases": 0,
+        "clean_false_trigger": 0.25,
+        "threshold_from_valid_95pct": 0.8218928113165967
+      },
+      "validation_veto": {
+        "target_action_keep": 1.0,
+        "strong_action_keep": 1.0,
+        "clean_fpr": 0.0
+      },
+      "test_action": {
+        "baseline_target_actions": 0,
+        "veto_target_actions": 0,
+        "target_action_keep": 1.0,
+        "baseline_strong_actions": 0,
+        "veto_strong_actions": 0,
+        "strong_action_keep": 1.0
+      },
+      "internal_clean": {
+        "n": 8,
+        "baseline_fpr": 0.25,
+        "veto_fpr": 0.0,
+        "veto_minus_baseline": -0.25,
+        "bootstrap_lo": -0.625,
+        "bootstrap_hi": 0.0,
+        "improvements": 2,
+        "regressions": 0
+      },
+      "external_clean": {
+        "n": 40,
+        "baseline_fpr": 0.25,
+        "veto_fpr": 0.0,
+        "veto_minus_baseline": -0.25,
+        "bootstrap_lo": -0.4,
+        "bootstrap_hi": -0.125,
+        "improvements": 10,
+        "regressions": 0
+      },
+      "source_overlap_count": 0,
+      "ranking_order_unchanged": true
+    }
+  },
+  "retention_gate": {
+    "accepted": false,
+    "criteria": {
+      "20261003": {
+        "zero_source_overlap": true,
+        "ranking_order_unchanged": true,
+        "external_fpr_improves_by_0_05": false,
+        "external_paired_ci_upper_nonpositive": true,
+        "target_action_keep_gte_0_95": true,
+        "strong_action_keep_gte_0_95": true,
+        "no_new_external_false_triggers": true
+      },
+      "20261013": {
+        "zero_source_overlap": true,
+        "ranking_order_unchanged": true,
+        "external_fpr_improves_by_0_05": true,
+        "external_paired_ci_upper_nonpositive": true,
+        "target_action_keep_gte_0_95": true,
+        "strong_action_keep_gte_0_95": true,
+        "no_new_external_false_triggers": true
+      }
+    },
+    "meaning": "Whether run-length morphology is useful only as a post-ranker veto/abstention stage. Passing does not improve or validate the semantic ranking product gate."
+  },
+  "product_gate": {
+    "passed": false,
+    "reason": "The static semantic ranker remains far below the existing Top-5 / strong-effect product criteria; R6 only tests abstention."
+  },
+  "raw_audio_persisted": false
+}

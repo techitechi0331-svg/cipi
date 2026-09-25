@@ -1,0 +1,3 @@
+seed,baseline_target_actions,veto_target_actions,target_action_keep,baseline_strong_actions,veto_strong_actions,strong_action_keep,internal_baseline_fpr,internal_veto_fpr,external_baseline_fpr,external_veto_fpr
+20261003,1,1,1.0,0,0,1.0,0.375,0.375,0.175,0.15
+20261013,0,0,1.0,0,0,1.0,0.25,0.0,0.25,0.0

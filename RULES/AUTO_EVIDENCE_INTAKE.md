@@ -44,4 +44,4 @@ A successful intake may expose:
 - new queued CIPI Research Jobs;
 - new bounded Cross-Repo action requests.
 
-The intake workflow explicitly re-dispatches both the CIPI worker and Cross-Repo Orchestrator so the autonomous chain can continue without a user saying "continue".
+The intake workflow returns control to the No-Wait scheduler and Cross-Repo Orchestrator. The Global DAG schedule is the fallback coordinator, so continuation does not depend on a `workflow_run` event being emitted by a token-dispatched child workflow.

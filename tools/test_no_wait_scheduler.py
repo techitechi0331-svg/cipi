@@ -32,6 +32,13 @@ def write_job(root: Path, name: str, job_id: str, *, state: str = "QUEUED", prio
     }
     if deps:
         payload["depends_on_jobs"] = deps
+    if state == "BLOCKED_EXTERNAL":
+        payload["external_wait"] = [{
+            "kind": "GITHUB_ACTIONS",
+            "ref": "run:test",
+            "resume_when": "the referenced run completes",
+            "resume_step": "re-evaluate the blocked test job",
+        }]
     (root / name).write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
 
 

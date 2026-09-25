@@ -207,3 +207,10 @@ adapters:
     network_required: false
     purpose: "Run the reviewed deterministic synthetic masking-aware presence pilot against a static presence-EQ baseline; this is an oracle-style selectivity test only and cannot establish a deployable masking estimator or product claim."
 
+  rp_phrase_envelope_riding_001_pilot_v1:
+    tracks:
+      - ARCHITECT_PHRASE_ENVELOPE_RIDING
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Run the reviewed deterministic causal Phrase Envelope pilot against a bounded one-timescale level baseline; passing authorizes deeper real-vocal research only and cannot establish standalone product value."
+

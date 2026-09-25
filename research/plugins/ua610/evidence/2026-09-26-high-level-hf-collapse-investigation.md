@@ -67,3 +67,50 @@ This remains a hypothesis until the Windows workflow passes the new gate and the
 - Current formal stage remains measurement/revision.
 - Real-vocal A/B must not select a final winner until this regression is closed.
 - Cubase Pro 14 Mic 2k / Mic 500 confirmation remains a separate open host gate.
+
+
+## WINDOWS FIX VALIDATION
+
+### SOURCE_FACT
+
+- Windows workflow run: `36155252191` (Run 37).
+- Source SHA: `87fb94468085323083edbb2db973f7483d263ecf`.
+- The run was later cancelled by a newer workflow-only/test-harness refinement, but before cancellation it completed:
+  - fail-fast analyzer build: PASS;
+  - preserved 610 baseline regression: PASS;
+  - full Original overload investigation: PASS;
+  - overload artifact upload: SUCCESS.
+- Overload artifact: `Original-Vocal-Pre-Overload`.
+- Artifact digest: `sha256:98b110a26a13da5a2c1ac076f9cca254fb2874723154508c97c99da126534008`.
+- Subsequent product commits through `5b00e453c5b7c0ee295d7fd42343fabc0ab9ecd3` refine only the overload test harness/workflow and do not change the validated Original DSP solver fix.
+
+### MEASURED
+
+With all Original blocks enabled, Character 100, input trim 0 dB, source -6 dBFS:
+- 1 kHz fundamental gain: **-0.213888 dB**.
+- 1 kHz peak: **0.504335**.
+- 1 kHz THD: **3.02875%**.
+- 10 kHz fundamental gain: **-0.319197 dB**.
+- 10 kHz peak: **0.49369**.
+- 10 kHz THD: **2.0258%**.
+- Both points were finite and passed the new > -6 dB high-level fundamental gate.
+
+Additional stress point, Character 100 / input trim 0 dB / source -3 dBFS:
+- 1 kHz gain: **-0.746097 dB**, THD **8.79264%**.
+- 10 kHz gain: **-0.521395 dB**, THD **4.08656%**.
+- Both remained finite with the wanted fundamental intact.
+
+The previous catastrophic 10 kHz / -6 dBFS loss of approximately -88 to -300 dB is therefore not present in this Windows measurement.
+
+### INFERRED
+
+- The opt-in bracketed current solve removes the observed latch/collapse while preserving the old 610 research solver path.
+- The successful preserved 610 baseline regression in the same run is evidence that this fix did not silently alter the historical 610 product path.
+- The corrected overload behavior is strong enough to resume extended Original measurements, but it does not by itself lock Character, Tone, transformer settings or CPU/latency policy.
+
+### REMAINING
+
+- Re-run the latest branch with the split fast gate and corrected trim-relative reporting.
+- Inspect extended shortlist/IMD/alias/frequency results under the robust Original solver because numerical values can legitimately shift after the solver correction.
+- Measure real-time CPU cost of the robust solver before parameter lock.
+- Complete level-matched real-vocal A/B and Cubase Pro 14 host validation.

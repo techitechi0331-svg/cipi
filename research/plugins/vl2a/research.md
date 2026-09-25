@@ -479,3 +479,28 @@ Therefore:
 
 This closes stereo-link as a release blocker unless new controlled reference
 measurements justify reopening it.
+
+
+## 2026-09-25 Phase 03B stateful optical-ripple result
+
+Run `36112297868` completed successfully.
+
+Strict winner:
+- **v3**
+- 1 kHz / ~6 dB GR THD: ~0.7830%
+- H3: ~-42.22 dBc
+- fixed-control GR drift: 0.00000 dB
+- matched T4 release/control path preserved
+
+Five-frequency active-GR THD:
+- 63 Hz: ~1.366%
+- 125 Hz: ~1.178%
+- 250 Hz: ~1.119%
+- 500 Hz: ~1.029%
+- 1 kHz: ~0.783%
+
+Decision:
+- promote Phase 03B v3 to **integration candidate**;
+- retain Phase 03 v4 as numeric benchmark only;
+- do not promote to release until combined Peak calibration and real-vocal
+  regression pass.

@@ -17,6 +17,21 @@ This CIPI track imports the completed Phase 01-B..H work around the VL2A main au
 
 T4, R37/sidechain, Peak Reduction law and final product oversampling remain separate later work.
 
+## Current synthesis — 2026-09-25 non-destructive content audit
+
+The early Phase 01-H sections below are preserved as historical stage records. They are no longer the authoritative statement of the track's current location.
+
+Current evidence state:
+- Phase 01-H line amplifier received an engineering **KEEP** decision and was integrated into VL2A v0.5.0.
+- The final product Gain range was restored to `-18..+18 dB` with a `0 dB` centre, and the mojibake-prone UI separator was corrected during that integration.
+- Phase 02 measured the exact current T4 / sidechain / Peak Reduction / COMP-LIMIT baseline and passed its hard-correctness gates.
+- R37 / sidechain emphasis remains factory-flat for the music/vocal product default.
+- A later strict reference-parity review **reopened** the user-facing Peak Reduction operating range, gain-reduction meter presentation, stereo detector/link law and active-compression nonlinear coloration.
+- The UAD LA-2A Collection `-12 dBFS` value is a plug-in internal reference level; it must not be conflated with the separate laboratory convention `-18 dBFS = +4 dBu`.
+- Human subjective preference is still not measured, and Cubase Pro 14 release-candidate validation is still pending.
+
+For current work, use `status.yaml` plus the later Phase 01-H integration, Phase 02, R37 and strict reference-parity sections in this document. Earlier "Current location", "Unresolved" and "Next stage" paragraphs are historical snapshots and must not override newer evidence.
+
 ## SOURCE_FACT
 
 - The product architecture keeps input transformer, T4 attenuation, Gain, line amplifier and output transformer as separable concerns.

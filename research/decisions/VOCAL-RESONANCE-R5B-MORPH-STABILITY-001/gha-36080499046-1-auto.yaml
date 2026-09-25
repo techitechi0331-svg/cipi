@@ -1,0 +1,37 @@
+schema_version: '1.0'
+decision_id: VOCAL-RESONANCE-R5B-MORPH-STABILITY-001:gha-36080499046-1:auto
+job_id: VOCAL-RESONANCE-R5B-MORPH-STABILITY-001
+source_run: research/runs/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Declared rejection criteria were triggered; detailed rationale requires
+  review.
+scope: Automated rejection evidence for VOCAL-RESONANCE-R5B-MORPH-STABILITY-001; final
+  rejection requires review.
+declared_rejection_criteria:
+- any source basename overlap is detected
+- Top-5 or strong-effect Top-5 regresses on either seed
+- external clean false-trigger improvement fails the declared margin on either seed
+- same-C control fails the declared margin or ranking-preservation criteria
+- paired external-clean bootstrap upper bound is positive on either seed
+triggered_criteria: []
+retained_findings:
+- All run artifacts, measurements, parameters, environment data and checksums are
+  retained as negative evidence.
+reusable_findings: []
+revisit_if:
+- New evidence, a changed model, or a changed baseline materially affects the failed
+  criteria.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T01:10:48.750671Z'
+immutable: true

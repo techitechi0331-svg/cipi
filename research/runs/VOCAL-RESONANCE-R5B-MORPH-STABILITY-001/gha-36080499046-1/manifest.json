@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/temporal_morphology_stability.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T01:10:48.750671Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_temporal_morphology_stability_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R5B-MORPH-STABILITY-001",
+  "random_seed": 20261004,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36080499046-1",
+  "schema_version": "1.0",
+  "source_commit": "bb7b72da62bed3b001be9eb3b950d3aa26583e3a",
+  "started_at": "2026-09-25T01:06:07.422260Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

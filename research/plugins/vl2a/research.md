@@ -571,3 +571,22 @@ failed the strict <=0.75 dB real-vocal band gate.
 Decision:
 - shorter tau direction: REJECTED
 - next experiment: longer tau 4.5 / 5.0 / 6.0 ms
+
+
+## 2026-09-25 Phase03D longer optical mean tracking
+
+Phase03D tested 4.5 / 5.0 / 6.0 ms.
+
+MEASURED max real-vocal band shift:
+- 4.5 ms: ~0.782919 dB
+- 5.0 ms: ~0.777979 dB
+- 6.0 ms: ~0.772116 dB
+
+The controlling miss remained forte / 20..80 Hz. All three candidates
+preserved ~0.783% 1 kHz active-GR THD, H3 dominance, and stable control.
+
+Decision:
+- 4.5 / 5.0 / 6.0 ms: REJECTED as final values
+- longer-tau direction remains active because the A/B metric improves
+  monotonically
+- next: Phase03E 8 / 12 / 16 ms with an added 63 Hz THD guard.

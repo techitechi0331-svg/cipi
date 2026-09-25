@@ -9,7 +9,7 @@
 A final-stage vocal finishing processor for controlled polish, width and density.
 
 ## Evidence carried forward
-- Historical testing confirmed a working VST3 and audible width changes, especially at stronger settings.
+- Historical project reports describe a working VST3 and audible width changes, especially at stronger settings. The original binary/source and formal host-validation artifacts are not currently registered in CIPI, so this remains historical evidence rather than independently reproduced MEASURED proof.
 - PAZ Analyzer observation showed lower settings sometimes widened only briefly, motivating calibration review.
 
 ## Interpretation

@@ -553,3 +553,21 @@ Current status:
 
 The final calibration gate is now based on normalized real VocalSet material,
 not only a sine-wave proxy.
+
+
+## 2026-09-25 Phase03C low-band refinement
+
+Shortening the optical mean-tracking tau was tested and rejected.
+
+Measured forte 20..80 Hz max band shift:
+- current 4.0 ms: ~0.789805 dB
+- 3.5 ms: ~0.799981 dB
+- 3.0 ms: ~0.813955 dB
+- 2.5 ms: ~0.836254 dB
+
+All candidates retained ~0.783% 1 kHz active-GR THD and H3 dominance, but all
+failed the strict <=0.75 dB real-vocal band gate.
+
+Decision:
+- shorter tau direction: REJECTED
+- next experiment: longer tau 4.5 / 5.0 / 6.0 ms

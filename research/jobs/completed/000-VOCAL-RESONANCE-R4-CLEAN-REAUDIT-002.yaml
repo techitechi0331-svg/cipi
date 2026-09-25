@@ -1,15 +1,22 @@
 schema_version: '1.0'
 job_id: VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002
-state: QUEUED
+state: COMPLETED
 track:
   id: VOCAL_RESONANCE_FORMAL
   path: research/plugins/vocal-resonance
-research_question: Does the clean false-trigger technique concentration replicate on excerpts excluded from Audit-001 and across multiple exercise families, and does a conservative YIN-style pitch proxy provide credible high-pitch coverage?
-hypothesis: The fast-piano/fast-forte clean false-trigger concentration will remain at least 15 percentage points above the other represented techniques on an independent exercise-balanced cohort, while conservative pitch analysis will retain at least six reliable p90-F0 >=400 Hz excerpts.
+research_question: Does the clean false-trigger technique concentration replicate
+  on excerpts excluded from Audit-001 and across multiple exercise families, and does
+  a conservative YIN-style pitch proxy provide credible high-pitch coverage?
+hypothesis: The fast-piano/fast-forte clean false-trigger concentration will remain
+  at least 15 percentage points above the other represented techniques on an independent
+  exercise-balanced cohort, while conservative pitch analysis will retain at least
+  six reliable p90-F0 >=400 Hz excerpts.
 counter_hypotheses:
-- The apparent technique concentration was specific to the Audit-001 arpeggio/singer sample and collapses on an independent exercise-balanced cohort.
+- The apparent technique concentration was specific to the Audit-001 arpeggio/singer
+  sample and collapses on an independent exercise-balanced cohort.
 - Singer identity explains more of the false-trigger variation than technique family.
-- The legacy ACF high-pitch coverage was dominated by octave/search-boundary errors and conservative pitch analysis yields too few high-pitch cases.
+- The legacy ACF high-pitch coverage was dominated by octave/search-boundary errors
+  and conservative pitch analysis yields too few high-pitch cases.
 baseline:
 - static_r2_style_safe_negative_frozen_from_audit001
 variants:
@@ -58,9 +65,10 @@ prohibited_operations:
 - paid_api
 - product_release
 knowledge_candidate:
-  claim: Clean false-trigger concentration by vocal technique persists across independent exercise-balanced real-vocal excerpts when pitch coverage is measured with a conservative YIN-style proxy.
+  claim: Clean false-trigger concentration by vocal technique persists across independent
+    exercise-balanced real-vocal excerpts when pitch coverage is measured with a conservative
+    YIN-style proxy.
   evidence_type: HYPOTHESIS
   scope: Vocal resonance semantic-ranker hard-negative design and subgroup measurement.
   promotion_requested: HYPOTHESIS
-
-# rerun after Audit-001 checksum restoration
+latest_run: gha-36072656461-2

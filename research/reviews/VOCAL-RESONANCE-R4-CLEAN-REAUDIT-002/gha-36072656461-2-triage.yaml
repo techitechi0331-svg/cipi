@@ -1,0 +1,27 @@
+schema_version: '1.0'
+triage_id: VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002:gha-36072656461-2:triage-v1
+job_id: VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002
+run_id: gha-36072656461-2
+source_run: research/runs/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2
+source_decision_id: VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002:gha-36072656461-2:auto
+source_decision_path: research/decisions/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2-auto.yaml
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002.yaml
+knowledge_candidate_path: research/knowledge_candidates/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2.yaml
+candidate_class: RESEARCH_MORE
+route: CONTINUE_RESEARCH
+final_decision_made: false
+existing_review_decision_id: null
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates: []
+downstream_gate_signals: []
+reasons:
+- The run passed as evidence, but it does not yet request a bounded LIKELY/PROVISIONAL
+  promotion review.
+recommended_action: Continue the declared research path or use a predeclared continuation;
+  no promotion decision is warranted yet.
+created_at: '2026-09-24T23:43:29.255625Z'
+triage_version: '1.0'
+immutable: true

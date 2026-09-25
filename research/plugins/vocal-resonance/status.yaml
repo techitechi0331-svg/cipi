@@ -41,11 +41,10 @@ unresolved:
   - Clean hard-negative false-trigger behavior remains too high to authorize suppression DSP.
   - Strong-effect target ranking remains below the research gate.
   - The tested v0.4R.3 motion-coherence bundle regressed ranking and is rejected; other temporal evidence remains unproven.
-  - High-pitch coverage remains unresolved: Audit-001 frequently saturated the legacy ACF proxy near its 1000 Hz ceiling, so its p90>=400 grouping is not accepted as validated high-F0 evidence.\n  - Audit-001 selected only arpeggio excerpts, leaving exercise-family confounding in the observed technique differences.
-  - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
+  - Legacy ACF upper-quantile pitch estimates are not accepted as high-pitch ground truth; Re-audit-002 obtained a usable YIN-style high-pitch subset and did not find elevated false triggers there.\n  - Technique-specific protection is not supported by the independent re-audit; the remaining false-trigger problem is treated as a generic candidate-context problem.\n  - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "Audit-001 found large technique/singer variation, but lip-trill did not reproduce, all selected excerpts were arpeggios, and the legacy ACF pitch proxy saturated near 1000 Hz. Replicate the subgroup result on excluded excerpts across exercise families with a conservative pitch proxy before adding a new feature family."
-next_confirmation: "Whether fast-piano/fast-forte false-trigger concentration replicates on Audit-001-excluded, exercise-balanced clean excerpts and whether conservative YIN-style pitch measurement yields a credible high-pitch cohort."
+why_next: "Independent Re-audit-002 did not replicate the fast-technique concentration and did not find high pitch to be the dominant false-trigger subgroup. The next bounded question is whether generic temporal candidate morphology improves ranking and clean-vocal abstention without technique labels or F0 dependence."
+next_confirmation: "Whether run-length, fragmentation, occupancy and temporal-concentration features improve Top-5 and strong-effect ranking while reducing disjoint clean false triggers versus the unchanged static R2-style ranker and simple prominence baseline."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

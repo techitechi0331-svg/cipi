@@ -1,0 +1,26 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed MicroDouble/Vo.Prep detector evidence snapshot",
+    "verify committed SHA256 ledger",
+    "apply predeclared reuse-to-product-experiment gates"
+  ],
+  "completed_at": "2026-09-25T03:00:42.694278Z",
+  "environment": {
+    "experiment_adapter": "microdouble_sibilance_reuse_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "MICRODOUBLE-SIBILANCE-REUSE-001",
+  "random_seed": 20260925,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36088584811-1",
+  "schema_version": "1.0",
+  "source_commit": "c19dadfc16b604e6b6376596239320347865e50f",
+  "started_at": "2026-09-25T03:00:42.692244Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

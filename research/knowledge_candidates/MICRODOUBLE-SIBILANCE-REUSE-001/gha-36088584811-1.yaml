@@ -1,0 +1,8 @@
+claim: The Vo.Prep hybrid high/broad + high/mid detector has enough bounded real-vocal
+  evidence to be tested as a MicroDouble sibilance-protection candidate against the
+  current simple detector.
+evidence_type: HYPOTHESIS
+scope: Evidence-reuse decision only; direct MicroDouble A/B, subjective naturalness,
+  multilingual generalization and product adoption remain unproven.
+source_run: research/runs/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1
+promotion_requested: PROVISIONAL

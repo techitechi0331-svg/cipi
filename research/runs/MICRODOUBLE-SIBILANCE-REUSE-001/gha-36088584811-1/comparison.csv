@@ -1,0 +1,13 @@
+metric,value
+snapshot_checksum_ok,True
+candidate_has_real_vocal_evidence,True
+candidate_real_vocal_stem_count,11.0
+candidate_reference_recall_pct,64.0
+candidate_low_conf_false_trigger_pct,0.02
+candidate_active_occupancy_pct,3.1
+candidate_corpus_max_reduction_db,1.33
+candidate_body_mean_movement_db,0.14
+candidate_precision_bias_ok,True
+candidate_processing_bounded,True
+baseline_synthetic_sane,True
+baseline_real_labeled_gap,True

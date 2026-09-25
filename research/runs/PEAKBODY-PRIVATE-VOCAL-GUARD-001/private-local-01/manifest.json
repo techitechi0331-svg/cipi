@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "job_id": "PEAKBODY-PRIVATE-VOCAL-GUARD-001",
+  "run_id": "private-local-01",
+  "run_mode": "PRIVATE_LOCAL_MANUAL",
+  "track_id": "PEAKBODY_01",
+  "protocol_path": "research/experiments/PeakBody/PRIVATE_REAL_VOCAL_GUARD_PROTOCOL_01.md",
+  "analysis_script_path": "research/experiments/PeakBody/private_real_vocal_guard_measure.py",
+  "metrics_path": "research/measurements/PEAKBODY_PRIVATE_REAL_VOCAL_GUARD_01.json",
+  "report_path": "research/measurements/PEAKBODY_PRIVATE_REAL_VOCAL_GUARD_01.md",
+  "completed_at": "2026-09-26",
+  "acceptance_met": false,
+  "rejection_triggered": false,
+  "decision": "INCONCLUSIVE",
+  "triggered_criteria": [
+    "bright voiced crest proxy count was 0, below the predeclared minimum of 30",
+    "noise-like high-band median retention was 0.492622222, above the <=0.35 target"
+  ],
+  "privacy": {
+    "raw_audio_committed": false,
+    "frame_timecodes_committed": false,
+    "spectral_images_committed": false,
+    "aggregate_non_reversible_metrics_only": true
+  },
+  "source_binding": [
+    {"id":"PV1","sha256":"6df64e2aba1b6c00582f2ac4eaf17ba169d6cdd239550863d2c8773d79d7e234","sample_rate_hz":44100,"channels":2,"duration_seconds":68.35954648526076},
+    {"id":"PV2","sha256":"5798e68e732725f345a032a48da658aed6ac93b3db2d769b0d183bb0c8d75ad5","sample_rate_hz":44100,"channels":1,"duration_seconds":68.35954648526076},
+    {"id":"PV3","sha256":"c40c1454f09c3047b07daacb77b04097cc177d517b1556a847e00e3a5b70cf04","sample_rate_hz":44100,"channels":1,"duration_seconds":68.35954648526076},
+    {"id":"PV4","sha256":"14890fbce0e891f9c3267b2c42cd3e454399e7367af88b0a054394f77ffdc750","sample_rate_hz":44100,"channels":1,"duration_seconds":68.35954648526076}
+  ]
+}

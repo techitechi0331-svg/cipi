@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CIPI Research Gap",
+  "type": "object",
+  "required": ["schema_version","gap_id","topic_id","title","state","score","support_path_count","minimum_support_paths","support_paths","why_gap","question","human_only","plugin_opportunity"],
+  "properties": {
+    "schema_version":{"const":"1.0"},
+    "gap_id":{"type":"string","pattern":"^GAP-[A-Z0-9._-]+$"},
+    "topic_id":{"type":"string","minLength":3},
+    "title":{"type":"string","minLength":5},
+    "state":{"enum":["OPEN","PILOT_READY","NEEDS_ADAPTER","RESEARCHING","CLOSED"]},
+    "score":{"type":"number"},
+    "support_path_count":{"type":"integer","minimum":0},
+    "minimum_support_paths":{"type":"integer","minimum":1},
+    "support_paths":{"type":"array","items":{"type":"string"}},
+    "why_gap":{"type":"string","minLength":10},
+    "question":{"type":"string","minLength":10},
+    "human_only":{"type":"boolean"},
+    "plugin_opportunity":{"type":"boolean"}
+  },
+  "additionalProperties": true
+}

@@ -47,6 +47,34 @@ def count_support(patterns: list[str]) -> tuple[int, list[str]]:
             units.add(support_unit(path))
     return len(units), sorted(units)
 
+def infer_signal_class(text:str)->str:
+    low=text.lower()
+    if any(token in low for token in ("cubase","subjective","listening","target-machine","real-host","real host","windows host")):
+        return "HUMAN_GATE"
+    if any(token in low for token in ("corpus","dataset","labelled","labeled","language","japanese","korean","public vocal")):
+        return "DATA_GAP"
+    return "RESEARCH_GAP"
+
+def signal_pressure(patterns:list[str], output_root:Path)->tuple[int,list[str]]:
+    base=output_root/"research"/"architect"/"signals"
+    if not base.exists():
+        base=REPO_ROOT/"research"/"architect"/"signals"
+    pats=[p.lower() for p in patterns]
+    matched=[]
+    if not base.exists():
+        return 0, matched
+    for path in sorted(base.glob("*.yaml")):
+        try:data=load_yaml(path)
+        except Exception:continue
+        if not isinstance(data,dict):continue
+        text=str(data.get("text",""))
+        klass=str(data.get("signal_class") or infer_signal_class(text))
+        if klass=="HUMAN_GATE":
+            continue
+        if any(p in text.lower() for p in pats):
+            matched.append(str(path.relative_to(output_root if str(path).startswith(str(output_root)) else REPO_ROOT)))
+    return len(matched), matched
+
 def write_yaml(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
@@ -71,27 +99,28 @@ def main() -> int:
         if not topics:
             raise SystemExit(f"unknown topic: {args.topic}")
 
+    output_root = Path(args.output_root)
     ranked = []
     for topic in topics:
-        support_count, support_paths = count_support(list(topic.get("patterns") or []))
+        patterns=list(topic.get("patterns") or [])
+        support_count, support_paths = count_support(patterns)
+        signal_count, signal_paths = signal_pressure(patterns, output_root)
         minimum = int(topic.get("min_support_paths", 1))
         missing = max(0, minimum - support_count)
-        if missing <= 0 and not args.topic:
+        if missing <= 0 and signal_count <= 0 and not args.topic:
             continue
         score = sum(int(topic.get(k, 0)) for k in (
             "impact", "measurability", "falsifiability", "cross_track_reuse", "implementation_feasibility"
-        )) + missing * 2
-        ranked.append((score, support_count, support_paths, topic))
-    ranked.sort(key=lambda item: (-item[0], item[3]["id"]))
-
-    output_root = Path(args.output_root)
+        )) + missing * 2 + min(signal_count,4) * 2
+        ranked.append((score, support_count, support_paths, signal_count, signal_paths, topic))
+    ranked.sort(key=lambda item: (-item[0], item[5]["id"]))
     created = []
     top_pilot = ""
     top_plugin = ""
     top_gap_id = ""
 
     created_gap_count = 0
-    for score, support_count, support_paths, topic in ranked:
+    for score, support_count, support_paths, signal_count, signal_paths, topic in ranked:
         if created_gap_count >= max(1, args.max_gaps):
             break
         sid = slug(topic["id"])
@@ -115,9 +144,12 @@ def main() -> int:
             "support_path_count": support_count,
             "minimum_support_paths": int(topic.get("min_support_paths", 1)),
             "support_paths": support_paths[:16],
+            "unresolved_signal_count": signal_count,
+            "unresolved_signal_paths": signal_paths[:16],
             "why_gap": (
-                f"Only {support_count} materially distinct evidence path(s) were detected "
-                f"against a target of {int(topic.get('min_support_paths', 1))}."
+                f"Evidence support={support_count}/{int(topic.get('min_support_paths', 1))}; "
+                f"unresolved non-human gap signals={signal_count}. "
+                "The topic remains research-worthy when support is sparse or unresolved evidence pressure persists."
             ),
             "question": topic["question"],
             "human_only": bool(topic.get("human_only", False)),

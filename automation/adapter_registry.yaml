@@ -52,6 +52,13 @@ adapters:
     network_required: false
     purpose: "Compare PeakBody strong-periodicity veto against a Vo.Prep-contextual noise-evidence extension on a deterministic synthetic confounder matrix; complex candidate is not automatically preferred."
 
+  peakbody_plosive_protection_v1:
+    tracks:
+      - PEAKBODY_01
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare simple LF-concentration and full Vo.Prep-contextual plosive protection as independent vetoes for PeakBody after strong-periodicity-veto plosive failure."
+
   original_vocal_pre_measurement_gate_v1:
     tracks:
       - UA610_ORIGINAL_VOCAL_PRE

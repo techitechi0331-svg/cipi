@@ -14,7 +14,14 @@
       "queued": 0
     }
   },
-  "human_gates": [],
+  "human_gates": [
+    {
+      "gates": [
+        "Level-matched blind real-vocal listening before final Amount adoption."
+      ],
+      "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001"
+    }
+  ],
   "local": {
     "blocked_count": 0,
     "claimed_branches": [],
@@ -22,16 +29,16 @@
     "claimed_jobs": [],
     "dependency_blocked_count": 0,
     "ready_job": {
-      "branch": "research-bot/VOCAL-RESONANCE-R12-RAW-PATCH-001/auto-6f644e1c659d",
-      "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+      "branch": "research-bot/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/auto-292c7f261b8e",
+      "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
       "kind": "LOCAL_RESEARCH",
       "priority": 0
     }
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VOCAL-RESONANCE-R12-RAW-PATCH-001/auto-6f644e1c659d",
-    "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+    "branch": "research-bot/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/auto-292c7f261b8e",
+    "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
     "kind": "LOCAL_RESEARCH",
     "priority": 0
   }

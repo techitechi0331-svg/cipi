@@ -1,0 +1,48 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-PRIVATE-VOCAL-GUARD-001:private-local-01:review"
+job_id: PEAKBODY-PRIVATE-VOCAL-GUARD-001
+source_run: research/runs/PEAKBODY-REV02-POLICY-001/gha-36071157266-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The locked private real-vocal protocol is inconclusive rather than PASS or
+  REJECT because the same-performance corpus produced zero bright voiced
+  high-band crest proxy frames, below the predeclared minimum of 30. Processing
+  invariance, low-frequency transient preservation, and periodic-body invariance
+  passed, while noise-like high-band suppression was weaker than the synthetic
+  target. Thresholds are therefore not changed; the next action is broader
+  multi-singer/high-register corpus validation.
+declared_rejection_criteria:
+  - "Reject only when preservation or invariance criteria fail with adequate proxy counts."
+  - "Treat any required proxy class with fewer than 30 pooled frames as inconclusive."
+triggered_criteria:
+  - "bright voiced crest proxy count was 0, below the minimum 30 required for a conclusive decision"
+retained_findings:
+  - "Candidate pairwise processing-variant correlation median was 0.904204799 versus baseline 0.911208678."
+  - "Low-frequency transient retention median and p10 were both 1.0 across 11,969 pooled proxy frames."
+  - "Strong periodic-body mean absolute candidate-vs-baseline transient-factor delta was 0.0 across 10,612 pooled frames."
+  - "Noise-like high-band retention median was 0.492622222 across 246 pooled proxy frames, missing the <=0.35 target."
+  - "No bright voiced crest proxy frames were present, so the critical bright high-F0 protection claim remains untested on this private performance."
+reusable_findings:
+  - "Synthetic detector success should not be promoted without checking event prevalence and effect strength on real vocal material."
+  - "Same-performance processing variants are useful for processing-invariance testing but must not be treated as independent singers."
+  - "Insufficient event coverage should produce INCONCLUSIVE rather than threshold tuning."
+revisit_if:
+  - "A broader public/private singing corpus provides at least 30 bright voiced crest proxy frames."
+  - "Multi-singer high-register material becomes locally analyzable without committing raw audio."
+  - "A production realtime periodicity detector replaces the analysis-only proxy."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-REV02-POLICY-001
+    - PEAKBODY-CONFOUNDER-SPECTRAL-001
+    - PEAKBODY-CONFOUNDER-PERIODICITY-002
+  related_decisions:
+    - "PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:review-01"
+parent_decision_id: "PEAKBODY-CONFOUNDER-PERIODICITY-002:gha-36154735970-1:review-01"
+created_at: "2026-09-26"
+immutable: true
+scope: "Private same-performance four-processing-variant real-vocal measurement; aggregate metrics only."
+review_gaps: []

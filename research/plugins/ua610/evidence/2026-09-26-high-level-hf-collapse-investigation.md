@@ -133,3 +133,57 @@ At Character 100, input trim 0 dB, source -6 dBFS:
 
 The latest branch therefore reproduces the corrected high-level behavior at the permanent fast gate.
 The longer shortlist / tuning / full-overload artifacts from this run remain separate evidence and must be inspected before parameter lock.
+
+
+## RUN 39 EXTENDED-MEASUREMENT CLOSURE
+
+### SOURCE_FACT
+- Windows workflow run: `36156239641` (Run 39) — **SUCCESS**.
+- Source SHA: `5b00e453c5b7c0ee295d7fd42343fabc0ab9ecd3`.
+- Dedicated Original VST3 artifact digest: `sha256:833e527436dfe9999fe32e481a8d247865bacd9cc8c83bab87c10a8a63e8a5ca`.
+- Extended shortlist artifact digest: `sha256:4c0bd1b55a50e7f5a96682c72b697498a2aab4878a5958dd9cb3713ad1c9739f`.
+- Full overload characterization artifact digest: `sha256:863342afee053578b156766d31579ad53ae61a33e9d0b58c1b4fc1e54bb4c3e4`.
+- Preserved 610 research VST3 artifact digest: `sha256:b6247f2d81e185359e42cfd8fcfadf28ee24e8475b17a5e6c2ab871010116d46`.
+
+### MEASURED
+All five refreshed shortlist profiles pass the current technical gate under the robust Original solver.
+
+Small-signal Character compensation:
+- gain spread across Character 0..100 is approximately **0.0060 dB** for every shortlist profile;
+- maximum absolute small-signal gain error is approximately **0.0116–0.0133 dB**.
+
+Frequency response at Character 50:
+- no-output-transformer profiles: approximately **-0.16 to -0.17 dB at 20 Hz** and **-0.325 dB at 20 kHz** relative to 1 kHz;
+- output-transformer profiles: approximately **-0.33 to -0.37 dB at 20 Hz** and **-0.853 dB at 20 kHz** relative to 1 kHz.
+
+Character 100 / -6 dBFS, wanted-fundamental gain and THD:
+- `simple4_no_output_tx`: 100 Hz **-0.240 dB / 1.108%**, 1 kHz **-0.207 dB / 3.030%**, 10 kHz **-0.185 dB / 2.114%**.
+- `conservative`: 100 Hz **-0.250 dB / 1.118%**, 1 kHz **-0.213 dB / 3.028%**, 10 kHz **-0.319 dB / 2.026%**.
+- `simple6_no_output_tx`: 100 Hz **-0.359 dB / 1.635%**, 1 kHz **-0.450 dB / 5.908%**, 10 kHz **-0.280 dB / 3.208%**.
+- `balanced`: 100 Hz **-0.371 dB / 1.651%**, 1 kHz **-0.470 dB / 5.904%**, 10 kHz **-0.417 dB / 3.074%**.
+- `color_contrast`: 100 Hz **-0.697 dB / 2.900%**, 1 kHz **-1.347 dB / 6.392%**, 10 kHz **-0.696 dB / 3.068%**.
+
+Character 100 IMD at -18 dBFS:
+- SMPTE-like: **0.369–0.467%** across the shortlist.
+- CCIF-like: **0.312–0.418%** across the shortlist.
+
+Alias:
+- 8x oversampling alias result ranges from approximately **-136.7 to -147.2 dBc**.
+- 16x ranges from approximately **-136.8 to -148.0 dBc**.
+- All current shortlist profiles therefore remain comfortably inside the existing -70 dBc technical alias gate.
+
+Full overload characterization confirms the corrected all-on Original path remains finite and retains the wanted fundamental through the tested -3 dBFS stress points:
+- 1 kHz / -3 dBFS / Character 100: **-0.746 dB gain, 8.793% THD**.
+- 10 kHz / -3 dBFS / Character 100: **-0.521 dB gain, 4.087% THD**.
+
+### INFERRED
+- The robust-solver correction is not merely a fail-fast-point fix; refreshed frequency, THD, IMD, alias and overload measurements remain numerically stable enough to resume product-candidate comparison.
+- The output-transformer profiles introduce a measurable but still modest top/bottom spectral tilt relative to their no-output-transformer counterparts. Whether that tilt/body behavior is beneficial is a listening decision, not a numerical winner metric.
+- 4 dB profiles are materially more conservative at high Character than the 6 dB profiles. The `color_contrast` profile is intentionally the strongest and shows the greatest gain compression / THD at Character 100.
+- Numerical evidence does not justify selecting one final profile yet. The refreshed measurements narrow the candidate space and make level-matched vocal A/B the next meaningful discriminator.
+
+### STATUS
+- High-level HF solver collapse: **CLOSED for the measured Windows path**.
+- Robust-solver extended measurement refresh: **COMPLETE**.
+- Preserved 610 baseline compatibility: **PASS**.
+- Product track remains **PROVISIONAL** pending real-vocal A/B, CPU/latency closure and Cubase Pro 14 validation.

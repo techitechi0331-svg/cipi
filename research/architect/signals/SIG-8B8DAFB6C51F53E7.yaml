@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-8B8DAFB6C51F53E7
+source_path: research/experiments/MicroDouble/status.yaml
+kind: UNRESOLVED
+text_hash: 8b8dafb6c51f53e7
+text: v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline
+  render and latency-compensation confirmation.
+state: UNCLASSIFIED
+signal_class: HUMAN_GATE
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

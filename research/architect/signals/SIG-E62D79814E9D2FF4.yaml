@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-E62D79814E9D2FF4
+source_path: research/experiments/Density/status.yaml
+kind: UNRESOLVED
+text_hash: e62d79814e9d2ff4
+text: ADAA comparison remains open.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

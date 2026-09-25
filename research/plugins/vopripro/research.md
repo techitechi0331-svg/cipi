@@ -64,3 +64,22 @@ The next free-research step is to add an allowlisted deterministic snapshot adap
 
 The decisive product gate remains **human level-matched listening** of the current main A/B pack, followed by **Cubase Pro 14 real-host validation**. No current CIPI evidence justifies declaring Natural50 universally optimal.
 
+## 2026-09-26 product-boundary revision
+
+VoPriPro is now formally scoped as the **Broadband Dynamics Preparation Compressor**. Vo.Prep is the separate Problem / Event Preparation product.
+
+Boundary record:
+- `research/plugins/vopripro/product_boundary_v1.md`
+
+The current `VocalPrepComp/main@cc796d30` remains the simple production baseline. Vo.Prep transparent-compressor results are retained as transfer candidates only; they do not replace the current detector, Amount map, Character mapping, knee, operating point, or limiter by default.
+
+Immediate transfer-research order:
+1. detector transfer;
+2. ballistics transfer;
+3. Amount mapping comparison;
+4. knee / sidechain HPF only if still material;
+5. Vo.Prep -> VoPriPro integration;
+6. level-matched listening and target-host validation.
+
+The scope explicitly excludes Plosive Guard, Sibilance Guard / de-essing, Macro/Phrase Rider, resonance/noise cleanup, analog coloration, channel-strip and finisher functions from VoPriPro.
+

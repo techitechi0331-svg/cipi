@@ -1,0 +1,77 @@
+schema_version: '1.0'
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002
+state: QUEUED
+track:
+  id: 1176_FAMILY_FORMAL
+  path: research/reference_devices/1176
+research_question: Does the append-only Black76 actual-VST3 real-vocal Snapshot-002 pass the same continuity, clipping, latency, working-unity, provenance, raw-audio-safety and checksum-integrity gates after correcting only the CIPI byte-level packaging?
+hypothesis: Snapshot-002 will preserve every previously passing Black76 DSP/host-derived metric while also passing SHA256 verification because its checksum was computed from the exact bytes committed to CIPI.
+counter_hypotheses:
+  - Snapshot-002 still fails checksum verification, indicating the evidence packaging repair is incomplete.
+  - A supposedly unchanged behavioral metric differs, indicating Snapshot-002 is not a pure packaging repair.
+baseline:
+  - black76-real-vocal-vst3-20260925
+variants:
+  - black76-real-vocal-vst3-20260925-v2
+metrics:
+  - checksum_ok
+  - matrix_complete
+  - all_numeric_finite
+  - sample_rates
+  - latencies
+  - input_peak_max_abs_error
+  - clip_total
+  - nonfinite_total
+  - max_output_peak
+  - max_sample_step
+  - color_gain_abs_max_db
+  - compression_active_all_cases
+  - provenance_ok
+  - actual_vst3
+  - raw_audio_present_in_cipi
+acceptance:
+  - The Snapshot-002 committed checksum ledger verifies the exact committed metrics.csv bytes.
+  - The six-case two-source by three-mode matrix remains complete.
+  - All numerical fields remain finite at 48 kHz with exactly 6 samples of latency.
+  - Input peak normalization error remains <= 1e-6 from 0.5.
+  - Total clipped and non-finite sample counts remain zero and maximum output peak remains below 1.0.
+  - Attack-OFF color gain remains within +/-0.5 dB on both sources.
+  - Both compression modes retain at least 3 dB attenuation on every source.
+  - Provenance identifies actual VST3 processing and no raw WAV audio exists in the CIPI evidence directory.
+rejection:
+  - Checksum verification still fails.
+  - Any previously passing finite-state, clipping, latency, matrix-integrity, provenance, working-unity or raw-audio-safety gate regresses.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 7602503
+experiment_adapter: black76_real_vocal_snapshot_gate_v2
+allowed_operations:
+  - read_committed_derived_metrics
+  - verify_committed_sha256
+  - deterministic_numeric_comparison
+prohibited_operations:
+  - arbitrary_shell
+  - network_access
+  - network_write
+  - main_push
+  - raw_audio_read
+  - confidence_change
+  - current_stage_change
+knowledge_candidate:
+  claim: The append-only Black76 actual-VST3 real-vocal Snapshot-002 preserves the previously measured finite clipping-free six-sample-latency behavior while correcting CIPI byte-level checksum integrity.
+  evidence_type: MEASURED
+  scope: Evidence-packaging revision for Black76 Rev E product commit 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693 on the same two public pdx-cs-sound/wavs clips and six derived cases; no subjective listening or ratio-fidelity claim.
+  promotion_requested: PROVISIONAL
+lineage:
+  supersedes: []
+  related_jobs:
+    - BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001
+  related_decisions:
+    - BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:assistant-review-20260925
+continuation:
+  on_accept: []
+  on_reject: []
+review_policy:
+  required_human_gates:
+    - Subjective level-matched vocal preference remains a human listening gate.
+    - Cubase Pro 14 scan, instantiate, automation, preset recall and session behavior remain separate host gates.

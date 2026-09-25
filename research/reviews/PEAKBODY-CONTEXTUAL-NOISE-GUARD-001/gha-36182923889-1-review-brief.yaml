@@ -1,0 +1,135 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-001:gha-36182923889-1:review-brief-v1
+job_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-001
+run_id: gha-36182923889-1
+source_run: research/runs/PEAKBODY-CONTEXTUAL-NOISE-GUARD-001/gha-36182923889-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/PEAKBODY-CONTEXTUAL-NOISE-GUARD-001/gha-36182923889-1-triage.yaml
+triage_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-001:gha-36182923889-1:triage-v1
+job_path: research/jobs/completed/PEAKBODY-CONTEXTUAL-NOISE-GUARD-001.yaml
+research_question: Can replacing proportional periodicity discount with a strong-periodicity
+  veto improve PeakBody noise-like rejection without harming bright/noisy voiced or
+  plosive preservation, and does adding Vo.Prep contextual sibilance probability justify
+  its extra complexity?
+hypothesis: The simple strong-periodicity veto will satisfy the locked synthetic safety
+  gates; contextual sibilance evidence will only be retained if it adds at least a
+  meaningful extra improvement without harming another hard gate.
+counter_hypotheses:
+- Strong-periodicity veto will over-suppress plosives or noisy voiced material.
+- Contextual sibilance evidence will suppress bright vowels or noisy voiced material.
+- The complex contextual detector will not materially improve on the simpler veto.
+acceptance_criteria:
+- at least one candidate satisfies every locked synthetic hard gate
+- standard voiced retention minimum is at least 0.90
+- bright/startup voiced retention minimum is at least 0.95
+- 6 dB SNR noisy-voiced retention minimum is at least 0.90
+- sibilant/breath/long-S false-preservation maximum is no more than 0.25
+- plosive retention minimum is at least 0.85
+- steady-vowel mean transient-factor delta is no more than 0.03
+- all outputs are finite
+rejection_criteria:
+- neither simple_veto nor context_veto satisfies every locked synthetic hard gate
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria:
+  - neither simple_veto nor context_veto passed all locked synthetic safety gates
+  source_commit: 770ce92dae6b353af635c2fab2e11ef91ed53ccb
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: context_incremental_noise_improvement
+  value: 0.000944822373393802
+- path: context_veto.acceptance_met
+  value: false
+- path: context_veto.all_finite
+  value: true
+- path: context_veto.bright_high_retention_min
+  value: 1.0
+- path: context_veto.context_probability_bright_max
+  value: 0.9334715682989068
+- path: context_veto.context_probability_noise_max
+  value: 0.9492583155957172
+- path: context_veto.noise_false_preserve_ratio_max
+  value: 0.0
+- path: context_veto.noisy_voiced_retention_min
+  value: 1.0
+- path: context_veto.plosive_retention_min
+  value: 0.04541666666666667
+- path: context_veto.standard_voiced_retention_min
+  value: 1.0
+- path: context_veto.steady_mean_t_delta_max
+  value: 0.0
+- path: context_veto.triggered_criteria[0]
+  value: plosive retention below 0.85
+- path: simple_veto.acceptance_met
+  value: false
+- path: simple_veto.all_finite
+  value: true
+- path: simple_veto.bright_high_retention_min
+  value: 1.0
+- path: simple_veto.context_probability_bright_max
+  value: 0.9334715682989068
+- path: simple_veto.context_probability_noise_max
+  value: 0.9492583155957172
+- path: simple_veto.noise_false_preserve_ratio_max
+  value: 0.000944822373393802
+- path: simple_veto.noisy_voiced_retention_min
+  value: 1.0
+- path: simple_veto.plosive_retention_min
+  value: 0.05458333333333333
+- path: simple_veto.standard_voiced_retention_min
+  value: 1.0
+- path: simple_veto.steady_mean_t_delta_max
+  value: 0.0
+- path: simple_veto.triggered_criteria[0]
+  value: plosive retention below 0.85
+knowledge_candidate:
+  claim: A strong-periodicity veto may be safer than proportional weak-periodicity
+    protection for PeakBody; contextual sibilance evidence must beat the simple veto
+    enough to justify complexity.
+  evidence_type: MEASURED
+  scope: Deterministic synthetic PeakBody contextual-noise-guard matrix only.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-001:gha-36182923889-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- '{''Private same-performance real-vocal guard study was INCONCLUSIVE'': ''processing
+  invariance and low-frequency/body preservation passed, but bright-voiced proxy count
+  was 0 and noise-like suppression missed the locked target.''}'
+- Level-matched vocal AB is still pending.
+- Cubase Pro 14 real-host verification is pending.
+- Final parameter promotion requires the full raw vocal corpus plus level-matched
+  listening.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

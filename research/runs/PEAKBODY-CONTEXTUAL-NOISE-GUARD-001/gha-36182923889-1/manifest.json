@@ -1,0 +1,26 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/PeakBody/contextual_noise_guard_model.py"
+  ],
+  "completed_at": "2026-09-25T19:59:13.340986Z",
+  "environment": {
+    "experiment_adapter": "peakbody_contextual_noise_guard_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "PEAKBODY-CONTEXTUAL-NOISE-GUARD-001",
+  "random_seed": 2026092602,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36182923889-1",
+  "schema_version": "1.0",
+  "source_commit": "770ce92dae6b353af635c2fab2e11ef91ed53ccb",
+  "started_at": "2026-09-25T19:58:49.733699Z",
+  "triggered_criteria": [
+    "neither simple_veto nor context_veto passed all locked synthetic safety gates"
+  ],
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -13,6 +13,7 @@ import tempfile
 from typing import Any
 
 ADAPTERS = {
+    "black76_real_vocal_snapshot_gate_v1",
     "black76_ratio_p2a_compare_v1",
     "black76_linear_detector_compare_v1",
     "peakbody_legacy_model_stress_v1",
@@ -246,6 +247,141 @@ def _original_vocal_pre_measurement_gate(repo_root: Path, timeout_seconds: int) 
         ),
     }
 
+
+
+def _black76_real_vocal_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = (
+        repo_root / "research" / "reference_devices" / "1176" / "evidence"
+        / "black76-real-vocal-vst3-20260925"
+    )
+    metrics_path = root / "metrics.csv"
+    manifest_path = root / "manifest.json"
+    provenance_path = root / "provenance.txt"
+    checksums_path = root / "checksums.sha256"
+    for path in (metrics_path, manifest_path, provenance_path, checksums_path):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+    expected = {}
+    for line in checksums_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        digest, filename = line.split(None, 1)
+        expected[filename.strip()] = digest.lower()
+
+    checksum_ok = True
+    for filename, digest in expected.items():
+        path = root / filename
+        if not path.is_file():
+            checksum_ok = False
+            continue
+        checksum_ok = checksum_ok and hashlib.sha256(path.read_bytes()).hexdigest().lower() == digest
+
+    with metrics_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    provenance = provenance_path.read_text(encoding="utf-8")
+
+    expected_sources = {"voice-note.wav", "voice.wav"}
+    expected_modes = {"color_attack_off", "moderate_ratio4", "stress_ratio20"}
+    actual_pairs = {(r["file"], r["mode"]) for r in rows}
+    expected_pairs = {(s, m) for s in expected_sources for m in expected_modes}
+
+    all_finite = True
+    numeric_fields = [
+        "sample_rate", "source_original_peak", "input_normalization_db",
+        "input_peak", "input_rms", "input_crest_db", "output_peak",
+        "output_rms", "output_crest_db", "gain_db", "max_step",
+        "clipped_samples", "nonfinite_samples", "latency_samples",
+    ]
+    for row in rows:
+        for field in numeric_fields:
+            all_finite = all_finite and math.isfinite(float(row[field]))
+
+    clip_total = sum(int(float(r["clipped_samples"])) for r in rows)
+    nonfinite_total = sum(int(float(r["nonfinite_samples"])) for r in rows)
+    sample_rates = {int(float(r["sample_rate"])) for r in rows}
+    latencies = {int(float(r["latency_samples"])) for r in rows}
+    input_peak_error = max(abs(float(r["input_peak"]) - 0.5) for r in rows)
+    max_output_peak = max(abs(float(r["output_peak"])) for r in rows)
+    max_step = max(abs(float(r["max_step"])) for r in rows)
+    color_gain_abs_max = max(abs(float(r["gain_db"])) for r in rows if r["mode"] == "color_attack_off")
+    compression_gains = [
+        float(r["gain_db"]) for r in rows
+        if r["mode"] in {"moderate_ratio4", "stress_ratio20"}
+    ]
+    compression_active = bool(compression_gains) and all(g <= -3.0 for g in compression_gains)
+
+    raw_audio_present = any(root.rglob("*.wav"))
+    provenance_ok = (
+        "pdx-cs-sound/wavs" in provenance
+        and "CC0" in provenance
+        and manifest.get("raw_audio_persisted_in_cipi") is False
+    )
+    actual_vst3 = manifest.get("actual_vst3") is True
+
+    metrics = {
+        "checksum_ok": checksum_ok,
+        "row_count": len(rows),
+        "matrix_complete": actual_pairs == expected_pairs and len(rows) == 6,
+        "all_numeric_finite": all_finite,
+        "sample_rates": sorted(sample_rates),
+        "latencies": sorted(latencies),
+        "input_peak_max_abs_error": input_peak_error,
+        "clip_total": clip_total,
+        "nonfinite_total": nonfinite_total,
+        "max_output_peak": max_output_peak,
+        "max_sample_step": max_step,
+        "color_gain_abs_max_db": color_gain_abs_max,
+        "compression_active_all_cases": compression_active,
+        "provenance_ok": provenance_ok,
+        "actual_vst3": actual_vst3,
+        "raw_audio_present_in_cipi": raw_audio_present,
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and metrics["matrix_complete"]
+        and all_finite
+        and sample_rates == {48000}
+        and latencies == {6}
+        and input_peak_error <= 1.0e-6
+        and clip_total == 0
+        and nonfinite_total == 0
+        and max_output_peak < 1.0
+        and color_gain_abs_max <= 0.5
+        and compression_active
+        and provenance_ok
+        and actual_vst3
+        and not raw_audio_present
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, json.dumps(value) if isinstance(value, (list, dict)) else value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"measurement.csv": output.getvalue()},
+        "commands": [
+            "read committed Black76 derived real-vocal VST3 snapshot",
+            "verify committed metrics SHA256",
+            "apply predeclared continuity/host/provenance gates",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Derived-evidence gate for the Black76 actual-VST3 real-vocal snapshot. "
+            "It validates evidence integrity, finite/clipping-free processing, stable "
+            "latency, practical Attack-OFF unity behavior, active compression paths, "
+            "and absence of raw audio in CIPI. It does not score subjective quality, "
+            "ratio fidelity, vintage hardware equivalence, or Cubase validation."
+        ),
+    }
 
 
 def _black76_ratio_p2a_compare(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -1930,6 +2066,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
     if timeout_seconds < 1:
         raise ValueError("timeout_seconds must be positive")
+    if name == "black76_real_vocal_snapshot_gate_v1":
+        return _black76_real_vocal_snapshot_gate(repo_root, timeout_seconds)
     if name == "peakbody_legacy_model_stress_v1":
         return _peakbody_legacy_model_stress(repo_root, timeout_seconds)
     if name == "peakbody_revision02_policy_v1":

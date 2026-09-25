@@ -253,6 +253,46 @@ SectionDynamicsResult measureSectionDynamics (double sampleRate, float amount)
                  && std::isfinite (result.withinSectionLevelingReduction);
     return result;
 }
+struct InputLevelSweepRow
+{
+    float baseLevelDb { 0.0f };
+    bool targetReadyAfterReference { false };
+    float referenceGainDb { 0.0f };
+    float quietGainDb { 0.0f };
+    float loudGainDb { 0.0f };
+    bool functional { false };
+    bool finite { true };
+};
+
+InputLevelSweepRow measureInputLevelCase (double sampleRate, float baseLevelDb)
+{
+    cipi::dsp::VocalRiderCore rider;
+    rider.prepare (sampleRate);
+
+    runSegment (rider, sampleRate, 0.5, -120.0f, 0.50f, false);
+    const auto reference = runSegment (rider, sampleRate, 5.0, baseLevelDb, 0.50f, true);
+    const auto ready = rider.isTargetReady();
+
+    runSegment (rider, sampleRate, 0.4, -120.0f, 0.50f, false);
+    const auto quiet = runSegment (rider, sampleRate, 2.0, baseLevelDb - 8.0f, 0.50f, true);
+
+    runSegment (rider, sampleRate, 0.4, -120.0f, 0.50f, false);
+    const auto loud = runSegment (rider, sampleRate, 2.0, baseLevelDb + 8.0f, 0.50f, true);
+
+    InputLevelSweepRow result;
+    result.baseLevelDb = baseLevelDb;
+    result.targetReadyAfterReference = ready;
+    result.referenceGainDb = reference.meanTailGainDb;
+    result.quietGainDb = quiet.meanTailGainDb;
+    result.loudGainDb = loud.meanTailGainDb;
+    result.finite = reference.finite && quiet.finite && loud.finite;
+    result.functional = result.finite
+                     && result.targetReadyAfterReference
+                     && result.quietGainDb > 0.50f
+                     && result.loudGainDb < -0.50f;
+    return result;
+}
+
 } // namespace
 
 int main (int argc, char** argv)
@@ -262,6 +302,10 @@ int main (int argc, char** argv)
 
     const std::vector<double> sampleRates { 44100.0, 48000.0, 88200.0, 96000.0, 192000.0 };
     const std::vector<float> amounts { 0.0f, 0.25f, 0.50f, 0.75f, 1.0f };
+    const std::vector<float> inputBaseLevelsDb {
+        -12.0f, -18.0f, -24.0f, -30.0f, -36.0f,
+        -42.0f, -48.0f, -54.0f, -57.0f, -60.0f
+    };
 
     std::vector<Scenario> rows;
     rows.reserve (sampleRates.size() * amounts.size());
@@ -269,6 +313,25 @@ int main (int argc, char** argv)
     for (const auto sampleRate : sampleRates)
         for (const auto amount : amounts)
             rows.push_back (measureScenario (sampleRate, amount));
+
+    std::vector<InputLevelSweepRow> inputSweep;
+    inputSweep.reserve (inputBaseLevelsDb.size());
+    for (const auto baseLevelDb : inputBaseLevelsDb)
+        inputSweep.push_back (measureInputLevelCase (48000.0, baseLevelDb));
+
+    std::ofstream inputCsv (outputDir / "input_level_sweep.csv");
+    inputCsv << "base_level_db,target_ready,reference_gain_db,quiet_gain_db,loud_gain_db,functional,finite\n";
+    inputCsv << std::fixed << std::setprecision (6);
+    for (const auto& row : inputSweep)
+    {
+        inputCsv << row.baseLevelDb << ','
+                 << (row.targetReadyAfterReference ? 1 : 0) << ','
+                 << row.referenceGainDb << ','
+                 << row.quietGainDb << ','
+                 << row.loudGainDb << ','
+                 << (row.functional ? 1 : 0) << ','
+                 << (row.finite ? 1 : 0) << '\n';
+    }
 
     std::ofstream csv (outputDir / "vocal_rider_core_matrix.csv");
     csv << "sample_rate,amount,reference_gain_db,quiet_gain_db,loud_gain_db,"
@@ -357,7 +420,21 @@ int main (int argc, char** argv)
     summary << "- within-section leveling reduction: " << (100.0f * sectionDynamics.withinSectionLevelingReduction) << "%\n";
     summary << "- section-dynamics gate: " << (sectionDynamicsPass ? "PASS" : "FAIL") << "\n\n";
     summary << "Gate thresholds are provisional research criteria: preserve >=70% of a sustained 6 dB section contrast while reducing within-section phrase spread by >=20%.\n\n";
-    summary << "The CSV contains the full 5 sample-rate x 5 Amount matrix.\n";
+    float lowestFunctionalBaseDb = 100.0f;
+    for (const auto& row : inputSweep)
+        if (row.functional)
+            lowestFunctionalBaseDb = std::min (lowestFunctionalBaseDb, row.baseLevelDb);
+
+    summary << "## Input-level activity sweep (48 kHz / Amount 50%)\n\n";
+    if (lowestFunctionalBaseDb < 99.0f)
+        summary << "- lowest tested base level with full reference/quiet/loud directional riding: "
+                << lowestFunctionalBaseDb << " dBFS tone amplitude\n";
+    else
+        summary << "- no tested base level passed the full directional-riding criterion\n";
+
+    summary << "- detailed rows: input_level_sweep.csv\n";
+    summary << "- this is diagnostic evidence for whether the fixed -58/-62 dBFS activity thresholds require an adaptive replacement.\n\n";
+    summary << "The core CSV contains the full 5 sample-rate x 5 Amount matrix.\n";
 
     std::ofstream json (outputDir / "metrics.json");
     json << "{\n"

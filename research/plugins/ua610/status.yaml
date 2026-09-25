@@ -38,6 +38,7 @@ milestones:
   - original measurement harness design
   - dedicated Original VST3 artifact build
   - high-level HF collapse detection and fail-fast regression
+  - latest-branch high-level HF overload regression pass
 
 unresolved:
   - Final Character/Drive mapping is not locked.
@@ -47,7 +48,7 @@ unresolved:
   - Level-matched real-vocal AB is pending.
   - Windows VST3/Cubase Pro 14 RC validation is pending.
   - Final CPU/latency tradeoff is not locked.
-  - High-level HF fundamental collapse regression is under Windows validation.
+  - Extended shortlist/IMD/alias/frequency measurements must be refreshed after the robust Original solver correction.
 
 historical_nonblocking_unknowns:
   - Exact modern 2-610 transformer magnetic parameters are not public.
@@ -55,8 +56,8 @@ historical_nonblocking_unknowns:
   - A hardware Golden Dataset is still absent for clone-fidelity research.
 
 next_stage: measurement
-why_next: "The clone-fidelity blocker was removed from the original-product scope. The first original candidate and ablation/measurement harness now need numerical evidence before parameter lock."
-next_confirmation: "First close the high-level HF fundamental-collapse regression without breaking the preserved 610 baseline; then determine which nonlinear stages, feedback modulation, transformer blocks and spectral-drive protection are worth carrying into real-vocal AB."
+why_next: "The high-level HF solver collapse is closed by latest-branch Windows fail-fast evidence without breaking the preserved 610 baseline. Extended measurements must now be refreshed under the corrected solver before parameter lock and real-vocal AB."
+next_confirmation: "Refresh shortlist, IMD, alias, frequency and overload evidence under the corrected Original solver, then determine which nonlinear stages, feedback modulation, transformer blocks and spectral-drive protection are worth carrying into real-vocal AB."
 
 blockers:
   - Real-vocal material or an approved open singing corpus is required before the audio_ab gate can be closed.

@@ -91,6 +91,8 @@ def main() -> int:
         assert stats["skipped_dependency"] == 1
         assert stats["skipped_blocked"] == 1
         assert stats["work_steal"] is True
+        assert stats["blocked_jobs"] == ["EXTERNAL-001"]
+        assert stats["dependency_jobs"] == ["HIGH-BLOCKED-001<-DEP-001"]
 
         write_completed(completed, "dep.yaml", "DEP-001")
         selected, stats = choose_job(queued, completed, branch_exists=lambda _: False)
@@ -101,6 +103,7 @@ def main() -> int:
         selected, stats = choose_job(queued, completed, branch_exists=lambda branch: branch == claimed_branch)
         assert selected is not None and selected[1] == "READY-001"
         assert stats["skipped_claimed"] == 1
+        assert stats["claimed_jobs"] == ["HIGH-BLOCKED-001"]
         assert stats["work_steal"] is True
 
     print("CIPI no-wait scheduler tests: PASS")

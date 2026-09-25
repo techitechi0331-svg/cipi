@@ -72,12 +72,16 @@ def main() -> int:
     dispatched_action = action("TEST-RUN-001", "build", 0)
     dispatched_action["state"] = "DISPATCHED"
     dispatched_action["dispatched_at"] = "2026-09-26T00:00:00Z"
+    dispatched_action["previous_run_id"] = 10
+    dispatched_action["ref"] = "main"
     runs = [
-        {"id": 1, "event": "push", "created_at": "2026-09-26T00:00:10Z"},
-        {"id": 2, "event": "workflow_dispatch", "created_at": "2026-09-26T00:00:20Z"},
+        {"id": 9, "event": "workflow_dispatch", "created_at": "2026-09-26T00:00:10Z", "head_branch": "main"},
+        {"id": 11, "event": "push", "created_at": "2026-09-26T00:00:10Z", "head_branch": "main"},
+        {"id": 12, "event": "workflow_dispatch", "created_at": "2026-09-26T00:00:20Z", "head_branch": "other"},
+        {"id": 13, "event": "workflow_dispatch", "created_at": "2026-09-26T00:00:20Z", "head_branch": "main"},
     ]
     matched = match_dispatched_run(dispatched_action, runs)
-    assert matched is not None and matched["id"] == 2
+    assert matched is not None and matched["id"] == 13
 
     job = {
         "state": "BLOCKED_EXTERNAL",

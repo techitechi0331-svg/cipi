@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "job_id": "CROSS-TRACK-KNOWLEDGE-001",
+  "run_id": "manual-20260925",
+  "source_commit": "711610a4c615c62013fde6166571fed58b171f42",
+  "worker_version": "assistant-cross-track-review/1.0",
+  "started_at": "2026-09-25T07:37:00Z",
+  "completed_at": "2026-09-25T07:50:00Z",
+  "random_seed": 0,
+  "environment": {
+    "mode": "manual_cross_track_knowledge_review",
+    "repository": "techitechi0331-svg/cipi",
+    "candidate_records_reviewed": 32,
+    "raw_audio_persisted": false,
+    "product_dsp_mutated": false,
+    "schemas_mutated": false,
+    "workflows_mutated": false
+  },
+  "commands": [
+    "review all Knowledge Candidate metadata present at source_commit",
+    "separate product calibration from reusable mechanism",
+    "require independent cross-track or source-plus-measurement support for broad reusable candidates",
+    "retain negative evidence and unresolved generalisation boundaries"
+  ],
+  "result": "COMPLETED",
+  "acceptance_met": true,
+  "rejection_triggered": false,
+  "import_kind": "manual_cross_track_knowledge_review"
+}

@@ -4,36 +4,116 @@ import argparse
 import hashlib
 from pathlib import Path
 import subprocess
+from typing import Callable
 import yaml
+
 
 def remote_branch_exists(prefix: str) -> bool:
     result = subprocess.run(
         ["git", "ls-remote", "--heads", "origin", f"refs/heads/{prefix}*"],
-        text=True, capture_output=True, check=True,
+        text=True,
+        capture_output=True,
+        check=True,
     )
     return bool(result.stdout.strip())
+
+
+def _load_yaml(path: Path) -> dict:
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    return data if isinstance(data, dict) else {}
+
+
+def completed_job_ids(completed_root: Path) -> set[str]:
+    if not completed_root.exists():
+        return set()
+    ids: set[str] = set()
+    for path in sorted([*completed_root.glob("*.yaml"), *completed_root.glob("*.yml")]):
+        data = _load_yaml(path)
+        if data.get("state") == "COMPLETED" and data.get("job_id"):
+            ids.add(str(data["job_id"]))
+    return ids
+
+
+def _priority(data: dict) -> int:
+    value = data.get("priority", 0)
+    return value if isinstance(value, int) and not isinstance(value, bool) else 0
+
+
+def _dependencies(data: dict) -> list[str]:
+    values = data.get("depends_on_jobs", [])
+    if not isinstance(values, list):
+        return []
+    return [str(v) for v in values]
+
+
+def choose_job(
+    queued_root: Path,
+    completed_root: Path,
+    branch_exists: Callable[[str], bool] = remote_branch_exists,
+) -> tuple[tuple[Path, str, str, str] | None, dict[str, int | bool]]:
+    jobs = sorted([*queued_root.glob("*.yaml"), *queued_root.glob("*.yml")]) if queued_root.exists() else []
+    parsed = [(path, _load_yaml(path)) for path in jobs]
+    parsed.sort(key=lambda item: (-_priority(item[1]), item[0].as_posix()))
+
+    completed = completed_job_ids(completed_root)
+    stats: dict[str, int | bool] = {
+        "skipped_blocked": 0,
+        "skipped_dependency": 0,
+        "skipped_claimed": 0,
+        "work_steal": False,
+    }
+
+    skipped_before_selection = False
+    for path, data in parsed:
+        state = str(data.get("state", ""))
+        if state != "QUEUED":
+            stats["skipped_blocked"] = int(stats["skipped_blocked"]) + 1
+            skipped_before_selection = True
+            continue
+
+        job_id = str(data.get("job_id", ""))
+        if not job_id:
+            skipped_before_selection = True
+            continue
+
+        unresolved = [dep for dep in _dependencies(data) if dep not in completed]
+        if unresolved:
+            stats["skipped_dependency"] = int(stats["skipped_dependency"]) + 1
+            skipped_before_selection = True
+            continue
+
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+        branch = f"research-bot/{job_id}/auto-{digest}"
+        if branch_exists(branch):
+            stats["skipped_claimed"] = int(stats["skipped_claimed"]) + 1
+            skipped_before_selection = True
+            continue
+
+        stats["work_steal"] = skipped_before_selection
+        return (path, job_id, digest, branch), stats
+
+    stats["work_steal"] = skipped_before_selection
+    return None, stats
+
 
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--queued", default="research/jobs/queued")
+    p.add_argument("--completed", default="research/jobs/completed")
     p.add_argument("--github-output", required=True)
     args = p.parse_args()
-    root = Path(args.queued)
-    jobs = sorted([*root.glob("*.yaml"), *root.glob("*.yml")]) if root.exists() else []
-    selected = None
-    for path in jobs:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-        job_id = str(data.get("job_id", ""))
-        if not job_id:
-            continue
-        digest = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
-        branch = f"research-bot/{job_id}/auto-{digest}"
-        if remote_branch_exists(branch):
-            continue
-        selected = (path, job_id, digest, branch)
-        break
+
+    selected, stats = choose_job(
+        Path(args.queued),
+        Path(args.completed),
+    )
+
     out = Path(args.github_output)
     with out.open("a", encoding="utf-8") as h:
+        h.write(f"skipped_blocked={stats['skipped_blocked']}\n")
+        h.write(f"skipped_dependency={stats['skipped_dependency']}\n")
+        h.write(f"skipped_claimed={stats['skipped_claimed']}\n")
+        h.write(f"work_steal={'true' if stats['work_steal'] else 'false'}\n")
         if selected is None:
             h.write("has_job=false\n")
         else:
@@ -44,6 +124,7 @@ def main() -> int:
             h.write(f"job_hash={digest}\n")
             h.write(f"branch={bot_branch}\n")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

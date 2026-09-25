@@ -1,0 +1,26 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed MicroDouble/Vo.Prep transient-context evidence snapshot",
+    "verify committed SHA256 ledger",
+    "apply predeclared augment-only reuse gates"
+  ],
+  "completed_at": "2026-09-25T07:59:06.098031Z",
+  "environment": {
+    "experiment_adapter": "microdouble_transient_context_reuse_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001",
+  "random_seed": 20260925,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36110443655-1",
+  "schema_version": "1.0",
+  "source_commit": "69081cb9ff2ab54afee75ef9f3c81baa8dbf1513",
+  "started_at": "2026-09-25T07:59:06.095755Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

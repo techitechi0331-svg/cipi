@@ -1,0 +1,31 @@
+schema_version: '1.0'
+decision_id: MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36110443655-1:auto
+job_id: MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001
+source_run: research/runs/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36110443655-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001;
+  promotion requires review.
+declared_rejection_criteria:
+- Any declared acceptance condition fails.
+- The candidate is interpreted as permission to replace the generic transient detector.
+- The known growl-onset risk is omitted or reclassified away.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - MICRODOUBLE-SIBILANCE-R3-GATE-001
+  related_decisions:
+  - MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:review-01
+created_at: '2026-09-25T07:59:06.098031Z'
+immutable: true

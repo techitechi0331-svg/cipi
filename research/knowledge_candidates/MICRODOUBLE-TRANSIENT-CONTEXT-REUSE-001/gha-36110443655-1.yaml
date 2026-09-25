@@ -1,0 +1,8 @@
+claim: The Vo.Prep plosive-context detector has enough bounded evidence to be tested
+  as an auxiliary P/B context modifier for MicroDouble while the current generic transient
+  detector remains mandatory.
+evidence_type: HYPOTHESIS
+scope: Evidence-reuse permission only; growl-onset risk remains open, direct MicroDouble
+  experiment is required, and product adoption/release is unproven.
+source_run: research/runs/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36110443655-1
+promotion_requested: PROVISIONAL

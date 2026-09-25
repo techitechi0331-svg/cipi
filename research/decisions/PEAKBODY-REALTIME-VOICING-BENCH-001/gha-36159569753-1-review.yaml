@@ -1,0 +1,49 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:review-01"
+job_id: PEAKBODY-REALTIME-VOICING-BENCH-001
+source_run: research/runs/PEAKBODY-REALTIME-VOICING-BENCH-001/gha-36159569753-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  Both YIN-CMND and MPM-NSDF satisfied every predeclared synthetic PeakBody
+  confidence/safety/complexity gate, so the experiment supports continued
+  research. It does not support product promotion. YIN is selected only as the
+  next challenger because it used a lower pair-operation proxy and had much
+  lower diagnostic clean-F0 error, while MPM is retained as a qualified control.
+  YIN also produced higher confidence on noise-like synthetic cases than the
+  normalized-autocorrelation baseline, so private real-vocal rejection behavior
+  must be tested before any product adoption.
+declared_rejection_criteria:
+  - neither candidate satisfies all predeclared confidence/safety/complexity gates
+triggered_criteria: []
+retained_findings:
+  - "YIN-CMND clean voiced confidence minimum was 0.980452073."
+  - "YIN-CMND bright-high confidence minimum was 0.985657605."
+  - "YIN-CMND noisy-voiced confidence was 0.830018414."
+  - "YIN-CMND noise-like confidence maximum was 0.281152598."
+  - "YIN-CMND operation proxy was 0.717198582 of normalized-autocorrelation baseline."
+  - "YIN-CMND clean F0 diagnostic maximum relative error was 0.003393028."
+  - "MPM-NSDF also qualified, with confidence behavior nearly matching normalized autocorrelation and operation proxy 1.0x."
+  - "MPM-NSDF and normalized-autocorrelation showed large octave/subharmonic ambiguity in the diagnostic pitch estimate, demonstrating that high periodicity confidence does not imply correct F0."
+reusable_findings:
+  - "For a dynamics-protection detector, periodicity confidence and exact F0 accuracy are separate evaluation axes."
+  - "A candidate should not be promoted from synthetic voicing/noise separation alone; real-vocal false-protection behavior remains mandatory."
+  - "YIN-CMND is a justified next experimental challenger for PeakBody, not a product winner."
+revisit_if:
+  - "Private or public real-vocal testing shows YIN protects sibilance/breath more than the autocorrelation baseline."
+  - "A C++ realtime benchmark shows YIN CPU or block behavior is worse than the analysis proxy suggests."
+  - "Broader high-register multi-singer data contradicts the synthetic bright-voiced result."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-CONFOUNDER-PERIODICITY-002
+    - PEAKBODY-PRIVATE-VOCAL-GUARD-001
+  related_decisions:
+    - "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:auto"
+parent_decision_id: "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Synthetic 12 kHz / 40 ms periodicity-family benchmark; next action is private real-vocal YIN challenger replay."
+review_gaps: []

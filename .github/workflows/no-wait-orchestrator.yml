@@ -1,0 +1,51 @@
+name: No-Wait Queue Orchestrator
+
+on:
+  workflow_run:
+    workflows: ["Free Autonomous Research Worker"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: cipi-no-wait-queue-orchestrator
+  cancel-in-progress: false
+
+jobs:
+  dispatch-next-ready:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Select next READY job by work stealing
+        id: select
+        run: python automation/queue/select_job.py --github-output "$GITHUB_OUTPUT"
+
+      - name: Dispatch next autonomous worker
+        if: steps.select.outputs.has_job == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run free-autonomous-research.yml --ref main
+
+      - name: No READY work remains
+        if: steps.select.outputs.has_job != 'true'
+        run: |
+          echo "No READY autonomous research job remains."
+          echo "blocked=${{ steps.select.outputs.skipped_blocked }} dependency=${{ steps.select.outputs.skipped_dependency }} claimed=${{ steps.select.outputs.skipped_claimed }}"

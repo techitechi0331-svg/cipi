@@ -1,0 +1,125 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:review-brief-v1
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001
+run_id: gha-36111769039-1
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-triage.yaml
+triage_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:triage-v1
+job_path: research/jobs/completed/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001.yaml
+research_question: Does the provenance-clean Black76 actual-VST3 real-vocal snapshot
+  satisfy the predeclared numerical continuity, clipping, latency, working-unity,
+  active-processing, provenance, and raw-audio-safety gates?
+hypothesis: The current Black76 working build processes both public vocal/voice sources
+  through the actual VST3 with finite output, no clipping, stable latency, practical
+  Attack-OFF unity behavior, and active compression in all declared modes.
+counter_hypotheses:
+- One or more source/mode renders contain non-finite values, clipping, inconsistent
+  latency, or unexpected working-point gain.
+- The snapshot is incomplete, provenance is inconsistent, or raw vocal audio was accidentally
+  persisted in CIPI.
+acceptance_criteria:
+- The six-case two-source by three-mode matrix is complete.
+- All numerical fields are finite at 48 kHz.
+- All cases report exactly 6 samples of VST3 latency.
+- Input peak normalization error is <= 1e-6 from 0.5.
+- Total clipped and non-finite sample counts are zero and maximum output peak remains
+  below 1.0.
+- Attack-OFF color gain stays within +/-0.5 dB on both sources.
+- Both compression modes show at least 3 dB attenuation on every source.
+- Product artifact provenance is consistent and the snapshot identifies actual VST3
+  processing.
+- No raw WAV audio exists under the CIPI evidence path.
+rejection_criteria:
+- Any finite-state, clipping, latency, matrix-integrity, provenance, or raw-audio-safety
+  gate fails.
+- Attack-OFF working-point gain leaves the +/-0.5 dB real-audio tolerance.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 334447f3efb1c4ec7e63b8f2cc23c609653c8fbb
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: actual_vst3
+  value: true
+- path: all_numeric_finite
+  value: true
+- path: checksum_ok
+  value: false
+- path: clip_total
+  value: 0
+- path: color_gain_abs_max_db
+  value: 0.300513
+- path: compression_active_all_cases
+  value: true
+- path: input_peak_max_abs_error
+  value: 0.0
+- path: latencies[0]
+  value: 6
+- path: matrix_complete
+  value: true
+- path: max_output_peak
+  value: 0.504726
+- path: max_sample_step
+  value: 0.284703
+- path: nonfinite_total
+  value: 0
+- path: provenance_ok
+  value: true
+- path: raw_audio_present_in_cipi
+  value: false
+- path: row_count
+  value: 6
+- path: sample_rates[0]
+  value: 48000
+knowledge_candidate:
+  claim: The current Black76 actual VST3 preserves finite clipping-free processing,
+    stable six-sample latency, and practical Attack-OFF unity behavior on the tested
+    public vocal/voice clips.
+  evidence_type: MEASURED
+  scope: Black76 Rev E working build at product commit 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693
+    on two public pdx-cs-sound/wavs clips at 48 kHz; numerical continuity only, not
+    subjective preference or ratio fidelity.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates:
+- Subjective level-matched vocal preference remains a human listening gate.
+- Cubase Pro 14 scan, instantiate, automation, preset recall, and session behavior
+  remain separate host gates.
+downstream_gate_signals:
+- Register CIPI measurements, level-matched listening, and Cubase Pro 14 VST3 validation.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

@@ -1,0 +1,88 @@
+schema_version: '1.0'
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001
+state: COMPLETED
+track:
+  id: 1176_FAMILY_FORMAL
+  path: research/reference_devices/1176
+research_question: Does the provenance-clean Black76 actual-VST3 real-vocal snapshot
+  satisfy the predeclared numerical continuity, clipping, latency, working-unity,
+  active-processing, provenance, and raw-audio-safety gates?
+hypothesis: The current Black76 working build processes both public vocal/voice sources
+  through the actual VST3 with finite output, no clipping, stable latency, practical
+  Attack-OFF unity behavior, and active compression in all declared modes.
+counter_hypotheses:
+- One or more source/mode renders contain non-finite values, clipping, inconsistent
+  latency, or unexpected working-point gain.
+- The snapshot is incomplete, provenance is inconsistent, or raw vocal audio was accidentally
+  persisted in CIPI.
+baseline:
+- color_attack_off
+variants:
+- moderate_ratio4
+- stress_ratio20
+metrics:
+- checksum_ok
+- matrix_complete
+- all_numeric_finite
+- sample_rates
+- latencies
+- input_peak_max_abs_error
+- clip_total
+- nonfinite_total
+- max_output_peak
+- max_sample_step
+- color_gain_abs_max_db
+- compression_active_all_cases
+- provenance_ok
+- actual_vst3
+- raw_audio_present_in_cipi
+acceptance:
+- The six-case two-source by three-mode matrix is complete.
+- All numerical fields are finite at 48 kHz.
+- All cases report exactly 6 samples of VST3 latency.
+- Input peak normalization error is <= 1e-6 from 0.5.
+- Total clipped and non-finite sample counts are zero and maximum output peak remains
+  below 1.0.
+- Attack-OFF color gain stays within +/-0.5 dB on both sources.
+- Both compression modes show at least 3 dB attenuation on every source.
+- Product artifact provenance is consistent and the snapshot identifies actual VST3
+  processing.
+- No raw WAV audio exists under the CIPI evidence path.
+rejection:
+- Any finite-state, clipping, latency, matrix-integrity, provenance, or raw-audio-safety
+  gate fails.
+- Attack-OFF working-point gain leaves the +/-0.5 dB real-audio tolerance.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 7602502
+experiment_adapter: black76_real_vocal_snapshot_gate_v1
+allowed_operations:
+- read_committed_derived_metrics
+- verify_committed_sha256
+- deterministic_numeric_comparison
+prohibited_operations:
+- arbitrary_shell
+- network_access
+- network_write
+- main_push
+- raw_audio_read
+- confidence_change
+- current_stage_change
+knowledge_candidate:
+  claim: The current Black76 actual VST3 preserves finite clipping-free processing,
+    stable six-sample latency, and practical Attack-OFF unity behavior on the tested
+    public vocal/voice clips.
+  evidence_type: MEASURED
+  scope: Black76 Rev E working build at product commit 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693
+    on two public pdx-cs-sound/wavs clips at 48 kHz; numerical continuity only, not
+    subjective preference or ratio fidelity.
+  promotion_requested: PROVISIONAL
+continuation:
+  on_accept: []
+  on_reject: []
+review_policy:
+  required_human_gates:
+  - Subjective level-matched vocal preference remains a human listening gate.
+  - Cubase Pro 14 scan, instantiate, automation, preset recall, and session behavior
+    remain separate host gates.
+latest_run: gha-36111769039-1

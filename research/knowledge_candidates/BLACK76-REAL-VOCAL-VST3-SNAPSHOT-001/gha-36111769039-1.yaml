@@ -1,0 +1,9 @@
+claim: The current Black76 actual VST3 preserves finite clipping-free processing,
+  stable six-sample latency, and practical Attack-OFF unity behavior on the tested
+  public vocal/voice clips.
+evidence_type: MEASURED
+scope: Black76 Rev E working build at product commit 1d23fb8a31b29eb40e79b4026091a9d4b6c1f693
+  on two public pdx-cs-sound/wavs clips at 48 kHz; numerical continuity only, not
+  subjective preference or ratio fidelity.
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1
+promotion_requested: PROVISIONAL

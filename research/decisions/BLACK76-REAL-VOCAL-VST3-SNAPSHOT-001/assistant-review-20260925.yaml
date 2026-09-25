@@ -1,0 +1,38 @@
+schema_version: '1.0'
+decision_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:assistant-review-20260925
+job_id: BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001
+source_run: research/runs/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The run failed only the committed snapshot checksum gate. All product-behavior gates passed: the six-case matrix was complete, all values were finite, clipping and non-finite counts were zero, latency was consistently six samples, the Attack-OFF gain stayed within the declared +/-0.5 dB tolerance, compression was active, provenance was correct, and no raw audio was present in CIPI. Review traced checksum failure to using the source artifact CSV SHA256 for a line-ending-normalized CIPI copy. This is an evidence-packaging defect, not a Black76 DSP failure. Preserve this failed run and repeat with a new append-only snapshot whose checksum is computed from the committed CIPI bytes.
+scope: Evidence-integrity review for Black76 actual-VST3 real-vocal snapshot revision 1 only; no subjective listening, ratio-fidelity, vintage-hardware, or Cubase conclusion.
+declared_rejection_criteria:
+- Any finite-state, clipping, latency, matrix-integrity, provenance, or raw-audio-safety gate fails.
+- Attack-OFF working-point gain leaves the +/-0.5 dB real-audio tolerance.
+triggered_criteria:
+- Snapshot checksum verification failed because the CIPI copy used normalized line endings while checksums.sha256 contained the source artifact byte hash.
+retained_findings:
+- Matrix completeness passed for two sources by three modes.
+- All numerical fields were finite at 48 kHz.
+- Total clipped samples and non-finite samples were zero.
+- VST3 latency was consistently six samples.
+- Maximum Attack-OFF absolute gain deviation was 0.300513 dB, inside the declared +/-0.5 dB tolerance.
+- Provenance and raw-audio-safety checks passed.
+reusable_findings:
+- Imported derived evidence must checksum the bytes committed to the research repository, not a semantically identical source file whose line endings may differ.
+- A failed evidence-integrity gate must not be misreported as a DSP failure when independent behavior metrics pass.
+revisit_if:
+- A new append-only evidence snapshot is created with a checksum calculated from its committed byte representation.
+lineage:
+  supersedes: []
+  related_jobs:
+  - BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002
+  related_decisions:
+  - "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:auto"
+parent_decision_id: "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:auto"
+created_at: '2026-09-25'
+immutable: true
+review_gaps: []

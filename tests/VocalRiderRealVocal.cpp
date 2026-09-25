@@ -1,5 +1,6 @@
 #include <JuceHeader.h>
 #include "../src/dsp/VocalRiderCore.h"
+#include "../src/dsp/VocalRiderHeadroomGuard.h"
 
 #include <algorithm>
 #include <array>
@@ -194,6 +195,9 @@ RenderResult render (const juce::AudioBuffer<float>& source,
     RenderResult result;
     result.latencySamples = std::max (1, static_cast<int> (std::lround (sampleRate * 0.050)));
 
+    cipi::dsp::VocalRiderHeadroomGuard headroomGuard;
+    headroomGuard.prepare (sampleRate, result.latencySamples);
+
     const auto channels = source.getNumChannels();
     const auto totalSamples = source.getNumSamples() + result.latencySamples;
 
@@ -216,7 +220,8 @@ RenderResult render (const juce::AudioBuffer<float>& source,
                 linkedAbs = std::max (linkedAbs, std::abs (input));
         }
 
-        const auto gainDb = rider.processSample (linkedAbs, amount);
+        const auto requestedRideDb = rider.processSample (linkedAbs, amount);
+        const auto gainDb = headroomGuard.process (linkedAbs, 1.0f, requestedRideDb);
         result.finite = result.finite && std::isfinite (gainDb);
         result.gainTraceDb.push_back (gainDb);
 

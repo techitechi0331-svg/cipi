@@ -52,5 +52,10 @@ private:
     juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> outputGainSmooth;
     bool controlsPrimed { false };
 
+    float headroomLimitDb { 12.0f };
+    float headroomTargetDb { 12.0f };
+    int headroomHoldSamples { 0 };
+    double currentSampleRate { 44100.0 };
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VocalRiderAudioProcessor)
 };

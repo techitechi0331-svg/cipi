@@ -22,7 +22,7 @@ public:
         peakAttackCoeff = timeCoeff (0.001);
         peakReleaseCoeff = timeCoeff (0.050);
 
-        targetSmoothingCoeff = std::exp (-0.050 / 2.5);
+        targetSmoothingCoeff = std::exp (-0.050 / 0.20);
 
         reset();
     }
@@ -33,9 +33,7 @@ public:
         phraseEnergy = 0.0;
         peakEnvelope = 0.0;
         targetDb = 0.0f;
-        sectionOffsetDb = 0.0f;
-        sectionEvidenceSeconds = 0.0f;
-        sectionEvidenceSign = 0;
+        recentHighBodyDb = -120.0f;
         targetReady = false;
         targetCounter = 0;
         historyWrite = 0;
@@ -71,18 +69,35 @@ public:
         currentCrestDb = static_cast<float> (
             20.0 * std::log10 ((peakEnvelope + 1.0e-12) / (bodyRms + 1.0e-12)));
 
+        const auto wasActive = active;
         updateActivity();
 
+        if (active)
+        {
+            if (! wasActive)
+                recentHighBodyDb = currentBodyDb;
+            else
+                recentHighBodyDb = std::max (
+                    currentBodyDb,
+                    recentHighBodyDb
+                        - bodyHighDecayDbPerSecond / static_cast<float> (sampleRate));
+        }
+        else
+        {
+            recentHighBodyDb = -120.0f;
+        }
+
         const auto shortTransient = currentBodyDb > -60.0f && currentCrestDb > 10.0f;
+        const auto fallingEvent = active
+                               && (recentHighBodyDb - currentBodyDb) > bodyDropProtectDb;
 
         if (++targetCounter >= targetUpdateSamples)
         {
             targetCounter = 0;
 
-            if (active && ! shortTransient && std::isfinite (currentPhraseDb))
+            if (active && ! shortTransient && ! fallingEvent
+                && std::isfinite (currentPhraseDb))
                 pushTargetSample (currentPhraseDb);
-            else
-                decaySectionStateWhileInactive();
         }
 
         amount01 = clamp (amount01, 0.0f, 1.0f);
@@ -92,12 +107,14 @@ public:
 
         if (active && targetReady && depth > 0.0f)
         {
-            const auto effectiveTargetDb = targetDb + sectionOffsetDb;
-            const auto errorDb = effectiveTargetDb - currentPhraseDb;
+            const auto errorDb = targetDb - currentPhraseDb;
             const auto deadZoneError = applyDeadZone (errorDb, 0.65f);
             const auto rangeDb = 4.0f * depth;
 
             newDesired = clamp (0.85f * depth * deadZoneError, -rangeDb, rangeDb);
+
+            if (fallingEvent && newDesired > 0.0f)
+                newDesired = 0.0f;
         }
 
         if (! shortTransient)
@@ -119,9 +136,8 @@ public:
 
     float getCurrentGainDb() const noexcept { return currentGainDb; }
     float getDesiredGainDb() const noexcept { return desiredGainDb; }
-    float getTargetDb() const noexcept { return targetDb + sectionOffsetDb; }
-    float getBaseTargetDb() const noexcept { return targetDb; }
-    float getSectionOffsetDb() const noexcept { return sectionOffsetDb; }
+    float getTargetDb() const noexcept { return targetDb; }
+    float getRecentHighBodyDb() const noexcept { return recentHighBodyDb; }
     float getBodyDb() const noexcept { return currentBodyDb; }
     float getPhraseDb() const noexcept { return currentPhraseDb; }
     float getCrestDb() const noexcept { return currentCrestDb; }
@@ -129,8 +145,12 @@ public:
     bool isTargetReady() const noexcept { return targetReady; }
 
 private:
-    static constexpr std::size_t historyCapacity = 400;
+    static constexpr std::size_t historyCapacity = 160;
     static constexpr double minEnergy = 1.0e-15;
+    static constexpr float activityEnterDb = -66.0f;
+    static constexpr float activityRemainDb = -74.0f;
+    static constexpr float bodyDropProtectDb = 5.0f;
+    static constexpr float bodyHighDecayDbPerSecond = 4.0f;
 
     double timeCoeff (double tauSeconds) const noexcept
     {
@@ -168,7 +188,7 @@ private:
     {
         if (! active)
         {
-            if (currentBodyDb > -58.0f)
+            if (currentBodyDb > activityEnterDb)
             {
                 active = true;
                 activityHang = activityHangSamples;
@@ -176,7 +196,7 @@ private:
             return;
         }
 
-        if (currentBodyDb > -62.0f)
+        if (currentBodyDb > activityRemainDb)
         {
             activityHang = activityHangSamples;
             return;
@@ -187,74 +207,6 @@ private:
 
         if (activityHang <= 0)
             active = false;
-    }
-
-    static float moveToward (float current, float target, float maxDelta) noexcept
-    {
-        return current + clamp (target - current, -maxDelta, maxDelta);
-    }
-
-    void updateSectionAdaptation (float valueDb) noexcept
-    {
-        constexpr float updateSeconds = 0.050f;
-        constexpr float evidenceThresholdDb = 2.50f;
-        constexpr float evidenceHoldSeconds = 4.00f;
-        constexpr float sectionTrackRateDbPerSecond = 1.50f;
-        constexpr float activeRelaxRateDbPerSecond = 0.05f;
-        constexpr float maxSectionOffsetDb = 6.0f;
-
-        const auto effectiveTargetDb = targetDb + sectionOffsetDb;
-        const auto errorToEffectiveDb = valueDb - effectiveTargetDb;
-
-        int newSign = 0;
-        if (errorToEffectiveDb > evidenceThresholdDb)
-            newSign = 1;
-        else if (errorToEffectiveDb < -evidenceThresholdDb)
-            newSign = -1;
-
-        if (newSign == 0)
-        {
-            sectionEvidenceSeconds = std::max (0.0f, sectionEvidenceSeconds - 2.0f * updateSeconds);
-            sectionOffsetDb = moveToward (
-                sectionOffsetDb, 0.0f, activeRelaxRateDbPerSecond * updateSeconds);
-        }
-        else if (newSign == sectionEvidenceSign)
-        {
-            sectionEvidenceSeconds += updateSeconds;
-        }
-        else
-        {
-            sectionEvidenceSign = newSign;
-            sectionEvidenceSeconds = updateSeconds;
-        }
-
-        if (sectionEvidenceSeconds >= evidenceHoldSeconds)
-        {
-            const auto desiredOffsetDb = clamp (
-                valueDb - targetDb, -maxSectionOffsetDb, maxSectionOffsetDb);
-            sectionOffsetDb = moveToward (
-                sectionOffsetDb,
-                desiredOffsetDb,
-                sectionTrackRateDbPerSecond * updateSeconds);
-        }
-
-        if (sectionEvidenceSeconds <= 0.0f)
-            sectionEvidenceSign = 0;
-    }
-
-    void decaySectionStateWhileInactive() noexcept
-    {
-        constexpr float updateSeconds = 0.050f;
-        constexpr float evidenceDecayPerSecond = 0.25f;
-        constexpr float inactiveRelaxRateDbPerSecond = 0.01f;
-
-        sectionEvidenceSeconds = std::max (
-            0.0f, sectionEvidenceSeconds - evidenceDecayPerSecond * updateSeconds);
-        sectionOffsetDb = moveToward (
-            sectionOffsetDb, 0.0f, inactiveRelaxRateDbPerSecond * updateSeconds);
-
-        if (sectionEvidenceSeconds <= 0.0f)
-            sectionEvidenceSign = 0;
     }
 
     void pushTargetSample (float valueDb) noexcept
@@ -284,7 +236,6 @@ private:
                 targetSmoothingCoeff * targetDb + (1.0 - targetSmoothingCoeff) * medianDb);
         }
 
-        updateSectionAdaptation (valueDb);
     }
 
     void updateGainTrajectory (float depth) noexcept
@@ -359,9 +310,7 @@ private:
     bool targetReady { false };
 
     float targetDb { 0.0f };
-    float sectionOffsetDb { 0.0f };
-    float sectionEvidenceSeconds { 0.0f };
-    int sectionEvidenceSign { 0 };
+    float recentHighBodyDb { -120.0f };
     float desiredGainDb { 0.0f };
     float currentGainDb { 0.0f };
     float velocityDbPerSecond { 0.0f };

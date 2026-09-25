@@ -129,7 +129,7 @@ jobs:
         id: triage
         env:
           JOB_ID: ${{ matrix.item.job_id }}
-        run: python tooling/automation/review/triage.py --root evidence --job-id "$JOB_ID" --github-output "$GITHUB_OUTPUT"
+        run: python tooling/automation/review/triage.py --root evidence --review-root tooling --job-id "$JOB_ID" --github-output "$GITHUB_OUTPUT"
 
       - name: Validate triage
         if: steps.branch.outputs.found == 'true'

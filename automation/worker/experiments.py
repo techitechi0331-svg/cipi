@@ -51,6 +51,7 @@ ADAPTERS = {
     "vocal_resonance_clean_normative_prior_v1",
     "vocal_resonance_self_counterfactual_inpainting_v1",
     "voprep_amount_mapping_r4_v1",
+    "vopripro_detector_transfer_screen_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3259,6 +3260,49 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         ),
     }
 
+def _vopripro_detector_transfer_screen(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vopripro"
+        / "experiments" / "detector_transfer_screen.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-vopripro-detector-transfer-") as td:
+        out = Path(td)
+        completed = subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "detector_transfer_rows.csv": (out / "detector_transfer_rows.csv").read_text(encoding="utf-8"),
+            "summary.json": (out / "summary.json").read_text(encoding="utf-8"),
+            "report.md": (out / "report.md").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary.get("acceptance_met", False))
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vopripro/experiments/detector_transfer_screen.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Deterministic synthetic eligibility screen comparing the current VoPriPro "
+            "Natural50 detector against the Vo.Prep-derived Slow-RMS/Fast-Peak fusion "
+            "with shared HPF, gain computer, calibration, cap and ballistics. Passing "
+            "authorizes only a same-corpus real-vocal comparison; it does not alter "
+            "VoPriPro product DSP or product stage."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3340,4 +3384,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_self_counterfactual_inpainting(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r4_v1":
         return _voprep_amount_mapping_r4(repo_root, timeout_seconds)
+    if name == "vopripro_detector_transfer_screen_v1":
+        return _vopripro_detector_transfer_screen(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

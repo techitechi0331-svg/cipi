@@ -3,6 +3,7 @@ decision_id: "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:review-0
 job_id: MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001
 source_run: research/runs/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1
 event_type: REVIEW
+parent_decision_id: "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:auto"
 authority: ASSISTANT_REVIEW
 decision: ITERATE
 review_status: CONFIRMED
@@ -39,7 +40,4 @@ scope: >-
   Authorization for an augment-only development experiment. No product
   integration approval, no replacement of the generic transient detector,
   no knowledge CONFIRMED status, no Cubase closure, and no release approval.
-review_gaps:
-  - "No direct MicroDouble augment-only A/B yet."
-  - "No target-machine listening yet."
-  - "No labelled multilingual plosive corpus yet."
+review_gaps: []

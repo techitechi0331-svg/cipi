@@ -20,102 +20,285 @@
     "timeout_minutes"
   ],
   "properties": {
-    "schema_version": {"const": "1.0"},
-    "job_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"},
+    "schema_version": {
+      "const": "1.0"
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"
+    },
     "state": {
       "enum": [
-        "QUEUED", "CLAIMED", "RUNNING", "BLOCKED_EXTERNAL", "BLOCKED_DEPENDENCY",
-        "COMPLETED", "FAILED", "REJECTED", "CANCELLED"
+        "QUEUED",
+        "CLAIMED",
+        "RUNNING",
+        "BLOCKED_EXTERNAL",
+        "BLOCKED_DEPENDENCY",
+        "COMPLETED",
+        "FAILED",
+        "REJECTED",
+        "CANCELLED"
       ]
     },
-    "priority": {"type": "integer", "minimum": -100, "maximum": 100},
+    "priority": {
+      "type": "integer",
+      "minimum": -100,
+      "maximum": 100
+    },
     "depends_on_jobs": {
       "type": "array",
       "uniqueItems": true,
-      "items": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"}
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"
+      }
     },
     "external_wait": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["kind", "ref", "resume_when", "resume_step"],
+        "required": [
+          "kind",
+          "ref",
+          "resume_when",
+          "resume_step"
+        ],
         "properties": {
           "kind": {
-            "enum": ["GITHUB_ACTIONS", "EXTERNAL_TOOL", "CUBASE_HOST", "HUMAN_LISTENING", "RUNNER", "OTHER"]
+            "enum": [
+              "GITHUB_ACTIONS",
+              "EXTERNAL_TOOL",
+              "CUBASE_HOST",
+              "HUMAN_LISTENING",
+              "RUNNER",
+              "OTHER"
+            ]
           },
-          "ref": {"type": "string", "minLength": 3},
-          "resume_when": {"type": "string", "minLength": 3},
-          "resume_step": {"type": "string", "minLength": 3}
+          "ref": {
+            "type": "string",
+            "minLength": 3
+          },
+          "resume_when": {
+            "type": "string",
+            "minLength": 3
+          },
+          "resume_step": {
+            "type": "string",
+            "minLength": 3
+          }
         },
         "additionalProperties": true
       }
     },
     "track": {
       "type": "object",
-      "required": ["id", "path"],
+      "required": [
+        "id",
+        "path"
+      ],
       "properties": {
-        "id": {"type": "string"},
-        "path": {"type": "string", "pattern": "^research/"}
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^research/"
+        }
       }
     },
-    "research_question": {"type": "string", "minLength": 10},
-    "hypothesis": {"type": "string", "minLength": 10},
-    "counter_hypotheses": {"type": "array", "minItems": 1, "items": {"type": "string"}},
-    "baseline": {"type": "array", "minItems": 1},
-    "variants": {"type": "array", "minItems": 1},
-    "metrics": {"type": "array", "minItems": 1},
-    "acceptance": {"type": "array", "minItems": 1},
-    "rejection": {"type": "array", "minItems": 1},
-    "max_runs": {"type": "integer", "minimum": 1, "maximum": 10000},
-    "timeout_minutes": {"type": "integer", "minimum": 1, "maximum": 1440},
-    "random_seed": {"type": "integer"},
-    "experiment_adapter": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,95}$"},
-    "allowed_operations": {"type": "array", "items": {"type": "string"}},
-    "prohibited_operations": {"type": "array", "items": {"type": "string"}},
+    "research_question": {
+      "type": "string",
+      "minLength": 10
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 10
+    },
+    "counter_hypotheses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "baseline": {
+      "type": "array",
+      "minItems": 1
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1
+    },
+    "acceptance": {
+      "type": "array",
+      "minItems": 1
+    },
+    "rejection": {
+      "type": "array",
+      "minItems": 1
+    },
+    "max_runs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "timeout_minutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1440
+    },
+    "random_seed": {
+      "type": "integer"
+    },
+    "experiment_adapter": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,95}$"
+    },
+    "allowed_operations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prohibited_operations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "knowledge_candidate": {
       "type": "object",
-      "required": ["claim", "evidence_type", "scope"],
+      "required": [
+        "claim",
+        "evidence_type",
+        "scope"
+      ],
       "properties": {
-        "claim": {"type": "string", "minLength": 10},
-        "evidence_type": {"enum": ["SOURCE_CANDIDATE", "MEASURED", "INFERRED", "HYPOTHESIS"]},
-        "scope": {"type": "string", "minLength": 3},
-        "promotion_requested": {"enum": ["HYPOTHESIS", "LIKELY", "PROVISIONAL"]}
+        "claim": {
+          "type": "string",
+          "minLength": 10
+        },
+        "evidence_type": {
+          "enum": [
+            "SOURCE_CANDIDATE",
+            "MEASURED",
+            "INFERRED",
+            "HYPOTHESIS"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 3
+        },
+        "promotion_requested": {
+          "enum": [
+            "HYPOTHESIS",
+            "LIKELY",
+            "PROVISIONAL"
+          ]
+        }
       },
       "additionalProperties": true
     },
     "continuation": {
       "type": "object",
       "properties": {
-        "on_accept": {"type": "array", "items": {"type": "string", "pattern": "^automation/job_templates/"}},
-        "on_reject": {"type": "array", "items": {"type": "string", "pattern": "^automation/job_templates/"}}
+        "on_accept": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^automation/job_templates/"
+          }
+        },
+        "on_reject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^automation/job_templates/"
+          }
+        }
       },
       "additionalProperties": false
     },
     "rejection_record": {
       "type": "object",
       "properties": {
-        "reason": {"type": "string", "minLength": 10},
-        "retained_findings": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 3}},
-        "reusable_findings": {"type": "array", "items": {"type": "string", "minLength": 3}},
-        "revisit_if": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 3}},
-        "scope": {"type": "string", "minLength": 3}
+        "reason": {
+          "type": "string",
+          "minLength": 10
+        },
+        "retained_findings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "reusable_findings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "revisit_if": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 3
+        }
       },
       "additionalProperties": false
     },
     "lineage": {
       "type": "object",
       "properties": {
-        "supersedes": {"type": "array", "items": {"type": "string", "minLength": 3}},
-        "related_jobs": {"type": "array", "items": {"type": "string", "minLength": 3}},
-        "related_decisions": {"type": "array", "items": {"type": "string", "minLength": 3}}
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "related_jobs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        },
+        "related_decisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
       },
       "additionalProperties": false
     },
     "review_policy": {
       "type": "object",
       "properties": {
-        "required_human_gates": {"type": "array", "items": {"type": "string", "minLength": 3}}
+        "required_human_gates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
       },
       "additionalProperties": false
     }

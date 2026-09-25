@@ -1,0 +1,36 @@
+schema_version: '1.0'
+decision_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:auto
+job_id: VOCAL-RESONANCE-R8-LOCAL-PATCH-001
+source_run: research/runs/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Declared rejection criteria were triggered; detailed rationale requires
+  review.
+scope: Automated rejection evidence for VOCAL-RESONANCE-R8-LOCAL-PATCH-001; final
+  rejection requires review.
+declared_rejection_criteria:
+- any seed conditional Top-5 improvement < 0.08
+- any seed oracle gap closure < 0.15
+- any seed strong-effect conditional Top-5 regresses by more than 0.05
+- any seed external clean false-trigger worsens by more than 0.05
+triggered_criteria: []
+retained_findings:
+- All run artifacts, measurements, parameters, environment data and checksums are
+  retained as negative evidence.
+reusable_findings: []
+revisit_if:
+- New evidence, a changed model, or a changed baseline materially affects the failed
+  criteria.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-25T15:55:27.591080Z'
+immutable: true

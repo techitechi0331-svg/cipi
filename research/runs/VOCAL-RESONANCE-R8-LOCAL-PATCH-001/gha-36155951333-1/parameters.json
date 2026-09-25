@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "prominence_only",
+    "frozen_static_r2_single_view"
+  ],
+  "experiment_adapter": "vocal_resonance_local_patch_proxy_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R8-LOCAL-PATCH-001.yaml",
+  "metrics": [
+    "top5_given_generator_hit",
+    "strong_top5_given_generator_hit",
+    "oracle_gap_closure",
+    "external_clean_false_trigger",
+    "generator_ceiling",
+    "mrr"
+  ],
+  "variants": [
+    "local_patch_multiscale_single_view"
+  ]
+}

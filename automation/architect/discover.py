@@ -90,7 +90,10 @@ def main() -> int:
     top_plugin = ""
     top_gap_id = ""
 
-    for score, support_count, support_paths, topic in ranked[: max(1, args.max_gaps)]:
+    created_gap_count = 0
+    for score, support_count, support_paths, topic in ranked:
+        if created_gap_count >= max(1, args.max_gaps):
+            break
         sid = slug(topic["id"])
         gap_id = f"GAP-{sid}-001"
         proposal_id = f"RP-{sid}-001"
@@ -99,6 +102,8 @@ def main() -> int:
         gap_path = output_root / gap_rel
         proposal_path = output_root / proposal_rel
         was_new = not gap_path.exists() and not proposal_path.exists()
+        if not was_new:
+            continue
 
         gap = {
             "schema_version": "1.0",
@@ -147,6 +152,7 @@ def main() -> int:
         write_yaml(gap_path, gap)
         write_yaml(proposal_path, proposal)
         if was_new:
+            created_gap_count += 1
             created.extend([str(gap_rel), str(proposal_rel)])
             if not top_gap_id:
                 top_gap_id = gap_id

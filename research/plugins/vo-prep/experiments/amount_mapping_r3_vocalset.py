@@ -372,7 +372,7 @@ def main():
     }
     (out/"amount_r3_results.json").write_text(json.dumps(result,indent=2),encoding="utf-8")
 
-    fields=["candidate","split","amount","mean_gr","p95_gr","p99_gr","max_gr","frac_gt10","gr_ripple","cross_source_mean_gr_std"]
+    fields=["candidate","split","amount","mean_gr","p95_gr","p99_gr","max_gr","frac_gt10","gr_ripple","cross_source_mean_gr_std","ballistics_homogeneity_max_error"]
     for name,rows in (("selection.csv",selection_rows),("holdout.csv",holdout_rows)):
         with (out/name).open("w",newline="",encoding="utf-8") as f:
             w=csv.DictWriter(f,fieldnames=fields)

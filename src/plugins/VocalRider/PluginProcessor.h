@@ -48,5 +48,9 @@ private:
     int delayWritePosition { 0 };
     int lookaheadSamples { 0 };
 
+    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> amountSmooth;
+    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Linear> outputGainSmooth;
+    bool controlsPrimed { false };
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VocalRiderAudioProcessor)
 };

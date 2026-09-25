@@ -491,3 +491,28 @@ The growl-onset value is an explicit known false-positive risk and must remain i
 The current MicroDouble generic transient detector remains mandatory because it protects broader consonant/onset events than P/B plosives.
 
 Research Job `MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001` therefore asks only whether the Plosive Guard evidence is sufficient to justify an **augment-only** product experiment. It may not authorize replacement of the current transient detector.
+
+
+## v0.4 post-integration checkpoint — 2026-09-25 product evidence
+
+The CIPI-reviewed sibilance candidate at activation **0.62** has now been integrated into the product development branch `v0.4-dev` with the change scoped to the sibilance detector path.
+
+Product-repository validation completed successfully at head `ee5725fa33b9b8ed0637575a86903d4c6bd0bd73`:
+
+- Core Regression: PASS;
+- Detector Corpus Calibration: PASS;
+- v0.3-v0.4 real-vocal integration AB: PASS;
+- Windows VST3 build: PASS;
+- pluginval 1.0.4 strictness 5: PASS;
+- VST3 artifact ID: `10845297780`;
+- VST3 artifact digest: `sha256:49558afa01f5767d413b2d794b97311470371a04508a42a8d8b41fbf9c80e1d3`.
+
+Real-vocal scope-containment AB at DOUBLE 50%:
+
+- clean normalized RMS difference v0.3→v0.4: **0.0000236892**;
+- injected-sibilance normalized RMS difference: **0.00585653**;
+- clean stereo RMS level delta: **0.000000195 dB**;
+- clean mono-minus-stereo delta: **~7.7e-10 dB**;
+- injected mono-minus-stereo delta: **0.0001024 dB**.
+
+Interpretation remains PROVISIONAL: objective integration safety is supported, but target-machine subjective naturalness and Cubase verification of this v0.4 build remain open.

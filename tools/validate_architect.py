@@ -16,6 +16,7 @@ PROPOSAL_REQUIRED = {
     "plugin_opportunity","overlap_hints","external_validity","budget"
 }
 PROPOSAL_STATES = {"PILOT_READY","NEEDS_ADAPTER","RESEARCH_MORE","ARCHIVED"}
+SIGNAL_REQUIRED = {"schema_version","signal_id","source_path","kind","text_hash","text","state","executable"}
 ADAPTER_REQUIRED = {
     "schema_version","adapter_candidate_id","source_research_proposal","state","executable",
     "proposed_adapter_name","track","research_question","baseline","variants","metrics",
@@ -30,6 +31,19 @@ def load(path: Path):
 def validate_root(root: Path) -> list[str]:
     errors=[]
     base=root/"research"/"architect"
+    for path in sorted((base/"signals").glob("*.yaml")) if (base/"signals").exists() else []:
+        try: data=load(path)
+        except Exception as exc:
+            errors.append(f"{path}: YAML parse error: {exc}"); continue
+        if not isinstance(data,dict):
+            errors.append(f"{path}: root must be mapping"); continue
+        missing=sorted(SIGNAL_REQUIRED-set(data))
+        if missing: errors.append(f"{path}: missing {', '.join(missing)}")
+        if data.get("state") not in {"UNCLASSIFIED","CLASSIFIED","ARCHIVED"}:
+            errors.append(f"{path}: invalid signal state")
+        if data.get("executable") is not False:
+            errors.append(f"{path}: research-gap signal must be non-executable")
+
     for path in sorted((base/"gaps").glob("*.yaml")) if (base/"gaps").exists() else []:
         try: data=load(path)
         except Exception as exc:

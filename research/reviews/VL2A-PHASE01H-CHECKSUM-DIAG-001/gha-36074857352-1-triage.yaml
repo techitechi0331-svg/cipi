@@ -1,0 +1,32 @@
+schema_version: '1.0'
+triage_id: VL2A-PHASE01H-CHECKSUM-DIAG-001:gha-36074857352-1:triage-v1
+job_id: VL2A-PHASE01H-CHECKSUM-DIAG-001
+run_id: gha-36074857352-1
+source_run: research/runs/VL2A-PHASE01H-CHECKSUM-DIAG-001/gha-36074857352-1
+source_decision_id: VL2A-PHASE01H-CHECKSUM-DIAG-001:gha-36074857352-1:auto
+source_decision_path: research/decisions/VL2A-PHASE01H-CHECKSUM-DIAG-001/gha-36074857352-1-auto.yaml
+job_path: research/jobs/completed/VL2A-PHASE01H-CHECKSUM-DIAG-001.yaml
+knowledge_candidate_path: null
+candidate_class: RESEARCH_MORE
+route: CONTINUE_RESEARCH
+final_decision_made: false
+existing_review_decision_id: null
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: null
+review_gaps: []
+required_human_gates: []
+downstream_gate_signals:
+- Human level-matched vocal KEEP/REVISE/ROLLBACK decision is pending.
+- Cubase Pro 14 production-candidate validation is pending.
+- A human listener must perform the blind/level-matched AB before subjective preference
+  can be claimed.
+- Cubase Pro 14 confirmation ultimately requires a Windows real-host run.
+reasons:
+- The run passed as evidence, but it does not yet request a bounded LIKELY/PROVISIONAL
+  promotion review.
+recommended_action: Continue the declared research path or use a predeclared continuation;
+  no promotion decision is warranted yet.
+created_at: '2026-09-24T23:52:22.842770Z'
+triage_version: '1.0'
+immutable: true

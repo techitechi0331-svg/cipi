@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "source_artifact_sha256_ledger"
+  ],
+  "experiment_adapter": "vl2a_phase01h_checksum_diagnosis_v1",
+  "job_file": "research/jobs/queued/VL2A-PHASE01H-CHECKSUM-DIAG-001.yaml",
+  "metrics": [
+    "file_count",
+    "exact_match_count",
+    "newline_equivalent_count",
+    "unexplained_mismatch_count",
+    "missing_count",
+    "raw_audio_present"
+  ],
+  "variants": [
+    "cipi_committed_exact_bytes",
+    "lf_normalized_utf8",
+    "crlf_normalized_utf8"
+  ]
+}

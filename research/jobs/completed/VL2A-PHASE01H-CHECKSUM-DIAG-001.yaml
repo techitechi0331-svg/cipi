@@ -1,0 +1,57 @@
+schema_version: '1.0'
+job_id: VL2A-PHASE01H-CHECKSUM-DIAG-001
+state: COMPLETED
+track:
+  id: VL2A_PHASE01H_LINEAMP
+  path: research/plugins/vl2a
+research_question: Was the rejected VL2A Phase 01-H snapshot checksum gate caused
+  only by UTF-8 line-ending representation, rather than missing or changed numeric
+  evidence?
+hypothesis: Every imported evidence hash mismatch is explainable by exact LF/CRLF
+  text normalization while file content remains otherwise equivalent.
+counter_hypotheses:
+- At least one imported evidence file is missing.
+- At least one mismatch cannot be explained by LF/CRLF normalization and therefore
+  may represent content drift.
+- Raw vocal audio was accidentally committed to the CIPI evidence snapshot.
+baseline:
+- source_artifact_sha256_ledger
+variants:
+- cipi_committed_exact_bytes
+- lf_normalized_utf8
+- crlf_normalized_utf8
+metrics:
+- file_count
+- exact_match_count
+- newline_equivalent_count
+- unexplained_mismatch_count
+- missing_count
+- raw_audio_present
+acceptance:
+- every ledger entry is present
+- every file is either an exact SHA256 match or matches after deterministic LF/CRLF
+  normalization
+- unexplained mismatch count is zero
+- no raw WAV audio exists in the VL2A CIPI evidence snapshot
+rejection:
+- any file is missing
+- any checksum mismatch remains unexplained after LF/CRLF normalization
+- raw WAV audio is present
+max_runs: 1
+timeout_minutes: 2
+random_seed: 3310202
+experiment_adapter: vl2a_phase01h_checksum_diagnosis_v1
+allowed_operations:
+- read_committed_vl2a_evidence
+- compute_sha256
+- normalize_text_line_endings
+- write_derived_measurements
+prohibited_operations:
+- arbitrary_shell
+- network_access
+- network_write
+- main_push
+- knowledge_promotion
+- raw_audio_write
+- product_release
+latest_run: gha-36074857352-1

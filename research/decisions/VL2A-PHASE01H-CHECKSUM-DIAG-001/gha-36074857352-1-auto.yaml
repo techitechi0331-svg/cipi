@@ -1,0 +1,29 @@
+schema_version: '1.0'
+decision_id: VL2A-PHASE01H-CHECKSUM-DIAG-001:gha-36074857352-1:auto
+job_id: VL2A-PHASE01H-CHECKSUM-DIAG-001
+source_run: research/runs/VL2A-PHASE01H-CHECKSUM-DIAG-001/gha-36074857352-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for VL2A-PHASE01H-CHECKSUM-DIAG-001; promotion
+  requires review.
+declared_rejection_criteria:
+- any file is missing
+- any checksum mismatch remains unexplained after LF/CRLF normalization
+- raw WAV audio is present
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-24T23:52:22.842770Z'
+immutable: true

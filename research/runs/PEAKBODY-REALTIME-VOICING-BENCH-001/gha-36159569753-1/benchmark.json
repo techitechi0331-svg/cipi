@@ -1,0 +1,56 @@
+{
+  "acceptance_met": true,
+  "analysis_rate_hz": 12000,
+  "frame_samples": 480,
+  "lag_range": [
+    10,
+    150
+  ],
+  "measurement_csv": "detector,case,confidence,pitch_hz,true_f0_hz,pitch_relative_error,pair_ops,finite\nautocorr_baseline,sine_100,1.000000000,100.000000000,100.000000000,0.000000000,169200,1\nautocorr_baseline,harmonic_220,0.999098687,110.091743119,220.000000000,0.499582986,169200,1\nautocorr_baseline,harmonic_700,1.000000000,100.000000000,700.000000000,0.857142857,169200,1\nautocorr_baseline,bright_700,1.000000000,100.000000000,700.000000000,0.857142857,169200,1\nautocorr_baseline,bright_1000,1.000000000,500.000000000,1000.000000000,0.500000000,169200,1\nautocorr_baseline,bright_700_noise6,0.802494868,100.000000000,700.000000000,0.857142857,169200,1\nautocorr_baseline,sibilant_noise,0.131196409,118.811881188,,,169200,1\nautocorr_baseline,breath_noise,0.124593398,102.564102564,,,169200,1\nautocorr_baseline,silence,0.000000000,0.000000000,,,0,1\nyin_cmnd,sine_100,1.000000000,100.001157033,100.000000000,0.000011570,121350,1\nyin_cmnd,harmonic_220,0.980452073,219.901475062,220.000000000,0.000447841,121350,1\nyin_cmnd,harmonic_700,0.993836382,701.879581398,700.000000000,0.002685116,121350,1\nyin_cmnd,bright_700,0.985657605,702.375119839,700.000000000,0.003393028,121350,1\nyin_cmnd,bright_1000,1.000000000,1002.084709751,1000.000000000,0.002084710,121350,1\nyin_cmnd,bright_700_noise6,0.830018414,99.990240579,700.000000000,0.857156799,121350,1\nyin_cmnd,sibilant_noise,0.281152598,84.481176222,,,121350,1\nyin_cmnd,breath_noise,0.259431135,88.796018076,,,121350,1\nyin_cmnd,silence,0.000000000,0.000000000,,,0,1\nmpm_nsdf,sine_100,1.000000000,99.997689995,100.000000000,0.000023100,169200,1\nmpm_nsdf,harmonic_220,0.999098663,110.007316657,220.000000000,0.499966742,169200,1\nmpm_nsdf,harmonic_700,1.000000000,99.993817692,700.000000000,0.857151689,169200,1\nmpm_nsdf,bright_700,1.000000000,99.996897956,700.000000000,0.857147289,169200,1\nmpm_nsdf,bright_1000,1.000000000,166.662849673,1000.000000000,0.833337150,169200,1\nmpm_nsdf,bright_700_noise6,0.802490628,99.989929556,700.000000000,0.857157243,169200,1\nmpm_nsdf,sibilant_noise,0.131189742,118.766563400,,,169200,1\nmpm_nsdf,breath_noise,0.124526916,102.582625261,,,169200,1\nmpm_nsdf,silence,0.000000000,0.000000000,,,0,1\n",
+  "metrics": {
+    "autocorr_baseline": {
+      "all_finite": true,
+      "bright_high_confidence_min": 1.0,
+      "bright_noise_margin": 0.8688035913929744,
+      "clean_pitch_relative_error_max": 0.8571428571428571,
+      "clean_voiced_confidence_min": 0.999098687116719,
+      "noise_like_confidence_max": 0.1311964086070257,
+      "noisy_voiced_confidence": 0.8024948679764111,
+      "operation_ratio_vs_autocorr": 1.0,
+      "pair_ops": 169200.0,
+      "silence_confidence": 0.0
+    },
+    "mpm_nsdf": {
+      "all_finite": true,
+      "bright_high_confidence_min": 1.0,
+      "bright_noise_margin": 0.8688102579898715,
+      "clean_pitch_relative_error_max": 0.857151689012097,
+      "clean_voiced_confidence_min": 0.9990986633415923,
+      "noise_like_confidence_max": 0.13118974201012842,
+      "noisy_voiced_confidence": 0.8024906278608374,
+      "operation_ratio_vs_autocorr": 1.0,
+      "pair_ops": 169200.0,
+      "silence_confidence": 0.0
+    },
+    "yin_cmnd": {
+      "all_finite": true,
+      "bright_high_confidence_min": 0.985657604980387,
+      "bright_noise_margin": 0.704505007319446,
+      "clean_pitch_relative_error_max": 0.0033930283407695634,
+      "clean_voiced_confidence_min": 0.9804520734293245,
+      "noise_like_confidence_max": 0.28115259766094103,
+      "noisy_voiced_confidence": 0.8300184135379082,
+      "operation_ratio_vs_autocorr": 0.7171985815602837,
+      "pair_ops": 121350.0,
+      "silence_confidence": 0.0
+    }
+  },
+  "qualified_candidates": [
+    "yin_cmnd",
+    "mpm_nsdf"
+  ],
+  "random_seed": 2026092601,
+  "rejection_triggered": false,
+  "scope": "Synthetic 12 kHz / 40 ms algorithm-family benchmark for PeakBody periodicity protection; no product or real-vocal claim.",
+  "triggered_criteria": []
+}

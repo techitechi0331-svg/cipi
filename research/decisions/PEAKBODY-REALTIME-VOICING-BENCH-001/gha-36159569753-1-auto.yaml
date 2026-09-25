@@ -1,0 +1,29 @@
+schema_version: '1.0'
+decision_id: PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:auto
+job_id: PEAKBODY-REALTIME-VOICING-BENCH-001
+source_run: research/runs/PEAKBODY-REALTIME-VOICING-BENCH-001/gha-36159569753-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for PEAKBODY-REALTIME-VOICING-BENCH-001; promotion
+  requires review.
+declared_rejection_criteria:
+- neither candidate satisfies all predeclared confidence/safety/complexity gates
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - PEAKBODY-CONFOUNDER-PERIODICITY-002
+  - PEAKBODY-PRIVATE-VOCAL-GUARD-001
+  related_decisions: []
+created_at: '2026-09-25T16:15:29.052472Z'
+immutable: true

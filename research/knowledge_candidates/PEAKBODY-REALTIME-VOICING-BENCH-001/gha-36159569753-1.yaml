@@ -1,0 +1,7 @@
+claim: An established causal frame-wise periodicity family may reproduce PeakBody
+  harmonic protection with bounded complexity; synthetic qualification does not establish
+  a product winner.
+evidence_type: MEASURED
+scope: Synthetic 12 kHz, 40 ms PeakBody periodicity-family benchmark only.
+source_run: research/runs/PEAKBODY-REALTIME-VOICING-BENCH-001/gha-36159569753-1
+promotion_requested: PROVISIONAL

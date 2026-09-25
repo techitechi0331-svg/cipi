@@ -1,0 +1,23 @@
+{
+  "baseline": [
+    "normalized_autocorrelation_40ms_12khz"
+  ],
+  "experiment_adapter": "peakbody_realtime_voicing_bench_v1",
+  "job_file": "research/jobs/queued/PEAKBODY-REALTIME-VOICING-BENCH-001.yaml",
+  "metrics": [
+    "clean_voiced_confidence_min",
+    "bright_high_confidence_min",
+    "noisy_voiced_confidence",
+    "noise_like_confidence_max",
+    "silence_confidence",
+    "bright_noise_margin",
+    "clean_pitch_relative_error_max",
+    "operation_ratio_vs_autocorr",
+    "all_finite",
+    "qualified_candidates"
+  ],
+  "variants": [
+    "yin_cmnd_confidence_40ms_12khz",
+    "mpm_nsdf_clarity_40ms_12khz"
+  ]
+}

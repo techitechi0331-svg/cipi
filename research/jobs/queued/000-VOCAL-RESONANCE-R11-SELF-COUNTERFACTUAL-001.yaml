@@ -1,0 +1,61 @@
+schema_version: "1.0"
+job_id: VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001
+state: QUEUED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: "Can a deployable same-observation spectral-inpainting counterfactual approximate the R7 paired causal delta and materially improve semantic candidate ranking without increasing independent clean-vocal false triggers?"
+hypothesis: "Across both predeclared seeds, observed-minus-inpainted counterfactual features will improve conditional Top-5 by at least 0.08, close at least 15 percent of the R7 oracle gap, preserve strong-effect conditional Top-5 within 0.05, and not worsen external clean false-trigger by more than 0.025."
+counter_hypotheses:
+  - "Spectral inpainting is only a reparameterization of local prominence and adds no stable information beyond the frozen static ranker."
+  - "The reconstructed pseudo-clean is biased by natural formant/harmonic slopes and increases clean-vocal false triggers."
+  - "The R7 causal information fundamentally depends on a true paired observation and cannot be approximated from same-observation context."
+baseline:
+  - frozen_static_r2_single_view
+  - simple_inpaint_delta_only
+variants:
+  - static_plus_self_counterfactual_inpainting
+metrics:
+  - top5_given_generator_hit
+  - strong_top5_given_generator_hit
+  - oracle_gap_closure
+  - external_clean_false_trigger
+  - generator_ceiling
+  - source_overlap_count
+  - proxy_vs_true_delta_diagnostic
+acceptance:
+  - "for each seed: source overlap count == 0"
+  - "for each seed: conditional Top-5 >= static + 0.08"
+  - "for each seed: R7 oracle gap closure >= 0.15"
+  - "for each seed: strong-effect conditional Top-5 >= static - 0.05"
+  - "for each seed: external clean false-trigger <= static + 0.025"
+  - "for each seed: generator ceiling >= 0.80"
+rejection:
+  - "any seed has source overlap"
+  - "any seed conditional Top-5 improvement < 0.08"
+  - "any seed oracle gap closure < 0.15"
+  - "any seed strong-effect conditional Top-5 regresses by more than 0.05"
+  - "any seed external clean false-trigger worsens by more than 0.025"
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20261123
+experiment_adapter: vocal_resonance_self_counterfactual_inpainting_v1
+allowed_operations:
+  - stream_public_vocalset_in_runner_memory
+  - controlled_eq_injection
+  - same_observation_spectral_inpainting
+  - paired_clean_injected_diagnostic_only
+  - derived_metric_write
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - raw_audio_write
+  - paid_api
+  - product_release
+knowledge_candidate:
+  claim: "Same-observation spectral inpainting may provide a deployable self-counterfactual proxy for the causal resonance delta revealed by a paired clean/injected oracle."
+  evidence_type: HYPOTHESIS
+  scope: "Vocal resonance semantic ranking without a real clean-reference input."
+  promotion_requested: HYPOTHESIS

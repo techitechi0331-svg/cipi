@@ -299,3 +299,10 @@ adapters:
     max_timeout_minutes: 12
     network_required: true
     purpose: "Audit in-memory candidate-centered raw 2D local-residual patch sufficiency with linear models and a tiny nonlinear diagnostic upper bound; persist derived evidence only."
+
+  voprep_amount_mapping_r5_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Test whether a simple post-ballistics Soft Range repairs high-Amount ripple while keeping the frozen Vo.Prep detector/curve/8/70 core and explicit Learn solve unchanged."

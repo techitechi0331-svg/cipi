@@ -1,0 +1,10 @@
+schema_version: '1.0'
+signal_id: SIG-9B788A92B51B44F8
+source_path: research/experiments/AirGuard/status.yaml
+kind: UNRESOLVED
+text_hash: 9b788a92b51b44f8
+text: Japanese/Korean/English singing variability is unmeasured.
+state: UNCLASSIFIED
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

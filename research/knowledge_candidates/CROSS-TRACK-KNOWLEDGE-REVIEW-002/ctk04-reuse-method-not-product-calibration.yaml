@@ -1,0 +1,5 @@
+claim: Cross-product reuse should preferentially transfer mechanisms, measurement methods and failure boundaries rather than empirically tuned product constants; product-tuned thresholds, knob mappings and numeric defaults must be revalidated in the new context, while independently sourced physical or specification constants may transfer as SOURCE_FACT without being treated as product calibration.
+evidence_type: INFERRED
+scope: Precision-review synthesis from MicroDouble activation calibration, Vo.Prep Amount mapping, Vocal Resonance K=20 candidate budget and VL2A Peak Reduction reference-level reopening. This rule concerns empirical/product calibration and does not erase valid hardware specifications, physical constants or standards; their mapping into a new digital product still requires explicit context.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-REVIEW-002/manual-20260925
+promotion_requested: LIKELY

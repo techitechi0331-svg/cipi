@@ -250,3 +250,54 @@ Assistant review:
 
 Next:
 **MODULE 1 v0.4R.5b — Morphology Stability / Ablation / Leakage Audit.**
+
+
+---
+
+# MODULE 1 v0.4R.5b — Morphology Stability / Ablation Review
+
+Run: `VOCAL-RESONANCE-R5B-MORPH-STABILITY-001 / gha-36080499046-1`
+
+## MEASURED
+
+Zero source overlap was verified for both tested seeds.
+
+Seed 20261003:
+- static Top-5: 25.0%
+- full morphology Top-5: 25.0%
+- static strong-effect Top-5: 33.33%
+- full morphology strong-effect Top-5: 33.33%
+- static external clean false-trigger: 17.5%
+- full morphology: 0.0%
+- same-C morphology: 2.5%
+
+Seed 20261013:
+- static Top-5: 34.375%
+- full morphology Top-5: 31.25%
+- static strong-effect Top-5: 28.57%
+- full morphology strong-effect Top-5: 35.71%
+- static external clean false-trigger: 25.0%
+- full morphology: 20.0%
+- same-C morphology: 20.0%
+
+Ablation:
+- run-only morphology reduced external clean false triggers in both seeds:
+  - 17.5% -> 2.5%
+  - 25.0% -> 17.5%
+- but run-only Top-5 regressed on seed 20261013:
+  - 34.375% -> 28.125%
+- distribution-only morphology was unstable and is not retained.
+
+## DECISION
+
+**REJECT the full R5 Temporal Morphology bundle as a ranker feature family.**
+
+Run-length morphology is **not accepted as a ranker feature**, but remains a bounded hypothesis for a separate post-ranker abstention/veto stage.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.6 — Run-Length Veto / Abstention Gate.**
+
+The veto must leave candidate scores/order unchanged and only decide whether a top-ranked candidate is safe enough to act on.
+
+No production suppressor or VST3 is authorized.

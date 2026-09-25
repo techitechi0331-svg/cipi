@@ -1,0 +1,98 @@
+{
+  "experiment": "VOCAL_RESONANCE_R5B_MORPH_STABILITY",
+  "seeds": [
+    20261003,
+    20261013
+  ],
+  "candidate_budget": 20,
+  "external_clean_n": 40,
+  "per_seed": {
+    "20261003": {
+      "overlap_count": 0,
+      "static": {
+        "top5": 0.25,
+        "strong_top5": 0.3333333333333333,
+        "external_clean_false": 0.175
+      },
+      "full": {
+        "top5": 0.25,
+        "strong_top5": 0.3333333333333333,
+        "external_clean_false": 0.0
+      },
+      "full_same_c": {
+        "top5": 0.25,
+        "strong_top5": 0.3333333333333333,
+        "external_clean_false": 0.025
+      },
+      "checks": {
+        "zero_source_overlap": true,
+        "full_top5_not_worse": true,
+        "full_strong_not_worse": true,
+        "full_external_fpr_minus_0_10": true,
+        "same_c_top5_not_worse": true,
+        "same_c_strong_not_worse": true,
+        "same_c_external_fpr_minus_0_05": true,
+        "full_paired_ci_upper_nonpositive": true,
+        "same_c_paired_ci_upper_nonpositive": true
+      }
+    },
+    "20261013": {
+      "overlap_count": 0,
+      "static": {
+        "top5": 0.34375,
+        "strong_top5": 0.2857142857142857,
+        "external_clean_false": 0.25
+      },
+      "full": {
+        "top5": 0.3125,
+        "strong_top5": 0.35714285714285715,
+        "external_clean_false": 0.2
+      },
+      "full_same_c": {
+        "top5": 0.3125,
+        "strong_top5": 0.35714285714285715,
+        "external_clean_false": 0.2
+      },
+      "checks": {
+        "zero_source_overlap": true,
+        "full_top5_not_worse": false,
+        "full_strong_not_worse": true,
+        "full_external_fpr_minus_0_10": false,
+        "same_c_top5_not_worse": false,
+        "same_c_strong_not_worse": true,
+        "same_c_external_fpr_minus_0_05": true,
+        "full_paired_ci_upper_nonpositive": false,
+        "same_c_paired_ci_upper_nonpositive": false
+      }
+    }
+  },
+  "retention_gate": {
+    "accepted": false,
+    "criteria": {
+      "20261003": {
+        "zero_source_overlap": true,
+        "full_top5_not_worse": true,
+        "full_strong_not_worse": true,
+        "full_external_fpr_minus_0_10": true,
+        "same_c_top5_not_worse": true,
+        "same_c_strong_not_worse": true,
+        "same_c_external_fpr_minus_0_05": true,
+        "full_paired_ci_upper_nonpositive": true,
+        "same_c_paired_ci_upper_nonpositive": true
+      },
+      "20261013": {
+        "zero_source_overlap": true,
+        "full_top5_not_worse": false,
+        "full_strong_not_worse": true,
+        "full_external_fpr_minus_0_10": false,
+        "same_c_top5_not_worse": false,
+        "same_c_strong_not_worse": true,
+        "same_c_external_fpr_minus_0_05": true,
+        "full_paired_ci_upper_nonpositive": false,
+        "same_c_paired_ci_upper_nonpositive": false
+      }
+    },
+    "meaning": "Whether the R5 morphology abstention result survives source-overlap audit, a second injection seed, morphology-family ablation, a same-C control and paired external-clean uncertainty. Not a product gate."
+  },
+  "raw_audio_persisted": false
+}

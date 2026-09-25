@@ -35,6 +35,7 @@ milestones:
   - Motion-coherence Ranker v0.4R.3 measured and rejected.
   - Clean-negative Audit-001 measured strong technique/singer variation; the earlier lip-trill-specific failure clue did not reproduce.
   - Temporal Morphology R5 preserved Top-5/strong-effect Top-5 while materially reducing measured clean false triggers; retained only as a falsification candidate.
+  - R5b multi-seed/same-C/ablation stability audit rejected the full Temporal Morphology bundle as unstable across seeds.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -45,12 +46,13 @@ unresolved:
   - The tested v0.4R.3 motion-coherence bundle regressed ranking and is rejected; other temporal evidence remains unproven.
   - Legacy ACF upper-quantile pitch estimates are not accepted as high-pitch ground truth; Re-audit-002 obtained a usable YIN-style high-pitch subset and did not find elevated false triggers there.
   - Technique-specific protection is not supported by the independent re-audit; the remaining false-trigger problem is treated as a generic candidate-context problem.
-  - R5 temporal morphology has not yet passed source-overlap, multi-seed, same-C or feature-family ablation checks.
+  - R5b found zero source overlap, but the full morphology benefit did not survive the second injection seed and therefore is rejected as a full ranker feature bundle.
+  - Run-length-only morphology reduced clean false triggers in both tested seeds but still regressed Top-5 on the second seed; it remains only a hypothesis for a separate abstention/veto stage.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R5 morphology materially reduced measured clean false triggers without lowering Top-5/strong-effect Top-5, but ranking did not improve and the effect may be confounded by source overlap, selected C/threshold, feature bundling or one injection seed. R5b must falsify those alternatives before promotion."
-next_confirmation: "Whether the R5 abstention benefit survives zero-overlap verification, two injection seeds, run/distribution feature ablation, a same-static-C control and paired external-clean bootstrap without Top-5/strong-effect regression."
+why_next: "R5b rejected the full morphology bundle because the clean-abstention benefit and Top-5 preservation did not replicate across seeds. The run-length-only family still reduced clean false triggers in both seeds, so the next bounded question is whether it works better as a separate veto/abstention stage that never reorders resonance candidates."
+next_confirmation: "Whether a run-length-only veto applied after the unchanged static ranker reduces independent clean false triggers across at least two seeds while preserving Top-5, strong-effect Top-5, and candidate ordering for injected targets."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

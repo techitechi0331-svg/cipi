@@ -1,0 +1,25 @@
+{
+  "baseline": [
+    "static_r2_style_safe_negative"
+  ],
+  "experiment_adapter": "vocal_resonance_temporal_morphology_stability_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R5B-MORPH-STABILITY-001.yaml",
+  "metrics": [
+    "top3",
+    "top5",
+    "mrr",
+    "top5_effect_gte3",
+    "internal_clean_false_trigger",
+    "external_clean_false_trigger",
+    "source_overlap_count",
+    "paired_external_fpr_difference",
+    "paired_external_bootstrap_95",
+    "paired_improvement_regression_counts"
+  ],
+  "variants": [
+    "run_length_morphology",
+    "distribution_morphology",
+    "full_temporal_morphology_tuned_C",
+    "full_temporal_morphology_same_static_C"
+  ]
+}

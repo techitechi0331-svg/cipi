@@ -223,3 +223,30 @@ Review:
 **MODULE 1 v0.4R.5 — Generic Temporal Morphology.**
 
 Test technique-independent candidate run-length / fragmentation evidence against the unchanged static R2-style ranker and simple prominence baseline.
+
+
+---
+
+# MODULE 1 v0.4R.5 — Generic Temporal Morphology
+
+Run: `VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001 / gha-36078101620-1`
+
+Measured:
+- static R2 Top-5: 25.0%;
+- morphology Top-5: 25.0%;
+- static strong-effect Top-5: 33.33%;
+- morphology strong-effect Top-5: 33.33%;
+- static internal clean false-trigger: 37.5%;
+- morphology internal clean false-trigger: 12.5%;
+- static external-clean false-trigger: 17.5%;
+- morphology external-clean false-trigger: 0.0% (n=40);
+- morphology Top-3/MRR were slightly lower than static;
+- retention gate passed; product gate failed.
+
+Assistant review:
+- **KEEP FOR FALSIFICATION / ITERATE**;
+- morphology is currently an abstention/context candidate, not a demonstrated ranking improvement;
+- the 0% external result is not promoted until source overlap, seed stability, same-C control and feature-family ablation are checked.
+
+Next:
+**MODULE 1 v0.4R.5b — Morphology Stability / Ablation / Leakage Audit.**

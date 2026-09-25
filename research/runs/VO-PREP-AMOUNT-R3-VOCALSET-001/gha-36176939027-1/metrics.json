@@ -1,0 +1,26 @@
+{
+  "acceptance_met": false,
+  "decision": "REVISE",
+  "files_per_singer": 2,
+  "final_ripple_gate_db": 0.08,
+  "holdout_gates": {},
+  "holdout_passes": false,
+  "holdout_singer_count": 4,
+  "holdout_singers": [
+    "f3",
+    "f4",
+    "m3",
+    "m4"
+  ],
+  "raw_audio_persisted": false,
+  "selected_candidate": null,
+  "selected_target100_db": null,
+  "selection_ripple_margin_db": 0.075,
+  "selection_singer_count": 4,
+  "selection_singers": [
+    "f1",
+    "f2",
+    "m1",
+    "m2"
+  ]
+}

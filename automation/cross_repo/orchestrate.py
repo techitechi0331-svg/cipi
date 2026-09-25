@@ -323,6 +323,14 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
         if write_yaml_if_changed(health_path, health):
             stats["health_changes"] += 1
 
+        retry_waiting = action.get("retry_waiting_for_attempt")
+        current_attempt = int(run.get("run_attempt") or 1) if run is not None else 0
+        if isinstance(retry_waiting, int) and current_attempt < retry_waiting:
+            continue
+        if isinstance(retry_waiting, int) and current_attempt >= retry_waiting:
+            action.pop("retry_waiting_for_attempt", None)
+            write_yaml(path, action)
+
         if run is None or run.get("status") != "completed":
             continue
 
@@ -384,6 +392,7 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
                     action["retry_count"] = retry_count + 1
                     action["last_failure_classification"] = classification
                     action["last_retry_at"] = now_iso()
+                    action["retry_waiting_for_attempt"] = int(run.get("run_attempt") or 1) + 1
                     write_yaml(path, action)
                     stats["retried"] += 1
                     continue

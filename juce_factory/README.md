@@ -73,6 +73,13 @@ A successful Factory run now requires the generated C++ project to compile, the 
 
 These gates establish manufacturing and host-safety evidence only. They do not establish subjective audio quality, product superiority, Cubase approval, or CIPI CONFIRMED knowledge.
 
+### Validation semantics
+
+- `nan_inf` means that finite/silence/automation test inputs must not produce spontaneous NaN/Inf output. It does **not** claim that every product sanitizes deliberately injected NaN/Inf input.
+- The Factory stress-tests parameter changes and the external validators exercise host automation. The current Golden template does **not** claim sample-accurate consumption of every intra-block automation point unless a future DSP contract explicitly requires it.
+- The Factory-owned executable is intentionally headless and validates Processor/APVTS/DSP behavior. GUI/editor behavior remains covered by the real VST3 plus pluginval/Steinberg validation and later Cubase review.
+- Phase 1 contracts that omit the newer Phase 2 validation-matrix fields remain valid and receive the locked default matrix.
+
 ## Next gates
 
 Phase 3 should add a versioned Factory Result Bundle and CIPI failure-evidence ingestion, then reproducibility comparison across repeated builds. Queue/batch/resume and UI template expansion should follow only after those evidence/provenance gates are stable.

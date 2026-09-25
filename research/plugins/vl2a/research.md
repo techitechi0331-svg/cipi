@@ -504,3 +504,24 @@ Decision:
 - retain Phase 03 v4 as numeric benchmark only;
 - do not promote to release until combined Peak calibration and real-vocal
   regression pass.
+
+
+## 2026-09-25 Peak Reduction calibration v3
+
+Strict matrix run `36142898418` completed successfully.
+
+Selected:
+- `0.18 * 10^(2.00 * n^0.85)`
+- -18 dBFS COMP:
+  - PR30 ~0.50 dB
+  - PR50 ~1.94 dB
+  - PR75 ~6.38 dB
+  - PR100 ~12.44 dB
+- -12 dBFS / PR100 COMP ~17.07 dB
+- matched-GR T4 release unchanged
+- high-drive finite through +18 dBFS
+
+Decision:
+- **Peak calibration v3 -> integration candidate**
+- current v0 calibration -> superseded for final integration
+- no T4 timing change.

@@ -3,6 +3,7 @@ decision_id: VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001:assistant-review-20260925
 job_id: VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001
 source_run: research/runs/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1
 event_type: REVIEW
+parent_decision_id: VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001:gha-36078101620-1:auto
 authority: ASSISTANT_REVIEW
 decision: ITERATE
 review_status: CONFIRMED
@@ -27,8 +28,3 @@ lineage:
   related_decisions: []
 created_at: '2026-09-25'
 immutable: true
-review_gaps:
-- External-clean source overlap with ranker source basenames has not been audited.
-- R5 used independently selected C values for static and morphology models.
-- Only one injection seed was measured.
-- Morphology features were evaluated as one bundle.

@@ -14,6 +14,12 @@ The project follows this loop:
 - Build experimental plug-ins while the knowledge base grows.
 - Target JUCE 9 / C++20 / VST3, with Cubase Pro 14 as the primary real-host validation target.
 
+## No-Wait orchestration
+
+CIPI uses a No-Wait / Work-Stealing rule for CI and external dependencies. A GitHub Actions run, runner, external tool, listening gate, or host check blocks only the task that depends on it; independent READY work should continue instead of ending the work pass.
+
+The canonical rule is `RULES/NO_WAIT_WORK_STEALING.md`. Autonomous queue selection skips explicit blockers, unresolved `depends_on_jobs`, and already-claimed research-bot branches, then steals the next READY job. Successful worker completion can chain into the next READY job through the No-Wait Queue Orchestrator.
+
 ## Initial experimental plug-ins
 
 - **CIPI VoxLevel** — dual-detector vocal leveler / compressor.

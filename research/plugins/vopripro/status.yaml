@@ -30,6 +30,7 @@ completed:
   - revision
 
 unresolved:
+  - Direct fixed 8/70 ms ballistics transfer was rejected by short-transient, 100 ms body, long-body and repeated-phrase gates; current Character timing remains baseline.
   - Direct Vo.Prep Slow-RMS/Fast-Peak detector transfer v1 was rejected by predeclared sustained-body and short-transient gates; current VoPriPro detector remains baseline.
   - Product boundary is now fixed: VoPriPro owns broadband dynamics; Vo.Prep owns problem/event preparation. Transfer candidates still require same-corpus comparison before adoption.
   - Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current main Natural50 A/B pack.
@@ -39,7 +40,7 @@ unresolved:
   - Final precision review remains pending after subjective and target-host evidence.
 
 next_stage: audio_ab
-why_next: "Current main remains the protected production baseline and has passed the existing objective gates. Human level-matched listening remains the decisive product gate. The direct detector transfer was rejected, so independent ballistics/Amount transfer screens may proceed in parallel under No-Wait / Work-Stealing without changing product main."
+why_next: "Current main remains the protected production baseline and has passed the existing objective gates. Human level-matched listening remains the decisive product gate. Direct detector fusion and fixed 8/70 ms ballistics transfers were rejected, so Amount-mapping and Vo.Prep-integration studies may proceed in parallel without changing product main."
 next_confirmation: "Whether Natural50 should be kept, revised, or rolled back after strict level-matched listening, and whether any Vo.Prep-derived transfer candidate earns a separate same-corpus product experiment."
 
 blockers:

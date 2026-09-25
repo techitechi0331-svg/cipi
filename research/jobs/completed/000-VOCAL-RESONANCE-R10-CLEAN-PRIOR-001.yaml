@@ -1,0 +1,73 @@
+schema_version: '1.0'
+job_id: VOCAL-RESONANCE-R10-CLEAN-PRIOR-001
+state: COMPLETED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: Can a lightweight normative prior learned only from clean training
+  singers provide deployable single-view information that materially closes the R7
+  causal-oracle ranking gap without increasing independent clean-vocal false triggers?
+hypothesis: Across both predeclared seeds, adding clean-trained frequency-conditioned
+  robust rarity features to the frozen static candidate representation will improve
+  conditional Top-5 by at least 0.08, close at least 15 percent of the R7 oracle gap,
+  preserve strong-effect conditional Top-5 within 0.05, and not worsen external clean
+  false-trigger by more than 0.025.
+counter_hypotheses:
+- Natural singer-to-singer spectral diversity is too large for a lightweight normative
+  prior to add stable information.
+- The prior learns corpus-specific normality and worsens unseen-singer clean false
+  triggers.
+- The R7 information gap requires an actual within-source counterfactual and cannot
+  be approximated by population priors.
+baseline:
+- frozen_static_r2_single_view
+- prior_only_anomaly_score
+variants:
+- static_plus_clean_normative_prior
+metrics:
+- top5_given_generator_hit
+- strong_top5_given_generator_hit
+- oracle_gap_closure
+- external_clean_false_trigger
+- generator_ceiling
+- mrr
+- prior_fit_singer_isolation
+acceptance:
+- 'for each seed: prior is fit only on predeclared training singers'
+- 'for each seed: conditional Top-5 >= static + 0.08'
+- 'for each seed: R7 oracle gap closure >= 0.15'
+- 'for each seed: strong-effect conditional Top-5 >= static - 0.05'
+- 'for each seed: external clean false-trigger <= static + 0.025'
+- 'for each seed: generator ceiling >= 0.80'
+rejection:
+- any seed has prior singer leakage
+- any seed conditional Top-5 improvement < 0.08
+- any seed oracle gap closure < 0.15
+- any seed strong-effect conditional Top-5 regresses by more than 0.05
+- any seed external clean false-trigger worsens by more than 0.025
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20261117
+experiment_adapter: vocal_resonance_clean_normative_prior_v1
+allowed_operations:
+- stream_public_vocalset_in_runner_memory
+- controlled_eq_injection
+- train_clean_singer_disjoint_normative_prior
+- derived_metric_write
+prohibited_operations:
+- arbitrary_shell
+- main_push
+- confidence_change
+- current_stage_change
+- raw_audio_write
+- paid_api
+- product_release
+knowledge_candidate:
+  claim: Singer-disjoint clean-vocal normative priors may provide deployable context
+    for distinguishing unusual candidate resonances from ordinary vocal spectral structure
+    without a paired clean reference.
+  evidence_type: HYPOTHESIS
+  scope: Deployable vocal-resonance semantic ranking with a frozen offline statistical
+    prior.
+  promotion_requested: HYPOTHESIS
+latest_run: gha-36177223221-1

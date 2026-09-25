@@ -1,0 +1,8 @@
+claim: Singer-disjoint clean-vocal normative priors may provide deployable context
+  for distinguishing unusual candidate resonances from ordinary vocal spectral structure
+  without a paired clean reference.
+evidence_type: HYPOTHESIS
+scope: Deployable vocal-resonance semantic ranking with a frozen offline statistical
+  prior.
+source_run: research/runs/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1
+promotion_requested: HYPOTHESIS

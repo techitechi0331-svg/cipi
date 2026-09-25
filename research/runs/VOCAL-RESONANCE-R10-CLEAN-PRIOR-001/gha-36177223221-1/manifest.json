@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/clean_normative_prior.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T19:08:47.142693Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_clean_normative_prior_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001",
+  "random_seed": 20261117,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36177223221-1",
+  "schema_version": "1.0",
+  "source_commit": "56117ebdcfcd505e8a2a364bb5a74dbfe9a43d2a",
+  "started_at": "2026-09-25T19:03:07.716855Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

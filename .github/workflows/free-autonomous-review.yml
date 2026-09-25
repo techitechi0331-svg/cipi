@@ -136,19 +136,9 @@ jobs:
         id: brief
         env:
           JOB_ID: ${{ matrix.item.job_id }}
+          RUN_ID: ${{ steps.triage.outputs.run_id }}
           TRIAGE_PATH: ${{ steps.triage.outputs.yaml_path }}
-        run: |
-          RUN_ID="$(python -c 'import yaml; print(yaml.safe_load(open("'"$TRIAGE_PATH"'"))["run_id"])' TRIAGE_PATH="$TRIAGE_PATH" 2>/dev/null || true)"
-          if [ -z "$RUN_ID" ]; then
-            RUN_ID="$(python - <<'PY'
-          import os, yaml
-          p=os.environ["TRIAGE_PATH"]
-          with open("evidence/"+p, encoding="utf-8") as f:
-              print(yaml.safe_load(f)["run_id"])
-          PY
-          )"
-          fi
-          python tooling/automation/review/brief.py --root evidence --review-root tooling --job-id "$JOB_ID" --run-id "$RUN_ID" --triage-path "$TRIAGE_PATH" --github-output "$GITHUB_OUTPUT"
+        run: python tooling/automation/review/brief.py --root evidence --review-root tooling --job-id "$JOB_ID" --run-id "$RUN_ID" --triage-path "$TRIAGE_PATH" --github-output "$GITHUB_OUTPUT"
 
       - name: Validate triage and Review Brief
         if: steps.branch.outputs.found == 'true'

@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - "CMakeLists.txt"
-      - "src/dsp/VocalRiderCore.h"
+      - "src/dsp/VocalRider*.h"
       - "tests/VocalRiderRealVocal.cpp"
       - ".github/workflows/vocal-rider-real-vocal.yml"
   workflow_dispatch:

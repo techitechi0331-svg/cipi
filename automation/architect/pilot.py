@@ -121,6 +121,7 @@ def main() -> int:
         f"## Scope\n\n{result['summary']}\n",
         encoding="utf-8",
     )
+    completed = utc_now()
     manifest = {
         "schema_version": "1.0",
         "job_id": job_id,
@@ -128,7 +129,7 @@ def main() -> int:
         "source_commit": git_sha(),
         "worker_version": "cipi-research-architect/0.1",
         "started_at": started,
-        "completed_at": utc_now(),
+        "completed_at": completed,
         "random_seed": 0,
         "environment": {"mode": "allowlisted_architect_pilot", "pilot_adapter": adapter},
         "commands": [f"allowlisted pilot: {adapter}"],
@@ -191,7 +192,7 @@ def main() -> int:
             "A numerically smoother implementation shows the same low-level floor under matched measurement conditions.",
         ],
         "lineage": {"supersedes": [], "related_jobs": [], "related_decisions": []},
-        "created_at": utc_now(),
+        "created_at": completed,
         "immutable": True,
         "scope": "Research-method pilot only; no product adoption or CONFIRMED promotion.",
         "review_gaps": ["Independent second-product replication is still required."],

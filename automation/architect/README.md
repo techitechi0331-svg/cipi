@@ -32,3 +32,9 @@ A `NEEDS_ADAPTER` proposal is not a dead end. The architect may generate an appe
 The candidate fixes the research question, baseline, variants, metrics, acceptance/rejection rules, bounded operations, dependency/network policy, timeout and forbidden operations before implementation.
 
 Automation may never mark that candidate executable or add it to `automation/adapter_registry.yaml`. Implementation and registry promotion require a separate reviewed change that passes the normal gates.
+
+## Uncatalogued gap signals
+
+The scheduled architect also extracts stable, non-executable signals from formal track `unresolved` and `blockers` lists. These records live under `research/architect/signals/`.
+
+A signal is not a Research Proposal and cannot execute code. It exists so important gaps outside the reviewed topic catalog are visible for later classification instead of being silently ignored.

@@ -15,6 +15,15 @@ PROPOSAL_REQUIRED={
 }
 DECISIONS={"REJECT","ITERATE","MERGE_EXISTING","INCUBATE","ARCHIVE"}
 STATES={"OVERLAP_REVIEW","RESEARCH_MORE","INCUBATE","REJECTED","ARCHIVED"}
+EVIDENCE_REQUIRED={
+ "schema_version","plugin_proposal_id","source_measurement_run","baseline_improvement_pass",
+ "holdout_pass","regression_pass","cpu_pass","latency_pass","overlap_advantage_pass",
+ "negative_knowledge_reviewed","raw_audio_persisted","scope"
+}
+PASS_GATES={
+ "baseline_improvement_pass","holdout_pass","regression_pass","cpu_pass","latency_pass",
+ "overlap_advantage_pass","negative_knowledge_reviewed"
+}
 
 def validate_root(root:Path)->list[str]:
     errors=[]
@@ -32,6 +41,24 @@ def validate_root(root:Path)->list[str]:
             if data.get("automatic_production_allowed") is not False:
                 errors.append(f"{path}: automatic production must be false")
             proposals[data.get("plugin_proposal_id")]=path
+    evidence={}
+    edir=base/"evidence"
+    if edir.exists():
+        for path in sorted(edir.rglob("*.yaml")):
+            try:data=yaml.safe_load(path.read_text(encoding="utf-8"))
+            except Exception as exc:errors.append(f"{path}: YAML parse error: {exc}");continue
+            if not isinstance(data,dict):errors.append(f"{path}: root must be mapping");continue
+            missing=sorted(EVIDENCE_REQUIRED-set(data))
+            if missing:errors.append(f"{path}: missing {', '.join(missing)}")
+            pid=data.get("plugin_proposal_id")
+            if pid not in proposals:errors.append(f"{path}: matching proposal not found")
+            if data.get("raw_audio_persisted") is not False:errors.append(f"{path}: raw_audio_persisted must be false")
+            for key in PASS_GATES:
+                if not isinstance(data.get(key),bool):errors.append(f"{path}: {key} must be boolean")
+            source=str(data.get("source_measurement_run",""))
+            if not source.startswith("research/runs/"):errors.append(f"{path}: source_measurement_run must be under research/runs/")
+            elif not (root/source).exists():errors.append(f"{path}: source_measurement_run does not exist")
+            evidence[str(path.relative_to(root))]=data
     ddir=base/"decisions"
     if ddir.exists():
         for path in sorted(ddir.glob("*.yaml")):
@@ -41,6 +68,12 @@ def validate_root(root:Path)->list[str]:
             if data.get("final") is not False:errors.append(f"{path}: automation decision must not be final")
             if data.get("plugin_proposal_id") not in proposals:
                 errors.append(f"{path}: matching proposal not found")
+            if data.get("decision")=="INCUBATE":
+                source=data.get("source_evidence")
+                if not source or source not in evidence:
+                    errors.append(f"{path}: INCUBATE decision requires valid source_evidence")
+                elif not all(evidence[source].get(k) is True for k in PASS_GATES):
+                    errors.append(f"{path}: INCUBATE source_evidence has an unpassed product gate")
     proto=base/"prototypes"
     if proto.exists():
         for path in proto.rglob("metrics.json"):

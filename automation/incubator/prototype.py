@@ -36,6 +36,7 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--proposal")
     p.add_argument("--adapter")
+    p.add_argument("--decision")
     p.add_argument("--output-root", default=str(REPO_ROOT))
     p.add_argument("--self-test", action="store_true")
     args = p.parse_args()
@@ -60,8 +61,18 @@ def main() -> int:
 
     if proposal is None:
         raise SystemExit("--proposal is required outside --self-test")
-    if proposal.get("state") != "INCUBATE":
-        raise SystemExit("prototype generation requires an INCUBATE proposal")
+    authorized = proposal.get("state") == "INCUBATE"
+    if args.decision:
+        decision = yaml.safe_load(Path(args.decision).read_text(encoding="utf-8"))
+        authorized = (
+            isinstance(decision, dict)
+            and decision.get("plugin_proposal_id") == proposal.get("plugin_proposal_id")
+            and decision.get("decision") == "INCUBATE"
+            and decision.get("final") is False
+            and bool(decision.get("source_evidence"))
+        )
+    if not authorized:
+        raise SystemExit("prototype generation requires an INCUBATE proposal or matching non-final INCUBATE decision")
 
     root = Path(args.output_root)
     out = root / "research/incubator/prototypes" / proposal["plugin_proposal_id"]
@@ -71,7 +82,7 @@ def main() -> int:
     (out / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
     (out / "summary.md").write_text(
         "# Experimental Incubator Prototype\n\n"
-        "This is an isolated deterministic DSP harness, not a production plug-in or release artifact.\n",
+        "This is an isolated deterministic DSP harness authorized by a bounded Incubator decision; it is not a production plug-in or release artifact.\n",
         encoding="utf-8",
     )
     print(f"wrote {out}")

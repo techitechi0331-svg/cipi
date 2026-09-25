@@ -117,3 +117,10 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Gate reuse of the measured Vo.Prep hybrid sibilance detector as a MicroDouble product-experiment candidate against the simpler current detector evidence. This gate authorizes an A/B experiment only; it does not adopt the candidate."
+
+  microdouble_sibilance_r3_snapshot_gate_v1:
+    tracks:
+      - MICRODOUBLE_01
+    max_timeout_minutes: 3
+    network_required: false
+    purpose: "Verify the MicroDouble sibilance R1/R2 negative evidence and the predeclared leak-free R3 threshold-selection + holdout result before any product integration."

@@ -396,3 +396,57 @@ Interpretation:
 - no claim of detector superiority is made;
 - no product DSP change is approved until same-source baseline-vs-candidate measurement is complete;
 - subjective naturalness, Japanese/Korean sibilance coverage and Cubase behavior remain open.
+
+
+## Product sibilance transfer study — R1 / R2 / R3
+
+### R1 — MEASURED FAIL
+
+Product run `36089002315` failed the original direct-transfer gate.
+
+R1 incorrectly used candidate processing strength >0.5 as a detector-recall proxy. The measured failure is retained, but the interpretation "candidate cannot detect sibilance" is rejected because the source detector intentionally separates event detection from light correction strength.
+
+Reusable INFERRED lesson:
+
+> Detector/event recall and processing-strength metrics must be measured separately for adaptive protection stages.
+
+### R2 — MEASURED FAIL
+
+Product run `36089348914` corrected the metric semantics.
+
+Unchanged Vo.Prep activation 0.65 produced:
+
+- baseline recall: 97.389771%;
+- candidate recall: 91.661628%;
+- recall gap: 5.728143 percentage points;
+- baseline injected non-event occupancy: 9.991188%;
+- candidate non-event occupancy: 0.325508%;
+- candidate strength mean / p90: 0.367032 / 0.434729;
+- max candidate onset: 24.331066 ms.
+
+Every R2 gate except the predeclared <=5 percentage-point relative-recall criterion passed. Direct unchanged Vo.Prep v2.3 transfer is therefore **REJECTED for this revision**.
+
+### R3 — PRODUCT MEASUREMENT PENDING CIPI GATE
+
+R3 predeclared activation variants 0.64 / 0.62 / 0.60, used the original five files for selection, and froze the highest passing candidate before touching a disjoint five-file holdout.
+
+Selection:
+
+- 0.64: FAIL;
+- 0.62: PASS;
+- 0.60: PASS;
+- deterministic frozen choice: **0.62**.
+
+Disjoint holdout for frozen 0.62:
+
+- candidate clean occupancy: 0.000000%;
+- baseline recall: 97.464097%;
+- candidate recall: 94.744268%;
+- recall gap: 2.719829 percentage points;
+- baseline injected non-event occupancy: 10.083470%;
+- candidate non-event occupancy: 0.364273%;
+- candidate strength mean / p90: 0.381149 / 0.443423;
+- max onset: 23.310658 ms;
+- all predeclared holdout checks: PASS.
+
+Research Job `MICRODOUBLE-SIBILANCE-R3-GATE-001` independently gates this imported snapshot before any product integration. No raw audio is stored in CIPI.

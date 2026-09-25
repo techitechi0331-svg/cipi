@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "source_repository": "techitechi0331-svg/Vocal-One-Knob-Doubler",
+  "source_branch": "v0.4-research",
+  "r1_run": 36089002315,
+  "r2_run": 36089348914,
+  "r3_run": 36089623919,
+  "r3_product_head": "4bd1b425f226b723bf99ebe2212982bc5fd14722",
+  "r3_artifact_id": 10844334577,
+  "r3_artifact_sha256": "ef72c845a7e1b5401641ae0e54df8959e402f340af6eeff2b38ea6abe12d8c4e",
+  "selected_activation": 0.62,
+  "raw_audio_persisted": false,
+  "note": "Only derived numeric evidence is imported. R1/R2 failures are retained."
+}

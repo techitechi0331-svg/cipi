@@ -1,0 +1,90 @@
+schema_version: "1.0"
+job_id: MICRODOUBLE-SIBILANCE-R3-GATE-001
+state: QUEUED
+track:
+  id: MICRODOUBLE_01
+  path: research/experiments/MicroDouble
+research_question: "Does the predeclared MicroDouble sibilance R3 study preserve its R1/R2 negative results, deterministically select activation 0.62 as the highest passing candidate, and reproduce every gate on a disjoint holdout set strongly enough to authorize development integration?"
+hypothesis: "The exact source transfer and R2 remain rejected, but activation 0.62 is the highest passing predeclared candidate and independently passes the frozen holdout criteria, justifying implementation on a development branch."
+counter_hypotheses:
+  - "The snapshot hides or overwrites the earlier R1/R2 failures."
+  - "Activation 0.64 actually passed and the 0.62 choice violates the conservative selection rule."
+  - "The 0.62 candidate only passes the selection corpus and fails the disjoint holdout."
+  - "Recall recovery requires unacceptable false/event occupancy or excessive onset latency."
+baseline:
+  - MicroDouble v0.3 current sibilance detector
+variants:
+  - Vo.Prep-derived hybrid detector activation 0.64
+  - Vo.Prep-derived hybrid detector activation 0.62
+  - Vo.Prep-derived hybrid detector activation 0.60
+metrics:
+  - snapshot_checksum_ok
+  - r1_r2_and_064_negative_evidence_preserved
+  - r2_recall_gap_pp
+  - r3_064_pass
+  - r3_062_pass
+  - r3_060_pass
+  - r3_selected_activation
+  - selection_rule_ok
+  - holdout_pass
+  - holdout_candidate_clean_pct
+  - holdout_baseline_recall_pct
+  - holdout_candidate_recall_pct
+  - holdout_recall_gap_pp
+  - holdout_baseline_non_event_pct
+  - holdout_candidate_non_event_pct
+  - holdout_strength_mean
+  - holdout_strength_p90
+  - holdout_max_onset_ms
+  - holdout_gate_ok
+acceptance:
+  - "Committed metrics snapshot SHA256 must match."
+  - "R1 and R2 must remain failed evidence and the 0.64 R3 candidate must remain failed."
+  - "Both 0.62 and 0.60 must pass selection so the highest-passing rule deterministically freezes 0.62."
+  - "Frozen activation must equal 0.62."
+  - "Holdout clean candidate occupancy must be at most 5 percent."
+  - "Holdout candidate detection recall must be at least 75 percent."
+  - "Holdout recall gap versus baseline must be at most 5 percentage points."
+  - "Holdout candidate non-event occupancy must be at most 6 percent and at least 2 percentage points below baseline."
+  - "Holdout event strength mean must be at least 0.10 and p90 at least 0.20."
+  - "Holdout maximum onset latency must be at most 25 ms."
+rejection:
+  - "Any declared acceptance condition fails."
+  - "Negative results are missing or rewritten."
+  - "The frozen threshold differs from the predeclared highest-passing rule."
+max_runs: 1
+timeout_minutes: 3
+random_seed: 20260925
+experiment_adapter: microdouble_sibilance_r3_snapshot_gate_v1
+allowed_operations:
+  - read_committed_snapshot
+  - deterministic_compare
+  - write_research_evidence
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: "In the controlled MicroDouble transfer study, separating detection from protection strength and calibrating only the hybrid detector activation threshold to 0.62 produced a candidate that passed predeclared selection and disjoint holdout gates while preserving prior negative results."
+  evidence_type: MEASURED
+  scope: "Controlled public-vocal plus deterministic injected-event protocol only; product integration, subjective naturalness, multilingual sibilance generalization, Cubase verification and release remain unproven."
+  promotion_requested: PROVISIONAL
+review_policy:
+  required_human_gates:
+    - Review R1/R2 negative-result preservation before development integration.
+    - Product regressions and listening after integration.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-SIBILANCE-REUSE-001
+  related_decisions:
+    - "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:review-01"

@@ -25,6 +25,7 @@ ADAPTERS = {
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
     "microdouble_sibilance_reuse_gate_v1",
+    "microdouble_sibilance_r3_snapshot_gate_v1",
     "vo_prep_snapshot_gate_v1",
     "vocal_resonance_temporal_morphology_v1",
     "vocal_resonance_temporal_morphology_stability_v1",
@@ -1609,6 +1610,122 @@ def _microdouble_sibilance_reuse_gate(repo_root: Path, timeout_seconds: int) -> 
     }
 
 
+
+def _microdouble_sibilance_r3_snapshot_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = (
+        repo_root
+        / "research"
+        / "experiments"
+        / "MicroDouble"
+        / "measurements"
+        / "sibilance-r3-20260925"
+    )
+    metrics_path = root / "metrics.csv"
+    checksum_path = root / "checksums.sha256"
+    if not metrics_path.is_file() or not checksum_path.is_file():
+        raise FileNotFoundError(root)
+
+    expected_digest = ""
+    for line in checksum_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and line.endswith("metrics.csv"):
+            expected_digest = line.split(None, 1)[0]
+            break
+    if not expected_digest:
+        raise ValueError("metrics.csv checksum is missing")
+
+    raw = metrics_path.read_bytes()
+    actual_digest = hashlib.sha256(raw).hexdigest()
+    checksum_ok = actual_digest == expected_digest
+
+    rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
+    values = {row["metric"]: float(row["value"]) for row in rows}
+
+    negatives_preserved = (
+        values["r1_gate_pass"] == 0.0
+        and values["r2_gate_pass"] == 0.0
+        and values["r2_recall_gap_pp"] > 5.0
+        and values["r3_activation_064_pass"] == 0.0
+    )
+
+    deterministic_selection_ok = (
+        values["r3_activation_062_pass"] == 1.0
+        and values["r3_activation_060_pass"] == 1.0
+        and abs(values["r3_selected_activation"] - 0.62) <= 1.0e-9
+    )
+
+    holdout_ok = (
+        values["r3_holdout_pass"] == 1.0
+        and values["r3_holdout_candidate_clean_pct"] <= 5.0
+        and values["r3_holdout_candidate_recall_pct"] >= 75.0
+        and values["r3_holdout_recall_gap_pp"] <= 5.0
+        and values["r3_holdout_candidate_non_event_pct"] <= 6.0
+        and values["r3_holdout_candidate_non_event_pct"] + 2.0
+            <= values["r3_holdout_baseline_non_event_pct"]
+        and values["r3_holdout_strength_mean"] >= 0.10
+        and values["r3_holdout_strength_p90"] >= 0.20
+        and values["r3_holdout_max_onset_ms"] <= 25.0
+    )
+
+    metrics = {
+        "snapshot_checksum_ok": checksum_ok,
+        "r1_r2_and_064_negative_evidence_preserved": negatives_preserved,
+        "r2_recall_gap_pp": values["r2_recall_gap_pp"],
+        "r3_064_pass": values["r3_activation_064_pass"],
+        "r3_062_pass": values["r3_activation_062_pass"],
+        "r3_060_pass": values["r3_activation_060_pass"],
+        "r3_selected_activation": values["r3_selected_activation"],
+        "selection_rule_ok": deterministic_selection_ok,
+        "holdout_pass": values["r3_holdout_pass"],
+        "holdout_candidate_clean_pct": values["r3_holdout_candidate_clean_pct"],
+        "holdout_baseline_recall_pct": values["r3_holdout_baseline_recall_pct"],
+        "holdout_candidate_recall_pct": values["r3_holdout_candidate_recall_pct"],
+        "holdout_recall_gap_pp": values["r3_holdout_recall_gap_pp"],
+        "holdout_baseline_non_event_pct": values["r3_holdout_baseline_non_event_pct"],
+        "holdout_candidate_non_event_pct": values["r3_holdout_candidate_non_event_pct"],
+        "holdout_strength_mean": values["r3_holdout_strength_mean"],
+        "holdout_strength_p90": values["r3_holdout_strength_p90"],
+        "holdout_max_onset_ms": values["r3_holdout_max_onset_ms"],
+        "holdout_gate_ok": holdout_ok,
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and negatives_preserved
+        and deterministic_selection_ok
+        and holdout_ok
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"comparison.csv": output.getvalue()},
+        "commands": [
+            "read committed MicroDouble sibilance R1/R2/R3 snapshot",
+            "verify committed SHA256 ledger",
+            "verify negative-result preservation",
+            "verify predeclared highest-passing-threshold selection",
+            "verify frozen holdout gates",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic snapshot gate over the MicroDouble sibilance transfer study. "
+            "Acceptance means the exact source settings and R2 remain rejected, while "
+            "the predeclared 0.62 activation candidate passed both development selection "
+            "and disjoint holdout gates. It authorizes development integration only; "
+            "it does not establish subjective naturalness, multilingual generalization, "
+            "Cubase confirmation, knowledge CONFIRMED status, or product release."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1636,6 +1753,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _microdouble_product_v03_gate(repo_root, timeout_seconds)
     if name == "microdouble_sibilance_reuse_gate_v1":
         return _microdouble_sibilance_reuse_gate(repo_root, timeout_seconds)
+    if name == "microdouble_sibilance_r3_snapshot_gate_v1":
+        return _microdouble_sibilance_r3_snapshot_gate(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_reaudit_v2":
         return _vocal_resonance_clean_negative_reaudit(repo_root, timeout_seconds)
     if name == "vo_prep_snapshot_gate_v1":

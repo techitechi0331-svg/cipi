@@ -427,3 +427,30 @@ Next:
 - Phase 03 active-GR nonlinearity decision;
 - level-matched free-vocal validation;
 - controlled commercial-reference host comparison.
+
+
+## 2026-09-25 Phase 03 active-GR candidate result
+
+Strict candidate matrix completed successfully on product run `36108289078`.
+
+Selected numeric candidate:
+- **v4**
+- ~0.9408% THD at -18 dBFS / ~6 dB GR / 1 kHz
+- H3 dominant at ~-40.67 dBc
+- fixed-control GR drift versus baseline: 0.0000 dB
+- matched 60 ms release-retention drift: 0
+- sample-rate GR drift versus baseline: 0
+- PR0 THD remains ~0.01157%
+
+Interpretation:
+- v4 demonstrates that the missing active-compression harmonic envelope can be
+  reproduced without changing the validated T4/control trajectory.
+- v4 is **not production-approved** because its memoryless coloration mechanism
+  is not yet physically justified.
+- v1/v2/v3 are rejected in their current form because they either miss the
+  target harmonic window or perturb the control law beyond predeclared limits.
+
+Next:
+- stateful/optical-modulation follow-up;
+- then level-matched real-vocal validation;
+- only then production consideration.

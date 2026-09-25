@@ -293,6 +293,98 @@ InputLevelSweepRow measureInputLevelCase (double sampleRate, float baseLevelDb)
     return result;
 }
 
+struct EventProbeResult
+{
+    float breathMaxBoostDb { 0.0f };
+    float breathEndBoostDb { 0.0f };
+    float tailMaxBoostDb { 0.0f };
+    float tailEndBoostDb { 0.0f };
+    float silenceNoiseMaxAbsGainDb { 0.0f };
+    bool finite { true };
+};
+
+EventProbeResult measureEventProbe (double sampleRate)
+{
+    EventProbeResult result;
+
+    {
+        cipi::dsp::VocalRiderCore rider;
+        rider.prepare (sampleRate);
+        runSegment (rider, sampleRate, 5.0, -20.0f, 0.50f, true);
+
+        std::uint32_t state = 0x12345678u;
+        const auto total = static_cast<int> (std::lround (0.80 * sampleRate));
+        const auto targetRms = dbToGain (-36.0f);
+        const auto uniformScale = targetRms * std::sqrt (3.0f);
+
+        for (int n = 0; n < total; ++n)
+        {
+            state = state * 1664525u + 1013904223u;
+            const auto u = static_cast<float> ((state >> 8) & 0x00ffffffu)
+                         / static_cast<float> (0x00ffffffu);
+            const auto sample = (2.0f * u - 1.0f) * uniformScale;
+            const auto gainDb = rider.processSample (std::abs (sample), 0.50f);
+
+            result.finite = result.finite && std::isfinite (gainDb);
+            result.breathMaxBoostDb = std::max (result.breathMaxBoostDb, gainDb);
+            result.breathEndBoostDb = gainDb;
+        }
+    }
+
+    {
+        cipi::dsp::VocalRiderCore rider;
+        rider.prepare (sampleRate);
+        runSegment (rider, sampleRate, 5.0, -20.0f, 0.50f, true);
+
+        const auto total = static_cast<int> (std::lround (1.20 * sampleRate));
+        double phase = 0.0;
+        const auto increment = 2.0 * 3.14159265358979323846 * 190.0 / sampleRate;
+
+        for (int n = 0; n < total; ++n)
+        {
+            const auto fraction = total > 1
+                                ? static_cast<float> (n) / static_cast<float> (total - 1)
+                                : 1.0f;
+            const auto levelDb = -20.0f + (-45.0f + 20.0f) * fraction;
+            const auto sample = dbToGain (levelDb) * static_cast<float> (std::sin (phase));
+            phase += increment;
+            if (phase >= 2.0 * 3.14159265358979323846)
+                phase -= 2.0 * 3.14159265358979323846;
+
+            const auto gainDb = rider.processSample (std::abs (sample), 0.50f);
+            result.finite = result.finite && std::isfinite (gainDb);
+            result.tailMaxBoostDb = std::max (result.tailMaxBoostDb, gainDb);
+            result.tailEndBoostDb = gainDb;
+        }
+    }
+
+    {
+        cipi::dsp::VocalRiderCore rider;
+        rider.prepare (sampleRate);
+        runSegment (rider, sampleRate, 5.0, -20.0f, 0.50f, true);
+
+        std::uint32_t state = 0x87654321u;
+        const auto total = static_cast<int> (std::lround (2.0 * sampleRate));
+        const auto targetRms = dbToGain (-72.0f);
+        const auto uniformScale = targetRms * std::sqrt (3.0f);
+
+        for (int n = 0; n < total; ++n)
+        {
+            state = state * 1664525u + 1013904223u;
+            const auto u = static_cast<float> ((state >> 8) & 0x00ffffffu)
+                         / static_cast<float> (0x00ffffffu);
+            const auto sample = (2.0f * u - 1.0f) * uniformScale;
+            const auto gainDb = rider.processSample (std::abs (sample), 0.50f);
+
+            result.finite = result.finite && std::isfinite (gainDb);
+            result.silenceNoiseMaxAbsGainDb = std::max (
+                result.silenceNoiseMaxAbsGainDb, std::abs (gainDb));
+        }
+    }
+
+    return result;
+}
+
 } // namespace
 
 int main (int argc, char** argv)
@@ -388,7 +480,8 @@ int main (int argc, char** argv)
     loudSpread = nominalLoudMax - nominalLoudMin;
 
     const auto sectionDynamics = measureSectionDynamics (48000.0, 0.50f);
-    allFinite = allFinite && sectionDynamics.finite;
+    const auto eventProbe = measureEventProbe (48000.0);
+    allFinite = allFinite && sectionDynamics.finite && eventProbe.finite;
 
     std::ofstream summary (outputDir / "summary.md");
     summary << "# Vocal Rider core deterministic measurement\n\n";
@@ -434,6 +527,16 @@ int main (int argc, char** argv)
 
     summary << "- detailed rows: input_level_sweep.csv\n";
     summary << "- this is diagnostic evidence for whether the fixed -58/-62 dBFS activity thresholds require an adaptive replacement.\n\n";
+    summary << "## Event-protection diagnostic (48 kHz / Amount 50%)\n\n";
+    summary << "- 0.8 s breath-like noise at -36 dBFS RMS: max boost "
+            << eventProbe.breathMaxBoostDb << " dB, end boost "
+            << eventProbe.breathEndBoostDb << " dB\n";
+    summary << "- 1.2 s phrase-tail ramp -20 -> -45 dBFS: max boost "
+            << eventProbe.tailMaxBoostDb << " dB, end boost "
+            << eventProbe.tailEndBoostDb << " dB\n";
+    summary << "- 2.0 s -72 dBFS noise-floor segment: max |ride| "
+            << eventProbe.silenceNoiseMaxAbsGainDb << " dB\n";
+    summary << "- these are diagnostics only; they decide whether explicit breath/tail protection is justified before adding spectral complexity.\n\n";
     summary << "The core CSV contains the full 5 sample-rate x 5 Amount matrix.\n";
 
     std::ofstream json (outputDir / "metrics.json");
@@ -458,6 +561,11 @@ int main (int argc, char** argv)
          << "  \"section_output_phrase_std_db\": " << sectionDynamics.outputWithinSectionPhraseStdDb << ",\n"
          << "  \"section_within_leveling_reduction\": " << sectionDynamics.withinSectionLevelingReduction << ",\n"
          << "  \"section_dynamics_pass\": " << (sectionDynamicsPass ? "true" : "false") << ",\n"
+         << "  \"event_breath_max_boost_db\": " << eventProbe.breathMaxBoostDb << ",\n"
+         << "  \"event_breath_end_boost_db\": " << eventProbe.breathEndBoostDb << ",\n"
+         << "  \"event_tail_max_boost_db\": " << eventProbe.tailMaxBoostDb << ",\n"
+         << "  \"event_tail_end_boost_db\": " << eventProbe.tailEndBoostDb << ",\n"
+         << "  \"event_noise_floor_max_abs_gain_db\": " << eventProbe.silenceNoiseMaxAbsGainDb << ",\n"
          << "  \"all_finite\": " << (allFinite ? "true" : "false") << "\n"
          << "}\n";
 

@@ -159,3 +159,10 @@ adapters:
     max_timeout_minutes: 20
     network_required: true
     purpose: "Evaluate run-length-only morphology strictly as a post-ranker veto/abstention gate over the frozen static vocal-resonance ranker."
+
+  vocal_resonance_identifiability_oracle_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 20
+    network_required: true
+    purpose: "Research-only paired clean/injected causal-oracle audit to diagnose vocal-resonance candidate identifiability versus single-view feature limitations."

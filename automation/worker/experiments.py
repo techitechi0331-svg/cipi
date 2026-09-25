@@ -55,6 +55,7 @@ ADAPTERS = {
     "vopripro_ballistics_transfer_screen_v1",
     "vocal_resonance_raw_patch_sufficiency_v2",
     "voprep_amount_mapping_r5_v1",
+    "voprep_sidechain_hpf_real_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3189,6 +3190,70 @@ def _vocal_resonance_self_counterfactual_inpainting(
     }
 
 
+
+def _voprep_sidechain_hpf_real(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "sidechain_hpf_real_vocal.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-sc-hpf-real-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep sidechain HPF real-vocal subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+
+        result = json.loads((out / "sidechain_hpf_real_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "sidechain_hpf_real_results.json": (out / "sidechain_hpf_real_results.json").read_text(encoding="utf-8"),
+            "sidechain_hpf_real_report.md": (out / "sidechain_hpf_real_report.md").read_text(encoding="utf-8"),
+            "sidechain_hpf_real_metrics.csv": (out / "sidechain_hpf_real_metrics.csv").read_text(encoding="utf-8"),
+        }
+
+    validation = result.get("validation") or {}
+    confirmation = result.get("confirmation") or {}
+    metrics = {
+        "decision": result.get("decision"),
+        "acceptance_met": bool(result.get("acceptance_met", False)),
+        "candidate_hpf_hz": (result.get("candidate") or {}).get("hpf_hz"),
+        "validation_passes": bool(validation.get("passes", False)),
+        "validation_aggregate": validation.get("aggregate", {}),
+        "confirmation_accessed": bool(result.get("confirmation_accessed", False)),
+        "confirmation_passes": bool(confirmation.get("passes", False)) if confirmation else False,
+        "confirmation_aggregate": confirmation.get("aggregate", {}) if confirmation else {},
+        "validation_singers": result.get("validation_singers", []),
+        "confirmation_singers": result.get("confirmation_singers", []),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/sidechain_hpf_real_vocal.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Real-vocal validation of the synthetic-pilot winner only: OFF versus "
+            "detector-side 40 Hz second-order HPF. Clean VocalSet preservation is "
+            "measured alongside controlled 30 Hz rumble and LF-plosive overlays. "
+            "Confirmation singers are not accessed unless the first cohort passes."
+        ),
+    }
+
 def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     script = (
         repo_root / "research" / "plugins" / "vo-prep"
@@ -3558,6 +3623,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_clean_normative_prior(repo_root, timeout_seconds)
     if name == "vocal_resonance_self_counterfactual_inpainting_v1":
         return _vocal_resonance_self_counterfactual_inpainting(repo_root, timeout_seconds)
+    if name == "voprep_sidechain_hpf_real_v1":
+        return _voprep_sidechain_hpf_real(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r4_v1":
         return _voprep_amount_mapping_r4(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r5_v1":

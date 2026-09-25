@@ -1,0 +1,9 @@
+claim: A bounded masking-context presence law is more selective than a static 3 dB
+  presence boost in the declared synthetic matrix when judged by retained masking-proxy
+  improvement and non-target movement.
+evidence_type: MEASURED
+scope: Deterministic oracle-style synthetic target/masker-band pilot only; this does
+  not establish a deployable masking estimator, perceptual preference, real-vocal
+  generalization, or product readiness.
+source_run: research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/gha-36157458914-1
+promotion_requested: HYPOTHESIS

@@ -1,0 +1,16 @@
+{
+  "all_numeric_finite": true,
+  "baseline_masked_proxy_improvement_db": 2.0,
+  "baseline_non_target_movement_db": 3.0,
+  "candidate_gain_std_db": 1.076903998610007,
+  "candidate_masked_mean_gain_db": 2.3333333333333335,
+  "candidate_masked_proxy_improvement_db": 2.0,
+  "candidate_max_gain_db": 3.0,
+  "candidate_non_target_movement_db": 0.5,
+  "masked_case_count": 6,
+  "masked_proxy_improvement_ratio": 1.0,
+  "matrix_complete": true,
+  "non_target_movement_ratio": 0.16666666666666666,
+  "row_count": 12,
+  "unmasked_case_count": 6
+}

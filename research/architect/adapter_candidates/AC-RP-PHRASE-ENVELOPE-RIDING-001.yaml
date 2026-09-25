@@ -1,0 +1,56 @@
+schema_version: '1.0'
+adapter_candidate_id: AC-RP-PHRASE-ENVELOPE-RIDING-001
+source_research_proposal: research/architect/proposals/RP-PHRASE-ENVELOPE-RIDING-001.yaml
+state: DRAFT_REVIEW
+executable: false
+proposed_adapter_name: rp_phrase_envelope_riding_001_pilot_v1
+track:
+  id: ARCHITECT_PHRASE_ENVELOPE_RIDING
+  path: research/architect
+research_question: Can phrase-scale vocal level be estimated without chasing consonants, breaths and short syllabic transients?
+baseline:
+  - bounded_rms_normalizer
+variants:
+  - dual_timescale_phrase_estimator
+metrics:
+  - phrase_level_error
+  - short_event_gain_movement
+  - downstream_gr_variance
+  - phrase_contrast_error
+acceptance:
+  - Candidate phrase-level error is at most 65 percent of the bounded one-timescale baseline.
+  - Candidate maximum short-event movement is at most 3.0 dB and at most 50 percent of baseline.
+  - Candidate downstream macro-level variance is at most 50 percent of baseline.
+  - Candidate phrase-contrast error is at most 0.8 dB.
+rejection:
+  - Candidate chases short consonant/breath events beyond the declared movement bound.
+  - Candidate macro-level error or downstream variance fails to improve materially over baseline.
+  - Candidate flattens phrase contrast beyond the declared 0.8 dB bound.
+required_operations:
+  - read_committed_research_evidence
+  - generate_deterministic_synthetic_inputs
+  - calculate_declared_metrics
+  - write_derived_json_csv_markdown_sha256
+network_required: false
+public_dataset_review_recommended: true
+timeout_minutes: 5
+dependency_policy: standard-library or explicitly pinned existing CIPI dependency only
+allowed_output_prefixes:
+  - research/runs/ARCHITECT-
+  - research/knowledge_candidates/ARCHITECT-
+  - research/decisions/ARCHITECT-
+forbidden_operations:
+  - arbitrary_shell_from_yaml
+  - production_plugin_mutation
+  - adapter_registry_self_registration
+  - raw_client_audio_persistence
+  - secret_access
+  - automatic_promote_or_confirm
+  - official_repo_or_release_creation
+review_requirements:
+  - Confirm phrase tracking and short-event protection are measured separately.
+  - Confirm the one-timescale baseline remains competitive and uses the same causal input.
+  - Confirm phrase-step guard regions do not hide long settling failures.
+  - Confirm this synthetic pilot cannot be treated as a product, listening, or singer-generalization claim.
+implementation_status: NOT_IMPLEMENTED
+automatic_registry_promotion_allowed: false

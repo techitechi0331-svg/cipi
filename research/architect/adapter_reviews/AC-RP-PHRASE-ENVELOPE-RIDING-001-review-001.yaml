@@ -1,0 +1,23 @@
+schema_version: '1.0'
+adapter_candidate_id: AC-RP-PHRASE-ENVELOPE-RIDING-001
+source_candidate: research/architect/adapter_candidates/AC-RP-PHRASE-ENVELOPE-RIDING-001.yaml
+review_authority: ASSISTANT_REVIEW
+decision: APPROVE_FOR_IMPLEMENTATION
+implementation_adapter: rp_phrase_envelope_riding_001_pilot_v1
+implementation_scope: deterministic causal synthetic phrase/syllable/consonant/breath matrix only
+network_required: false
+timeout_minutes: 5
+arbitrary_shell_from_yaml: false
+raw_audio_persisted: false
+production_plugin_mutation: false
+automatic_registry_promotion: false
+reasoning:
+  - The experiment directly separates phrase-scale tracking from short-event chasing instead of collapsing both into one score.
+  - The bounded one-timescale baseline remains competitive and receives the identical synthetic observation stream.
+  - Phrase transitions use fixed guard regions, but phrase-contrast error separately checks that slow tracking has not simply flattened the macro dynamics.
+  - Downstream variance is treated only as a macro-level compressor proxy, not as proof of subjective naturalness.
+  - The first implementation is synthetic and causal with no lookahead, so passing can authorize deeper real-vocal research but not product adoption.
+next_gate:
+  - Architect Gate must execute the deterministic pilot successfully before merge.
+  - The queued formal job must run through the ordinary Research Worker after merge.
+  - Public singer-disjoint or real-vocal evidence is required before any INCUBATE product evidence can be written.

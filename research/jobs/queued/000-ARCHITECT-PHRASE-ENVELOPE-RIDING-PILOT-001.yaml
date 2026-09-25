@@ -1,0 +1,77 @@
+schema_version: '1.0'
+job_id: ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001
+state: QUEUED
+track:
+  id: ARCHITECT_PHRASE_ENVELOPE_RIDING
+  path: research/architect
+research_question: Can a causal dual-timescale phrase estimator reduce phrase-scale vocal level error without chasing short consonant/breath events more than a bounded one-timescale baseline?
+hypothesis: A clipped-innovation dual-timescale estimator will reduce steady phrase-level error and downstream macro-level variance while materially reducing short-event movement and preserving phrase contrast.
+counter_hypotheses:
+  - The one-timescale baseline performs equivalently once phrase transitions are excluded from the steady-state error metric.
+  - The slower candidate only appears stable because it flattens true phrase-to-phrase contrast.
+  - Short-event protection comes at the cost of excessive phrase tracking error.
+baseline:
+  - bounded_one_timescale_level_estimator
+variants:
+  - clipped_innovation_dual_timescale_phrase_estimator
+metrics:
+  - matrix_complete
+  - all_numeric_finite
+  - phrase_mae_ratio
+  - candidate_short_event_max_movement_db
+  - short_event_movement_ratio
+  - downstream_macro_variance_ratio
+  - candidate_phrase_contrast_error_db
+acceptance:
+  - Synthetic phrase/event matrix is complete and all outputs are finite.
+  - Candidate phrase-level MAE is <= 65 percent of baseline.
+  - Candidate maximum short-event movement is <= 3.0 dB and <= 50 percent of baseline.
+  - Candidate downstream macro-level variance is <= 50 percent of baseline.
+  - Candidate phrase-contrast error is <= 0.8 dB.
+rejection:
+  - Candidate phrase-level MAE exceeds 65 percent of baseline.
+  - Candidate maximum short-event movement exceeds 3.0 dB or 50 percent of baseline.
+  - Candidate downstream macro-level variance exceeds 50 percent of baseline.
+  - Candidate phrase-contrast error exceeds 0.8 dB.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 0
+experiment_adapter: rp_phrase_envelope_riding_001_pilot_v1
+allowed_operations:
+  - generate_deterministic_synthetic_inputs
+  - calculate_declared_metrics
+  - write_derived_json_csv_markdown_sha256
+prohibited_operations:
+  - arbitrary_shell_from_yaml
+  - network_access
+  - network_write
+  - raw_audio_read
+  - raw_audio_write
+  - production_plugin_mutation
+  - main_push
+  - confidence_change
+  - current_stage_change
+knowledge_candidate:
+  claim: A causal dual-timescale clipped-innovation phrase estimator can outperform a bounded one-timescale level estimator on the declared synthetic phrase/event matrix while preserving macro phrase contrast.
+  evidence_type: MEASURED
+  scope: Deterministic synthetic phrase/syllable/consonant/breath pilot only; this does not establish singer generalization, subjective naturalness, standalone product value, or release readiness.
+  promotion_requested: HYPOTHESIS
+continuation:
+  on_accept: []
+  on_reject: []
+rejection_record:
+  reason: The phrase-envelope hypothesis fails if reduced short-event chasing cannot coexist with materially better phrase tracking and macro-level stability.
+  retained_findings:
+    - Preserve baseline and candidate phrase/error/event movement measurements even if the candidate fails.
+  reusable_findings:
+    - The synthetic phrase-step plus consonant/breath matrix remains reusable for future phrase-level estimator comparisons.
+  revisit_if:
+    - A public singer-disjoint phrase-level corpus or better phrase-boundary labels become available.
+    - A different causal estimator improves phrase tracking without increasing event chasing.
+  scope: Synthetic research pilot only; failure does not reject Vocal Rider or phrase-level processing as a product category.
+review_policy:
+  required_human_gates:
+    - Passing this pilot authorizes deeper public/real-vocal research only.
+    - Level-matched listening is required before subjective naturalness claims.
+    - Standalone Vocal Rider value versus Vo.Prep integration must be measured before INCUBATE.
+    - Cubase Pro 14 remains a separate target-host gate.

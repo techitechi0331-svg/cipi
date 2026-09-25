@@ -13,6 +13,7 @@ on:
       - "automation/schemas/incubator_decision.schema.json"
       - "tools/validate_research.py"
       - "tools/validate_architect.py"
+      - "tools/validate_incubator.py"
       - ".github/workflows/research-gate.yml"
   pull_request:
     paths:
@@ -45,4 +46,6 @@ jobs:
       - name: Validate research state contract
         run: python tools/validate_research.py
       - name: Validate architect and incubator artifacts
-        run: python tools/validate_architect.py
+        run: |
+          python tools/validate_architect.py
+          python tools/validate_incubator.py

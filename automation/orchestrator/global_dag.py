@@ -41,7 +41,8 @@ def health_alerts(root: Path) -> list[dict[str, Any]]:
                 "repo_key": data.get("repo_key"),
                 "workflow_key": data.get("workflow_key"),
                 "state": data.get("state"),
-                "age_minutes": data.get("age_minutes"),
+                "since": data.get("since"),
+                "wait_threshold_minutes": data.get("wait_threshold_minutes"),
             })
     return alerts
 
@@ -170,7 +171,7 @@ def write_dashboard(root: Path, snapshot: dict[str, Any]) -> bool:
         for alert in alerts:
             lines.append(
                 f"- \`{alert.get('action_id')}\` — {alert.get('state')} "
-                f"({alert.get('repo_key')}/{alert.get('workflow_key')}, {alert.get('age_minutes')} min)"
+                f"({alert.get('repo_key')}/{alert.get('workflow_key')}, since {alert.get('since')})"
             )
         lines.append("")
     if gates:

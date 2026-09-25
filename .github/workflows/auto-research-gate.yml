@@ -127,6 +127,37 @@ jobs:
           print("incubator overlap routing: PASS")
           PY
           python automation/incubator/prototype.py --self-test
+      - name: Smoke-test bounded INCUBATE to prototype path
+        run: |
+          rm -rf /tmp/cipi-incubator-eval
+          mkdir -p /tmp/cipi-incubator-eval/research/incubator/proposals
+          cat > /tmp/cipi-incubator-eval/research/incubator/proposals/PLUGIN-SMOKE-001.yaml <<'YAML'
+          schema_version: "1.0"
+          plugin_proposal_id: PLUGIN-SMOKE-001
+          source_research_proposal: research/architect/proposals/RP-SMOKE-001.yaml
+          state: RESEARCH_MORE
+          working_name: Incubator Smoke
+          problem: Verify bounded candidate-to-prototype orchestration.
+          target_user: test
+          target_signal: synthetic
+          supporting_research: [research/architect/gaps/GAP-SMOKE-001.yaml]
+          supporting_negative_knowledge: []
+          existing_plugin_overlap: []
+          why_not_merge_existing: Smoke fixture has no production meaning.
+          dsp_hypothesis: A reviewed allowlisted prototype can be reached only after accepted evidence.
+          simple_baseline: [simple]
+          metrics: [finite]
+          failure_criteria: [nonfinite]
+          expected_cpu: bounded
+          expected_latency: measured
+          prototype_adapter: dual_timescale_phrase_level_v1
+          automatic_production_allowed: false
+          YAML
+          python automation/incubator/evaluate.py             --proposal /tmp/cipi-incubator-eval/research/incubator/proposals/PLUGIN-SMOKE-001.yaml             --evidence-manifest research/runs/ARCHITECT-NONLINEAR-CONTINUITY-REPLICATION-PILOT-001/ci-smoke-architect/manifest.json             --output-root /tmp/cipi-incubator-eval             --github-output /tmp/cipi-incubator-eval/out.txt
+          CANDIDATE=$(sed -n 's/^incubator_candidate_path=//p' /tmp/cipi-incubator-eval/out.txt)
+          test -n "$CANDIDATE"
+          python automation/incubator/prototype.py --proposal "/tmp/cipi-incubator-eval/$CANDIDATE" --output-root /tmp/cipi-incubator-eval
+          python tools/validate_incubator.py --root /tmp/cipi-incubator-eval
       - name: Validate research results and artifact safety
         run: |
           python tools/validate_research_result.py

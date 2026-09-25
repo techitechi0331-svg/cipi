@@ -14,7 +14,7 @@ It is deliberately **not** a DSP research system, product authority, or release 
 
 A Factory PASS means only that the manufacturing/technical gate passed. It does not mean that a DSP claim is CONFIRMED or that a plug-in is approved for release.
 
-## Phase 1 implemented here
+## Phase 1 + Phase 2 implemented here
 
 - versioned JSON Plugin Contract v1;
 - strict contract validation;
@@ -29,7 +29,17 @@ A Factory PASS means only that the manufacturing/technical gate passed. It does 
 - non-overwriting generation;
 - generation manifest with contract SHA-256;
 - isolated MELON result-bundle adapter that cannot grant Factory eligibility;
-- CI self-test + Windows VST3 build + external pluginval.
+- CI self-test + Windows VST3 build + external pluginval;
+- Factory-owned JUCE validation executable compiled against the generated plug-in;
+- 44.1 / 48 / 88.2 / 96 kHz validation matrix;
+- block-size matrix including an irregular 257-sample block;
+- silence, finite-output, denormal, unity-gain and settled-gain checks;
+- rapid parameter-automation stress;
+- state save/restore plus corrupt-state safety check;
+- mono/stereo/mismatched-layout checks;
+- bypass pass-through and declared-latency check;
+- pinned Steinberg official VST3 validator in the Factory PR gate;
+- validation report, provenance, SHA-256 manifest and failure quarantine classification.
 
 ## MELON decoupling
 
@@ -57,6 +67,12 @@ cmake --build generated/GoldenGain/build --config Release --parallel 4
 
 Without `JUCE_SOURCE_DIR`, the generated project fetches JUCE tag 9.0.2.
 
+## Current validation meaning
+
+A successful Factory run now requires the generated C++ project to compile, the Factory-owned processor harness to pass its declared matrix, pluginval strictness 5 to pass, and the pinned Steinberg official validator to pass. Failed candidates are uploaded separately as quarantine artifacts and never promoted into the validation-passed artifact path.
+
+These gates establish manufacturing and host-safety evidence only. They do not establish subjective audio quality, product superiority, Cubase approval, or CIPI CONFIRMED knowledge.
+
 ## Next gates
 
-Phase 2 should add Factory-owned DSP/state/automation/sample-rate/block-size tests and Steinberg-validator integration for generated candidates. Phase 3 should add provenance/result bundles and CIPI failure-evidence ingestion. Queue/batch/resume and UI template expansion come only after manufacturing determinism is stable.
+Phase 3 should add a versioned Factory Result Bundle and CIPI failure-evidence ingestion, then reproducibility comparison across repeated builds. Queue/batch/resume and UI template expansion should follow only after those evidence/provenance gates are stable.

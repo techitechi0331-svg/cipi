@@ -28,6 +28,18 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_contract(bad)
 
+    def test_validation_matrix_rejects_duplicate_sample_rate(self):
+        bad = copy.deepcopy(self.contract)
+        bad["validation"]["sample_rates"] = [48000, 48000]
+        with self.assertRaises(ContractError):
+            validate_contract(bad)
+
+    def test_validation_matrix_rejects_invalid_block_size(self):
+        bad = copy.deepcopy(self.contract)
+        bad["validation"]["block_sizes"] = [64, 0, 256]
+        with self.assertRaises(ContractError):
+            validate_contract(bad)
+
     def test_out_of_range_default_is_rejected(self):
         bad = copy.deepcopy(self.contract)
         bad["parameters"][0]["default"] = 1000.0
@@ -54,12 +66,15 @@ class ContractTests(unittest.TestCase):
             self.assertTrue((out / "CMakeLists.txt").exists())
             self.assertTrue((out / "factory_manifest.json").exists())
             self.assertTrue((out / "Source" / "PluginProcessor.cpp").exists())
+            self.assertTrue((out / "Tests" / "FactoryValidation.cpp").exists())
             processor = (out / "Source" / "PluginProcessor.cpp").read_text(encoding="utf-8")
             self.assertIn("NormalisableRange<float>(-24.0f, 24.0f, 0.01f)", processor)
             self.assertIn("\n        0.0f,\n", processor)
             manifest = json.loads((out / "factory_manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["juce_version"], "9.0.2")
             self.assertFalse(manifest["release_authority"])
+            self.assertEqual(manifest["validation_matrix"]["sample_rates"], [44100, 48000, 88200, 96000])
+            self.assertIn(257, manifest["validation_matrix"]["block_sizes"])
 
 
 class MelonBoundaryTests(unittest.TestCase):

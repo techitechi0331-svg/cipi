@@ -1,0 +1,89 @@
+schema_version: '1.0'
+job_id: VO-PREP-AMOUNT-R3-VOCALSET-001
+state: QUEUED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Can a predeclared DesiredGR-scaling Amount mapping with a selection-side ripple safety margin pass the unchanged Vo.Prep real-vocal gates on a completely different VocalSet singer corpus after Amount R2 narrowly failed HUST holdout ripple?
+hypothesis: At least one target100 value among 5.0, 5.2, 5.3, 5.4, and 5.5 dB will pass all original Amount safety gates plus a 0.075 dB selection ripple margin on four VocalSet selection singers, and the frozen selected candidate will then pass the unchanged 0.080 dB ripple gate and all other original gates on four different VocalSet holdout singers.
+counter_hypotheses:
+  - No candidate passes the stricter selection-margin gate.
+  - A candidate passes selection but fails the untouched VocalSet holdout, showing the R2 near-miss was not solved robustly.
+  - Lowering target100 enough to pass ripple causes the Amount 100 mean-GR lower bound to fail.
+  - DesiredGR scaling remains too ripple-sensitive across singers even when its mathematical Amount response is linear.
+baseline:
+  - DesiredGR scaling target100 5.5 dB, the R2 selection winner that failed final HUST holdout ripple by 0.00034317083146783 dB.
+variants:
+  - DesiredGR scaling target100 5.0 dB.
+  - DesiredGR scaling target100 5.2 dB.
+  - DesiredGR scaling target100 5.3 dB.
+  - DesiredGR scaling target100 5.4 dB.
+metrics:
+  - selected_candidate
+  - selected_target100_db
+  - selection_singer_count
+  - holdout_singer_count
+  - files_per_singer
+  - selection_ripple_margin_db
+  - final_ripple_gate_db
+  - holdout_passes
+  - holdout_gates
+  - raw_audio_persisted
+acceptance:
+  - Candidate target values and offsets are fixed before VocalSet evaluation.
+  - Selection uses exactly f1, f2, m1, and m2 with two qualifying files per singer.
+  - Final holdout uses exactly f3, f4, m3, and m4 with two qualifying files per singer.
+  - No singer appears in both selection and final holdout.
+  - Selection candidate must pass every original Amount gate with GR ripple tightened to no more than 0.075 dB.
+  - Among selection-margin passers, choose the highest target100 value before opening final holdout.
+  - Amount 0 final holdout produces exact zero gain reduction.
+  - Amount 25 final-holdout mean GR is between 0.75 and 2.25 dB and p95 GR is no more than 4.0 dB.
+  - Amount 50 final-holdout mean GR is between 2.5 and 3.75 dB, p95 GR is no more than 6.0 dB, and fraction above 10 dB is no more than 0.5 percent.
+  - Amount 75 final-holdout mean GR is between 3.75 and 5.5 dB and p99 GR is no more than 9.0 dB.
+  - Amount 100 final-holdout mean GR is between 5.0 and 7.0 dB, p99 GR is no more than 10.0 dB, and fraction above 10 dB is no more than 2 percent.
+  - Every nonzero final-holdout Amount has aggregate GR ripple no more than 0.080 dB.
+  - Final-holdout cross-singer mean-GR standard deviation at Amount 50 is no more than 1.0 dB.
+  - Final-holdout mean and p95 gain reduction remain monotonic with Amount.
+  - Raw VocalSet audio is not persisted into CIPI artifacts.
+rejection:
+  - No candidate passes all selection-margin gates.
+  - The frozen selected candidate fails any unchanged original gate on the untouched final holdout singers.
+  - Any required singer has fewer than two qualifying files.
+  - Any selection/final-holdout singer overlap occurs.
+  - Raw public audio is persisted into the evidence branch.
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20260926
+experiment_adapter: voprep_amount_mapping_r3_v1
+allowed_operations:
+  - stream_public_audio_to_runner_memory
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: A speaker-disjoint selection safety margin can make a mathematically linear DesiredGR-scaling Amount control generalize across a second independent public singing corpus without relaxing the frozen Vo.Prep ripple gate.
+  evidence_type: HYPOTHESIS
+  scope: Vo.Prep Amount Revision 3 using eight disjoint VocalSet singers, two qualifying files per singer, frozen 4-second Learn-and-Lock, 8/70 ms ballistics, and unchanged final 0.080 dB ripple gate.
+  promotion_requested: PROVISIONAL
+review_policy:
+  required_human_gates:
+    - Level-matched blind real-vocal listening before final Amount adoption.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-R2-001
+    - VO-PREP-AMOUNT-MAP-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:review-01"
+    - "VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:review-01"

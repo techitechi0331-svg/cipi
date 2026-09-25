@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "job_id": "VO-PREP-MACRO-BOUNDARY-001",
+  "run_id": "manual-20260926",
+  "source_commit": "b60afa6acc0a33431c5ce558a43fd058ce2b809c",
+  "worker_version": "assistant-private-corpus-boundary-lab/1.0",
+  "started_at": "2026-09-26",
+  "completed_at": "2026-09-26",
+  "random_seed": 0,
+  "environment": {
+    "mode": "manual_private_corpus_offline_dsp_replay",
+    "voprep_product_commit": "28afccdf6d863f1c874ecd086fcb62d5b4f21a82",
+    "vopripro_product_commit": "cc796d30d7e1885e0ca66caaf7f1b02d0bffeb33",
+    "private_input_files": 11,
+    "raw_audio_persisted": false,
+    "raw_filenames_persisted": false,
+    "anonymized_ids": true,
+    "product_dsp_mutated": false
+  },
+  "commands": [
+    "select one 90 s highest-RMS excerpt per private vocal using dry-only 5 s hop selection",
+    "replay current Vo.Prep Plosive/Macro/Sibilance equations at 50 percent with Input/Output 0 dB and Subsonic OFF",
+    "replay current VoPriPro Natural50 broadband dynamics equations at Amount 50 / Character 50 / Input 0 / Output 0",
+    "measure predeclared A-F boundary metrics on anonymized derived data only"
+  ],
+  "result": "COMPLETED",
+  "acceptance_met": false,
+  "rejection_triggered": true,
+  "import_kind": "manual_private_corpus_derived_metrics"
+}

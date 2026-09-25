@@ -176,3 +176,36 @@ Actions authorized:
 - after that, continue T4/R37/sidechain/Peak Reduction research.
 
 Human subjective preference remains **not measured** and must not be represented as confirmed evidence.
+
+
+## 2026-09-25 v0.5.0 Phase 01-H integration
+
+Product integration is complete on the VL2A development line.
+
+Product merge:
+- repository: `techitechi0331-svg/VocalPrepComp`
+- target branch: `build-vocal-leveler2a-v01`
+- merge commit: `a74b6d735774ff23de0342c008bcbe32381fbdd6`
+
+Validated pre-merge executable-equivalent build:
+- workflow run: `36076772730`
+- validated source SHA: `d0419a90d5050b8cb1d5ced672989ca2276fe6c0`
+- Windows VST3 artifact id: `10840940568`
+- VST3 artifact digest: `sha256:fd0413a34b0a3b4ec7e1735aeb51d48cd4ee9ffff13d764854c63d4aa4a3e18c`
+- Phase 01-H measurement artifact id: `10839914317`
+- measurement artifact digest: `sha256:c778c72bcbf2efd285a223db4e8fde1fe7c5ddbf7701b2f05b6dcb40b9a970a4`
+
+Integration changes:
+- Phase 01-H line amplifier retained;
+- final Gain restored to -18..+18 dB with 0 dB centre;
+- mojibake-prone UI separator replaced with ASCII;
+- generated product version set to v0.5.0.
+
+The commits after the validated source SHA changed CI metadata, evidence text,
+and one source comment only. No post-validation DSP or executable behaviour
+change remained at merge.
+
+Current stage now advances to **Phase 02 baseline measurement of the existing
+T4 / sidechain / Peak Reduction / COMP-LIMIT subsystem**.
+
+No optical/sidechain production constants are yet approved for change.

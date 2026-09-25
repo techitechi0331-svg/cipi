@@ -1,0 +1,7 @@
+claim: A smooth high-GR Range may repair high-Amount time-domain ripple without reopening
+  a validated compressor core.
+evidence_type: HYPOTHESIS
+scope: Frozen Vo.Prep transparent core with explicit Learn solve; selection f7/f8/m7/m8
+  and fresh holdout f9/m9/m10/m11.
+source_run: research/runs/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1
+promotion_requested: HYPOTHESIS

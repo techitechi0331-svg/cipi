@@ -1,0 +1,177 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:review-brief-v1
+job_id: VO-PREP-AMOUNT-R5-SOFT-RANGE-001
+run_id: gha-36201243756-1
+source_run: research/runs/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-triage.yaml
+triage_id: VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-AMOUNT-R5-SOFT-RANGE-001.yaml
+research_question: Can a simple smooth post-ballistics GR Range repair the R4 high-Amount
+  ripple failure without changing the frozen Vo.Prep detector, 1.5:1/18 dB curve,
+  8/70 ms ballistics, or explicit Learn-time Threshold solve?
+hypothesis: At least one ceiling among 10, 9, or 8 dB with a 6 dB unity region will
+  pass all original Amount gates and the 0.075 dB selection ripple ceiling on f7/f8/m7/m8,
+  improve Amount-100 ripple by at least 15 percent versus the no-Range R4 baseline,
+  preserve gain invariance, and then pass the unchanged 0.080 dB final ripple gate
+  on fresh f9/m9/m10/m11 holdout singers.
+counter_hypotheses:
+- Soft Range does not reduce ripple enough without reopening ballistics.
+- Range strong enough to pass ripple damages the 25/50/75 Amount mapping.
+- Range causes cross-singer inconsistency or high-GR safety problems.
+- The no-Range R4 baseline remains the better simplicity/quality trade-off.
+acceptance_criteria:
+- Selection uses only f7, f8, m7 and m8 with two qualifying files per singer.
+- Fresh holdout uses only f9, m9, m10 and m11 with two qualifying files per singer.
+- Holdout audio is not streamed or decoded until a candidate passes every selection,
+  complexity and gain-invariance gate.
+- Amount 0 is exact bypass.
+- Amount 25 mean GR is 0.75 to 2.25 dB and p95 is no more than 4 dB.
+- Amount 50 mean GR is 2.5 to 3.75 dB, p95 is no more than 6 dB and fraction above
+  10 dB is no more than 0.5 percent.
+- Amount 75 mean GR is 3.75 to 5.5 dB and p99 is no more than 9 dB.
+- Amount 100 mean GR is 5.0 to 7.0 dB, p99 is no more than 10 dB and fraction above
+  10 dB is no more than 2 percent.
+- Selection aggregate ripple is no more than 0.075 dB at every nonzero Amount.
+- Final holdout aggregate ripple is no more than 0.080 dB at every nonzero Amount.
+- Cross-singer mean-GR standard deviation at Amount 50 is no more than 1.0 dB.
+- Mean and p95 GR are monotonic with Amount.
+- Selection mapping RMSE is no more than 0.50 dB.
+- Final holdout mapping RMSE is no more than 0.65 dB.
+- Learn-solver residual is no more than 0.02 dB.
+- Selected candidate improves Amount-100 ripple by at least 15 percent versus R4 no-Range
+  baseline.
+- Gain-invariance Threshold and post-lock mean-GR errors are each no more than 0.005
+  dB across +/-12 dB.
+- Among passing candidates choose the highest ceiling, preserving the least intrusive
+  Range.
+- Raw VocalSet audio is not persisted into CIPI artifacts.
+rejection_criteria:
+- No Range candidate passes every selection and complexity gate.
+- Passing requires relaxing a predeclared gate.
+- Fresh holdout fails any unchanged product gate.
+- Holdout data is accessed before selection is frozen.
+- Raw public audio is persisted.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 829022eeb2e5f92d9c41dc21eba850e8bde4bc07
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: baseline_amount100_ripple_db
+  value: 0.08797198246318512
+- path: candidate_summary[0].amount100_ripple_db
+  value: 0.08848596636123582
+- path: candidate_summary[0].ceiling_db
+  value: 10.0
+- path: candidate_summary[0].id
+  value: soft_range_start6_ceiling10
+- path: candidate_summary[0].mapping_rmse_db
+  value: 0.5184546116982374
+- path: candidate_summary[0].passes_selection
+  value: false
+- path: candidate_summary[0].ripple_improvement_ratio
+  value: -0.005842586283261175
+- path: candidate_summary[1].amount100_ripple_db
+  value: 0.08883704777112217
+- path: candidate_summary[1].ceiling_db
+  value: 9.0
+- path: candidate_summary[1].id
+  value: soft_range_start6_ceiling9
+- path: candidate_summary[1].mapping_rmse_db
+  value: 0.5101827911389013
+- path: candidate_summary[1].passes_selection
+  value: false
+- path: candidate_summary[1].ripple_improvement_ratio
+  value: -0.009833418364751045
+- path: candidate_summary[2].amount100_ripple_db
+  value: 0.08966973300731865
+- path: candidate_summary[2].ceiling_db
+  value: 8.0
+- path: candidate_summary[2].id
+  value: soft_range_start6_ceiling8
+- path: candidate_summary[2].mapping_rmse_db
+  value: 0.4926789902935472
+- path: candidate_summary[2].passes_selection
+  value: false
+- path: candidate_summary[2].ripple_improvement_ratio
+  value: -0.01929876418147125
+- path: decision
+  value: REVISE
+- path: holdout_accessed
+  value: false
+- path: holdout_amount100_ripple_db
+  value: null
+- path: holdout_passes
+  value: false
+- path: holdout_singers[0]
+  value: f9
+- path: holdout_singers[1]
+  value: m9
+- path: holdout_singers[2]
+  value: m10
+- path: holdout_singers[3]
+  value: m11
+- path: range_start_db
+  value: 6.0
+- path: raw_audio_persisted
+  value: false
+- path: selected_candidate
+  value: null
+- path: selected_ceiling_db
+  value: null
+knowledge_candidate:
+  claim: A smooth high-GR Range may repair high-Amount time-domain ripple without
+    reopening a validated compressor core.
+  evidence_type: HYPOTHESIS
+  scope: Frozen Vo.Prep transparent core with explicit Learn solve; selection f7/f8/m7/m8
+    and fresh holdout f9/m9/m10/m11.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates:
+- Level-matched blind real-vocal listening before final Amount adoption.
+downstream_gate_signals:
+- Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard
+  are not all formally closed.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Transparent compressor core level-matched blind listening is pending.
+- Transparent compressor final VST3 / Cubase Pro 14 host validation is pending.
+- Representative real-vocal listening is still required.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

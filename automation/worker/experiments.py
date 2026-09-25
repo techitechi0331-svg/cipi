@@ -17,6 +17,7 @@ ADAPTERS = {
     "black76_real_vocal_snapshot_gate_v2",
     "black76_ratio_p2a_compare_v1",
     "black76_linear_detector_compare_v1",
+    "black76_detector_curvature_compare_v1",
     "peakbody_legacy_model_stress_v1",
     "peakbody_revision02_policy_v1",
     "original_vocal_pre_measurement_gate_v1",
@@ -2163,6 +2164,117 @@ def _vocal_resonance_identifiability_oracle(
         ),
     }
 
+
+def _black76_detector_curvature_compare(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = (
+        repo_root / "research" / "reference_devices" / "1176" / "evidence"
+        / "black76-detector-curvature-20260925"
+    )
+    summary_path = root / "summary.csv"
+    best_path = root / "best.csv"
+    checksums_path = root / "checksums.sha256"
+    manifest_path = root / "manifest.json"
+
+    for path in (summary_path, best_path, checksums_path, manifest_path):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+    expected: dict[str, str] = {}
+    for line in checksums_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        digest, filename = line.split(None, 1)
+        expected[filename.strip()] = digest.lower()
+
+    checksum_ok = True
+    for filename, digest in expected.items():
+        path = root / filename
+        if not path.is_file():
+            checksum_ok = False
+            continue
+        checksum_ok = (
+            checksum_ok
+            and hashlib.sha256(path.read_bytes()).hexdigest().lower() == digest
+        )
+
+    with summary_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    parsed = []
+    for row in rows:
+        parsed.append(
+            {
+                "gamma": float(row["gamma"]),
+                "onset_mae_db": float(row["onset_mae_db"]),
+                "ratio_log_rmse": float(row["ratio_log_rmse"]),
+                "max_relative_ratio_error": float(row["max_relative_ratio_error"]),
+                "deep_ratio_fraction_min": float(row["deep_ratio_fraction_min"]),
+                "valid": int(row["valid"]) == 1,
+            }
+        )
+
+    baseline = next((r for r in parsed if abs(r["gamma"] - 1.0) < 1.0e-12), None)
+    candidates = [r for r in parsed if r["gamma"] > 1.0 and r["valid"]]
+    if baseline is None or not candidates:
+        raise ValueError("detector-curvature evidence is missing baseline or candidates")
+
+    candidate = min(candidates, key=lambda r: r["ratio_log_rmse"])
+    improvement = 100.0 * (
+        baseline["ratio_log_rmse"] - candidate["ratio_log_rmse"]
+    ) / max(baseline["ratio_log_rmse"], 1.0e-12)
+
+    metrics = {
+        "checksum_ok": checksum_ok,
+        "baseline_gamma": baseline["gamma"],
+        "baseline_onset_mae_db": baseline["onset_mae_db"],
+        "baseline_ratio_log_rmse": baseline["ratio_log_rmse"],
+        "baseline_max_relative_ratio_error": baseline["max_relative_ratio_error"],
+        "baseline_deep_ratio_fraction_min": baseline["deep_ratio_fraction_min"],
+        "candidate_gamma": candidate["gamma"],
+        "candidate_onset_mae_db": candidate["onset_mae_db"],
+        "candidate_ratio_log_rmse": candidate["ratio_log_rmse"],
+        "candidate_max_relative_ratio_error": candidate["max_relative_ratio_error"],
+        "candidate_deep_ratio_fraction_min": candidate["deep_ratio_fraction_min"],
+        "ratio_log_rmse_improvement_percent": improvement,
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and candidate["onset_mae_db"] <= 1.0
+        and candidate["ratio_log_rmse"] <= 0.20
+        and improvement >= 30.0
+        and candidate["max_relative_ratio_error"] <= 0.35
+        and candidate["deep_ratio_fraction_min"] >= 0.80
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"measurement.csv": output.getvalue()},
+        "commands": [
+            "read committed Black76 detector-curvature derived evidence",
+            "verify committed SHA256 ledger",
+            "deterministically compare gamma=1 baseline against best shared-gamma candidate",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic gate for the Black76 research-only shared detector-curvature "
+            "ablation. It tests whether one shared superlinear power exponent plus "
+            "per-ratio gain/bias is sufficient against the committed supplemental LN-era "
+            "proxy curves. It does not promote the proxy to vintage Rev-E hardware truth "
+            "and does not modify product DSP."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -2180,6 +2292,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
     if name == "black76_linear_detector_compare_v1":
         return _black76_linear_detector_compare(repo_root, timeout_seconds)
+    if name == "black76_detector_curvature_compare_v1":
+        return _black76_detector_curvature_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":
         return _original_vocal_pre_measurement_gate(repo_root, timeout_seconds)
     if name == "original_vocal_pre_tuning_frontier_v1":

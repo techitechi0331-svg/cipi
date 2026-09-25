@@ -17,6 +17,20 @@ def main() -> int:
         print(f"CIPI cross-repo gate: FAIL\n- registry: {exc}")
         return 1
 
+    templates = ROOT / "automation" / "cross_repo" / "action_templates"
+    if templates.exists():
+        for path in sorted(templates.glob("*.yaml")):
+            count += 1
+            try:
+                action = load_yaml(path)
+            except Exception as exc:
+                errors.append(f"{path}: {exc}")
+                continue
+            if action.get("state") != "QUEUED":
+                errors.append(f"{path}: action template state must be QUEUED")
+            for error in validate_action(action, registry):
+                errors.append(f"{path}: {error}")
+
     base = ROOT / "research" / "cross_repo" / "actions"
     states = {"queued": "QUEUED", "dispatched": "DISPATCHED", "completed": "COMPLETED", "failed": "FAILED", "quarantined": "QUARANTINED"}
     count = 0

@@ -146,3 +146,33 @@ Whether Phase 01-H is KEEP, REVISE or ROLLBACK based on natural vocal density, t
 - closed-loop line-amplifier calibration;
 - block-isolated real-vocal AB with invariant GR checks;
 - measurement maturity separation between model, compiled DSP, VST3 and real-host confirmation.
+
+
+## 2026-09-25 Phase 01-H strict engineering decision
+
+Decision: **KEEP**.
+
+Evidence boundary:
+- This is an engineering/signal-analysis decision, not a claim of human blind-listening preference.
+- The user delegated the decision to the assistant.
+- The recovered 9-pair VocalSet A/B artifact was independently re-analysed.
+- Baseline/Candidate GR was identical in every pair.
+- Level-matched correlation was 0.999928..0.999937.
+- Residual relative level was -38.9898..-38.3867 dB.
+- Maximum absolute matched peak difference was 0.17533 dB.
+- Independent band analysis found a maximum absolute 250 Hz..20 kHz energy shift of about 0.103 dB and a systematic 20..80 Hz shift of about +0.381..+0.436 dB.
+- The compiled Phase 01-H block removed the previously reproduced approximately fixed low-level distortion floor while retaining finite, level-dependent behavior.
+
+Interpretation:
+- no material objective regression was found;
+- the candidate fixes a known modeling defect without changing the T4/sidechain GR trajectory;
+- the sub-80 Hz shift is retained as a known small tonal difference, not erased from evidence.
+
+Actions authorized:
+- retain Phase 01-H line amplifier;
+- restore final Gain -18..+18 dB, 0 dB centre;
+- fix the remaining mojibake-prone UI glyph;
+- build/validate the production candidate;
+- after that, continue T4/R37/sidechain/Peak Reduction research.
+
+Human subjective preference remains **not measured** and must not be represented as confirmed evidence.

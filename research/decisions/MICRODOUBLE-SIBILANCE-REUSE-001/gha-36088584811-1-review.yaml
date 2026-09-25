@@ -1,0 +1,46 @@
+schema_version: "1.0"
+decision_id: "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:review-01"
+job_id: MICRODOUBLE-SIBILANCE-REUSE-001
+source_run: research/runs/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The evidence-reuse gate passed with intact provenance and predeclared criteria.
+  Vo.Prep provides bounded 11-stem evidence for the hybrid detector while the
+  current MicroDouble detector still lacks equivalent labelled real-vocal recall
+  evidence. This is sufficient to authorize a direct product baseline-vs-candidate
+  experiment, but not sufficient to adopt or promote the candidate.
+declared_rejection_criteria:
+  - Any declared acceptance condition fails.
+  - The snapshot checksum fails.
+  - Evidence would be interpreted as product adoption rather than permission to run a direct A/B.
+triggered_criteria: []
+retained_findings:
+  - "Vo.Prep hybrid evidence: 11 real-vocal stems, 64% reference recall, 0.02% low-confidence false trigger, 3.1% occupancy."
+  - "Vo.Prep source-scope processing remained bounded: 1.33 dB corpus max reduction and 0.14 dB body-region mean movement."
+  - "Current MicroDouble baseline remains synthetically sane but lacks equivalent labelled real-vocal recall evidence."
+reusable_findings:
+  - "A precision-biased high/broad + high/mid energy-ratio detector is a justified candidate for subtle vocal-event protection when false-trigger control matters, but source-plugin evidence should be followed by same-product direct A/B before adoption."
+revisit_if:
+  - "Direct MicroDouble A/B shows higher false activation on breathy or bright non-sibilant vocals."
+  - "Hybrid protection audibly dulls consonants or reduces desired air."
+  - "Candidate CPU cost is materially higher without measurable protection benefit."
+  - "A broader labelled multilingual corpus contradicts the source Vo.Prep precision bias."
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-V03-PRODUCT-GATE-001
+  related_decisions:
+    - "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:auto"
+created_at: "2026-09-25T12:05:00+09:00"
+immutable: true
+scope: >-
+  Authorization for a direct MicroDouble experimental A/B only. No product
+  adoption, knowledge CONFIRMED promotion, subjective-naturalness claim, Cubase
+  validation or release approval.
+review_gaps:
+  - "No same-source current-vs-hybrid MicroDouble comparison yet."
+  - "No labelled Japanese/Korean singing sibilance corpus yet."
+  - "No target-machine subjective comparison yet."

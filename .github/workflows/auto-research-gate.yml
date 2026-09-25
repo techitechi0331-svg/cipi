@@ -109,7 +109,12 @@ jobs:
       - name: Smoke reviewed masking-aware presence adapter
         run: |
           rm -rf research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
-          python automation/worker/runner.py research/jobs/queued/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml --output research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001 --run-id ci-0001
+          JOB_PATH="research/jobs/queued/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml"
+          if [ ! -f "$JOB_PATH" ]; then
+            JOB_PATH="research/jobs/completed/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml"
+          fi
+          test -f "$JOB_PATH"
+          python automation/worker/runner.py "$JOB_PATH" --output research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001 --run-id ci-0001
           python - <<'PY'
           import json
           p=json.load(open("research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001/manifest.json", encoding="utf-8"))

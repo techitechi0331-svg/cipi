@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/self_counterfactual_inpainting.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T19:31:17.987568Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_self_counterfactual_inpainting_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001",
+  "random_seed": 20261123,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36179619006-1",
+  "schema_version": "1.0",
+  "source_commit": "7517b8e7f9960de8bb4e0298d09806fbdb7d48d3",
+  "started_at": "2026-09-25T19:26:21.690966Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

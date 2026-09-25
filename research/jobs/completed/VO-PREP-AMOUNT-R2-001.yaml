@@ -1,0 +1,100 @@
+schema_version: '1.0'
+job_id: VO-PREP-AMOUNT-R2-001
+state: COMPLETED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Can a predeclared lower-maximum Amount mapping pass the original
+  Vo.Prep real-vocal safety gates on previously unused speakers without relaxing the
+  0.08 dB GR-ripple limit or reusing the Revision-1 validation set?
+hypothesis: At least one predeclared mapping with a 100-percent target of 5.0, 5.2,
+  or 5.4 dB will retain useful compression range while passing every original Amount
+  safety gate on both the disjoint HUST selection speakers and the untouched final
+  HUST holdout speakers.
+counter_hypotheses:
+- No revised candidate passes the unchanged original safety gates.
+- The original 5.5 dB baseline remains the best safe mapping on new speakers.
+- DesiredGR scaling remains mathematically linear but is less stable than anchor Threshold
+  mapping on real singing.
+- A candidate passes the selection speakers but fails the untouched holdout, indicating
+  overfit.
+baseline:
+- Revision-1 Gentle anchor Threshold mapping with 5.5 dB 100-percent target
+variants:
+- Anchor Threshold with 5.0 dB 100-percent target
+- Anchor Threshold with 5.2 dB 100-percent target
+- Anchor Threshold with 5.4 dB 100-percent target
+- DesiredGR scaling with 5.0 dB calibrated 100-percent operating point
+- DesiredGR scaling with 5.2 dB calibrated 100-percent operating point
+- DesiredGR scaling with 5.4 dB calibrated 100-percent operating point
+- DesiredGR scaling with 5.5 dB Revision-1 baseline operating point
+metrics:
+- selected_candidate
+- selected_kind
+- selected_target100_db
+- selection_speaker_count
+- holdout_speaker_count
+- holdout_passes
+- holdout_gates
+acceptance:
+- Candidate definitions are fixed before HUST evaluation.
+- Selection uses exactly four previously unused HUST speakers.
+- Final holdout uses four different previously unused HUST speakers.
+- Amount 0 produces exact zero gain reduction.
+- Amount 25 held-out mean GR is between 0.75 and 2.25 dB and p95 GR is no more than
+  4.0 dB.
+- Amount 50 held-out mean GR is between 2.5 and 3.75 dB, p95 GR is no more than 6.0
+  dB, and fraction above 10 dB is no more than 0.5 percent.
+- Amount 75 held-out mean GR is between 3.75 and 5.5 dB and p99 GR is no more than
+  9.0 dB.
+- Amount 100 held-out mean GR is between 5.0 and 7.0 dB, p99 GR is no more than 10.0
+  dB, and fraction above 10 dB is no more than 2 percent.
+- Every nonzero Amount has GR ripple no more than 0.08 dB.
+- Cross-source mean-GR standard deviation at Amount 50 is no more than 1.0 dB.
+- Mean and p95 gain reduction remain monotonic with Amount.
+rejection:
+- No candidate passes all unchanged gates on the selection speakers.
+- The frozen selected candidate fails any original gate on the untouched holdout speakers.
+- The HUST public object fails the pinned SHA256 or size check.
+- Any required speaker WAV is missing.
+- Any raw public audio is persisted into the CIPI evidence branch.
+max_runs: 1
+timeout_minutes: 12
+random_seed: 20260925
+experiment_adapter: voprep_amount_mapping_r2_v1
+allowed_operations:
+- download_pinned_public_audio_to_temporary_storage
+- execute_allowlisted_adapter
+- write_derived_measurements
+prohibited_operations:
+- arbitrary_shell
+- raw_audio_persistence
+- main_push
+- confidence_change
+- current_stage_change
+- automatic_promotion
+- product_dsp_mutation
+- product_release
+knowledge_candidate:
+  claim: A bounded one-knob Amount mapping can retain the frozen Vo.Prep transparent
+    compressor behavior while satisfying the original real-vocal ripple and gain-reduction
+    safety limits on disjoint new speakers.
+  evidence_type: HYPOTHESIS
+  scope: Vo.Prep Amount Revision 2 on eight disjoint HUST_Solfege adult speakers using
+    the frozen 4-second Learn-and-Lock operating point and unchanged 0.08 dB ripple
+    gate.
+  promotion_requested: PROVISIONAL
+review_policy:
+  required_human_gates:
+  - Level-matched blind real-vocal listening before final Amount adoption.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - VO-PREP-AMOUNT-MAP-001
+  - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions:
+  - VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:review-01
+latest_run: gha-36080984748-1

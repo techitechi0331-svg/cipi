@@ -1,0 +1,38 @@
+{
+  "acceptance_met": false,
+  "decision": "REVISE",
+  "holdout_gates": {
+    "amount0_exact_bypass": true,
+    "amount100_gt10": true,
+    "amount100_mean": true,
+    "amount100_p99": true,
+    "amount25_mean": true,
+    "amount25_p95": true,
+    "amount50_gt10": true,
+    "amount50_mean": true,
+    "amount50_p95": true,
+    "amount75_mean": true,
+    "amount75_p99": true,
+    "cross_source_50": true,
+    "monotonic": true,
+    "ripple_all": false
+  },
+  "holdout_passes": false,
+  "holdout_speaker_count": 4,
+  "holdout_speakers": [
+    "man3_twinkle",
+    "man4_butterfly",
+    "woman3_schoolbell",
+    "man5_twinkle"
+  ],
+  "selected_candidate": "desired_gr_scale_target100_5.5",
+  "selected_kind": "desired_gr_scale",
+  "selected_target100_db": 5.5,
+  "selection_speaker_count": 4,
+  "selection_speakers": [
+    "man1_butterfly",
+    "man2_schoolbell",
+    "woman1_twinkle",
+    "woman2_butterfly"
+  ]
+}

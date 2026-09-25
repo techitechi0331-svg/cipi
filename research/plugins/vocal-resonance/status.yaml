@@ -36,6 +36,7 @@ milestones:
   - Clean-negative Audit-001 measured strong technique/singer variation; the earlier lip-trill-specific failure clue did not reproduce.
   - Temporal Morphology R5 preserved Top-5/strong-effect Top-5 while materially reducing measured clean false triggers; retained only as a falsification candidate.
   - R5b multi-seed/same-C/ablation stability audit rejected the full Temporal Morphology bundle as unstable across seeds.
+  - R6 run-length post-ranker veto failed its predeclared two-seed retention gate and is rejected as a validated abstention stage.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -47,12 +48,13 @@ unresolved:
   - Legacy ACF upper-quantile pitch estimates are not accepted as high-pitch ground truth; Re-audit-002 obtained a usable YIN-style high-pitch subset and did not find elevated false triggers there.
   - Technique-specific protection is not supported by the independent re-audit; the remaining false-trigger problem is treated as a generic candidate-context problem.
   - R5b found zero source overlap, but the full morphology benefit did not survive the second injection seed and therefore is rejected as a full ranker feature bundle.
-  - Run-length-only morphology reduced clean false triggers in both tested seeds but still regressed Top-5 on the second seed; it remains only a hypothesis for a separate abstention/veto stage.
+  - Run-length-only morphology reduced clean false triggers in R5b, but R6 veto reproduced only a 2.5-point external-clean reduction on seed 20261003 and therefore failed the 5-point minimum.
+  - R6 target-action retention was underpowered: locked-test baseline target actions were 1 and 0 across the two seeds, with 0 strong-effect actions in both; the apparent 100-percent retention is not accepted as meaningful protection evidence.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R5b rejected the full morphology bundle because the clean-abstention benefit and Top-5 preservation did not replicate across seeds. The run-length-only family still reduced clean false triggers in both seeds, so the next bounded question is whether it works better as a separate veto/abstention stage that never reorders resonance candidates."
-next_confirmation: "Whether a run-length-only veto applied after the unchanged static ranker reduces independent clean false triggers across at least two seeds while preserving Top-5, strong-effect Top-5, and candidate ordering for injected targets."
+why_next: "R6 rejected run-length-only veto as a validated abstention stage and also exposed an underpowered action-retention metric caused by the current static actuation threshold. Rather than tuning another veto, the next bounded question is whether the current candidate representation contains enough information to distinguish the injected causal target at all."
+next_confirmation: "Whether a research-only paired clean/injected oracle can rank the injected target near the top when candidate discovery hits, and how large the gap is between that oracle and single-view inference features. This determines whether the blocker is feature identifiability, label/candidate alignment, or model choice."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

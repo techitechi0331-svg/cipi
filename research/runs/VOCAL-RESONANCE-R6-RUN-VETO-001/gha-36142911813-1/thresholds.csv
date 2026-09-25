@@ -1,0 +1,3 @@
+seed,static_C,static_threshold,veto_C,veto_threshold,validation_target_keep,validation_strong_keep,validation_clean_fpr
+20261003,0.03,0.7941223642156119,0.03,0.48103510209374134,1.0,1.0,0.125
+20261013,1.0,0.8218928113165967,0.03,0.9,1.0,1.0,0.0

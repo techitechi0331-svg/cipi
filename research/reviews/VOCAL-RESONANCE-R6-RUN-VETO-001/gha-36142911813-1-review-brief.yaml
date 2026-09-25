@@ -1,0 +1,152 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOCAL-RESONANCE-R6-RUN-VETO-001:gha-36142911813-1:review-brief-v1
+job_id: VOCAL-RESONANCE-R6-RUN-VETO-001
+run_id: gha-36142911813-1
+source_run: research/runs/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-triage.yaml
+triage_id: VOCAL-RESONANCE-R6-RUN-VETO-001:gha-36142911813-1:triage-v1
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R6-RUN-VETO-001.yaml
+research_question: Can run-length-only temporal morphology work as a separate post-ranker
+  veto/abstention gate that reduces clean-vocal false triggers without reordering
+  candidates or vetoing true injected resonances?
+hypothesis: Across both predeclared injection seeds, a validation-selected run-length
+  veto will reduce independent clean false-trigger rate by at least 5 percentage points
+  while retaining at least 95 percent of baseline target actions and strong-effect
+  target actions.
+counter_hypotheses:
+- The R5b run-length benefit was caused by ranking interactions and disappears when
+  morphology is isolated as a veto.
+- A veto that materially reduces clean false triggers also rejects too many true resonance
+  actions.
+- The clean false-trigger reduction is seed-specific and does not reproduce across
+  both predeclared seeds.
+acceptance_criteria:
+- 'for each seed: source overlap count == 0'
+- 'for each seed: ranking order is unchanged'
+- 'for each seed: veto external clean false-trigger <= baseline - 0.05'
+- 'for each seed: paired external-clean bootstrap upper bound <= 0'
+- 'for each seed: target action keep >= 0.95'
+- 'for each seed: strong-effect target action keep >= 0.95'
+- 'for each seed: veto creates zero new external clean false triggers'
+rejection_criteria:
+- any seed fails the 5 percentage point clean false-trigger reduction
+- any seed target action keep < 0.95
+- any seed strong-effect action keep < 0.95
+- candidate ranking is changed
+- source overlap is detected
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: a826b34e86721de18733492c48ce0fc127a74540
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: candidate_budget
+  value: 20
+- path: experiment
+  value: VOCAL_RESONANCE_R6_RUN_LENGTH_VETO
+- path: per_seed.20261003.external_clean.baseline_fpr
+  value: 0.175
+- path: per_seed.20261003.external_clean.bootstrap_hi
+  value: 0.0
+- path: per_seed.20261003.external_clean.bootstrap_lo
+  value: -0.075
+- path: per_seed.20261003.external_clean.improvements
+  value: 1
+- path: per_seed.20261003.external_clean.n
+  value: 40
+- path: per_seed.20261003.external_clean.regressions
+  value: 0
+- path: per_seed.20261003.external_clean.veto_fpr
+  value: 0.15
+- path: per_seed.20261003.external_clean.veto_minus_baseline
+  value: -0.025
+- path: per_seed.20261003.internal_clean.baseline_fpr
+  value: 0.375
+- path: per_seed.20261003.internal_clean.bootstrap_hi
+  value: 0.0
+- path: per_seed.20261003.internal_clean.bootstrap_lo
+  value: 0.0
+- path: per_seed.20261003.internal_clean.improvements
+  value: 0
+- path: per_seed.20261003.internal_clean.n
+  value: 8
+- path: per_seed.20261003.internal_clean.regressions
+  value: 0
+- path: per_seed.20261003.internal_clean.veto_fpr
+  value: 0.375
+- path: per_seed.20261003.internal_clean.veto_minus_baseline
+  value: 0.0
+- path: per_seed.20261003.ranking_order_unchanged
+  value: true
+- path: per_seed.20261003.seed
+  value: 20261003
+- path: per_seed.20261003.source_overlap_count
+  value: 0
+- path: per_seed.20261003.static_C
+  value: 0.03
+- path: per_seed.20261003.static_ranking.clean_false_trigger
+  value: 0.375
+- path: per_seed.20261003.static_ranking.generator_ceiling
+  value: 0.9375
+- path: per_seed.20261003.static_ranking.mrr
+  value: 0.17148762051287206
+- path: per_seed.20261003.static_ranking.n_cases
+  value: 32
+- path: per_seed.20261003.static_ranking.n_high_f0_cases
+  value: 0
+- path: per_seed.20261003.static_ranking.threshold_from_valid_95pct
+  value: 0.7941223642156119
+- path: per_seed.20261003.static_ranking.top1
+  value: 0.03125
+- path: per_seed.20261003.static_ranking.top1_given_generator_hit
+  value: 0.03333333333333333
+- path: per_seed.20261003.static_ranking.top3
+  value: 0.125
+- path: per_seed.20261003.static_ranking.top3_given_generator_hit
+  value: 0.13333333333333333
+knowledge_candidate:
+  claim: Run-length morphology may be useful as a separate post-ranker abstention/veto
+    signal even when it is not stable enough to modify semantic ranking scores.
+  evidence_type: HYPOTHESIS
+  scope: Vocal resonance clean-false-trigger control after a frozen semantic candidate
+    ranker.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOCAL-RESONANCE-R6-RUN-VETO-001:gha-36142911813-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

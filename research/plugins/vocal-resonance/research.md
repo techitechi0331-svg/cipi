@@ -301,3 +301,75 @@ Run-length morphology is **not accepted as a ranker feature**, but remains a bou
 The veto must leave candidate scores/order unchanged and only decide whether a top-ranked candidate is safe enough to act on.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.6 — Run-Length Veto Review
+
+Run: `VOCAL-RESONANCE-R6-RUN-VETO-001 / gha-36142911813-1`
+
+## MEASURED
+
+Seed 20261003:
+- static external-clean false-trigger: 17.5%
+- veto external-clean false-trigger: 15.0%
+- improvement: 2.5 points
+- predeclared minimum improvement: 5 points
+- source overlap: 0
+- ranking order unchanged: yes
+- baseline target actions: 1
+- veto target actions: 1
+- baseline strong-effect actions: 0
+
+Seed 20261013:
+- static external-clean false-trigger: 25.0%
+- veto external-clean false-trigger: 0.0%
+- improvement: 25 points
+- source overlap: 0
+- ranking order unchanged: yes
+- baseline target actions: 0
+- baseline strong-effect actions: 0
+
+## DECISION
+
+**REJECT the tested run-length post-ranker veto as a validated research candidate.**
+
+The predeclared two-seed gate failed because seed 20261003 improved external clean false-trigger by only 2.5 points.
+
+## Measurement limitation discovered
+
+The true-target retention test was not informative:
+- seed 20261003 had only one baseline target action;
+- seed 20261013 had zero baseline target actions;
+- both seeds had zero strong-effect baseline target actions.
+
+Therefore the reported 100% target/strong retention is largely vacuous and must not be promoted as protection evidence.
+
+This is a major measurement warning:
+the current static actuation threshold is too sparse for a useful veto-safety study.
+
+## INFERRED
+
+Further veto tuning is premature while semantic ranking and actuation remain weak.
+
+The next research should answer a more fundamental question:
+**does the current candidate representation contain enough information to identify the causal injected target when candidate discovery succeeds?**
+
+## Next formal gate
+
+**MODULE 1 v0.4R.7 — Identifiability / Causal Oracle Audit.**
+
+Compare:
+1. current single-view static inference features;
+2. a research-only paired clean/injected delta oracle unavailable to the final plugin;
+3. simple local-prominence baseline.
+
+Required outputs:
+- Top-1 / Top-3 / Top-5 conditional on generator hit;
+- strong-effect conditional ranking;
+- candidate alignment failure rate;
+- oracle-vs-single-view gap;
+- feature-family separability diagnostics.
+
+No production suppressor or VST3 is authorized.

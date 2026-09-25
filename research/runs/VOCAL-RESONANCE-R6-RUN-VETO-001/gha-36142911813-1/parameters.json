@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "unchanged_static_r2_ranker_no_veto"
+  ],
+  "experiment_adapter": "vocal_resonance_run_length_veto_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R6-RUN-VETO-001.yaml",
+  "metrics": [
+    "external_clean_false_trigger",
+    "paired_external_clean_difference",
+    "target_action_keep",
+    "strong_action_keep",
+    "ranking_order_unchanged",
+    "source_overlap_count",
+    "static_top5",
+    "static_strong_top5"
+  ],
+  "variants": [
+    "run_length_only_post_ranker_veto"
+  ]
+}

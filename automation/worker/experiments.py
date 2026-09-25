@@ -14,6 +14,7 @@ from typing import Any
 
 ADAPTERS = {
     "black76_ratio_p2a_compare_v1",
+    "black76_linear_detector_compare_v1",
     "peakbody_legacy_model_stress_v1",
     "peakbody_revision02_policy_v1",
     "original_vocal_pre_measurement_gate_v1",
@@ -351,6 +352,91 @@ def _black76_ratio_p2a_compare(repo_root: Path, timeout_seconds: int) -> dict[st
             "P2-A is accepted only if it fixes threshold ordering and also materially "
             "improves static-ratio slope accuracy. A threshold-only improvement is "
             "retained as useful negative evidence, not promoted as a complete ratio solution."
+        ),
+    }
+
+
+def _black76_linear_detector_compare(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    source = repo_root / "research/reference_devices/1176/black76_linear_detector_compare.csv"
+    if not source.is_file():
+        raise FileNotFoundError(source)
+
+    with source.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    modes = ["4", "8", "12", "20"]
+    ratio_fields = ["ratio_1_6", "ratio_6_12", "ratio_12_18"]
+    table: dict[str, dict[str, dict[str, float]]] = {}
+    for row in rows:
+        table.setdefault(row["dataset"], {})[row["mode"]] = {
+            "onset_dbfs": float(row["onset_dbfs"]),
+            **{field: float(row[field]) for field in ratio_fields},
+        }
+
+    required = {"supplemental_target", "linear_detector_best"}
+    missing = [
+        f"{dataset}:{mode}"
+        for dataset in required
+        for mode in modes
+        if mode not in table.get(dataset, {})
+    ]
+    if missing:
+        raise ValueError("missing linear detector evidence rows: " + ", ".join(missing))
+
+    onset_errors = [
+        abs(table["linear_detector_best"][m]["onset_dbfs"]
+            - table["supplemental_target"][m]["onset_dbfs"])
+        for m in modes
+    ]
+    log_errors = []
+    rel_errors = []
+    for mode in modes:
+        for field in ratio_fields:
+            actual = table["linear_detector_best"][mode][field]
+            target = table["supplemental_target"][mode][field]
+            log_errors.append(math.log(actual / target))
+            rel_errors.append(abs(actual - target) / target)
+
+    deep_fraction_min = min(
+        table["linear_detector_best"][mode]["ratio_12_18"]
+        / table["supplemental_target"][mode]["ratio_12_18"]
+        for mode in modes
+    )
+    metrics = {
+        "onset_mae_db": sum(onset_errors) / len(onset_errors),
+        "ratio_log_rmse": math.sqrt(sum(e * e for e in log_errors) / len(log_errors)),
+        "max_relative_ratio_error": max(rel_errors),
+        "deep_ratio_fraction_min": deep_fraction_min,
+    }
+
+    acceptance_met = (
+        metrics["onset_mae_db"] <= 1.0
+        and metrics["ratio_log_rmse"] <= 0.20
+        and metrics["max_relative_ratio_error"] <= 0.35
+        and metrics["deep_ratio_fraction_min"] >= 0.80
+    )
+
+    out = io.StringIO()
+    writer = csv.writer(out, lineterminator="\n")
+    writer.writerow(["dataset", "mode", "onset_dbfs", *ratio_fields])
+    for dataset in ("supplemental_target", "linear_detector_best"):
+        for mode in modes:
+            row = table[dataset][mode]
+            writer.writerow([dataset, mode, row["onset_dbfs"],
+                             row["ratio_1_6"], row["ratio_6_12"], row["ratio_12_18"]])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"comparison.csv": out.getvalue()},
+        "commands": ["deterministic_read:black76_linear_detector_compare.csv"],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic sufficiency gate for the Black76 diagnostic linear full-wave "
+            "detector. Passing would require matched onset plus acceptable low/mid/deep "
+            "static-ratio curvature across all four single-button modes. Failure is "
+            "retained as negative evidence and does not modify product DSP."
         ),
     }
 
@@ -1850,6 +1936,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _peakbody_revision02_policy(repo_root, timeout_seconds)
     if name == "black76_ratio_p2a_compare_v1":
         return _black76_ratio_p2a_compare(repo_root, timeout_seconds)
+    if name == "black76_linear_detector_compare_v1":
+        return _black76_linear_detector_compare(repo_root, timeout_seconds)
     if name == "original_vocal_pre_measurement_gate_v1":
         return _original_vocal_pre_measurement_gate(repo_root, timeout_seconds)
     if name == "original_vocal_pre_tuning_frontier_v1":

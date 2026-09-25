@@ -33,6 +33,7 @@ bool VocalRiderAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 void VocalRiderAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     rider.prepare (sampleRate);
+    currentSampleRate = sampleRate > 1000.0 ? sampleRate : 44100.0;
 
     amountSmooth.reset (sampleRate, 0.050);
     outputGainSmooth.reset (sampleRate, 0.020);
@@ -50,6 +51,10 @@ void VocalRiderAudioProcessor::prepareToPlay (double sampleRate, int)
     delayBuffer.setSize (juce::jmax (1, getTotalNumInputChannels()), lookaheadSamples, false, true, true);
     delayBuffer.clear();
     delayWritePosition = 0;
+
+    headroomLimitDb = 12.0f;
+    headroomTargetDb = 12.0f;
+    headroomHoldSamples = 0;
 
     setLatencySamples (lookaheadSamples);
 }
@@ -94,7 +99,43 @@ void VocalRiderAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         const auto amount = amountSmooth.getNextValue();
         const auto outputGain = outputGainSmooth.getNextValue();
         const auto rideDb = rider.processSample (linkedAbs, amount);
-        const auto totalGain = juce::Decibels::decibelsToGain (rideDb) * outputGain;
+
+        constexpr float safetyCeilingDb = -0.25f;
+        constexpr float unrestrictedRideDb = 12.0f;
+        constexpr float headroomAttackRateDbPerSecond = 600.0f;
+        constexpr float headroomReleaseRateDbPerSecond = 12.0f;
+
+        const auto inputPeakDb = juce::Decibels::gainToDecibels (
+            juce::jmax (linkedAbs, 1.0e-12f), -120.0f);
+        const auto outputGainDb = juce::Decibels::gainToDecibels (
+            juce::jmax (outputGain, 1.0e-12f), -120.0f);
+        const auto safeRideForFuturePeakDb = juce::jlimit (
+            -24.0f, unrestrictedRideDb, safetyCeilingDb - inputPeakDb - outputGainDb);
+
+        if (safeRideForFuturePeakDb < headroomTargetDb)
+        {
+            headroomTargetDb = safeRideForFuturePeakDb;
+            headroomHoldSamples = lookaheadSamples;
+        }
+        else if (headroomHoldSamples > 0)
+        {
+            --headroomHoldSamples;
+        }
+        else
+        {
+            headroomTargetDb = unrestrictedRideDb;
+        }
+
+        const auto dt = static_cast<float> (1.0 / currentSampleRate);
+        const auto rate = headroomTargetDb < headroomLimitDb
+                        ? headroomAttackRateDbPerSecond
+                        : headroomReleaseRateDbPerSecond;
+        const auto maxHeadroomDelta = rate * dt;
+        headroomLimitDb += juce::jlimit (
+            -maxHeadroomDelta, maxHeadroomDelta, headroomTargetDb - headroomLimitDb);
+
+        const auto protectedRideDb = juce::jmin (rideDb, headroomLimitDb);
+        const auto totalGain = juce::Decibels::decibelsToGain (protectedRideDb) * outputGain;
 
         for (int ch = 0; ch < channels; ++ch)
         {

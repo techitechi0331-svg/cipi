@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"CIPI Plugin Incubator Proposal",
+  "type":"object",
+  "required":["schema_version","plugin_proposal_id","source_research_proposal","state","working_name","problem","target_user","target_signal","supporting_research","supporting_negative_knowledge","existing_plugin_overlap","why_not_merge_existing","dsp_hypothesis","simple_baseline","metrics","failure_criteria","expected_cpu","expected_latency","automatic_production_allowed"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "plugin_proposal_id":{"type":"string","pattern":"^PLUGIN-[A-Z0-9._-]+$"},
+    "state":{"enum":["OVERLAP_REVIEW","RESEARCH_MORE","INCUBATE","ARCHIVE","REJECTED"]},
+    "automatic_production_allowed":{"const":false}
+  },
+  "additionalProperties":true
+}

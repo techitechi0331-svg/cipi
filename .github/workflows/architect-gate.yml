@@ -78,16 +78,23 @@ jobs:
           rm -rf /tmp/cipi-incubator-smoke
           mkdir -p /tmp/cipi-incubator-smoke
           python automation/architect/discover.py --topic breath_event_detection --output-root /tmp/cipi-incubator-smoke --max-gaps 1
+          python automation/architect/adapter_candidate.py --root /tmp/cipi-incubator-smoke --max-candidates 1
           python automation/incubator/discover.py --proposal /tmp/cipi-incubator-smoke/research/architect/proposals/RP-BREATH-EVENT-DETECTION-001.yaml --output-root /tmp/cipi-incubator-smoke
           python tools/validate_architect.py --root /tmp/cipi-incubator-smoke
           python tools/validate_incubator.py --root /tmp/cipi-incubator-smoke
           python - <<'PY'
           import pathlib,yaml
-          p=next(pathlib.Path("/tmp/cipi-incubator-smoke/research/incubator/decisions").glob("*.yaml"))
+          root=pathlib.Path("/tmp/cipi-incubator-smoke")
+          p=next((root/"research/incubator/decisions").glob("*.yaml"))
           d=yaml.safe_load(p.read_text())
+          ac=next((root/"research/architect/adapter_candidates").glob("*.yaml"))
+          a=yaml.safe_load(ac.read_text())
           assert d["decision"] == "MERGE_EXISTING"
           assert d["final"] is False
-          print("incubator overlap smoke: PASS")
+          assert a["state"] == "DRAFT_REVIEW"
+          assert a["executable"] is False
+          assert a["automatic_registry_promotion_allowed"] is False
+          print("incubator + adapter-candidate smoke: PASS")
           PY
 
       - name: Smoke isolated prototype adapter

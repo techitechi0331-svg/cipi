@@ -11,3 +11,10 @@ States:
 - `ARCHIVED`: retained but not active.
 
 These artifacts never authorize product release or knowledge CONFIRMED status.
+
+
+## Adapter Candidates
+
+`research/architect/adapter_candidates/` contains non-executable implementation contracts derived from `NEEDS_ADAPTER` proposals.
+
+They make unknown research themes actionable without granting the scheduled runner arbitrary code-generation or Adapter Registry authority. A candidate stays review-only until a separate implementation is written, tested and explicitly approved.

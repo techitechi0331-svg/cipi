@@ -43,6 +43,10 @@ jobs:
         id: discover
         run: python automation/architect/discover.py --max-gaps 3 --github-output "$GITHUB_OUTPUT"
 
+      - name: Generate one bounded Adapter Candidate specification
+        id: adapter_candidate
+        run: python automation/architect/adapter_candidate.py --max-candidates 1 --github-output "$GITHUB_OUTPUT"
+
       - name: Run one allowlisted Pilot when available
         id: pilot
         if: steps.discover.outputs.top_pilot_proposal != ''
@@ -79,6 +83,7 @@ jobs:
         id: changes
         env:
           TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+          ADAPTER_CANDIDATE: ${{ steps.adapter_candidate.outputs.adapter_candidate_id }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
@@ -86,7 +91,11 @@ jobs:
             exit 0
           fi
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          BOT_BRANCH="architect-bot/${TOP_GAP}/auto-v1"
+          WORK_KEY="$TOP_GAP"
+          if [ -z "$WORK_KEY" ]; then WORK_KEY="$ADAPTER_CANDIDATE"; fi
+          if [ -z "$WORK_KEY" ]; then WORK_KEY="ARCHITECT-WORK"; fi
+          echo "work_key=$WORK_KEY" >> "$GITHUB_OUTPUT"
+          BOT_BRANCH="architect-bot/${WORK_KEY}/auto-v1"
           echo "bot_branch=$BOT_BRANCH" >> "$GITHUB_OUTPUT"
           if git ls-remote --exit-code --heads origin "$BOT_BRANCH" >/dev/null 2>&1; then
             echo "skip_submit=true" >> "$GITHUB_OUTPUT"
@@ -109,7 +118,7 @@ jobs:
             git add -A "research/knowledge_candidates/$PILOT_JOB"
             git add -A "research/decisions/$PILOT_JOB"
           fi
-          git commit -m "submit autonomous architect evidence: ${{ steps.discover.outputs.top_gap_id }}"
+          git commit -m "submit autonomous architect evidence: ${{ steps.changes.outputs.work_key }}"
           python tools/validate_architect_change_scope.py --base origin/main --head HEAD
           git push --set-upstream origin "$BOT_BRANCH"
 
@@ -120,18 +129,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
-          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+          WORK_KEY: ${{ steps.changes.outputs.work_key }}
         run: |
-          gh pr create --base main --head "$BOT_BRANCH" --title "Autonomous architect evidence: $TOP_GAP" --body "Bounded zero-paid CIPI Research Architect pass. It discovered at most three gaps, ran at most one allowlisted pilot, routed at most one product opportunity through the isolated Plugin Incubator, and passed Architect/Incubator plus existing CIPI research gates. No production plug-in repository, release, adapter-registry mutation, PROMOTE or CONFIRMED action was performed."
+          gh pr create --base main --head "$BOT_BRANCH" --title "Autonomous architect evidence: $WORK_KEY" --body "Bounded zero-paid CIPI Research Architect pass. It discovered at most three gaps, ran at most one allowlisted pilot, generated at most one non-executable Adapter Candidate specification, routed at most one product opportunity through the isolated Plugin Incubator, and passed Architect/Incubator plus existing CIPI research gates. No production plug-in repository, release, adapter-registry mutation, PROMOTE or CONFIRMED action was performed."
 
       - name: Create review issue when Actions PR creation is disabled
         if: steps.changes.outputs.has_changes == 'true' && steps.changes.outputs.skip_submit != 'true' && steps.open_pr.outcome != 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
-          TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
+          WORK_KEY: ${{ steps.changes.outputs.work_key }}
         run: |
-          gh issue create --title "Autonomous architect ready: $TOP_GAP" --body "A bounded Research Architect pass is ready on branch $BOT_BRANCH. It may contain Research Gap/Proposal artifacts, at most one allowlisted pilot run and one Plugin Incubator routing decision. All local Architect/Incubator and existing CIPI research validators passed. Production mutation and automatic final promotion are prohibited."
+          gh issue create --title "Autonomous architect ready: $WORK_KEY" --body "A bounded Research Architect pass is ready on branch $BOT_BRANCH. It may contain Research Gap/Proposal artifacts, at most one allowlisted pilot run, one non-executable Adapter Candidate specification and one Plugin Incubator routing decision. All local Architect/Incubator and existing CIPI research validators passed. Production mutation and automatic final promotion are prohibited."
 
       - name: No new architect work
         if: steps.changes.outputs.has_changes != 'true'

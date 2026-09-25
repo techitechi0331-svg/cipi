@@ -16,6 +16,13 @@ PROPOSAL_REQUIRED = {
     "plugin_opportunity","overlap_hints","external_validity","budget"
 }
 PROPOSAL_STATES = {"PILOT_READY","NEEDS_ADAPTER","RESEARCH_MORE","ARCHIVED"}
+ADAPTER_REQUIRED = {
+    "schema_version","adapter_candidate_id","source_research_proposal","state","executable",
+    "proposed_adapter_name","track","research_question","baseline","variants","metrics",
+    "acceptance","rejection","required_operations","network_required","timeout_minutes",
+    "dependency_policy","allowed_output_prefixes","forbidden_operations","review_requirements",
+    "implementation_status","automatic_registry_promotion_allowed"
+}
 
 def load(path: Path):
     return yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -52,6 +59,31 @@ def validate_root(root: Path) -> list[str]:
         if not source.exists(): errors.append(f"{path}: source_gap does not exist: {data.get('source_gap')}")
         budget=data.get("budget")
         if not isinstance(budget,dict): errors.append(f"{path}: budget must be mapping")
+
+    for path in sorted((base/"adapter_candidates").glob("*.yaml")) if (base/"adapter_candidates").exists() else []:
+        try: data=load(path)
+        except Exception as exc:
+            errors.append(f"{path}: YAML parse error: {exc}"); continue
+        if not isinstance(data,dict):
+            errors.append(f"{path}: root must be mapping"); continue
+        missing=sorted(ADAPTER_REQUIRED-set(data))
+        if missing: errors.append(f"{path}: missing {', '.join(missing)}")
+        if data.get("state") not in {"DRAFT_REVIEW","APPROVED_FOR_IMPLEMENTATION","REJECTED"}:
+            errors.append(f"{path}: invalid adapter candidate state")
+        if data.get("executable") is not False:
+            errors.append(f"{path}: adapter candidate artifact must be non-executable")
+        if data.get("automatic_registry_promotion_allowed") is not False:
+            errors.append(f"{path}: automatic registry promotion must be false")
+        source=root/str(data.get("source_research_proposal",""))
+        if not source.exists():
+            errors.append(f"{path}: source_research_proposal does not exist")
+        else:
+            proposal=load(source)
+            if proposal.get("state") != "NEEDS_ADAPTER":
+                errors.append(f"{path}: source proposal must remain NEEDS_ADAPTER until reviewed implementation exists")
+        for key in ("baseline","variants","metrics","acceptance","rejection","required_operations","allowed_output_prefixes","forbidden_operations","review_requirements"):
+            if not isinstance(data.get(key),list) or not data.get(key):
+                errors.append(f"{path}: {key} must be a non-empty list")
     return errors
 
 def main() -> int:

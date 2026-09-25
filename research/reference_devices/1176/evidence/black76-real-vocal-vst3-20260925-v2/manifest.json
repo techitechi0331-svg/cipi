@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "evidence_id": "black76-real-vocal-vst3-20260925-v2",
+  "repackages_evidence_id": "black76-real-vocal-vst3-20260925",
+  "packaging_revision": 2,
+  "product_repo": "techitechi0331-svg/76blackCompressor",
+  "product_commit": "1d23fb8a31b29eb40e79b4026091a9d4b6c1f693",
+  "workflow_run_id": 36110318053,
+  "artifact_id": 10852897794,
+  "artifact_name": "Black76-Real-Vocal-AB",
+  "artifact_sha256": "6e7297f02bedbee78af5be535b1b3676b179751882da691e2ad5defbf6055efa",
+  "source_repo": "https://github.com/pdx-cs-sound/wavs",
+  "source_license_scope": "CC0 unless otherwise indicated by upstream README",
+  "sample_rate_hz": 48000,
+  "input_peak_target": 0.5,
+  "source_count": 2,
+  "modes": [
+    "color_attack_off",
+    "moderate_ratio4",
+    "stress_ratio20"
+  ],
+  "actual_vst3": true,
+  "host": "JUCE offline VST3 host",
+  "expected_latency_samples": 6,
+  "raw_audio_persisted_in_cipi": false,
+  "scope": "Packaging-revision snapshot of the same provenance-clean derived metrics. Corrects only CIPI byte-level checksum provenance; no DSP result is changed."
+}

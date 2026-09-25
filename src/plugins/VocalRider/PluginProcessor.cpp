@@ -97,8 +97,10 @@ void VocalRiderAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         const auto outputGain = outputGainSmooth.getNextValue();
         const auto rideDb = rider.processSample (linkedAbs, amount);
 
+        const auto safetyOutputGain = juce::jmax (
+            outputGain, outputGainSmooth.getTargetValue());
         const auto protectedRideDb = headroomGuard.process (
-            linkedAbs, outputGain, rideDb);
+            linkedAbs, safetyOutputGain, rideDb);
         const auto totalGain = juce::Decibels::decibelsToGain (protectedRideDb) * outputGain;
 
         for (int ch = 0; ch < channels; ++ch)
@@ -147,7 +149,43 @@ void VocalRiderAudioProcessor::processDelayOnly (juce::AudioBuffer<float>& buffe
 void VocalRiderAudioProcessor::processBlockBypassed (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
 {
     juce::ScopedNoDenormals noDenormals;
-    processDelayOnly (buffer);
+
+    const auto channels = buffer.getNumChannels();
+    const auto samples = buffer.getNumSamples();
+
+    if (channels <= 0 || samples <= 0 || delayBuffer.getNumSamples() <= 0)
+        return;
+
+    amountSmooth.setTargetValue (0.0f);
+    outputGainSmooth.setTargetValue (1.0f);
+
+    for (int i = 0; i < samples; ++i)
+    {
+        float linkedAbs = 0.0f;
+
+        for (int ch = 0; ch < channels; ++ch)
+        {
+            const auto input = sanitise (buffer.getSample (ch, i));
+            linkedAbs = juce::jmax (linkedAbs, std::abs (input));
+        }
+
+        const auto amount = amountSmooth.getNextValue();
+        const auto neutralOutputGain = outputGainSmooth.getNextValue();
+        const auto rideDb = rider.processSample (linkedAbs, amount);
+        (void) headroomGuard.process (linkedAbs, neutralOutputGain, rideDb);
+
+        for (int ch = 0; ch < channels; ++ch)
+        {
+            const auto input = sanitise (buffer.getSample (ch, i));
+            auto* delay = delayBuffer.getWritePointer (ch);
+            const auto delayed = delay[delayWritePosition];
+            delay[delayWritePosition] = input;
+            buffer.setSample (ch, i, delayed);
+        }
+
+        if (++delayWritePosition >= lookaheadSamples)
+            delayWritePosition = 0;
+    }
 }
 
 juce::AudioProcessorEditor* VocalRiderAudioProcessor::createEditor()

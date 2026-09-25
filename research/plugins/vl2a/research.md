@@ -454,3 +454,28 @@ Next:
 - stateful/optical-modulation follow-up;
 - then level-matched real-vocal validation;
 - only then production consideration.
+
+
+## 2026-09-25 stereo-link product decision
+
+Decision: **KEEP current shared phase-safe detector as an intentional modern
+VL2A design**.
+
+Current law:
+`0.5 * (abs(L) + abs(R))`
+
+Evidence boundary:
+- 1966 Teletronix stereo linking makes the control voltage common so either
+  channel can cause equal gain reduction in both units;
+- Waves CLA-2A documents one detector for both stereo channel paths;
+- neither source publishes a digital-equivalent one-sided L/R combine law;
+- current VL2A is symmetric, centered-stereo == mono, and phase-safe.
+
+Therefore:
+- one shared detector: KEEP;
+- current average-of-magnitudes combine: KEEP as product design;
+- exact 1966 one-sided sensitivity: not claimed;
+- max(L,R) as historical truth: rejected as unsupported.
+
+This closes stereo-link as a release blocker unless new controlled reference
+measurements justify reopening it.

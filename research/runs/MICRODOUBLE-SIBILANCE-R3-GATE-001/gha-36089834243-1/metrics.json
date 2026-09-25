@@ -1,0 +1,21 @@
+{
+  "holdout_baseline_non_event_pct": 10.08347,
+  "holdout_baseline_recall_pct": 97.464097,
+  "holdout_candidate_clean_pct": 0.0,
+  "holdout_candidate_non_event_pct": 0.364273,
+  "holdout_candidate_recall_pct": 94.744268,
+  "holdout_gate_ok": true,
+  "holdout_max_onset_ms": 23.310658,
+  "holdout_pass": 1.0,
+  "holdout_recall_gap_pp": 2.719829,
+  "holdout_strength_mean": 0.381149,
+  "holdout_strength_p90": 0.443423,
+  "r1_r2_and_064_negative_evidence_preserved": true,
+  "r2_recall_gap_pp": 5.728143,
+  "r3_060_pass": 1.0,
+  "r3_062_pass": 1.0,
+  "r3_064_pass": 0.0,
+  "r3_selected_activation": 0.62,
+  "selection_rule_ok": true,
+  "snapshot_checksum_ok": true
+}

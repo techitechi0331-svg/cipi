@@ -1,0 +1,31 @@
+schema_version: '1.0'
+decision_id: MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:auto
+job_id: MICRODOUBLE-SIBILANCE-R3-GATE-001
+source_run: research/runs/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for MICRODOUBLE-SIBILANCE-R3-GATE-001; promotion
+  requires review.
+declared_rejection_criteria:
+- Any declared acceptance condition fails.
+- Negative results are missing or rewritten.
+- The frozen threshold differs from the predeclared highest-passing rule.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - MICRODOUBLE-SIBILANCE-REUSE-001
+  related_decisions:
+  - MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:review-01
+created_at: '2026-09-25T03:18:47.744628Z'
+immutable: true

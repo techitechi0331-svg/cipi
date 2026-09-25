@@ -54,6 +54,7 @@ ADAPTERS = {
     "vopripro_detector_transfer_screen_v1",
     "vopripro_ballistics_transfer_screen_v1",
     "vocal_resonance_raw_patch_sufficiency_v2",
+    "voprep_amount_mapping_r5_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3262,6 +3263,86 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         ),
     }
 
+
+def _voprep_amount_mapping_r5(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "amount_mapping_r5_soft_range.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-amount-r5-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Amount R5 subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+
+        result = json.loads((out / "amount_r5_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "amount_r5_results.json": (out / "amount_r5_results.json").read_text(encoding="utf-8"),
+            "amount_r5_report.md": (out / "amount_r5_report.md").read_text(encoding="utf-8"),
+            "amount_r5_metrics.csv": (out / "amount_r5_metrics.csv").read_text(encoding="utf-8"),
+        }
+
+    selected = result.get("selected_before_holdout") or {}
+    holdout = result.get("holdout") or {}
+    base = result.get("baseline") or {}
+    candidates = result.get("candidates") or []
+    candidate_summary = [
+        {
+            "id": x.get("id"),
+            "ceiling_db": x.get("ceiling_db"),
+            "passes_selection": bool(x.get("passes_selection", False)),
+            "mapping_rmse_db": x.get("mapping_rmse_db"),
+            "ripple_improvement_ratio": x.get("ripple_improvement_ratio"),
+            "amount100_ripple_db": ((x.get("response") or {}).get("100.0") or {}).get("aggregate", {}).get("gr_ripple"),
+        }
+        for x in candidates
+    ]
+    metrics = {
+        "decision": result.get("decision"),
+        "acceptance_met": bool(result.get("acceptance_met", False)),
+        "baseline_amount100_ripple_db": ((base.get("response") or {}).get("100.0") or {}).get("aggregate", {}).get("gr_ripple"),
+        "selected_candidate": selected.get("id"),
+        "selected_ceiling_db": selected.get("ceiling_db"),
+        "candidate_summary": candidate_summary,
+        "holdout_accessed": bool(result.get("holdout_accessed", False)),
+        "holdout_passes": bool(holdout.get("passes", False)) if holdout else False,
+        "holdout_amount100_ripple_db": ((holdout.get("response") or {}).get("100.0") or {}).get("aggregate", {}).get("gr_ripple") if holdout else None,
+        "selection_singers": result.get("selection_singers", []),
+        "holdout_singers": result.get("holdout_singers", []),
+        "range_start_db": result.get("range_start_db"),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/amount_mapping_r5_soft_range.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Vo.Prep Amount R5 keeps the frozen detector/curve/8/70 ballistics and "
+            "the explicit Learn-time threshold solve, then compares a no-Range R4 "
+            "baseline with post-ballistics smooth ranges starting at 6 dB and "
+            "asymptotic ceilings 10/9/8 dB. The highest passing ceiling is frozen "
+            "before any fresh f9/m9/m10/m11 holdout audio is accessed."
+        ),
+    }
+
 def _vopripro_detector_transfer_screen(
     repo_root: Path, timeout_seconds: int
 ) -> dict[str, Any]:
@@ -3479,6 +3560,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_self_counterfactual_inpainting(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r4_v1":
         return _voprep_amount_mapping_r4(repo_root, timeout_seconds)
+    if name == "voprep_amount_mapping_r5_v1":
+        return _voprep_amount_mapping_r5(repo_root, timeout_seconds)
     if name == "vopripro_detector_transfer_screen_v1":
         return _vopripro_detector_transfer_screen(repo_root, timeout_seconds)
     if name == "vopripro_ballistics_transfer_screen_v1":

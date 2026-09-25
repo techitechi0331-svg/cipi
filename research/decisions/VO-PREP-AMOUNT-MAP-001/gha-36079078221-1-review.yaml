@@ -1,0 +1,51 @@
+schema_version: '1.0'
+decision_id: VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:review-01
+job_id: VO-PREP-AMOUNT-MAP-001
+source_run: research/runs/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The predeclared deterministic Amount-mapping gate passed with exact zero-null,
+  exact 100-percent endpoint equivalence, zero measured strength-linearity error
+  for DesiredGR scaling, and materially larger nonlinearity for threshold sweep
+  and ratio interpolation. This is sufficient to advance DesiredGR scaling as
+  the implementation/listening candidate, but not to promote it as final product
+  behavior because the run did not test real-vocal listening, parameter automation,
+  operating-point interaction, or host behavior.
+scope: >-
+  Review of the deterministic level-domain Amount mapping study only. The decision
+  advances DesiredGR scaling to product-candidate implementation and level-matched
+  listening; it does not confirm the final Amount control or the compressor product.
+declared_rejection_criteria:
+  - Any acceptance invariant fails.
+  - Any required mapping, Amount, or input-shift case is missing.
+  - Any non-finite output is produced.
+triggered_criteria: []
+retained_findings:
+  - DesiredGR scaling zero-null maximum gain reduction error was 0.0 dB.
+  - DesiredGR scaling 100-percent endpoint maximum error was 0.0 dB.
+  - DesiredGR scaling maximum strength-linearity RMSE was 0.0 dB.
+  - DesiredGR scaling event-extra linearity RMSE was 0.0 dB.
+  - Threshold-sweep maximum linearity RMSE was 2.638720624 dB.
+  - Ratio-interpolation maximum linearity RMSE was 0.551673086 dB.
+  - All 75 mapping-by-Amount-by-input-shift rows were present and finite.
+reusable_findings:
+  - Scaling post-curve DesiredGR is a mathematically exact way to expose a linear compression-intensity control for a frozen static gain curve under constant Amount.
+  - Threshold or ratio interpolation can be musically valid controls, but they should not be described as linear Amount mappings without measurement.
+revisit_if:
+  - Level-matched real-vocal listening does not prefer or cannot distinguish the candidate behavior.
+  - Parameter automation reveals clicks, discontinuities, stale gain-reduction state, or unintuitive recovery when Amount changes.
+  - The final operating-point architecture changes the relationship between body and peak-extra gain reduction.
+  - Product VST3 or Cubase Pro 14 validation shows behavior that differs from the deterministic model.
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:auto"
+parent_decision_id: "VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:auto"
+created_at: '2026-09-25'
+immutable: true
+review_gaps: []

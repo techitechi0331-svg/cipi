@@ -1,0 +1,109 @@
+name: Auto Evidence Intake
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Research-bot branch to intake
+        required: true
+        type: string
+      job_id:
+        description: CIPI Research Job ID
+        required: true
+        type: string
+      run_id:
+        description: CIPI Research Run ID
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: cipi-auto-evidence-intake
+  cancel-in-progress: false
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BOT_BRANCH: ${{ inputs.branch }}
+      JOB_ID: ${{ inputs.job_id }}
+      RUN_ID: ${{ inputs.run_id }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Validate intake identity
+        run: |
+          case "$BOT_BRANCH" in
+            "research-bot/$JOB_ID/"*) ;;
+            *)
+              echo "Branch does not match declared job: $BOT_BRANCH vs $JOB_ID"
+              exit 1
+              ;;
+          esac
+          git fetch origin "$BOT_BRANCH:refs/remotes/origin/$BOT_BRANCH"
+          git rev-parse "origin/$BOT_BRANCH"
+
+      - name: Validate worker change scope from merge base
+        run: |
+          BASE="$(git merge-base origin/main "origin/$BOT_BRANCH")"
+          echo "merge_base=$BASE"
+          python tools/validate_research_change_scope.py --base "$BASE" --head "origin/$BOT_BRANCH"
+
+      - name: Merge evidence in an isolated candidate branch
+        run: |
+          git config user.name "cipi-evidence-intake-bot"
+          git config user.email "cipi-evidence-intake-bot@users.noreply.github.com"
+          git switch -c "intake-$GITHUB_RUN_ID" origin/main
+          git merge --no-ff --no-edit "origin/$BOT_BRANCH"
+
+      - name: Validate merged CIPI state
+        run: |
+          python tools/validate_research_job.py
+          python tools/validate_research_result.py
+          python tools/validate_evidence_candidate.py
+          python tools/validate_decision_records.py
+          python tools/validate_review_triage.py
+          python tools/validate_review_brief.py
+          python tools/validate_cross_repo.py
+          python tools/validate_research.py
+
+      - name: Push evidence intake to main
+        run: |
+          git push origin HEAD:main
+          git push origin --delete "$BOT_BRANCH" || true
+
+      - name: Close stale autonomous review handoffs
+        run: |
+          gh pr list --state open --head "$BOT_BRANCH" --json number --jq '.[].number' |
+            while read -r number; do
+              [ -z "$number" ] || gh pr close "$number" --comment "Evidence was automatically intake-validated and merged to main. Review/promotion authority remains unchanged."
+            done
+          gh issue list --state open --search "\"Autonomous research ready: $JOB_ID\" in:title" --json number --jq '.[].number' |
+            while read -r number; do
+              [ -z "$number" ] || gh issue close "$number" --comment "Evidence was automatically intake-validated and merged to main. Review/promotion authority remains unchanged."
+            done
+
+      - name: Continue CIPI work queue
+        run: gh workflow run free-autonomous-research.yml --ref main
+
+      - name: Continue Cross-Repo queue
+        run: gh workflow run cross-repo-orchestrator.yml --ref main

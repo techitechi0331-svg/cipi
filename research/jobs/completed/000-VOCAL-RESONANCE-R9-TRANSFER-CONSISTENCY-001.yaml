@@ -1,0 +1,67 @@
+schema_version: '1.0'
+job_id: VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001
+state: COMPLETED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: Can deployable single-view fixed-Hz temporal transfer-consistency
+  features recover a material fraction of the R7 causal-oracle ranking gap without
+  increasing independent clean-vocal false triggers?
+hypothesis: Across both predeclared seeds, time-consistent center-vs-neighborhood
+  relative-gain features will improve conditional Top-5 by at least 0.08 over the
+  frozen static ranker, close at least 15 percent of the R7 oracle gap, preserve strong-effect
+  conditional Top-5 within 0.05, and not worsen external clean false-trigger by more
+  than 0.05.
+counter_hypotheses:
+- Natural formants/harmonics can be equally time-consistent at fixed Hz, so transfer-consistency
+  adds no separability.
+- The feature family improves one seed only and is not stable.
+- Transfer-consistency overfires on legitimate stable vocal resonances and worsens
+  clean false triggers.
+baseline:
+- frozen_static_r2_single_view
+variants:
+- fixed_hz_temporal_transfer_consistency
+metrics:
+- top5_given_generator_hit
+- strong_top5_given_generator_hit
+- oracle_gap_closure
+- external_clean_false_trigger
+- generator_ceiling
+- mrr
+- feature_separation
+acceptance:
+- 'for each seed: conditional Top-5 >= static + 0.08'
+- 'for each seed: R7 oracle gap closure >= 0.15'
+- 'for each seed: strong-effect conditional Top-5 >= static - 0.05'
+- 'for each seed: external clean false-trigger <= static + 0.05'
+- 'for each seed: generator ceiling >= 0.80'
+rejection:
+- any seed conditional Top-5 improvement < 0.08
+- any seed oracle gap closure < 0.15
+- any seed strong-effect conditional Top-5 regresses by more than 0.05
+- any seed external clean false-trigger worsens by more than 0.05
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20261109
+experiment_adapter: vocal_resonance_transfer_consistency_v1
+allowed_operations:
+- stream_public_vocalset_in_runner_memory
+- controlled_eq_injection
+- derived_metric_write
+prohibited_operations:
+- arbitrary_shell
+- main_push
+- confidence_change
+- current_stage_change
+- raw_audio_write
+- paid_api
+- product_release
+knowledge_candidate:
+  claim: A fixed unwanted resonance may be distinguishable from natural vocal structure
+    by the time-consistency of its relative gain at one absolute frequency versus
+    neighboring spectral context.
+  evidence_type: HYPOTHESIS
+  scope: Deployable single-view vocal-resonance semantic ranking without a clean reference.
+  promotion_requested: HYPOTHESIS
+latest_run: gha-36172028692-1

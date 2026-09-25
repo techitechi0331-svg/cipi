@@ -1,0 +1,7 @@
+claim: A fixed unwanted resonance may be distinguishable from natural vocal structure
+  by the time-consistency of its relative gain at one absolute frequency versus neighboring
+  spectral context.
+evidence_type: HYPOTHESIS
+scope: Deployable single-view vocal-resonance semantic ranking without a clean reference.
+source_run: research/runs/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1
+promotion_requested: HYPOTHESIS

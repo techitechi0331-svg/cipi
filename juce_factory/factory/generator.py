@@ -13,6 +13,13 @@ def _cpp_string(value: str) -> str:
     return value.replace("\\", "\\\\").replace('"', '\\"')
 
 
+def _cpp_float(value: float | int) -> str:
+    text = format(float(value), ".9g")
+    if "." not in text and "e" not in text.lower():
+        text += ".0"
+    return text + "f"
+
+
 def _target_name(plugin_id: str) -> str:
     safe = re.sub(r"[^A-Za-z0-9]", "", plugin_id)
     if not safe:
@@ -161,8 +168,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout FactoryPluginAudioProcessor:
     layout.add(std::make_unique<juce::AudioParameterFloat>(
         juce::ParameterID{{"gain_db", 1}},
         "{_cpp_string(gain.get("name", "Gain"))}",
-        juce::NormalisableRange<float>({float(gain["min"]):.8g}f, {float(gain["max"]):.8g}f, 0.01f),
-        {float(gain["default"]):.8g}f,
+        juce::NormalisableRange<float>({_cpp_float(gain["min"])}, {_cpp_float(gain["max"])}, 0.01f),
+        {_cpp_float(gain["default"])},
         "dB"));
     return layout;
 }}

@@ -5,11 +5,9 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
-import shutil
 import urllib.error
 import urllib.parse
 import urllib.request
-import yaml
 
 from core import (
     action_terminal_dir,
@@ -164,7 +162,11 @@ def observe_latest(root: Path, registry: dict, gh: GitHubClient) -> int:
             if workflow.get("monitor") is not True:
                 continue
             workflow_file = str(workflow["file"])
-            runs = gh.list_workflow_runs(repo, workflow_file, per_page=5)
+            try:
+                runs = gh.list_workflow_runs(repo, workflow_file, per_page=5)
+            except RuntimeError as exc:
+                print(f"cross-repo monitor warning: {repo_key}/{workflow_key}: {exc}")
+                continue
             completed_runs = [r for r in runs if r.get("status") == "completed"]
             if not completed_runs:
                 continue

@@ -106,6 +106,21 @@ jobs:
           rm -rf research/runs/PEAKBODY-LEGACY-STRESS-001
           python automation/worker/runner.py automation/examples/peakbody_legacy_stress_job.yaml --output research/runs/PEAKBODY-LEGACY-STRESS-001/ci-0001 --run-id ci-0001
 
+      - name: Smoke reviewed masking-aware presence adapter
+        run: |
+          rm -rf research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
+          python automation/worker/runner.py research/jobs/queued/000-ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001.yaml --output research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001 --run-id ci-0001
+          python - <<'PY'
+          import json
+          p=json.load(open("research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001/manifest.json", encoding="utf-8"))
+          m=json.load(open("research/runs/ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001/ci-0001/metrics.json", encoding="utf-8"))
+          assert p["acceptance_met"] is True
+          assert m["masked_proxy_improvement_ratio"] >= 0.80
+          assert m["non_target_movement_ratio"] <= 0.35
+          assert m["candidate_gain_std_db"] >= 0.50
+          print("masking-aware presence adapter smoke: PASS")
+          PY
+
       - name: Validate research results and artifact safety
         run: |
           python tools/validate_research_result.py

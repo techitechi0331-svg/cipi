@@ -1,0 +1,78 @@
+schema_version: '1.0'
+job_id: ARCHITECT-MASKING-AWARE-PRESENCE-PILOT-001
+state: QUEUED
+track:
+  id: ARCHITECT_MASKING_AWARE_PRESENCE
+  path: research/architect
+research_question: Can vocal presence be increased from masking context without becoming a static high-mid boost?
+hypothesis: A bounded context-dependent presence law can retain most of a static presence-EQ masking-proxy benefit while avoiding unnecessary movement when the vocal is already unmasked.
+counter_hypotheses:
+  - Level-matched static presence EQ is equally selective once the movement budget is matched.
+  - The contextual law collapses toward a near-static boost across the declared matrix.
+  - Reducing non-target movement sacrifices too much masked-case proxy improvement.
+baseline:
+  - static_presence_eq_3db
+variants:
+  - bounded_masking_context_presence
+metrics:
+  - matrix_complete
+  - all_numeric_finite
+  - masked_proxy_improvement_ratio
+  - candidate_non_target_movement_db
+  - non_target_movement_ratio
+  - candidate_masked_mean_gain_db
+  - candidate_gain_std_db
+  - candidate_max_gain_db
+acceptance:
+  - Synthetic matrix is complete and all numeric outputs are finite.
+  - Candidate retains at least 80 percent of static-EQ masked proxy improvement.
+  - Candidate mean non-target movement is <= 1.0 dB.
+  - Candidate non-target movement is <= 35 percent of static-EQ non-target movement.
+  - Candidate masked-case mean gain is >= 0.50 dB.
+  - Candidate gain standard deviation is >= 0.50 dB so the law has not collapsed to a static boost.
+  - Candidate maximum gain is <= 3.0 dB.
+rejection:
+  - Candidate retains less than 80 percent of static-EQ masked proxy improvement.
+  - Candidate non-target movement exceeds 1.0 dB or 35 percent of the static baseline.
+  - Candidate collapses toward a static gain law or exceeds the declared 3 dB movement budget.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 0
+experiment_adapter: rp_masking_aware_presence_001_pilot_v1
+allowed_operations:
+  - generate_deterministic_synthetic_inputs
+  - calculate_declared_metrics
+  - write_derived_json_csv_markdown_sha256
+prohibited_operations:
+  - arbitrary_shell_from_yaml
+  - network_access
+  - network_write
+  - raw_audio_read
+  - raw_audio_write
+  - production_plugin_mutation
+  - main_push
+  - confidence_change
+  - current_stage_change
+knowledge_candidate:
+  claim: A bounded masking-context presence law is more selective than a static 3 dB presence boost in the declared synthetic matrix when judged by retained masking-proxy improvement and non-target movement.
+  evidence_type: MEASURED
+  scope: Deterministic oracle-style synthetic target/masker-band pilot only; this does not establish a deployable masking estimator, perceptual preference, real-vocal generalization, or product readiness.
+  promotion_requested: HYPOTHESIS
+continuation:
+  on_accept: []
+  on_reject: []
+rejection_record:
+  reason: The masking-aware presence hypothesis fails if the contextual law cannot retain most of the static-EQ masking proxy benefit while materially reducing non-target movement.
+  retained_findings:
+    - Preserve the full synthetic matrix and comparative movement metrics even if the candidate fails.
+  reusable_findings:
+    - The target-vs-masker synthetic matrix remains reusable as a baseline selectivity test for future presence-control laws.
+  revisit_if:
+    - A non-oracle deployable masking estimator becomes available for the same fixed movement budget.
+    - Real-vocal or mix-context evidence motivates a different selectivity metric.
+  scope: Synthetic research pilot only; failure does not reject masking-aware presence as a product category.
+review_policy:
+  required_human_gates:
+    - Passing this pilot authorizes deeper research only, not product integration.
+    - Real-vocal level-matched listening remains required before any product claim.
+    - Existing Vocal Surface and Vocal Finisher overlap must be revisited before standalone product incubation.

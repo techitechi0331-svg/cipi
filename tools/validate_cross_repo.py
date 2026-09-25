@@ -17,6 +17,7 @@ def main() -> int:
         print(f"CIPI cross-repo gate: FAIL\n- registry: {exc}")
         return 1
 
+    count = 0
     templates = ROOT / "automation" / "cross_repo" / "action_templates"
     if templates.exists():
         for path in sorted(templates.glob("*.yaml")):
@@ -33,7 +34,6 @@ def main() -> int:
 
     base = ROOT / "research" / "cross_repo" / "actions"
     states = {"queued": "QUEUED", "dispatched": "DISPATCHED", "completed": "COMPLETED", "failed": "FAILED", "quarantined": "QUARANTINED"}
-    count = 0
     for folder, expected in states.items():
         root = base / folder
         if not root.exists():

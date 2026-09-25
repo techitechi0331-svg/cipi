@@ -50,28 +50,38 @@ def choose_job(
     queued_root: Path,
     completed_root: Path,
     branch_exists: Callable[[str], bool] = remote_branch_exists,
-) -> tuple[tuple[Path, str, str, str] | None, dict[str, int | bool]]:
+) -> tuple[
+    tuple[Path, str, str, str] | None,
+    dict[str, int | bool | list[str]],
+]:
     jobs = sorted([*queued_root.glob("*.yaml"), *queued_root.glob("*.yml")]) if queued_root.exists() else []
     parsed = [(path, _load_yaml(path)) for path in jobs]
     parsed.sort(key=lambda item: (-_priority(item[1]), item[0].as_posix()))
 
     completed = completed_job_ids(completed_root)
-    stats: dict[str, int | bool] = {
+    stats: dict[str, int | bool | list[str]] = {
         "skipped_blocked": 0,
         "skipped_dependency": 0,
         "skipped_claimed": 0,
+        "blocked_jobs": [],
+        "dependency_jobs": [],
+        "claimed_jobs": [],
         "work_steal": False,
     }
 
     skipped_before_selection = False
     for path, data in parsed:
         state = str(data.get("state", ""))
+        job_id = str(data.get("job_id", ""))
+
         if state != "QUEUED":
             stats["skipped_blocked"] = int(stats["skipped_blocked"]) + 1
+            blocked_jobs = stats["blocked_jobs"]
+            assert isinstance(blocked_jobs, list)
+            blocked_jobs.append(job_id or path.stem)
             skipped_before_selection = True
             continue
 
-        job_id = str(data.get("job_id", ""))
         if not job_id:
             skipped_before_selection = True
             continue
@@ -79,6 +89,9 @@ def choose_job(
         unresolved = [dep for dep in _dependencies(data) if dep not in completed]
         if unresolved:
             stats["skipped_dependency"] = int(stats["skipped_dependency"]) + 1
+            dependency_jobs = stats["dependency_jobs"]
+            assert isinstance(dependency_jobs, list)
+            dependency_jobs.append(f"{job_id}<-{','.join(unresolved)}")
             skipped_before_selection = True
             continue
 
@@ -86,6 +99,9 @@ def choose_job(
         branch = f"research-bot/{job_id}/auto-{digest}"
         if branch_exists(branch):
             stats["skipped_claimed"] = int(stats["skipped_claimed"]) + 1
+            claimed_jobs = stats["claimed_jobs"]
+            assert isinstance(claimed_jobs, list)
+            claimed_jobs.append(job_id)
             skipped_before_selection = True
             continue
 
@@ -94,6 +110,10 @@ def choose_job(
 
     stats["work_steal"] = skipped_before_selection
     return None, stats
+
+
+def _csv(values: int | bool | list[str]) -> str:
+    return ",".join(values) if isinstance(values, list) else ""
 
 
 def main() -> int:
@@ -113,6 +133,9 @@ def main() -> int:
         h.write(f"skipped_blocked={stats['skipped_blocked']}\n")
         h.write(f"skipped_dependency={stats['skipped_dependency']}\n")
         h.write(f"skipped_claimed={stats['skipped_claimed']}\n")
+        h.write(f"blocked_jobs={_csv(stats['blocked_jobs'])}\n")
+        h.write(f"dependency_jobs={_csv(stats['dependency_jobs'])}\n")
+        h.write(f"claimed_jobs={_csv(stats['claimed_jobs'])}\n")
         h.write(f"work_steal={'true' if stats['work_steal'] else 'false'}\n")
         if selected is None:
             h.write("has_job=false\n")

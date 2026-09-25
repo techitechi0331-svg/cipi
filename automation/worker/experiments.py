@@ -3218,7 +3218,8 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         }
 
     cand = result.get("candidate") or {}
-    holdout = result.get("holdout") or {}
+    raw_holdout = result.get("holdout")
+    holdout = raw_holdout or {}
     base = result.get("baseline") or {}
     metrics = {
         "decision": result.get("decision"),
@@ -3230,7 +3231,7 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
         "selection_relative_threshold_std_db": (cand.get("solver") or {}).get("std_relative_threshold_db"),
         "gain_invariance_max_threshold_error_db": (cand.get("gain_invariance_probe") or {}).get("max_threshold_shift_error_db"),
         "gain_invariance_max_gr_error_db": (cand.get("gain_invariance_probe") or {}).get("max_eval_mean_gr_error_db"),
-        "holdout_opened": holdout is not None,
+        "holdout_opened": bool(result.get("holdout_accessed", raw_holdout is not None)),
         "holdout_passes": bool(holdout.get("passes", False)) if holdout else False,
         "holdout_mapping_rmse_db": holdout.get("candidate_mapping_rmse_db") if holdout else None,
         "selection_singers": result.get("selection_singers", []),

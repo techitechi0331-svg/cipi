@@ -24,7 +24,7 @@ ADAPTERS = {
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
     "vo_prep_snapshot_gate_v1",
-    "vocal_resonance_temporal_morphology_v1",
+    "vocal_resonance_temporal_morphology_v1",\n    "vocal_resonance_temporal_morphology_stability_v1",
     "voprep_amount_mapping_v1",
 }
 
@@ -1361,6 +1361,58 @@ def _voprep_amount_mapping(repo_root: Path, timeout_seconds: int) -> dict[str, A
         ),
     }
 
+
+def _vocal_resonance_temporal_morphology_stability(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = repo_root / "research/experiments/VocalResonance/temporal_morphology_stability.py"
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-r5b-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {}
+        for name in [
+            "comparison.csv",
+            "coefficients.csv",
+            "source_overlap.csv",
+            "paired_external_clean.csv",
+            "summary.json",
+        ]:
+            raw_files[name] = (out / name).read_text(encoding="utf-8")
+
+    accepted = bool(summary["retention_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/temporal_morphology_stability.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Strict R5b falsification of temporal morphology: source-overlap audit, "
+            "two injection seeds, feature-family ablation, same-C control and paired "
+            "external-clean bootstrap. Raw vocal audio is not persisted."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1392,4 +1444,4 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_temporal_morphology(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_v1":
         return _voprep_amount_mapping(repo_root, timeout_seconds)
-    raise AssertionError(f"adapter dispatch missing for {name}")
+    if name == "vocal_resonance_temporal_morphology_stability_v1":\n        return _vocal_resonance_temporal_morphology_stability(repo_root, timeout_seconds)\n    raise AssertionError(f"adapter dispatch missing for {name}")

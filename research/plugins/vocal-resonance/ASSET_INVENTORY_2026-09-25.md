@@ -294,3 +294,29 @@ Run: `VOCAL-RESONANCE-R4-CLEAN-AUDIT-001 / gha-36070450907-1`
 **UNRESOLVED:** high-F0 behavior. The legacy ACF proxy reached >=900 Hz at p90 in 8/32 excerpts and >=900 Hz at p95 in 23/32, including many values at the 1000 Hz search ceiling.
 
 No production DSP or VST3 is authorized.
+
+
+---
+
+# 15. MEASURED — R5 temporal morphology
+
+Run: `VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001 / gha-36078101620-1`
+
+- Static R2 Top-5: 25.0%.
+- Full morphology Top-5: 25.0%.
+- Static strong-effect Top-5: 33.33%.
+- Full morphology strong-effect Top-5: 33.33%.
+- Static internal clean false-trigger: 37.5%.
+- Full morphology internal clean false-trigger: 12.5%.
+- Static external-clean false-trigger: 17.5%.
+- Full morphology external-clean false-trigger: 0.0% across 40 cases.
+- Top-3 and MRR did not improve.
+- Product gate failed.
+
+Classification:
+- **MEASURED:** exact R5 values above.
+- **INFERRED:** temporal morphology may improve abstention/context.
+- **HYPOTHESIS:** the effect is leakage-free and independent of C/threshold/seed.
+- **NOT SUPPORTED:** R5 improves semantic ranking.
+
+R5b must close overlap, ablation, same-C and multi-seed gaps before promotion.

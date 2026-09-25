@@ -1,0 +1,5 @@
+claim: In VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001, the full temporal-morphology ranker preserved Top-5 and strong-effect Top-5 while reducing measured clean false triggers from 37.5% to 12.5% internally and 17.5% to 0% on the 40-case external-clean cohort.
+evidence_type: MEASURED
+scope: Exact R5 seed/cohorts/model-selection procedure only; does not establish product safety or causal attribution to morphology.
+source_run: research/runs/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1
+promotion_requested: PROVISIONAL

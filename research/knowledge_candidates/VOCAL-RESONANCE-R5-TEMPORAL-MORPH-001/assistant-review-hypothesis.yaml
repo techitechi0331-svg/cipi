@@ -1,0 +1,5 @@
+claim: Generic candidate temporal morphology provides a leakage-free and calibration-robust clean-vocal abstention benefit without semantic-ranking regression.
+evidence_type: HYPOTHESIS
+scope: Vocal resonance semantic-ranker context features; requires R5b leakage, ablation, same-C and multi-seed audit.
+source_run: research/runs/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1
+promotion_requested: HYPOTHESIS

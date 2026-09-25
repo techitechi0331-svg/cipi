@@ -52,6 +52,7 @@ ADAPTERS = {
     "vocal_resonance_self_counterfactual_inpainting_v1",
     "voprep_amount_mapping_r4_v1",
     "vopripro_detector_transfer_screen_v1",
+    "vopripro_ballistics_transfer_screen_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3303,6 +3304,49 @@ def _vopripro_detector_transfer_screen(
     }
 
 
+def _vopripro_ballistics_transfer_screen(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vopripro"
+        / "experiments" / "ballistics_transfer_screen.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-vopripro-ballistics-transfer-") as td:
+        out = Path(td)
+        subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "ballistics_transfer_rows.csv": (out / "ballistics_transfer_rows.csv").read_text(encoding="utf-8"),
+            "release_rows.csv": (out / "release_rows.csv").read_text(encoding="utf-8"),
+            "summary.json": (out / "summary.json").read_text(encoding="utf-8"),
+            "report.md": (out / "report.md").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary.get("acceptance_met", False))
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vopripro/experiments/ballistics_transfer_screen.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Deterministic synthetic eligibility screen comparing current VoPriPro "
+            "Natural50 20/110 ms timing against the Vo.Prep-derived fixed 8/70 ms "
+            "pair with detector, static curve, calibration and cap held equal. "
+            "Passing authorizes only a same-corpus real-vocal timing study."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3386,4 +3430,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _voprep_amount_mapping_r4(repo_root, timeout_seconds)
     if name == "vopripro_detector_transfer_screen_v1":
         return _vopripro_detector_transfer_screen(repo_root, timeout_seconds)
+    if name == "vopripro_ballistics_transfer_screen_v1":
+        return _vopripro_ballistics_transfer_screen(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

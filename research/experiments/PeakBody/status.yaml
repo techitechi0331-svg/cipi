@@ -28,16 +28,21 @@ unresolved:
   - The 200 ms peak-preserve alternative protects transients but holds onset memory too long.
   - Revision 02 uses an 80 ms split-direction detector with 6–40 ms attack and 120–400 ms release; deterministic model replay and prototype branch gates have passed.
   - The full raw Macro-Level vocal corpus is not directly materializable in the current Project runtime.
-  - Spectral-only crest guarding is REJECTED; periodicity-protected guarding passed synthetic confounder gates but private real-vocal validation is still pending.
+  - Spectral-only crest guarding is REJECTED; the original proportional periodicity guard passed synthetic confounder gates but missed the locked private noise-like target (median retention 0.492622).
   - Private same-performance real-vocal guard study was INCONCLUSIVE: processing invariance and low-frequency/body preservation passed, but bright-voiced proxy count was 0 and noise-like suppression missed the locked target.
+  - YIN-CMND and MPM/NSDF direct-confidence replacements are REJECTED for the current private scope because both increased false protection on the fixed 246-frame noise-like reference mask.
+  - Strong-periodicity veto Candidate A passed the locked private sub-gate: noise-like median retention 0.295898, low-frequency median/p10 1.0/1.0, body delta 0.0, processing-variant correlation median 0.899242.
+  - Vo.Prep-context Candidate B passed private safety but did not justify extra complexity: private median noise retention improvement versus A was 0.0.
+  - Candidate A synthetic bright/noisy-voiced/plosive safety is queued and remains unconfirmed.
   - Broader multi-singer/high-register corpus validation is required before guard thresholds change.
   - Level-matched vocal AB is still pending.
   - Cubase Pro 14 real-host verification is pending.
   - A dedicated PeakBody product repository is not currently available; product implementation must not be merged into CIPI main.
 
 next_stage: measurement
-why_next: "The first private real-vocal study was inconclusive because it contained no bright-voiced proxy events. The next highest-value measurement is a broader multi-singer/high-register vocal corpus; thresholds must remain unchanged until that coverage gap is closed."
-next_confirmation: "Whether a broader multi-singer/high-register corpus supplies enough bright periodic and noise-like vocal events to validate or reject the periodicity-protected guard without post-hoc threshold changes."
+why_next: "The simple strong-periodicity veto already passes the locked private non-regression/noise sub-gate and the contextual extension does not yet justify its complexity. The next executable gate is the predeclared synthetic bright/noisy-voiced/plosive matrix; broader multi-singer/high-register validation remains mandatory afterward."
+next_confirmation: "Whether the simple strong-periodicity veto preserves bright/startup/noisy voiced and plosive transients while keeping synthetic noise false-preservation within the locked gate, and whether the contextual extension adds enough benefit to justify its complexity."
 
 blockers:
+  - "Dedicated PeakBody product repository is unavailable; product DSP handoff is BLOCKED while CIPI research continues."
   - "Final parameter promotion requires the full raw vocal corpus plus level-matched listening."

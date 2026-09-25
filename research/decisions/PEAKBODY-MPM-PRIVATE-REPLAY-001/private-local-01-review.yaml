@@ -1,0 +1,51 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-MPM-PRIVATE-REPLAY-001:private-local-01:review"
+job_id: PEAKBODY-MPM-PRIVATE-REPLAY-001
+source_run: research/runs/PEAKBODY-MPM-PRIVATE-REPLAY-001/private-local-01
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  MPM/NSDF clarity failed both predeclared real-vocal noise-like non-regression
+  gates on 246 baseline-defined private frames. Median transient-factor retention
+  rose from 0.492622 for the current autocorrelation guard to 0.625372 with MPM,
+  an absolute worsening of 0.132749. Low-frequency transient preservation, body
+  invariance and processing-variant correlation passed, but those successes do
+  not override the false-protection regression. MPM is therefore rejected as the
+  immediate direct-confidence challenger for this PeakBody scope.
+declared_rejection_criteria:
+  - "MPM noise-like median retention exceeds 0.50 with adequate reference count."
+  - "MPM noise-like median retention exceeds autocorr guard median by more than 0.02 absolute."
+  - "Any low-frequency/body/processing-invariance non-regression gate fails with adequate reference count."
+triggered_criteria:
+  - "MPM noise-like median retention was 0.625372, above the locked 0.50 gate."
+  - "MPM exceeded autocorr noise-like median retention by 0.132749, above the locked +0.02 non-regression allowance."
+retained_findings:
+  - "MPM low-frequency transient median and p10 retention were both 1.0 across 11,969 pooled baseline-defined frames."
+  - "MPM periodic-body mean absolute transient-factor delta was 0.0 across 10,612 pooled frames."
+  - "MPM guard processing-variant correlation median was 0.908387, slightly above the autocorr guard 0.904205."
+  - "Median MPM confidence on the baseline noise-like mask was 0.331997 versus autocorr 0.228648."
+  - "Bright-voiced reference count remained zero, so high-register real-vocal safety remains untested."
+reusable_findings:
+  - "Synthetic periodicity confidence separation does not guarantee dynamics-safe real-vocal false-protection behavior."
+  - "Candidate-independent event masks expose regressions that would be hidden by candidate-dependent event selection."
+  - "After YIN and MPM both fail the same real-vocal axis, the next design search should move from estimator substitution to contextual noise-evidence fusion."
+revisit_if:
+  - "MPM clarity is recalibrated or fused with independent contextual sibilance/breath evidence under a predeclared protocol."
+  - "A broader annotated singing corpus shows a materially different calibration regime."
+  - "A production-specific MPM implementation changes confidence behavior without increasing false protection."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-REALTIME-VOICING-BENCH-001
+    - PEAKBODY-YIN-PRIVATE-REPLAY-001
+    - PEAKBODY-PRIVATE-VOCAL-GUARD-001
+  related_decisions:
+    - "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:review-01"
+    - "PEAKBODY-YIN-PRIVATE-REPLAY-001:private-local-01:review"
+parent_decision_id: "PEAKBODY-REALTIME-VOICING-BENCH-001:gha-36159569753-1:review-01"
+created_at: "2026-09-26"
+immutable: true
+scope: "Private same-performance four-processing-variant MPM non-regression replay using baseline-defined event masks."
+review_gaps: []

@@ -1,0 +1,51 @@
+schema_version: "1.0"
+decision_id: "PEAKBODY-CONTEXTUAL-NOISE-GUARD-PRIVATE-001:private-local-01:review"
+job_id: PEAKBODY-CONTEXTUAL-NOISE-GUARD-PRIVATE-001
+source_run: research/runs/PEAKBODY-CONTEXTUAL-NOISE-GUARD-PRIVATE-001/private-local-01
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The simple strong-periodicity veto passed every locked private real-vocal
+  sub-gate and reduced median noise-like retention from 0.492622 to 0.295898
+  while preserving low-frequency transients, body behavior and processing-variant
+  stability. The contextual Vo.Prep-derived extension also passed safety but did
+  not improve median noise retention at all, so its extra complexity is not
+  justified by the private evidence. Synthetic bright/noisy-voiced/plosive safety
+  remains pending, so neither architecture is promoted yet.
+declared_rejection_criteria:
+  - "Reject the simple veto if a locked private preservation/invariance/noise gate fails."
+  - "Reject contextual complexity if it fails safety or does not meet the predeclared improvement rule."
+triggered_criteria: []
+retained_findings:
+  - "Current guard private noise-like median retention was 0.492622."
+  - "Simple veto private noise-like median retention was 0.295898."
+  - "Simple veto low-frequency transient median/p10 retention were 1.0/1.0."
+  - "Simple veto periodic-body mean absolute delta was 0.0."
+  - "Simple veto pairwise processing-variant correlation median was 0.899242."
+  - "Context candidate noise-like median retention was also 0.295898."
+  - "Context candidate complexity improvement on private median noise retention was 0.0."
+  - "Private bright-voiced reference count remained zero."
+reusable_findings:
+  - "Weak periodicity should not automatically receive proportional protection; a strong-voicing veto can materially improve rejection without changing the periodicity estimator."
+  - "Complex contextual evidence should be rejected when a simpler mapping change captures the measured benefit."
+revisit_if:
+  - "Synthetic bright/noisy-voiced/plosive gates contradict the private simple-veto result."
+  - "A broader annotated high-register corpus exposes false suppression not represented in the private set."
+  - "Contextual evidence provides a meaningful improvement in a later predeclared class that the simple veto fails."
+lineage:
+  supersedes: []
+  related_jobs:
+    - PEAKBODY-CONFOUNDER-PERIODICITY-002
+    - PEAKBODY-YIN-PRIVATE-REPLAY-001
+    - PEAKBODY-MPM-PRIVATE-REPLAY-001
+    - PEAKBODY-CONTEXTUAL-NOISE-GUARD-001
+  related_decisions:
+    - "PEAKBODY-YIN-PRIVATE-REPLAY-001:private-local-01:review"
+    - "PEAKBODY-MPM-PRIVATE-REPLAY-001:private-local-01:review"
+parent_decision_id: "PEAKBODY-MPM-PRIVATE-REPLAY-001:private-local-01:review"
+created_at: "2026-09-26"
+immutable: true
+scope: "Private same-performance four-processing-variant contextual-noise-guard sub-gate; synthetic gate remains pending."
+review_gaps: []

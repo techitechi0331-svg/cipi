@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "job_id": "PEAKBODY-YIN-PRIVATE-REPLAY-001",
+  "run_id": "private-local-01",
+  "source_commit": "484e4a1821a84b548df97a4cc21a49e9cdbfc89b",
+  "analysis_script_commit": "7e5d175d2fdff2849813e964c55ecf1554f9f130",
+  "worker_version": "private-local-periodicity-replay-v1",
+  "started_at": "2026-09-25T19:36:20Z",
+  "completed_at": "2026-09-25T19:38:59Z",
+  "random_seed": 0,
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "network_required": false,
+    "raw_audio_storage": "private local runtime only"
+  },
+  "commands": [
+    "python research/experiments/PeakBody/private_periodicity_challenger_replay.py --detector yin PRIVATE_SOURCE_PV1 PRIVATE_SOURCE_PV2 PRIVATE_SOURCE_PV3 PRIVATE_SOURCE_PV4"
+  ],
+  "result": "REJECTED",
+  "acceptance_met": false,
+  "rejection_triggered": true,
+  "triggered_criteria": [
+    "YIN noise-like median retention 0.667187 exceeded locked 0.50 gate",
+    "YIN noise-like median retention exceeded autocorr median by 0.174565, above +0.02 allowance"
+  ],
+  "protocol_path": "research/experiments/PeakBody/YIN_PRIVATE_REAL_VOCAL_REPLAY_01.md",
+  "metrics_path": "research/measurements/PEAKBODY_YIN_PRIVATE_REPLAY_01.json",
+  "report_path": "research/measurements/PEAKBODY_YIN_PRIVATE_REPLAY_01.md",
+  "privacy": {
+    "raw_audio_committed": false,
+    "frame_timecodes_committed": false,
+    "per_frame_arrays_committed": false
+  },
+  "source_binding": [
+    {
+      "id": "PV1",
+      "sha256": "6df64e2aba1b6c00582f2ac4eaf17ba169d6cdd239550863d2c8773d79d7e234"
+    },
+    {
+      "id": "PV2",
+      "sha256": "5798e68e732725f345a032a48da658aed6ac93b3db2d769b0d183bb0c8d75ad5"
+    },
+    {
+      "id": "PV3",
+      "sha256": "c40c1454f09c3047b07daacb77b04097cc177d517b1556a847e00e3a5b70cf04"
+    },
+    {
+      "id": "PV4",
+      "sha256": "14890fbce0e891f9c3267b2c42cd3e454399e7367af88b0a054394f77ffdc750"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "peakbody-yin-private-replay-01",
+  "decision": "REJECT",
+  "scope": "Private same-performance four-processing-variant non-regression replay against fixed autocorr-defined event masks.",
+  "pooled": {
+    "noise_like_count": 246,
+    "noise_autocorr_guard_retention_median": 0.4926222216898596,
+    "noise_yin_guard_retention_median": 0.6671869092922937,
+    "noise_yin_minus_autocorr_median": 0.1745646876024341,
+    "noise_yin_guard_retention_p10": 0.5081685979428769,
+    "noise_yin_guard_retention_p90": 0.8167269814307259,
+    "yin_confidence_on_noise_mask_median": 0.40601700550484676,
+    "autocorr_confidence_on_noise_mask_median": 0.22864817563227127,
+    "low_frequency_transient_count": 11969,
+    "low_frequency_yin_retention_median": 1.0,
+    "low_frequency_yin_retention_p10": 1.0,
+    "periodic_body_count": 10612,
+    "periodic_body_yin_mean_abs_delta": 0.0,
+    "autocorr_guard_pairwise_correlation_median": 0.9042047987281352,
+    "yin_guard_pairwise_correlation_median": 0.9086417874461465,
+    "yin_minus_autocorr_correlation_median": 0.004436988718011348,
+    "bright_voiced_reference_count": 0
+  },
+  "criteria": {
+    "all_finite": true,
+    "active_frames_each_ge_100": true,
+    "noise_mask_count_ge_30": true,
+    "low_mask_count_ge_30": true,
+    "body_mask_count_ge_30": true,
+    "yin_noise_median_le_0_50": false,
+    "yin_noise_not_more_than_0_02_above_autocorr": false,
+    "yin_low_median_ge_0_90": true,
+    "yin_low_p10_ge_0_80": true,
+    "yin_body_mean_abs_delta_le_0_03": true,
+    "yin_guard_corr_median_ge_0_80": true,
+    "yin_guard_corr_drop_le_0_05": true
+  },
+  "privacy": "aggregate non-reversible metrics only; no raw audio, frame timecodes or per-frame arrays"
+}

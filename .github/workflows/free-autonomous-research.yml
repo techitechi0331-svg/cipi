@@ -46,7 +46,7 @@ jobs:
         run: python automation/queue/select_job.py --github-output "$GITHUB_OUTPUT"
 
       - name: Install pinned scientific stack when required
-        if: steps.select.outputs.has_job == 'true' && (startsWith(steps.select.outputs.job_id, 'VOCAL-RESONANCE') || startsWith(steps.select.outputs.job_id, 'VO-PREP-AMOUNT-R2'))
+        if: steps.select.outputs.has_job == 'true' && (startsWith(steps.select.outputs.job_id, 'VOCAL-RESONANCE') || startsWith(steps.select.outputs.job_id, 'VO-PREP-AMOUNT-R'))
         run: python -m pip install -r automation/worker/requirements-scientific.txt
 
       - name: Validate jobs before execution

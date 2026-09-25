@@ -127,3 +127,39 @@ Reason:
 
 ### INFERRED
 The second source is a useful texture contrast because it adds denser a cappella choral/solo material, but it is not a substitute for singer-diverse solo-vocal validation. Final parameter lock must not claim broad singer generalization from these two sources alone.
+
+
+## SPECTRAL-PROTECTION ABLATION ADDITION
+
+### MEASURED
+Run 39 `original_ablation.csv` under the robust Original solver measured Character 50 / -18 dBFS:
+
+At 100 Hz:
+- full path: gain **13.833 dB**, THD **1.01189%**;
+- spectral protection off: gain **13.5977 dB**, THD **4.14854%**.
+
+At 1 kHz:
+- full path THD **0.234491%**;
+- spectral protection off THD **0.234285%**.
+
+At 10 kHz:
+- full path THD **0.202057%**;
+- spectral protection off THD **0.219435%**.
+
+### INFERRED
+The current pre/de-emphasis protection is materially changing low-frequency nonlinear drive rather than acting as a cosmetic EQ. It suppresses a large LF distortion increase while leaving the 1 kHz case almost unchanged in this measurement.
+
+This numerical result does not prove the protection is perceptually preferable on vocals.
+
+### AB REVISION
+The real-vocal shortlist therefore adds:
+- `conservative_no_protection`: same 4 dB / flux 8 / nonlinear 0.125 profile as `conservative`, but `spectralDriveProtection=false`.
+
+This creates a controlled mechanism pair:
+- conservative protection ON;
+- conservative protection OFF.
+
+The blinded listening artifact now contains seven files per corpus rather than six.
+
+### STATUS
+Spectral protection remains PROVISIONAL until the level-matched vocal pair is listened to. The Run 39 measurement justifies carrying the mechanism into AB; it does not authorize final retention.

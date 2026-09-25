@@ -34,6 +34,7 @@ ADAPTERS = {
     "vocal_resonance_temporal_morphology_stability_v1",
     "voprep_amount_mapping_v1",
     "voprep_amount_mapping_r2_v1",
+    "vocal_resonance_run_length_veto_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -2061,6 +2062,58 @@ def _microdouble_transient_context_reuse_gate(repo_root: Path, timeout_seconds: 
     }
 
 
+
+def _vocal_resonance_run_length_veto(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = repo_root / "research/experiments/VocalResonance/run_length_veto.py"
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-veto-") as td:
+        out = Path(td)
+        command = [
+            sys.executable,
+            str(script),
+            "--output-dir",
+            str(out),
+        ]
+        subprocess.run(
+            command,
+            cwd=repo_root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {}
+        for name in [
+            "comparison.csv",
+            "thresholds.csv",
+            "external_cases.csv",
+            "action_metrics.csv",
+            "summary.json",
+        ]:
+            raw_files[name] = (out / name).read_text(encoding="utf-8")
+
+    accepted = bool(summary["retention_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/run_length_veto.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Research-only two-seed test of run-length morphology strictly as a "
+            "post-ranker veto. Static semantic scores and ordering are frozen; the "
+            "candidate can only remove actions. Public VocalSet audio is streamed in "
+            "runner memory and only derived evidence is persisted."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -2108,4 +2161,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_temporal_morphology_stability(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r2_v1":
         return _voprep_amount_mapping_r2(repo_root, timeout_seconds)
+    if name == "vocal_resonance_run_length_veto_v1":
+        return _vocal_resonance_run_length_veto(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

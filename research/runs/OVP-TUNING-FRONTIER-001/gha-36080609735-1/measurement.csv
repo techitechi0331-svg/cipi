@@ -1,0 +1,4 @@
+profile,drive_db,flux_multiplier,nonlinear_scale,char50_1k_thd,char50_100_thd,char50_lf_mid_ratio,char100_1k_thd,char100_stress_thd,full_to_baseline_lf_ratio
+conservative,4,8,0.125,0.205818,0.210315,1.02185,0.514087,3.03226,1.00501
+balanced,6,8,0.125,0.231231,0.257395,1.11315,0.654414,5.91336,1.00558
+color_contrast,6,2,0.5,0.231247,0.356973,1.54369,0.654657,6.88262,1.3946

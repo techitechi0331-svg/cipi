@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/OriginalVocalPre/tuning_frontier.py"
+  ],
+  "completed_at": "2026-09-25T01:11:07.505410Z",
+  "environment": {
+    "experiment_adapter": "original_vocal_pre_tuning_frontier_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "OVP-TUNING-FRONTIER-001",
+  "random_seed": 6101001,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36080609735-1",
+  "schema_version": "1.0",
+  "source_commit": "6bcd62cc483c184cb91ee4d4a233e350aece750b",
+  "started_at": "2026-09-25T01:11:07.482820Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

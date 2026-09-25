@@ -1,0 +1,21 @@
+{
+  "baseline": [
+    "output_transformer_off_simple_baseline"
+  ],
+  "experiment_adapter": "original_vocal_pre_tuning_frontier_v1",
+  "job_file": "research/jobs/queued/A-OVP-TUNING-FRONTIER-001.yaml",
+  "metrics": [
+    "checksum_ok",
+    "total_candidates",
+    "hard_pass_count",
+    "drive2_hard_pass_count",
+    "drive4_hard_pass_count",
+    "drive6_hard_pass_count",
+    "conservative_profile",
+    "balanced_profile",
+    "color_contrast_profile"
+  ],
+  "variants": [
+    "27_point_tuning_grid"
+  ]
+}

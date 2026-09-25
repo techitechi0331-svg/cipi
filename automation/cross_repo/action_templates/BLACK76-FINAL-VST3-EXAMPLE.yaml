@@ -8,4 +8,8 @@ inputs: {}
 priority: 50
 attempts: 0
 max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
 reason: Example reviewed Cross-Repo continuation. Do not reference this template from a Research Job unless the final-VST3 action is actually required.

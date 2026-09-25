@@ -49,3 +49,26 @@ Completed autonomous evidence is now routed through `automation/review/triage.py
 The triage layer writes immutable records under `research/reviews/<job-id>/` and classifies the handoff as rejection review, scoped promotion review, continued research, explicit human-gate review, or already reviewed.
 
 A separate free GitHub Actions workflow also drains existing `Autonomous research ready:` issues in bounded batches and comments the deterministic triage result back onto the issue. Triage never creates a final PROMOTE/REJECT decision and never approves a product release.
+
+## Autonomous Research Architect and Plugin Incubator
+
+The Research Architect is a separate, bounded layer above the existing Research Worker.
+
+It may:
+- scan a reviewed topic catalog against evidence-bearing CIPI paths;
+- create append-only Research Gap and Research Proposal artifacts;
+- execute only explicitly allowlisted pilot adapters;
+- write normal research-run, knowledge-candidate and pending Decision evidence for those pilots;
+- route product-relevant proposals to the isolated Plugin Incubator.
+
+It may not:
+- generate or execute arbitrary shell from a proposal;
+- mutate the existing Adapter Registry automatically;
+- modify production plug-in repositories;
+- create an official product repository or release;
+- automatically PROMOTE or CONFIRM knowledge.
+
+If a newly discovered topic has no reviewed pilot adapter, the proposal is emitted as `NEEDS_ADAPTER`. This preserves fully new research questions as actionable work without turning the free GitHub runner into an unrestricted code-generation/execution system.
+
+The Plugin Incubator performs duplicate/overlap routing before any standalone prototype. Existing-product overlap can produce `MERGE_EXISTING`; low-evidence ideas remain `ITERATE`. Only an explicitly reviewed `INCUBATE` proposal may invoke an allowlisted isolated prototype adapter. Production adoption remains a human/assistant gate.
+

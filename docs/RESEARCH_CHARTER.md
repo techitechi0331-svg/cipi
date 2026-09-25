@@ -12,6 +12,8 @@ Research -> verification -> numerical specification -> implementation -> measure
 
 A stage returns to an earlier stage whenever a material contradiction or measurement failure is found.
 
+The lifecycle is dependency-aware rather than wait-bound: if one stage action is waiting on CI, an external tool, a host check, or a human gate, apply `RULES/NO_WAIT_WORK_STEALING.md` and continue independent READY work without assuming the missing result.
+
 ## Precision gate
 
 Before promoting a conclusion, check evidence sufficiency, contradictions, fact/inference/hypothesis separation, mathematical consistency, realtime feasibility, measurable acceptance criteria, vocal relevance, compatibility risk, and unresolved items.

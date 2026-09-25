@@ -1,0 +1,58 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:review-01"
+job_id: VO-PREP-SC-HPF-REAL-001
+source_run: research/runs/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  The detector-only 40 Hz second-order HPF passes the declared real-vocal
+  objective validation and confirmation gates and is advanced to level-matched
+  listening, but is not yet adopted into product DSP. On validation singers it
+  reduced controlled rumble excess GR by 73.51% and controlled plosive excess
+  GR by 17.03%, while changing clean-vocal mean GR by only about 0.0052 dB.
+  On the gated confirmation singers it reduced rumble excess GR by 73.75% and
+  plosive excess GR by 20.21%, with clean mean-GR change about 0.0042 dB.
+  Every declared clean-preservation, benefit-consistency and solver gate passed
+  in both cohorts. Human level-matched naturalness listening remains required
+  before product adoption.
+scope: >-
+  Real-vocal objective validation of OFF versus the already-frozen 40 Hz
+  detector-only HPF candidate on the frozen Vo.Prep transparent compressor.
+  This review authorizes blind/listening work only; it does not mutate product
+  DSP or close Cubase/VST3 gates.
+declared_rejection_criteria:
+  - Validation fails any clean-preservation or LF-stress benefit gate.
+  - Confirmation fails any unchanged gate.
+  - Confirmation audio is accessed before validation passes.
+  - Passing requires changing the candidate cutoff or relaxing a criterion.
+  - Raw public audio is persisted.
+triggered_criteria: []
+retained_findings:
+  - "Validation clean mean-GR absolute delta was 0.005159873647465674 dB."
+  - "Validation rumble excess-GR reduction was 0.7351043887229355 and plosive excess-GR reduction was 0.17034021959672924; positive fractions were both 1.0."
+  - "Confirmation clean mean-GR absolute delta was 0.0041768211447698045 dB."
+  - "Confirmation rumble excess-GR reduction was 0.737451385518135 and plosive excess-GR reduction was 0.20211374555654038; positive fractions were both 1.0."
+  - "Validation and confirmation male clean-vocal mean-GR deltas were 0.006825389634820822 dB and 0.0035907352824853245 dB respectively."
+  - "Raw public audio was not persisted."
+reusable_findings:
+  - "A detector-only 40 Hz second-order HPF can strongly reduce added subsonic/very-low-frequency compressor drive while leaving clean-vocal GR statistics nearly unchanged on the tested singer cohorts."
+  - "Synthetic sidechain-filter screening can transfer to real-vocal objective behavior when the candidate cutoff is frozen before real-vocal evaluation."
+  - "Objective preservation and stress reduction are not substitutes for level-matched naturalness listening."
+revisit_if:
+  - "Level-matched listening finds low-vocal thinning, altered consonant feel, pumping or no audible benefit."
+  - "A real recording with natural plosive/rumble confounds contradicts the controlled-overlay result."
+  - "The final Amount/ballistics architecture changes detector operating conditions materially."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SC-HPF-PILOT-001
+  related_decisions:
+    - "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:auto"
+    - "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:review-01"
+parent_decision_id: "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps:
+  - "Level-matched real-vocal listening is still open."

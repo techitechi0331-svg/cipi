@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-EEBFAC415A7F8D54
+source_path: research/experiments/BreathKeeper/status.yaml
+kind: BLOCKERS
+text_hash: eebfac415a7f8d54
+text: Final thresholds require labelled singing stems with intentional breaths and
+  confounders.
+state: UNCLASSIFIED
+signal_class: DATA_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

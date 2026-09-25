@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-DDBFA019F85545C4
+source_path: research/experiments/Density/status.yaml
+kind: UNRESOLVED
+text_hash: ddbfa019f85545c4
+text: Alias energy versus 2x/4x/8x is not measured.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

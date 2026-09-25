@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-26AC29E99A0F5B46
+source_path: research/experiments/Density/status.yaml
+kind: UNRESOLVED
+text_hash: 26ac29e99a0f5b46
+text: THD/IMD versus drive is not measured.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -1,0 +1,34 @@
+schema_version: '1.0'
+plugin_proposal_id: PLUGIN-RP-BREATH-EVENT-DETECTION-001
+source_research_proposal: research/architect/proposals/RP-BREATH-EVENT-DETECTION-001.yaml
+state: OVERLAP_REVIEW
+working_name: Breath Event Detection 001
+problem: Can intentional vocal breath be distinguished from hiss-like excess and consonant
+  noise with bounded false activation across singer conditions?
+target_user: vocal / singing mix engineer
+target_signal: singing vocal
+supporting_research:
+- research/architect/gaps/GAP-BREATH-EVENT-DETECTION-001.yaml
+supporting_negative_knowledge:
+- Breath and hiss are not separable robustly enough without singer-specific calibration.
+- Any improvement over a simple energy rule collapses on unseen singers.
+existing_plugin_overlap:
+- Vo.Prep
+- Vocal Surface
+why_not_merge_existing: Not yet demonstrated; overlap review must be resolved before
+  an independent product is incubated.
+dsp_hypothesis: Contextual spectral and temporal features can separate intentional
+  breath events from steady hiss and voiced consonants better than a high-frequency-energy-only
+  rule.
+simple_baseline:
+- high_frequency_energy_rule
+metrics:
+- event_recall
+- false_trigger_rate
+- onset_latency
+failure_criteria:
+- Holdout false triggers erase the selection-set gain.
+expected_cpu: bounded pilot required
+expected_latency: must be measured
+prototype_adapter: null
+automatic_production_allowed: false

@@ -1,0 +1,23 @@
+schema_version: '1.0'
+gap_id: GAP-BREATH-EVENT-DETECTION-001
+topic_id: breath_event_detection
+title: Independent breath-event discrimination
+state: OPEN
+score: 24
+support_path_count: 5
+minimum_support_paths: 3
+support_paths:
+- experiments/BreathKeeper
+- experiments/MicroDouble
+- knowledge_candidates/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001
+- plugins/vl2a
+- plugins/vocal-resonance
+unresolved_signal_count: 1
+unresolved_signal_paths:
+- research/architect/signals/SIG-F7970916EC976579.yaml
+why_gap: Evidence support=5/3; unresolved non-human gap signals=1. The topic remains
+  research-worthy when support is sparse or unresolved evidence pressure persists.
+question: Can intentional vocal breath be distinguished from hiss-like excess and
+  consonant noise with bounded false activation across singer conditions?
+human_only: false
+plugin_opportunity: true

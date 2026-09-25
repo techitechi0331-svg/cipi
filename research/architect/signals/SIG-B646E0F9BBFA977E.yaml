@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-B646E0F9BBFA977E
+source_path: research/experiments/Density/status.yaml
+kind: UNRESOLVED
+text_hash: b646e0f9bbfa977e
+text: Perceived-density benefit after loudness matching is unproven.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

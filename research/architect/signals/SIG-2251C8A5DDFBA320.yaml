@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-2251C8A5DDFBA320
+source_path: research/experiments/Density/status.yaml
+kind: UNRESOLVED
+text_hash: 2251c8a5ddfba320
+text: Current drive and wet mappings are hypothesis-level.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

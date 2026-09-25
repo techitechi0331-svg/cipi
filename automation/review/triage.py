@@ -339,6 +339,7 @@ This is deterministic triage only. It does not PROMOTE, ARCHIVE or finally REJEC
         "yaml_path": yaml_path.relative_to(root).as_posix(),
         "markdown_path": md_path.relative_to(root).as_posix(),
         "reviewed": "true" if confirmed else "false",
+        "run_id": run_id,
     })
     print(f"{candidate_class} -> {route}: {md_path.relative_to(root).as_posix()}")
     return 0

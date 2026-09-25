@@ -553,3 +553,54 @@ Current status:
 
 The final calibration gate is now based on normalized real VocalSet material,
 not only a sine-wave proxy.
+
+
+## 2026-09-25 VL2A v0.6.0 RC2 integration status
+
+RC2 gate:
+- product repo branch: `integration/vl2a-v060-rc2`
+- run: `36147549961`
+- source SHA: `f59e15479dc436bcb9f7f85ff597caf3aaf5c080`
+- conclusion: SUCCESS
+
+Final Peak calibration:
+`drive = 0.18 * 10^(2 * (1 - (1-n)^2.70))`
+
+Real-vocal / -18 dBFS peak / COMP / PR50:
+- breathy: ~5.309 dB max GR
+- straight: ~5.552 dB
+- forte: ~6.403 dB
+- median: ~5.552 dB
+
+Thus the explicit product midpoint requirement of approximately 5..7 dB GR is
+satisfied on all three pinned VocalSet validation clips.
+
+Integrated active-GR coloration:
+- Phase 03B stateful optical v3
+- 1 kHz / ~6 dB GR THD: ~0.783%
+- H3 dominant
+- detector/control path remains isolated from the coloration path
+
+Meter:
+- 0..20 dB segmented bar retained as smooth presentation;
+- central numeric GR uses processor-side block peak hold so short events are
+  not lost between editor refreshes;
+- meter change does not alter audio DSP.
+
+Stereo:
+- shared average-of-magnitudes detector retained as intentional modern,
+  phase-safe product behavior.
+
+R37:
+- factory-flat musical default retained.
+
+Remaining release blockers:
+- final matched-GR release recheck;
+- dependency-free objective real-vocal A/B;
+- pluginval strictness 10;
+- final source-state contradiction audit;
+- final VST3 artifact;
+- Cubase Pro 14 user-side host confirmation.
+
+RC2 is the active integration candidate. RC1 and earlier Peak curves are
+superseded.

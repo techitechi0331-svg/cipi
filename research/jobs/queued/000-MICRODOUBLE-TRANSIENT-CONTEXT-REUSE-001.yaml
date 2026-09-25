@@ -1,0 +1,79 @@
+schema_version: "1.0"
+job_id: MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001
+state: QUEUED
+track:
+  id: MICRODOUBLE_01
+  path: research/experiments/MicroDouble
+research_question: "Is the measured Vo.Prep plosive-context detector sufficiently evidenced and bounded to justify a MicroDouble experiment as an augmenting P/B context signal while retaining the current generic transient detector unchanged?"
+hypothesis: "The Vo.Prep contextual plosive detector can be tested as an auxiliary modifier because it separates a synthetic plosive burst from sustained low-vowel/proximity/fry stress cases and produces bounded processing, while the existing generic transient detector remains necessary for non-P/B consonant/onset protection."
+counter_hypotheses:
+  - "The plosive detector evidence is too context-specific for transfer."
+  - "Known growl-onset false positives make even auxiliary use unjustified."
+  - "Processing/body movement is too large for subtle double protection."
+  - "The current generic transient detector should be replaced rather than retained."
+baseline:
+  - current MicroDouble generic derivative/envelope transient detector
+variants:
+  - current generic transient detector plus Vo.Prep-derived plosive-context probability as an auxiliary modifier
+metrics:
+  - snapshot_checksum_ok
+  - baseline_generic_transient_must_remain
+  - candidate_context_separation_supported
+  - known_growl_false_positive_risk_retained
+  - candidate_processing_bounded
+  - downstream_compressor_proxy_supported
+  - baseline_contextual_evidence_gap
+  - candidate_plosive_burst_max_probability
+  - candidate_growl_onset_max_probability
+  - candidate_fry_max_probability
+  - candidate_body_region_mean_movement_db
+acceptance:
+  - "Committed metrics snapshot SHA256 must match."
+  - "Current generic transient onset response must remain >=0.90 and steady response <=0.10; the candidate is never authorized as a replacement."
+  - "Candidate source evidence must include at least 10 real-vocal stems."
+  - "Candidate plosive burst probability must be >=0.90."
+  - "Candidate sustained low-vowel and proximity probabilities must each be <=0.40."
+  - "Candidate fry probability must remain below its 0.75 activation threshold."
+  - "Known growl-onset probability must remain at or above activation, explicitly preserving the false-positive risk rather than hiding it."
+  - "Candidate body-region mean movement must be <=0.25 dB and event-band mean reduction <=1.50 dB in its source scope."
+  - "All four downstream compressor proxy improvements must be >=0.30 dB."
+  - "Current baseline must still lack equivalent labelled contextual false-positive evidence, otherwise this reuse gate cannot choose a transfer experiment."
+rejection:
+  - "Any declared acceptance condition fails."
+  - "The candidate is interpreted as permission to replace the generic transient detector."
+  - "The known growl-onset risk is omitted or reclassified away."
+max_runs: 1
+timeout_minutes: 3
+random_seed: 20260925
+experiment_adapter: microdouble_transient_context_reuse_gate_v1
+allowed_operations:
+  - read_committed_snapshot
+  - deterministic_compare
+  - write_research_evidence
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: "The Vo.Prep plosive-context detector has enough bounded evidence to be tested as an auxiliary P/B context modifier for MicroDouble while the current generic transient detector remains mandatory."
+  evidence_type: HYPOTHESIS
+  scope: "Evidence-reuse permission only; growl-onset risk remains open, direct MicroDouble experiment is required, and product adoption/release is unproven."
+  promotion_requested: PROVISIONAL
+review_policy:
+  required_human_gates:
+    - Direct MicroDouble augment-only experiment before any integration decision.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-SIBILANCE-R3-GATE-001
+  related_decisions:
+    - "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:review-01"

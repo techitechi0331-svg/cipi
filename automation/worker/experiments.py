@@ -26,6 +26,7 @@ ADAPTERS = {
     "microdouble_product_v03_gate_v1",
     "microdouble_sibilance_reuse_gate_v1",
     "microdouble_sibilance_r3_snapshot_gate_v1",
+    "microdouble_transient_context_reuse_gate_v1",
     "vo_prep_snapshot_gate_v1",
     "vocal_resonance_temporal_morphology_v1",
     "vocal_resonance_temporal_morphology_stability_v1",
@@ -1726,6 +1727,118 @@ def _microdouble_sibilance_r3_snapshot_gate(repo_root: Path, timeout_seconds: in
     }
 
 
+
+def _microdouble_transient_context_reuse_gate(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    del timeout_seconds
+    root = (
+        repo_root
+        / "research"
+        / "experiments"
+        / "MicroDouble"
+        / "measurements"
+        / "transient-context-reuse-20260925"
+    )
+    metrics_path = root / "metrics.csv"
+    checksum_path = root / "checksums.sha256"
+    if not metrics_path.is_file() or not checksum_path.is_file():
+        raise FileNotFoundError(root)
+
+    expected_digest = ""
+    for line in checksum_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and line.endswith("metrics.csv"):
+            expected_digest = line.split(None, 1)[0]
+            break
+    if not expected_digest:
+        raise ValueError("metrics.csv checksum is missing")
+
+    raw = metrics_path.read_bytes()
+    checksum_ok = hashlib.sha256(raw).hexdigest() == expected_digest
+    rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
+    values = {row["metric"]: float(row["value"]) for row in rows}
+
+    baseline_must_remain = (
+        values["baseline_transient_onset_response"] >= 0.90
+        and values["baseline_transient_steady_response"] <= 0.10
+    )
+    candidate_context_separation = (
+        values["candidate_real_vocal_stem_count"] >= 10.0
+        and values["candidate_plosive_burst_max_probability"] >= 0.90
+        and values["candidate_low_vowel_max_probability"] <= 0.40
+        and values["candidate_proximity_max_probability"] <= 0.40
+        and values["candidate_fry_max_probability"]
+            < values["candidate_activation_probability"]
+    )
+    known_risk_retained = (
+        values["candidate_growl_onset_max_probability"]
+            >= values["candidate_activation_probability"]
+    )
+    processing_bounded = (
+        values["candidate_body_region_mean_movement_db"] <= 0.25
+        and values["candidate_event_band_mean_reduction_db"] <= 1.50
+        and values["candidate_max_continuous_event_ms"] <= 120.0
+    )
+    downstream_proxy_supported = min(
+        values["candidate_fet_peak_gr_improvement_db"],
+        values["candidate_opto_peak_gr_improvement_db"],
+        values["candidate_vca_peak_gr_improvement_db"],
+        values["candidate_clean_peak_gr_improvement_db"],
+    ) >= 0.30
+    baseline_context_gap = (
+        values["baseline_contextual_false_positive_labeled_evidence_available"] == 0.0
+    )
+
+    metrics = {
+        "snapshot_checksum_ok": checksum_ok,
+        "baseline_generic_transient_must_remain": baseline_must_remain,
+        "candidate_context_separation_supported": candidate_context_separation,
+        "known_growl_false_positive_risk_retained": known_risk_retained,
+        "candidate_processing_bounded": processing_bounded,
+        "downstream_compressor_proxy_supported": downstream_proxy_supported,
+        "baseline_contextual_evidence_gap": baseline_context_gap,
+        "candidate_plosive_burst_max_probability": values["candidate_plosive_burst_max_probability"],
+        "candidate_growl_onset_max_probability": values["candidate_growl_onset_max_probability"],
+        "candidate_fry_max_probability": values["candidate_fry_max_probability"],
+        "candidate_body_region_mean_movement_db": values["candidate_body_region_mean_movement_db"],
+    }
+
+    acceptance_met = (
+        checksum_ok
+        and baseline_must_remain
+        and candidate_context_separation
+        and known_risk_retained
+        and processing_bounded
+        and downstream_proxy_supported
+        and baseline_context_gap
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator="\n")
+    writer.writerow(["metric", "value"])
+    for key, value in metrics.items():
+        writer.writerow([key, value])
+
+    return {
+        "metrics": metrics,
+        "raw_files": {"comparison.csv": output.getvalue()},
+        "commands": [
+            "read committed MicroDouble/Vo.Prep transient-context evidence snapshot",
+            "verify committed SHA256 ledger",
+            "apply predeclared augment-only reuse gates",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Evidence-reuse gate for a future MicroDouble transient-context experiment. "
+            "Passing means the Vo.Prep plosive detector has enough bounded contextual "
+            "evidence to be tested only as an augmenting P/B context signal while the "
+            "current generic transient detector remains mandatory. The known growl-onset "
+            "false-positive risk is required to remain explicit. This gate does not "
+            "modify product DSP, promote knowledge, or authorize release."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1755,6 +1868,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _microdouble_sibilance_reuse_gate(repo_root, timeout_seconds)
     if name == "microdouble_sibilance_r3_snapshot_gate_v1":
         return _microdouble_sibilance_r3_snapshot_gate(repo_root, timeout_seconds)
+    if name == "microdouble_transient_context_reuse_gate_v1":
+        return _microdouble_transient_context_reuse_gate(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_reaudit_v2":
         return _vocal_resonance_clean_negative_reaudit(repo_root, timeout_seconds)
     if name == "vo_prep_snapshot_gate_v1":

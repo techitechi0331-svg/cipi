@@ -124,3 +124,10 @@ adapters:
     max_timeout_minutes: 3
     network_required: false
     purpose: "Verify the MicroDouble sibilance R1/R2 negative evidence and the predeclared leak-free R3 threshold-selection + holdout result before any product integration."
+
+  microdouble_transient_context_reuse_gate_v1:
+    tracks:
+      - MICRODOUBLE_01
+    max_timeout_minutes: 3
+    network_required: false
+    purpose: "Gate whether Vo.Prep plosive-context evidence is sufficient to justify a MicroDouble development experiment as an augmenting context signal, never as a replacement for the current generic transient detector."

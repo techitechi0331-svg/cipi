@@ -470,3 +470,24 @@ The exact source configuration remains rejected:
 This review authorizes replacing only the MicroDouble sibilance detector on a development branch. Pitch, human timing, transient protection, Mud Protection, DOUBLE mapping and stereo topology are outside this revision.
 
 The candidate remains **PROVISIONAL** until post-integration regression, VST3/pluginval, real-vocal render comparison and target-machine listening are complete.
+
+
+## Transient / Plosive Context reuse gate queued
+
+CIPI/Vo.Prep already contains measured Plosive Guard evidence over 11 stems and synthetic stress cases:
+
+- sustained low-vowel max probability: 0.28;
+- proximity-heavy sustained max: 0.28;
+- fry-like max: 0.69;
+- growl-onset max: 0.83;
+- synthetic plosive burst max: 0.96;
+- source activation threshold: 0.75;
+- event-band mean reduction: ~1 dB;
+- 180–500 Hz body movement: ~0.2 dB;
+- downstream compressor proxy improvements: 0.36–0.44 dB.
+
+The growl-onset value is an explicit known false-positive risk and must remain in the record.
+
+The current MicroDouble generic transient detector remains mandatory because it protects broader consonant/onset events than P/B plosives.
+
+Research Job `MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001` therefore asks only whether the Plosive Guard evidence is sufficient to justify an **augment-only** product experiment. It may not authorize replacement of the current transient detector.

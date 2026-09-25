@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Evidence-reuse gate for a MicroDouble transient/plosive context experiment",
+  "product_repository": "techitechi0331-svg/Vocal-One-Knob-Doubler",
+  "product_baseline": "v0.3/v0.4 generic transient detector",
+  "cipi_source_run": "research/runs/VO-PREP-SYNC-001/manual-20260925",
+  "cipi_source_candidate": "research/knowledge_candidates/VO-PREP-SYNC-001/manual-20260925-plosive-context.yaml",
+  "raw_audio_persisted": false,
+  "important_constraint": "Candidate may augment but never replace the generic transient detector in the authorized experiment."
+}

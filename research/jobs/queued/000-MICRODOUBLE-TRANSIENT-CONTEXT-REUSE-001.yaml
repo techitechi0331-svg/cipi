@@ -77,3 +77,5 @@ lineage:
     - MICRODOUBLE-SIBILANCE-R3-GATE-001
   related_decisions:
     - "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:review-01"
+
+# resume-trigger-after-v04-integration: product v0.4 core/AB/VST3/pluginval checkpoint passed

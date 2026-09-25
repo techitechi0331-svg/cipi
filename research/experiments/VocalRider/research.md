@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `c1a2a4f4d0bb408c9eeb37c077b735f59e744414`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `d32c70f3df8313358c6a13d4d03eca6c702f4f26`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -315,7 +315,7 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 
 ## Current location
 
-Dedicated product Repo measurement/revision stage. Prior CIPI-branch core/VST3/pluginval evidence exists, but dedicated-Repo CI is currently runner-blocked. Independent review found and fixed a Headroom Guard design error that could turn neutral ride into attenuation; a regression test now locks the guard to boost-only behavior. Musical-behaviour and real-vocal validation remain open.
+Dedicated product Repo measurement/revision stage. Prior CIPI-branch core/VST3/pluginval evidence exists, but dedicated-Repo CI is currently runner-blocked. Independent review found and fixed a Headroom Guard design error that could turn neutral ride into attenuation; deterministic regression now locks the guard to boost-only behavior. A processor-level regression also requires Amount 0% / Output 0 dB to be delayed unity and verifies that the first non-zero sample lands exactly at the reported 50 ms latency. These new gates are implemented but remain unmeasured in the dedicated Repo until runner CI executes. Musical-behaviour and real-vocal validation remain open.
 
 ## Next stage
 

@@ -1,0 +1,133 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+from pathlib import Path
+from typing import Any
+
+CONTRACT_VERSION = 1
+SUPPORTED_FORMATS = {"VST3"}
+SUPPORTED_LAYOUTS = {"mono", "stereo"}
+SUPPORTED_DSP_TEMPLATES = {"golden_gain_v1"}
+
+_ID = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
+_CODE4 = re.compile(r"^[A-Za-z0-9]{4}$")
+_BUNDLE = re.compile(r"^[A-Za-z][A-Za-z0-9.-]+$")
+_SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
+
+
+class ContractError(ValueError):
+    pass
+
+
+def canonical_json(data: Any) -> str:
+    return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def contract_sha256(data: dict[str, Any]) -> str:
+    return hashlib.sha256(canonical_json(data).encode("utf-8")).hexdigest()
+
+
+def load_contract(path: str | Path) -> dict[str, Any]:
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ContractError("plugin contract must be a JSON object")
+    validate_contract(data)
+    return data
+
+
+def _require_object(parent: dict[str, Any], key: str) -> dict[str, Any]:
+    value = parent.get(key)
+    if not isinstance(value, dict):
+        raise ContractError(f"{key} must be an object")
+    return value
+
+
+def _require_list(parent: dict[str, Any], key: str) -> list[Any]:
+    value = parent.get(key)
+    if not isinstance(value, list):
+        raise ContractError(f"{key} must be an array")
+    return value
+
+
+def validate_contract(data: dict[str, Any]) -> None:
+    required = {"contract_version", "plugin", "target", "audio", "parameters", "dsp", "ui", "validation"}
+    missing = sorted(required - set(data))
+    if missing:
+        raise ContractError(f"missing top-level fields: {missing}")
+    if data["contract_version"] != CONTRACT_VERSION:
+        raise ContractError(f"unsupported contract_version: {data['contract_version']}")
+
+    plugin = _require_object(data, "plugin")
+    for key in ("id", "name", "vendor", "version", "bundle_id", "manufacturer_code", "plugin_code"):
+        if not isinstance(plugin.get(key), str) or not plugin[key].strip():
+            raise ContractError(f"plugin.{key} must be a non-empty string")
+    if not _ID.fullmatch(plugin["id"]):
+        raise ContractError("plugin.id must match ^[A-Za-z][A-Za-z0-9_]*$")
+    if not _SEMVER.fullmatch(plugin["version"]):
+        raise ContractError("plugin.version must be semantic version x.y.z")
+    if not _BUNDLE.fullmatch(plugin["bundle_id"]):
+        raise ContractError("plugin.bundle_id contains unsupported characters")
+    if not _CODE4.fullmatch(plugin["manufacturer_code"]):
+        raise ContractError("plugin.manufacturer_code must be exactly four ASCII letters/digits")
+    if not _CODE4.fullmatch(plugin["plugin_code"]):
+        raise ContractError("plugin.plugin_code must be exactly four ASCII letters/digits")
+
+    target = _require_object(data, "target")
+    formats = set(_require_list(target, "formats"))
+    if not formats or not formats.issubset(SUPPORTED_FORMATS):
+        raise ContractError(f"target.formats must be a non-empty subset of {sorted(SUPPORTED_FORMATS)}")
+    if target.get("os") != "windows_x64":
+        raise ContractError("Phase 1 supports target.os=windows_x64 only")
+
+    audio = _require_object(data, "audio")
+    layouts = set(_require_list(audio, "layouts"))
+    if not layouts or not layouts.issubset(SUPPORTED_LAYOUTS):
+        raise ContractError(f"audio.layouts must be a non-empty subset of {sorted(SUPPORTED_LAYOUTS)}")
+
+    parameters = _require_list(data, "parameters")
+    if not parameters:
+        raise ContractError("parameters must be non-empty")
+    ids: set[str] = set()
+    for index, parameter in enumerate(parameters):
+        if not isinstance(parameter, dict):
+            raise ContractError(f"parameters[{index}] must be an object")
+        pid = parameter.get("id")
+        if not isinstance(pid, str) or not _ID.fullmatch(pid):
+            raise ContractError(f"parameters[{index}].id is invalid")
+        if pid in ids:
+            raise ContractError(f"duplicate parameter id: {pid}")
+        ids.add(pid)
+        if parameter.get("type") != "float":
+            raise ContractError("Phase 1 generator supports float parameters only")
+        for key in ("min", "max", "default"):
+            if not isinstance(parameter.get(key), (int, float)) or isinstance(parameter.get(key), bool):
+                raise ContractError(f"parameter {pid}.{key} must be numeric")
+        lo, hi, default = float(parameter["min"]), float(parameter["max"]), float(parameter["default"])
+        if not lo < hi:
+            raise ContractError(f"parameter {pid}: min must be < max")
+        if not lo <= default <= hi:
+            raise ContractError(f"parameter {pid}: default must be within min/max")
+
+    dsp = _require_object(data, "dsp")
+    if dsp.get("template") not in SUPPORTED_DSP_TEMPLATES:
+        raise ContractError(f"unsupported dsp.template: {dsp.get('template')}")
+    if dsp["template"] == "golden_gain_v1":
+        if ids != {"gain_db"}:
+            raise ContractError("golden_gain_v1 requires exactly one parameter with id=gain_db")
+        if not isinstance(dsp.get("source_revision"), str) or not dsp["source_revision"].strip():
+            raise ContractError("dsp.source_revision must be a non-empty immutable identifier")
+
+    ui = _require_object(data, "ui")
+    for key in ("width", "height"):
+        value = ui.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or value < 200 or value > 4000:
+            raise ContractError(f"ui.{key} must be an integer in [200, 4000]")
+    if not isinstance(ui.get("show_version"), bool):
+        raise ContractError("ui.show_version must be boolean")
+
+    validation = _require_object(data, "validation")
+    for key in ("pluginval", "state_restore", "automation", "silence", "nan_inf"):
+        if not isinstance(validation.get(key), bool):
+            raise ContractError(f"validation.{key} must be boolean")

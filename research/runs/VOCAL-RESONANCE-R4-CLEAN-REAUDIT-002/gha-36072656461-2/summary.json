@@ -1,0 +1,69 @@
+{
+  "experiment": "VOCAL_RESONANCE_R4_CLEAN_NEGATIVE_REAUDIT",
+  "dataset": "Bill13579/vocalset-mirror",
+  "reference_ranker_seed": 20260930,
+  "candidate_budget": 20,
+  "selected_C": 0.3,
+  "validation_threshold_95pct": 0.7432067296971119,
+  "static_validation_metrics": {
+    "n_cases": 32,
+    "generator_ceiling": 0.875,
+    "top1": 0.09375,
+    "top1_given_generator_hit": 0.10714285714285714,
+    "top3": 0.28125,
+    "top3_given_generator_hit": 0.32142857142857145,
+    "top5": 0.375,
+    "top5_given_generator_hit": 0.42857142857142855,
+    "mrr": 0.2392980958830901,
+    "top5_effect_gte3": 0.6428571428571429,
+    "top5_high_f0": null,
+    "n_high_f0_cases": 0
+  },
+  "audit": {
+    "n_cases": 40,
+    "n_singers": 4,
+    "n_labels": 9,
+    "n_exercise_families": 3,
+    "label_mapping": {
+      "0": "belt",
+      "1": "breathy",
+      "2": "fast_forte",
+      "3": "fast_piano",
+      "11": "spoken",
+      "12": "straight",
+      "16": "vibrato",
+      "4": "forte",
+      "5": "inhaled"
+    },
+    "excluded_prior_basenames": 32,
+    "prior_overlap_count": 0,
+    "overall_clean_false_trigger": 0.2,
+    "technique_false_trigger_spread": 0.5,
+    "fast_piano_forte_false_trigger": 0.25,
+    "other_techniques_false_trigger": 0.1875,
+    "fast_minus_other": 0.0625,
+    "yin_p90_ge_400_count": 16,
+    "yin_p90_ge_400_false_trigger": 0.125,
+    "yin_unresolved_count": 2,
+    "old_acf_p90_ge900_count": 6,
+    "old_acf_p95_ge900_count": 22,
+    "median_acf_yin_disagreement_gt300c": 0.0
+  },
+  "hypothesis_readout": {
+    "technique_concentration_replicated": false,
+    "high_pitch_coverage_sufficient": true
+  },
+  "diagnostic_gate": {
+    "accepted": true,
+    "criteria": {
+      "at_least_24_clean_cases": true,
+      "at_least_4_techniques": true,
+      "at_least_2_exercise_families": true,
+      "at_least_20_yin_resolved_cases": true,
+      "at_least_6_yin_p90_ge400_cases": true,
+      "zero_overlap_with_audit1": true
+    },
+    "meaning": "Evidence sufficiency for deciding whether event-context research or a dedicated high-note cohort is justified. This is not a product gate."
+  },
+  "raw_audio_persisted": false
+}

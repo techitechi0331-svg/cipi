@@ -1,0 +1,190 @@
+schema_version: "1.0"
+topics:
+  - id: nonlinear_continuity_replication
+    title: Cross-product low-level nonlinearity continuity screening
+    patterns: ["zero-crossing", "slope discontinuity", "low-level thd", "low level thd"]
+    min_support_paths: 2
+    impact: 4
+    measurability: 5
+    falsifiability: 5
+    cross_track_reuse: 5
+    implementation_feasibility: 5
+    question: "Does a zero-crossing slope discontinuity create a persistent low-level harmonic floor that a smooth baseline avoids under a controlled synthetic test?"
+    hypothesis: "A slope-discontinuous static nonlinearity will retain materially higher low-level THD than a smooth odd-symmetric baseline as input level falls."
+    counter_hypotheses:
+      - "The apparent low-level THD floor is caused by measurement resolution rather than the transfer discontinuity."
+      - "Both models converge to the same low-level distortion when level is sufficiently small."
+    baseline: ["smooth_tanh"]
+    variants: ["slope_discontinuous"]
+    metrics: ["low_level_thd_db", "zero_crossing_derivative_mismatch"]
+    acceptance:
+      - "Slope-discontinuous model exceeds smooth-baseline THD by at least 20 dB at -60 dBFS."
+      - "Measured zero-crossing derivative mismatch exceeds 0.10."
+    rejection:
+      - "Low-level THD separation is below 20 dB."
+      - "Derivative mismatch is not measurable."
+    pilot_adapter: nonlinear_continuity_pilot_v1
+    plugin_opportunity: false
+    overlap_hints: []
+    human_only: false
+    expected_reuse: "Nonlinear model screening across tube, transformer, saturation and density research."
+
+  - id: breath_event_detection
+    title: Independent breath-event discrimination
+    patterns: ["breath detector", "breath detection", "breathy", "breath-heavy"]
+    min_support_paths: 3
+    impact: 5
+    measurability: 4
+    falsifiability: 4
+    cross_track_reuse: 5
+    implementation_feasibility: 4
+    question: "Can intentional vocal breath be distinguished from hiss-like excess and consonant noise with bounded false activation across singer conditions?"
+    hypothesis: "Contextual spectral and temporal features can separate intentional breath events from steady hiss and voiced consonants better than a high-frequency-energy-only rule."
+    counter_hypotheses:
+      - "Breath and hiss are not separable robustly enough without singer-specific calibration."
+      - "Any improvement over a simple energy rule collapses on unseen singers."
+    baseline: ["high_frequency_energy_rule"]
+    variants: ["contextual_breath_features"]
+    metrics: ["event_recall", "false_trigger_rate", "onset_latency"]
+    acceptance:
+      - "Holdout recall improves without increasing false-trigger rate beyond the predeclared bound."
+    rejection:
+      - "Holdout false triggers erase the selection-set gain."
+    pilot_adapter: null
+    plugin_opportunity: true
+    overlap_hints: ["Vo.Prep", "Vocal Surface"]
+    human_only: false
+    expected_reuse: "Vo.Prep, Surface, Finisher, rider and future event-aware processors."
+
+  - id: phrase_envelope_riding
+    title: Phrase-level vocal envelope estimation
+    patterns: ["phrase envelope", "vocal rider", "macro level", "adaptive leveling", "phrase-level"]
+    min_support_paths: 3
+    impact: 5
+    measurability: 5
+    falsifiability: 5
+    cross_track_reuse: 5
+    implementation_feasibility: 5
+    question: "Can phrase-scale vocal level be estimated without chasing consonants, breaths and short syllabic transients?"
+    hypothesis: "A dual-timescale/contextual phrase estimator can reduce phrase-level variance while preserving short-event dynamics better than a simple RMS normalizer."
+    counter_hypotheses:
+      - "A simple bounded RMS normalizer performs equivalently after level matching."
+      - "Phrase estimation reduces natural macro dynamics more than it improves downstream stability."
+    baseline: ["bounded_rms_normalizer"]
+    variants: ["dual_timescale_phrase_estimator"]
+    metrics: ["phrase_level_error", "short_event_gain_movement", "downstream_gr_variance"]
+    acceptance:
+      - "Phrase error improves while short-event movement remains below the predeclared safety bound."
+    rejection:
+      - "Short-event chasing or macro-dynamic flattening exceeds the safety bound."
+    pilot_adapter: null
+    plugin_opportunity: true
+    overlap_hints: ["Vo.Prep", "VoxLevel"]
+    human_only: false
+    expected_reuse: "Vocal rider, prep leveling and downstream compressor stabilization."
+
+  - id: variable_mu_dynamics
+    title: Variable-mu vocal dynamics mechanisms
+    patterns: ["variable-mu", "vari-mu", "variable mu"]
+    min_support_paths: 2
+    impact: 3
+    measurability: 3
+    falsifiability: 4
+    cross_track_reuse: 4
+    implementation_feasibility: 3
+    question: "Which variable-mu control and timing mechanisms are necessary before a reusable vocal-oriented model can be justified?"
+    hypothesis: "A level-dependent gain law plus program-dependent control behavior will outperform a fixed-ratio static baseline on declared variable-mu reference behaviors."
+    counter_hypotheses:
+      - "A conventional soft-knee compressor is sufficient for the target behaviors."
+    baseline: ["soft_knee_compressor"]
+    variants: ["variable_mu_graybox"]
+    metrics: ["static_curve_error", "program_dependence_error", "thd_vs_gr"]
+    acceptance:
+      - "Gray-box candidate reduces declared reference error across static and dynamic tests."
+    rejection:
+      - "Added model complexity does not reduce reference error."
+    pilot_adapter: null
+    plugin_opportunity: false
+    overlap_hints: []
+    human_only: false
+    expected_reuse: "Dynamics topology knowledge and future color compressors."
+
+  - id: vca_dynamics
+    title: VCA vocal dynamics control law
+    patterns: ["vca compressor", "vca dynamics", "vca compression"]
+    min_support_paths: 2
+    impact: 4
+    measurability: 4
+    falsifiability: 5
+    cross_track_reuse: 4
+    implementation_feasibility: 4
+    question: "Which detector, gain-computer and timing properties are actually required for a reusable VCA vocal-compression baseline?"
+    hypothesis: "A separated detector/gain-computer VCA model can produce reproducible control behavior without importing FET/opto assumptions."
+    counter_hypotheses:
+      - "Existing generic compressor research already covers the required behavior."
+    baseline: ["generic_feedforward_compressor"]
+    variants: ["vca_control_model"]
+    metrics: ["static_curve", "step_response", "release_shape"]
+    acceptance:
+      - "The VCA model yields a distinct, reproducible behavior justified by source or measurement evidence."
+    rejection:
+      - "No meaningful behavior remains after removing unsupported topology assumptions."
+    pilot_adapter: null
+    plugin_opportunity: false
+    overlap_hints: []
+    human_only: false
+    expected_reuse: "Control Comp, bus compression and transparent vocal dynamics."
+
+  - id: adaa_alias_control
+    title: ADAA applicability to vocal nonlinear stages
+    patterns: ["adaa", "anti-derivative anti-aliasing", "antiderivative antialiasing"]
+    min_support_paths: 2
+    impact: 4
+    measurability: 5
+    falsifiability: 5
+    cross_track_reuse: 5
+    implementation_feasibility: 4
+    question: "When does ADAA reduce alias energy enough to justify its complexity versus oversampling for CIPI nonlinear stages?"
+    hypothesis: "For compatible memoryless nonlinearities, ADAA can reduce alias energy at lower oversampling cost than a naive 1x baseline."
+    counter_hypotheses:
+      - "Oversampling alone is simpler and equally effective at the target CPU budget."
+      - "Stateful nonlinear stages reduce the practical value of ADAA."
+    baseline: ["naive_1x_waveshaper", "oversampled_waveshaper"]
+    variants: ["adaa_candidate"]
+    metrics: ["alias_energy_dbc", "cpu_relative", "band_error"]
+    acceptance:
+      - "ADAA materially reduces alias energy at a declared CPU/error budget."
+    rejection:
+      - "ADAA provides no practical advantage over the matched oversampling baseline."
+    pilot_adapter: null
+    plugin_opportunity: false
+    overlap_hints: []
+    human_only: false
+    expected_reuse: "Density, preamps, saturation and future nonlinear products."
+
+  - id: masking_aware_presence
+    title: Masking-aware vocal presence
+    patterns: ["masking-aware", "masking aware", "vocalforward", "masking"]
+    min_support_paths: 3
+    impact: 4
+    measurability: 3
+    falsifiability: 4
+    cross_track_reuse: 4
+    implementation_feasibility: 3
+    question: "Can vocal presence be increased from masking context without becoming a static high-mid boost?"
+    hypothesis: "Contextual masking features can choose bounded presence movement more selectively than a fixed EQ boost."
+    counter_hypotheses:
+      - "Level-matched static EQ performs equivalently."
+      - "Masking estimates are too mix-dependent for a stable vocal-only processor."
+    baseline: ["static_presence_eq"]
+    variants: ["masking_aware_presence"]
+    metrics: ["target_band_movement", "non_target_movement", "masking_proxy_improvement"]
+    acceptance:
+      - "The contextual candidate improves the masking proxy with less non-target movement than static EQ."
+    rejection:
+      - "The contextual candidate collapses to a static boost or becomes unstable across mixes."
+    pilot_adapter: null
+    plugin_opportunity: true
+    overlap_hints: ["Vocal Surface", "Vocal Finisher"]
+    human_only: false
+    expected_reuse: "Surface/Finisher and future mix-aware vocal processors."

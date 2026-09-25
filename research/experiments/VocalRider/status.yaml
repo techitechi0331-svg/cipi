@@ -1,0 +1,42 @@
+id: VOCAL_RIDER_01
+title: CIPI Vocal Rider 0.1
+
+status: measurement
+knowledge_status: HYPOTHESIS
+confidence: 0.64
+
+stages:
+  research: complete
+  review: complete
+  parameter_lock: in_progress
+  implementation: complete
+  measurement: in_progress
+  audio_ab: pending
+  revision: pending
+  vst3_validation: in_progress
+  final_review: pending
+
+current_stage: measurement
+
+completed:
+  - research
+  - review
+  - implementation
+
+unresolved:
+  - Band-aware breath / consonant / plosive protection is not validated.
+  - Adaptive noise-floor tracking is not numerically locked.
+  - Auto-target history and section adaptation require intentional section-dynamics and real-song validation.
+  - Lookahead choice needs real-vocal comparison.
+  - Amount upper-half mapping is provisional.
+  - Real-vocal objective validation and level-matched listening are pending; hosted Windows fallback is enabled so self-hosted Runner availability is not a blocker.
+  - Post-prepare 50 ms latency/state processor gate passed at 44.1/48/88.2/96/192 kHz and buffer sizes 32–1024.
+  - Steinberg validator is pending.
+  - Cubase Pro 14 host verification is pending.
+
+next_stage: measurement
+why_next: "The compiled core, VST3 build and pluginval gate pass. The next evidence must falsify musical over-riding and host-latency risks before real-vocal promotion."
+next_confirmation: "Intentional section contrast preservation, within-section leveling, explicit post-prepare latency reporting, then real-vocal objective metrics and level-matched A/B renders."
+
+blockers:
+  - "Human listening and Cubase Pro 14 confirmation remain unavoidable final gates."

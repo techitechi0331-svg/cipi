@@ -65,6 +65,7 @@ endfunction()
 cipi_add_plugin(CIPIVoxLevel "CIPI VoxLevel" VxL1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VoxLevel")
 cipi_add_plugin(CIPIAirGuard "CIPI AirGuard" ArG1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/AirGuard")
 cipi_add_plugin(CIPIDensity "CIPI Density" Dns1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/Density")
+cipi_add_plugin(CIPIVocalRider "CIPI Vocal Rider" VRd1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VocalRider")
 
 
 juce_add_console_app(CIPITests
@@ -87,3 +88,108 @@ target_link_libraries(CIPITests
 )
 
 set_target_properties(CIPITests PROPERTIES OUTPUT_NAME "CIPITests")
+
+
+juce_add_console_app(CIPIVocalRiderTests
+    PRODUCT_NAME "CIPI Vocal Rider Tests"
+)
+
+juce_generate_juce_header(CIPIVocalRiderTests)
+
+target_sources(CIPIVocalRiderTests PRIVATE tests/VocalRiderTests.cpp)
+target_include_directories(CIPIVocalRiderTests PRIVATE src)
+
+target_link_libraries(CIPIVocalRiderTests
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_core
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderTests PROPERTIES OUTPUT_NAME "CIPIVocalRiderTests")
+
+
+juce_add_console_app(CIPIVocalRiderMeasurement
+    PRODUCT_NAME "CIPI Vocal Rider Measurement"
+)
+
+juce_generate_juce_header(CIPIVocalRiderMeasurement)
+
+target_sources(CIPIVocalRiderMeasurement PRIVATE tests/VocalRiderMeasurement.cpp)
+target_include_directories(CIPIVocalRiderMeasurement PRIVATE src)
+
+target_link_libraries(CIPIVocalRiderMeasurement
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_core
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderMeasurement PROPERTIES OUTPUT_NAME "CIPIVocalRiderMeasurement")
+
+
+juce_add_console_app(CIPIVocalRiderPluginTests
+    PRODUCT_NAME "CIPI Vocal Rider Plugin Tests"
+)
+
+juce_generate_juce_header(CIPIVocalRiderPluginTests)
+
+target_sources(CIPIVocalRiderPluginTests PRIVATE
+    tests/VocalRiderPluginTests.cpp
+    src/plugins/VocalRider/PluginProcessor.cpp
+    src/plugins/VocalRider/PluginProcessor.h
+)
+target_include_directories(CIPIVocalRiderPluginTests PRIVATE src)
+
+target_compile_definitions(CIPIVocalRiderPluginTests
+    PRIVATE
+        JUCE_WEB_BROWSER=0
+        JUCE_USE_CURL=0
+        JUCE_VST3_CAN_REPLACE_VST2=0
+)
+
+target_link_libraries(CIPIVocalRiderPluginTests
+    PRIVATE
+        juce::juce_audio_utils
+        juce::juce_dsp
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderPluginTests PROPERTIES OUTPUT_NAME "CIPIVocalRiderPluginTests")
+
+
+juce_add_console_app(CIPIVocalRiderRealVocal
+    PRODUCT_NAME "CIPI Vocal Rider Real Vocal Validation"
+)
+
+juce_generate_juce_header(CIPIVocalRiderRealVocal)
+
+target_sources(CIPIVocalRiderRealVocal PRIVATE
+    tests/VocalRiderRealVocal.cpp
+)
+target_include_directories(CIPIVocalRiderRealVocal PRIVATE src)
+
+target_compile_definitions(CIPIVocalRiderRealVocal
+    PRIVATE
+        JUCE_WEB_BROWSER=0
+        JUCE_USE_CURL=0
+)
+
+target_link_libraries(CIPIVocalRiderRealVocal
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_audio_formats
+        juce::juce_core
+        juce::juce_data_structures
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderRealVocal PROPERTIES OUTPUT_NAME "CIPIVocalRiderRealVocal")

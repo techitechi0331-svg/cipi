@@ -1,0 +1,206 @@
+name: vocal-rider-research
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "CMakeLists.txt"
+      - "src/dsp/VocalRider*.h"
+      - "src/plugins/VocalRider/**"
+      - "tests/VocalRider*.cpp"
+      - "research/experiments/VocalRider/**"
+      - ".github/workflows/vocal-rider-research.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: vocal-rider-research-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test-validate:
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        shell: pwsh
+        run: cmake -S . -B build -G "Visual Studio 18 2026" -A x64
+
+      - name: Build Vocal Rider tests
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRiderTests --parallel 4
+
+      - name: Run Vocal Rider deterministic gate
+        shell: pwsh
+        run: |
+          $testExe = Get-ChildItem -Path build -Recurse -File -Filter CIPIVocalRiderTests.exe | Select-Object -First 1
+          if (-not $testExe) {
+            throw "CIPIVocalRiderTests.exe was not produced."
+          }
+
+          Write-Host "Running $($testExe.FullName)"
+          & $testExe.FullName
+          if ($LASTEXITCODE -ne 0) {
+            throw "Vocal Rider deterministic tests failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Build Vocal Rider processor tests
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRiderPluginTests --parallel 4
+
+      - name: Run Vocal Rider processor latency/state gate
+        shell: pwsh
+        run: |
+          $processorTest = Get-ChildItem -Path build -Recurse -File -Filter CIPIVocalRiderPluginTests.exe | Select-Object -First 1
+          if (-not $processorTest) {
+            throw "CIPIVocalRiderPluginTests.exe was not produced."
+          }
+
+          & $processorTest.FullName
+          if ($LASTEXITCODE -ne 0) {
+            throw "Vocal Rider processor tests failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Build Vocal Rider measurement renderer
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRiderMeasurement --parallel 4
+
+      - name: Run Vocal Rider measurement matrix
+        shell: pwsh
+        run: |
+          $measureExe = Get-ChildItem -Path build -Recurse -File -Filter CIPIVocalRiderMeasurement.exe | Select-Object -First 1
+          if (-not $measureExe) {
+            throw "CIPIVocalRiderMeasurement.exe was not produced."
+          }
+
+          New-Item -ItemType Directory -Force -Path measurements | Out-Null
+          & $measureExe.FullName measurements
+          if ($LASTEXITCODE -ne 0) {
+            throw "Vocal Rider measurement renderer failed with exit code $LASTEXITCODE."
+          }
+
+          Get-Content measurements/summary.md
+
+      - name: Build Vocal Rider VST3
+        shell: pwsh
+        run: cmake --build build --config Release --target CIPIVocalRider_VST3 --parallel 4
+
+      - name: Collect Vocal Rider VST3
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts | Out-Null
+          $bundle = Get-ChildItem -Path build -Recurse -Directory -Filter "CIPI Vocal Rider.vst3" | Select-Object -First 1
+          if (-not $bundle) {
+            throw "CIPI Vocal Rider.vst3 was not produced."
+          }
+
+          Copy-Item -LiteralPath $bundle.FullName -Destination (Join-Path artifacts $bundle.Name) -Recurse -Force
+
+      - name: Download pinned pluginval
+        shell: pwsh
+        run: |
+          $url = "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip"
+          $expected = "c08e61ce3b96db41636f8ec7e76f4c7e2c13ebdac7fa1b5a1f52b4f32ec715ab"
+
+          Invoke-WebRequest -Uri $url -OutFile pluginval.zip
+          $actual = (Get-FileHash pluginval.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+
+          if ($actual -ne $expected) {
+            throw "pluginval checksum mismatch. Expected $expected, got $actual."
+          }
+
+          Expand-Archive pluginval.zip -DestinationPath pluginval -Force
+
+      - name: Run pluginval strictness 5
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path pluginval-logs | Out-Null
+
+          $pluginval = Get-ChildItem -Path pluginval -Recurse -File -Filter pluginval.exe | Select-Object -First 1
+          if (-not $pluginval) {
+            throw "pluginval.exe was not found."
+          }
+
+          $bundle = Get-ChildItem -Path artifacts -Directory -Filter "CIPI Vocal Rider.vst3" | Select-Object -First 1
+          if (-not $bundle) {
+            throw "Vocal Rider bundle was not found for pluginval."
+          }
+
+          & $pluginval.FullName --validate $bundle.FullName --strictness-level 5 2>&1 |
+            Tee-Object -FilePath pluginval-logs/vocal-rider.log
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "pluginval failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Fetch pinned Steinberg VST3 SDK 3.8.1
+        shell: pwsh
+        run: |
+          git clone https://github.com/steinbergmedia/vst3sdk.git vst3sdk
+          git -C vst3sdk checkout 3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96
+          git -C vst3sdk submodule update --init --recursive
+
+      - name: Configure official Steinberg validator
+        shell: pwsh
+        run: |
+          cmake -S vst3sdk -B vst3sdk-build -G "Visual Studio 18 2026" -A x64 -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=ON -DSMTG_ENABLE_VSTGUI_SUPPORT=OFF -DSMTG_CREATE_PLUGIN_LINK=0
+
+      - name: Build official Steinberg validator
+        shell: pwsh
+        run: cmake --build vst3sdk-build --config Release --target validator --parallel 4
+
+      - name: Run official Steinberg validator
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path validator-logs | Out-Null
+
+          $validator = Get-ChildItem -Path vst3sdk-build -Recurse -File -Filter validator.exe | Select-Object -First 1
+          if (-not $validator) {
+            throw "validator.exe was not produced."
+          }
+
+          $bundle = Get-ChildItem -Path artifacts -Directory -Filter "CIPI Vocal Rider.vst3" | Select-Object -First 1
+          if (-not $bundle) {
+            throw "Vocal Rider bundle was not found for official validator."
+          }
+
+          & $validator.FullName $bundle.FullName 2>&1 |
+            Tee-Object -FilePath validator-logs/vocal-rider.log
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "Official Steinberg validator failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Upload official validator log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-Steinberg-validator
+          path: validator-logs
+          if-no-files-found: ignore
+
+      - name: Upload Vocal Rider artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-Windows-VST3
+          path: artifacts
+          if-no-files-found: error
+
+      - name: Upload Vocal Rider measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-measurements
+          path: measurements
+          if-no-files-found: error
+
+      - name: Upload pluginval log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIPI-Vocal-Rider-pluginval
+          path: pluginval-logs
+          if-no-files-found: ignore

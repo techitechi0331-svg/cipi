@@ -103,6 +103,11 @@ Names are provisional. Each item must earn implementation through a research hyp
 Current synthesis:
 `research/reports/cross-track-knowledge-review-2026-09-25.md`
 
+Preferred precision-reviewed wording:
+`research/reports/cross-track-knowledge-precision-review-2026-09-25.md`
+
+The precision review supersedes broad wording where the two reports differ; the first synthesis remains historical provenance.
+
 CIPI separates **product evidence strength** from **knowledge generality**.
 
 A result may be strongly MEASURED for one product and still remain product-scoped.

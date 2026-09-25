@@ -1,0 +1,36 @@
+{
+  "candidates_reviewed": 4,
+  "kept_likely_after_narrowing": 4,
+  "downgraded_to_hypothesis": 0,
+  "promoted_to_provisional": 0,
+  "confirmed_promotions": 0,
+  "claims_narrowed": 4,
+  "numeric_product_constants_promoted": 0,
+  "source_defined_constants_exempted_from_product_calibration_rule": true,
+  "minimum_materially_independent_support_paths_target": 2,
+  "candidate_assessment": {
+    "ctk01_detection_decision_action": {
+      "rating": "LIKELY",
+      "independent_support": "strong",
+      "primary_support_paths": 2,
+      "secondary_support_paths": 1
+    },
+    "ctk02_level_normalized_features": {
+      "rating": "LIKELY",
+      "independent_support": "moderate",
+      "primary_support_paths": 2,
+      "comparative_superiority_proven_cross_track": false
+    },
+    "ctk03_mechanism_separation": {
+      "rating": "LIKELY",
+      "independent_support": "moderate",
+      "direct_measured_failure_paths": 1,
+      "source_or_design_support_paths": 3
+    },
+    "ctk04_reuse_mechanism_not_calibration": {
+      "rating": "LIKELY",
+      "independent_support": "strong_methodological",
+      "source_defined_physical_constants_are_separate": true
+    }
+  }
+}

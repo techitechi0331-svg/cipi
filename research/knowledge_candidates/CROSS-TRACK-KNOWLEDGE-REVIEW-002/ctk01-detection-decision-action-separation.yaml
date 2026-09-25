@@ -1,0 +1,5 @@
+claim: When an adaptive vocal-DSP pipeline contains separable upstream detection or candidate-generation, downstream ranking or decision, and processing-action stages, each stage should be measured separately because good upstream recall does not guarantee correct downstream decisions or appropriately calibrated action strength.
+evidence_type: INFERRED
+scope: Precision-review synthesis of Vocal Resonance candidate-discovery versus semantic-ranking failures and MicroDouble detector-recall versus protection-strength failures, with Vo.Prep as supporting product-design evidence. Applies only where the pipeline actually contains separable stages; it does not require every processor to add a semantic classifier.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-REVIEW-002/manual-20260925
+promotion_requested: LIKELY

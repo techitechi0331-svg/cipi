@@ -1,0 +1,5 @@
+claim: When reference evidence distinguishes materially different control-path, nonlinear-device, feedback/load or transformer mechanisms, validation should keep those contributions separable enough for ablation, and additional nonlinear or memory complexity should be added only when source evidence or reproducible measurement justifies it over a simpler baseline.
+evidence_type: INFERRED
+scope: Precision-review synthesis from directly measured VL2A nonlinear-model failure/ablation work plus source-backed or planned mechanism separation in LA-2A, 1176 and Original Vocal Pre research. The strongest direct measured support is currently VL2A; the broader rule is therefore a modeling/validation discipline, not proof that one reduced topology is universally sufficient.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-REVIEW-002/manual-20260925
+promotion_requested: LIKELY

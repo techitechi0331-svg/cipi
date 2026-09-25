@@ -184,6 +184,7 @@ def main() -> int:
     p.add_argument("--job-id", required=True)
     p.add_argument("--run-id")
     p.add_argument("--github-output")
+    p.add_argument("--review-root", help="Optional authoritative main-tree root for confirmed REVIEW decisions.")
     args = p.parse_args()
 
     root = Path(args.root).resolve()
@@ -197,6 +198,11 @@ def main() -> int:
     run_dir = root / source_run
 
     confirmed = find_confirmed_review(root, args.job_id, str(decision["decision_id"]))
+    review_root = Path(args.review_root).resolve() if args.review_root else None
+    if review_root is not None and review_root != root:
+        main_confirmed = find_confirmed_review(review_root, args.job_id, str(decision["decision_id"]))
+        if main_confirmed is not None:
+            confirmed = main_confirmed
     candidate_path, candidate = find_candidate(root, args.job_id, source_run)
     review_gaps = list(decision.get("review_gaps", [])) if isinstance(decision.get("review_gaps", []), list) else []
     policy = job.get("review_policy", {}) if isinstance(job.get("review_policy"), dict) else {}

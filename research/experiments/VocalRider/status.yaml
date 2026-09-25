@@ -8,7 +8,7 @@ confidence: 0.52
 stages:
   research: complete
   review: complete
-  parameter_lock: provisional
+  parameter_lock: in_progress
   implementation: in_progress
   measurement: pending
   audio_ab: pending

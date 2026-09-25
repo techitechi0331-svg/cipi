@@ -170,14 +170,14 @@ def write_dashboard(root: Path, snapshot: dict[str, Any]) -> bool:
         lines += ["## Runner / dispatch alerts", ""]
         for alert in alerts:
             lines.append(
-                f"- \`{alert.get('action_id')}\` — {alert.get('state')} "
+                f"- `{alert.get('action_id')}` — {alert.get('state')} "
                 f"({alert.get('repo_key')}/{alert.get('workflow_key')}, since {alert.get('since')})"
             )
         lines.append("")
     if gates:
         lines += ["## Human gates", ""]
         for item in gates:
-            lines.append(f"- \`{item.get('job_id')}\` — " + "; ".join(map(str, item.get("gates", []))))
+            lines.append(f"- `{item.get('job_id')}` — " + "; ".join(map(str, item.get("gates", []))))
         lines.append("")
     md_text = "\n".join(lines)
 

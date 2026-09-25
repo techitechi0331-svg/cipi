@@ -1,0 +1,6 @@
+{
+  "experiment_adapter": "vocal_resonance_run_length_veto_v1",
+  "mode": "allowlisted_adapter",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14"
+}

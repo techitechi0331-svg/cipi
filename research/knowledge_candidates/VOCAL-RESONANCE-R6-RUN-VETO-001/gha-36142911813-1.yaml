@@ -1,0 +1,7 @@
+claim: Run-length morphology may be useful as a separate post-ranker abstention/veto
+  signal even when it is not stable enough to modify semantic ranking scores.
+evidence_type: HYPOTHESIS
+scope: Vocal resonance clean-false-trigger control after a frozen semantic candidate
+  ranker.
+source_run: research/runs/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1
+promotion_requested: HYPOTHESIS

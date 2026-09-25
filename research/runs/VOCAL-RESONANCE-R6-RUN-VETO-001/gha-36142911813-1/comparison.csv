@@ -1,0 +1,3 @@
+seed,rank_top5,rank_strong_top5,external_baseline_fpr,external_veto_fpr,target_action_keep,strong_action_keep
+20261003,0.25,0.3333333333333333,0.175,0.15,1.0,1.0
+20261013,0.34375,0.2857142857142857,0.25,0.0,1.0,1.0

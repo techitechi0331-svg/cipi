@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/run_length_veto.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T13:57:06.716397Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_run_length_veto_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOCAL-RESONANCE-R6-RUN-VETO-001",
+  "random_seed": 20261023,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36142911813-1",
+  "schema_version": "1.0",
+  "source_commit": "a826b34e86721de18733492c48ce0fc127a74540",
+  "started_at": "2026-09-25T13:45:14.942677Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

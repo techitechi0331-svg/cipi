@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "frozen_static_r2_single_view",
+    "raw_patch_only_linear_logistic"
+  ],
+  "experiment_adapter": "vocal_resonance_raw_patch_sufficiency_v2",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R12-RAW-PATCH-001.yaml",
+  "metrics": [
+    "top5_given_generator_hit",
+    "strong_top5_given_generator_hit",
+    "oracle_gap_closure",
+    "external_clean_false_trigger",
+    "generator_ceiling",
+    "source_overlap_count"
+  ],
+  "variants": [
+    "static_plus_raw_patch_linear",
+    "tiny_mlp_diagnostic_upper_bound"
+  ]
+}

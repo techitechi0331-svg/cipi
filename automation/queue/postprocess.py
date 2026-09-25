@@ -14,6 +14,13 @@ def safe_template_path(value: str) -> Path:
         raise ValueError(f"continuation template must stay under automation/job_templates: {value}")
     return path
 
+def safe_cross_repo_template_path(value: str) -> Path:
+    path = (ROOT / value).resolve()
+    allowed = (ROOT / "automation" / "cross_repo" / "action_templates").resolve()
+    if allowed not in path.parents:
+        raise ValueError(f"cross-repo continuation template must stay under automation/cross_repo/action_templates: {value}")
+    return path
+
 def write_immutable_yaml(path: Path, payload: dict) -> None:
     text = yaml.safe_dump(payload, sort_keys=False, allow_unicode=True)
     if path.exists():
@@ -137,6 +144,32 @@ def main() -> int:
                 existing = yaml.safe_load(dst.read_text(encoding="utf-8"))
                 if existing != data:
                     raise FileExistsError(f"queued continuation already exists with different content: {dst}")
+                continue
+            dst.write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True), encoding="utf-8")
+
+    cross_repo = job.get("cross_repo_continuation")
+    if isinstance(cross_repo, dict):
+        key = "on_accept" if bool(manifest.get("acceptance_met")) else "on_reject"
+        templates = cross_repo.get(key, [])
+        if templates is None:
+            templates = []
+        if not isinstance(templates, list):
+            raise ValueError(f"cross_repo_continuation.{key} must be a list")
+        queue = Path("research/cross_repo/actions/queued")
+        queue.mkdir(parents=True, exist_ok=True)
+        for value in templates:
+            src = safe_cross_repo_template_path(str(value))
+            if not src.is_file():
+                raise FileNotFoundError(src)
+            data = yaml.safe_load(src.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                raise ValueError(f"cross-repo action template must be a mapping: {src}")
+            data["state"] = "QUEUED"
+            dst = queue / src.name
+            if dst.exists():
+                existing = yaml.safe_load(dst.read_text(encoding="utf-8"))
+                if existing != data:
+                    raise FileExistsError(f"queued cross-repo action already exists with different content: {dst}")
                 continue
             dst.write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True), encoding="utf-8")
 

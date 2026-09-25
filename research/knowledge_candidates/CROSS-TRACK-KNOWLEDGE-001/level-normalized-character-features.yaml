@@ -1,0 +1,5 @@
+claim: When the target property is vocal event character rather than absolute loudness, level-normalized features such as spectral energy ratios or crest-like ratios are a stronger reusable starting point than absolute energy alone, provided contextual false-positive tests remain separate.
+evidence_type: INFERRED
+scope: Cross-track synthesis from Vo.Prep Sibilance Guard level-normalized high-to-broad/high-to-mid ratios, Vo.Prep Plosive Guard context beyond LF energy alone, and PeakBody measured crest-feature invariance under a -12 dB gain change. This does not prove one feature set works for every event, singer, language or near-silence condition.
+source_run: research/runs/CROSS-TRACK-KNOWLEDGE-001/manual-20260925
+promotion_requested: LIKELY

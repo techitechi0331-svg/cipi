@@ -141,6 +141,8 @@ def validate_contract(data: dict[str, Any]) -> None:
 
     if validation["pluginval"] is not True:
         raise ContractError("validation.pluginval is a mandatory VST3 Factory gate and cannot be disabled")
+    if validation["nan_inf"] is not True:
+        raise ContractError("validation.nan_inf is a mandatory Factory safety gate and cannot be disabled")
     if validation.get("official_vst3_validator", True) is not True:
         raise ContractError(
             "validation.official_vst3_validator is a mandatory VST3 Factory gate and cannot be disabled"

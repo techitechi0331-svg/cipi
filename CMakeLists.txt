@@ -65,6 +65,7 @@ endfunction()
 cipi_add_plugin(CIPIVoxLevel "CIPI VoxLevel" VxL1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VoxLevel")
 cipi_add_plugin(CIPIAirGuard "CIPI AirGuard" ArG1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/AirGuard")
 cipi_add_plugin(CIPIDensity "CIPI Density" Dns1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/Density")
+cipi_add_plugin(CIPIVocalRider "CIPI Vocal Rider" VRd1 "${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/VocalRider")
 
 
 juce_add_console_app(CIPITests
@@ -87,3 +88,24 @@ target_link_libraries(CIPITests
 )
 
 set_target_properties(CIPITests PROPERTIES OUTPUT_NAME "CIPITests")
+
+
+juce_add_console_app(CIPIVocalRiderTests
+    PRODUCT_NAME "CIPI Vocal Rider Tests"
+)
+
+juce_generate_juce_header(CIPIVocalRiderTests)
+
+target_sources(CIPIVocalRiderTests PRIVATE tests/VocalRiderTests.cpp)
+target_include_directories(CIPIVocalRiderTests PRIVATE src)
+
+target_link_libraries(CIPIVocalRiderTests
+    PRIVATE
+        juce::juce_audio_basics
+        juce::juce_core
+    PUBLIC
+        juce::juce_recommended_config_flags
+        juce::juce_recommended_warning_flags
+)
+
+set_target_properties(CIPIVocalRiderTests PROPERTIES OUTPUT_NAME "CIPIVocalRiderTests")

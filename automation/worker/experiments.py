@@ -27,6 +27,7 @@ ADAPTERS = {
     "vocal_resonance_temporal_morphology_v1",
     "vocal_resonance_temporal_morphology_stability_v1",
     "voprep_amount_mapping_v1",
+    "voprep_amount_mapping_r2_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -1414,6 +1415,63 @@ def _vocal_resonance_temporal_morphology_stability(
     }
 
 
+def _voprep_amount_mapping_r2(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "amount_mapping_r2.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-amount-r2-") as td:
+        out = Path(td)
+        completed = subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        result = json.loads((out / "amount_r2_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "amount_r2_results.json": (out / "amount_r2_results.json").read_text(encoding="utf-8"),
+            "amount_r2_report.md": (out / "amount_r2_report.md").read_text(encoding="utf-8"),
+            "selection.csv": (out / "selection.csv").read_text(encoding="utf-8"),
+            "holdout.csv": (out / "holdout.csv").read_text(encoding="utf-8"),
+        }
+
+    selected = result.get("selected_before_holdout") or {}
+    holdout = result.get("final_holdout") or {}
+    metrics = {
+        "decision": result.get("decision"),
+        "acceptance_met": bool(result.get("acceptance_met", False)),
+        "selected_candidate": selected.get("id"),
+        "selected_kind": selected.get("kind"),
+        "selected_target100_db": selected.get("target100"),
+        "selection_speaker_count": len(result.get("selection_speakers", [])),
+        "holdout_speaker_count": len(result.get("holdout_speakers", [])),
+        "holdout_passes": bool(holdout.get("passes", False)),
+        "holdout_gates": holdout.get("gates", {}),
+        "selection_speakers": result.get("selection_speakers", []),
+        "holdout_speakers": result.get("holdout_speakers", []),
+    }
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/amount_mapping_r2.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Leak-free Vo.Prep Amount Revision 2. Candidate values are fixed from "
+            "the prior development calibration, candidate selection uses four previously "
+            "unused HUST_Solfege speakers, and final acceptance uses four different "
+            "previously unused holdout speakers. The original 0.08 dB GR-ripple gate "
+            "is unchanged. Public raw audio is downloaded only to temporary runner storage "
+            "and is not persisted in CIPI."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -1447,4 +1505,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _voprep_amount_mapping(repo_root, timeout_seconds)
     if name == "vocal_resonance_temporal_morphology_stability_v1":
         return _vocal_resonance_temporal_morphology_stability(repo_root, timeout_seconds)
+    if name == "voprep_amount_mapping_r2_v1":
+        return _voprep_amount_mapping_r2(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

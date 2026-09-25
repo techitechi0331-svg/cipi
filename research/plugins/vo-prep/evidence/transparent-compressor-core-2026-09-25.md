@@ -207,3 +207,78 @@ These are retained as negative evidence, not erased.
 
 No raw private/client vocal audio is stored in CIPI.
 Only derived research evidence may be persisted.
+
+## Operating Point — MEASURED
+
+Product-repo Operating Point research selected a **4.0 s Learn & Lock** relative reference candidate.
+
+Held-out validation:
+- mean-GR input-gain invariance error: **0.000 dB**
+- p95-GR input-gain invariance error: **0.000 dB**
+- cross-source mean-GR standard deviation: **0.555 dB**
+- nominal mean GR: **3.289 dB**
+- nominal p95 GR: **4.866 dB**
+- GR ripple: **0.0486 dB**
+- loud/soft GR contrast: **1.990 dB**
+- contrast retained vs static-relative oracle: **101.5%**
+- threshold motion after lock: **0 dB**
+- learn time: **4.0 s**
+- parameter plateau: present
+
+Status for this subsystem:
+- product research decision: `AUTO_DEFAULT`
+- product UX/host feasibility remains unresolved.
+
+## Amount Mapping Revision 1 — MEASURED / REJECTED AS FINAL
+
+The first real-vocal Amount study compared:
+- learned-relative anchor Threshold mapping
+- simple linear Threshold mapping
+- DesiredGR scaling with exponents 0.8 / 1.0 / 1.2
+
+The numerically strongest candidate was **Gentle anchor Threshold mapping**.
+
+At 100% Amount it measured:
+- mean GR: **5.743 dB**
+- p95 GR: **7.871 dB**
+- p99 GR: **8.919 dB**
+- fraction >10 dB: **1.75%**
+- GR ripple: **0.080892 dB**
+
+The predeclared all-nonzero Amount GR-ripple gate was **<= 0.08 dB**.
+Therefore Revision 1 returned **REVISE**. The gate is not relaxed post hoc.
+
+For comparison, DesiredGR scaling with exponent 1.0 measured:
+- 50% mean GR: **3.123 dB**
+- 100% GR ripple: **0.083558 dB**
+- 100% p99 GR: **9.437 dB**
+- 100% fraction >10 dB: **1.97%**
+
+CIPI job `VO-PREP-AMOUNT-MAP-001` separately established that DesiredGR scaling is mathematically exact and linear on the frozen level-domain model. That result is retained, but it does not override the real-vocal Revision 1 negative result.
+
+## Amount Mapping Revision 2 — HYPOTHESIS / TEST PLAN
+
+Revision 2 keeps the original safety gates unchanged and avoids validation leakage.
+
+Predeclared 100% target candidates:
+- 5.0 dB
+- 5.2 dB
+- 5.4 dB
+- original 5.5 dB Revision-1 baseline
+
+The old Development calibration values are frozen before introducing the new dataset.
+HUST_Solfege is used only as a new public validation source.
+
+Selection speakers:
+- man1_butterfly
+- man2_schoolbell
+- woman1_twinkle
+- woman2_butterfly
+
+Final untouched holdout speakers:
+- man3_twinkle
+- man4_butterfly
+- woman3_schoolbell
+- man5_twinkle
+
+The candidate is selected on the first four speakers, frozen, and then evaluated once on the separate four-speaker holdout.

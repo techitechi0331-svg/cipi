@@ -33,6 +33,9 @@ public:
         phraseEnergy = 0.0;
         peakEnvelope = 0.0;
         targetDb = 0.0f;
+        sectionOffsetDb = 0.0f;
+        sectionEvidenceSeconds = 0.0f;
+        sectionEvidenceSign = 0;
         targetReady = false;
         targetCounter = 0;
         historyWrite = 0;
@@ -78,6 +81,8 @@ public:
 
             if (active && ! shortTransient && std::isfinite (currentPhraseDb))
                 pushTargetSample (currentPhraseDb);
+            else
+                decaySectionStateWhileInactive();
         }
 
         amount01 = clamp (amount01, 0.0f, 1.0f);
@@ -87,7 +92,8 @@ public:
 
         if (active && targetReady && depth > 0.0f)
         {
-            const auto errorDb = targetDb - currentPhraseDb;
+            const auto effectiveTargetDb = targetDb + sectionOffsetDb;
+            const auto errorDb = effectiveTargetDb - currentPhraseDb;
             const auto deadZoneError = applyDeadZone (errorDb, 0.65f);
             const auto rangeDb = 4.0f * depth;
 
@@ -113,7 +119,9 @@ public:
 
     float getCurrentGainDb() const noexcept { return currentGainDb; }
     float getDesiredGainDb() const noexcept { return desiredGainDb; }
-    float getTargetDb() const noexcept { return targetDb; }
+    float getTargetDb() const noexcept { return targetDb + sectionOffsetDb; }
+    float getBaseTargetDb() const noexcept { return targetDb; }
+    float getSectionOffsetDb() const noexcept { return sectionOffsetDb; }
     float getBodyDb() const noexcept { return currentBodyDb; }
     float getPhraseDb() const noexcept { return currentPhraseDb; }
     float getCrestDb() const noexcept { return currentCrestDb; }
@@ -181,6 +189,74 @@ private:
             active = false;
     }
 
+    static float moveToward (float current, float target, float maxDelta) noexcept
+    {
+        return current + clamp (target - current, -maxDelta, maxDelta);
+    }
+
+    void updateSectionAdaptation (float valueDb) noexcept
+    {
+        constexpr float updateSeconds = 0.050f;
+        constexpr float evidenceThresholdDb = 2.50f;
+        constexpr float evidenceHoldSeconds = 4.00f;
+        constexpr float sectionTrackRateDbPerSecond = 1.50f;
+        constexpr float activeRelaxRateDbPerSecond = 0.05f;
+        constexpr float maxSectionOffsetDb = 6.0f;
+
+        const auto effectiveTargetDb = targetDb + sectionOffsetDb;
+        const auto errorToEffectiveDb = valueDb - effectiveTargetDb;
+
+        int newSign = 0;
+        if (errorToEffectiveDb > evidenceThresholdDb)
+            newSign = 1;
+        else if (errorToEffectiveDb < -evidenceThresholdDb)
+            newSign = -1;
+
+        if (newSign == 0)
+        {
+            sectionEvidenceSeconds = std::max (0.0f, sectionEvidenceSeconds - 2.0f * updateSeconds);
+            sectionOffsetDb = moveToward (
+                sectionOffsetDb, 0.0f, activeRelaxRateDbPerSecond * updateSeconds);
+        }
+        else if (newSign == sectionEvidenceSign)
+        {
+            sectionEvidenceSeconds += updateSeconds;
+        }
+        else
+        {
+            sectionEvidenceSign = newSign;
+            sectionEvidenceSeconds = updateSeconds;
+        }
+
+        if (sectionEvidenceSeconds >= evidenceHoldSeconds)
+        {
+            const auto desiredOffsetDb = clamp (
+                valueDb - targetDb, -maxSectionOffsetDb, maxSectionOffsetDb);
+            sectionOffsetDb = moveToward (
+                sectionOffsetDb,
+                desiredOffsetDb,
+                sectionTrackRateDbPerSecond * updateSeconds);
+        }
+
+        if (sectionEvidenceSeconds <= 0.0f)
+            sectionEvidenceSign = 0;
+    }
+
+    void decaySectionStateWhileInactive() noexcept
+    {
+        constexpr float updateSeconds = 0.050f;
+        constexpr float evidenceDecayPerSecond = 0.25f;
+        constexpr float inactiveRelaxRateDbPerSecond = 0.01f;
+
+        sectionEvidenceSeconds = std::max (
+            0.0f, sectionEvidenceSeconds - evidenceDecayPerSecond * updateSeconds);
+        sectionOffsetDb = moveToward (
+            sectionOffsetDb, 0.0f, inactiveRelaxRateDbPerSecond * updateSeconds);
+
+        if (sectionEvidenceSeconds <= 0.0f)
+            sectionEvidenceSign = 0;
+    }
+
     void pushTargetSample (float valueDb) noexcept
     {
         history[historyWrite] = valueDb;
@@ -207,6 +283,8 @@ private:
             targetDb = static_cast<float> (
                 targetSmoothingCoeff * targetDb + (1.0 - targetSmoothingCoeff) * medianDb);
         }
+
+        updateSectionAdaptation (valueDb);
     }
 
     void updateGainTrajectory (float depth) noexcept
@@ -281,6 +359,9 @@ private:
     bool targetReady { false };
 
     float targetDb { 0.0f };
+    float sectionOffsetDb { 0.0f };
+    float sectionEvidenceSeconds { 0.0f };
+    int sectionEvidenceSign { 0 };
     float desiredGainDb { 0.0f };
     float currentGainDb { 0.0f };
     float velocityDbPerSecond { 0.0f };

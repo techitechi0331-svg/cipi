@@ -56,6 +56,7 @@ ADAPTERS = {
     "vocal_resonance_raw_patch_sufficiency_v2",
     "voprep_amount_mapping_r5_v1",
     "voprep_sidechain_hpf_real_v1",
+    "voprep_amount_mapping_r6_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3329,6 +3330,77 @@ def _voprep_amount_mapping_r4(repo_root: Path, timeout_seconds: int) -> dict[str
     }
 
 
+
+def _voprep_amount_mapping_r6(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "amount_mapping_r6_dual_ballistics.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-amount-r6-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Amount R6 subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+
+        result = json.loads((out / "amount_r6_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "amount_r6_results.json": (out / "amount_r6_results.json").read_text(encoding="utf-8"),
+            "amount_r6_report.md": (out / "amount_r6_report.md").read_text(encoding="utf-8"),
+            "amount_r6_metrics.csv": (out / "amount_r6_metrics.csv").read_text(encoding="utf-8"),
+        }
+
+    selection = result.get("selection") or {}
+    holdout = result.get("holdout") or {}
+    cand = (selection.get("candidate") or {}).get("response") or {}
+    base = (selection.get("baseline") or {}).get("response") or {}
+    metrics = {
+        "decision": result.get("decision"),
+        "acceptance_met": bool(result.get("acceptance_met", False)),
+        "selection_passes": bool(result.get("selection_passes", False)),
+        "baseline_amount100_ripple_db": (base.get("100.0") or {}).get("aggregate", {}).get("gr_ripple"),
+        "candidate_amount100_ripple_db": (cand.get("100.0") or {}).get("aggregate", {}).get("gr_ripple"),
+        "selection_ripple_improvement_ratio": selection.get("ripple_improvement_ratio"),
+        "selection_event_metrics": (selection.get("event_metrics") or {}).get("aggregate", {}),
+        "selection_extra_gates": selection.get("extra_gates", {}),
+        "holdout_accessed": bool(result.get("holdout_accessed", False)),
+        "holdout_passes": bool(holdout.get("passes", False)) if holdout else False,
+        "gain_invariance_probe": result.get("gain_invariance_probe", {}),
+        "selection_singers": result.get("selection_singers", []),
+        "holdout_singers": result.get("holdout_singers", []),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/amount_mapping_r6_dual_ballistics.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Vo.Prep Amount R6 explicitly reopens gain ballistics after the R5 "
+            "Soft Range rejection. The simple baseline is the current shared 8/70 "
+            "path. The only complex candidate reuses the previously measured Peak "
+            "Assist principle with the current Body release: Body 8/70 plus PeakExtra "
+            "3/20 and crest 6.5 dB. Amount smoothness, event selectivity, non-event "
+            "quietness, gain invariance and fresh-holdout gates are all required."
+        ),
+    }
+
 def _voprep_amount_mapping_r5(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     script = (
         repo_root / "research" / "plugins" / "vo-prep"
@@ -3627,6 +3699,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _voprep_sidechain_hpf_real(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r4_v1":
         return _voprep_amount_mapping_r4(repo_root, timeout_seconds)
+    if name == "voprep_amount_mapping_r6_v1":
+        return _voprep_amount_mapping_r6(repo_root, timeout_seconds)
     if name == "voprep_amount_mapping_r5_v1":
         return _voprep_amount_mapping_r5(repo_root, timeout_seconds)
     if name == "vopripro_detector_transfer_screen_v1":

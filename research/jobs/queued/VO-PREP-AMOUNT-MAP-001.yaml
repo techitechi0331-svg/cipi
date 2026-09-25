@@ -1,0 +1,77 @@
+schema_version: '1.0'
+job_id: VO-PREP-AMOUNT-MAP-001
+state: QUEUED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Does scaling the frozen transparent-core DesiredGR provide a more predictable one-knob Amount control than threshold sweep or ratio interpolation while preserving exact zero and full-core endpoints?
+hypothesis: DesiredGR scaling will produce exact Amount-zero null, monotonic gain reduction, exact 100-percent equivalence to the frozen core, and essentially zero linearity error for body and peak-extra gain reduction across the tested level shifts.
+counter_hypotheses:
+  - Threshold sweep is equally predictable and should remain the simple baseline.
+  - Ratio interpolation is sufficiently linear that post-curve DesiredGR scaling adds no useful property.
+  - DesiredGR scaling changes the peak-extra versus body relationship as Amount moves away from 100 percent.
+  - A candidate fails exact null, endpoint equivalence, monotonicity, numerical finiteness, or matrix completeness.
+baseline:
+  - threshold_sweep_from_no_compression_to_research_calibration_threshold
+variants:
+  - ratio_interpolation_1_to_1_5
+  - desired_gr_scale_0_to_1
+metrics:
+  - row_count
+  - matrix_complete
+  - all_numeric_finite
+  - desired_gr_scale_zero_null_max_gr_db
+  - desired_gr_scale_full_match_max_error_db
+  - desired_gr_scale_linearity_rmse_max_db
+  - desired_gr_scale_event_extra_linearity_rmse_max_db
+  - desired_gr_scale_monotonic
+  - threshold_sweep_linearity_rmse_max_db
+  - ratio_interp_linearity_rmse_max_db
+acceptance:
+  - The full mapping by Amount by input-shift matrix is present.
+  - All numeric outputs are finite.
+  - DesiredGR scaling at Amount zero produces no gain reduction above 1e-9 dB.
+  - DesiredGR scaling at Amount 100 percent matches the frozen core within 1e-9 dB.
+  - DesiredGR scaling maximum strength-linearity RMSE is no more than 1e-9 dB.
+  - DesiredGR scaling peak-extra linearity RMSE is no more than 1e-9 dB.
+  - DesiredGR scaling is monotonic at every tested input shift.
+  - Threshold-sweep linearity error exceeds DesiredGR-scaling error by at least 0.05 dB.
+  - Ratio-interpolation linearity error exceeds DesiredGR-scaling error by at least 0.05 dB.
+rejection:
+  - Any acceptance invariant fails.
+  - Any required mapping, Amount, or input-shift case is missing.
+  - Any non-finite output is produced.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 20260925
+experiment_adapter: voprep_amount_mapping_v1
+allowed_operations:
+  - read_committed_model
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - network_write
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: Scaling DesiredGR after the frozen static curve can provide an exact-null, endpoint-preserving and mathematically linear Amount control while preserving the peak-extra/body gain-reduction relationship better than changing threshold.
+  evidence_type: HYPOTHESIS
+  scope: Deterministic level-domain Vo.Prep transparent-core Amount mapping across Amount 0/25/50/75/100 and input shifts -12/-6/0/+6/+12 dB.
+  promotion_requested: PROVISIONAL
+review_policy:
+  required_human_gates:
+    - Level-matched real-vocal listening before product Amount adoption.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SNAPSHOT-GATE-001
+  related_decisions: []

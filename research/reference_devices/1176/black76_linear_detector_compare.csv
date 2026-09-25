@@ -1,0 +1,9 @@
+dataset,mode,onset_dbfs,ratio_1_6,ratio_6_12,ratio_12_18
+supplemental_target,4,-42,3.0854,4.6462,5.0337
+supplemental_target,8,-40,4.9467,7.8239,8.2618
+supplemental_target,12,-38,7.7485,11.8871,12.1317
+supplemental_target,20,-37,13.7836,21.9264,22.8206
+linear_detector_best,4,-42,5.21,4.56,3.39
+linear_detector_best,8,-40,9.39,7.07,5.01
+linear_detector_best,12,-38,15.27,11.10,7.51
+linear_detector_best,20,-37,12.46,23.11,15.22

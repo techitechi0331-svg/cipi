@@ -1,0 +1,106 @@
+name: Architect Gate
+
+on:
+  pull_request:
+    paths:
+      - "automation/architect/**"
+      - "automation/incubator/**"
+      - "research/architect/**"
+      - "research/incubator/**"
+      - "research/runs/ARCHITECT-*/**"
+      - "research/knowledge_candidates/ARCHITECT-*/**"
+      - "research/decisions/ARCHITECT-*/**"
+      - "tools/validate_architect.py"
+      - "tools/validate_incubator.py"
+      - "tools/validate_architect_change_scope.py"
+      - ".github/workflows/architect-gate.yml"
+      - ".github/workflows/free-autonomous-architect.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "automation/architect/**"
+      - "automation/incubator/**"
+      - "research/architect/**"
+      - "research/incubator/**"
+      - "research/runs/ARCHITECT-*/**"
+      - "research/knowledge_candidates/ARCHITECT-*/**"
+      - "research/decisions/ARCHITECT-*/**"
+      - "tools/validate_architect.py"
+      - "tools/validate_incubator.py"
+      - "tools/validate_architect_change_scope.py"
+  workflow_dispatch:
+
+jobs:
+  validate-architect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Validate committed Architect and Incubator artifacts
+        run: |
+          python tools/validate_architect.py
+          python tools/validate_incubator.py
+
+      - name: Smoke Research Gap discovery and Pilot
+        run: |
+          rm -rf /tmp/cipi-architect-smoke
+          mkdir -p /tmp/cipi-architect-smoke
+          python automation/architect/discover.py --topic nonlinear_continuity_replication --output-root /tmp/cipi-architect-smoke --max-gaps 1
+          python tools/validate_architect.py --root /tmp/cipi-architect-smoke
+          python automation/architect/pilot.py --proposal /tmp/cipi-architect-smoke/research/architect/proposals/RP-NONLINEAR-CONTINUITY-REPLICATION-001.yaml --output-root /tmp/cipi-architect-smoke --run-id architect-smoke-0001
+          python - <<'PY'
+          import json, pathlib, yaml
+          root=pathlib.Path("/tmp/cipi-architect-smoke")
+          manifest=json.loads(next((root/"research/runs").rglob("manifest.json")).read_text())
+          metrics=json.loads(next((root/"research/runs").rglob("metrics.json")).read_text())
+          kc=yaml.safe_load(next((root/"research/knowledge_candidates").rglob("*.yaml")).read_text())
+          decision=yaml.safe_load(next((root/"research/decisions").rglob("*.yaml")).read_text())
+          assert manifest["acceptance_met"] is True
+          assert metrics["low_level_thd_penalty_db"] >= 20.0
+          assert kc["evidence_type"] == "MEASURED"
+          assert decision["event_type"] == "AUTOMATED_PROPOSAL"
+          assert decision["review_status"] == "PENDING"
+          print("architect pilot smoke: PASS")
+          PY
+
+      - name: Smoke Plugin Incubator overlap routing
+        run: |
+          rm -rf /tmp/cipi-incubator-smoke
+          mkdir -p /tmp/cipi-incubator-smoke
+          python automation/architect/discover.py --topic breath_event_detection --output-root /tmp/cipi-incubator-smoke --max-gaps 1
+          python automation/incubator/discover.py --proposal /tmp/cipi-incubator-smoke/research/architect/proposals/RP-BREATH-EVENT-DETECTION-001.yaml --output-root /tmp/cipi-incubator-smoke
+          python tools/validate_architect.py --root /tmp/cipi-incubator-smoke
+          python tools/validate_incubator.py --root /tmp/cipi-incubator-smoke
+          python - <<'PY'
+          import pathlib,yaml
+          p=next(pathlib.Path("/tmp/cipi-incubator-smoke/research/incubator/decisions").glob("*.yaml"))
+          d=yaml.safe_load(p.read_text())
+          assert d["decision"] == "MERGE_EXISTING"
+          assert d["final"] is False
+          print("incubator overlap smoke: PASS")
+          PY
+
+      - name: Smoke isolated prototype adapter
+        run: python automation/incubator/prototype.py --self-test
+
+      - name: Validate existing CIPI research contracts
+        run: |
+          python tools/validate_research_result.py
+          python tools/validate_evidence_candidate.py
+          python tools/validate_decision_records.py
+          python tools/validate_research_job.py
+          python tools/validate_research.py
+
+      - name: Enforce architect-bot append-only scope
+        if: ${{ github.event_name == 'pull_request' && startsWith(github.head_ref, 'architect-bot/') }}
+        run: python tools/validate_architect_change_scope.py --base "${{ github.event.pull_request.base.sha }}" --head "${{ github.event.pull_request.head.sha }}"

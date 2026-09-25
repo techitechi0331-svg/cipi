@@ -369,3 +369,46 @@ Completion now requires:
 - strict pluginval;
 - Cubase Pro 14 host confirmation;
 - final CIPI contradiction review.
+
+
+## 2026-09-25 Reference-Parity Audit measured result
+
+Audit run `36088776046` passed its hard implementation gate.
+
+The main new conclusion is a separation of **capability** from **calibration**:
+
+- VL2A can already reach about 32 dB COMP and 36.8 dB LIMIT at very hot
+  PR100 input, so the T4 maximum-reduction capability is not the primary
+  blocker.
+- At ordinary reference contexts it is much more conservative:
+  - -18 dBFS / PR50 COMP: ~0.61 dB GR
+  - -18 dBFS / PR100: ~6.22 dB
+  - -12 dBFS / PR100: ~10.28 dB
+- therefore the Peak Reduction / sidechain operating sensitivity remains
+  **REOPEN / high priority**.
+
+Stereo detector:
+- centered stereo == mono in the current implementation;
+- one-sided stereo produces materially less GR;
+- L/R symmetry is correct;
+- exact historical/commercial one-sided sensitivity is not source-established.
+Status remains **UNRESOLVED**; do not switch to max detection by inference.
+
+Meter:
+- current 50 ms editor rise smoothing can under-display short-event GR by
+  approximately 1..5.6 dB in the measured matrix;
+- by 250..500 ms the displayed value is close to DSP GR;
+- this can affect perceived responsiveness but does not explain the sustained
+  Peak Reduction operating-range discrepancy.
+- 20 dB meter full scale is not automatically a defect; meter scale and
+  compressor maximum capability are separate.
+
+Artifact:
+- id `10844739826`
+- digest `sha256:757c94d102433c210fecd4fe7d901fc9eb2246f2a938a2bcdf52f242b79915df`
+
+Next:
+- revised Peak candidate matrix;
+- Phase 03 active-GR nonlinearity decision;
+- level-matched free-vocal validation;
+- controlled commercial-reference host comparison.

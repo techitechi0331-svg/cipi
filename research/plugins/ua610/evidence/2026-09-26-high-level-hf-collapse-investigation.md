@@ -114,3 +114,22 @@ The previous catastrophic 10 kHz / -6 dBFS loss of approximately -88 to -300 dB 
 - Inspect extended shortlist/IMD/alias/frequency results under the robust Original solver because numerical values can legitimately shift after the solver correction.
 - Measure real-time CPU cost of the robust solver before parameter lock.
 - Complete level-matched real-vocal A/B and Cubase Pro 14 host validation.
+
+
+## LATEST-BRANCH FAIL-FAST CONFIRMATION
+
+### SOURCE_FACT
+- Latest product branch source under validation: `5b00e453c5b7c0ee295d7fd42343fabc0ab9ecd3`.
+- Windows workflow run: `36156239641` (Run 39).
+- Preserved 610 baseline regression: PASS.
+- New split high-level overload fail-fast gate: PASS.
+- Fail-fast artifact: `Original-Vocal-Pre-Overload-Gate`.
+- Artifact digest: `sha256:a616018c68fd05da7e7ef22b6fa92a17d02984be68818afc8ab12a2218d45b02`.
+
+### MEASURED
+At Character 100, input trim 0 dB, source -6 dBFS:
+- 1 kHz gain: **-0.213888 dB**, peak **0.504335**, THD **3.02875%**, finite.
+- 10 kHz gain: **-0.319197 dB**, peak **0.493690**, THD **2.0258%**, finite.
+
+The latest branch therefore reproduces the corrected high-level behavior at the permanent fast gate.
+The longer shortlist / tuning / full-overload artifacts from this run remain separate evidence and must be inspected before parameter lock.

@@ -18,9 +18,11 @@ Natural vocal dynamics preparation before downstream color compression with a de
 - Amount/Character tables are product calibration rather than universal compressor constants.
 
 ## Unresolved
-- Gain-matched real-vocal AB is not formally registered in CIPI.
-- Cubase Pro 14 scan/load/save-reopen verification is not formally complete.
-- Final review must test the fixed Natural 50% mapping across representative vocals.
+- Objective gain-matched real-vocal A/B preparation and engineering measurement are registered for the current four-recording HUST_Solfege snapshot; the human level-matched KEEP/REVISE/ROLLBACK listening decision is still pending.
+- The current snapshot covers four adult HUST_Solfege Twinkle recordings and does not justify universal singer, language, microphone or genre generalisation claims.
+- Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally complete on the user's actual machine.
+- Steinberg official VST3 validator evidence is not currently registered for the VoPriPro main candidate.
+- Final precision review remains pending after subjective listening and target-host confirmation.
 
 ## Reusable knowledge target
 Detector calibration, bounded gain reduction, INPUT/detector separation, realtime-safe limiting and minimal-control vocal dynamics.

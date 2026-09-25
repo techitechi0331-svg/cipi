@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "current_vopripro_natural50_20_110"
+  ],
+  "experiment_adapter": "vopripro_ballistics_transfer_screen_v1",
+  "job_file": "research/jobs/queued/VOPRIPRO-BALLISTICS-TRANSFER-001.yaml",
+  "metrics": [
+    "all_finite",
+    "burst_10ms_max_extra_peak_gr_db",
+    "burst_30ms_max_extra_peak_gr_db",
+    "burst_100ms_min_extra_peak_gr_db",
+    "body_800ms_max_abs_active_mean_delta_db",
+    "repeated_phrase_max_extra_ripple_db",
+    "release_200ms_max_candidate_minus_baseline_residual_db",
+    "candidate_max_peak_gr_sample_rate_spread_db"
+  ],
+  "variants": [
+    "voprep_fixed_8_70"
+  ]
+}

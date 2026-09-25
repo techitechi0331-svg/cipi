@@ -1,0 +1,49 @@
+{
+  "acceptance": {
+    "all_finite": true,
+    "body_800ms_active_mean_delta_le_0_15db": false,
+    "burst_100ms_control_gain_ge_0_25db": false,
+    "burst_10ms_extra_peak_gr_le_0_35db": false,
+    "burst_30ms_extra_peak_gr_le_0_50db": false,
+    "candidate_peak_gr_sample_rate_spread_le_0_10db": true,
+    "release_200ms_not_slower_than_baseline": true,
+    "repeated_phrase_ripple_extra_le_0_10db": false
+  },
+  "acceptance_met": false,
+  "aggregate_metrics": {
+    "all_finite": true,
+    "body_800ms_max_abs_active_mean_delta_db": 0.17794757722294463,
+    "burst_100ms_min_extra_peak_gr_db": 0.09469343302365996,
+    "burst_10ms_max_extra_peak_gr_db": 1.1187655219084456,
+    "burst_30ms_max_extra_peak_gr_db": 1.1877726046296955,
+    "candidate_max_peak_gr_sample_rate_spread_db": 0.006671343211695824,
+    "release_200ms_max_candidate_minus_baseline_residual_db": -0.7083725165973689,
+    "repeated_phrase_max_extra_ripple_db": 0.11777022040764296
+  },
+  "baseline": {
+    "attack_ms": 20.0,
+    "release_ms": 110.0
+  },
+  "candidate": {
+    "attack_ms": 8.0,
+    "release_ms": 70.0
+  },
+  "experiment": "VOPRIPRO_BALLISTICS_TRANSFER_SCREEN_V1",
+  "interpretation": "Passing authorizes only a real-vocal timing comparison. It does not establish that 8/70 ms is perceptually superior or suitable for replacing the current Character mapping.",
+  "sample_rates": [
+    44100,
+    48000,
+    96000,
+    192000
+  ],
+  "seed": 20260926,
+  "shared_conditions": {
+    "calibration_gr_db": 3.0,
+    "detector": "current VoPriPro Natural50 35/65 Peak/RMS",
+    "knee_db": 12.0,
+    "max_gr_db": 6.0,
+    "ratio": 2.7,
+    "rms_tau_ms": 25.0,
+    "sidechain_hpf_hz": 80.0
+  }
+}

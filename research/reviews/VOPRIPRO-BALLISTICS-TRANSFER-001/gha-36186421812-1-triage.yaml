@@ -1,0 +1,38 @@
+schema_version: '1.0'
+triage_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:triage-v1
+job_id: VOPRIPRO-BALLISTICS-TRANSFER-001
+run_id: gha-36186421812-1
+source_run: research/runs/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1
+source_decision_id: VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:auto
+source_decision_path: research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-auto.yaml
+job_path: research/jobs/completed/VOPRIPRO-BALLISTICS-TRANSFER-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1.yaml
+candidate_class: REJECT_CANDIDATE
+route: REJECTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: false
+rejection_triggered: true
+promotion_requested: HYPOTHESIS
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+required_human_gates: []
+downstream_gate_signals:
+- Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current
+  main Natural50 A/B pack.
+- The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle
+  recordings and does not establish universal singer/generalisation claims.
+- Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally
+  complete on the user's actual machine.
+- Final precision review remains pending after subjective and target-host evidence.
+- Human listening is required to convert the generated gain-matched A/B pack into
+  perceptual evidence.
+- Cubase Pro 14 validation ultimately requires the user's Windows host.
+reasons:
+- The automated proposal is REJECT; final rejection still requires review authority.
+recommended_action: Review the triggered rejection criteria, retained findings, reusable
+  findings and revisit conditions; confirm or supersede with a new REVIEW decision.
+created_at: '2026-09-25T20:33:14.332011Z'
+triage_version: '1.0'
+immutable: true

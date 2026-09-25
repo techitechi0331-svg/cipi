@@ -240,3 +240,70 @@ A detector study that lacks the event class needed to test its most important sa
 Use a broader multi-singer/high-register corpus with enough bright periodic and noise-like vocal events. VocalSet plus Annotated-VocalSet are strong source candidates because they provide professional multi-singer monophonic singing plus technique and F0/note annotations.
 
 Do not change Revision 02 guard thresholds before that corpus gate.
+
+
+## PeakBody periodicity challengers and strong-voicing veto
+
+### MEASURED — synthetic detector-family screen
+
+YIN-CMND and MPM/NSDF both satisfied the predeclared synthetic periodicity-confidence gates.
+
+YIN showed lower pair-operation proxy and much better diagnostic F0 accuracy, but these advantages did not establish dynamics-safe real-vocal behavior.
+
+### REJECTED — direct YIN / MPM confidence substitution
+
+Using candidate-independent baseline masks on the same private singing performance:
+
+- current autocorrelation guard noise-like median retention: **0.492622**;
+- YIN direct-confidence guard: **0.667187** — REJECTED;
+- MPM direct-confidence guard: **0.625372** — REJECTED.
+
+Both challengers preserved low-frequency transients, periodic body behavior and processing-variant stability, but both protected the fixed noise-like real-vocal frames more strongly than the current guard.
+
+Reusable conclusion:
+
+> Accurate or high-confidence pitch/periodicity estimation is not equivalent to dynamics-safe voicing protection.
+
+### MEASURED — strong-periodicity veto private sub-gate
+
+A simpler mapping change was tested before adding new detector complexity.
+
+Strong-periodicity veto:
+
+`u = clamp((P - 0.55) / 0.25, 0, 1)`
+
+`V = u*u*(3 - 2*u)`
+
+`G = 0.75 * spectralEvidence * (1 - V)`
+
+Private same-performance result:
+
+- noise-like median retention: **0.295898**;
+- low-frequency transient median / p10: **1.0 / 1.0**;
+- periodic-body mean absolute delta: **0.0**;
+- processing-variant correlation median: **0.899242**.
+
+This clears the locked private sub-gate and the mature <=0.35 noise-retention target.
+
+### REJECTED for current revision — unnecessary contextual complexity
+
+A second candidate added verified Vo.Prep Sibilance Guard v2.3 continuous probability as extra noise evidence.
+
+It remained safe on the private replay, but median noise-like retention was also **0.295898**, giving **0.000000** median improvement over the simple veto. The predeclared complexity-improvement rule was therefore not met on private evidence.
+
+The contextual candidate is not deleted; it remains a reusable negative/alternative result.
+
+### HYPOTHESIS / next gate
+
+The strong-periodicity veto is now the leading PeakBody guard hypothesis, **not yet a product lock**.
+
+Before adopting it, the queued synthetic gate must confirm:
+
+- bright/startup voiced retention;
+- 6 dB SNR noisy-voiced retention;
+- plosive retention;
+- sibilant/breath/long-S rejection;
+- steady-body invariance;
+- finite behavior across 44.1 / 48 / 96 / 192 kHz.
+
+A broader multi-singer/high-register real-vocal corpus remains a separate mandatory gate because the current private material contains zero bright-voiced reference frames.

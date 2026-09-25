@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "frozen_static_r2_single_view",
+    "simple_inpaint_delta_only"
+  ],
+  "experiment_adapter": "vocal_resonance_self_counterfactual_inpainting_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001.yaml",
+  "metrics": [
+    "top5_given_generator_hit",
+    "strong_top5_given_generator_hit",
+    "oracle_gap_closure",
+    "external_clean_false_trigger",
+    "generator_ceiling",
+    "source_overlap_count",
+    "proxy_vs_true_delta_diagnostic"
+  ],
+  "variants": [
+    "static_plus_self_counterfactual_inpainting"
+  ]
+}

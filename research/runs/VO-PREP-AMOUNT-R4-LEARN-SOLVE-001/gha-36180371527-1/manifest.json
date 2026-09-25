@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vo-prep/experiments/amount_mapping_r4_learn_solve.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-25T19:34:47.721321Z",
+  "environment": {
+    "experiment_adapter": "voprep_amount_mapping_r4_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001",
+  "random_seed": 20260926,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36180371527-1",
+  "schema_version": "1.0",
+  "source_commit": "d5c6a994e953718e9ae6f305e2fa5bc23055be66",
+  "started_at": "2026-09-25T19:33:34.092016Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

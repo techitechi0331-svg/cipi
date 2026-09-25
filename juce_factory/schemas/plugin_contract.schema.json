@@ -189,7 +189,7 @@
       ],
       "properties": {
         "pluginval": {
-          "type": "boolean"
+          "const": true
         },
         "state_restore": {
           "type": "boolean"
@@ -201,10 +201,10 @@
           "type": "boolean"
         },
         "nan_inf": {
-          "type": "boolean"
+          "const": true
         },
         "official_vst3_validator": {
-          "type": "boolean"
+          "const": true
         },
         "latency": {
           "type": "boolean"

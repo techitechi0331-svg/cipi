@@ -160,6 +160,7 @@ def main() -> int:
         "route": route,
         "candidate_class": triage.get("candidate_class"),
         "triage_path": triage_path.relative_to(root).as_posix(),
+        "triage_id": triage.get("triage_id"),
         "job_path": job_path.relative_to(root).as_posix(),
         "research_question": job.get("research_question"),
         "hypothesis": job.get("hypothesis"),
@@ -195,10 +196,34 @@ def main() -> int:
     }
 
     out_dir = root / "research" / "reviews" / args.job_id
-    yaml_path = out_dir / f"{args.run_id}-review-brief.yaml"
-    md_path = out_dir / f"{args.run_id}-review-brief.md"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    base_brief_id = str(payload["brief_id"])
+    revision = 1
+    supersedes = None
 
-    yaml_text = yaml.safe_dump(payload, sort_keys=False, allow_unicode=True)
+    while True:
+        suffix = "" if revision == 1 else f"-r{revision}"
+        yaml_path = out_dir / f"{args.run_id}-review-brief{suffix}.yaml"
+        md_path = out_dir / f"{args.run_id}-review-brief{suffix}.md"
+        active = dict(payload)
+        if revision > 1:
+            active["brief_id"] = f"{base_brief_id}-r{revision}"
+            active["brief_revision"] = revision
+            active["supersedes_brief_id"] = supersedes
+            active["correction_reason"] = "A superseding triage or authoritative review history changed the bounded review brief; prior brief remains preserved."
+        yaml_text = yaml.safe_dump(active, sort_keys=False, allow_unicode=True)
+        if yaml_path.exists():
+            existing = load_yaml(yaml_path)
+            if existing == active:
+                payload = active
+                break
+            if isinstance(existing, dict):
+                supersedes = str(existing.get("brief_id", "")) or supersedes
+            revision += 1
+            continue
+        payload = active
+        write_immutable(yaml_path, yaml_text)
+        break
 
     metric_lines = "\n".join(f"- `{m['path']}`: {m['value']}" for m in metric_snapshot) or "- no scalar metrics"
     accept_lines = "\n".join(f"- {x}" for x in payload["acceptance_criteria"]) or "- none"
@@ -218,6 +243,8 @@ def main() -> int:
 
 - Job: `{args.job_id}`
 - Run: `{args.run_id}`
+- Brief revision: **{revision}**
+- Triage: `{payload.get('triage_id')}`
 - Route: **{route}**
 - Candidate class: **{triage.get('candidate_class')}**
 - Existing confirmed review: {confirmed_line}

@@ -1,0 +1,48 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-MACRO-BOUNDARY-R2-001:manual-20260926:review-01"
+job_id: VO-PREP-MACRO-BOUNDARY-R2-001
+source_run: research/runs/VO-PREP-MACRO-BOUNDARY-R2-001/manual-20260926
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+rationale: >-
+  Macro Boundary R2 passed every predeclared short-term shape diagnostic gate.
+  The 10 ms crest-factor p95 changed by only 0.00171 dB median and 0.00349 dB
+  worst-file, while p99 Macro gain excursions remained about 0.015 / 0.075 /
+  0.150 dB over 10 / 50 / 100 ms. Cut/boost gain-rate measurements matched the
+  frozen 1.5/0.6 dB/s design bounds. R2 therefore supports the interpretation
+  that R1 absolute short-window failures were dominated by intended slow level
+  offset rather than compressor-like within-window transient flattening.
+  R1 remains preserved and failed; R2 is a separate diagnostic result.
+declared_rejection_criteria:
+  - "Any predeclared R2 crest, gain-excursion, gain-rate, or numerical-safety gate fails."
+triggered_criteria: []
+retained_findings:
+  - "Median 10 ms crest-p95 change was 0.0017095734 dB; worst-file was 0.0034907223 dB."
+  - "Maximum 10/50/100 ms p99 gain excursions were 0.0149687529 / 0.0749687552 / 0.1499687582 dB."
+  - "Maximum cut-rate p99 was 1.5035390854 dB/s and maximum boost-rate p99 was 0.6019413471 dB/s."
+  - "Median cut-ceiling occupancy was 0.0035372685; worst-file occupancy was 0.0525520282."
+  - "R1 remains a failed final-proof run and is not rewritten."
+  - "R1 downstream evidence still shows only 0.0230 dB median mean-GR change and >=99.33% worst mean-GR retention in VoPriPro."
+reusable_findings:
+  - "Slow scalar gain movement should be distinguished from within-window transient-shape compression when validating phrase-level preprocessing."
+  - "Crest-factor preservation plus bounded within-window gain excursion is a useful diagnostic for separating phrase riding from short-term compression."
+revisit_if:
+  - "Integrated level-matched listening reveals pumping, flattened attacks, tail lift, or double-processing despite the objective boundary metrics."
+  - "A broader independent corpus shows materially larger crest or gain-excursion changes."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-MACRO-BOUNDARY-001
+    - VO-PREP-PRODUCT-BOUNDARY-001
+  related_decisions:
+    - "VO-PREP-MACRO-BOUNDARY-001:manual-20260926:review-01"
+    - "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01"
+created_at: "2026-09-26"
+immutable: true
+scope: >-
+  Isolated Macro Level v2.1 short-term shape diagnostic on the same 11
+  anonymized private-vocal segments used in R1. This advances Macro as a
+  boundary candidate; it is not final human listening or host approval.
+review_gaps: []

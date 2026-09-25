@@ -1,0 +1,5 @@
+claim: Product-specific problem/event preparation and broadband vocal dynamics preparation should remain separate product responsibilities when merging them would duplicate DSP role, UI intent and downstream processing ownership.
+evidence_type: INFERRED
+scope: Vo.Prep versus VoPriPro product-boundary review at Vo.Prep main 28afccdf and VocalPrepComp main cc796d30; architecture principle, not a universal commercial-product rule.
+source_run: research/runs/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926
+promotion_requested: PROVISIONAL

@@ -49,3 +49,6 @@ jobs:
         run: |
           echo "No READY autonomous research job remains."
           echo "blocked=${{ steps.select.outputs.skipped_blocked }} dependency=${{ steps.select.outputs.skipped_dependency }} claimed=${{ steps.select.outputs.skipped_claimed }}"
+          echo "blocked_jobs=${{ steps.select.outputs.blocked_jobs }}"
+          echo "dependency_jobs=${{ steps.select.outputs.dependency_jobs }}"
+          echo "claimed_jobs=${{ steps.select.outputs.claimed_jobs }}"

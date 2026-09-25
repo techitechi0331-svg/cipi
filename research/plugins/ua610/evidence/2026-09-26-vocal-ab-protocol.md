@@ -99,3 +99,31 @@ This remains a hypothesis until rendered listening evidence exists.
 - Inspect metrics and listening files.
 - Add at least one contrasting vocal source before parameter lock if a suitably licensed source is available.
 - Complete user-side Cubase Pro 14 validation.
+
+
+## CONTRASTING SOURCE ADDITION
+
+### SOURCE_FACT
+A second licensed/public-domain singing source is added to reduce dependence on one solo-style recording:
+
+- Wikimedia Commons file: `Shenandoah.ogg`.
+- Description: a cappella choral arrangement performed by the Singing Sergeants of the United States Air Force Band, featuring a soloist.
+- Performance and recording are identified as United States Air Force work and documented as public domain in the United States on the Commons file page.
+- Composition is traditional.
+- Source page: `https://commons.wikimedia.org/wiki/File:Shenandoah.ogg`.
+
+### AB RUNTIME BOUNDING
+The renderer now supports deterministic source segments.
+
+Initial reproducible render plan:
+- Twinkle source: start 0 s, duration 30 s.
+- Shenandoah source: start 0 s, duration 30 s.
+- Source SHA-256 is written into each artifact's provenance file at workflow runtime.
+
+Reason:
+- robust-solver rendering can be computationally expensive;
+- a bounded segment lets the four Original candidates plus bypass and preserved 610 be rendered reproducibly without requiring a full multi-minute song for every iteration;
+- final perceptual closure may expand/relocate the segment if the bounded excerpts prove unrepresentative.
+
+### INFERRED
+The second source is a useful texture contrast because it adds denser a cappella choral/solo material, but it is not a substitute for singer-diverse solo-vocal validation. Final parameter lock must not claim broad singer generalization from these two sources alone.

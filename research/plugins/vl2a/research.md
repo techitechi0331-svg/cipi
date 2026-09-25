@@ -590,3 +590,23 @@ Decision:
 - longer-tau direction remains active because the A/B metric improves
   monotonically
 - next: Phase03E 8 / 12 / 16 ms with an added 63 Hz THD guard.
+
+
+## 2026-09-25 RC2 / Peak v8 integration
+
+RC2 integration run `36147549961` passed.
+
+Peak v8 real-vocal gate at -18 dBFS / COMP / PR50:
+- breathy: ~5.31 dB GR
+- straight: ~5.55 dB
+- forte: ~6.40 dB
+- median: ~5.55 dB
+
+Thus the user-facing PR50 operating-point requirement is satisfied.
+
+Final color-isolation A/B later found one narrow release blocker:
+- forte 20..80 Hz band shift: +0.789805 dB
+- gate: <=0.75 dB
+
+Peak v8 remains accepted.
+Optical low-band behavior remains reopened for the Phase03C+ follow-up line.

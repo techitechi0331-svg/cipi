@@ -143,7 +143,12 @@ jobs:
       - name: Smoke Phrase Envelope worker adapter
         run: |
           rm -rf /tmp/cipi-phrase-envelope-smoke
-          python automation/worker/runner.py             research/jobs/queued/000-ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001.yaml             --output /tmp/cipi-phrase-envelope-smoke             --run-id phrase-envelope-smoke-0001
+          JOB="research/jobs/queued/000-ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001.yaml"
+          if [ ! -f "$JOB" ]; then
+            JOB="research/jobs/completed/000-ARCHITECT-PHRASE-ENVELOPE-RIDING-PILOT-001.yaml"
+          fi
+          test -f "$JOB"
+          python automation/worker/runner.py "$JOB" --output /tmp/cipi-phrase-envelope-smoke --run-id phrase-envelope-smoke-0001
           python - <<'PY'
           import json
           m=json.load(open("/tmp/cipi-phrase-envelope-smoke/manifest.json",encoding="utf-8"))

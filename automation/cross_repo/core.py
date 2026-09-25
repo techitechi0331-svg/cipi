@@ -143,10 +143,17 @@ def parse_time(value: str) -> datetime:
 
 def match_dispatched_run(action: dict[str, Any], runs: list[dict[str, Any]]) -> dict[str, Any] | None:
     dispatched_at = parse_time(str(action["dispatched_at"]))
-    earliest = dispatched_at - timedelta(minutes=2)
+    earliest = dispatched_at - timedelta(seconds=30)
+    previous_run_id = action.get("previous_run_id")
+    ref = str(action.get("ref", ""))
     candidates = []
     for run in runs:
         if run.get("event") != "workflow_dispatch":
+            continue
+        run_id = run.get("id")
+        if isinstance(previous_run_id, int) and isinstance(run_id, int) and run_id <= previous_run_id:
+            continue
+        if ref and run.get("head_branch") not in (None, ref):
             continue
         created = run.get("created_at")
         if not isinstance(created, str):

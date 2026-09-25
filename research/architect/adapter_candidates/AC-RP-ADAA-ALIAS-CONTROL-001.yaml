@@ -1,0 +1,54 @@
+schema_version: '1.0'
+adapter_candidate_id: AC-RP-ADAA-ALIAS-CONTROL-001
+source_research_proposal: research/architect/proposals/RP-ADAA-ALIAS-CONTROL-001.yaml
+state: DRAFT_REVIEW
+executable: false
+proposed_adapter_name: rp_adaa_alias_control_001_pilot_v1
+track:
+  id: ARCHITECT_ADAA_ALIAS_CONTROL
+  path: research/architect
+research_question: When does ADAA reduce alias energy enough to justify its complexity
+  versus oversampling for CIPI nonlinear stages?
+baseline:
+- naive_1x_waveshaper
+- oversampled_waveshaper
+variants:
+- adaa_candidate
+metrics:
+- alias_energy_dbc
+- cpu_relative
+- band_error
+acceptance:
+- ADAA materially reduces alias energy at a declared CPU/error budget.
+rejection:
+- ADAA provides no practical advantage over the matched oversampling baseline.
+required_operations:
+- read_committed_research_evidence
+- generate_deterministic_synthetic_inputs
+- calculate_declared_metrics
+- write_derived_json_csv_markdown_sha256
+network_required: false
+public_dataset_review_recommended: false
+timeout_minutes: 5
+dependency_policy: standard-library or explicitly pinned existing CIPI dependency
+  only
+allowed_output_prefixes:
+- research/runs/ARCHITECT-
+- research/knowledge_candidates/ARCHITECT-
+- research/decisions/ARCHITECT-
+forbidden_operations:
+- arbitrary_shell_from_yaml
+- production_plugin_mutation
+- adapter_registry_self_registration
+- raw_client_audio_persistence
+- secret_access
+- automatic_promote_or_confirm
+- official_repo_or_release_creation
+review_requirements:
+- Confirm the metric really tests the research question.
+- Confirm baseline and counter-hypotheses remain competitive.
+- Confirm dependencies, network access and timeout are bounded.
+- Implement the adapter separately and pass Architect/Auto Research gates before registry
+  consideration.
+implementation_status: NOT_IMPLEMENTED
+automatic_registry_promotion_allowed: false

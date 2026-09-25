@@ -56,7 +56,7 @@ class ContractTests(unittest.TestCase):
             self.assertTrue((out / "Source" / "PluginProcessor.cpp").exists())
             processor = (out / "Source" / "PluginProcessor.cpp").read_text(encoding="utf-8")
             self.assertIn("NormalisableRange<float>(-24.0f, 24.0f, 0.01f)", processor)
-            self.assertIn("\\n        0.0f,\\n", processor)
+            self.assertIn("\n        0.0f,\n", processor)
             manifest = json.loads((out / "factory_manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["juce_version"], "9.0.2")
             self.assertFalse(manifest["release_authority"])

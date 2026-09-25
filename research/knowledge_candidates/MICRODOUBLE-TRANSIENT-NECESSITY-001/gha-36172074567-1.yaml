@@ -1,0 +1,8 @@
+claim: A specialised plosive-context augmentation should only be explored if the current
+  generic transient detector shows a measurable P/B burst-coverage gap under the fixed
+  necessity protocol.
+evidence_type: MEASURED
+scope: Deterministic synthetic necessity protocol only; no product integration or
+  subjective claim.
+source_run: research/runs/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1
+promotion_requested: PROVISIONAL

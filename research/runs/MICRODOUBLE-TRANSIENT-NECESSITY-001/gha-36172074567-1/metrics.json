@@ -1,0 +1,14 @@
+{
+  "augmentation_needed_by_declared_gate": false,
+  "bright_context_peak": 0.18495181902442323,
+  "bright_generic_peak": 0.3267044366351263,
+  "fry_context_peak": 0.6705582708210681,
+  "growl_context_peak": 0.49778152094255856,
+  "low_vowel_context_peak": 0.38418260765500467,
+  "plosive_context_peak": 0.7497065762007735,
+  "plosive_generic_mean": 5.030836538906733e-25,
+  "plosive_generic_occupancy_pct": 0.0,
+  "plosive_generic_peak": 0.02970569122639698,
+  "product_source_commit": "ee5725fa33b9b8ed0637575a86903d4c6bd0bd73",
+  "proximity_context_peak": 0.47906445685972116
+}

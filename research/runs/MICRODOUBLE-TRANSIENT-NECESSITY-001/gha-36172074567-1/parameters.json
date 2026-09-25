@@ -1,0 +1,23 @@
+{
+  "baseline": [
+    "MicroDouble v0.4 generic transient detector equations at product commit ee5725fa33b9b8ed0637575a86903d4c6bd0bd73"
+  ],
+  "experiment_adapter": "microdouble_transient_necessity_v1",
+  "job_file": "research/jobs/queued/000-MICRODOUBLE-TRANSIENT-NECESSITY-001.yaml",
+  "metrics": [
+    "plosive_generic_peak",
+    "plosive_generic_occupancy_pct",
+    "plosive_generic_mean",
+    "plosive_context_peak",
+    "low_vowel_context_peak",
+    "proximity_context_peak",
+    "fry_context_peak",
+    "growl_context_peak",
+    "bright_generic_peak",
+    "bright_context_peak",
+    "augmentation_needed_by_declared_gate"
+  ],
+  "variants": [
+    "Vo.Prep-derived plosive-context detector used only as a measurement context"
+  ]
+}

@@ -1,0 +1,121 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:review-brief-v1
+job_id: MICRODOUBLE-TRANSIENT-NECESSITY-001
+run_id: gha-36172074567-1
+source_run: research/runs/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-triage.yaml
+triage_id: MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:triage-v1
+job_path: research/jobs/completed/000-MICRODOUBLE-TRANSIENT-NECESSITY-001.yaml
+research_question: Does the current MicroDouble generic transient detector leave enough
+  controlled P/B burst coverage unprotected to justify adding a specialised plosive-context
+  augmentation experiment?
+hypothesis: The generic detector will detect the P/B onset but cover less than 70%
+  of the 120 ms controlled burst, while the Vo.Prep-derived context detector will
+  strongly identify the burst and preserve the declared negative stress separations.
+counter_hypotheses:
+- The generic transient detector already covers at least 70% of the controlled P/B
+  burst, so augmentation is unnecessary complexity.
+- The specialist context detector fails the declared low-vowel/proximity/fry separation
+  checks.
+- The specialist context detector also fires on the bright consonant case, making
+  P/B specificity too weak.
+acceptance_criteria:
+- Generic plosive peak must be at least 0.50, proving baseline onset detection exists.
+- Generic plosive event occupancy above 0.50 must be below 70 percent; otherwise augmentation
+  is unnecessary.
+- Plosive-context peak on the controlled burst must be at least 0.90.
+- Low-vowel and proximity context peaks must each be at most 0.40.
+- Fry context peak must remain below 0.75.
+- Growl context peak must remain at or above 0.75, preserving the known false-positive
+  risk explicitly.
+- Bright consonant generic transient peak must be at least 0.70.
+- Bright consonant plosive-context peak must remain below 0.75.
+rejection_criteria:
+- Any declared acceptance condition fails.
+- The current generic detector already provides at least 70 percent controlled burst
+  coverage.
+- The known growl false-positive risk is omitted.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: bdb429c33803a195bdb597ea1869af65ed103230
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: augmentation_needed_by_declared_gate
+  value: false
+- path: bright_context_peak
+  value: 0.18495181902442323
+- path: bright_generic_peak
+  value: 0.3267044366351263
+- path: fry_context_peak
+  value: 0.6705582708210681
+- path: growl_context_peak
+  value: 0.49778152094255856
+- path: low_vowel_context_peak
+  value: 0.38418260765500467
+- path: plosive_context_peak
+  value: 0.7497065762007735
+- path: plosive_generic_mean
+  value: 5.030836538906733e-25
+- path: plosive_generic_occupancy_pct
+  value: 0.0
+- path: plosive_generic_peak
+  value: 0.02970569122639698
+- path: product_source_commit
+  value: ee5725fa33b9b8ed0637575a86903d4c6bd0bd73
+- path: proximity_context_peak
+  value: 0.47906445685972116
+knowledge_candidate:
+  claim: A specialised plosive-context augmentation should only be explored if the
+    current generic transient detector shows a measurable P/B burst-coverage gap under
+    the fixed necessity protocol.
+  evidence_type: MEASURED
+  scope: Deterministic synthetic necessity protocol only; no product integration or
+    subjective claim.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates:
+- Human review before any augment-only candidate implementation.
+downstream_gate_signals:
+- Broader target-machine listening across additional vocal styles/settings is still
+  desirable; first target-machine 50% checkpoint is complete and was reported as slightly
+  strong but acceptable.
+- v0.3 requires Cubase Pro 14 scan/load, save/recall, automation, bypass, realtime/offline
+  render and latency-compensation confirmation.
+- Final release evidence requires Cubase Pro 14 and target-machine listening.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

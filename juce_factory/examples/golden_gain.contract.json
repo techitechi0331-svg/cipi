@@ -10,20 +10,25 @@
     "plugin_code": "JFG1"
   },
   "target": {
-    "formats": ["VST3"],
+    "formats": [
+      "VST3"
+    ],
     "os": "windows_x64"
   },
   "audio": {
-    "layouts": ["mono", "stereo"]
+    "layouts": [
+      "mono",
+      "stereo"
+    ]
   },
   "parameters": [
     {
       "id": "gain_db",
       "name": "Gain",
       "type": "float",
-      "min": -24.0,
-      "max": 24.0,
-      "default": 0.0
+      "min": -24,
+      "max": 24,
+      "default": 0
     }
   ],
   "dsp": {
@@ -40,6 +45,8 @@
     "state_restore": true,
     "automation": true,
     "silence": true,
-    "nan_inf": true
+    "nan_inf": true,
+    "dsp_matrix": true,
+    "official_vst3_validator": true
   }
 }

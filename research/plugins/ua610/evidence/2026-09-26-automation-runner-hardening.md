@@ -111,3 +111,44 @@ Implementation:
 - CPU simple-baseline measurement: implemented, **pending Windows execution**.
 - Real-vocal AB alignment hardening: implemented, **pending renderer build and rendered evidence**.
 - Cubase Pro 14 host validation remains open and must not be auto-closed.
+
+
+## RUN 57 AUTOMATION NEGATIVE RESULT
+
+### SOURCE_FACT
+- Windows workflow: `36178302483` (Run 57).
+- Product source: `1f0ad46c9603c9437892e4304b19d29c8676c038`.
+- Configure: PASS.
+- Fail-fast build: PASS.
+- Preserved 610 baseline regression: PASS.
+- Original high-level overload fail-fast gate: PASS.
+- Automation regression: FAIL.
+- Automation artifact digest: `sha256:5ea26e26a0b833887da8785f8cee2466a4ba291ee3f324da3ce1a2b194de14b7`.
+
+### MEASURED
+Automation artifact rows:
+- Input: first-jump fraction **0.0**, finite, stereo mismatch **0**.
+- Character: first-jump fraction **0.0**, settled gain error **0.0083 dB**, PASS.
+- Output: first-jump fraction **0.00104** (~0.104%), finite, stereo mismatch **0**.
+
+The Input and Output rows failed only on the analyzer's settled analytical-gain expectation:
+- Input measured **+11.9917 dB**, analyzer expected **+9 dB**.
+- Output measured **+5.99173 dB**, analyzer expected **+3 dB**.
+
+### INFERRED
+The common +2.99 dB discrepancy is explained by the analyzer accidentally retaining the default `OriginalControls.character = 0.5`, which adds 3 dB of pre-drive with the study tuning `maxDriveDb = 6`.
+
+Therefore Run 57 is a **test-harness negative result**, not evidence that the new Input/Character smoothing failed.
+
+The transition metrics themselves support the smoothing hypothesis:
+- no first-sample discontinuity was measured for Input or Character;
+- Output remained very gradual under its existing 20 ms smoother.
+
+### REVISION
+The analyzer now explicitly sets unrelated Character to 0 when testing Input or Output so each control is isolated.
+
+Correction commit:
+- `b8e1d9c46021338d8749f861f359c46d3db2cf88`.
+
+### STATUS
+Do not promote the automation fix to CONFIRMED from Run 57 alone. Re-run the corrected analyzer and require the dedicated gate to pass.

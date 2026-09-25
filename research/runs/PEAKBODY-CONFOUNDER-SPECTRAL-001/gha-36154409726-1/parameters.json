@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "peakbody_revision02_broadband_crest"
+  ],
+  "experiment_adapter": "peakbody_spectral_guard_stress_v1",
+  "job_file": "research/jobs/queued/PEAKBODY-CONFOUNDER-SPECTRAL-001.yaml",
+  "metrics": [
+    "noise_false_preserve_ratio_max",
+    "standard_voiced_retention_min",
+    "bright_high_f0_retention_min",
+    "steady_mean_t_delta_max",
+    "plosive_retention_min",
+    "matrix_complete",
+    "all_numeric_finite"
+  ],
+  "variants": [
+    "airguard_style_spectral_ratio_guard"
+  ]
+}

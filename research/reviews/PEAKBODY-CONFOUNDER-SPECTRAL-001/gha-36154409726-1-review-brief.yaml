@@ -1,0 +1,107 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:review-brief-v1
+job_id: PEAKBODY-CONFOUNDER-SPECTRAL-001
+run_id: gha-36154409726-1
+source_run: research/runs/PEAKBODY-CONFOUNDER-SPECTRAL-001/gha-36154409726-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/PEAKBODY-CONFOUNDER-SPECTRAL-001/gha-36154409726-1-triage.yaml
+triage_id: PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:triage-v1
+job_path: research/jobs/completed/PEAKBODY-CONFOUNDER-SPECTRAL-001.yaml
+research_question: Is an AirGuard-style normalized high-band guard alone sufficient
+  to stop PeakBody broadband crest from treating sibilance and breath-like noise as
+  peak-preservation events without damaging voiced harmonic transients?
+hypothesis: A simple normalized high-band guard can reduce sibilant/breath false peak-preservation
+  to 25 percent or less of baseline while retaining at least 85 percent of bright
+  high-F0 harmonic transient activation.
+counter_hypotheses:
+- Bright high-F0 harmonic material has enough high-band energy to be mistaken for
+  sibilance by the spectral-only guard.
+- The guard reduces standard voiced transient preservation.
+- The guard changes steady-vowel behavior or low-frequency plosive-like transients.
+- The guard behaves inconsistently across sample rates.
+acceptance_criteria:
+- all numeric outputs are finite
+- all seven synthetic confounder cases are present at 44.1/48/96/192 kHz
+- sibilant/breath candidate high-transient activation is no more than 25 percent of
+  broadband-crest baseline
+- standard low/high voiced transient activation retains at least 90 percent of broadband-crest
+  baseline
+- bright high-F0 harmonic transient activation retains at least 85 percent of broadband-crest
+  baseline
+- steady-vowel mean transient factor changes by no more than 0.05
+- low-frequency plosive-like transient activation retains at least 85 percent of broadband-crest
+  baseline
+rejection_criteria:
+- any acceptance invariant fails
+- the required confounder/sample-rate matrix is incomplete
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria:
+  - bright high-F0 harmonic transient retention fell below 85 percent of baseline
+  - low-frequency plosive transient retention fell below 85 percent of baseline
+  source_commit: c1ce92325a64d24030890a90d468fb8e5bdd1314
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: all_numeric_finite
+  value: true
+- path: bright_high_f0_retention_min
+  value: 0.0
+- path: matrix_complete
+  value: true
+- path: noise_false_preserve_ratio_max
+  value: 0.000944822
+- path: noise_periodicity_max
+  value: 0.116312811
+- path: plosive_retention_min
+  value: 0.054583333
+- path: row_count
+  value: 28
+- path: standard_voiced_retention_min
+  value: 0.9979159423693414
+- path: steady_mean_t_delta_max
+  value: 8.476000000001704e-05
+- path: voiced_periodicity_min
+  value: 0.980584895
+knowledge_candidate: null
+source_proposal:
+  decision_id: PEAKBODY-CONFOUNDER-SPECTRAL-001:gha-36154409726-1:auto
+  decision: REJECT
+  rationale: If the declared gate fails, the simple normalized high-band guard is
+    insufficient for the tested PeakBody confounder scope and must not be promoted
+    as a vocal-safe detector guard.
+  review_gaps: []
+  retained_findings:
+  - Preserve the full per-case/per-sample-rate measurements, including whichever voiced
+    or noise-like class caused rejection.
+  - A successful noise reduction result does not override a bright-voiced false suppression.
+  reusable_findings:
+  - Spectral balance alone may be insufficient to distinguish noise-like sibilance
+    from bright harmonic high-register singing.
+  revisit_if:
+  - A periodicity/voicing protection term is added.
+  - A stronger harmonic-motion or F0-aware feature becomes available.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Level-matched vocal AB is still pending.
+- Cubase Pro 14 real-host verification is pending.
+- Final parameter promotion requires the full raw vocal corpus plus level-matched
+  listening.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

@@ -1,0 +1,20 @@
+{
+  "baseline": [
+    "prominence_only",
+    "frozen_static_r2_single_view"
+  ],
+  "experiment_adapter": "vocal_resonance_identifiability_oracle_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R7-IDENTIFIABILITY-001.yaml",
+  "metrics": [
+    "top5_given_generator_hit",
+    "strong_top5_given_generator_hit",
+    "oracle_gap_vs_static",
+    "generator_ceiling",
+    "target_row_count",
+    "target_new_candidate_fraction",
+    "causal_delta_separation"
+  ],
+  "variants": [
+    "research_only_paired_causal_delta_oracle"
+  ]
+}

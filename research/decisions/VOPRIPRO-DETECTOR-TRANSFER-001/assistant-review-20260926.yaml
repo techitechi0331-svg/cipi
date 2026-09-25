@@ -1,0 +1,55 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926
+job_id: VOPRIPRO-DETECTOR-TRANSFER-001
+source_run: research/runs/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+parent_decision_id: VOPRIPRO-DETECTOR-TRANSFER-001:gha-36185711418-1:auto
+rationale: >-
+  The direct Vo.Prep-derived max(Slow RMS, Fast Peak - 6 dB) detector transfer
+  failed two predeclared VoPriPro eligibility gates under matched HPF, gain
+  computer, calibration, cap and ballistics. It changed sustained-body active
+  mean GR by up to about 0.486 dB and added up to about 1.143 dB peak GR on the
+  short-transient screen, both beyond the locked limits. Event-proxy and
+  sample-rate gates passed, so the negative result is specific to the direct
+  fusion formulation rather than a claim that the underlying Vo.Prep research
+  is generally invalid.
+scope: >-
+  Reject only the direct Vo.Prep-derived max(25 ms RMS, instantaneous Peak -
+  6 dB) detector formulation as a VoPriPro transfer candidate under the v1
+  synthetic screen. This does not reject Vo.Prep's transparent-compressor
+  research, limited Fast-Peak assist variants, or other detector formulations.
+declared_rejection_criteria:
+  - Any numeric trajectory is non-finite.
+  - Sustained-body active mean GR differs by more than 0.25 dB after equal reference calibration.
+  - Candidate adds more than 0.25 dB peak GR on either short-transient proxy.
+  - Candidate adds more than 0.50 dB peak GR on a problem-event proxy.
+  - Candidate body-plus-transient peak GR falls below 50 percent of the current detector.
+  - Candidate peak-GR sample-rate spread exceeds 0.10 dB.
+triggered_criteria:
+  - Sustained-body active mean GR differs by more than 0.25 dB after equal reference calibration.
+  - Candidate adds more than 0.25 dB peak GR on either short-transient proxy.
+retained_findings:
+  - All detector and gain-reduction trajectories were finite.
+  - Problem-event extra peak GR stayed below the 0.50 dB rejection limit; observed maximum was about 0.097 dB.
+  - Candidate peak-GR sample-rate spread was about 0.0051 dB across 44.1/48/96/192 kHz, well inside the 0.10 dB limit.
+  - Body-plus-transient peak-GR ratio remained about 1.033 relative to the current baseline.
+  - The direct transfer reduced sustained-body peak GR by about 0.529 dB while increasing 10 ms and 30 ms transient peak GR by about 1.14 dB and 0.78 dB respectively.
+reusable_findings:
+  - Detector transfers should be calibrated to the same sustained-body operating point before transient/event comparison.
+  - A detector that looks attractive in its source product may shift transient/body balance materially when inserted into a different compressor architecture.
+  - Synthetic transient/event screens are useful as cheap falsification gates before opening a real-vocal comparison.
+revisit_if:
+  - A materially different Fast-Peak assist or fusion rule is proposed under new predeclared criteria.
+  - The peak allowance or fusion topology is changed enough that this v1 result no longer represents the candidate.
+  - New evidence demonstrates a critical flaw in the current synthetic screen.
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions:
+    - VOPRIPRO-DETECTOR-TRANSFER-001:gha-36185711418-1:auto
+created_at: '2026-09-26'
+immutable: true
+review_gaps: []

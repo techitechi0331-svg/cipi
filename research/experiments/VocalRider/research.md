@@ -103,6 +103,44 @@ The build remains a research prototype until post-prepare latency reporting is t
 
 ## REJECTED
 
+### Global-median-only Auto Target across sustained section changes
+
+Rejected as the complete Auto Target strategy.
+
+MEASURED baseline:
+- synthetic intentional verse-to-chorus contrast in: 6.000 dB;
+- out: 2.862 dB;
+- preserved: 47.7%;
+- within-section phrase spread reduction: 40.3%.
+
+Reason:
+- it correctly levels phrase variation but treats an intentionally louder song section as a persistent error;
+- this removes too much macro musical dynamics for the Vocal Rider product goal.
+
+The global robust median remains useful as the base anchor, but it now requires a persistent-section adaptation layer.
+
+## HYPOTHESIS — persistent section adaptation
+
+Candidate 0.2 adds a bounded section offset around the robust base target.
+
+Provisional rules:
+- require >2.5 dB same-direction deviation from the effective target;
+- require approximately 4.0 s persistent evidence;
+- then track the section offset at up to 1.5 dB/s;
+- cap section offset at ±6 dB;
+- relax offset very slowly toward 0 when evidence disappears;
+- preserve the existing 0.65 dB ride dead zone and bounded macro range.
+
+Rationale:
+- a 2 s level-step phrase must still be treated as a phrase imbalance;
+- a sustained section change should gradually become the new local reference;
+- this keeps the architecture simpler than segmentation / ML section classification.
+
+Acceptance gate for the synthetic section probe:
+- preserve at least 70% of a sustained 6 dB section contrast;
+- reduce within-section phrase spread by at least 20%.
+
+
 ### Peak-only or fast RMS-only riding
 
 Rejected as the primary control path.

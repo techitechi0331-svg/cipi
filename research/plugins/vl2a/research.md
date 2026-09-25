@@ -610,3 +610,30 @@ Final color-isolation A/B later found one narrow release blocker:
 
 Peak v8 remains accepted.
 Optical low-band behavior remains reopened for the Phase03C+ follow-up line.
+
+
+## 2026-09-25 Phase03E tau-only exhaustion
+
+Phase03E tested 8 / 12 / 16 ms.
+
+MEASURED max real-vocal band shift:
+- 8 ms: ~0.768085 dB
+- 12 ms: ~0.768993 dB
+- 16 ms: ~0.771614 dB
+
+The <=0.75 dB gate is still missed and the curve turns upward after 8 ms.
+Therefore tau-only tuning is exhausted as the sole final fix.
+
+Harmonic/control checks remain healthy:
+- 1 kHz THD ~0.7820..0.7824%
+- H3 dominant
+- 63 Hz THD ~1.247..1.299%
+- release/sample-rate/control finite and unchanged
+
+Validation-process note:
+- the CI selector omitted the protocol's 63 Hz guard;
+- manual artifact inspection confirms all candidates pass that guard;
+- reject outcome is unaffected because all independently fail the color gate.
+
+Next:
+- Phase03F residual-modulation HP comparison with 8 ms as Simple Baseline.

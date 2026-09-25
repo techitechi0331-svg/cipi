@@ -89,6 +89,23 @@ During a detected short transient:
 - Output gain smoothing: 20 ms linear gain domain;
 - smoothing is host-automation protection only and does not alter the internal ride ballistics.
 
+## Positive-ride headroom guard
+
+Purpose:
+- prevent a positive macro ride from creating digital clipping when a near-full-scale peak is already visible inside the 50 ms lookahead;
+- remain inactive when requested ride is already safe;
+- avoid turning the main Rider detector into a fast compressor.
+
+Prototype constants:
+- sample safety ceiling: -0.25 dBFS;
+- unrestricted ride ceiling inside the guard: +12 dB;
+- minimum emergency ride limit: -24 dB;
+- downward guard movement: up to 600 dB/s, using the existing lookahead to arrive before the detected peak;
+- recovery: 12 dB/s;
+- target hold: one lookahead interval.
+
+The guard constrains the requested ride before final Output gain application. It is shared by the VST3 processor and real-vocal validation renderer.
+
 ## Lookahead
 
 Research VST3 latency:

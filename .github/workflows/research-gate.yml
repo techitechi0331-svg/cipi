@@ -11,6 +11,7 @@ on:
       - "automation/schemas/research_proposal.schema.json"
       - "automation/schemas/plugin_proposal.schema.json"
       - "automation/schemas/incubator_decision.schema.json"
+      - "automation/schemas/incubator_candidate.schema.json"
       - "tools/validate_research.py"
       - "tools/validate_architect.py"
       - "tools/validate_incubator.py"
@@ -27,6 +28,7 @@ on:
       - "automation/schemas/incubator_decision.schema.json"
       - "tools/validate_research.py"
       - "tools/validate_architect.py"
+      - "tools/validate_incubator.py"
       - ".github/workflows/research-gate.yml"
   workflow_dispatch:
 

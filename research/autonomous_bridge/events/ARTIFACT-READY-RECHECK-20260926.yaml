@@ -1,0 +1,6 @@
+schema_version: "1.0"
+event: CROSS_REPO_ARTIFACT_READY_RECHECK
+reason: "Re-evaluate MELON macro result after successful artifact backfill."
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

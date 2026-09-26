@@ -33,4 +33,4 @@ Runner wait, missing external results, or Human Gates block only the affected pa
 
 ## Pilot
 
-MELON-BRIDGE-PILOT-001 is intentionally bounded to three macro runs, 36 total candidates, 360 seconds of declared experiment runtime, blind holdout off, and product integration off. Completion of Bridge v1 still requires observed evidence that at least three macro loops execute successfully without violating the safeguards.
+MELON-BRIDGE-PILOT-001 is intentionally bounded to three macro runs, 36 total candidates, 900 seconds of declared aggregate experiment runtime, blind holdout off, and product integration off. Completion of Bridge v1 still requires observed evidence that at least three macro loops execute successfully without violating the safeguards.

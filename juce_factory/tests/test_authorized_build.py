@@ -17,11 +17,19 @@ from automation.incubator.factory_handoff import (
 )
 from juce_factory.factory.authorized_build import (
     AuthorizedBuildIntakeError,
+    _binding_hash,
+    bind_factory_result,
     discover_authorized_requests,
     generate_authorized_project,
     load_authorized_request,
+    validate_result_binding,
 )
 from juce_factory.factory.contract import load_contract
+from juce_factory.factory.result_bundle import (
+    build_pass_bundle,
+    build_quarantine_bundle,
+    write_result_bundle,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -163,6 +171,82 @@ class AuthorizedBuildIntakeTests(unittest.TestCase):
             request_dir,
         )
         return request_dir
+
+
+    def _pass_bundle(self, root: Path, request: Path, *, suffix: str) -> Path:
+        generated = generate_authorized_project(
+            request,
+            root / f"generated-{suffix}",
+            root=root,
+        )
+        manifest = json.loads(
+            (generated / "factory_manifest.json").read_text(encoding="utf-8")
+        )
+        report = {
+            "factory_status": "VALIDATION_PASS",
+            "factory_owned_validation": "PASS",
+            "pluginval": "PASS",
+            "steinberg_validator": "PASS",
+            "release_authority": False,
+        }
+        provenance = {
+            "factory_status": "VALIDATION_PASS",
+            "source_revision": "1" * 40,
+            "validation_revision": "2" * 40,
+            "validation_base_revision": "3" * 40,
+            "juce_version": manifest["juce_version"],
+            "platform": manifest["target_os"],
+            "contract_semantic_sha256": manifest["contract_sha256"],
+            "release_authority": False,
+        }
+        report_path = generated / "validation_report.json"
+        provenance_path = generated / "provenance.json"
+        hashes_path = generated / "sha256.txt"
+        report_path.write_text(json.dumps(report), encoding="utf-8")
+        provenance_path.write_text(json.dumps(provenance), encoding="utf-8")
+        hashes_path.write_text(
+            ("a" * 64)
+            + "  passed/Candidate.vst3/Contents/x86_64-win/Candidate.vst3\n",
+            encoding="ascii",
+        )
+        bundle = build_pass_bundle(
+            generated / "factory_manifest.json",
+            report_path,
+            provenance_path,
+            hashes_path,
+        )
+        bundle_path = generated / "factory_result_bundle.json"
+        write_result_bundle(bundle_path, bundle)
+        return bundle_path
+
+    def _quarantine_bundle(self, root: Path, request: Path, *, suffix: str) -> Path:
+        generated = generate_authorized_project(
+            request,
+            root / f"quarantine-generated-{suffix}",
+            root=root,
+        )
+        failure = {
+            "factory_status": "QUARANTINED",
+            "failure_class": "PLUGINVAL_ERROR",
+            "source_revision": "4" * 40,
+            "validation_revision": "5" * 40,
+            "validation_base_revision": "6" * 40,
+            "validators": {
+                "factory_owned_validation": "PASS",
+                "pluginval": "FAIL",
+                "steinberg_validator": "NOT_RUN",
+            },
+            "release_authority": False,
+        }
+        failure_path = generated / "failure.json"
+        failure_path.write_text(json.dumps(failure), encoding="utf-8")
+        bundle = build_quarantine_bundle(
+            generated / "factory_manifest.json",
+            failure_path,
+        )
+        bundle_path = generated / "factory_result_bundle.json"
+        write_result_bundle(bundle_path, bundle)
+        return bundle_path
 
     def test_valid_request_loads_and_discovers(self):
         with tempfile.TemporaryDirectory() as td:
@@ -338,6 +422,107 @@ class AuthorizedBuildIntakeTests(unittest.TestCase):
 
             with self.assertRaises(AuthorizedBuildIntakeError):
                 discover_authorized_requests(root=root)
+
+
+    def test_pass_result_binds_to_exact_authorization(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            request = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-009",
+                request_id="authorized-009",
+            )
+            bundle_path = self._pass_bundle(root, request, suffix="009")
+            binding = bind_factory_result(request, bundle_path, root=root)
+            self.assertEqual(binding["factory_status"], "VALIDATION_PASS")
+            self.assertTrue(binding["factory_build_authorized"])
+            self.assertFalse(binding["product_release_authority"])
+            self.assertFalse(binding["cubase_confirmed"])
+            self.assertFalse(binding["listening_confirmed"])
+
+            authorization = json.loads(
+                (request / "factory_build_authorization.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                binding["authorization_hash"],
+                authorization["authorization_hash"],
+            )
+
+    def test_quarantine_result_still_binds_without_release_authority(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            request = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-010",
+                request_id="authorized-010",
+            )
+            bundle_path = self._quarantine_bundle(root, request, suffix="010")
+            binding = bind_factory_result(request, bundle_path, root=root)
+            self.assertEqual(binding["factory_status"], "QUARANTINED")
+            self.assertTrue(binding["factory_build_authorized"])
+            self.assertFalse(binding["product_release_authority"])
+
+    def test_result_from_different_contract_cannot_be_bound(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            request_a = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-011A",
+                request_id="authorized-011a",
+                plugin_id="BindingPluginA",
+                bundle_id="audio.cipi.binding.a",
+                plugin_code="BD01",
+            )
+            request_b = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-011B",
+                request_id="authorized-011b",
+                plugin_id="BindingPluginB",
+                bundle_id="audio.cipi.binding.b",
+                plugin_code="BD02",
+            )
+            bundle_b = self._pass_bundle(root, request_b, suffix="011b")
+            with self.assertRaises(AuthorizedBuildIntakeError):
+                bind_factory_result(request_a, bundle_b, root=root)
+
+    def test_result_binding_semantic_tamper_is_rejected_with_fresh_hash(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            request = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-012",
+                request_id="authorized-012",
+            )
+            bundle_path = self._pass_bundle(root, request, suffix="012")
+            binding = bind_factory_result(request, bundle_path, root=root)
+            binding["product_release_authority"] = True
+            binding["binding_hash"] = _binding_hash(binding)
+            with self.assertRaises(AuthorizedBuildIntakeError):
+                validate_result_binding(binding)
+
+    def test_result_binding_schema_matches_runtime_fields(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            request = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-013",
+                request_id="authorized-013",
+            )
+            bundle_path = self._pass_bundle(root, request, suffix="013")
+            binding = bind_factory_result(request, bundle_path, root=root)
+            schema = json.loads(
+                (
+                    ROOT
+                    / "schemas"
+                    / "authorized_build_result_binding.schema.json"
+                ).read_text(encoding="utf-8")
+            )
+            self.assertEqual(set(schema["required"]), set(binding))
+            self.assertFalse(
+                schema["properties"]["product_release_authority"]["const"]
+            )
 
     def test_empty_request_root_is_valid_and_discovers_nothing(self):
         with tempfile.TemporaryDirectory() as td:

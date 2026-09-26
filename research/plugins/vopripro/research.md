@@ -197,3 +197,31 @@ v2 changes only the evidence quality of the event stimuli and engagement checks:
 - 88.2 kHz is added so the event-positive-control matrix matches the source product's tested sample-rate family more closely.
 
 This remains a deterministic source-code-translation screen. It does not replace actual VST3 processing, level-matched real-vocal listening, the VoPriPro limiter path, or Cubase Pro 14 validation.
+
+
+## 2026-09-26 Vo.Prep -> VoPriPro integration screen v2 review
+
+Run:
+- `VOPRIPRO-VOPREP-INTEGRATION-002`
+- `research/runs/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1`
+
+Review decision:
+- **REJECT for the tested all-modules 50% downstream-benefit/recovery hypothesis.**
+
+The source-derived positive controls resolved the v1 ambiguity:
+- Plosive probability >= **0.8498** and Plosive Guard reduction >= **1.1518 dB** across 44.1/48/88.2/96 kHz;
+- Sibilance probability >= **0.7431** and Sibilance Guard reduction >= **0.8669 dB**.
+
+Two unchanged plosive gates failed:
+- downstream VoPriPro plosive-event peak-GR improvement was only about **0.0131 dB** versus the locked **0.10 dB** minimum;
+- post-plosive downstream mean-GR shift reached about **0.4019 dB** versus the locked **0.35 dB** maximum.
+
+Important retained positives:
+- Sibilance downstream event peak-GR improvement was at least about **0.2857 dB** with post-event shift below about **0.0194 dB**;
+- neutral false event reduction stayed at **0 dB** and neutral mean-GR shift stayed below about **0.0941 dB**;
+- phrase spread improved by about **0.8234 dB** with Macro movement at least about **1.6242 dB**;
+- downstream peak-GR sample-rate spread was about **0.1062 dB**, inside the **0.15 dB** gate.
+
+Interpretation:
+
+This does **not** reject the Vo.Prep -> VoPriPro product ordering. It rejects advancing the tested all-modules 50% chain under the assumption that every event front-end should materially reduce downstream VoPriPro peak GR and stay inside the v2 recovery budget. The next independent question is module isolation: Plosive-only vs Macro-only vs Plosive+Macro on the source-derived plosive positive control. No v2 threshold is relaxed after the result.

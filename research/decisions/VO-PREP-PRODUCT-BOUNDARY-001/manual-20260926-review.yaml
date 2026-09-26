@@ -49,6 +49,7 @@ lineage:
     - VO-PREP-AMOUNT-R4-LEARN-SOLVE-001
   related_decisions:
     - "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01"
+parent_decision_id: "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01"
 created_at: "2026-09-26"
 immutable: true
 scope: >-

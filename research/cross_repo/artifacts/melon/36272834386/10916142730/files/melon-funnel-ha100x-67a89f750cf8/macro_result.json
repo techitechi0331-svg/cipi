@@ -1,0 +1,81 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "cacb8e4ee2cb9dc37d78683c8897f5237f674dea3580118f9f44cc7e8187d709",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [],
+  "efficiency_metrics": {
+    "deep_validation_count": 0,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.009411,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.6658380688888843,
+    "measurements_executed_stage1": 12,
+    "new_semantic_candidate_rate": 1.0,
+    "stage2_measurement_runs": 4
+  },
+  "elapsed_seconds": 0.009411,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 12,
+    "deep_validation_count": 0,
+    "runtime_seconds": 0.009411,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "MELON-FUNNEL-HA100X-A6BA0AE78F70-ITERATE-1",
+  "hypothesis_id": "HYP-VL2A-HA100X-LINEAR-FIRST",
+  "job_id": "VL2A-CIRCUIT-HA100X-001-R5-89143290",
+  "loop_depth": 5,
+  "measured_candidates": 12,
+  "novelty": 1.0,
+  "parent_job_id": "VL2A-CIRCUIT-HA100X-001-R4-7D4AABA3",
+  "parent_run_id": "melon-funnel-ha100x-a6ba0ae78f70",
+  "precision_review": {
+    "checks": {
+      "bounded_candidate_count": true,
+      "catalog_compatible_candidate_exists": true,
+      "fixed_source_backed_turns_ratio": true,
+      "hysteresis_locked": true,
+      "nonlinearity_locked": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true
+    },
+    "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "no bounded continuation proposal was produced by this MELON run",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VL2A-CIRCUIT-HA100X-001",
+  "research_question": "Can a source-constrained, load-aware linear HA-100X model explain the documented transformer envelope and reconstructed LA-2A loading more consistently than the current VL2A 12 Hz HP / 25 ms state / tanh heuristic, without requiring unsupported magnetic nonlinearity and without changing product behavior?",
+  "result": {
+    "deep_validation_count": 0,
+    "improvement_signal": 0.6658380688888843,
+    "precision_review_passed": true,
+    "routes": {},
+    "stage1_pareto": 7,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VL2A-CIRCUIT-HA100X-001",
+  "route": "STOP",
+  "run_id": "melon-funnel-ha100x-67a89f750cf8",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "b8dc7b481c978b26337a791378405a096b902407",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-26T21:25:01.050435+00:00",
+  "track_id": "VL2A-CIRCUIT-HA100X-001",
+  "unresolved_questions": []
+}

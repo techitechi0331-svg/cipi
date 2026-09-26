@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36272834386
+run_attempt: 1
+artifact_id: 10916142730
+artifact_name: melon-research-36272834386
+expired: false
+size_in_bytes: 67837
+created_at: '2026-09-26T21:25:05Z'
+expires_at: '2026-10-26T21:25:02Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-ha100x-67a89f750cf8/efficiency_metrics.json
+  status: ingested
+  size: 323
+  sha256: 4ba4dcaae1419a88fc131094d855b960a5ee7d8ebf3b16aa68ba267748dc0a78
+- path: melon-funnel-ha100x-67a89f750cf8/ha100x_measurements.json
+  status: ingested
+  size: 145829
+  sha256: 9d82e3bd5080dc4d287de2b134e710cda3bce54d35b723b7f0416f82b11d7475
+- path: melon-funnel-ha100x-67a89f750cf8/macro_result.json
+  status: ingested
+  size: 3197
+  sha256: c051af21b0f733c7203017f7570996a59c47e213c7c5c6259bdaf7607b85477f
+- path: melon-funnel-ha100x-67a89f750cf8/manifest.json
+  status: ingested
+  size: 337
+  sha256: a5bc2f9e74704534534c390b90a1d73000a4d1286fdb8dc798b02e125f886f04
+- path: melon-funnel-ha100x-67a89f750cf8/precision_review.json
+  status: ingested
+  size: 387
+  sha256: 3aa0a9ae353617835bf964a7947f7945b8c03bc964beabb8a7a1cd9e5b5ccd57
+- path: melon-funnel-ha100x-67a89f750cf8/stage1_screening.json
+  status: ingested
+  size: 124367
+  sha256: 0e9ad6543df7981adc0b82cdd83f05e62a99b8bf8e7fd45b2bda27f648e8fdbf
+- path: melon-funnel-ha100x-67a89f750cf8/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-ha100x-67a89f750cf8/stage3_deep_validation.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-ha100x-67a89f750cf8/summary.json
+  status: ingested
+  size: 1661
+  sha256: e4f371fa9039d78e932bc3ebe630fa70a738685480068dbc67aca2a74cb6bc3c
+archive_sha256: a6ad986738dd559a5ecad5926e8cc577a412c4497b9ce9a603efe7c3ce1323d9
+ingest_status: text_evidence_ingested

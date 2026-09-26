@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/incubator/manufacturing_review.schema.json",
+  "title": "CIPI Incubator Manufacturing Review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plugin_proposal_id",
+    "source_incubate_decision",
+    "source_product_evidence",
+    "review",
+    "contract"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "plugin_proposal_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_incubate_decision": {
+      "type": "string",
+      "pattern": "^research/incubator/decisions/.+\\.yaml$"
+    },
+    "source_product_evidence": {
+      "type": "string",
+      "pattern": "^research/incubator/evidence/.+\\.yaml$"
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "approved_for_factory_contract_candidate",
+        "automatic_approval",
+        "final_product_decision",
+        "factory_build_authorized",
+        "product_release_authority",
+        "cubase_confirmed",
+        "listening_confirmed"
+      ],
+      "properties": {
+        "authority": {
+          "enum": [
+            "HUMAN",
+            "ASSISTANT_REVIEW"
+          ]
+        },
+        "approved_for_factory_contract_candidate": {
+          "const": true
+        },
+        "automatic_approval": {
+          "const": false
+        },
+        "final_product_decision": {
+          "const": false
+        },
+        "factory_build_authorized": {
+          "const": false
+        },
+        "product_release_authority": {
+          "const": false
+        },
+        "cubase_confirmed": {
+          "const": false
+        },
+        "listening_confirmed": {
+          "const": false
+        }
+      }
+    },
+    "contract": {
+      "type": "object"
+    }
+  }
+}

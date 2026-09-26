@@ -43,7 +43,9 @@ class FactoryResultBundleTests(unittest.TestCase):
         }
         provenance = {
             "factory_status": "VALIDATION_PASS",
-            "git_sha": "1" * 40,
+            "source_revision": "1" * 40,
+            "validation_revision": "2" * 40,
+            "validation_base_revision": "3" * 40,
             "juce_version": manifest["juce_version"],
             "platform": manifest["target_os"],
             "contract_semantic_sha256": manifest["contract_sha256"],
@@ -103,18 +105,71 @@ class FactoryResultBundleTests(unittest.TestCase):
             self.assertFalse(bundle["cubase_confirmed"])
             self.assertFalse(bundle["listening_confirmed"])
             self.assertFalse(bundle["raw_audio_persisted"])
+            self.assertEqual(bundle["source_revision"], "1" * 40)
+            self.assertEqual(bundle["validation_revision"], "2" * 40)
+            self.assertEqual(bundle["validation_base_revision"], "3" * 40)
 
             record = build_evidence_record(bundle)
             validate_evidence_record(record)
             self.assertEqual(record["evidence_type"], "MEASURED")
             self.assertEqual(record["scope"], "manufacturing_and_host_safety_only")
             self.assertFalse(record["promotion_requested"])
+            self.assertEqual(record["source_revision"], "1" * 40)
+            self.assertEqual(record["validation_revision"], "2" * 40)
+            self.assertEqual(record["validation_base_revision"], "3" * 40)
 
             evidence_root = root / "evidence"
             first = write_evidence_record(bundle, evidence_root)
             second = write_evidence_record(bundle, evidence_root)
             self.assertEqual(first, second)
             self.assertEqual(first.read_bytes(), second.read_bytes())
+
+
+    def test_pass_bundle_requires_explicit_validation_revisions(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            data = json.loads(provenance.read_text(encoding="utf-8"))
+            del data["validation_base_revision"]
+            provenance.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaises(ResultBundleError):
+                build_pass_bundle(
+                    out / "factory_manifest.json",
+                    report,
+                    provenance,
+                    hashes,
+                )
+
+    def test_pass_bundle_rejects_platform_mismatch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            data = json.loads(provenance.read_text(encoding="utf-8"))
+            data["platform"] = "windows-x64"
+            provenance.write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaises(ResultBundleError):
+                build_pass_bundle(
+                    out / "factory_manifest.json",
+                    report,
+                    provenance,
+                    hashes,
+                )
+
+    def test_artifact_hash_manifest_rejects_path_traversal(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            hashes.write_text(("a" * 64) + "  ../escape.vst3\\n", encoding="ascii")
+            with self.assertRaises(ResultBundleError):
+                build_pass_bundle(
+                    out / "factory_manifest.json",
+                    report,
+                    provenance,
+                    hashes,
+                )
 
     def test_bundle_authority_tampering_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:
@@ -142,7 +197,14 @@ class FactoryResultBundleTests(unittest.TestCase):
                     {
                         "factory_status": "QUARANTINED",
                         "failure_class": "PLUGINVAL_ERROR",
-                        "git_sha": "2" * 40,
+                        "source_revision": "4" * 40,
+                        "validation_revision": "5" * 40,
+                        "validation_base_revision": "6" * 40,
+                        "validators": {
+                            "factory_owned_validation": "PASS",
+                            "pluginval": "FAIL",
+                            "steinberg_validator": "NOT_RUN",
+                        },
                         "release_authority": False,
                     }
                 ),

@@ -13,6 +13,7 @@ from automation.incubator.factory_handoff import (
     _receipt_hash,
     build_contract_candidate,
     validate_receipt,
+    verify_receipt_sources,
     write_candidate,
 )
 from juce_factory.factory.contract import load_contract
@@ -205,16 +206,16 @@ class IncubatorFactoryHandoffTests(unittest.TestCase):
                 )
 
 
-    def test_source_hash_tamper_is_rejected_even_with_fresh_receipt_hash(self):
+    def test_source_mutation_is_rejected_by_receipt_reverification(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            _, _, receipt = self._build(root)
-            receipt["source_product_evidence_sha256"] = "0" * 64
-            receipt["receipt_hash"] = _receipt_hash(receipt)
-            validate_receipt(receipt)
-            self.assertEqual(receipt["source_product_evidence_sha256"], "0" * 64)
-            # Receipt remains internally valid, but a consumer can now compare the pinned hash
-            # against the source file and detect later source mutation without trusting the path alone.
+            paths, _, receipt = self._build(root)
+            verify_receipt_sources(receipt, root=root)
+            data = yaml.safe_load(paths["evidence"].read_text(encoding="utf-8"))
+            data["scope"] = "mutated after handoff"
+            paths["evidence"].write_text(yaml.safe_dump(data), encoding="utf-8")
+            with self.assertRaises(FactoryHandoffError):
+                verify_receipt_sources(receipt, root=root)
 
     def test_receipt_semantic_tamper_is_rejected_even_with_fresh_hash(self):
         with tempfile.TemporaryDirectory() as td:

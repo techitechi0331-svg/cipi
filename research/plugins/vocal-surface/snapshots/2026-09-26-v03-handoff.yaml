@@ -1,0 +1,74 @@
+id: VOCAL_SURFACE_HANDOFF_2026_09_26
+title: Vocal Surface Processor v0.3 continuation snapshot
+snapshot_date: 2026-09-26
+product_repo: techitechi0331-svg/VocalSurfaceProcessor
+product_main_sha: b89a1de4cd856b02ca9e0716b6775c576421d99d
+product_version: 0.3.0
+cipi_track: research/plugins/vocal-surface
+
+product_state:
+  signal_flow:
+    - dynamic_low_mid
+    - spectral_harshness_sibilance
+    - fast_peak_controller
+    - slow_program_dependent_leveler
+    - adaptive_air
+    - auto_gain
+    - output
+  default:
+    amount_pct: 50
+    clean_pct: 50
+    smooth_pct: 50
+    density_pct: 50
+    air_pct: 50
+    output_db: 0.0
+    auto_gain: true
+    bypass: false
+  mapping:
+    equal_25_combined: 0.196875
+    equal_50_combined: 1.0
+    equal_75_combined: 1.484873046875
+    equal_100_combined_capped: 1.8
+
+latest_ci:
+  run_id: 36051783935
+  conclusion: success
+  measurement_artifact_id: 10831470193
+  vst3_artifact_id: 10830314424
+  pluginval_strictness_10: pass
+  steinberg_validator: pass
+
+measured_default_50:
+  bypass_max_error: 0.000000089
+  low_gr_db: 2.4
+  spectral_gr_db_range_across_tested_sr: [1.756, 2.085]
+  peak_gr_db: 2.2
+  leveler_gr_db_range: [1.917, 1.919]
+  sibilance_gr_db: 2.4
+  air_db: 1.5
+  spectral_sr_range_db: 0.329
+  air_block_consistency_delta_db: 0.0
+
+latency_policy_samples:
+  "44100": 1024
+  "48000": 1024
+  "96000": 2048
+  "176400": 4096
+  "192000": 4096
+
+confidence:
+  implementation: E5
+  synthetic_measurement: E5
+  vst3_validator: E5
+  default_50_perceptual_optimum: HYPOTHESIS
+  real_vocal_quality: UNCONFIRMED
+  cubase_pdc: UNCONFIRMED
+
+unresolved:
+  - harmonic_and_formant_false_positive_risk
+  - representative_real_vocal_level_matched_abx
+  - source_class_default_50_statistics
+  - cubase_pro_14_pdc_and_host_validation
+  - auto_gain_perceptual_fairness
+
+next_task: harmonic_formant_safe_spectral_validation_plus_real_vocal_default50_calibration

@@ -3,33 +3,49 @@ title: Vocal Surface Processor Formal Research Track
 
 status: research
 knowledge_status: PROVISIONAL
-confidence: 0.66
+confidence: 0.78
 
-source_kind: repository_verified
+source_kind: repository_verified_ci_measured
 source_ref: "https://github.com/techitechi0331-svg/VocalSurfaceProcessor"
+source_snapshot_sha: "b89a1de4cd856b02ca9e0716b6775c576421d99d"
+product_version: "0.3.0"
+handoff: "research/plugins/vocal-surface/snapshots/2026-09-26-v03-handoff.md"
 
 stages:
   research: in_progress
   review: in_progress
   parameter_lock: in_progress
   implementation: complete
-  measurement: in_progress
+  measurement: complete
   audio_ab: pending
   revision: in_progress
   vst3_validation: in_progress
   final_review: pending
 
-current_stage: research
+current_stage: review
+
 completed:
-  - implementation
+  - v0.1_prototype
+  - v0.2_nominal_50_mapping
+  - v0.3_verified_dsp_update
+  - deterministic_reference_test
+  - macro_25_50_75_100_sweep
+  - pluginval_strictness_10
+  - steinberg_vst3_validator
+  - vst3_bypass_persistence_validation
+
 unresolved:
   - Legitimate harmonics/formants can still be mistaken for unwanted spectral prominence.
-  - The harmonic-safe spectral reference is not numerically locked.
-  - Real-vocal level-matched AB/ABX is incomplete.
-  - 50% nominal calibration remains a design target, not a universal optimum.
+  - Harmonic/formant-safe spectral protection is not numerically locked.
+  - Representative real-vocal level-matched AB/ABX is incomplete.
+  - Default 50% remains an evidence-driven nominal design target rather than a perceptually confirmed universal optimum.
+  - Cubase Pro 14 PDC / host latency behavior is not yet confirmed.
+  - Auto Gain perceptual fairness on real vocals is not yet confirmed.
 
 next_stage: review
-why_next: "The integrated v0.2 works, but spectral discrimination research reopened because harmonic false positives are a fundamental failure mode."
-next_confirmation: "Which spectral-reference and harmonic-protection method suppresses harshness without damaging legitimate vocal structure."
+why_next: "Implementation, deterministic measurement, pluginval strictness 10 and Steinberg validation pass. The main remaining risk is real-vocal spectral false positives and perceptual default-50 calibration."
+next_confirmation: "Whether harmonic/formant-safe discrimination improves Smooth without dulling legitimate vocal structure, whether 50% remains the correct nominal default, and whether Cubase Pro 14 PDC is correct."
+
 blockers:
-  - Representative dry-vocal AB and labelled spectral failures are required.
+  - Representative dry-vocal material is required for the perceptual gate.
+  - Cubase Pro 14 real-host validation is required for PDC confirmation.

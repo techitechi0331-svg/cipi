@@ -50,6 +50,3 @@ lineage:
     - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:auto
 created_at: '2026-09-26'
 immutable: true
-review_gaps:
-  - Real-vocal listening remains open.
-  - Actual VST3/Cubase cross-product validation remains open.

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -10,6 +11,7 @@ from .contract import canonical_json
 from .result_bundle import ResultBundleError, validate_result_bundle
 
 COMPARISON_VERSION = "1.0"
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 
 class ReproducibilityComparisonError(ValueError):
@@ -109,6 +111,9 @@ def validate_comparison_report(report: dict[str, Any]) -> None:
         raise ReproducibilityComparisonError("unsupported comparison schema_version")
     if report["comparison_kind"] != "FACTORY_ARTIFACT_HASH_COMPARISON":
         raise ReproducibilityComparisonError("unexpected comparison kind")
+    for key in ("first_bundle_hash", "second_bundle_hash", "report_hash"):
+        if not isinstance(report[key], str) or not _SHA256.fullmatch(report[key]):
+            raise ReproducibilityComparisonError(f"{key} must be a lowercase SHA-256 digest")
     for key in (
         "same_contract",
         "same_generated_source",
@@ -131,6 +136,37 @@ def validate_comparison_report(report: dict[str, Any]) -> None:
         raise ReproducibilityComparisonError("invalid comparison classification")
     if not isinstance(report["limitations"], list) or not report["limitations"]:
         raise ReproducibilityComparisonError("limitations must be a non-empty array")
+    if any(not isinstance(value, str) or not value.strip() for value in report["limitations"]):
+        raise ReproducibilityComparisonError("limitations entries must be non-empty strings")
+
+    classification = report["classification"]
+    if classification == "ARTIFACT_HASH_MATCH":
+        if not (
+            report["same_contract"]
+            and report["same_generated_source"]
+            and report["same_recorded_factory_context"]
+            and report["artifact_hash_match"]
+        ):
+            raise ReproducibilityComparisonError("ARTIFACT_HASH_MATCH invariants are inconsistent")
+    elif classification == "ARTIFACT_HASH_DIFF":
+        if not (
+            report["same_contract"]
+            and report["same_generated_source"]
+            and report["same_recorded_factory_context"]
+            and not report["artifact_hash_match"]
+        ):
+            raise ReproducibilityComparisonError("ARTIFACT_HASH_DIFF invariants are inconsistent")
+    elif classification == "NOT_COMPARABLE_SOURCE_DIFF":
+        if report["same_contract"] and report["same_generated_source"]:
+            raise ReproducibilityComparisonError("source-diff classification requires a source difference")
+    elif classification == "NOT_COMPARABLE_RECORDED_CONTEXT_DIFF":
+        if not (
+            report["same_contract"]
+            and report["same_generated_source"]
+            and not report["same_recorded_factory_context"]
+        ):
+            raise ReproducibilityComparisonError("context-diff classification invariants are inconsistent")
+
     if report["report_hash"] != _report_hash(report):
         raise ReproducibilityComparisonError("comparison report hash mismatch")
 

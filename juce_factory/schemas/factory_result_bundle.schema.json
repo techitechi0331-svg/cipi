@@ -79,19 +79,81 @@
       "minLength": 1
     },
     "platform": {
-      "type": "string",
-      "minLength": 1
+      "const": "windows_x64"
     },
     "formats": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
       "items": {
-        "type": "string"
+        "const": "VST3"
       }
     },
     "validation_matrix": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample_rates",
+        "block_sizes",
+        "state_restore",
+        "automation",
+        "silence",
+        "nan_inf",
+        "official_vst3_validator",
+        "latency",
+        "mono_stereo_layouts",
+        "denormal",
+        "bypass"
+      ],
+      "properties": {
+        "sample_rates": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "number",
+            "minimum": 8000,
+            "maximum": 384000
+          }
+        },
+        "block_sizes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192
+          }
+        },
+        "state_restore": {
+          "type": "boolean"
+        },
+        "automation": {
+          "type": "boolean"
+        },
+        "silence": {
+          "type": "boolean"
+        },
+        "nan_inf": {
+          "const": true
+        },
+        "official_vst3_validator": {
+          "const": true
+        },
+        "latency": {
+          "type": "boolean"
+        },
+        "mono_stereo_layouts": {
+          "type": "boolean"
+        },
+        "denormal": {
+          "type": "boolean"
+        },
+        "bypass": {
+          "type": "boolean"
+        }
+      }
     },
     "validators": {
       "type": "object",
@@ -156,5 +218,67 @@
       "type": "string",
       "pattern": "^[0-9a-f]{40}$"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "factory_status": {
+            "const": "VALIDATION_PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_class": {
+            "type": "null"
+          },
+          "artifact_hashes": {
+            "type": "object",
+            "minProperties": 1
+          },
+          "validators": {
+            "type": "object",
+            "required": [
+              "factory_owned_validation",
+              "pluginval",
+              "steinberg_validator"
+            ],
+            "properties": {
+              "factory_owned_validation": {
+                "const": "PASS"
+              },
+              "pluginval": {
+                "const": "PASS"
+              },
+              "steinberg_validator": {
+                "const": "PASS"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "factory_status": {
+            "const": "QUARANTINED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_class": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_hashes": {
+            "type": "object",
+            "maxProperties": 0
+          }
+        }
+      }
+    }
+  ]
 }

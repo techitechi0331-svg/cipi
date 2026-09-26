@@ -1,0 +1,39 @@
+schema_version: '1.0'
+job_id: VL2A-CIRCUIT-HA100X-001-R5-89143290
+track_id: VL2A-CIRCUIT-HA100X-001
+root_research_id: VL2A-CIRCUIT-HA100X-001
+parent_job_id: VL2A-CIRCUIT-HA100X-001-R4-7D4AABA3
+parent_run_id: melon-funnel-ha100x-a6ba0ae78f70
+hypothesis_id: HYP-VL2A-HA100X-LINEAR-FIRST
+experiment_id: MELON-FUNNEL-HA100X-A6BA0AE78F70-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VL2A-CIRCUIT-HA100X-001-R4-7D4AABA3
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VL2A-CIRCUIT-HA100X-001-R5-89143290
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+continuation_reason: Run the final bounded replication of the source/load matrix to
+  test whether the linear-family conclusions reproduce without unlocking saturation
+  or hysteresis.
+expected_information_gain: 0.8839668765736354
+fingerprint: 89143290fd9c0b8a84b599a9ca160c077098e393db7c9bde513b2ea83ab3e11b
+loop_depth: 5
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: HA100X_LINEAR_LTI_LOAD_AWARE
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

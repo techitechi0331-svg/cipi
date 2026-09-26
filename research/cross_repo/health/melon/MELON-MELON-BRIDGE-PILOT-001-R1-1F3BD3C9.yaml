@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36248592915
+run_status: completed
+run_conclusion: success
+since: '2026-09-26T14:27:57Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

@@ -7,6 +7,10 @@ import sys
 import yaml
 
 REPO_ROOT=Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from automation.incubator.factory_handoff import FactoryHandoffError, validate_review
 PROPOSAL_REQUIRED={
  "schema_version","plugin_proposal_id","source_research_proposal","state","working_name",
  "problem","target_user","target_signal","supporting_research","supporting_negative_knowledge",
@@ -74,6 +78,42 @@ def validate_root(root:Path)->list[str]:
                     errors.append(f"{path}: INCUBATE decision requires valid source_evidence")
                 elif not all(evidence[source].get(k) is True for k in PASS_GATES):
                     errors.append(f"{path}: INCUBATE source_evidence has an unpassed product gate")
+
+    mdir=base/"manufacturing_reviews"
+    if mdir.exists():
+        for path in sorted(mdir.glob("*.yaml")):
+            try:data=yaml.safe_load(path.read_text(encoding="utf-8"))
+            except Exception as exc:errors.append(f"{path}: YAML parse error: {exc}");continue
+            if not isinstance(data,dict):errors.append(f"{path}: root must be mapping");continue
+            try:validate_review(data)
+            except (FactoryHandoffError, ValueError) as exc:
+                errors.append(f"{path}: invalid Manufacturing Review: {exc}")
+                continue
+            pid=data.get("plugin_proposal_id")
+            if pid not in proposals:
+                errors.append(f"{path}: matching proposal not found")
+            decision_rel=str(data.get("source_incubate_decision",""))
+            evidence_rel=str(data.get("source_product_evidence",""))
+            decision_path=root/decision_rel
+            evidence_path=root/evidence_rel
+            if not decision_rel.startswith("research/incubator/decisions/") or not decision_path.is_file():
+                errors.append(f"{path}: source_incubate_decision is missing or outside Incubator decisions")
+            else:
+                try:decision=yaml.safe_load(decision_path.read_text(encoding="utf-8"))
+                except Exception as exc:errors.append(f"{path}: source decision parse error: {exc}");decision=None
+                if not isinstance(decision,dict) or decision.get("plugin_proposal_id")!=pid or decision.get("decision")!="INCUBATE" or decision.get("final") is not False:
+                    errors.append(f"{path}: source decision is not a matching non-final INCUBATE decision")
+                elif decision.get("source_evidence")!=evidence_rel:
+                    errors.append(f"{path}: source decision evidence does not match Manufacturing Review")
+            if not evidence_rel.startswith("research/incubator/evidence/") or not evidence_path.is_file():
+                errors.append(f"{path}: source_product_evidence is missing or outside Incubator evidence")
+            else:
+                try:ev=yaml.safe_load(evidence_path.read_text(encoding="utf-8"))
+                except Exception as exc:errors.append(f"{path}: source evidence parse error: {exc}");ev=None
+                if not isinstance(ev,dict) or ev.get("plugin_proposal_id")!=pid:
+                    errors.append(f"{path}: source evidence does not match proposal")
+                elif ev.get("raw_audio_persisted") is not False or not all(ev.get(k) is True for k in PASS_GATES):
+                    errors.append(f"{path}: source evidence has an unpassed product-discrimination gate")
     proto=base/"prototypes"
     if proto.exists():
         for path in proto.rglob("metrics.json"):

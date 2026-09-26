@@ -5,8 +5,14 @@ on:
     paths:
       - "juce_factory/**"
       - "automation/factory/**"
+      - "automation/incubator/factory_handoff.py"
       - "automation/schemas/factory_evidence_record.schema.json"
+      - "automation/schemas/incubator_manufacturing_review.schema.json"
+      - "automation/schemas/incubator_factory_handoff_receipt.schema.json"
       - "research/factory_evidence/**"
+      - "research/incubator/manufacturing_reviews/**"
+      - "research/incubator/factory_contracts/**"
+      - "tools/validate_incubator.py"
       - ".github/workflows/juce-factory.yml"
   workflow_dispatch:
 
@@ -27,6 +33,9 @@ jobs:
 
       - name: Contract and generator tests
         run: python -m unittest discover -s juce_factory/tests -v
+
+      - name: Validate Incubator and Factory handoff policy
+        run: python tools/validate_incubator.py
 
       - name: CLI self-test
         run: python -m juce_factory.factory.cli self-test

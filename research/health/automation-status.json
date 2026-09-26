@@ -2,6 +2,46 @@
   "authority": "OPERATIONAL_SCHEDULING_ONLY",
   "automatic_knowledge_promotion": false,
   "automatic_product_decision": false,
+  "autonomous_research": {
+    "active_research_tracks": [
+      "MELON-BRIDGE-PILOT-001"
+    ],
+    "authority": "OPERATIONAL_SCHEDULING_ONLY",
+    "automatic_knowledge_promotion": false,
+    "automatic_product_decision": false,
+    "bridge_version": "cipi-autonomous-research-bridge/1.0",
+    "budget_status": {
+      "MELON-BRIDGE-PILOT-001": {
+        "candidates": 0,
+        "candidates_limit": 36,
+        "loop_depth": 0,
+        "loop_depth_limit": 3,
+        "runs": 0,
+        "runs_limit": 3,
+        "runtime_limit_seconds": 900.0,
+        "runtime_seconds": 0.0
+      }
+    },
+    "continuation_candidates": 0,
+    "current_loop_depth": {
+      "MELON-BRIDGE-PILOT-001": 0
+    },
+    "duplicate_suppressions": 0,
+    "generated_jobs": 1,
+    "human_gates": 0,
+    "invalid_results": 0,
+    "melon_runs": 0,
+    "next_scheduler_action": "MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9",
+    "no_improvement_count": 0,
+    "queued_actions": [
+      "MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9"
+    ],
+    "rejected_continuations": 0,
+    "result_missing": 0,
+    "runner_wait": 0,
+    "schema_version": "1.0",
+    "track_stop_reasons": {}
+  },
   "cross_repo": {
     "enabled": false,
     "health_alerts": [],
@@ -11,7 +51,7 @@
       "dispatched": 0,
       "failed": 0,
       "quarantined": 0,
-      "queued": 0
+      "queued": 1
     }
   },
   "human_gates": [],

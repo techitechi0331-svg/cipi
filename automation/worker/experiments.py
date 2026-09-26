@@ -55,6 +55,7 @@ ADAPTERS = {
     "vopripro_ballistics_transfer_screen_v1",
     "vopripro_voprep_integration_screen_v1",
     "vopripro_voprep_integration_screen_v2",
+    "vopripro_voprep_plosive_decomposition_v1",
     "vocal_resonance_raw_patch_sufficiency_v2",
     "voprep_amount_mapping_r5_v1",
     "voprep_sidechain_hpf_real_v1",
@@ -3730,6 +3731,49 @@ def _vopripro_voprep_integration_screen_v2(
     }
 
 
+
+def _vopripro_voprep_plosive_decomposition(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vopripro"
+        / "experiments" / "plosive_decomposition_v1.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-vopripro-plosive-decomp-") as td:
+        out = Path(td)
+        subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "decomposition_rows.csv": (out / "decomposition_rows.csv").read_text(encoding="utf-8"),
+            "summary.json": (out / "summary.json").read_text(encoding="utf-8"),
+            "report.md": (out / "report.md").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary.get("acceptance_met", False))
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vopripro/experiments/plosive_decomposition_v1.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Diagnostic decomposition of the source-derived plosive case into dry, "
+            "Plosive-only, Macro-only, and Plosive+Macro paths feeding VoPriPro "
+            "Natural50. Passing identifies a likely interaction source only; it does "
+            "not mutate either product or approve a product chain."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -3827,6 +3871,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vopripro_voprep_integration_screen(repo_root, timeout_seconds)
     if name == "vopripro_voprep_integration_screen_v2":
         return _vopripro_voprep_integration_screen_v2(repo_root, timeout_seconds)
+    if name == "vopripro_voprep_plosive_decomposition_v1":
+        return _vopripro_voprep_plosive_decomposition(repo_root, timeout_seconds)
     if name == "vocal_resonance_raw_patch_sufficiency_v2":
         return _vocal_resonance_raw_patch_sufficiency_v2(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

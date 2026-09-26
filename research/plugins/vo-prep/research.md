@@ -77,3 +77,38 @@ The research calibration threshold near -27.75 dBFS is not a product default.
 Next transparent-core research target:
 - user-facing Amount / operating-point mapping while keeping the frozen core unchanged.
 
+
+
+## 2026-09-26 product-boundary correction
+
+Formal decision:
+- `research/decisions/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926-review.yaml`
+
+Vo.Prep is explicitly scoped as a **Problem / Event Preparation Plugin**.
+Broadband vocal dynamics preparation belongs to **VoPriPro / VocalPrepComp**.
+
+The transparent-compressor research remains preserved as reusable Dynamics evidence. Its 25 ms Slow RMS, instantaneous Fast peak, Fast-6 dB fusion, 1.5:1 / 18 dB curve, 8/70 ms fixed ballistics, operating-point work, Amount studies, stereo-link work and objective GO_FOR_BLIND result are retained. The rejection is product-scope only; the DSP research itself is not rejected.
+
+### Macro Boundary evidence
+
+R1:
+- 11 anonymized private-vocal excerpts.
+- median 2 s phrase-spread reduction: 0.3953 dB.
+- median 1 s phrase-spread reduction: 0.2595 dB.
+- median downstream VoPriPro mean-GR change: 0.0230 dB.
+- worst downstream mean-GR retention: 99.33%.
+- R1 failed three predeclared absolute short-window / gain-movement gates and remains a negative final-proof result.
+
+R2 diagnostic:
+- 10 ms crest-p95 change: 0.00171 dB median / 0.00349 dB worst.
+- p99 Macro gain excursions: about 0.015 / 0.075 / 0.150 dB over 10 / 50 / 100 ms.
+- cut/boost p99 gain-rate: 1.5035 / 0.6019 dB/s.
+- all predeclared R2 short-term-shape gates passed.
+
+Interpretation:
+- current Macro v2.1 materially improves 1-2 s phrase spread on this cohort;
+- it does not materially replace VoPriPro broadband compression;
+- the R1 absolute short-window failures were dominated by intended slow scalar level offset rather than compressor-like short-term shape flattening;
+- final product lock still requires integrated level-matched listening and target-host QA.
+
+Transparent-compressor productization is frozen. The next formal research priorities are Plosive/Sibilance false-positive/false-negative refinement and Vo.Prep -> VoPriPro integrated validation.

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "job_id": "VO-PREP-MACRO-BOUNDARY-R2-001",
+  "run_id": "manual-20260926",
+  "source_commit": "b60afa6acc0a33431c5ce558a43fd058ce2b809c",
+  "worker_version": "assistant-private-corpus-macro-shape-lab/1.0",
+  "started_at": "2026-09-26",
+  "completed_at": "2026-09-26",
+  "random_seed": 0,
+  "environment": {
+    "mode": "manual_private_corpus_macro_stage_diagnostic",
+    "voprep_product_commit": "28afccdf6d863f1c874ecd086fcb62d5b4f21a82",
+    "private_input_files": 11,
+    "raw_audio_persisted": false,
+    "raw_filenames_persisted": false,
+    "anonymized_ids": true,
+    "product_dsp_mutated": false
+  },
+  "commands": [
+    "reuse the same 11 anonymized R1 dry-selected 90 s segments",
+    "replay current Macro Level v2.1 equations at Amount 50 without changing DSP",
+    "measure scale-invariant 10 ms crest change and 10/50/100 ms gain excursion",
+    "measure cut/boost gain-rate and ceiling occupancy"
+  ],
+  "result": "COMPLETED",
+  "acceptance_met": true,
+  "rejection_triggered": false,
+  "import_kind": "manual_private_corpus_derived_metrics"
+}

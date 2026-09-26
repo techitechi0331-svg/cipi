@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "job_id": "VO-PREP-PRODUCT-BOUNDARY-001",
+  "run_id": "manual-20260926",
+  "source_commit": "098630a414bc870a2e590664fdf88d5b655d7f38",
+  "worker_version": "assistant-product-boundary-review/1.0",
+  "started_at": "2026-09-26",
+  "completed_at": "2026-09-26",
+  "random_seed": 0,
+  "environment": {
+    "mode": "manual_product_scope_review",
+    "repository": "techitechi0331-svg/cipi",
+    "product_repository": "techitechi0331-svg/Vo.Prep",
+    "product_main": "28afccdf6d863f1c874ecd086fcb62d5b4f21a82",
+    "related_product_repository": "techitechi0331-svg/VocalPrepComp",
+    "related_product_main": "cc796d30d7e1885e0ca66caaf7f1b02d0bffeb33",
+    "raw_audio_persisted": false,
+    "product_dsp_mutated": false,
+    "negative_evidence_deleted": false
+  },
+  "commands": [
+    "review Vo.Prep product boundary revision v1.0",
+    "compare current Vo.Prep product role with VoPriPro broadband dynamics role",
+    "preserve transparent-compressor research as reusable dynamics knowledge",
+    "reject only Vo.Prep product adoption of broadband compressor functionality"
+  ],
+  "result": "COMPLETED",
+  "acceptance_met": true,
+  "rejection_triggered": true,
+  "import_kind": "manual_product_scope_review"
+}

@@ -74,6 +74,18 @@ jobs:
             git push origin HEAD:main
           fi
 
+      - name: Re-dispatch Global DAG after Cross-Repo state changed
+        if: steps.orchestrate.outputs.configured == 'true' && steps.orchestrate.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ACTIVE="$(gh run list --workflow global-dag-orchestrator.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress")] | length')"
+          if [ "$ACTIVE" = "0" ]; then
+            gh workflow run global-dag-orchestrator.yml --ref main
+          else
+            echo "Global DAG already active; changed Cross-Repo state will be visible on its next pass."
+          fi
+
       - name: Re-dispatch No-Wait scheduler when an external wait resumed
         if: steps.orchestrate.outputs.configured == 'true' && steps.orchestrate.outputs.resumed_jobs != '0'
         env:

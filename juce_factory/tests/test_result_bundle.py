@@ -227,6 +227,39 @@ class FactoryResultBundleTests(unittest.TestCase):
             self.assertFalse(record["promotion_authority"])
 
 
+
+    def test_bundle_rejects_incomplete_validation_matrix(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            malformed = copy.deepcopy(bundle)
+            del malformed["validation_matrix"]["block_sizes"]
+            with self.assertRaises(ResultBundleError):
+                validate_result_bundle(malformed)
+
+    def test_bundle_rejects_disabled_mandatory_matrix_gate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            malformed = copy.deepcopy(bundle)
+            malformed["validation_matrix"]["official_vst3_validator"] = False
+            with self.assertRaises(ResultBundleError):
+                validate_result_bundle(malformed)
+
     def test_bundle_rejects_non_string_format_entries(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

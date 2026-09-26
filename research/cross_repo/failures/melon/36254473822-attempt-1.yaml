@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: MELON-VL2A-CIRCUIT-HA100X-001-R1-256E3F1E
+repo_key: melon
+workflow_key: research
+run_id: 36254473822
+run_attempt: 1
+head_sha: b8abc4386868f7c41b3a59314b51bf7d3a38ed12
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Upload research evidence
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

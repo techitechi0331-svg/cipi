@@ -1,0 +1,52 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-VOPREP-INTEGRATION-001:assistant-review-20260926
+job_id: VOPRIPRO-VOPREP-INTEGRATION-001
+source_run: research/runs/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+parent_decision_id: VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:auto
+rationale: >-
+  The v1 integration screen is not sufficient to reject the Vo.Prep -> VoPriPro
+  product relationship because its intended plosive positive-control did not
+  engage Plosive Guard at all: measured maximum plosive reduction was 0 dB.
+  The observed downstream plosive-case GR improvement is therefore confounded
+  by other preprocessing and cannot support the intended plosive interaction
+  claim. Sibilance Guard did engage, but downstream peak-GR improvement was
+  0.01890 dB versus the predeclared 0.02000 dB minimum, so that near-miss is
+  preserved as negative evidence and the gate is not relaxed. Neutral, post-event,
+  phrase-spread and sample-rate gates passed. The current Vo.Prep repository
+  contains regression-test stimuli that are already verified to engage its
+  Plosive and Sibilance modules, so the correct next action is a new predeclared
+  screen using those source-derived positive controls rather than changing
+  acceptance thresholds after seeing v1.
+scope: >-
+  Review of the synthetic mono source-code-translation integration screen v1
+  only. ITERATE means the v1 stress stimulus was insufficient for the intended
+  plosive interaction question; it does not approve or reject the actual
+  Vo.Prep -> VoPriPro product chain.
+retained_findings:
+  - "All generated samples and downstream GR trajectories were finite."
+  - "Neutral steady-vocal mean-GR shift stayed below 0.10 dB and event modules did not falsely reduce the neutral case."
+  - "Macro Level reduced the phrase-step RMS spread by about 0.823 dB with about 1.624 dB maximum macro movement."
+  - "Preprocessed downstream peak-GR sample-rate spread was about 0.0604 dB across 44.1/48/96 kHz."
+  - "Sibilance Guard engaged by at least about 1.194 dB, but downstream event peak-GR improvement was only about 0.01890 dB versus the locked 0.02000 dB gate."
+  - "The v1 plosive stress case did not engage Plosive Guard, so its downstream GR change cannot be attributed to Plosive Guard."
+reusable_findings:
+  - "An interaction test that claims benefit from an event-specific front-end must first verify that the intended event detector actually engaged."
+  - "A near-miss against a predeclared gate is retained as negative evidence; the gate is not weakened after the result."
+  - "Source-product regression positive controls are preferable to ad-hoc synthetic events when validating cross-product detector interactions."
+revisit_if:
+  - "A v2 integration screen uses source-derived Vo.Prep positive-control stimuli and predeclares unchanged downstream benefit/recovery gates."
+  - "Actual VST3 cross-product measurements become available and reveal a material mismatch with the source-code translation."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOPRIPRO-DETECTOR-TRANSFER-001
+    - VOPRIPRO-BALLISTICS-TRANSFER-001
+  related_decisions:
+    - VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:auto
+created_at: '2026-09-26'
+immutable: true
+review_gaps: []

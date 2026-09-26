@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/juce-factory/factory_reproducibility_report.schema.json",
+  "title": "CIPI JUCE Factory Artifact Reproducibility Comparison v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "comparison_kind",
+    "first_bundle_hash",
+    "second_bundle_hash",
+    "same_contract",
+    "same_generated_source",
+    "same_recorded_factory_context",
+    "artifact_hash_match",
+    "classification",
+    "automatic_gate_decision",
+    "bit_reproducibility_confirmed",
+    "limitations",
+    "report_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "comparison_kind": {
+      "const": "FACTORY_ARTIFACT_HASH_COMPARISON"
+    },
+    "first_bundle_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "second_bundle_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "same_contract": {
+      "type": "boolean"
+    },
+    "same_generated_source": {
+      "type": "boolean"
+    },
+    "same_recorded_factory_context": {
+      "type": "boolean"
+    },
+    "artifact_hash_match": {
+      "type": "boolean"
+    },
+    "classification": {
+      "enum": [
+        "NOT_COMPARABLE_SOURCE_DIFF",
+        "NOT_COMPARABLE_RECORDED_CONTEXT_DIFF",
+        "ARTIFACT_HASH_MATCH",
+        "ARTIFACT_HASH_DIFF"
+      ]
+    },
+    "automatic_gate_decision": {
+      "const": false
+    },
+    "bit_reproducibility_confirmed": {
+      "const": false
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "report_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

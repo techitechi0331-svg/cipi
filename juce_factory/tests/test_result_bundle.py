@@ -214,12 +214,50 @@ class FactoryResultBundleTests(unittest.TestCase):
                 out / "factory_manifest.json",
                 failure_path,
             )
+            self.assertEqual(bundle["validators"]["factory_owned_validation"], "PASS")
+            self.assertEqual(bundle["validators"]["pluginval"], "FAIL")
+            self.assertEqual(bundle["validators"]["steinberg_validator"], "NOT_RUN")
             record = build_evidence_record(bundle)
             self.assertEqual(record["factory_status"], "QUARANTINED")
             self.assertEqual(record["evidence_type"], "MEASURED")
+            self.assertEqual(record["validation_revision"], "5" * 40)
+            self.assertEqual(record["validation_base_revision"], "6" * 40)
             self.assertIn("PLUGINVAL_ERROR", record["claim"])
             self.assertFalse(record["automatic_final_decision"])
             self.assertFalse(record["promotion_authority"])
+
+
+    def test_bundle_rejects_non_string_format_entries(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            malformed = copy.deepcopy(bundle)
+            malformed["formats"] = [{"name": "VST3"}]
+            with self.assertRaises(ResultBundleError):
+                validate_result_bundle(malformed)
+
+    def test_evidence_revision_tampering_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            record = build_evidence_record(bundle)
+            record["validation_revision"] = "not-a-git-sha"
+            with self.assertRaises(FactoryEvidenceIntakeError):
+                validate_evidence_record(record)
 
     def test_evidence_record_hash_tampering_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:

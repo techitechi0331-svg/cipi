@@ -6,6 +6,13 @@ on:
       - "RULES/**"
       - "research/**"
       - "tools/validate_research.py"
+      - "tools/validate_autonomy_state.py"
+      - "tools/validate_cross_repo.py"
+      - "tools/test_autonomous_research_bridge.py"
+      - "automation/autonomous_bridge/**"
+      - "automation/cross_repo/registry.yaml"
+      - "automation/cross_repo/artifacts.py"
+      - "automation/orchestrator/global_dag.py"
       - ".github/workflows/research-gate.yml"
   pull_request:
     paths:
@@ -33,4 +40,9 @@ jobs:
         run: python -m pip install PyYAML==6.0.2
 
       - name: Validate research state contract
-        run: python tools/validate_research.py
+        run: |
+          python -m py_compile automation/autonomous_bridge/bridge.py automation/orchestrator/global_dag.py
+          python tools/validate_research.py
+          python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
+          python tools/test_autonomous_research_bridge.py

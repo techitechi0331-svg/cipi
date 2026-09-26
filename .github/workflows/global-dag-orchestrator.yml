@@ -10,6 +10,9 @@ on:
       - "research/jobs/**"
       - "research/cross_repo/actions/**"
       - "research/cross_repo/health/**"
+      - "research/autonomous_bridge/**"
+      - "research/health/autonomous-bridge.json"
+      - "automation/autonomous_bridge/**"
       - "automation/orchestrator/**"
       - "automation/cross_repo/**"
       - ".github/workflows/global-dag-orchestrator.yml"
@@ -49,6 +52,18 @@ jobs:
           python tools/validate_cross_repo.py
           python tools/validate_autonomy_state.py
           python tools/test_autonomy_stack.py
+          python tools/test_autonomous_research_bridge.py
+
+      - name: Evaluate MELON macro results and registered tracks
+        id: bridge
+        run: python automation/autonomous_bridge/bridge.py --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate bridge-generated state
+        if: steps.bridge.outputs.changed == 'true'
+        run: |
+          python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
+          python tools/test_autonomous_research_bridge.py
 
       - name: Build DAG and health dashboard
         id: dag
@@ -61,19 +76,19 @@ jobs:
             --github-output "$GITHUB_OUTPUT"
 
       - name: Validate generated health dashboard
-        if: steps.dag.outputs.dashboard_changed == 'true'
+        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true'
         run: python tools/validate_autonomy_state.py
 
-      - name: Commit health dashboard when changed
-        if: steps.dag.outputs.dashboard_changed == 'true'
+      - name: Commit bridge state and health dashboard when changed
+        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true'
         run: |
           git config user.name "cipi-health-bot"
           git config user.email "cipi-health-bot@users.noreply.github.com"
-          git add research/health/automation-status.json research/health/automation-status.md
+          git add research/autonomous_bridge research/cross_repo/actions/queued research/health/autonomous-bridge.json research/health/automation-status.json research/health/automation-status.md
           if git diff --cached --quiet; then
             echo "Health dashboard unchanged."
           else
-            git commit -m "update automation health dashboard"
+            git commit -m "update autonomous research bridge state"
             git pull --rebase origin main
             git push origin HEAD:main
           fi

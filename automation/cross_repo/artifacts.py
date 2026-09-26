@@ -10,7 +10,7 @@ import yaml
 
 TEXT_SUFFIXES = {".json", ".csv", ".md", ".txt", ".log", ".yaml", ".yml", ".xml"}
 EVIDENCE_NAME_RE = re.compile(
-    r"(measurement|metric|result|report|log|summary|validation|validator|reference|analysis|evidence|test)",
+    r"(measurement|metric|result|report|log|summary|validation|validator|reference|analysis|evidence|test|research)",
     re.IGNORECASE,
 )
 MAX_ARCHIVE_BYTES = 50 * 1024 * 1024

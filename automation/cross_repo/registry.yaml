@@ -148,3 +148,43 @@ repositories:
         file: vocalset-semantic-ranker.yml
         dispatch: true
         monitor: true
+
+  melon:
+    repository: techitechi0331-svg/melon
+    default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
+    workflows:
+      research:
+        file: melon-research.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - seed
+          - cipi_context_json
+          - population
+          - generations
+          - max_candidates
+          - max_runtime_seconds
+          - stage2_limit
+          - stage2_archive_limit
+          - stage2_epsilon_range_fraction
+          - stage2_epsilon_spread_multiplier
+          - stage3_limit
+          - workers
+          - preflight_mode
+        required_inputs:
+          - seed
+          - cipi_context_json
+          - population
+          - generations
+          - max_candidates
+          - max_runtime_seconds
+          - stage2_limit
+          - stage2_archive_limit
+          - stage2_epsilon_range_fraction
+          - stage2_epsilon_spread_multiplier
+          - stage3_limit
+          - workers
+          - preflight_mode

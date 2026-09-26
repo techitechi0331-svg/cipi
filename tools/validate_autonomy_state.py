@@ -57,6 +57,32 @@ def main() -> int:
         if data.get("automatic_product_decision") is not False:
             errors.append(f"{dashboard}: dashboard may not make product decision")
 
+    bridge_health = ROOT / "research/health/autonomous-bridge.json"
+    if bridge_health.exists():
+        data = json.loads(bridge_health.read_text(encoding="utf-8"))
+        if data.get("authority") != "OPERATIONAL_SCHEDULING_ONLY":
+            errors.append(f"{bridge_health}: invalid bridge health authority")
+        if data.get("automatic_product_decision") is not False:
+            errors.append(f"{bridge_health}: bridge health may not make product decision")
+        if data.get("automatic_knowledge_promotion") is not False:
+            errors.append(f"{bridge_health}: bridge health may not promote knowledge")
+        if not isinstance(data.get("active_research_tracks"), list):
+            errors.append(f"{bridge_health}: active_research_tracks must be a list")
+
+    bridge_root = ROOT / "research/autonomous_bridge"
+    if bridge_root.exists():
+        for path in bridge_root.rglob("*.yaml"):
+            data = yaml.safe_load(path.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                errors.append(f"{path}: root must be mapping")
+                continue
+            if data.get("automatic_product_decision") not in (None, False):
+                errors.append(f"{path}: bridge record may not make product decision")
+            if data.get("automatic_knowledge_promotion") not in (None, False):
+                errors.append(f"{path}: bridge record may not promote knowledge")
+            if data.get("state") == "RESULT_MISSING" and data.get("automatic_retry") is not False:
+                errors.append(f"{path}: RESULT_MISSING may not auto-retry")
+
     if errors:
         print("CIPI autonomy-state gate: FAIL")
         for error in errors:

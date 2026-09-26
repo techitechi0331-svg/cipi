@@ -47,6 +47,30 @@ def health_alerts(root: Path) -> list[dict[str, Any]]:
     return alerts
 
 
+def autonomous_research_health(root: Path) -> dict[str, Any]:
+    path = root / "research" / "health" / "autonomous-bridge.json"
+    if not path.exists():
+        return {
+            "active_research_tracks": [],
+            "current_loop_depth": {},
+            "melon_runs": 0,
+            "continuation_candidates": 0,
+            "generated_jobs": 0,
+            "rejected_continuations": 0,
+            "duplicate_suppressions": 0,
+            "no_improvement_count": 0,
+            "human_gates": 0,
+            "runner_wait": 0,
+            "budget_status": {},
+            "next_scheduler_action": "NO_READY_WORK",
+            "authority": "OPERATIONAL_SCHEDULING_ONLY",
+            "automatic_product_decision": False,
+            "automatic_knowledge_promotion": False,
+        }
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return data if isinstance(data, dict) else {}
+
+
 def human_gates(root: Path) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     for path in yaml_files(root / "research" / "jobs" / "queued"):
@@ -131,6 +155,7 @@ def build_snapshot(root: Path, registry: dict[str, Any], cross_repo_enabled: boo
             "health_alerts": health_alerts(root),
         },
         "human_gates": human_gates(root),
+        "autonomous_research": autonomous_research_health(root),
         "authority": "OPERATIONAL_SCHEDULING_ONLY",
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,
@@ -150,6 +175,7 @@ def write_dashboard(root: Path, snapshot: dict[str, Any]) -> bool:
     states = cross["states"]
     alerts = cross["health_alerts"]
     gates = snapshot["human_gates"]
+    bridge = snapshot.get("autonomous_research") or {}
 
     lines = [
         "# CIPI Automation Health",
@@ -164,6 +190,21 @@ def write_dashboard(root: Path, snapshot: dict[str, Any]) -> bool:
         f"- Cross-Repo queued / dispatched / failed / quarantined: **{states['queued']} / {states['dispatched']} / {states['failed']} / {states['quarantined']}**",
         f"- Runner/dispatch alerts: **{len(alerts)}**",
         f"- Declared human-gate jobs: **{len(gates)}**",
+        "",
+        "## Autonomous Research Bridge",
+        "",
+        f"- Active Research Tracks: **{len(bridge.get('active_research_tracks', []))}**",
+        f"- Current Loop Depth: **{json.dumps(bridge.get('current_loop_depth', {}), sort_keys=True)}**",
+        f"- MELON Runs: **{bridge.get('melon_runs', 0)}**",
+        f"- Continuation Candidates: **{bridge.get('continuation_candidates', 0)}**",
+        f"- Generated Jobs: **{bridge.get('generated_jobs', 0)}**",
+        f"- Rejected Continuations: **{bridge.get('rejected_continuations', 0)}**",
+        f"- Duplicate Suppressions: **{bridge.get('duplicate_suppressions', 0)}**",
+        f"- No-Improvement Count: **{bridge.get('no_improvement_count', 0)}**",
+        f"- Human Gates: **{bridge.get('human_gates', 0)}**",
+        f"- Runner Wait: **{bridge.get('runner_wait', 0)}**",
+        f"- Budget Status: **{json.dumps(bridge.get('budget_status', {}), sort_keys=True)}**",
+        f"- Next Scheduler Action: **{bridge.get('next_scheduler_action', 'NO_READY_WORK')}**",
         "",
     ]
     if alerts:

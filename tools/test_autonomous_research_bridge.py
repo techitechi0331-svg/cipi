@@ -64,6 +64,9 @@ def track(track_id: str = "TRACK-1", **overrides) -> dict:
         }
     }
     value.update(overrides)
+    unhashed = dict(value)
+    unhashed.pop("bundle_hash", None)
+    value["bundle_hash"] = canonical_hash(unhashed)
     return value
 
 
@@ -289,6 +292,16 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             second, _ = bootstrap_track(root, t, set())
             self.assertTrue(first); self.assertFalse(second)
             self.assertEqual(len(list((root / "research/cross_repo/actions/queued").glob("*.yaml"))), 1)
+
+    def test_failure_injection_bundle_hash_mismatch(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); install_track(root, track())
+            result = macro_result()
+            result["bundle_hash"] = "0" * 64
+            install_result(root, result)
+            out = reconcile(root)
+            self.assertEqual(out["counters"]["invalid_results"], 1)
+            self.assertTrue(any((root / "research/autonomous_bridge/quarantine").glob("*.yaml")))
 
     def test_failure_injection_broken_json(self):
         with tempfile.TemporaryDirectory() as td:

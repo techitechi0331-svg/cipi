@@ -112,15 +112,24 @@ def build_snapshot(root: Path, registry: dict[str, Any], cross_repo_enabled: boo
         }
 
     external_candidate = None
-    queued_action = select_queued_action(root, registry) if cross_repo_enabled else None
+    blocked_external = None
+    queued_action = select_queued_action(root, registry)
     if queued_action is not None:
         _, action = queued_action
-        external_candidate = {
-            "kind": "CROSS_REPO",
-            "priority": int(action.get("priority", 0)),
-            "action_id": action.get("action_id"),
-            "reason": "ready_external_action",
-        }
+        if cross_repo_enabled:
+            external_candidate = {
+                "kind": "CROSS_REPO",
+                "priority": int(action.get("priority", 0)),
+                "action_id": action.get("action_id"),
+                "reason": "ready_external_action",
+            }
+        else:
+            blocked_external = {
+                "kind": "EXTERNAL_BLOCK",
+                "priority": int(action.get("priority", 0)),
+                "action_id": action.get("action_id"),
+                "reason": "CIPI_CROSS_REPO_TOKEN_MISSING",
+            }
 
     states = count_states(root)
     if cross_repo_enabled and states["dispatched"] > 0:
@@ -135,7 +144,12 @@ def build_snapshot(root: Path, registry: dict[str, Any], cross_repo_enabled: boo
 
     candidates = [c for c in (local_candidate, intake_candidate, external_candidate) if c is not None]
     candidates.sort(key=lambda c: (-int(c["priority"]), str(c["kind"])))
-    selected = candidates[0] if candidates else {"kind": "IDLE", "priority": -999}
+    if candidates:
+        selected = candidates[0]
+    elif blocked_external is not None:
+        selected = blocked_external
+    else:
+        selected = {"kind": "IDLE", "priority": -999}
 
     return {
         "schema_version": "1.0",
@@ -152,6 +166,8 @@ def build_snapshot(root: Path, registry: dict[str, Any], cross_repo_enabled: boo
             "enabled": cross_repo_enabled,
             "states": states,
             "ready_action": external_candidate if external_candidate and external_candidate.get("reason") == "ready_external_action" else None,
+            "blocked_action": blocked_external,
+            "blocked_reason": blocked_external.get("reason") if blocked_external else None,
             "health_alerts": health_alerts(root),
         },
         "human_gates": human_gates(root),
@@ -187,6 +203,7 @@ def write_dashboard(root: Path, snapshot: dict[str, Any]) -> bool:
         f"- Claimed evidence branches: **{local['claimed_count']}**",
         f"- Local blocked / dependency-blocked: **{local['blocked_count']} / {local['dependency_blocked_count']}**",
         f"- Cross-Repo enabled: **{'YES' if cross['enabled'] else 'NO'}**",
+        f"- Cross-Repo blocked reason: **{cross.get('blocked_reason') or '-'}**",
         f"- Cross-Repo queued / dispatched / failed / quarantined: **{states['queued']} / {states['dispatched']} / {states['failed']} / {states['quarantined']}**",
         f"- Runner/dispatch alerts: **{len(alerts)}**",
         f"- Declared human-gate jobs: **{len(gates)}**",

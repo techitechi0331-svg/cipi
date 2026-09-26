@@ -9,9 +9,13 @@
     "handoff_kind",
     "plugin_proposal_id",
     "source_proposal",
+    "source_proposal_sha256",
     "source_incubate_decision",
+    "source_incubate_decision_sha256",
     "source_product_evidence",
+    "source_product_evidence_sha256",
     "source_manufacturing_review",
+    "source_manufacturing_review_sha256",
     "review_authority",
     "contract_sha256",
     "status",
@@ -78,6 +82,22 @@
       "const": false
     },
     "receipt_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_proposal_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_incubate_decision_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_product_evidence_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_manufacturing_review_sha256": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
     }

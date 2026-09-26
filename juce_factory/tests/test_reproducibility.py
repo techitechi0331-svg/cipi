@@ -124,6 +124,22 @@ class FactoryReproducibilityTests(unittest.TestCase):
             self.assertFalse(report["same_recorded_factory_context"])
 
 
+
+    def test_report_schema_required_fields_match_runtime_report(self):
+        schema = json.loads(
+            (ROOT / "schemas" / "factory_reproducibility_report.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = self._bundle(root / "a", "a" * 64)
+            second = self._bundle(root / "b", "a" * 64)
+            report = compare_pass_bundles(first, second)
+            self.assertEqual(set(schema["required"]), set(report))
+            self.assertFalse(schema["properties"]["automatic_gate_decision"]["const"])
+            self.assertFalse(schema["properties"]["bit_reproducibility_confirmed"]["const"])
+
     def test_semantically_inconsistent_report_is_rejected_even_with_fresh_hash(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

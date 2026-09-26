@@ -1,0 +1,142 @@
+name: Vo.Prep Actual VST3 Chain Validation
+
+on:
+  pull_request:
+    paths:
+      - "research/plugins/vo-prep/experiments/ACTUAL_VST3_CHAIN_VALIDATION_V1_PROTOCOL.md"
+      - "research/plugins/vo-prep/experiments/vst3_chain_probe/**"
+      - ".github/workflows/voprep-actual-vst3-chain.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "research/plugins/vo-prep/experiments/ACTUAL_VST3_CHAIN_VALIDATION_V1_PROTOCOL.md"
+      - "research/plugins/vo-prep/experiments/vst3_chain_probe/**"
+      - ".github/workflows/voprep-actual-vst3-chain.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-vst3-chain:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      CROSS_REPO_CONFIGURED: ${{ secrets.CIPI_CROSS_REPO_TOKEN != '' }}
+
+    steps:
+      - name: Checkout CIPI
+        uses: actions/checkout@v4
+
+      - name: Record blocked external state when credential is unavailable
+        if: env.CROSS_REPO_CONFIGURED != 'true'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path result | Out-Null
+          @'
+          {
+            "schema": "voprep-actual-vst3-chain-v1",
+            "decision": "BLOCKED_EXTERNAL",
+            "reason": "CIPI_CROSS_REPO_TOKEN is not configured",
+            "raw_audio_persisted": false,
+            "product_dsp_mutated": false
+          }
+          '@ | Set-Content -Path result\actual_vst3_chain.json -Encoding utf8
+
+      - name: Checkout pinned Vo.Prep
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/Vo.Prep
+          ref: ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6
+          path: product-voprep
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout pinned VoPriPro
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/VocalPrepComp
+          ref: 58049696815fcc24067870edd6a1b89c3cfd2163
+          path: product-vopripro
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout pinned JUCE 9.0.2
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: juce-framework/JUCE
+          ref: 9.0.2
+          path: JUCE
+          persist-credentials: false
+
+      - name: Configure and build pinned Vo.Prep VST3
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S product-voprep -B product-voprep\build -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build product-voprep\build --config Release --target VoPrepMacro_VST3 --parallel 4
+
+      - name: Configure and build pinned VoPriPro VST3
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S product-vopripro -B product-vopripro\build -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build product-vopripro\build --config Release --target VocalPrepComp_VST3 --parallel 4
+
+      - name: Configure and build JUCE headless chain host
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S research\plugins\vo-prep\experiments\vst3_chain_probe -B chain-build -G "Visual Studio 17 2022" -A x64 -DJUCE_SOURCE_DIR="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build chain-build --config Release --target VoPrepActualVst3ChainProbe --parallel 4
+
+      - name: Locate actual VST3 bundles and host
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        id: locate
+        shell: pwsh
+        run: |
+          $prep = Get-ChildItem -Path product-voprep\build -Directory -Filter *.vst3 -Recurse | Select-Object -First 1
+          $pri = Get-ChildItem -Path product-vopripro\build -Directory -Filter *.vst3 -Recurse | Select-Object -First 1
+          $hostExe = Get-ChildItem -Path chain-build -File -Filter VoPrepActualVst3ChainProbe.exe -Recurse | Select-Object -First 1
+
+          if (-not $prep) { throw "Vo.Prep VST3 bundle not found" }
+          if (-not $pri) { throw "VoPriPro VST3 bundle not found" }
+          if (-not $hostExe) { throw "VST3 chain host executable not found" }
+
+          "voprep=$($prep.FullName)" >> $env:GITHUB_OUTPUT
+          "vopripro=$($pri.FullName)" >> $env:GITHUB_OUTPUT
+          "host=$($hostExe.FullName)" >> $env:GITHUB_OUTPUT
+
+      - name: Run actual VST3 binary chain matrix
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path result | Out-Null
+          & "${{ steps.locate.outputs.host }}" --voprep "${{ steps.locate.outputs.voprep }}" --vopripro "${{ steps.locate.outputs.vopripro }}" --out "$env:GITHUB_WORKSPACE\result\actual_vst3_chain.json"
+          $code = $LASTEXITCODE
+          if ($code -ne 0) {
+            throw "Actual VST3 chain probe rejected or failed with exit code $code"
+          }
+
+      - name: Add provenance metadata
+        if: env.CROSS_REPO_CONFIGURED == 'true' && always()
+        shell: pwsh
+        run: |
+          if (Test-Path result\actual_vst3_chain.json) {
+            $result = Get-Content result\actual_vst3_chain.json -Raw | ConvertFrom-Json
+            $result | Add-Member -NotePropertyName voprep_ref -NotePropertyValue "ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6" -Force
+            $result | Add-Member -NotePropertyName vopripro_ref -NotePropertyValue "58049696815fcc24067870edd6a1b89c3cfd2163" -Force
+            $result | Add-Member -NotePropertyName juce_ref -NotePropertyValue "9.0.2" -Force
+            $result | ConvertTo-Json -Depth 12 | Set-Content result\actual_vst3_chain.json -Encoding utf8
+          }
+
+      - name: Upload derived validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: VoPrep-Actual-VST3-Chain-Validation
+          path: result/actual_vst3_chain.json
+          if-no-files-found: warn

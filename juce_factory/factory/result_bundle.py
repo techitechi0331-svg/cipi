@@ -78,6 +78,55 @@ def read_sha256_manifest(path: str | Path) -> dict[str, str]:
     return dict(sorted(result.items()))
 
 
+
+def _validate_validation_matrix(matrix: dict[str, Any]) -> None:
+    required = {
+        "sample_rates", "block_sizes", "state_restore", "automation", "silence",
+        "nan_inf", "official_vst3_validator", "latency", "mono_stereo_layouts",
+        "denormal", "bypass",
+    }
+    missing = sorted(required - set(matrix))
+    unknown = sorted(set(matrix) - required)
+    if missing:
+        raise ResultBundleError(f"validation_matrix missing fields: {missing}")
+    if unknown:
+        raise ResultBundleError(f"validation_matrix contains unknown fields: {unknown}")
+
+    sample_rates = matrix["sample_rates"]
+    if not isinstance(sample_rates, list) or not sample_rates:
+        raise ResultBundleError("validation_matrix.sample_rates must be a non-empty array")
+    if any(
+        not isinstance(rate, (int, float))
+        or isinstance(rate, bool)
+        or not 8000 <= float(rate) <= 384000
+        for rate in sample_rates
+    ):
+        raise ResultBundleError("validation_matrix.sample_rates contains an invalid value")
+    if len(set(float(rate) for rate in sample_rates)) != len(sample_rates):
+        raise ResultBundleError("validation_matrix.sample_rates must be unique")
+
+    block_sizes = matrix["block_sizes"]
+    if not isinstance(block_sizes, list) or not block_sizes:
+        raise ResultBundleError("validation_matrix.block_sizes must be a non-empty array")
+    if any(
+        not isinstance(size, int)
+        or isinstance(size, bool)
+        or not 1 <= size <= 8192
+        for size in block_sizes
+    ):
+        raise ResultBundleError("validation_matrix.block_sizes contains an invalid value")
+    if len(set(block_sizes)) != len(block_sizes):
+        raise ResultBundleError("validation_matrix.block_sizes must be unique")
+
+    for key in required - {"sample_rates", "block_sizes"}:
+        if not isinstance(matrix[key], bool):
+            raise ResultBundleError(f"validation_matrix.{key} must be boolean")
+
+    if matrix["nan_inf"] is not True:
+        raise ResultBundleError("validation_matrix.nan_inf is a mandatory safety gate")
+    if matrix["official_vst3_validator"] is not True:
+        raise ResultBundleError("validation_matrix.official_vst3_validator is mandatory")
+
 def _hash_payload(data: dict[str, Any]) -> str:
     payload = dict(data)
     payload.pop("bundle_hash", None)
@@ -131,6 +180,7 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
         raise ResultBundleError("platform must be windows_x64")
     if not isinstance(data["validation_matrix"], dict):
         raise ResultBundleError("validation_matrix must be an object")
+    _validate_validation_matrix(data["validation_matrix"])
     if not isinstance(data["validators"], dict):
         raise ResultBundleError("validators must be an object")
     allowed_validator_states = {"PASS", "FAIL", "NOT_RUN", "UNKNOWN"}

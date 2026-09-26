@@ -43,12 +43,13 @@ jobs:
           set -euo pipefail
           matrix="$(python -m juce_factory.factory.authorized_build discover --root . --matrix)"
           count="$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])["include"]))' "$matrix")"
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
           if [ "$count" -gt 0 ]; then
             echo "has_requests=true" >> "$GITHUB_OUTPUT"
           else
             echo "has_requests=false" >> "$GITHUB_OUTPUT"
+            matrix='{"include":[{"request_id":"no-request","request_path":"no-request"}]}'
           fi
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
           echo "Authorized requests: $count"
 
   candidate-build:

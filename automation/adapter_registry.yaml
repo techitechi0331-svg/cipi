@@ -328,6 +328,13 @@ adapters:
     network_required: false
     purpose: "Repeat the Vo.Prep -> VoPriPro integration screen with source-derived Plosive/Sibilance regression positive controls and unchanged downstream interaction gates before actual VST3/real-vocal integration."
 
+  vopripro_voprep_plosive_decomposition_v1:
+    tracks:
+      - VOPRIPRO_FORMAL
+    max_timeout_minutes: 8
+    network_required: false
+    purpose: "Diagnose the failed v2 plosive interaction by separating Plosive-only, Macro-only, and Plosive+Macro paths before any product or threshold change."
+
   voprep_plosive_adversarial_v1:
     tracks:
       - VO_PREP_FORMAL

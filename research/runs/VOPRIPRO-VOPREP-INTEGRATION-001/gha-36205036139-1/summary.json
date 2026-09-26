@@ -1,0 +1,44 @@
+{
+  "experiment": "VOPRIPRO_VOPREP_INTEGRATION_SCREEN_V1",
+  "seed": 20260926,
+  "sample_rates": [
+    44100,
+    48000,
+    96000
+  ],
+  "source_product_refs": {
+    "voprep_main": "ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6",
+    "vopripro_main": "58049696815fcc24067870edd6a1b89c3cfd2163"
+  },
+  "scope": "Mono deterministic source-code translation screen of Vo.Prep Plosive/Macro/Sibilance at 50% feeding VoPriPro Natural50 compressor core. It is not a replacement for actual VST3, real-vocal, listening, limiter or Cubase validation.",
+  "aggregate_metrics": {
+    "all_finite": true,
+    "neutral_max_abs_mean_gr_delta_db": 0.09402296509519086,
+    "neutral_max_event_module_reduction_db": 0.0,
+    "plosive_min_guard_reduction_db": 0.0,
+    "plosive_min_event_peak_gr_improvement_db": 0.2729104368500108,
+    "plosive_max_abs_post_event_mean_gr_delta_db": 0.18664847406971008,
+    "sibilance_min_guard_reduction_db": 1.1944910452838484,
+    "sibilance_min_event_peak_gr_improvement_db": 0.018901712261868653,
+    "sibilance_max_abs_post_event_mean_gr_delta_db": 0.3393583250421157,
+    "phrase_min_macro_movement_db": 1.6241586642942925,
+    "phrase_min_spread_improvement_db": 0.8233559909897821,
+    "phrase_max_spread_improvement_db": 0.8233570749813524,
+    "downstream_peak_gr_sr_spread_db": 0.06039714867949897
+  },
+  "acceptance": {
+    "all_finite": true,
+    "neutral_mean_gr_shift_le_0_25db": true,
+    "neutral_false_event_reduction_le_0_25db": true,
+    "plosive_guard_engages_ge_0_25db": false,
+    "plosive_downstream_peak_gr_improves_ge_0_10db": true,
+    "plosive_post_event_mean_gr_shift_le_0_35db": true,
+    "sibilance_guard_engages_ge_0_15db": true,
+    "sibilance_downstream_peak_gr_improves_ge_0_02db": false,
+    "sibilance_post_event_mean_gr_shift_le_0_35db": true,
+    "macro_moves_phrase_ge_0_10db": true,
+    "macro_phrase_spread_improvement_between_0_05_and_1_50db": true,
+    "downstream_peak_gr_sample_rate_spread_le_0_15db": true
+  },
+  "acceptance_met": false
+}

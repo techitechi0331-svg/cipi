@@ -1,0 +1,7 @@
+claim: Vo.Prep and VoPriPro are eligible for actual integration validation only if
+  event preprocessing reduces targeted downstream compressor reactions while neutral
+  and phrase-level behavior stays inside the predeclared interaction budget.
+evidence_type: HYPOTHESIS
+scope: Synthetic mono source-code-translation integration screen only.
+source_run: research/runs/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1
+promotion_requested: HYPOTHESIS

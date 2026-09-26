@@ -1,0 +1,38 @@
+schema_version: '1.0'
+job_id: VL2A-CIRCUIT-HA100X-001-R3-8039A97F
+track_id: VL2A-CIRCUIT-HA100X-001
+root_research_id: VL2A-CIRCUIT-HA100X-001
+parent_job_id: VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A
+parent_run_id: melon-funnel-ha100x-ee45c3b192ff
+hypothesis_id: HYP-VL2A-HA100X-LINEAR-FIRST
+experiment_id: MELON-FUNNEL-HA100X-EE45C3B192FF-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VL2A-CIRCUIT-HA100X-001-R3-8039A97F
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+continuation_reason: Bound T4-dependent secondary loading; p90 absolute transfer interaction
+  is 1.735639 dB. Next isolate leakage/capacitance sensitivity at 15-20 kHz.
+expected_information_gain: 0.8472573331608161
+fingerprint: 8039a97f8a19e46b433aa48b73f3582487c264eff59651be25fbd909f8776ae5
+loop_depth: 3
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: HA100X_LINEAR_LTI_LOAD_AWARE
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

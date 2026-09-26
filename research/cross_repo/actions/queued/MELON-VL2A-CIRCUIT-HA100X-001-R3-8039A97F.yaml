@@ -1,0 +1,37 @@
+schema_version: '1.0'
+action_id: MELON-VL2A-CIRCUIT-HA100X-001-R3-8039A97F
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 12
+  max_runtime_seconds: 90
+  population: 6
+  preflight_mode: fast
+  seed: 2026092703
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 4
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"experiment_id":"MELON-FUNNEL-HA100X-EE45C3B192FF-ITERATE-1","hypothesis_id":"HYP-VL2A-HA100X-LINEAR-FIRST","job_id":"VL2A-CIRCUIT-HA100X-001-R3-8039A97F","loop_depth":3,"parent_job_id":"VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A","parent_run_id":"melon-funnel-ha100x-ee45c3b192ff","research_id":"VL2A-CIRCUIT-HA100X-001","research_question":"Can
+    a source-constrained, load-aware linear HA-100X model explain the documented transformer
+    envelope and reconstructed LA-2A loading more consistently than the current VL2A
+    12 Hz HP / 25 ms state / tanh heuristic, without requiring unsupported magnetic
+    nonlinearity and without changing product behavior?","track_id":"VL2A-CIRCUIT-HA100X-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VL2A-CIRCUIT-HA100X-001
+bridge_job_id: VL2A-CIRCUIT-HA100X-001-R3-8039A97F
+continuation_fingerprint: 8039a97f8a19e46b433aa48b73f3582487c264eff59651be25fbd909f8776ae5
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

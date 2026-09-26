@@ -30,30 +30,32 @@
       "runtime_seconds": 56.14099999999962
     },
     "VL2A-CIRCUIT-HA100X-001": {
-      "candidates": 12,
+      "candidates": 24,
       "candidates_limit": 60,
-      "loop_depth": 1,
+      "loop_depth": 2,
       "loop_depth_limit": 5,
-      "runs": 1,
+      "runs": 2,
       "runs_limit": 5,
       "runtime_limit_seconds": 600.0,
-      "runtime_seconds": 0.009003
+      "runtime_seconds": 0.017925
     }
   },
-  "continuation_candidates": 7,
+  "continuation_candidates": 8,
   "current_loop_depth": {
     "MELON-BRIDGE-CLEAN-PROOF-002": 3,
     "MELON-BRIDGE-PILOT-001": 3,
-    "VL2A-CIRCUIT-HA100X-001": 1
+    "VL2A-CIRCUIT-HA100X-001": 2
   },
   "duplicate_suppressions": 0,
-  "generated_jobs": 8,
+  "generated_jobs": 9,
   "human_gates": 0,
   "invalid_results": 0,
-  "melon_runs": 7,
-  "next_scheduler_action": "NO_READY_WORK",
+  "melon_runs": 8,
+  "next_scheduler_action": "MELON-VL2A-CIRCUIT-HA100X-001-R3-8039A97F",
   "no_improvement_count": 4,
-  "queued_actions": [],
+  "queued_actions": [
+    "MELON-VL2A-CIRCUIT-HA100X-001-R3-8039A97F"
+  ],
   "rejected_continuations": 2,
   "result_missing": 0,
   "runner_wait": 0,

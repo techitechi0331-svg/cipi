@@ -1,0 +1,172 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:review-brief-v1
+job_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001
+run_id: gha-36229978298-1
+source_run: research/runs/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1
+route: HUMAN_GATE_REVIEW
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml
+triage_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:triage-v1
+job_path: research/jobs/completed/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001.yaml
+research_question: Is Vo.Prep event-only processing (Plosive 50% + Sibilance 50%,
+  Macro Level OFF) compatible with VoPriPro Natural50 across source-derived positive
+  controls, neutral material, phrase steps, and sample rates without material double-processing?
+hypothesis: Event-only Vo.Prep will perform localized Plosive/Sibilance cleanup, remain
+  near-neutral on neutral/phrase material, preserve VoPriPro recovery, and avoid the
+  Macro-driven post-event residual observed in integration v2.
+counter_hypotheses:
+- Event-only processing still creates material post-event VoPriPro GR shifts.
+- Plosive cleanup materially changes downstream VoPriPro peak GR despite the 80 Hz
+  sidechain HPF.
+- Sibilance processing no longer reduces downstream VoPriPro event GR when Macro is
+  disabled.
+- Event modules false-trigger on neutral or phrase-step material.
+- Event-only compatibility is materially sample-rate dependent.
+acceptance_criteria:
+- All generated samples and downstream gain-reduction trajectories are finite.
+- Macro Level remains effectively unity with Amount 0%.
+- Neutral mean VoPriPro GR shift is no more than 0.10 dB.
+- Neutral false Plosive/Sibilance reduction is no more than 0.10 dB.
+- Plosive positive-control probability reaches at least 0.80 at every tested sample
+  rate.
+- Plosive reduction reaches at least 0.50 dB at every tested sample rate.
+- Plosive event RMS attenuation is at least 0.25 dB at every tested sample rate.
+- Plosive absolute downstream VoPriPro event peak-GR change is no more than 0.10 dB.
+- Plosive absolute post-event VoPriPro mean-GR shift is no more than 0.15 dB.
+- Sibilance positive-control probability reaches at least 0.65 at every tested sample
+  rate.
+- Sibilance reduction reaches at least 0.30 dB at every tested sample rate.
+- Sibilance event RMS attenuation is at least 0.10 dB at every tested sample rate.
+- Sibilance preprocessing improves downstream VoPriPro event peak GR by at least 0.02
+  dB.
+- Sibilance absolute post-event VoPriPro mean-GR shift is no more than 0.15 dB.
+- Phrase-step material causes no more than 0.10 dB false event reduction.
+- Event-only preprocessing changes phrase RMS spread by no more than 0.10 dB.
+- Preprocessed downstream peak-GR sample-rate spread across 44.1/48/88.2/96 kHz is
+  no more than 0.15 dB.
+rejection_criteria:
+- Any event-localization, neutrality, recovery, finite-state, phrase, or sample-rate
+  gate fails.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: eb8da19c65177cff066878201edce1ee63d541a6
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance.all_finite
+  value: true
+- path: acceptance.downstream_peak_gr_sr_spread_le_0_15db
+  value: true
+- path: acceptance.macro_disabled_is_unity
+  value: true
+- path: acceptance.neutral_false_event_reduction_le_0_10db
+  value: true
+- path: acceptance.neutral_mean_gr_shift_le_0_10db
+  value: true
+- path: acceptance.phrase_false_event_reduction_le_0_10db
+  value: true
+- path: acceptance.phrase_spread_delta_le_0_10db
+  value: true
+- path: acceptance.plosive_downstream_event_gr_change_le_0_10db
+  value: true
+- path: acceptance.plosive_event_audio_attenuation_ge_0_25db
+  value: true
+- path: acceptance.plosive_post_event_gr_shift_le_0_15db
+  value: true
+- path: acceptance.plosive_probability_ge_0_80
+  value: true
+- path: acceptance.plosive_reduction_ge_0_50db
+  value: true
+- path: acceptance.sibilance_downstream_peak_gr_improves_ge_0_02db
+  value: true
+- path: acceptance.sibilance_event_audio_attenuation_ge_0_10db
+  value: true
+- path: acceptance.sibilance_post_event_gr_shift_le_0_15db
+  value: true
+- path: acceptance.sibilance_probability_ge_0_65
+  value: true
+- path: acceptance.sibilance_reduction_ge_0_30db
+  value: true
+- path: acceptance_met
+  value: true
+- path: aggregate_metrics.all_finite
+  value: true
+- path: aggregate_metrics.downstream_peak_gr_sr_spread_db
+  value: 0.10617493193583982
+- path: aggregate_metrics.macro_disabled_max_abs_gain_db
+  value: 0.0
+- path: aggregate_metrics.neutral_max_abs_mean_gr_delta_db
+  value: 0.0
+- path: aggregate_metrics.neutral_max_event_reduction_db
+  value: 0.0
+- path: aggregate_metrics.phrase_max_abs_spread_delta_db
+  value: 0.0
+- path: aggregate_metrics.phrase_max_event_reduction_db
+  value: 0.0
+- path: aggregate_metrics.plosive_max_abs_event_vopripro_peak_gr_change_db
+  value: 0.0125650627651126
+- path: aggregate_metrics.plosive_max_abs_post_event_mean_gr_delta_db
+  value: 0.021098412113997433
+- path: aggregate_metrics.plosive_min_event_audio_rms_attenuation_db
+  value: 0.7945118516240246
+- path: aggregate_metrics.plosive_min_probability
+  value: 0.8498187159535602
+- path: aggregate_metrics.plosive_min_reduction_db
+  value: 1.1517584542725836
+- path: aggregate_metrics.sibilance_max_abs_post_event_mean_gr_delta_db
+  value: 0.01936226927765139
+- path: aggregate_metrics.sibilance_min_event_audio_rms_attenuation_db
+  value: 0.30972169557056617
+knowledge_candidate:
+  claim: Vo.Prep event-only processing may advance to actual cross-product validation
+    only if Plosive/Sibilance cleanup remains localized, Macro is truly disabled,
+    and downstream VoPriPro interaction stays inside the predeclared compatibility
+    budget.
+  evidence_type: HYPOTHESIS
+  scope: Deterministic source-derived event-only compatibility screen only.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Level-matched real-vocal listening remains mandatory before a perceptual chain recommendation.
+- Actual VST3/Cubase validation remains mandatory before release guidance.
+downstream_gate_signals:
+- Existing Vo.Prep Amount R2-R4 product mappings are not eligible for direct transfer;
+  current VoPriPro AMOUNT remains baseline while its own perceptual uniformity still
+  needs listening/generalisation evidence.
+- Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current
+  main Natural50 A/B pack.
+- The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle
+  recordings and does not establish universal singer/generalisation claims.
+- Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally
+  complete on the user's actual machine.
+- Final precision review remains pending after subjective and target-host evidence.
+- Human listening is required to convert the generated gain-matched A/B pack into
+  perceptual evidence.
+- Cubase Pro 14 validation ultimately requires the user's Windows host.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

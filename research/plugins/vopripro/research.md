@@ -158,3 +158,21 @@ Scope:
 
 The screen is deliberately bounded. It does not replace actual VST3 processing, real-vocal AB, the VoPriPro limiter path, or Cubase validation. Its only purpose is to falsify obvious cross-product overlap/double-processing before opening a more expensive integration stage.
 
+## 2026-09-26 Vo.Prep -> VoPriPro integration screen v1 review
+
+Run:
+- `VOPRIPRO-VOPREP-INTEGRATION-001`
+- `research/runs/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1`
+
+Review decision:
+- **ITERATE**, not product rejection.
+
+Reason:
+- the intended plosive positive-control did not engage Plosive Guard at all (max reduction 0 dB), so the plosive downstream-GR result was not attributable to the intended module;
+- Sibilance Guard did engage, but downstream peak-GR improvement was about **0.01890 dB**, narrowly below the unchanged **0.02000 dB** predeclared gate;
+- neutral, post-event, phrase-spread and sample-rate gates passed.
+
+No acceptance threshold is relaxed after the result.
+
+The next screen must use the current Vo.Prep repository's own regression-test positive controls for Plosive and Sibilance so detector engagement is verified before downstream VoPriPro interaction is interpreted.
+

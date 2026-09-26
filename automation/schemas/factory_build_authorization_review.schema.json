@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/incubator/factory_build_authorization_review.schema.json",
+  "title": "CIPI JUCE Factory Build Authorization Review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plugin_proposal_id",
+    "source_contract_candidate",
+    "source_handoff_receipt",
+    "authorization"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "plugin_proposal_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_contract_candidate": {
+      "type": "string",
+      "pattern": "^research/incubator/factory_contracts/.+/plugin_contract_candidate\\.json$"
+    },
+    "source_handoff_receipt": {
+      "type": "string",
+      "pattern": "^research/incubator/factory_contracts/.+/handoff_receipt\\.json$"
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "approved_for_factory_build",
+        "automatic_approval",
+        "final_product_decision",
+        "product_release_authority",
+        "cubase_confirmed",
+        "listening_confirmed"
+      ],
+      "properties": {
+        "authority": {
+          "enum": [
+            "HUMAN",
+            "ASSISTANT_REVIEW"
+          ]
+        },
+        "approved_for_factory_build": {
+          "const": true
+        },
+        "automatic_approval": {
+          "const": false
+        },
+        "final_product_decision": {
+          "const": false
+        },
+        "product_release_authority": {
+          "const": false
+        },
+        "cubase_confirmed": {
+          "const": false
+        },
+        "listening_confirmed": {
+          "const": false
+        }
+      }
+    }
+  }
+}

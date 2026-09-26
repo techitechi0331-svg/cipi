@@ -30,7 +30,7 @@ completed:
   - revision
 
 unresolved:
-  - Vo.Prep -> VoPriPro integration v2 is REJECTED only for the tested all-modules 50% downstream-benefit/recovery hypothesis: source-derived Plosive/Sibilance controls engaged correctly, but the plosive case improved downstream VoPriPro peak GR by only ~0.013 dB and left ~0.402 dB post-event mean-GR shift. Sibilance, neutral, phrase and sample-rate gates passed. VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001 is queued to isolate Plosive-only, Macro-only and Plosive+Macro behavior; product ordering is not rejected.
+  - Vo.Prep -> VoPriPro all-modules 50% integration v2 is REJECTED for its downstream-benefit/recovery hypothesis, but decomposition passed: Plosive-only attenuated the source event by >=~0.795 dB while changing VoPriPro event peak GR by <=~0.0126 dB and post-event mean GR by <=~0.0211 dB; Macro-only produced >=~0.423 dB post-event GR shift and explained the v2 residual. VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001 is queued with Macro OFF.
   - Existing Vo.Prep Amount R2-R4 product mappings are not eligible for direct transfer; current VoPriPro AMOUNT remains baseline while its own perceptual uniformity still needs listening/generalisation evidence.
   - Direct fixed 8/70 ms ballistics transfer was rejected by short-transient, 100 ms body, long-body and repeated-phrase gates; current Character timing remains baseline.
   - Direct Vo.Prep Slow-RMS/Fast-Peak detector transfer v1 was rejected by predeclared sustained-body and short-transient gates; current VoPriPro detector remains baseline.

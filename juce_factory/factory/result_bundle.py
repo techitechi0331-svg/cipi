@@ -81,7 +81,7 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
     required = {
         "schema_version", "bundle_kind", "factory_status", "plugin_id", "plugin_version",
         "contract_version", "contract_sha256", "generated_source_sha256",
-        "factory_version", "factory_revision", "validation_revision",
+        "factory_version", "source_revision", "validation_revision",
         "validation_base_revision", "dsp_source_revision", "juce_version",
         "platform", "formats", "validation_matrix", "validators", "artifact_hashes",
         "failure_class", "raw_audio_persisted", "automatic_final_decision",
@@ -106,7 +106,7 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
             raise ResultBundleError(f"{key} must be a non-empty string")
     if not isinstance(data["contract_version"], int) or isinstance(data["contract_version"], bool):
         raise ResultBundleError("contract_version must be an integer")
-    _require_git_sha(data["factory_revision"], "factory_revision")
+    _require_git_sha(data["source_revision"], "source_revision")
     _require_git_sha(data["validation_revision"], "validation_revision")
     _require_git_sha(data["validation_base_revision"], "validation_base_revision")
     _require_sha256(data["contract_sha256"], "contract_sha256")
@@ -200,16 +200,16 @@ def build_pass_bundle(
         "contract_sha256": contract_hash,
         "generated_source_sha256": generated_hash,
         "factory_version": manifest.get("factory_version"),
-        "factory_revision": _require_git_sha(
-            provenance.get("source_revision", provenance.get("git_sha")),
+        "source_revision": _require_git_sha(
+            provenance.get("source_revision"),
             "provenance.source_revision",
         ),
         "validation_revision": _require_git_sha(
-            provenance.get("validation_revision", provenance.get("git_sha")),
+            provenance.get("validation_revision"),
             "provenance.validation_revision",
         ),
         "validation_base_revision": _require_git_sha(
-            provenance.get("validation_base_revision", provenance.get("validation_revision", provenance.get("git_sha"))),
+            provenance.get("validation_base_revision"),
             "provenance.validation_base_revision",
         ),
         "dsp_source_revision": manifest.get("dsp_source_revision"),
@@ -260,16 +260,16 @@ def build_quarantine_bundle(
             manifest.get("generated_source_sha256"), "manifest.generated_source_sha256"
         ),
         "factory_version": manifest.get("factory_version"),
-        "factory_revision": _require_git_sha(
-            failure.get("source_revision", failure.get("git_sha")),
+        "source_revision": _require_git_sha(
+            failure.get("source_revision"),
             "failure.source_revision",
         ),
         "validation_revision": _require_git_sha(
-            failure.get("validation_revision", failure.get("git_sha")),
+            failure.get("validation_revision"),
             "failure.validation_revision",
         ),
         "validation_base_revision": _require_git_sha(
-            failure.get("validation_base_revision", failure.get("validation_revision", failure.get("git_sha"))),
+            failure.get("validation_base_revision"),
             "failure.validation_base_revision",
         ),
         "dsp_source_revision": manifest.get("dsp_source_revision"),

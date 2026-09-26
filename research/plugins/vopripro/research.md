@@ -142,3 +142,19 @@ Detailed assessment:
 
 A future Amount study must be designed specifically around the current VoPriPro architecture rather than copying a rejected Vo.Prep product mapping.
 
+## 2026-09-26 Vo.Prep -> VoPriPro integration screen queued
+
+Research Job:
+- `VOPRIPRO-VOPREP-INTEGRATION-001`
+
+Scope:
+- current Vo.Prep main `ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6`;
+- current VoPriPro main `58049696815fcc24067870edd6a1b89c3cfd2163`;
+- Vo.Prep Plosive / Level / Sibilance at 50%;
+- VoPriPro Natural50;
+- deterministic mono source-code translation;
+- 44.1 / 48 / 96 kHz;
+- neutral, plosive, sibilance and phrase-step stress cases.
+
+The screen is deliberately bounded. It does not replace actual VST3 processing, real-vocal AB, the VoPriPro limiter path, or Cubase validation. Its only purpose is to falsify obvious cross-product overlap/double-processing before opening a more expensive integration stage.
+

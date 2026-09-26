@@ -1,0 +1,82 @@
+schema_version: "1.0"
+job_id: VO-PREP-SIBILANCE-ADVERSARIAL-001
+state: QUEUED
+priority: 90
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: "Does the current Vo.Prep Sibilance Guard v2.3 contextual ratio detector preserve S/SH/CH/T event detection while rejecting bright but non-sibilant vocal conditions materially better than an absolute 4-12 kHz level trigger?"
+hypothesis: "The high-to-broad/high-to-mid contextual detector will detect controlled sibilant events while producing substantially less false occupancy on bright vowel, air, breath, falsetto, female upper-register and distorted-vocal stress cases than the absolute high-band baseline, with small sample-rate and input-scale sensitivity."
+counter_hypotheses:
+  - "The contextual detector misses too many CH/T or sustained S/SH events."
+  - "Bright vowels, air, breath or upper-register vocals still cause excessive false event occupancy."
+  - "Detector behavior changes materially with sample rate or +/-12 dB input scaling."
+baseline:
+  - "Simple absolute 4-12 kHz high-band level trigger with fixed -34 dB activation / -38 dB release and the same 350 ms event cap."
+variants:
+  - "Current Vo.Prep Sibilance Guard v2.3 contextual detector: 4-12k high, 1-4k mid, 250-12k broad, 7-12k upper, contextual geometric blend, activation 0.65, release 0.45, 350 ms cap."
+metrics:
+  - positive_detection_fraction
+  - s_and_sh_detected_all_sample_rates
+  - max_positive_onset_latency_ms
+  - context_negative_occupancy_mean_pct
+  - context_negative_occupancy_max_pct
+  - high_level_negative_occupancy_mean_pct
+  - context_to_high_level_false_occupancy_ratio
+  - max_context_probability_sample_rate_spread
+  - max_context_active_duration_ms
+  - input_scale_probability_spread
+  - input_scale_occupancy_spread_pct
+  - all_finite
+acceptance:
+  - "Context positive detection fraction is >= 0.85 across S/SH/CH/T and 44.1/48/96 kHz."
+  - "S and SH are detected at every tested sample rate."
+  - "Worst positive-event first-onset latency is <= 30 ms."
+  - "Mean false event occupancy over declared non-sibilant cases is <= 8% and worst negative occupancy is <= 20%."
+  - "Context mean false occupancy is <= 35% of the absolute high-band baseline mean false occupancy."
+  - "Maximum contiguous context event duration is <= 355 ms."
+  - "Maximum context probability spread across 44.1/48/96 kHz is <= 0.08."
+  - "Across -12/0/+12 dB scaling on S, bright vowel and breath, max context probability spread is <= 0.05 and occupancy spread <= 5 percentage points."
+  - "All derived values remain finite."
+rejection:
+  - "Any declared acceptance condition fails."
+  - "Passing requires relaxing a predeclared recall, false-occupancy, latency, duration, sample-rate or scale-invariance gate."
+  - "Raw audio is persisted or product DSP is mutated."
+max_runs: 1
+timeout_minutes: 5
+random_seed: 20260926
+experiment_adapter: voprep_sibilance_adversarial_v1
+allowed_operations:
+  - deterministic_synthetic_signal_generation
+  - deterministic_detector_replay
+  - derived_metric_export
+prohibited_operations:
+  - network_write
+  - arbitrary_shell
+  - raw_audio_persistence
+  - product_dsp_mutation
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_release
+knowledge_candidate:
+  claim: "Level-normalized contextual sibilance detection can reduce bright-vocal false events relative to an absolute high-band trigger while preserving controlled sibilant-event detection."
+  evidence_type: MEASURED
+  scope: "Deterministic Vo.Prep v2.3 adversarial screen only; real-vocal multilingual naturalness and bleed conditions remain separate gates."
+  promotion_requested: PROVISIONAL
+rejection_record:
+  reason: "If any predeclared gate fails, retain the failed phoneme/confounder cases as negative evidence and keep the current product baseline unchanged pending bounded refinement."
+  retained_findings:
+    - "Per-case probability, occupancy, onset, duration, sample-rate and scale-invariance measurements."
+    - "Simple absolute high-band baseline results and current contextual detector results."
+  reusable_findings:
+    - "Which bright/noisy vocal conditions remain inseparable from controlled sibilance under the current feature family."
+    - "Whether ratio-domain detector behavior remains stable across level scaling and sample rates."
+  revisit_if:
+    - "A bounded contextual-feature or threshold refinement directly targets the failed confounder without weakening S/SH/CH/T detection."
+    - "Real-vocal evidence contradicts the synthetic stress ranking."
+  scope: "Vo.Prep Sibilance Guard v2.3 adversarial boundary screen."
+continuation:
+  on_accept: []
+  on_reject: []

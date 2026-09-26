@@ -8,6 +8,12 @@ confidence: 0.82
 source_kind: repository_verified
 source_ref: "https://github.com/techitechi0331-svg/Vo.Prep"
 
+product_boundary:
+  role: "Problem / Event Preparation Plugin"
+  broadband_dynamics_owner: "VoPriPro / techitechi0331-svg/VocalPrepComp"
+  transparent_compressor_product_adoption: rejected_by_scope
+  transparent_compressor_research_preserved: true
+
 stages:
   research: complete
   review: complete
@@ -25,18 +31,38 @@ completed:
   - review
   - parameter_lock
   - implementation
+
+measured:
+  - Macro Boundary R1 improved median 2 s phrase spread by 0.3953 dB and median 1 s spread by 0.2595 dB on 11 anonymized private-vocal excerpts.
+  - Macro Boundary R1 changed downstream VoPriPro mean GR by only 0.0230 dB median; worst mean-GR retention was 99.33%.
+  - Macro Boundary R1 failed absolute 50 ms spread, 10 ms p99 peak, and Macro p95 movement gates and remains preserved as negative final-proof evidence.
+  - Macro Boundary R2 passed all predeclared short-term shape diagnostics; 10 ms crest-p95 change was 0.00171 dB median / 0.00349 dB worst.
+  - Macro Boundary R2 p99 gain excursion was approximately 0.015 / 0.075 / 0.150 dB over 10 / 50 / 100 ms.
+
 unresolved:
-  - Subjective naturalness gates for Plosive Guard, Macro Level and Sibilance Guard are not all formally closed.
+  - Integrated level-matched listening is still required before final Macro/Phrase product lock.
+  - Plosive Guard false-positive/false-negative behavior needs broader low-vowel, fry, growl, proximity, repeated-plosive and long-LF-note coverage.
+  - Sibilance Guard false-positive/false-negative behavior needs broader bright-vowel, air, breath, falsetto, upper-register and distorted-vocal coverage.
+  - Vo.Prep -> VoPriPro downstream integration needs formal double-processing and detector-interaction validation.
   - Cross-module interaction needs broader real-vocal validation.
   - Cubase Pro 14 release-candidate validation is pending.
   - Only derived measurements, never client recordings, may be committed.
-  - Transparent compressor core level-matched blind listening is pending.
-  - Transparent compressor user-facing Amount / operating-point mapping is not locked.
-  - Transparent compressor stereo-link regression on the final 8 ms / 70 ms core is pending.
-  - Transparent compressor final VST3 / Cubase Pro 14 host validation is pending.
+
+scope_frozen_research:
+  - research/integrated-vocal-compressor-core
+  - research/amount-mapping
+  - research/amount-mapping-r2
+  - integration/vocal-compressor-core
+  - integration/vocal-compressor-vst3-v1
+  - research/operating-point
+  - research/startup-learn-lock
+  - research/stereo-link
+  - research/stereo-link-v2
 
 next_stage: measurement
-why_next: "Three modules have locked baselines and integration tests; remaining work is broader corpus/subjective validation and host confirmation."
-next_confirmation: "Whether the integrated zero-latency chain preserves vocal identity while reducing plosive, macro-level and sibilance problems across diverse recordings."
+why_next: "Product boundary and Macro short-term-shape separation are now supported. Highest-value remaining automated work is event-guard false-positive/false-negative refinement and Vo.Prep -> VoPriPro integration measurement."
+next_confirmation: "Whether Plosive/Sibilance guards improve specific event handling without damaging normal vocal material or causing double-processing in downstream VoPriPro."
+
 blockers:
-  - Representative real-vocal listening is still required.
+  - Human level-matched listening is required for final naturalness sign-off.
+  - Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.

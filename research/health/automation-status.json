@@ -14,29 +14,33 @@
       "queued": 0
     }
   },
-  "human_gates": [],
+  "human_gates": [
+    {
+      "gates": [
+        "Actual real-vocal listening remains mandatory before perceptual product claims.",
+        "Actual VST3/Cubase validation remains mandatory before release guidance."
+      ],
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001"
+    }
+  ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [
-      "research-bot/VO-PREP-PLOSIVE-THRESHOLD-R2-001/auto-28a7cca784b2"
-    ],
-    "claimed_count": 1,
-    "claimed_jobs": [
-      "VO-PREP-PLOSIVE-THRESHOLD-R2-001"
-    ],
+    "claimed_branches": [],
+    "claimed_count": 0,
+    "claimed_jobs": [],
     "dependency_blocked_count": 0,
     "ready_job": {
-      "branch": "research-bot/VO-PREP-SIBILANCE-THRESHOLD-R2-001/auto-f80ef1346885",
-      "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
+      "branch": "research-bot/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/auto-5862cd3d7b73",
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
       "kind": "LOCAL_RESEARCH",
-      "priority": 98
+      "priority": 92
     }
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VO-PREP-SIBILANCE-THRESHOLD-R2-001/auto-f80ef1346885",
-    "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
+    "branch": "research-bot/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/auto-5862cd3d7b73",
+    "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
     "kind": "LOCAL_RESEARCH",
-    "priority": 98
+    "priority": 92
   }
 }

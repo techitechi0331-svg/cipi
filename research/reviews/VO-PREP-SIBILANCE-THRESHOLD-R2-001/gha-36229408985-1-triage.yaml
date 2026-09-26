@@ -1,0 +1,34 @@
+schema_version: '1.0'
+triage_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:triage-v1
+job_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001
+run_id: gha-36229408985-1
+source_run: research/runs/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1
+source_decision_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:auto
+source_decision_path: research/decisions/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-auto.yaml
+job_path: research/jobs/completed/VO-PREP-SIBILANCE-THRESHOLD-R2-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1.yaml
+candidate_class: RESEARCH_MORE
+route: CONTINUE_RESEARCH
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates: []
+downstream_gate_signals:
+- Integrated level-matched listening is still required before final Macro/Phrase product
+  lock.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Human level-matched listening is required for final naturalness sign-off.
+- Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.
+reasons:
+- The run passed as evidence, but it does not yet request a bounded LIKELY/PROVISIONAL
+  promotion review.
+recommended_action: Continue the declared research path or use a predeclared continuation;
+  no promotion decision is warranted yet.
+created_at: '2026-09-26T08:21:57.912149Z'
+triage_version: '1.0'
+immutable: true

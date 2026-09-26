@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from pathlib import Path
+import io
 import tempfile
+import zipfile
 import sys
 import yaml
 
@@ -10,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "automation" / "cross_repo"))
 
 from core import match_dispatched_run, select_queued_action, should_resume_external_job, validate_action  # noqa: E402
+from orchestrate import backfill_completed_artifacts  # noqa: E402
 
 
 REGISTRY = {
@@ -47,6 +50,24 @@ def action(action_id: str, workflow: str, priority: int) -> dict:
     }
 
 
+class FakeArtifactClient:
+    def list_run_artifacts(self, repo: str, run_id: int) -> list[dict]:
+        return [{
+            "id": 777,
+            "name": "measurement-results",
+            "expired": False,
+            "size_in_bytes": 256,
+            "created_at": "2026-09-26T00:00:00Z",
+            "expires_at": "2026-10-26T00:00:00Z",
+        }]
+
+    def download_artifact_zip(self, repo: str, artifact_id: int) -> bytes:
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr("macro_result.json", '{"schema_version":"1.0","ok":true}\n')
+        return buffer.getvalue()
+
+
 def main() -> int:
     a = action("TEST-ACTION-001", "build", 20)
     assert validate_action(a, REGISTRY) == []
@@ -68,6 +89,18 @@ def main() -> int:
         active["dispatched_at"] = "2026-09-26T00:00:00Z"
         write(dispatched / "active.yaml", active)
         assert select_queued_action(root, REGISTRY) is None
+
+        completed = root / "research/cross_repo/actions/completed"
+        finished = action("TEST-COMPLETED-001", "build", 0)
+        finished["state"] = "COMPLETED"
+        finished["run_id"] = 123
+        finished["conclusion"] = "success"
+        write(completed / "completed.yaml", finished)
+        created = backfill_completed_artifacts(root, REGISTRY, FakeArtifactClient())
+        assert created == 1
+        manifests = list((root / "research/cross_repo/artifacts/test/123").rglob("manifest.yaml"))
+        assert len(manifests) == 1
+        assert backfill_completed_artifacts(root, REGISTRY, FakeArtifactClient()) == 0
 
     dispatched_action = action("TEST-RUN-001", "build", 0)
     dispatched_action["state"] = "DISPATCHED"

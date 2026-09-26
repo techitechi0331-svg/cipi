@@ -38,6 +38,25 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def _read_limited_response(response: Any, max_bytes: int) -> bytes:
+    chunks: list[bytes] = []
+    total = 0
+    while True:
+        chunk = response.read(1024 * 1024)
+        if not chunk:
+            break
+        total += len(chunk)
+        if total > max_bytes:
+            raise RuntimeError(f"artifact archive exceeds {max_bytes} byte budget")
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
 class GitHubClient:
     def __init__(self, token: str):
         if not token:
@@ -82,20 +101,28 @@ class GitHubClient:
                 "User-Agent": "cipi-cross-repo-orchestrator/2.0",
             },
         )
+        opener = urllib.request.build_opener(_NoRedirect)
         try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                chunks: list[bytes] = []
-                total = 0
-                while True:
-                    chunk = resp.read(1024 * 1024)
-                    if not chunk:
-                        break
-                    total += len(chunk)
-                    if total > max_bytes:
-                        raise RuntimeError(f"artifact archive exceeds {max_bytes} byte budget")
-                    chunks.append(chunk)
-                return b"".join(chunks)
+            with opener.open(req, timeout=60) as resp:
+                return _read_limited_response(resp, max_bytes)
         except urllib.error.HTTPError as exc:
+            if exc.code in {301, 302, 303, 307, 308}:
+                location = exc.headers.get("Location")
+                if not location:
+                    raise RuntimeError("GitHub artifact redirect did not provide Location") from exc
+                signed_req = urllib.request.Request(
+                    location,
+                    method="GET",
+                    headers={"User-Agent": "cipi-cross-repo-orchestrator/2.0"},
+                )
+                try:
+                    with urllib.request.urlopen(signed_req, timeout=60) as resp:
+                        return _read_limited_response(resp, max_bytes)
+                except urllib.error.HTTPError as redirected_exc:
+                    detail = redirected_exc.read().decode("utf-8", errors="replace")
+                    raise RuntimeError(
+                        f"GitHub artifact signed download failed: {redirected_exc.code} {detail}"
+                    ) from redirected_exc
             detail = exc.read().decode("utf-8", errors="replace")
             raise RuntimeError(f"GitHub artifact download failed: {exc.code} {detail}") from exc
 
@@ -411,6 +438,49 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
     return stats
 
 
+def backfill_completed_artifacts(root: Path, registry: dict, gh: GitHubClient) -> int:
+    completed = root / "research" / "cross_repo" / "actions" / "completed"
+    if not completed.exists():
+        return 0
+
+    created = 0
+    for path in sorted(completed.glob("*.yaml")):
+        action = load_yaml(path)
+        run_id = action.get("run_id")
+        if not isinstance(run_id, int):
+            continue
+        repo_key = str(action.get("repo_key") or "")
+        workflow_key = str(action.get("workflow_key") or "")
+        if repo_key not in registry.get("repositories", {}):
+            continue
+        try:
+            repo, _, _ = workflow_spec(registry, action)
+            policy = workflow_policy(registry, action)
+        except Exception:
+            continue
+        mode = str(policy["artifact_ingest"])
+        if mode == "off":
+            continue
+
+        artifact_root = root / "research" / "cross_repo" / "artifacts" / repo_key / str(run_id)
+        if artifact_root.exists() and any(artifact_root.rglob("manifest.yaml")):
+            continue
+
+        synthetic_run = {
+            "id": run_id,
+            "run_attempt": int(action.get("run_attempt") or 1),
+        }
+        created += ingest_run_artifacts(
+            root,
+            gh=gh,
+            repo_key=repo_key,
+            repo=repo,
+            run=synthetic_run,
+            mode=mode,
+        )
+    return created
+
+
 def observe_latest(root: Path, registry: dict, gh: GitHubClient) -> int:
     created = 0
     for repo_key, repo_spec in registry["repositories"].items():
@@ -527,14 +597,22 @@ def main() -> int:
 
     gh = GitHubClient(token)
     reconciliation = reconcile_actions(root, registry, gh)
+    backfilled = backfill_completed_artifacts(root, registry, gh)
     observed = observe_latest(root, registry, gh)
     resumed = resume_jobs(root)
     dispatched = dispatch_one(root, registry, gh)
-    changed = any(reconciliation.values()) or observed > 0 or resumed > 0 or dispatched is not None
+    changed = (
+        any(reconciliation.values())
+        or backfilled > 0
+        or observed > 0
+        or resumed > 0
+        or dispatched is not None
+    )
 
     print(
         "CIPI cross-repo orchestrator:",
         *(f"{key}={value}" for key, value in reconciliation.items()),
+        f"backfilled_artifacts={backfilled}",
         f"observed={observed}",
         f"resumed={resumed}",
         f"dispatched={dispatched or '-'}",
@@ -547,7 +625,7 @@ def main() -> int:
             "completed_actions": reconciliation["completed"],
             "failed_actions": reconciliation["failed"],
             "retried_actions": reconciliation["retried"],
-            "artifact_records": reconciliation["artifacts"],
+            "artifact_records": reconciliation["artifacts"] + backfilled,
             "runner_health_changes": reconciliation["health_changes"],
             "observed_events": observed,
             "resumed_jobs": resumed,

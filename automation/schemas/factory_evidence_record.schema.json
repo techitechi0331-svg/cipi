@@ -130,5 +130,40 @@
       "type": "string",
       "pattern": "^[0-9a-f]{40}$"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "factory_status": {
+            "const": "VALIDATION_PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_class": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "factory_status": {
+            "const": "QUARANTINED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_class": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
 }

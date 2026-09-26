@@ -115,3 +115,21 @@ Factory Result Bundles and evidence records explicitly carry no authority for:
 
 A quarantined result records the technical failure class and partial validator
 outcomes. It does not automatically reject the DSP or product concept.
+
+
+## Reproducibility probe
+
+The next-stage comparator consumes two validated Factory Result Bundles and compares
+their recorded inputs plus promoted VST3 file hashes.
+
+Current classifications are observational:
+
+- `ARTIFACT_HASH_MATCH`
+- `ARTIFACT_HASH_DIFF`
+- `NOT_COMPARABLE_SOURCE_DIFF`
+- `NOT_COMPARABLE_RECORDED_CONTEXT_DIFF`
+
+A hash match does **not** yet prove bit-reproducible builds. Factory Result Bundle v1
+does not fully capture compiler, linker, Windows SDK and hosted-runner image identity.
+A hash difference is retained as MEASURED investigation evidence and is not an
+automatic product/release failure.

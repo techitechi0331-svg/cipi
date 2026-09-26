@@ -189,6 +189,24 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             ev = evaluate_continuation(Path(td), t, macro_result(depth=3), records, [], set())
             self.assertEqual(ev["stop_reason"], "NO_VALID_CONTINUATION")
 
+    def test_same_architecture_retry_limit_counts_initial_job(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            t = track()
+            t["budget"]["max_runs"] = 10
+            t["budget"]["max_total_experiments"] = 10
+            t["budget"]["max_loop_depth"] = 10
+            t["budget"]["max_same_architecture_retry"] = 3
+            for index in range(3):
+                write_yaml(root / "research/autonomous_bridge/jobs/TRACK-1" / f"j{index}.yaml", {
+                    "job_id": f"JOB-A-{index}",
+                    "selected_architecture": "ARCH-A",
+                })
+            records = [{"loop_depth": 1, "hypothesis_id": "HYP-X", "experiment_cost": {}, "improvement_signal": .2}]
+            ev = evaluate_continuation(root, t, macro_result(hypothesis_id="HYP-Y", proposals=[proposal(fp_tag="A")]), records, [], set())
+            self.assertEqual(ev["stop_reason"], "NO_VALID_CONTINUATION")
+            self.assertTrue(any(r.get("reason") == "MAX_SAME_ARCHITECTURE_RETRY" for r in ev["rejections"]))
+
     def test_oscillation_detection(self):
         with tempfile.TemporaryDirectory() as td:
             pa, pb = proposal(fp_tag="A"), proposal(fp_tag="B")

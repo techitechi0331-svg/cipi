@@ -410,7 +410,7 @@ def build_quarantine_bundle(
     bundle_version, module_provenance = _module_provenance_from_manifest(manifest)
 
     bundle: dict[str, Any] = {
-        "schema_version": RESULT_BUNDLE_VERSION,
+        "schema_version": bundle_version,
         "bundle_kind": _BUNDLE_KIND,
         "factory_status": "QUARANTINED",
         "plugin_id": manifest.get("plugin_id"),

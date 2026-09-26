@@ -1,0 +1,127 @@
+schema_version: "1.0"
+track_id: VL2A-CIRCUIT-HA100X-001
+enabled: true
+root_research_id: VL2A-CIRCUIT-HA100X-001
+
+research_question: >-
+  Can a source-constrained, load-aware linear HA-100X model explain the documented
+  transformer envelope and reconstructed LA-2A loading more consistently than the
+  current VL2A 12 Hz HP / 25 ms state / tanh heuristic, without requiring unsupported
+  magnetic nonlinearity and without changing product behavior?
+
+hypothesis_id: HYP-VL2A-HA100X-LINEAR-FIRST
+hypothesis: >-
+  A linear LTI HA-100X family constrained by the documented 500/600-to-60k topology,
+  a bounded source/load matrix, and evidence-labelled soft priors can satisfy the UTC
+  response envelope, predict a materially flatter 30 Hz transfer than the current
+  heuristic, and bound T4-state load interaction without saturation or hysteresis.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - REAL_AUDIO_AB
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/vl2a/circuit-lab/autonomous-track-baseline-2026-09-27.md
+  do_not_reopen:
+    - PEAK_REDUCTION_V8
+    - PHASE03G_OPTICAL_TAU8_AMOUNT054
+    - PHASE01H_LINE_AMPLIFIER
+    - R37_FACTORY_FLAT
+    - SHARED_PHASE_SAFE_STEREO_DETECTOR
+    - DIRECT_GAIN_MINUS18_PLUS18
+    - PLUGINVAL_STRICTNESS10_PASS
+    - FINAL_VST3_PREPARED_LATENCY_6_SAMPLES
+  rejected_directions:
+    - HA100X_12HZ_HPF_AS_HARDWARE_FACT
+    - HA100X_25MS_STATE_AS_PROVEN_MAGNETIZATION
+    - HA100X_ARBITRARY_TANH_OR_HYSTERESIS
+    - FIT_TO_CURRENT_VL2A_HEURISTIC
+    - COMMERCIAL_PLUGIN_AS_PHYSICAL_TARGET
+
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+
+initial_experiment:
+  experiment_id: EXP-VL2A-HA100X-R1-BROAD-LTI
+  experiment_type: INITIAL_CIRCUIT_IDENTIFIABILITY
+  expected_information_gain: 0.95
+  scope:
+    - vl2a_circuit_lab
+    - ha100x_input_transformer
+    - linear_lti
+    - source_load_identifiability
+  inputs:
+    seed: 2026092701
+    population: 6
+    generations: 2
+    max_candidates: 12
+    max_runtime_seconds: 90
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A linear LTI HA-100X family constrained by the documented 500/600-to-60k
+      topology, source/load matrix, and evidence-labelled soft priors can satisfy
+      the UTC response envelope and bound the current heuristic's unsupported
+      LF/nonlinear assumptions without saturation or hysteresis.
+    architecture: HA100X_LINEAR_LTI_LOAD_AWARE
+    tested_parameters:
+      primary_dcr_ohm: evidence_bounded
+      secondary_dcr_ohm: evidence_bounded
+      magnetizing_h: broad_positive
+      leakage_h: broad_positive
+      secondary_cap_f: broad_positive
+      core_loss_ohm: broad_positive
+    benchmark_profile:
+      - ha100x_catalog_v1
+      - la2a_source_load_matrix_v1
+      - vl2a_linear_first_falsification_v1
+    sample_rate: null
+    input_set: VL2A_HA100X_SOURCE_LOAD_MATRIX_V1
+    reference_model: UTC_HA100X_SOURCE_CONSTRAINTS_PLUS_LA2A_LOADING_TOPOLOGY
+    objective_set:
+      - catalog_envelope
+      - lf_identifiability
+      - hf_identifiability
+      - source_load_sensitivity
+      - complexity
+    relevant_constraints:
+      - turns_ratio_nominal_10
+      - utc_30Hz_20kHz_plusminus1dB
+      - no_hysteresis_v1
+      - no_saturation_v1
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: INITIAL_CIRCUIT_IDENTIFIABILITY
+    scope:
+      - vl2a_circuit_lab
+      - ha100x_input_transformer
+      - linear_lti
+      - source_load_identifiability

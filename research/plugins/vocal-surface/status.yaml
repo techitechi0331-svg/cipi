@@ -25,14 +25,8 @@ stages:
 current_stage: review
 
 completed:
-  - v0.1_prototype
-  - v0.2_nominal_50_mapping
-  - v0.3_verified_dsp_update
-  - deterministic_reference_test
-  - macro_25_50_75_100_sweep
-  - pluginval_strictness_10
-  - steinberg_vst3_validator
-  - vst3_bypass_persistence_validation
+  - implementation
+  - measurement
 
 unresolved:
   - Legitimate harmonics/formants can still be mistaken for unwanted spectral prominence.

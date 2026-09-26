@@ -1,0 +1,38 @@
+schema_version: '1.0'
+job_id: VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A
+track_id: VL2A-CIRCUIT-HA100X-001
+root_research_id: VL2A-CIRCUIT-HA100X-001
+parent_job_id: VL2A-CIRCUIT-HA100X-001-R1-256E3F1E
+parent_run_id: melon-funnel-ha100x-76e7f34e7021
+hypothesis_id: HYP-VL2A-HA100X-LINEAR-FIRST
+experiment_id: MELON-FUNNEL-HA100X-76E7F34E7021-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VL2A-CIRCUIT-HA100X-001-R1-256E3F1E
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+continuation_reason: Broad sweep identified magnetizing_h_to_30Hz as the strongest
+  observable axis; narrow the linear family and quantify T4-state load interaction.
+expected_information_gain: 0.8403943258593713
+fingerprint: 0bf7d37adf0831be48d5f8b0e93b8639448b9fa0b39361b548e972a078c44b6c
+loop_depth: 2
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: HA100X_LINEAR_LTI_LOAD_AWARE
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

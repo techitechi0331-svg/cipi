@@ -36,6 +36,18 @@ def _load_yaml(path: str | Path) -> dict[str, Any]:
     return value
 
 
+
+def _require_safe_rel(value: Any, label: str, prefix: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise FactoryHandoffError(f"{label} must be non-empty")
+    normalized = value.replace("\\", "/")
+    parts = normalized.split("/")
+    if normalized.startswith("/") or any(part in {"", ".", ".."} for part in parts):
+        raise FactoryHandoffError(f"{label} must be a safe repository-relative path")
+    if not normalized.startswith(prefix):
+        raise FactoryHandoffError(f"{label} must be under {prefix}")
+    return normalized
+
 def _canonical_rel(path: str | Path, root: Path) -> str:
     resolved = Path(path).resolve()
     root_resolved = root.resolve()
@@ -75,9 +87,16 @@ def validate_review(review: dict[str, Any]) -> None:
         raise FactoryHandoffError("unsupported Manufacturing Review schema_version")
     if not isinstance(review["plugin_proposal_id"], str) or not review["plugin_proposal_id"].strip():
         raise FactoryHandoffError("plugin_proposal_id must be non-empty")
-    for key in ("source_incubate_decision", "source_product_evidence"):
-        if not isinstance(review[key], str) or not review[key].strip():
-            raise FactoryHandoffError(f"{key} must be a non-empty repository-relative path")
+    _require_safe_rel(
+        review["source_incubate_decision"],
+        "source_incubate_decision",
+        "research/incubator/decisions/",
+    )
+    _require_safe_rel(
+        review["source_product_evidence"],
+        "source_product_evidence",
+        "research/incubator/evidence/",
+    )
 
     gate = review["review"]
     if not isinstance(gate, dict):
@@ -250,15 +269,24 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
     ):
         if not isinstance(receipt[key], str) or not _SHA256.fullmatch(receipt[key]):
             raise FactoryHandoffError(f"{key} must be a lowercase SHA-256 digest")
-    for key in (
-        "plugin_proposal_id",
-        "source_proposal",
+    if not isinstance(receipt["plugin_proposal_id"], str) or not receipt["plugin_proposal_id"].strip():
+        raise FactoryHandoffError("plugin_proposal_id must be non-empty")
+    _require_safe_rel(receipt["source_proposal"], "source_proposal", "research/incubator/proposals/")
+    _require_safe_rel(
+        receipt["source_incubate_decision"],
         "source_incubate_decision",
+        "research/incubator/decisions/",
+    )
+    _require_safe_rel(
+        receipt["source_product_evidence"],
         "source_product_evidence",
+        "research/incubator/evidence/",
+    )
+    _require_safe_rel(
+        receipt["source_manufacturing_review"],
         "source_manufacturing_review",
-    ):
-        if not isinstance(receipt[key], str) or not receipt[key].strip():
-            raise FactoryHandoffError(f"{key} must be non-empty")
+        "research/incubator/manufacturing_reviews/",
+    )
     if receipt["receipt_hash"] != _receipt_hash(receipt):
         raise FactoryHandoffError("handoff receipt hash mismatch")
 

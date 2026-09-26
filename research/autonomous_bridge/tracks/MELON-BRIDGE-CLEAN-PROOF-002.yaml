@@ -1,0 +1,47 @@
+schema_version: "1.0"
+track_id: MELON-BRIDGE-CLEAN-PROOF-002
+enabled: true
+root_research_id: MELON-BRIDGE-CLEAN-PROOF-002
+research_question: >-
+  Can the repaired CIPI-MELON Autonomous Research Bridge complete a fresh three-run
+  macro lineage without manual continuation triggers, duplicate dispatch, authority
+  escalation, blind-holdout use, or product integration?
+hypothesis_id: HYP-MELON-BRIDGE-CLEAN-PROOF-002
+hypothesis: >-
+  A distinct bounded MELON profile can complete three macro iterations entirely through
+  the repaired CIPI Global DAG and Cross-Repo chain while preserving evidence and product
+  authority boundaries.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: true
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 30
+  max_runtime: 900
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+initial_experiment:
+  experiment_id: EXP-MELON-BRIDGE-CLEAN-PROOF-002-R1
+  experiment_type: INITIAL_RESEARCH
+  expected_information_gain: 0.80
+  scope:
+    - autonomous_bridge_clean_proof
+    - dynamic_gain_release
+    - profile_5x2
+  inputs:
+    seed: 2026092701
+    population: 5
+    generations: 2
+    max_candidates: 10
+    max_runtime_seconds: 120
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast

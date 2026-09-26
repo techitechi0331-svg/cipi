@@ -1,0 +1,57 @@
+{
+  "bridge_profile": {
+    "architecture": "HA100X_LINEAR_LTI_LOAD_AWARE",
+    "benchmark_profiles": [
+      "ha100x_catalog_v1",
+      "la2a_source_load_matrix_v1",
+      "vl2a_linear_first_falsification_v1"
+    ],
+    "input_set": "VL2A_HA100X_SOURCE_LOAD_MATRIX_V1",
+    "objective_set": [
+      "catalog_envelope",
+      "lf_identifiability",
+      "hf_identifiability",
+      "source_load_sensitivity",
+      "complexity"
+    ],
+    "reference_model": "UTC_HA100X_SOURCE_CONSTRAINTS_PLUS_LA2A_LOADING_TOPOLOGY",
+    "relevant_constraints": [
+      "turns_ratio_nominal_10",
+      "utc_30Hz_20kHz_plusminus1dB",
+      "no_hysteresis_v1",
+      "no_saturation_v1",
+      "product_integration_off"
+    ],
+    "research_domain": "VL2A_HA100X_INPUT_TRANSFORMER",
+    "sample_rate": null
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "ha100x_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 12,
+    "max_runtime_seconds": 90.0,
+    "population_size": 6,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VL2A_HA100X_INPUT_TRANSFORMER",
+  "routes": {
+    "ITERATE": 1
+  },
+  "run_id": "melon-funnel-ha100x-76e7f34e7021",
+  "seed": 2026092701,
+  "stage1_pareto": 4,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-26T20:11:25.796137+00:00"
+}

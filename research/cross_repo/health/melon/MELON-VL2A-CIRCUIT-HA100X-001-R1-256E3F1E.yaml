@@ -6,7 +6,7 @@ runner_class: self-hosted
 state: COMPLETED
 run_id: 36254473822
 run_status: completed
-run_conclusion: failure
+run_conclusion: success
 since: '2026-09-26T16:09:59Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

@@ -1,0 +1,16 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "HA100X-006-9fb431bd",
+    "promotion_authority": false,
+    "reason": "Broad sweep identified magnetizing_h_to_30Hz as the strongest observable axis; narrow the linear family and quantify T4-state load interaction.",
+    "route": "ITERATE",
+    "scientific": {
+      "catalog_pass_fraction": 0.3333333333333333,
+      "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+      "falsification_signal": "LINEAR_FAMILY_CAN_EXPLAIN_CATALOG_WITH_FLATTER_30HZ_THAN_CURRENT_HEURISTIC",
+      "information_gain_signal": 0.7980283707031435
+    },
+    "species": "ha100x_lti_lf_identifiability"
+  }
+]

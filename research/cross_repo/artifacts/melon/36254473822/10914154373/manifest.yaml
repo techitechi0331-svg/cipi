@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36254473822
+run_attempt: 2
+artifact_id: 10914154373
+artifact_name: melon-research-36254473822
+expired: false
+size_in_bytes: 69342
+created_at: '2026-09-26T20:11:30Z'
+expires_at: '2026-10-26T20:11:27Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-ha100x-76e7f34e7021/efficiency_metrics.json
+  status: ingested
+  size: 323
+  sha256: 199bc812bc268c58a6e75d7e615c8b471a07db9072356bc72ba77fa4010e30f9
+- path: melon-funnel-ha100x-76e7f34e7021/manifest.json
+  status: ingested
+  size: 337
+  sha256: 0cd76198b02513cbb30bcff7890662d00fff94a3fa5c8ffd0d7df214842c3a6f
+- path: melon-funnel-ha100x-76e7f34e7021/macro_result.json
+  status: ingested
+  size: 6679
+  sha256: 03bf34d45e6b06dd5a3563a3d1b18b71b80715a8392651c01b2416a0537f2fa7
+- path: melon-funnel-ha100x-76e7f34e7021/ha100x_measurements.json
+  status: ingested
+  size: 144370
+  sha256: af60eb8d2f0db00ac3517b52011798fab9e6b1c0b5ba3bd6341560537326f0f9
+- path: melon-funnel-ha100x-76e7f34e7021/precision_review.json
+  status: ingested
+  size: 387
+  sha256: 3aa0a9ae353617835bf964a7947f7945b8c03bc964beabb8a7a1cd9e5b5ccd57
+- path: melon-funnel-ha100x-76e7f34e7021/stage1_screening.json
+  status: ingested
+  size: 122984
+  sha256: f0de614d070f305c038711b961011c295af93e9d1b8add3c58c5d04ece1f72a4
+- path: melon-funnel-ha100x-76e7f34e7021/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-ha100x-76e7f34e7021/stage3_deep_validation.json
+  status: ingested
+  size: 683
+  sha256: 996f565027ca51594b6ccaf324e57bfa1fa9da65b0247d395770416863381e4c
+- path: melon-funnel-ha100x-76e7f34e7021/summary.json
+  status: ingested
+  size: 1683
+  sha256: 8c3b1783a57f09d2d502ceff73a3fbd275f68b78acad535742c38e83442bad29
+archive_sha256: a693a7ad1fd32248a3c9c7ee0a233e34a657e6b41f86b7daef95c867fdc404ec
+ingest_status: text_evidence_ingested

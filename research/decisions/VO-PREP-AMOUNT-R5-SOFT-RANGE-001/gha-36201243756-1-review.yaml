@@ -1,0 +1,57 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:review-01"
+job_id: VO-PREP-AMOUNT-R5-SOFT-RANGE-001
+source_run: research/runs/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Amount Revision 5 is rejected as the final Amount architecture. None of the
+  predeclared Soft Range candidates repaired the limiting high-Amount ripple
+  failure on the selection singers. The R4 no-Range baseline measured
+  0.08797198246318512 dB ripple at Amount 100. The 10, 9 and 8 dB asymptotic
+  ceilings measured 0.08848596636123582, 0.08883704777112217 and
+  0.08966973300731865 dB respectively, so every Range candidate slightly
+  worsened rather than improved the limiting metric. All candidates also
+  remained below the declared mean-GR lower bounds at Amount 50, 75 and 100.
+  The fresh f9/m9/m10/m11 holdout remained unopened, preserving it for future
+  research. The negative result supports reopening gain-ballistics research
+  rather than adding a post-ballistics Range to this architecture.
+declared_rejection_criteria:
+  - No Range candidate passes every selection and complexity gate.
+  - Passing requires relaxing a predeclared gate.
+  - Fresh holdout fails any unchanged product gate.
+  - Holdout data is accessed before selection is frozen.
+  - Raw public audio is persisted.
+triggered_criteria:
+  - "No Range candidate passed every selection and complexity gate."
+retained_findings:
+  - "R4 no-Range baseline Amount-100 ripple was 0.08797198246318512 dB."
+  - "10 dB ceiling Amount-100 ripple was 0.08848596636123582 dB, a -0.5842586283261175% improvement ratio."
+  - "9 dB ceiling Amount-100 ripple was 0.08883704777112217 dB, a -0.9833418364751045% improvement ratio."
+  - "8 dB ceiling Amount-100 ripple was 0.08966973300731865 dB, a -1.929876418147125% improvement ratio."
+  - "The 8 dB ceiling had the best mapping RMSE of the candidates at 0.4926789902935472 dB, but still failed Amount 50/75/100 mean-GR gates and the ripple gate."
+  - "Fresh holdout singers f9, m9, m10 and m11 were not accessed."
+  - "Raw public audio was not persisted."
+reusable_findings:
+  - "A smooth post-ballistics GR Range does not necessarily reduce short-timescale GR ripple after a Learn-time Threshold is re-solved; the closed-loop operating point must be measured."
+  - "Complexity that fails to repair the exact limiting baseline failure should be rejected even if it improves a secondary mapping metric."
+  - "Fresh holdout preservation on failed selection is reusable research capital and should be retained."
+revisit_if:
+  - "Gain-ballistics timing is explicitly reopened against the validated 8/70 baseline."
+  - "A candidate changes the temporal generation of high-Amount ripple rather than only applying a static post-ballistics transfer curve."
+  - "A future candidate passes selection before the preserved f9/m9/m10/m11 holdout is accessed."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-R4-LEARN-SOLVE-001
+    - VO-PREP-AMOUNT-R3-VOCALSET-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:auto"
+    - "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01"
+parent_decision_id: "VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:auto"
+created_at: "2026-09-26"
+immutable: true
+scope: "Vo.Prep Amount R5 Soft Range selection on f7/f8/m7/m8 with frozen detector/curve/8-70 ballistics and explicit Learn-time Threshold solve. Fresh holdout f9/m9/m10/m11 remained unopened."
+review_gaps: []

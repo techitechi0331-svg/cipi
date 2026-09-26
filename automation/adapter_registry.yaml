@@ -335,6 +335,13 @@ adapters:
     network_required: false
     purpose: "Diagnose the failed v2 plosive interaction by separating Plosive-only, Macro-only, and Plosive+Macro paths before any product or threshold change."
 
+  vopripro_voprep_eventonly_integration_v1:
+    tracks:
+      - VOPRIPRO_FORMAL
+    max_timeout_minutes: 8
+    network_required: false
+    purpose: "Screen Vo.Prep Plosive/Sibilance event processing with Macro Level disabled before VoPriPro Natural50 using source-derived positive controls and compatibility gates."
+
   voprep_plosive_adversarial_v1:
     tracks:
       - VO_PREP_FORMAL

@@ -1,0 +1,53 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:review-01"
+job_id: VO-PREP-PLOSIVE-THRESHOLD-R2-001
+source_run: research/runs/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+parent_decision_id: "VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:auto"
+rationale: >-
+  The bounded R2 result supports advancing activation threshold 0.70 to
+  real-vocal validation, but not product adoption. Relative to the frozen 0.75
+  baseline, 0.70 recovered the synthetic soft-plosive and repeated-plosive
+  recall failures while preserving zero measured occupancy on the declared
+  negative matrix, the event-duration cap, sample-rate stability and +/-12 dB
+  input-scale invariance. Threshold 0.72 recovered soft-plosive recall but did
+  not recover both repeated events, so 0.70 is the highest passing candidate.
+  The detector feature family, release threshold and event cap remain frozen.
+  Real sung-vocal evidence is still required because the synthetic cases do not
+  establish naturalness or real-microphone false-positive behavior.
+scope: >-
+  Assistant review of the deterministic Vo.Prep Plosive Guard v2.2 threshold-only
+  R2 calibration. ITERATE authorizes a 0.75-vs-0.70 real-vocal comparison only.
+  It does not change Vo.Prep product DSP, parameter defaults or release status.
+declared_rejection_criteria:
+  - "Neither 0.72 nor 0.70 passes every predeclared R2 gate."
+  - "Passing requires a feature-family change, release/cap change, relaxed gate, raw-audio persistence or product mutation."
+triggered_criteria: []
+retained_findings:
+  - "0.70 positive detection fraction was 1.0 on the declared synthetic positive matrix."
+  - "0.70 detected soft, nominal and strong cases at every tested sample rate."
+  - "0.70 detected both repeated-plosive events at every tested sample rate."
+  - "0.70 mean and maximum declared negative occupancy were both 0 percent."
+  - "0.70 worst positive first-onset latency was about 15.6563 ms."
+  - "0.70 maximum probability spread across 44.1/48/96 kHz was about 0.00261935."
+  - "0.70 maximum +/-12 dB input-scale probability spread was about 0.0144773 and occupancy spread about 0.518519 percentage points."
+  - "0.72 failed the repeated-two-events gate and remains a negative intermediate result."
+reusable_findings:
+  - "A threshold-only calibration can recover conservative-detector recall without requiring feature expansion when negative cases retain large probability margin."
+  - "Synthetic threshold success must advance to real-vocal relevance/false-trigger screening before product adoption."
+revisit_if:
+  - "Real-vocal evidence shows candidate-only 0.70 activations are not concentrated on plosive-relevant material."
+  - "Real-vocal false-trigger occupancy materially increases on vowels, fry, growl, proximity or long-LF material."
+  - "A source-code or C++ replay disagrees with the Python detector translation."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-PLOSIVE-ADVERSARIAL-001
+  related_decisions:
+    - "VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:review-01"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

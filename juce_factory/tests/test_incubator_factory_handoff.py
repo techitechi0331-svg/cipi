@@ -206,6 +206,28 @@ class IncubatorFactoryHandoffTests(unittest.TestCase):
                 )
 
 
+
+    def test_review_provenance_path_traversal_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            paths = self._fixture(root)
+            data = yaml.safe_load(paths["review"].read_text(encoding="utf-8"))
+            data["source_product_evidence"] = "../../outside.yaml"
+            paths["review"].write_text(yaml.safe_dump(data), encoding="utf-8")
+            with self.assertRaises(FactoryHandoffError):
+                build_contract_candidate(
+                    paths["proposal"], paths["decision"], paths["evidence"], paths["review"], root=root
+                )
+
+    def test_receipt_provenance_path_traversal_is_rejected_even_with_fresh_hash(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _, _, receipt = self._build(root)
+            receipt["source_product_evidence"] = "../../outside.yaml"
+            receipt["receipt_hash"] = _receipt_hash(receipt)
+            with self.assertRaises(FactoryHandoffError):
+                validate_receipt(receipt)
+
     def test_source_mutation_is_rejected_by_receipt_reverification(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

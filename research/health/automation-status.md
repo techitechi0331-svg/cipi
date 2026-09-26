@@ -2,9 +2,9 @@
 
 > Operational status only. This is not a sound-quality score or release decision.
 
-- Next scheduler action: **LOCAL_RESEARCH**
-- Local READY job: **VO-PREP-PLOSIVE-ADVERSARIAL-001**
-- Claimed evidence branches: **0**
+- Next scheduler action: **EVIDENCE_INTAKE**
+- Local READY job: **-**
+- Claimed evidence branches: **2**
 - Local blocked / dependency-blocked: **0 / 0**
 - Cross-Repo enabled: **NO**
 - Cross-Repo queued / dispatched / failed / quarantined: **0 / 0 / 0 / 0**

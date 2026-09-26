@@ -41,6 +41,8 @@ def _require_safe_rel(value: Any, label: str, prefix: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise FactoryHandoffError(f"{label} must be non-empty")
     normalized = value.replace("\\", "/")
+    if normalized != value:
+        raise FactoryHandoffError(f"{label} must use canonical forward-slash separators")
     parts = normalized.split("/")
     if normalized.startswith("/") or any(part in {"", ".", ".."} for part in parts):
         raise FactoryHandoffError(f"{label} must be a safe repository-relative path")

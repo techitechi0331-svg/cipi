@@ -16,7 +16,7 @@ from artifacts import extract_text_evidence, ingest_artifact  # noqa: E402
 from core import select_queued_action  # noqa: E402
 from failure import classify_failure  # noqa: E402
 from watchdog import assess_wait  # noqa: E402
-from global_dag import write_dashboard  # noqa: E402
+from global_dag import build_snapshot, write_dashboard  # noqa: E402
 
 
 REGISTRY = {
@@ -118,6 +118,17 @@ def main() -> int:
         )
         selected = select_queued_action(root, REGISTRY)
         assert selected is not None and selected[1]["action_id"] == "TEST-DAG-001"
+
+        blocked_snapshot = build_snapshot(root, REGISTRY, False)
+        assert blocked_snapshot["selected"]["kind"] == "EXTERNAL_BLOCK"
+        assert blocked_snapshot["selected"]["reason"] == "CIPI_CROSS_REPO_TOKEN_MISSING"
+        assert blocked_snapshot["selected"]["action_id"] == "TEST-DAG-001"
+        assert blocked_snapshot["cross_repo"]["blocked_reason"] == "CIPI_CROSS_REPO_TOKEN_MISSING"
+
+        enabled_snapshot = build_snapshot(root, REGISTRY, True)
+        assert enabled_snapshot["selected"]["kind"] == "CROSS_REPO"
+        assert enabled_snapshot["selected"]["action_id"] == "TEST-DAG-001"
+        assert enabled_snapshot["cross_repo"]["blocked_reason"] is None
 
         artifact = {
             "id": 123,

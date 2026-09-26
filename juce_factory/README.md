@@ -199,3 +199,31 @@ unknown DSP implementation.
 The generated Factory manifest pins both the complete Registry SHA-256 and the
 selected module-spec SHA-256. Registry certification is manufacturing eligibility
 only; it is not a subjective audio-quality or release verdict.
+
+
+## Result Bundle / Evidence v1.1 DSP provenance
+
+Factory 0.3 artifacts extend the Result Bundle and CIPI Factory Evidence format to
+schema v1.1.
+
+v1.1 carries the certified DSP manufacturing context end-to-end:
+
+- `dsp_module_id`;
+- `dsp_implementation_id`;
+- `dsp_certification_status=FACTORY_CERTIFIED`;
+- `dsp_validation_profile`;
+- `dsp_module_spec_sha256`;
+- `dsp_module_registry_sha256`.
+
+The bundle builder derives v1.1 only when the Factory manifest contains the complete
+module-provenance set. Partial provenance is rejected.
+
+Legacy manifests without module provenance continue to produce/read v1.0 Result
+Bundles and v1.0 Evidence Records. A v1.0 record may not inject v1.1-only fields.
+
+Reproducibility comparison treats v1.0 vs v1.1, Registry hash changes, and module-spec
+hash changes as recorded Factory-context differences. Artifact hash equality alone
+does not erase a manufacturing-context difference.
+
+DSP Registry provenance remains manufacturing evidence only. It does not grant
+release, Cubase, listening, final-product, or CIPI promotion authority.

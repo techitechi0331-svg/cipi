@@ -51,7 +51,22 @@ def compare_pass_bundles(first: dict[str, Any], second: dict[str, Any]) -> dict[
         "formats",
         "validation_matrix",
     )
-    same_recorded_factory_context = all(first[key] == second[key] for key in context_keys)
+    module_context_keys = (
+        "dsp_module_id",
+        "dsp_implementation_id",
+        "dsp_certification_status",
+        "dsp_validation_profile",
+        "dsp_module_spec_sha256",
+        "dsp_module_registry_sha256",
+    )
+    same_recorded_factory_context = (
+        first["schema_version"] == second["schema_version"]
+        and all(first[key] == second[key] for key in context_keys)
+        and (
+            first["schema_version"] == "1.0"
+            or all(first[key] == second[key] for key in module_context_keys)
+        )
+    )
     artifact_hash_match = first["artifact_hashes"] == second["artifact_hashes"]
 
     if not same_contract or not same_generated_source:
@@ -77,7 +92,7 @@ def compare_pass_bundles(first: dict[str, Any], second: dict[str, Any]) -> dict[
         "bit_reproducibility_confirmed": False,
         "limitations": [
             "This comparison observes promoted artifact hashes only.",
-            "It does not prove bit-reproducible builds because compiler, linker, SDK and hosted-runner image identity are not yet fully captured in Factory Result Bundle v1.",
+            "It does not prove bit-reproducible builds because compiler, linker, SDK and hosted-runner image identity are not yet fully captured in the Factory Result Bundle.",
             "A hash difference is MEASURED evidence to investigate, not an automatic product or release failure.",
         ],
     }

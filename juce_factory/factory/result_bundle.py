@@ -8,8 +8,24 @@ from typing import Any
 
 from .contract import canonical_json
 
-RESULT_BUNDLE_VERSION = "1.0"
+RESULT_BUNDLE_VERSION = "1.1"
+SUPPORTED_RESULT_BUNDLE_VERSIONS = {"1.0", "1.1"}
 _BUNDLE_KIND = "JUCE_FACTORY_RESULT"
+_MODULE_PROVENANCE_FIELDS = {
+    "dsp_module_id",
+    "dsp_implementation_id",
+    "dsp_certification_status",
+    "dsp_validation_profile",
+    "dsp_module_spec_sha256",
+    "dsp_module_registry_sha256",
+}
+_MANIFEST_MODULE_MARKERS = {
+    "dsp_implementation_id",
+    "dsp_certification_status",
+    "dsp_validation_profile",
+    "dsp_module_spec_sha256",
+    "dsp_module_registry_sha256",
+}
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _GIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 _SHA_LINE = re.compile(r"^([0-9a-fA-F]{64})  (.+)$")
@@ -127,6 +143,69 @@ def _validate_validation_matrix(matrix: dict[str, Any]) -> None:
     if matrix["official_vst3_validator"] is not True:
         raise ResultBundleError("validation_matrix.official_vst3_validator is mandatory")
 
+
+def _module_provenance_from_manifest(
+    manifest: dict[str, Any],
+) -> tuple[str, dict[str, Any]]:
+    present = {key for key in _MANIFEST_MODULE_MARKERS if key in manifest}
+    if not present:
+        return "1.0", {}
+    if present != _MANIFEST_MODULE_MARKERS:
+        missing = sorted(_MANIFEST_MODULE_MARKERS - present)
+        raise ResultBundleError(
+            f"factory manifest contains partial DSP module provenance; missing {missing}"
+        )
+
+    module_id = manifest.get("dsp_template")
+    implementation_id = manifest.get("dsp_implementation_id")
+    certification = manifest.get("dsp_certification_status")
+    profile = manifest.get("dsp_validation_profile")
+    for value, label in (
+        (module_id, "manifest.dsp_template"),
+        (implementation_id, "manifest.dsp_implementation_id"),
+        (profile, "manifest.dsp_validation_profile"),
+    ):
+        if not isinstance(value, str) or not value.strip():
+            raise ResultBundleError(f"{label} must be a non-empty string")
+    if certification != "FACTORY_CERTIFIED":
+        raise ResultBundleError(
+            "manifest.dsp_certification_status must be FACTORY_CERTIFIED"
+        )
+
+    return "1.1", {
+        "dsp_module_id": module_id,
+        "dsp_implementation_id": implementation_id,
+        "dsp_certification_status": certification,
+        "dsp_validation_profile": profile,
+        "dsp_module_spec_sha256": _require_sha256(
+            manifest.get("dsp_module_spec_sha256"),
+            "manifest.dsp_module_spec_sha256",
+        ),
+        "dsp_module_registry_sha256": _require_sha256(
+            manifest.get("dsp_module_registry_sha256"),
+            "manifest.dsp_module_registry_sha256",
+        ),
+    }
+
+
+def _validate_module_provenance(data: dict[str, Any]) -> None:
+    for key in (
+        "dsp_module_id",
+        "dsp_implementation_id",
+        "dsp_validation_profile",
+    ):
+        if not isinstance(data[key], str) or not data[key].strip():
+            raise ResultBundleError(f"{key} must be a non-empty string")
+    if data["dsp_certification_status"] != "FACTORY_CERTIFIED":
+        raise ResultBundleError(
+            "dsp_certification_status must be FACTORY_CERTIFIED"
+        )
+    _require_sha256(data["dsp_module_spec_sha256"], "dsp_module_spec_sha256")
+    _require_sha256(
+        data["dsp_module_registry_sha256"],
+        "dsp_module_registry_sha256",
+    )
+
 def _hash_payload(data: dict[str, Any]) -> str:
     payload = dict(data)
     payload.pop("bundle_hash", None)
@@ -134,7 +213,7 @@ def _hash_payload(data: dict[str, Any]) -> str:
 
 
 def validate_result_bundle(data: dict[str, Any]) -> None:
-    required = {
+    base_required = {
         "schema_version", "bundle_kind", "factory_status", "plugin_id", "plugin_version",
         "contract_version", "contract_sha256", "generated_source_sha256",
         "factory_version", "source_revision", "validation_revision",
@@ -144,14 +223,22 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
         "promotion_authority", "product_release_authority", "cubase_confirmed",
         "listening_confirmed", "bundle_hash",
     }
-    unknown = sorted(set(data) - required)
+    version = data.get("schema_version")
+    if version not in SUPPORTED_RESULT_BUNDLE_VERSIONS:
+        raise ResultBundleError("unsupported Factory Result Bundle schema_version")
+
+    required = set(base_required)
+    allowed = set(base_required)
+    if version == "1.1":
+        required |= _MODULE_PROVENANCE_FIELDS
+        allowed |= _MODULE_PROVENANCE_FIELDS
+
+    unknown = sorted(set(data) - allowed)
     missing = sorted(required - set(data))
     if missing:
         raise ResultBundleError(f"Factory Result Bundle missing fields: {missing}")
     if unknown:
         raise ResultBundleError(f"Factory Result Bundle contains unknown fields: {unknown}")
-    if data["schema_version"] != RESULT_BUNDLE_VERSION:
-        raise ResultBundleError("unsupported Factory Result Bundle schema_version")
     if data["bundle_kind"] != _BUNDLE_KIND:
         raise ResultBundleError("unexpected Factory Result Bundle kind")
     if data["factory_status"] not in {"VALIDATION_PASS", "QUARANTINED"}:
@@ -160,6 +247,8 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
                 "dsp_source_revision", "juce_version", "platform"):
         if not isinstance(data[key], str) or not data[key].strip():
             raise ResultBundleError(f"{key} must be a non-empty string")
+    if version == "1.1":
+        _validate_module_provenance(data)
     if not isinstance(data["contract_version"], int) or isinstance(data["contract_version"], bool):
         raise ResultBundleError("contract_version must be an integer")
     _require_git_sha(data["source_revision"], "source_revision")
@@ -221,7 +310,6 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
     if data["bundle_hash"] != expected:
         raise ResultBundleError("Factory Result Bundle hash mismatch")
 
-
 def build_pass_bundle(
     manifest_path: str | Path,
     validation_report_path: str | Path,
@@ -253,6 +341,8 @@ def build_pass_bundle(
     if provenance.get("platform") != manifest.get("target_os"):
         raise ResultBundleError("platform mismatch between manifest and provenance")
 
+    bundle_version, module_provenance = _module_provenance_from_manifest(manifest)
+
     validators = {
         "factory_owned_validation": report.get("factory_owned_validation"),
         "pluginval": report.get("pluginval"),
@@ -262,7 +352,7 @@ def build_pass_bundle(
         raise ResultBundleError("pass bundle requires every mandatory validator to PASS")
 
     bundle: dict[str, Any] = {
-        "schema_version": RESULT_BUNDLE_VERSION,
+        "schema_version": bundle_version,
         "bundle_kind": _BUNDLE_KIND,
         "factory_status": "VALIDATION_PASS",
         "plugin_id": manifest.get("plugin_id"),
@@ -297,6 +387,7 @@ def build_pass_bundle(
         "product_release_authority": False,
         "cubase_confirmed": False,
         "listening_confirmed": False,
+        **module_provenance,
     }
     bundle["bundle_hash"] = _hash_payload(bundle)
     validate_result_bundle(bundle)
@@ -316,9 +407,10 @@ def build_quarantine_bundle(
     failure_class = failure.get("failure_class")
     if not isinstance(failure_class, str) or not failure_class.strip():
         raise ResultBundleError("failure record requires failure_class")
+    bundle_version, module_provenance = _module_provenance_from_manifest(manifest)
 
     bundle: dict[str, Any] = {
-        "schema_version": RESULT_BUNDLE_VERSION,
+        "schema_version": bundle_version,
         "bundle_kind": _BUNDLE_KIND,
         "factory_status": "QUARANTINED",
         "plugin_id": manifest.get("plugin_id"),
@@ -357,6 +449,7 @@ def build_quarantine_bundle(
         "product_release_authority": False,
         "cubase_confirmed": False,
         "listening_confirmed": False,
+        **module_provenance,
     }
     bundle["bundle_hash"] = _hash_payload(bundle)
     validate_result_bundle(bundle)

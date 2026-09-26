@@ -1,0 +1,16 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "HA100X-012-591362e2",
+    "promotion_authority": false,
+    "reason": "Run the final bounded replication of the source/load matrix to test whether the linear-family conclusions reproduce without unlocking saturation or hysteresis.",
+    "route": "ITERATE",
+    "scientific": {
+      "catalog_pass_fraction": 0.75,
+      "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+      "falsification_signal": "LINEAR_FAMILY_CAN_EXPLAIN_CATALOG_WITH_FLATTER_30HZ_THAN_CURRENT_HEURISTIC",
+      "information_gain_signal": 0.5801656171318235
+    },
+    "species": "ha100x_lti_replication"
+  }
+]

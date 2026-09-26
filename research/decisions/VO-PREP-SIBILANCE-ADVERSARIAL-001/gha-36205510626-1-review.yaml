@@ -1,0 +1,53 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:review-01"
+job_id: VO-PREP-SIBILANCE-ADVERSARIAL-001
+source_run: research/runs/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+parent_decision_id: "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:auto"
+rationale: >-
+  The v2.3 contextual detector is also conservative on the declared synthetic
+  matrix. Every declared negative case had 0 percent event occupancy, but
+  positive recall was only 0.6667 because SH and CH sat below the 0.65
+  activation threshold at 44.1 and 48 kHz while crossing it at 96 kHz.
+  S and T were detected across rates. The relative false-occupancy gate was
+  additionally non-evaluable because the simple absolute-level baseline also
+  had zero negative occupancy, producing a 0/0 ratio; this protocol defect is
+  retained rather than reinterpreted as product failure. A new protocol will
+  use absolute negative-occupancy gates and a small activation-threshold family
+  while keeping features, release threshold and event cap frozen.
+scope: >-
+  Review of the deterministic Vo.Prep Sibilance Guard v2.3 adversarial screen.
+  ITERATE authorizes only bounded threshold calibration. It does not relax the
+  v1 result, change product DSP, or establish real-vocal naturalness.
+declared_rejection_criteria:
+  - Any declared acceptance condition fails.
+triggered_criteria:
+  - "Positive detection fraction was 0.6666666667 versus the locked >=0.85 gate."
+  - "SH was missed at 44.1/48 kHz and CH was missed at 44.1/48 kHz with the 0.65 activation threshold."
+  - "The relative false-occupancy gate was non-evaluable because both contextual and simple baselines had zero negative occupancy."
+retained_findings:
+  - "Context negative occupancy mean and maximum were both 0 percent."
+  - "S and T were detected at every tested sample rate."
+  - "SH/CH max probabilities were about 0.602-0.618 at 44.1/48 kHz and about 0.658-0.666 at 96 kHz."
+  - "Worst positive onset latency among detected events was 9.15625 ms."
+  - "Maximum context active duration was 107 ms."
+  - "Maximum context probability sample-rate spread was 0.05659786, within the declared 0.08 gate."
+  - "Input-scale probability and occupancy spreads passed with large margin."
+reusable_findings:
+  - "A relative false-positive ratio is undefined when the simple baseline has zero false occupancy; new protocols should predeclare an absolute fallback or use absolute occupancy directly."
+  - "Near-threshold sample-rate decision flips can exist even when probability-spread gates pass; decision consistency must be checked explicitly."
+revisit_if:
+  - "A small activation-threshold family detects S/SH/CH/T at all tested rates while retaining near-zero negative occupancy."
+  - "A future filter implementation reduces the probability shift enough to make threshold calibration unnecessary."
+lineage:
+  supersedes: []
+  related_jobs:
+    - MICRODOUBLE-SIBILANCE-R3-GATE-001
+  related_decisions:
+    - "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

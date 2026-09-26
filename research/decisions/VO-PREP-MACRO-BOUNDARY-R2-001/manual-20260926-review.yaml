@@ -39,6 +39,7 @@ lineage:
   related_decisions:
     - "VO-PREP-MACRO-BOUNDARY-001:manual-20260926:review-01"
     - "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01"
+parent_decision_id: "VO-PREP-MACRO-BOUNDARY-001:manual-20260926:review-01"
 created_at: "2026-09-26"
 immutable: true
 scope: >-

@@ -1,0 +1,25 @@
+{
+  "baseline": [
+    "Simple 20-80 Hz LF-onset-only detector using the current sub-band fast/slow feature and the same event cap."
+  ],
+  "experiment_adapter": "voprep_plosive_adversarial_v1",
+  "job_file": "research/jobs/queued/VO-PREP-PLOSIVE-ADVERSARIAL-001.yaml",
+  "metrics": [
+    "positive_detection_fraction",
+    "nominal_strong_repeated_all_detected",
+    "repeated_two_events_all_sample_rates",
+    "max_nominal_strong_onset_latency_ms",
+    "context_negative_occupancy_mean_pct",
+    "context_negative_occupancy_max_pct",
+    "lf_only_negative_occupancy_mean_pct",
+    "context_to_lf_only_false_occupancy_ratio",
+    "max_context_probability_sample_rate_spread",
+    "max_context_active_duration_ms",
+    "input_scale_probability_spread",
+    "input_scale_occupancy_spread_pct",
+    "all_finite"
+  ],
+  "variants": [
+    "Current Vo.Prep Plosive Guard v2.2 contextual detector: sub-onset + LF/Mid + LF/Broad + broad-onset geometric blend, activation 0.75, release 0.55, 120 ms cap."
+  ]
+}

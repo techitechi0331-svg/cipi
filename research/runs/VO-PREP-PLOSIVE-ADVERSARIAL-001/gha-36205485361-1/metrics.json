@@ -1,0 +1,73 @@
+{
+  "acceptance_met": false,
+  "aggregate": {
+    "context_negative_occupancy_max_pct": 0.0,
+    "context_negative_occupancy_mean_pct": 0.0,
+    "context_to_lf_only_false_occupancy_ratio": 0.0,
+    "lf_only_negative_occupancy_mean_pct": 1.2622616948013774,
+    "max_context_active_duration_ms": 11.833333333333334,
+    "max_context_probability_sample_rate_spread": 0.0026193492899950765,
+    "max_nominal_strong_onset_latency_ms": 16.312500000000007,
+    "nominal_strong_repeated_all_detected": true,
+    "positive_detection_fraction": 0.75,
+    "repeated_two_events_all_sample_rates": false
+  },
+  "current_detector": "Vo.Prep Plosive Guard v2.2 context detector",
+  "decision": "REVISE",
+  "gates": {
+    "all_finite": true,
+    "event_duration_le_125ms": true,
+    "false_occupancy_le_35pct_of_lf_only": true,
+    "input_scale_occupancy_spread_le_3pct": true,
+    "input_scale_probability_spread_le_0_05": true,
+    "negative_occupancy_max_le_12pct": true,
+    "negative_occupancy_mean_le_5pct": true,
+    "nominal_strong_onset_latency_le_20ms": true,
+    "nominal_strong_repeated_detected_all_sr": true,
+    "positive_detection_fraction_ge_0_90": false,
+    "repeated_two_events_all_sr": false,
+    "sample_rate_probability_spread_le_0_06": true
+  },
+  "negative_cases": [
+    "low_vowel",
+    "proximity",
+    "fry",
+    "growl",
+    "long_lf_note",
+    "male_low",
+    "female_bright",
+    "breath",
+    "word_onset"
+  ],
+  "positive_cases": [
+    "plosive_soft",
+    "plosive_nominal",
+    "plosive_strong",
+    "plosive_repeated"
+  ],
+  "raw_audio_persisted": false,
+  "sample_rates": [
+    44100,
+    48000,
+    96000
+  ],
+  "scale_invariance": {
+    "cases": {
+      "growl": {
+        "occupancy_spread_pct": 0.0,
+        "probability_spread": 0.0040148399717520045
+      },
+      "low_vowel": {
+        "occupancy_spread_pct": 0.0,
+        "probability_spread": 8.903059955933657e-10
+      },
+      "plosive_nominal": {
+        "occupancy_spread_pct": 0.6296296296296298,
+        "probability_spread": 0.01447727070028515
+      }
+    },
+    "max_occupancy_spread_pct": 0.6296296296296298,
+    "max_probability_spread": 0.01447727070028515
+  },
+  "simple_baseline": "20-80 Hz LF onset only"
+}

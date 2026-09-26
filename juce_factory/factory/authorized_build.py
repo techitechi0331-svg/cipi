@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -17,12 +18,15 @@ from juce_factory.factory.contract import (
     validate_contract,
 )
 from juce_factory.factory.generator import generate_project
+from juce_factory.factory.result_bundle import validate_result_bundle
 
 _REQUEST_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 EXPECTED_FILES = {
     "plugin_contract.json",
     "factory_build_authorization.json",
 }
+_BINDING_VERSION = "1.0"
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 
 class AuthorizedBuildIntakeError(ValueError):
@@ -173,6 +177,140 @@ def discover_authorized_requests(
     return records
 
 
+
+def _canonical_json(data: Any) -> str:
+    return json.dumps(
+        data,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    )
+
+
+def _binding_hash(data: dict[str, Any]) -> str:
+    payload = dict(data)
+    payload.pop("binding_hash", None)
+    return hashlib.sha256(_canonical_json(payload).encode("utf-8")).hexdigest()
+
+
+def validate_result_binding(binding: dict[str, Any]) -> None:
+    required = {
+        "schema_version",
+        "binding_kind",
+        "request_id",
+        "plugin_id",
+        "plugin_version",
+        "contract_sha256",
+        "authorization_hash",
+        "authorization_authority",
+        "factory_result_bundle_hash",
+        "factory_status",
+        "automatic_final_decision",
+        "factory_build_authorized",
+        "product_release_authority",
+        "cubase_confirmed",
+        "listening_confirmed",
+        "binding_hash",
+    }
+    missing = sorted(required - set(binding))
+    unknown = sorted(set(binding) - required)
+    if missing:
+        raise AuthorizedBuildIntakeError(f"result binding missing fields: {missing}")
+    if unknown:
+        raise AuthorizedBuildIntakeError(f"result binding contains unknown fields: {unknown}")
+    if binding["schema_version"] != _BINDING_VERSION:
+        raise AuthorizedBuildIntakeError("unsupported result binding schema_version")
+    if binding["binding_kind"] != "AUTHORIZED_FACTORY_BUILD_RESULT":
+        raise AuthorizedBuildIntakeError("unexpected result binding kind")
+    if not isinstance(binding["request_id"], str) or not _REQUEST_ID.fullmatch(binding["request_id"]):
+        raise AuthorizedBuildIntakeError("invalid result binding request_id")
+    for key in ("plugin_id", "plugin_version"):
+        if not isinstance(binding[key], str) or not binding[key].strip():
+            raise AuthorizedBuildIntakeError(f"{key} must be non-empty")
+    for key in (
+        "contract_sha256",
+        "authorization_hash",
+        "factory_result_bundle_hash",
+        "binding_hash",
+    ):
+        if not isinstance(binding[key], str) or not _SHA256.fullmatch(binding[key]):
+            raise AuthorizedBuildIntakeError(f"{key} must be a lowercase SHA-256 digest")
+    if binding["authorization_authority"] not in {"HUMAN", "ASSISTANT_REVIEW"}:
+        raise AuthorizedBuildIntakeError("authorization_authority cannot be AUTOMATION")
+    if binding["factory_status"] not in {"VALIDATION_PASS", "QUARANTINED"}:
+        raise AuthorizedBuildIntakeError("invalid factory_status in result binding")
+    if binding["automatic_final_decision"] is not False:
+        raise AuthorizedBuildIntakeError("automatic_final_decision must be false")
+    if binding["factory_build_authorized"] is not True:
+        raise AuthorizedBuildIntakeError("factory_build_authorized must be true")
+    for key in (
+        "product_release_authority",
+        "cubase_confirmed",
+        "listening_confirmed",
+    ):
+        if binding[key] is not False:
+            raise AuthorizedBuildIntakeError(f"{key} must be false")
+    if binding["binding_hash"] != _binding_hash(binding):
+        raise AuthorizedBuildIntakeError("result binding hash mismatch")
+
+
+def bind_factory_result(
+    request_dir: str | Path,
+    factory_result_bundle_path: str | Path,
+    *,
+    root: str | Path,
+) -> dict[str, Any]:
+    request = Path(request_dir)
+    contract, authorization = load_authorized_request(request, root=root)
+    bundle = _load_json(Path(factory_result_bundle_path))
+    validate_result_bundle(bundle)
+
+    semantic_hash = contract_sha256(contract)
+    if bundle["contract_sha256"] != semantic_hash:
+        raise AuthorizedBuildIntakeError(
+            "Factory Result Bundle Contract does not match authorized request"
+        )
+    if bundle["plugin_id"] != contract["plugin"]["id"]:
+        raise AuthorizedBuildIntakeError(
+            "Factory Result Bundle plugin_id does not match authorized request"
+        )
+    if bundle["plugin_version"] != contract["plugin"]["version"]:
+        raise AuthorizedBuildIntakeError(
+            "Factory Result Bundle plugin_version does not match authorized request"
+        )
+
+    binding: dict[str, Any] = {
+        "schema_version": _BINDING_VERSION,
+        "binding_kind": "AUTHORIZED_FACTORY_BUILD_RESULT",
+        "request_id": request.name,
+        "plugin_id": contract["plugin"]["id"],
+        "plugin_version": contract["plugin"]["version"],
+        "contract_sha256": semantic_hash,
+        "authorization_hash": authorization["authorization_hash"],
+        "authorization_authority": authorization["authority"],
+        "factory_result_bundle_hash": bundle["bundle_hash"],
+        "factory_status": bundle["factory_status"],
+        "automatic_final_decision": False,
+        "factory_build_authorized": True,
+        "product_release_authority": False,
+        "cubase_confirmed": False,
+        "listening_confirmed": False,
+    }
+    binding["binding_hash"] = _binding_hash(binding)
+    validate_result_binding(binding)
+    return binding
+
+
+def write_result_binding(path: str | Path, binding: dict[str, Any]) -> None:
+    validate_result_binding(binding)
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        json.dumps(binding, sort_keys=True, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
 def generate_authorized_project(
     request_dir: str | Path,
     output_dir: str | Path,
@@ -205,6 +343,12 @@ def main() -> int:
     generate.add_argument("--request", required=True)
     generate.add_argument("--root", default=".")
     generate.add_argument("--output", required=True)
+
+    bind = sub.add_parser("bind-result", help="bind a Factory Result Bundle to its build authorization")
+    bind.add_argument("--request", required=True)
+    bind.add_argument("--bundle", required=True)
+    bind.add_argument("--root", default=".")
+    bind.add_argument("--output", required=True)
 
     args = parser.parse_args()
     try:
@@ -246,6 +390,21 @@ def main() -> int:
             print(json.dumps({
                 "status": "AUTHORIZED_FACTORY_PROJECT_GENERATED",
                 "output": str(out),
+            }))
+            return 0
+
+        if args.command == "bind-result":
+            binding = bind_factory_result(
+                args.request,
+                args.bundle,
+                root=args.root,
+            )
+            write_result_binding(args.output, binding)
+            print(json.dumps({
+                "status": "AUTHORIZED_FACTORY_RESULT_BOUND",
+                "binding_hash": binding["binding_hash"],
+                "factory_status": binding["factory_status"],
+                "product_release_authority": False,
             }))
             return 0
     except (

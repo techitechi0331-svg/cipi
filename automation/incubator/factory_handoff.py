@@ -263,6 +263,29 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
         raise FactoryHandoffError("handoff receipt hash mismatch")
 
 
+def verify_receipt_sources(receipt: dict[str, Any], *, root: str | Path) -> None:
+    validate_receipt(receipt)
+    repo_root = Path(root).resolve()
+    pairs = (
+        ("source_proposal", "source_proposal_sha256"),
+        ("source_incubate_decision", "source_incubate_decision_sha256"),
+        ("source_product_evidence", "source_product_evidence_sha256"),
+        ("source_manufacturing_review", "source_manufacturing_review_sha256"),
+    )
+    for path_key, hash_key in pairs:
+        rel = receipt[path_key]
+        path = (repo_root / rel).resolve()
+        try:
+            path.relative_to(repo_root)
+        except ValueError as exc:
+            raise FactoryHandoffError(f"{path_key} escapes repository root") from exc
+        if not path.is_file():
+            raise FactoryHandoffError(f"{path_key} source file is missing: {rel}")
+        actual = _file_sha256(path)
+        if actual != receipt[hash_key]:
+            raise FactoryHandoffError(f"{path_key} source hash mismatch: {rel}")
+
+
 def write_candidate(
     contract: dict[str, Any],
     receipt: dict[str, Any],

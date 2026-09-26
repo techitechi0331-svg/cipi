@@ -1,0 +1,17 @@
+{
+  "action": "HOLD_STANDARD_16X4",
+  "automatic_execution": false,
+  "current_profile": {
+    "generations": 2,
+    "max_candidates": 12,
+    "population": 6
+  },
+  "reasons": [
+    "multiobjective scale-up gate is not yet satisfied"
+  ],
+  "suggested_next_profile": {
+    "generations": 2,
+    "max_candidates": 12,
+    "population": 6
+  }
+}

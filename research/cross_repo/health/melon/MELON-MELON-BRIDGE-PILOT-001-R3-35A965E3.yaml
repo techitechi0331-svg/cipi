@@ -3,10 +3,10 @@ action_id: MELON-MELON-BRIDGE-PILOT-001-R3-35A965E3
 repo_key: melon
 workflow_key: research
 runner_class: self-hosted
-state: RUNNING
+state: COMPLETED
 run_id: 36249379126
-run_status: in_progress
-run_conclusion: null
+run_status: completed
+run_conclusion: success
 since: '2026-09-26T14:41:46Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

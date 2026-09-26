@@ -1,0 +1,392 @@
+{
+  "aggregates": [
+    {
+      "all_finite": true,
+      "cache_hits": 0,
+      "candidate_id": "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92",
+      "complexity_proxy": 5.5,
+      "crest_spread_error": 0.14262291242242275,
+      "input_hashes": [
+        "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae"
+      ],
+      "median_crest_error": 1.0740992592137637,
+      "median_settling_ms": 452.4166666666667,
+      "median_thd_ratio": 0.00017382730372130254,
+      "objectives": [
+        459.0,
+        0.00017382730372130254,
+        1.1113235650932864,
+        5.5
+      ],
+      "runs": 3,
+      "settling_spread_ms": 9.083333333333314,
+      "species": "crest_dependent",
+      "thd_spread_ratio": 0.0,
+      "worst_crest_error": 1.1113235650932864,
+      "worst_settling_ms": 459.0,
+      "worst_thd_ratio": 0.00017382730372130254
+    },
+    {
+      "all_finite": true,
+      "cache_hits": 0,
+      "candidate_id": "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+      "complexity_proxy": 5.5,
+      "crest_spread_error": 0.12031262857538372,
+      "input_hashes": [
+        "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae"
+      ],
+      "median_crest_error": 0.9156806622795368,
+      "median_settling_ms": 340.4166666666667,
+      "median_thd_ratio": 0.00018232169753966927,
+      "objectives": [
+        345.9166666666667,
+        0.00018232169753966927,
+        0.9490875730095973,
+        5.5
+      ],
+      "runs": 3,
+      "settling_spread_ms": 7.666666666666686,
+      "species": "fixed",
+      "thd_spread_ratio": 0.0,
+      "worst_crest_error": 0.9490875730095973,
+      "worst_settling_ms": 345.9166666666667,
+      "worst_thd_ratio": 0.00018232169753966927
+    },
+    {
+      "all_finite": true,
+      "cache_hits": 0,
+      "candidate_id": "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a",
+      "complexity_proxy": 5.5,
+      "crest_spread_error": 0.1901774474289355,
+      "input_hashes": [
+        "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae"
+      ],
+      "median_crest_error": 1.4491806928630004,
+      "median_settling_ms": 641.75,
+      "median_thd_ratio": 0.00015763777296933217,
+      "objectives": [
+        681.8333333333334,
+        0.00015763777296933217,
+        1.4895431181782217,
+        5.5
+      ],
+      "runs": 3,
+      "settling_spread_ms": 43.41666666666674,
+      "species": "gr_dependent",
+      "thd_spread_ratio": 0.0,
+      "worst_crest_error": 1.4895431181782217,
+      "worst_settling_ms": 681.8333333333334,
+      "worst_thd_ratio": 0.00015763777296933217
+    },
+    {
+      "all_finite": true,
+      "cache_hits": 0,
+      "candidate_id": "melon-dynamic_gain_release_v1-d264d7da1a2af317a76b",
+      "complexity_proxy": 7.0,
+      "crest_spread_error": 0.16614362778430936,
+      "input_hashes": [
+        "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae"
+      ],
+      "median_crest_error": 1.1896532858589306,
+      "median_settling_ms": 482.5,
+      "median_thd_ratio": 0.00017411678042184695,
+      "objectives": [
+        493.8333333333333,
+        0.00017411678042184695,
+        1.22991777155295,
+        7.0
+      ],
+      "runs": 3,
+      "settling_spread_ms": 15.666666666666629,
+      "species": "hybrid",
+      "thd_spread_ratio": 0.0,
+      "worst_crest_error": 1.22991777155295,
+      "worst_settling_ms": 493.8333333333333,
+      "worst_thd_ratio": 0.00017411678042184695
+    }
+  ],
+  "archive_ids": [
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+    "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a",
+    "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92"
+  ],
+  "archive_limit": 4,
+  "crowding_scores": {
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6": 3.0,
+    "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a": 3.0,
+    "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92": 3.0
+  },
+  "deep_selection_strategy": "RAW_PARETO_THEN_ROBUST_EPSILON_BOX_THEN_CROWDING_SPECIES_V4",
+  "details": {
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6": [
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.011163+00:00",
+        "cache_hit": false,
+        "cache_key": "aed0ce8111de0922b33e09db92b1d1c3f89fb550df36ba5170fac032a83b71ca",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 0.9156806622795368,
+        "input_hash": "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "seed": 3101,
+        "settling_ms": 338.25,
+        "source_result_hash": "1e07f61973e07bfeb990f8d0f67d086ee6391f495f0de691cd8e0d63aee99a81",
+        "thd_ratio": 0.00018232169753966927
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.148214+00:00",
+        "cache_hit": false,
+        "cache_key": "7f9221c6af2a014aae167f3782efe5e8e5479a41b786c46b96b081a9d35f3d2c",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 0.9490875730095973,
+        "input_hash": "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "seed": 3102,
+        "settling_ms": 340.4166666666667,
+        "source_result_hash": "68b7bd569ff277433e5fd62c4b53e2256a9ce9f803995dfcbe222879d46c6750",
+        "thd_ratio": 0.00018232169753966927
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.285863+00:00",
+        "cache_hit": false,
+        "cache_key": "b173f264fa4e55f1e0d09612967cfde0490406eef6c567ce96958dda10dcf4cc",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 0.8287749444342136,
+        "input_hash": "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae",
+        "seed": 3103,
+        "settling_ms": 345.9166666666667,
+        "source_result_hash": "e6d90876e1ca32f3a6dccdfe0e8b9a749ec75ca64a3ea917d6e986320a5c9997",
+        "thd_ratio": 0.00018232169753966927
+      }
+    ],
+    "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a": [
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.432739+00:00",
+        "cache_hit": false,
+        "cache_key": "3b867362bc556e1b7ef7223ec6c9bc047c99c95a60c094eee1846a4847c39d51",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 1.4491806928630004,
+        "input_hash": "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "seed": 3101,
+        "settling_ms": 681.8333333333334,
+        "source_result_hash": "242208d4121eda2d99ce5766f304177aa23fbb5bb69d235cd1a791e911011b73",
+        "thd_ratio": 0.00015763777296933217
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.573772+00:00",
+        "cache_hit": false,
+        "cache_key": "3589e48e9b83938aa6bc002b903545c099c91b33aac8d1233c39dbc58cf20d55",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 1.4895431181782217,
+        "input_hash": "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "seed": 3102,
+        "settling_ms": 641.75,
+        "source_result_hash": "1f35cf6769e7b75d96f27488119a05a4111ebc313fe5980fd0a4ccc00c326d3e",
+        "thd_ratio": 0.00015763777296933217
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.717698+00:00",
+        "cache_hit": false,
+        "cache_key": "38affe5fdb0fba52fefa8a9a22a74a5a412a63eff366246ec4a4f41ed4f51bc8",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 1.2993656707492862,
+        "input_hash": "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae",
+        "seed": 3103,
+        "settling_ms": 638.4166666666666,
+        "source_result_hash": "063ae38c4bdfd099c50ad4cdc2039e554eb9b9a6eb642c28a9308a82d1f052d4",
+        "thd_ratio": 0.00015763777296933217
+      }
+    ],
+    "melon-dynamic_gain_release_v1-d264d7da1a2af317a76b": [
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:07.876382+00:00",
+        "cache_hit": false,
+        "cache_key": "be5bc1d43dcf8b2632341d83033c297d19c1c105643e33ee2271496b9c7712b2",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 7.0,
+        "crest_error": 1.1896532858589306,
+        "input_hash": "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "seed": 3101,
+        "settling_ms": 478.1666666666667,
+        "source_result_hash": "b73a58b9fbd870e5657565c48f651ae56699a4898efb2c7c69bdca36fd900e97",
+        "thd_ratio": 0.00017411678042184695
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:08.033457+00:00",
+        "cache_hit": false,
+        "cache_key": "08e346cbc3ced0d9732aececc4f1c6b46d00a0d12782fdebcfa50cf386fcce10",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 7.0,
+        "crest_error": 1.22991777155295,
+        "input_hash": "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "seed": 3102,
+        "settling_ms": 482.5,
+        "source_result_hash": "ee34ea0b910d59756df367b194f652e9ddb5d7ed11ee46e7d0c985ab8fe44367",
+        "thd_ratio": 0.00017411678042184695
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:08.191962+00:00",
+        "cache_hit": false,
+        "cache_key": "43573723666a0e0ff26bb3d55460fd191a47f88744703b7986b61a605a7eadb0",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 7.0,
+        "crest_error": 1.0637741437686405,
+        "input_hash": "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae",
+        "seed": 3103,
+        "settling_ms": 493.8333333333333,
+        "source_result_hash": "2c3795e39c126eab3b521b3875eb62e908561873bea6ee950b16c622bacaa7f4",
+        "thd_ratio": 0.00017411678042184695
+      }
+    ],
+    "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92": [
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:06.584579+00:00",
+        "cache_hit": false,
+        "cache_key": "7b36f4f137e945fbad96162a9a16f305573802cc2f9e954f486225d5c49cca8b",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 1.0740992592137637,
+        "input_hash": "e3eccb2e8d254fb2e8c9fd3a35d8b368cb18814ece7cf2f830d5b8edac942a55",
+        "seed": 3101,
+        "settling_ms": 449.9166666666667,
+        "source_result_hash": "e15efeb3af8989f716bdef089eeec5230da5bda0df9b4e7b43769692a10f99cb",
+        "thd_ratio": 0.00017382730372130254
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:06.727472+00:00",
+        "cache_hit": false,
+        "cache_key": "5893c1733ca892d9b5c553cdb59ed09f8ce11bb26068ad173538bc9d1b3a1f3c",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 1.1113235650932864,
+        "input_hash": "540fd2f7519b7980f8928269f02e34a25c841f0103fab1c9417aaeaf2a402b7f",
+        "seed": 3102,
+        "settling_ms": 452.4166666666667,
+        "source_result_hash": "f4d005b14241e334166a6613e1e1abd4a180aaeb497b343b4df318d4fd51b5bc",
+        "thd_ratio": 0.00017382730372130254
+      },
+      {
+        "all_finite": true,
+        "cache_created_at": "2026-09-26T14:42:06.873287+00:00",
+        "cache_hit": false,
+        "cache_key": "a5f72717e44cb4e757154dc22d5730f2c7d376d778931230018f052e7d6ebc5d",
+        "cache_status": "CACHE_MISS",
+        "complexity_proxy": 5.5,
+        "crest_error": 0.9687006526708637,
+        "input_hash": "aaebe43e0b7edfa8e390b9cb3a70fdb2917b463153d34e18e544ecd2e6f108ae",
+        "seed": 3103,
+        "settling_ms": 459.0,
+        "source_result_hash": "d080dc02b5567935709cccfcb1e234eb6e48d5dca4b096353f36fe4572cf08d3",
+        "thd_ratio": 0.00017382730372130254
+      }
+    ]
+  },
+  "epsilon_calibration": {
+    "absolute_floors": [
+      1.0,
+      1e-07,
+      0.0001,
+      0.5
+    ],
+    "median_seed_spreads": [
+      9.083333333333314,
+      0.0,
+      0.14262291242242275,
+      0.5
+    ],
+    "objective_ranges": [
+      268.7333333333333,
+      1.9747139656269675e-05,
+      0.4323644361348995,
+      0.0
+    ],
+    "range_fraction": 0.03,
+    "range_method": "P90_MINUS_P10",
+    "raw_objective_ranges": [
+      335.9166666666667,
+      2.46839245703371e-05,
+      0.5404555451686244,
+      0.0
+    ],
+    "spread_multiplier": 0.5
+  },
+  "epsilon_front_ids": [
+    "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92",
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+    "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a"
+  ],
+  "epsilon_method_comparison": {
+    "epsilon_box_ids": [
+      "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92",
+      "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+      "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a"
+    ],
+    "legacy_tolerance_ids": [
+      "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92",
+      "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+      "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a"
+    ]
+  },
+  "epsilon_method_selected": "EPSILON_BOX_V1",
+  "epsilon_pareto_ids": [
+    "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92",
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+    "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a"
+  ],
+  "epsilon_species_anchor_ids": [],
+  "epsilon_vector": [
+    8.061999999999998,
+    5.924141896880902e-07,
+    0.07131145621121138,
+    0.5
+  ],
+  "pareto_ids": [
+    "melon-dynamic_gain_release_v1-f1f9b3e2657ce1726e92",
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6",
+    "melon-dynamic_gain_release_v1-4eb5912e8dba0275a73a"
+  ],
+  "pareto_objectives": [
+    "worst_settling_ms",
+    "worst_thd_ratio",
+    "worst_crest_error",
+    "complexity_proxy"
+  ],
+  "profile": "release_scientific_v1",
+  "retained_evidence": [
+    "raw_pareto",
+    "median",
+    "worst",
+    "spread",
+    "input_hashes"
+  ],
+  "seeds": [
+    3101,
+    3102,
+    3103
+  ],
+  "selected_for_deep_validation": [
+    "melon-dynamic_gain_release_v1-309c70c8c73a8dfa9ee6"
+  ]
+}

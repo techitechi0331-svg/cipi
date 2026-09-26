@@ -1,0 +1,7 @@
+claim: Context-normalized plosive detection can reduce LF-confounder false events
+  relative to an LF-onset-only baseline while preserving short plosive detection.
+evidence_type: MEASURED
+scope: Deterministic Vo.Prep v2.2 adversarial screen only; real-vocal naturalness
+  and broader singer/language generalization remain separate gates.
+source_run: research/runs/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1
+promotion_requested: PROVISIONAL

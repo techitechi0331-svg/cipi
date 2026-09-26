@@ -1,0 +1,163 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:review-brief-v1
+job_id: VO-PREP-PLOSIVE-ADVERSARIAL-001
+run_id: gha-36205485361-1
+source_run: research/runs/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-triage.yaml
+triage_id: VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-PLOSIVE-ADVERSARIAL-001.yaml
+research_question: Does the current Vo.Prep Plosive Guard v2.2 contextual detector
+  preserve short plosive-event recall while rejecting LF non-plosive confounders materially
+  better than a simple 20-80 Hz LF-onset detector?
+hypothesis: The current onset + LF/Mid + LF/Broad contextual detector will detect
+  nominal/strong/repeated plosives across supported sample rates while producing substantially
+  less false event occupancy on low-vowel, proximity, fry, growl, long-LF, low-male,
+  bright-female, breath and ordinary word-onset stress cases than the LF-only baseline.
+counter_hypotheses:
+- The contextual detector loses too much true-plosive recall or reacts too slowly.
+- Growl/fry/low-vowel/proximity onsets still trigger enough context events that the
+  added detector complexity is not justified.
+- Detector decisions vary materially with sample rate or +/-12 dB input scaling.
+acceptance_criteria:
+- Context positive detection fraction is >= 0.90 across plosive_soft/plosive_nominal/plosive_strong/plosive_repeated
+  and 44.1/48/96 kHz.
+- Nominal, strong and repeated plosives are detected at every tested sample rate.
+- Both events in the repeated-plosive case are detected at every tested sample rate.
+- Worst nominal/strong first-onset latency is <= 20 ms.
+- Mean false event occupancy over declared negative cases is <= 5% and worst negative
+  occupancy is <= 12%.
+- Context mean false occupancy is <= 35% of the LF-only baseline mean false occupancy.
+- Maximum contiguous context event duration is <= 125 ms.
+- Maximum context probability spread across 44.1/48/96 kHz is <= 0.06.
+- Across -12/0/+12 dB scaling on nominal plosive, low vowel and growl, max context
+  probability spread is <= 0.05 and occupancy spread <= 3 percentage points.
+- All derived values remain finite.
+rejection_criteria:
+- Any declared acceptance condition fails.
+- Passing requires relaxing a predeclared detector, occupancy, latency, duration,
+  sample-rate or scale-invariance gate.
+- Raw audio is persisted or product DSP is mutated.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: ef0023a4dc61a16ff56513459ff857dfd7d80746
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: aggregate.context_negative_occupancy_max_pct
+  value: 0.0
+- path: aggregate.context_negative_occupancy_mean_pct
+  value: 0.0
+- path: aggregate.context_to_lf_only_false_occupancy_ratio
+  value: 0.0
+- path: aggregate.lf_only_negative_occupancy_mean_pct
+  value: 1.2622616948013774
+- path: aggregate.max_context_active_duration_ms
+  value: 11.833333333333334
+- path: aggregate.max_context_probability_sample_rate_spread
+  value: 0.0026193492899950765
+- path: aggregate.max_nominal_strong_onset_latency_ms
+  value: 16.312500000000007
+- path: aggregate.nominal_strong_repeated_all_detected
+  value: true
+- path: aggregate.positive_detection_fraction
+  value: 0.75
+- path: aggregate.repeated_two_events_all_sample_rates
+  value: false
+- path: current_detector
+  value: Vo.Prep Plosive Guard v2.2 context detector
+- path: decision
+  value: REVISE
+- path: gates.all_finite
+  value: true
+- path: gates.event_duration_le_125ms
+  value: true
+- path: gates.false_occupancy_le_35pct_of_lf_only
+  value: true
+- path: gates.input_scale_occupancy_spread_le_3pct
+  value: true
+- path: gates.input_scale_probability_spread_le_0_05
+  value: true
+- path: gates.negative_occupancy_max_le_12pct
+  value: true
+- path: gates.negative_occupancy_mean_le_5pct
+  value: true
+- path: gates.nominal_strong_onset_latency_le_20ms
+  value: true
+- path: gates.nominal_strong_repeated_detected_all_sr
+  value: true
+- path: gates.positive_detection_fraction_ge_0_90
+  value: false
+- path: gates.repeated_two_events_all_sr
+  value: false
+- path: gates.sample_rate_probability_spread_le_0_06
+  value: true
+- path: negative_cases[0]
+  value: low_vowel
+- path: negative_cases[1]
+  value: proximity
+- path: negative_cases[2]
+  value: fry
+- path: negative_cases[3]
+  value: growl
+- path: negative_cases[4]
+  value: long_lf_note
+- path: negative_cases[5]
+  value: male_low
+- path: negative_cases[6]
+  value: female_bright
+knowledge_candidate:
+  claim: Context-normalized plosive detection can reduce LF-confounder false events
+    relative to an LF-onset-only baseline while preserving short plosive detection.
+  evidence_type: MEASURED
+  scope: Deterministic Vo.Prep v2.2 adversarial screen only; real-vocal naturalness
+    and broader singer/language generalization remain separate gates.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:auto
+  decision: REJECT
+  rationale: If any predeclared gate fails, retain the failed stress cases as negative
+    evidence and keep the current product baseline unchanged pending bounded refinement.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  retained_findings:
+  - Per-case probability, occupancy, onset, event count, duration, sample-rate and
+    scale-invariance measurements.
+  - Simple LF-only baseline results and current contextual detector results.
+  reusable_findings:
+  - Which LF vocal confounders are not separated by the current context feature family.
+  - Whether event-duration caps and context ratios remain stable across sample rates
+    and level scaling.
+  revisit_if:
+  - A bounded detector refinement directly targets the failed confounder without weakening
+    true-plosive recall.
+  - Real-vocal evidence contradicts the synthetic stress ranking.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Integrated level-matched listening is still required before final Macro/Phrase product
+  lock.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Human level-matched listening is required for final naturalness sign-off.
+- Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

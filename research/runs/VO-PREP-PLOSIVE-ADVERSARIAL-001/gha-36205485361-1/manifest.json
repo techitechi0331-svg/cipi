@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vo-prep/experiments/plosive_adversarial_v1.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-26T00:37:15.374264Z",
+  "environment": {
+    "experiment_adapter": "voprep_plosive_adversarial_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-PLOSIVE-ADVERSARIAL-001",
+  "random_seed": 20260926,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36205485361-1",
+  "schema_version": "1.0",
+  "source_commit": "ef0023a4dc61a16ff56513459ff857dfd7d80746",
+  "started_at": "2026-09-26T00:36:52.340702Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

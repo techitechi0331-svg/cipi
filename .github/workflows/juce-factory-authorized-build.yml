@@ -1,0 +1,335 @@
+name: juce-factory-authorized-build
+
+on:
+  pull_request:
+    paths:
+      - "research/incubator/factory_build_requests/**"
+      - "automation/incubator/factory_handoff.py"
+      - "automation/incubator/factory_build_authorization.py"
+      - "juce_factory/factory/authorized_build.py"
+      - "juce_factory/factory/contract.py"
+      - "juce_factory/factory/generator.py"
+      - "juce_factory/factory/result_bundle.py"
+      - "juce_factory/schemas/plugin_contract.schema.json"
+      - "juce_factory/schemas/authorized_build_result_binding.schema.json"
+      - ".github/workflows/juce-factory-authorized-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: juce-factory-authorized-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.discover.outputs.matrix }}
+      has_requests: ${{ steps.discover.outputs.has_requests }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Incubator authorization policy
+        run: python tools/validate_incubator.py
+
+      - name: Discover authorized build requests
+        id: discover
+        shell: bash
+        run: |
+          set -euo pipefail
+          matrix="$(python -m juce_factory.factory.authorized_build discover --root . --matrix)"
+          count="$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])["include"]))' "$matrix")"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          if [ "$count" -gt 0 ]; then
+            echo "has_requests=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_requests=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Authorized requests: $count"
+
+  candidate-build:
+    needs: discover
+    if: needs.discover.outputs.has_requests == 'true'
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Revalidate authorized build request
+        id: request_validate
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.authorized_build validate --root . --request "${{ matrix.request_path }}"
+          if ($LASTEXITCODE -ne 0) { throw "Authorized build request validation failed." }
+
+      - name: Generate authorized JUCE project
+        id: generate
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.authorized_build generate --root . --request "${{ matrix.request_path }}" --output generated/Candidate
+          if ($LASTEXITCODE -ne 0) { throw "Authorized Factory generation failed." }
+
+      - name: Configure
+        id: configure
+        shell: pwsh
+        run: cmake -S generated/Candidate -B generated/Candidate/build -G "Visual Studio 18 2026" -A x64
+
+      - name: Build Release
+        id: build
+        shell: pwsh
+        run: cmake --build generated/Candidate/build --config Release --parallel 4
+
+      - name: Run Factory-owned validation matrix
+        id: factory_validation
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-logs | Out-Null
+          $testExe = Get-ChildItem -Path generated/Candidate/build -Recurse -File -Filter *FactoryValidation.exe | Select-Object -First 1
+          if (-not $testExe) { throw "Factory validation executable was not produced." }
+          & $testExe.FullName 2>&1 | Tee-Object -FilePath factory-logs/factory-validation.log
+          if ($LASTEXITCODE -ne 0) { throw "Factory validation matrix failed with exit code $LASTEXITCODE." }
+
+      - name: Stage VST3
+        id: stage
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-staging | Out-Null
+          $bundle = Get-ChildItem -Path generated/Candidate/build -Recurse -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "Authorized VST3 bundle was not produced." }
+          Copy-Item -LiteralPath $bundle.FullName -Destination factory-staging -Recurse -Force
+
+      - name: Download pinned pluginval
+        id: pluginval_fetch
+        shell: pwsh
+        run: |
+          $url = "https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_Windows.zip"
+          $expected = "c08e61ce3b96db41636f8ec7e76f4c7e2c13ebdac7fa1b5a1f52b4f32ec715ab"
+          Invoke-WebRequest -Uri $url -OutFile pluginval.zip
+          $actual = (Get-FileHash pluginval.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $expected) { throw "pluginval checksum mismatch. Expected $expected, got $actual." }
+          Expand-Archive pluginval.zip -DestinationPath pluginval -Force
+
+      - name: Validate with external pluginval
+        id: pluginval
+        shell: pwsh
+        run: |
+          $pluginval = Get-ChildItem -Path pluginval -Recurse -File -Filter pluginval.exe | Select-Object -First 1
+          if (-not $pluginval) { throw "pluginval.exe was not found." }
+          $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "No staged VST3 found." }
+          & $pluginval.FullName --validate $bundle.FullName --strictness-level 5 2>&1 | Tee-Object -FilePath factory-logs/pluginval.log
+          if ($LASTEXITCODE -ne 0) { throw "pluginval failed with exit code $LASTEXITCODE." }
+
+      - name: Fetch pinned Steinberg VST3 SDK 3.8.1
+        id: steinberg_fetch
+        shell: pwsh
+        run: |
+          git clone https://github.com/steinbergmedia/vst3sdk.git vst3sdk
+          git -C vst3sdk checkout 3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96
+          git -C vst3sdk submodule update --init --recursive
+
+      - name: Configure Steinberg official validator
+        id: steinberg_configure
+        shell: pwsh
+        run: cmake -S vst3sdk -B vst3sdk-build -G "Visual Studio 18 2026" -A x64 -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=ON -DSMTG_ENABLE_VSTGUI_SUPPORT=OFF -DSMTG_CREATE_PLUGIN_LINK=0
+
+      - name: Build Steinberg official validator
+        id: steinberg_build
+        shell: pwsh
+        run: cmake --build vst3sdk-build --config Release --target validator --parallel 4
+
+      - name: Validate with Steinberg official validator
+        id: steinberg_validator
+        shell: pwsh
+        run: |
+          $validator = Get-ChildItem -Path vst3sdk-build -Recurse -File -Filter validator.exe | Select-Object -First 1
+          if (-not $validator) { throw "Steinberg validator.exe was not produced." }
+          $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "No staged VST3 found for Steinberg validator." }
+          & $validator.FullName $bundle.FullName 2>&1 | Tee-Object -FilePath factory-logs/steinberg-validator.log
+          if ($LASTEXITCODE -ne 0) { throw "Steinberg validator failed with exit code $LASTEXITCODE." }
+
+      - name: Write validation report
+        id: validation_report
+        shell: pwsh
+        run: |
+          $manifest = Get-Content generated/Candidate/factory_manifest.json -Raw | ConvertFrom-Json
+          $report = [ordered]@{
+            factory_status = "VALIDATION_PASS"
+            sample_rates = @($manifest.validation_matrix.sample_rates)
+            block_sizes = @($manifest.validation_matrix.block_sizes)
+            factory_owned_validation = "PASS"
+            pluginval = "PASS"
+            pluginval_version = "1.0.4"
+            pluginval_strictness = 5
+            steinberg_validator = "PASS"
+            steinberg_sdk_commit = "3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96"
+            release_authority = $false
+          }
+          $report | ConvertTo-Json -Depth 6 | Set-Content -Encoding utf8 factory-logs/validation_report.json
+
+      - name: Stage validation-passed candidate
+        id: promote
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-out/passed | Out-Null
+          $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
+          Copy-Item -LiteralPath $bundle.FullName -Destination factory-out/passed -Recurse -Force
+          Copy-Item generated/Candidate/factory_manifest.json factory-out/factory_manifest.json
+          Copy-Item generated/Candidate/plugin_contract.json factory-out/plugin_contract.json
+          Copy-Item factory-logs/validation_report.json factory-out/validation_report.json
+          Copy-Item "${{ matrix.request_path }}/factory_build_authorization.json" factory-out/factory_build_authorization.json
+
+          $contractHash = (Get-FileHash generated/Candidate/plugin_contract.json -Algorithm SHA256).Hash.ToLowerInvariant()
+          $manifest = Get-Content generated/Candidate/factory_manifest.json -Raw | ConvertFrom-Json
+          $provenance = [ordered]@{
+            factory_status = "VALIDATION_PASS"
+            source_revision = "${{ github.event.pull_request.head.sha || github.sha }}"
+            validation_revision = "${{ github.sha }}"
+            validation_base_revision = "${{ github.event.pull_request.base.sha || github.sha }}"
+            juce_version = $manifest.juce_version
+            build_type = "Release"
+            platform = $manifest.target_os
+            validators = @("factory-owned-matrix", "pluginval-1.0.4-strictness-5", "steinberg-vst3-validator")
+            contract_file_sha256 = $contractHash
+            contract_semantic_sha256 = $manifest.contract_sha256
+            validation_matrix = $manifest.validation_matrix
+            release_authority = $false
+          }
+          $provenance | ConvertTo-Json | Set-Content -Encoding utf8 factory-out/provenance.json
+
+          Get-ChildItem factory-out/passed -Recurse -File | Sort-Object FullName | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $($_.FullName.Substring((Resolve-Path factory-out).Path.Length + 1))"
+          } | Set-Content -Encoding ascii factory-out/sha256.txt
+
+      - name: Build Factory Result Bundle
+        id: result_bundle
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.cli bundle-pass --manifest generated/Candidate/factory_manifest.json --validation-report factory-out/validation_report.json --provenance factory-out/provenance.json --sha256 factory-out/sha256.txt --output factory-out/factory_result_bundle.json
+          if ($LASTEXITCODE -ne 0) { throw "Factory Result Bundle generation failed." }
+
+      - name: Build bounded CIPI evidence preview
+        id: evidence_preview
+        shell: pwsh
+        run: |
+          python -m automation.factory.intake factory-out/factory_result_bundle.json --output-root factory-out/cipi-evidence-preview
+          if ($LASTEXITCODE -ne 0) { throw "Factory evidence preview intake failed." }
+
+      - name: Bind result to exact Build Authorization
+        id: result_binding
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.authorized_build bind-result --root . --request "${{ matrix.request_path }}" --bundle factory-out/factory_result_bundle.json --output factory-out/authorized_build_result_binding.json
+          if ($LASTEXITCODE -ne 0) { throw "Authorized build result binding failed." }
+
+      - name: Quarantine failed authorized candidate
+        if: failure()
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path factory-quarantine | Out-Null
+          $failureClass = "UNKNOWN_AUTHORIZED_FACTORY_FAILURE"
+          if ("${{ steps.request_validate.outcome }}" -eq "failure") { $failureClass = "AUTHORIZED_REQUEST_VALIDATION_ERROR" }
+          elseif ("${{ steps.generate.outcome }}" -eq "failure") { $failureClass = "AUTHORIZED_GENERATION_ERROR" }
+          elseif ("${{ steps.configure.outcome }}" -eq "failure") { $failureClass = "CONFIGURE_ERROR" }
+          elseif ("${{ steps.build.outcome }}" -eq "failure") { $failureClass = "BUILD_ERROR" }
+          elseif ("${{ steps.factory_validation.outcome }}" -eq "failure") { $failureClass = "FACTORY_DSP_VALIDATION_ERROR" }
+          elseif ("${{ steps.stage.outcome }}" -eq "failure") { $failureClass = "PACKAGING_ERROR" }
+          elseif ("${{ steps.pluginval_fetch.outcome }}" -eq "failure") { $failureClass = "PLUGINVAL_FETCH_ERROR" }
+          elseif ("${{ steps.pluginval.outcome }}" -eq "failure") { $failureClass = "PLUGINVAL_ERROR" }
+          elseif ("${{ steps.steinberg_fetch.outcome }}" -eq "failure") { $failureClass = "STEINBERG_FETCH_ERROR" }
+          elseif ("${{ steps.steinberg_configure.outcome }}" -eq "failure") { $failureClass = "STEINBERG_CONFIGURE_ERROR" }
+          elseif ("${{ steps.steinberg_build.outcome }}" -eq "failure") { $failureClass = "STEINBERG_BUILD_ERROR" }
+          elseif ("${{ steps.steinberg_validator.outcome }}" -eq "failure") { $failureClass = "STEINBERG_VALIDATOR_ERROR" }
+          elseif ("${{ steps.validation_report.outcome }}" -eq "failure") { $failureClass = "VALIDATION_REPORT_ERROR" }
+          elseif ("${{ steps.promote.outcome }}" -eq "failure") { $failureClass = "PROMOTION_STAGING_ERROR" }
+          elseif ("${{ steps.result_bundle.outcome }}" -eq "failure") { $failureClass = "RESULT_BUNDLE_ERROR" }
+          elseif ("${{ steps.evidence_preview.outcome }}" -eq "failure") { $failureClass = "EVIDENCE_PREVIEW_ERROR" }
+          elseif ("${{ steps.result_binding.outcome }}" -eq "failure") { $failureClass = "RESULT_BINDING_ERROR" }
+
+          function Convert-StepOutcome([string]$outcome) {
+            switch ($outcome) {
+              "success" { return "PASS" }
+              "failure" { return "FAIL" }
+              "skipped" { return "NOT_RUN" }
+              default { return "UNKNOWN" }
+            }
+          }
+
+          $status = [ordered]@{
+            factory_status = "QUARANTINED"
+            failure_class = $failureClass
+            source_revision = "${{ github.event.pull_request.head.sha || github.sha }}"
+            validation_revision = "${{ github.sha }}"
+            validation_base_revision = "${{ github.event.pull_request.base.sha || github.sha }}"
+            validators = [ordered]@{
+              factory_owned_validation = Convert-StepOutcome "${{ steps.factory_validation.outcome }}"
+              pluginval = Convert-StepOutcome "${{ steps.pluginval.outcome }}"
+              steinberg_validator = Convert-StepOutcome "${{ steps.steinberg_validator.outcome }}"
+            }
+            release_authority = $false
+          }
+          $status | ConvertTo-Json | Set-Content -Encoding utf8 factory-quarantine/failure.json
+
+          if (Test-Path generated/Candidate/factory_manifest.json) {
+            Copy-Item generated/Candidate/factory_manifest.json factory-quarantine/factory_manifest.json
+          }
+          if (Test-Path generated/Candidate/plugin_contract.json) {
+            Copy-Item generated/Candidate/plugin_contract.json factory-quarantine/plugin_contract.json
+          }
+          if (Test-Path "${{ matrix.request_path }}/factory_build_authorization.json") {
+            Copy-Item "${{ matrix.request_path }}/factory_build_authorization.json" factory-quarantine/factory_build_authorization.json
+          }
+          if (Test-Path factory-logs) {
+            Copy-Item factory-logs factory-quarantine/logs -Recurse -Force
+          }
+
+      - name: Build quarantined Result Bundle and authorization binding
+        if: failure()
+        shell: pwsh
+        run: |
+          if ((Test-Path factory-quarantine/factory_manifest.json) -and (Test-Path factory-quarantine/failure.json)) {
+            python -m juce_factory.factory.cli bundle-quarantine --manifest factory-quarantine/factory_manifest.json --failure factory-quarantine/failure.json --output factory-quarantine/factory_result_bundle.json
+            if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory Result Bundle generation failed." }
+
+            python -m automation.factory.intake factory-quarantine/factory_result_bundle.json --output-root factory-quarantine/cipi-evidence-preview
+            if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory evidence preview failed." }
+
+            python -m juce_factory.factory.authorized_build bind-result --root . --request "${{ matrix.request_path }}" --bundle factory-quarantine/factory_result_bundle.json --output factory-quarantine/authorized_build_result_binding.json
+            if ($LASTEXITCODE -ne 0) { throw "Quarantined authorized-build result binding failed." }
+          } else {
+            Write-Host "No generated Factory manifest exists; retaining authorization and infrastructure failure logs only."
+          }
+
+      - name: Upload quarantined authorized candidate
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JUCE-Factory-${{ matrix.request_id }}-QUARANTINE
+          path: factory-quarantine
+          if-no-files-found: error
+
+      - name: Upload candidate logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: JUCE-Factory-${{ matrix.request_id }}-logs
+          path: factory-logs
+          if-no-files-found: ignore
+
+      - name: Upload validation-passed authorized candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: JUCE-Factory-${{ matrix.request_id }}-VST3
+          path: factory-out
+          if-no-files-found: error

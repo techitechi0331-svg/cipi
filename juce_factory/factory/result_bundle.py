@@ -121,6 +121,8 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
     _require_sha256(data["bundle_hash"], "bundle_hash")
     if not isinstance(data["formats"], list) or not data["formats"]:
         raise ResultBundleError("formats must be a non-empty array")
+    if any(not isinstance(value, str) for value in data["formats"]):
+        raise ResultBundleError("formats entries must be strings")
     if len(set(data["formats"])) != len(data["formats"]) or any(
         value != "VST3" for value in data["formats"]
     ):

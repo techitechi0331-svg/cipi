@@ -64,6 +64,8 @@ def load_authorized_request(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     repo_root = Path(root).resolve()
     request = Path(request_dir)
+    if not request.is_absolute():
+        request = repo_root / request
     resolved = _safe_request_dir(request, repo_root)
 
     contract_path = resolved / "plugin_contract.json"
@@ -77,7 +79,7 @@ def load_authorized_request(
     unexpected = sorted(
         entry.name
         for entry in resolved.iterdir()
-        if entry.is_file() and entry.name not in EXPECTED_FILES
+        if entry.name not in EXPECTED_FILES
     )
     if unexpected:
         raise AuthorizedBuildIntakeError(
@@ -86,9 +88,14 @@ def load_authorized_request(
 
     contract = _load_json(contract_path)
     authorization = _load_json(authorization_path)
-    validate_contract(contract)
-    validate_authorization(authorization)
-    verify_authorization_sources(authorization, root=repo_root)
+    try:
+        validate_contract(contract)
+        validate_authorization(authorization)
+        verify_authorization_sources(authorization, root=repo_root)
+    except (ContractError, FactoryBuildAuthorizationError) as exc:
+        raise AuthorizedBuildIntakeError(
+            f"authorized request provenance validation failed: {exc}"
+        ) from exc
 
     semantic_hash = contract_sha256(contract)
     if semantic_hash != authorization["contract_sha256"]:

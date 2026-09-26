@@ -217,12 +217,26 @@ jobs:
           elseif ("${{ steps.result_bundle.outcome }}" -eq "failure") { $failureClass = "RESULT_BUNDLE_ERROR" }
           elseif ("${{ steps.evidence_preview.outcome }}" -eq "failure") { $failureClass = "EVIDENCE_PREVIEW_ERROR" }
 
+          function Convert-StepOutcome([string]$outcome) {
+            switch ($outcome) {
+              "success" { return "PASS" }
+              "failure" { return "FAIL" }
+              "skipped" { return "NOT_RUN" }
+              default { return "UNKNOWN" }
+            }
+          }
+
           $status = [ordered]@{
             factory_status = "QUARANTINED"
             failure_class = $failureClass
             source_revision = "${{ github.event.pull_request.head.sha || github.sha }}"
             validation_revision = "${{ github.sha }}"
             validation_base_revision = "${{ github.event.pull_request.base.sha || github.sha }}"
+            validators = [ordered]@{
+              factory_owned_validation = Convert-StepOutcome "${{ steps.factory_validation.outcome }}"
+              pluginval = Convert-StepOutcome "${{ steps.pluginval.outcome }}"
+              steinberg_validator = Convert-StepOutcome "${{ steps.steinberg_validator.outcome }}"
+            }
             release_authority = $false
           }
           $status | ConvertTo-Json | Set-Content -Encoding utf8 factory-quarantine/failure.json

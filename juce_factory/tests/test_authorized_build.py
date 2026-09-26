@@ -322,7 +322,7 @@ class AuthorizedBuildIntakeTests(unittest.TestCase):
             review["authorization"]["listening_confirmed"] = True
             review_path.write_text(yaml.safe_dump(review), encoding="utf-8")
 
-            with self.assertRaises(Exception):
+            with self.assertRaises(AuthorizedBuildIntakeError):
                 load_authorized_request(request, root=root)
 
     def test_unexpected_request_file_is_rejected(self):
@@ -335,6 +335,19 @@ class AuthorizedBuildIntakeTests(unittest.TestCase):
             )
             (request / "release_me.txt").write_text("no", encoding="utf-8")
 
+            with self.assertRaises(AuthorizedBuildIntakeError):
+                load_authorized_request(request, root=root)
+
+
+    def test_unexpected_request_directory_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            request = self._request(
+                root,
+                pid="PLUGIN-RP-AUTHORIZED-005B",
+                request_id="authorized-005b",
+            )
+            (request / "extra").mkdir()
             with self.assertRaises(AuthorizedBuildIntakeError):
                 load_authorized_request(request, root=root)
 

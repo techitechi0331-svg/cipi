@@ -17,22 +17,26 @@
   "human_gates": [],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [],
-    "claimed_count": 0,
-    "claimed_jobs": [],
+    "claimed_branches": [
+      "research-bot/VO-PREP-PLOSIVE-THRESHOLD-R2-001/auto-28a7cca784b2"
+    ],
+    "claimed_count": 1,
+    "claimed_jobs": [
+      "VO-PREP-PLOSIVE-THRESHOLD-R2-001"
+    ],
     "dependency_blocked_count": 0,
     "ready_job": {
-      "branch": "research-bot/VO-PREP-PLOSIVE-THRESHOLD-R2-001/auto-28a7cca784b2",
-      "job_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+      "branch": "research-bot/VO-PREP-SIBILANCE-THRESHOLD-R2-001/auto-f80ef1346885",
+      "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
       "kind": "LOCAL_RESEARCH",
-      "priority": 99
+      "priority": 98
     }
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VO-PREP-PLOSIVE-THRESHOLD-R2-001/auto-28a7cca784b2",
-    "job_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+    "branch": "research-bot/VO-PREP-SIBILANCE-THRESHOLD-R2-001/auto-f80ef1346885",
+    "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
     "kind": "LOCAL_RESEARCH",
-    "priority": 99
+    "priority": 98
   }
 }

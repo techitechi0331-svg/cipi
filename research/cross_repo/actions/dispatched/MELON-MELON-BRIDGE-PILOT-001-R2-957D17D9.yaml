@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-MELON-BRIDGE-PILOT-001-R2-957D17D9
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -22,7 +22,7 @@ inputs:
     macro runs without duplicate-job generation, authority escalation, blind-holdout
     use, or product integration?","track_id":"MELON-BRIDGE-PILOT-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -34,3 +34,7 @@ continuation_fingerprint: 957d17d98fdd52e1338c40ccf8d863abcf50baa484a88e57ae4798
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 36248650100
+dispatched_at: '2026-09-26T14:37:12.263843Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

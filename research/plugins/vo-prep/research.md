@@ -121,3 +121,13 @@ Continuation snapshots:
 - `research/plugins/vo-prep/evidence/2026-09-26-no-wait-checkpoint.md`
 
 These files preserve the current product boundary, measured Macro R1/R2 state, Plosive/Sibilance adversarial and Threshold R2 results, event-only Vo.Prep -> VoPriPro compatibility, scope-frozen compressor research, blocked gates, and the required next-chat startup order.
+
+
+## 2026-09-26 resumed R3 / actual-VST3 checkpoint
+
+Continuation evidence:
+- `research/plugins/vo-prep/evidence/2026-09-26-resume-r3-vst3-checkpoint.md`
+
+This continuation completed assistant review of the Plosive 0.70 and Sibilance 0.60 R2 candidates, installed the phone-aligned real-vocal R3 harness, and installed an actual binary Vo.Prep -> VoPriPro VST3 chain gate. Product thresholds remain at 0.75 / 0.65.
+
+The first actual-chain workflow correctly entered `BLOCKED_EXTERNAL` because CIPI Actions lacks the cross-repository credential needed to read the private product repositories. No binary compatibility conclusion was promoted. Real-vocal R3 remains blocked on an appropriately authorised phone-aligned singing source. Human listening and Cubase Pro 14 remain open.

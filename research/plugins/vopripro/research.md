@@ -225,3 +225,19 @@ Important retained positives:
 Interpretation:
 
 This does **not** reject the Vo.Prep -> VoPriPro product ordering. It rejects advancing the tested all-modules 50% chain under the assumption that every event front-end should materially reduce downstream VoPriPro peak GR and stay inside the v2 recovery budget. The next independent question is module isolation: Plosive-only vs Macro-only vs Plosive+Macro on the source-derived plosive positive control. No v2 threshold is relaxed after the result.
+
+
+## 2026-09-26 Plosive / Macro decomposition queued
+
+Research Job:
+- `VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001`
+
+The v2 failure is now decomposed without changing either product:
+- dry -> VoPriPro;
+- Plosive 50% only -> VoPriPro;
+- Macro Level 50% only -> VoPriPro;
+- Plosive 50% + Macro Level 50% -> VoPriPro.
+
+The experiment asks whether Plosive Guard performs localized event cleanup while remaining nearly neutral to VoPriPro GR, and whether Macro Level accounts for most of the ~0.402 dB post-event GR shift observed in v2. It uses the same source-derived plosive positive control and the same 44.1/48/88.2/96 kHz matrix.
+
+This is a diagnostic decomposition, not a product-adoption gate. Failure is retained rather than repaired by post-hoc threshold changes.

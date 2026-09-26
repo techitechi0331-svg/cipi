@@ -30,6 +30,7 @@ completed:
   - revision
 
 unresolved:
+  - Vo.Prep -> VoPriPro synthetic integration v1 is ITERATE: the ad-hoc plosive case failed to engage Plosive Guard, and the sibilance downstream-GR benefit narrowly missed its unchanged gate. A source-derived positive-control v2 screen is required.
   - Existing Vo.Prep Amount R2-R4 product mappings are not eligible for direct transfer; current VoPriPro AMOUNT remains baseline while its own perceptual uniformity still needs listening/generalisation evidence.
   - Direct fixed 8/70 ms ballistics transfer was rejected by short-transient, 100 ms body, long-body and repeated-phrase gates; current Character timing remains baseline.
   - Direct Vo.Prep Slow-RMS/Fast-Peak detector transfer v1 was rejected by predeclared sustained-body and short-transient gates; current VoPriPro detector remains baseline.
@@ -41,7 +42,7 @@ unresolved:
   - Final precision review remains pending after subjective and target-host evidence.
 
 next_stage: audio_ab
-why_next: "Current main remains the protected production baseline and has passed the existing objective gates. Human level-matched listening remains the decisive product gate. Direct detector fusion and fixed 8/70 ms ballistics were rejected, and existing Vo.Prep Amount mappings do not justify direct transfer. The next cross-product objective question is Vo.Prep -> VoPriPro integration without changing product main."
+why_next: "Current main remains the protected production baseline and has passed the existing objective gates. Human level-matched listening remains the decisive product gate. Direct detector fusion and fixed 8/70 ms ballistics were rejected, existing Vo.Prep Amount mappings do not justify direct transfer, and integration v1 requires a source-derived positive-control iteration before any actual cross-product product claim."
 next_confirmation: "Whether Natural50 should be kept, revised, or rolled back after strict level-matched listening, and whether any Vo.Prep-derived transfer candidate earns a separate same-corpus product experiment."
 
 blockers:

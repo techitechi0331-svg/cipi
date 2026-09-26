@@ -708,8 +708,8 @@ def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[s
     generated_jobs = 0
     melon_runs = 0
     rejected = 0
-    duplicate = counters.get("duplicate_suppressions", 0)
-    continuation_candidates = counters.get("continuation_candidates", 0)
+    duplicate = 0
+    continuation_candidates = 0
     stop_reasons: dict[str, str] = {}
 
     for track_id in active:
@@ -720,6 +720,8 @@ def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[s
         budgets[track_id] = _track_budget_status(tracks[track_id], records)
         generated_jobs += len(list(_job_dir(root, track_id).glob("*.yaml"))) if _job_dir(root, track_id).exists() else 0
         rejected += sum(len(d.get("rejections") or []) for d in decisions)
+        continuation_candidates += sum(int(d.get("proposal_count", 0) or 0) for d in decisions)
+        duplicate += sum(int(d.get("duplicate_suppressions", 0) or 0) for d in decisions)
         human_gates += sum(1 for d in decisions if d.get("stop_reason") == "HUMAN_GATE")
         threshold = float(tracks[track_id].get("minimum_improvement", 0.01))
         no_improvement += _no_improvement_count(records, threshold)
@@ -823,6 +825,9 @@ def reconcile(root: Path) -> dict[str, Any]:
             "accepted_candidate_id": accepted.get("id") if isinstance(accepted, dict) else None,
             "selected_architecture": ((accepted.get("fingerprint_material") or {}).get("architecture") if isinstance(accepted, dict) else None),
             "rejections": list(evaluation.get("rejections") or []),
+            "proposal_count": len(data.get("continuation_candidates") or []),
+            "duplicate_suppressions": int(evaluation.get("duplicate_suppressions", 0) or 0),
+            "human_gate_proposals": int(evaluation.get("human_gate_proposals", 0) or 0),
             "processed_artifact_hash": artifact_hash,
             "authority": "CIPI_CONTINUATION_EVALUATION",
             "automatic_product_decision": False,

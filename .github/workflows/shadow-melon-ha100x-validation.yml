@@ -1,0 +1,27 @@
+name: Shadow MELON HA100X Validation
+
+on:
+  pull_request:
+    paths:
+      - "melon/ha100x_research.py"
+      - "integration/cipi/macro.py"
+      - "integration/cipi/research_driver.py"
+      - "tests/test_ha100x_autonomous_research.py"
+      - "tests/test_macro_bridge.py"
+      - ".github/workflows/shadow-melon-ha100x-validation.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile exact shadowed modules
+        run: python -m compileall -q melon/ha100x_research.py integration/cipi/macro.py integration/cipi/research_driver.py
+      - name: Test HA100X domain adapter
+        run: python -m unittest discover -s tests -p "test_ha100x_autonomous_research.py" -v
+      - name: Test macro bridge compatibility
+        run: python -m unittest discover -s tests -p "test_macro_bridge.py" -v

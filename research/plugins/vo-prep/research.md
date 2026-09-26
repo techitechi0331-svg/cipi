@@ -112,3 +112,12 @@ Interpretation:
 - final product lock still requires integrated level-matched listening and target-host QA.
 
 Transparent-compressor productization is frozen. The next formal research priorities are Plosive/Sibilance false-positive/false-negative refinement and Vo.Prep -> VoPriPro integrated validation.
+
+
+## 2026-09-26 chat handoff
+
+Continuation snapshots:
+- `research/plugins/vo-prep/evidence/2026-09-26-chat-handoff-snapshot.md`
+- `research/plugins/vo-prep/evidence/2026-09-26-no-wait-checkpoint.md`
+
+These files preserve the current product boundary, measured Macro R1/R2 state, Plosive/Sibilance adversarial and Threshold R2 results, event-only Vo.Prep -> VoPriPro compatibility, scope-frozen compressor research, blocked gates, and the required next-chat startup order.

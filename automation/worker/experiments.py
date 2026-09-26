@@ -59,6 +59,8 @@ ADAPTERS = {
     "voprep_sidechain_hpf_real_v1",
     "voprep_plosive_adversarial_v1",
     "voprep_sibilance_adversarial_v1",
+    "voprep_plosive_threshold_r2_v1",
+    "voprep_sibilance_threshold_r2_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3130,6 +3132,122 @@ def _voprep_sibilance_adversarial(repo_root: Path, timeout_seconds: int) -> dict
     }
 
 
+
+def _voprep_plosive_threshold_r2(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "plosive_threshold_calibration_r2.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-plosive-r2-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Plosive R2 subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+        result = json.loads((out / "plosive_r2_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "plosive_r2_results.json": (out / "plosive_r2_results.json").read_text(encoding="utf-8"),
+            "plosive_r2_report.md": (out / "plosive_r2_report.md").read_text(encoding="utf-8"),
+            "plosive_r2_matrix.csv": (out / "plosive_r2_matrix.csv").read_text(encoding="utf-8"),
+        }
+    selected = result.get("selected") or {}
+    accepted = result.get("decision") == "GO_TO_REAL_VOCAL"
+    metrics = {
+        "decision": result.get("decision"),
+        "baseline_threshold": result.get("baseline_threshold"),
+        "candidate_thresholds": result.get("candidate_thresholds"),
+        "selected_threshold": selected.get("threshold"),
+        "selected_gates": selected.get("gates", {}),
+        "summaries": result.get("summaries", []),
+        "feature_family_changed": bool(result.get("feature_family_changed", True)),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/plosive_threshold_calibration_r2.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Bounded Plosive Guard R2 activation-threshold calibration over the "
+            "frozen v2.2 feature family. The highest passing threshold may advance "
+            "to real-vocal validation only; no product DSP is mutated."
+        ),
+    }
+
+
+def _voprep_sibilance_threshold_r2(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "sibilance_threshold_calibration_r2.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-sibilance-r2-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Sibilance R2 subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+        result = json.loads((out / "sibilance_r2_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "sibilance_r2_results.json": (out / "sibilance_r2_results.json").read_text(encoding="utf-8"),
+            "sibilance_r2_report.md": (out / "sibilance_r2_report.md").read_text(encoding="utf-8"),
+            "sibilance_r2_matrix.csv": (out / "sibilance_r2_matrix.csv").read_text(encoding="utf-8"),
+        }
+    selected = result.get("selected") or {}
+    accepted = result.get("decision") == "GO_TO_REAL_VOCAL"
+    metrics = {
+        "decision": result.get("decision"),
+        "baseline_threshold": result.get("baseline_threshold"),
+        "candidate_thresholds": result.get("candidate_thresholds"),
+        "selected_threshold": selected.get("threshold"),
+        "selected_gates": selected.get("gates", {}),
+        "summaries": result.get("summaries", []),
+        "relative_false_occupancy_ratio_removed": bool(result.get("relative_false_occupancy_ratio_removed", False)),
+        "feature_family_changed": bool(result.get("feature_family_changed", True)),
+        "raw_audio_persisted": bool(result.get("raw_audio_persisted", True)),
+    }
+    return {
+        "metrics": metrics,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/sibilance_threshold_calibration_r2.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Bounded Sibilance Guard R2 activation-threshold calibration over the "
+            "frozen v2.3 feature family. V1's undefined 0/0 relative false-occupancy "
+            "gate is not reused; R2 uses predeclared absolute negative-occupancy gates."
+        ),
+    }
+
+
 def _voprep_sidechain_hpf_pilot(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     script = (
         repo_root / "research" / "plugins" / "vo-prep"
@@ -3765,6 +3883,10 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _voprep_plosive_adversarial(repo_root, timeout_seconds)
     if name == "voprep_sibilance_adversarial_v1":
         return _voprep_sibilance_adversarial(repo_root, timeout_seconds)
+    if name == "voprep_plosive_threshold_r2_v1":
+        return _voprep_plosive_threshold_r2(repo_root, timeout_seconds)
+    if name == "voprep_sibilance_threshold_r2_v1":
+        return _voprep_sibilance_threshold_r2(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_normative_prior_v1":
         return _vocal_resonance_clean_normative_prior(repo_root, timeout_seconds)
     if name == "vocal_resonance_self_counterfactual_inpainting_v1":

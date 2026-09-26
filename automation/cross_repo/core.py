@@ -90,6 +90,20 @@ def load_registry(path: Path) -> dict[str, Any]:
             retry = workflow.get("auto_retry_transient", defaults.get("auto_retry_transient", True))
             if not isinstance(retry, bool):
                 raise ValueError(f"workflow {repo_key}/{workflow_key}.auto_retry_transient must be bool")
+            allowed_inputs = workflow.get("allowed_inputs")
+            required_inputs = workflow.get("required_inputs")
+            if allowed_inputs is not None:
+                if not isinstance(allowed_inputs, list) or not all(isinstance(x, str) and x for x in allowed_inputs):
+                    raise ValueError(f"workflow {repo_key}/{workflow_key}.allowed_inputs must be a string list")
+                if len(set(allowed_inputs)) != len(allowed_inputs):
+                    raise ValueError(f"workflow {repo_key}/{workflow_key}.allowed_inputs contains duplicates")
+            if required_inputs is not None:
+                if not isinstance(required_inputs, list) or not all(isinstance(x, str) and x for x in required_inputs):
+                    raise ValueError(f"workflow {repo_key}/{workflow_key}.required_inputs must be a string list")
+                if len(set(required_inputs)) != len(required_inputs):
+                    raise ValueError(f"workflow {repo_key}/{workflow_key}.required_inputs contains duplicates")
+                if allowed_inputs is not None and not set(required_inputs) <= set(allowed_inputs):
+                    raise ValueError(f"workflow {repo_key}/{workflow_key}.required_inputs must be allowed")
     return data
 
 
@@ -163,6 +177,16 @@ def validate_action(action: dict[str, Any], registry: dict[str, Any]) -> list[st
                 errors.append("input keys must be non-empty strings")
             if not isinstance(value, (str, int, float, bool)):
                 errors.append(f"input {key!r} must be scalar")
+        allowed_inputs = workflow.get("allowed_inputs")
+        if isinstance(allowed_inputs, list):
+            unknown = sorted(set(inputs) - set(allowed_inputs))
+            if unknown:
+                errors.append(f"unsupported workflow inputs: {unknown}")
+        required_inputs = workflow.get("required_inputs")
+        if isinstance(required_inputs, list):
+            missing_inputs = sorted(set(required_inputs) - set(inputs))
+            if missing_inputs:
+                errors.append(f"missing required workflow inputs: {missing_inputs}")
 
     _validate_id_list(action, "depends_on_jobs", JOB_ID_RE, errors)
     _validate_id_list(action, "depends_on_actions", ACTION_ID_RE, errors)

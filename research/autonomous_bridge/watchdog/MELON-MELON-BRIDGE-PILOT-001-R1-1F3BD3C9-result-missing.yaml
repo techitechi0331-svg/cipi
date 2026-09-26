@@ -1,0 +1,10 @@
+schema_version: '1.0'
+action_id: MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9
+track_id: MELON-BRIDGE-PILOT-001
+run_id: 36248592915
+state: RESULT_MISSING
+reason: completed MELON research action has no ingested macro_result.json
+authority: AUTONOMOUS_BRIDGE_WATCHDOG
+automatic_retry: false
+automatic_product_decision: false
+immutable: true

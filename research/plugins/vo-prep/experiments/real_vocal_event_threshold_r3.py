@@ -202,17 +202,20 @@ def evaluate_phone(
     sample_rate: int,
     channels: int,
     pcm: array.array,
+    is_target: bool,
 ) -> dict[str, float | bool]:
     total_frames = len(pcm) // channels
     seg_start = max(0, int(math.floor((phone.start_s - config.pre_roll_s) * sample_rate)))
     seg_end = min(total_frames, int(math.ceil((phone.end_s + config.post_roll_s) * sample_rate)))
+    pad_before = config.pad_before_s if is_target else 0.0
+    pad_after = config.pad_after_s if is_target else 0.0
     eval_start = max(
         seg_start,
-        int(math.floor((phone.start_s - config.pad_before_s) * sample_rate)),
+        int(math.floor((phone.start_s - pad_before) * sample_rate)),
     )
     eval_end = min(
         seg_end,
-        int(math.ceil((phone.end_s + config.pad_after_s) * sample_rate)),
+        int(math.ceil((phone.end_s + pad_after) * sample_rate)),
     )
 
     baseline, candidate = detector_pair(config, sample_rate)
@@ -222,6 +225,8 @@ def evaluate_phone(
     candidate_active_samples = 0
     candidate_run = 0
     candidate_max_run = 0
+    previous_base_active = False
+    previous_cand_active = False
 
     for frame in range(seg_start, seg_end):
         x = mono_sample(pcm, channels, frame)
@@ -230,15 +235,19 @@ def evaluate_phone(
 
         if eval_start <= frame < eval_end:
             if base_active:
-                baseline_hit = True
                 baseline_active_samples += 1
+                if not previous_base_active:
+                    baseline_hit = True
             if cand_active:
-                candidate_hit = True
                 candidate_active_samples += 1
                 candidate_run += 1
                 candidate_max_run = max(candidate_max_run, candidate_run)
+                if not previous_cand_active:
+                    candidate_hit = True
             else:
                 candidate_run = 0
+        previous_base_active = base_active
+        previous_cand_active = cand_active
 
     eval_frames = max(1, eval_end - eval_start)
     return {
@@ -528,6 +537,7 @@ def main() -> int:
                         sample_rate,
                         channels,
                         pcm,
+                        True,
                     ),
                 )
             for phone in confounders:
@@ -540,6 +550,7 @@ def main() -> int:
                         sample_rate,
                         channels,
                         pcm,
+                        False,
                     ),
                 )
 

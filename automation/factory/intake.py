@@ -12,6 +12,8 @@ from juce_factory.factory.result_bundle import validate_result_bundle
 
 EVIDENCE_SCHEMA_VERSION = "1.0"
 _PLUGIN_ID = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_GIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 
 
 class FactoryEvidenceIntakeError(ValueError):
@@ -103,6 +105,21 @@ def validate_evidence_record(record: dict[str, Any]) -> None:
         raise FactoryEvidenceIntakeError("unsupported Factory evidence schema_version")
     if record["source_system"] != "JUCE_FACTORY":
         raise FactoryEvidenceIntakeError("unexpected Factory evidence source_system")
+    if not isinstance(record["plugin_id"], str) or not _PLUGIN_ID.fullmatch(record["plugin_id"]):
+        raise FactoryEvidenceIntakeError("Factory evidence plugin_id is invalid")
+    if not isinstance(record["plugin_version"], str) or not record["plugin_version"].strip():
+        raise FactoryEvidenceIntakeError("Factory evidence plugin_version must be non-empty")
+    for key in ("source_bundle_hash", "contract_sha256", "generated_source_sha256", "record_hash"):
+        if not isinstance(record[key], str) or not _SHA256.fullmatch(record[key]):
+            raise FactoryEvidenceIntakeError(f"{key} must be a lowercase SHA-256 digest")
+    for key in ("source_revision", "validation_revision", "validation_base_revision"):
+        if not isinstance(record[key], str) or not _GIT_SHA.fullmatch(record[key]):
+            raise FactoryEvidenceIntakeError(f"{key} must be a lowercase 40-character Git SHA")
+    expected_id = f"FACTORY-{record['source_bundle_hash'][:16].upper()}"
+    if record["evidence_id"] != expected_id:
+        raise FactoryEvidenceIntakeError("Factory evidence_id does not match source bundle hash")
+    if not isinstance(record["claim"], str) or len(record["claim"].strip()) < 20:
+        raise FactoryEvidenceIntakeError("Factory evidence claim is too short")
     if record["factory_status"] not in {"VALIDATION_PASS", "QUARANTINED"}:
         raise FactoryEvidenceIntakeError("unsupported Factory evidence status")
     if record["evidence_type"] != "MEASURED":

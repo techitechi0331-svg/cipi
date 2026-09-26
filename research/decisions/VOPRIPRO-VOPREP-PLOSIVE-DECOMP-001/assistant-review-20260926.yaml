@@ -1,0 +1,53 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:assistant-review-20260926
+job_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001
+source_run: research/runs/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+parent_decision_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:auto
+rationale: >-
+  The predeclared decomposition gates all passed. Plosive-only processing reduced
+  the source-derived plosive event RMS by at least about 0.795 dB while changing
+  VoPriPro event peak GR by at most about 0.0126 dB and post-event mean GR by at
+  most about 0.0211 dB. Macro-only processing produced at least about 0.4231 dB
+  post-event VoPriPro mean-GR shift and explained more than the full combined-shift
+  magnitude after the small opposite-signed Plosive contribution; the additive
+  residual was only about 0.00013 dB. This supports Macro Level as the dominant
+  source of the v2 plosive recovery residual for this synthetic positive-control
+  case. The result is diagnostic only and does not establish real-vocal or VST3
+  behavior.
+scope: >-
+  Confirm the module-isolation result for the source-derived synthetic plosive
+  positive control across 44.1/48/88.2/96 kHz. Continue research using an
+  event-only Vo.Prep chain with Macro Level disabled before VoPriPro; do not
+  promote a perceptual product claim.
+declared_rejection_criteria:
+  - Any localization, attribution, finite-state, or sample-rate gate fails.
+triggered_criteria: []
+retained_findings:
+  - Plosive-only probability was at least about 0.8498 and reduction at least about 1.1518 dB.
+  - Plosive-only event RMS attenuation was at least about 0.7945 dB.
+  - Plosive-only absolute VoPriPro event peak-GR change stayed below about 0.0126 dB.
+  - Plosive-only absolute post-event VoPriPro mean-GR shift stayed below about 0.0211 dB.
+  - Macro-only post-event VoPriPro mean-GR shift was at least about 0.4231 dB with about 1.0668 dB Macro movement.
+  - Macro accounted for at least about 105 percent of the combined residual magnitude because Plosive-only contributed a small opposite-signed shift.
+  - Additive decomposition residual stayed below about 0.00013 dB and sample-rate spread was negligible.
+reusable_findings:
+  - A front-end plosive processor can perform localized event cleanup while remaining effectively neutral to a downstream compressor already protected against LF dominance.
+  - Slow phrase-level gain movement should be isolated from event processing when diagnosing cross-stage recovery or double-processing.
+revisit_if:
+  - Actual VST3 processing disagrees materially with the source-code translation.
+  - Real-vocal listening reveals audible interaction not represented by the synthetic positive control.
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOPRIPRO-VOPREP-INTEGRATION-002
+    - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001
+  related_decisions:
+    - VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926
+    - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:auto
+created_at: '2026-09-26'
+immutable: true
+review_gaps: []

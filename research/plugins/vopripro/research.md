@@ -241,3 +241,40 @@ The v2 failure is now decomposed without changing either product:
 The experiment asks whether Plosive Guard performs localized event cleanup while remaining nearly neutral to VoPriPro GR, and whether Macro Level accounts for most of the ~0.402 dB post-event GR shift observed in v2. It uses the same source-derived plosive positive control and the same 44.1/48/88.2/96 kHz matrix.
 
 This is a diagnostic decomposition, not a product-adoption gate. Failure is retained rather than repaired by post-hoc threshold changes.
+
+
+## 2026-09-26 Plosive / Macro decomposition review
+
+Run:
+- `VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001`
+- `research/runs/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1`
+
+Decision:
+- **ITERATE — decomposition hypothesis supported inside the synthetic scope.**
+
+Key results:
+- Plosive-only event RMS attenuation >= **0.7945 dB**;
+- Plosive-only VoPriPro event peak-GR change <= **0.0126 dB** absolute;
+- Plosive-only post-event VoPriPro mean-GR shift <= **0.0211 dB** absolute;
+- Macro-only post-event VoPriPro mean-GR shift >= **0.4231 dB**;
+- Macro-only gain movement >= **1.0668 dB**;
+- Macro explained >= **105%** of the combined residual magnitude because Plosive-only contributed a small opposite-signed shift;
+- additive decomposition residual <= **0.00013 dB**;
+- sample-rate dependence was negligible.
+
+Interpretation:
+
+For the source-derived plosive positive control, Plosive Guard is localized and effectively neutral to VoPriPro Natural50 GR. The failed v2 recovery gate is dominated by Macro Level, not Plosive Guard. This is diagnostic evidence only; human listening and actual VST3/Cubase cross-product validation remain open.
+
+## 2026-09-26 Event-only integration screen queued
+
+Research Job:
+- `VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001`
+
+Candidate chain:
+- Vo.Prep Plosive **50%**
+- Vo.Prep Macro Level **0%**
+- Vo.Prep Sibilance **50%**
+- VoPriPro Natural50
+
+This is a new compatibility hypothesis, not a relaxation of v2. Plosive is now judged by localized cleanup plus downstream neutrality because VoPriPro already uses an 80 Hz sidechain HPF; Sibilance retains a downstream-GR benefit gate. Neutral, phrase-step, recovery and sample-rate gates remain explicit.

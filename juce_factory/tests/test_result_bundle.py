@@ -16,6 +16,7 @@ from juce_factory.factory.contract import load_contract
 from juce_factory.factory.generator import generate_project
 from juce_factory.factory.result_bundle import (
     ResultBundleError,
+    _hash_payload,
     build_pass_bundle,
     build_quarantine_bundle,
     validate_result_bundle,
@@ -99,7 +100,29 @@ class FactoryResultBundleTests(unittest.TestCase):
                 hashes,
             )
             validate_result_bundle(bundle)
+            self.assertEqual(bundle["schema_version"], "1.1")
             self.assertEqual(bundle["factory_status"], "VALIDATION_PASS")
+            self.assertEqual(bundle["dsp_module_id"], manifest["dsp_template"])
+            self.assertEqual(
+                bundle["dsp_implementation_id"],
+                manifest["dsp_implementation_id"],
+            )
+            self.assertEqual(
+                bundle["dsp_certification_status"],
+                "FACTORY_CERTIFIED",
+            )
+            self.assertEqual(
+                bundle["dsp_validation_profile"],
+                manifest["dsp_validation_profile"],
+            )
+            self.assertEqual(
+                bundle["dsp_module_spec_sha256"],
+                manifest["dsp_module_spec_sha256"],
+            )
+            self.assertEqual(
+                bundle["dsp_module_registry_sha256"],
+                manifest["dsp_module_registry_sha256"],
+            )
             self.assertFalse(bundle["promotion_authority"])
             self.assertFalse(bundle["product_release_authority"])
             self.assertFalse(bundle["cubase_confirmed"])
@@ -111,8 +134,18 @@ class FactoryResultBundleTests(unittest.TestCase):
 
             record = build_evidence_record(bundle)
             validate_evidence_record(record)
+            self.assertEqual(record["schema_version"], "1.1")
             self.assertEqual(record["evidence_type"], "MEASURED")
             self.assertEqual(record["scope"], "manufacturing_and_host_safety_only")
+            for key in (
+                "dsp_module_id",
+                "dsp_implementation_id",
+                "dsp_certification_status",
+                "dsp_validation_profile",
+                "dsp_module_spec_sha256",
+                "dsp_module_registry_sha256",
+            ):
+                self.assertEqual(record[key], bundle[key])
             self.assertFalse(record["promotion_requested"])
             self.assertEqual(record["source_revision"], "1" * 40)
             self.assertEqual(record["validation_revision"], "2" * 40)
@@ -124,6 +157,125 @@ class FactoryResultBundleTests(unittest.TestCase):
             self.assertEqual(first, second)
             self.assertEqual(first.read_bytes(), second.read_bytes())
 
+
+
+    def test_legacy_manifest_emits_v1_0_bundle_and_evidence(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            for key in (
+                "dsp_implementation_id",
+                "dsp_certification_status",
+                "dsp_validation_profile",
+                "dsp_module_spec_sha256",
+                "dsp_module_registry_sha256",
+            ):
+                manifest.pop(key)
+            (out / "factory_manifest.json").write_text(
+                json.dumps(manifest, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            self.assertEqual(bundle["schema_version"], "1.0")
+            for key in (
+                "dsp_module_id",
+                "dsp_implementation_id",
+                "dsp_certification_status",
+                "dsp_validation_profile",
+                "dsp_module_spec_sha256",
+                "dsp_module_registry_sha256",
+            ):
+                self.assertNotIn(key, bundle)
+
+            record = build_evidence_record(bundle)
+            self.assertEqual(record["schema_version"], "1.0")
+            self.assertNotIn("dsp_module_id", record)
+            validate_evidence_record(record)
+
+    def test_partial_manifest_module_provenance_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            manifest.pop("dsp_module_registry_sha256")
+            (out / "factory_manifest.json").write_text(
+                json.dumps(manifest, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            with self.assertRaises(ResultBundleError):
+                build_pass_bundle(
+                    out / "factory_manifest.json",
+                    report,
+                    provenance,
+                    hashes,
+                )
+
+    def test_v1_1_module_hash_tamper_is_rejected_even_with_fresh_bundle_hash(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            bundle["dsp_module_spec_sha256"] = "not-a-sha"
+            bundle["bundle_hash"] = _hash_payload(bundle)
+            with self.assertRaises(ResultBundleError):
+                validate_result_bundle(bundle)
+
+    def test_v1_0_bundle_rejects_v1_1_module_field_injection(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            for key in (
+                "dsp_implementation_id",
+                "dsp_certification_status",
+                "dsp_validation_profile",
+                "dsp_module_spec_sha256",
+                "dsp_module_registry_sha256",
+            ):
+                manifest.pop(key)
+            (out / "factory_manifest.json").write_text(
+                json.dumps(manifest, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            self.assertEqual(bundle["schema_version"], "1.0")
+            bundle["dsp_module_id"] = "golden_gain_v1"
+            bundle["bundle_hash"] = _hash_payload(bundle)
+            with self.assertRaises(ResultBundleError):
+                validate_result_bundle(bundle)
+
+    def test_v1_1_evidence_module_hash_tamper_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            out, manifest = self._generated(root / "plugin")
+            report, provenance, hashes = self._pass_inputs(out, manifest)
+            bundle = build_pass_bundle(
+                out / "factory_manifest.json",
+                report,
+                provenance,
+                hashes,
+            )
+            record = build_evidence_record(bundle)
+            record["dsp_module_registry_sha256"] = "bad"
+            with self.assertRaises(FactoryEvidenceIntakeError):
+                validate_evidence_record(record)
 
     def test_pass_bundle_requires_explicit_validation_revisions(self):
         with tempfile.TemporaryDirectory() as td:
@@ -214,6 +366,9 @@ class FactoryResultBundleTests(unittest.TestCase):
                 out / "factory_manifest.json",
                 failure_path,
             )
+            self.assertEqual(bundle["schema_version"], "1.1")
+            self.assertEqual(bundle["dsp_module_id"], "golden_gain_v1")
+            self.assertEqual(bundle["dsp_certification_status"], "FACTORY_CERTIFIED")
             self.assertEqual(bundle["validators"]["factory_owned_validation"], "PASS")
             self.assertEqual(bundle["validators"]["pluginval"], "FAIL")
             self.assertEqual(bundle["validators"]["steinberg_validator"], "NOT_RUN")

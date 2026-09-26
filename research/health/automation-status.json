@@ -12,28 +12,30 @@
     "bridge_version": "cipi-autonomous-research-bridge/1.0",
     "budget_status": {
       "MELON-BRIDGE-PILOT-001": {
-        "candidates": 9,
+        "candidates": 17,
         "candidates_limit": 36,
-        "loop_depth": 1,
+        "loop_depth": 2,
         "loop_depth_limit": 3,
-        "runs": 1,
+        "runs": 2,
         "runs_limit": 3,
         "runtime_limit_seconds": 900.0,
-        "runtime_seconds": 17.875
+        "runtime_seconds": 37.98500000000058
       }
     },
-    "continuation_candidates": 1,
+    "continuation_candidates": 2,
     "current_loop_depth": {
-      "MELON-BRIDGE-PILOT-001": 1
+      "MELON-BRIDGE-PILOT-001": 2
     },
     "duplicate_suppressions": 0,
-    "generated_jobs": 2,
+    "generated_jobs": 3,
     "human_gates": 0,
     "invalid_results": 0,
-    "melon_runs": 1,
-    "next_scheduler_action": "NO_READY_WORK",
-    "no_improvement_count": 1,
-    "queued_actions": [],
+    "melon_runs": 2,
+    "next_scheduler_action": "MELON-MELON-BRIDGE-PILOT-001-R3-35A965E3",
+    "no_improvement_count": 2,
+    "queued_actions": [
+      "MELON-MELON-BRIDGE-PILOT-001-R3-35A965E3"
+    ],
     "rejected_continuations": 0,
     "result_missing": 0,
     "runner_wait": 0,
@@ -45,13 +47,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "MELON-MELON-BRIDGE-PILOT-001-R3-35A965E3",
+      "kind": "CROSS_REPO",
+      "priority": 90,
+      "reason": "ready_external_action"
+    },
     "states": {
-      "completed": 1,
-      "dispatched": 1,
+      "completed": 2,
+      "dispatched": 0,
       "failed": 0,
       "quarantined": 0,
-      "queued": 0
+      "queued": 1
     }
   },
   "human_gates": [],
@@ -65,9 +72,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
+    "action_id": "MELON-MELON-BRIDGE-PILOT-001-R3-35A965E3",
     "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "priority": 90,
+    "reason": "ready_external_action"
   }
 }

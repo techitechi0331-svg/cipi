@@ -1,3 +1,3 @@
 """Core JUCE Factory implementation."""
 
-FACTORY_VERSION = "juce-factory/0.3.0"
+FACTORY_VERSION = "juce-factory/0.4.0"

@@ -13,6 +13,10 @@ from .dsp_modules.registry import (
     registry_sha256,
     require_build_eligible_module,
 )
+from .dsp_modules.implementation_adapter import (
+    implementation_adapter_sha256,
+    require_implementation_adapter,
+)
 
 
 def _cpp_string(value: str) -> str:
@@ -67,13 +71,10 @@ def generate_project(contract: dict[str, Any], output_dir: str | Path) -> Path:
         contract["dsp"]["template"],
         contract_version=contract["contract_version"],
     )
-    if module_spec.implementation_id != "builtin.golden_gain_v1":
+    implementation = require_implementation_adapter(module_spec)
+    if implementation.renderer_id != "renderer.golden_gain_v1":
         raise ValueError(
-            f"Factory generator has no implementation for {module_spec.implementation_id}"
-        )
-    if module_spec.validation_profile != "golden_gain_v1":
-        raise ValueError(
-            f"Factory generator has no validation profile {module_spec.validation_profile}"
+            f"Factory generator has no renderer for {implementation.renderer_id}"
         )
     sample_rates = validation.get("sample_rates", [44100, 48000, 88200, 96000])
     block_sizes = validation.get("block_sizes", [32, 64, 128, 257, 512, 1024])
@@ -653,6 +654,11 @@ target_link_libraries({target}FactoryValidation
         "plugin_version": plugin["version"],
         "dsp_template": contract["dsp"]["template"],
         "dsp_implementation_id": module_spec.implementation_id,
+        "dsp_renderer_id": implementation.renderer_id,
+        "dsp_renderer_version": implementation.renderer_version,
+        "dsp_implementation_adapter_sha256": implementation_adapter_sha256(
+            implementation.implementation_id
+        ),
         "dsp_certification_status": module_spec.certification_status,
         "dsp_validation_profile": module_spec.validation_profile,
         "dsp_module_spec_sha256": module_spec_sha256(module_spec.module_id),

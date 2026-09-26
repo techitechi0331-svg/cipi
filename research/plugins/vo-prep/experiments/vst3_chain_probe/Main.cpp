@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -681,11 +682,11 @@ int main (int argc, char** argv)
         juce::Array<juce::var> rowVars;
         for (const auto& row : rows)
             rowVars.add (rowToVar (row));
-        root->setProperty ("rows", rowVars);
+        root->setProperty ("rows", juce::var (rowVars));
 
         auto* gateObject = new juce::DynamicObject();
         for (const auto& [name, value] : gates)
-            gateObject->setProperty (juce::Identifier (name), value);
+            gateObject->setProperty (juce::Identifier (juce::String (name)), value);
         root->setProperty ("gates", juce::var (gateObject));
 
         const auto json = juce::JSON::toString (juce::var (root), true);

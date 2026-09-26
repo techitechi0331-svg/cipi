@@ -41,6 +41,7 @@ jobs:
 
       - name: Validate research state contract
         run: |
+          python -m py_compile automation/autonomous_bridge/bridge.py automation/orchestrator/global_dag.py
           python tools/validate_research.py
           python tools/validate_cross_repo.py
           python tools/validate_autonomy_state.py

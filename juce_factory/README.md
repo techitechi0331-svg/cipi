@@ -227,3 +227,33 @@ does not erase a manufacturing-context difference.
 
 DSP Registry provenance remains manufacturing evidence only. It does not grant
 release, Cubase, listening, final-product, or CIPI promotion authority.
+
+
+## DSP Implementation Adapter
+
+Factory 0.4 adds a code-level Implementation Adapter gate after DSP Module Registry
+certification.
+
+The Registry answers whether a DSP module is approved for manufacturing. The
+Implementation Adapter independently proves that Factory code contains a known
+renderer and matching validation profile for that exact implementation ID.
+
+The current adapter allowlist contains only:
+
+- `builtin.golden_gain_v1` → `renderer.golden_gain_v1` v1.0.
+
+The generator verifies:
+
+1. Registry module certification/build eligibility;
+2. implementation ID exists in Factory code;
+3. adapter module ID matches the Registry module;
+4. adapter validation profile matches the Registry profile;
+5. adapter cannot grant product release authority;
+6. renderer ID is implemented by the generator.
+
+The Factory manifest pins the renderer ID/version and implementation-adapter SHA-256.
+This means adding or editing Registry data alone still cannot execute new DSP code.
+
+Implementation Adapter eligibility remains a manufacturing property only. It does
+not establish subjective audio quality, Cubase approval, final product status,
+release authority, or CIPI knowledge promotion.

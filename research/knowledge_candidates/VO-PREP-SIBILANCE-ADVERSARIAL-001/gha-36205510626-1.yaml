@@ -1,0 +1,8 @@
+claim: Level-normalized contextual sibilance detection can reduce bright-vocal false
+  events relative to an absolute high-band trigger while preserving controlled sibilant-event
+  detection.
+evidence_type: MEASURED
+scope: Deterministic Vo.Prep v2.3 adversarial screen only; real-vocal multilingual
+  naturalness and bleed conditions remain separate gates.
+source_run: research/runs/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1
+promotion_requested: PROVISIONAL

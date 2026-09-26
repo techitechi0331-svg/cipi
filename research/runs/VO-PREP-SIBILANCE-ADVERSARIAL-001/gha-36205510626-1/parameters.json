@@ -1,0 +1,24 @@
+{
+  "baseline": [
+    "Simple absolute 4-12 kHz high-band level trigger with fixed -34 dB activation / -38 dB release and the same 350 ms event cap."
+  ],
+  "experiment_adapter": "voprep_sibilance_adversarial_v1",
+  "job_file": "research/jobs/queued/VO-PREP-SIBILANCE-ADVERSARIAL-001.yaml",
+  "metrics": [
+    "positive_detection_fraction",
+    "s_and_sh_detected_all_sample_rates",
+    "max_positive_onset_latency_ms",
+    "context_negative_occupancy_mean_pct",
+    "context_negative_occupancy_max_pct",
+    "high_level_negative_occupancy_mean_pct",
+    "context_to_high_level_false_occupancy_ratio",
+    "max_context_probability_sample_rate_spread",
+    "max_context_active_duration_ms",
+    "input_scale_probability_spread",
+    "input_scale_occupancy_spread_pct",
+    "all_finite"
+  ],
+  "variants": [
+    "Current Vo.Prep Sibilance Guard v2.3 contextual detector: 4-12k high, 1-4k mid, 250-12k broad, 7-12k upper, contextual geometric blend, activation 0.65, release 0.45, 350 ms cap."
+  ]
+}

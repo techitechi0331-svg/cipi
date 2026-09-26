@@ -1,0 +1,165 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:review-brief-v1
+job_id: VO-PREP-SIBILANCE-ADVERSARIAL-001
+run_id: gha-36205510626-1
+source_run: research/runs/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-triage.yaml
+triage_id: VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-SIBILANCE-ADVERSARIAL-001.yaml
+research_question: Does the current Vo.Prep Sibilance Guard v2.3 contextual ratio
+  detector preserve S/SH/CH/T event detection while rejecting bright but non-sibilant
+  vocal conditions materially better than an absolute 4-12 kHz level trigger?
+hypothesis: The high-to-broad/high-to-mid contextual detector will detect controlled
+  sibilant events while producing substantially less false occupancy on bright vowel,
+  air, breath, falsetto, female upper-register and distorted-vocal stress cases than
+  the absolute high-band baseline, with small sample-rate and input-scale sensitivity.
+counter_hypotheses:
+- The contextual detector misses too many CH/T or sustained S/SH events.
+- Bright vowels, air, breath or upper-register vocals still cause excessive false
+  event occupancy.
+- Detector behavior changes materially with sample rate or +/-12 dB input scaling.
+acceptance_criteria:
+- Context positive detection fraction is >= 0.85 across S/SH/CH/T and 44.1/48/96 kHz.
+- S and SH are detected at every tested sample rate.
+- Worst positive-event first-onset latency is <= 30 ms.
+- Mean false event occupancy over declared non-sibilant cases is <= 8% and worst negative
+  occupancy is <= 20%.
+- Context mean false occupancy is <= 35% of the absolute high-band baseline mean false
+  occupancy.
+- Maximum contiguous context event duration is <= 355 ms.
+- Maximum context probability spread across 44.1/48/96 kHz is <= 0.08.
+- Across -12/0/+12 dB scaling on S, bright vowel and breath, max context probability
+  spread is <= 0.05 and occupancy spread <= 5 percentage points.
+- All derived values remain finite.
+rejection_criteria:
+- Any declared acceptance condition fails.
+- Passing requires relaxing a predeclared recall, false-occupancy, latency, duration,
+  sample-rate or scale-invariance gate.
+- Raw audio is persisted or product DSP is mutated.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 227a5550215b2835aa17f2f8c9ef9bc6781a9787
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: aggregate.context_negative_occupancy_max_pct
+  value: 0.0
+- path: aggregate.context_negative_occupancy_mean_pct
+  value: 0.0
+- path: aggregate.context_to_high_level_false_occupancy_ratio
+  value: null
+- path: aggregate.high_level_negative_occupancy_mean_pct
+  value: 0.0
+- path: aggregate.max_context_active_duration_ms
+  value: 107.0
+- path: aggregate.max_context_probability_sample_rate_spread
+  value: 0.056597863554603944
+- path: aggregate.max_positive_onset_latency_ms
+  value: 9.156249999999977
+- path: aggregate.positive_detection_fraction
+  value: 0.6666666666666666
+- path: aggregate.s_and_sh_detected_all_sample_rates
+  value: false
+- path: current_detector
+  value: Vo.Prep Sibilance Guard v2.3 contextual detector
+- path: decision
+  value: REVISE
+- path: gates.all_finite
+  value: true
+- path: gates.event_duration_le_355ms
+  value: true
+- path: gates.false_occupancy_le_35pct_of_high_level
+  value: false
+- path: gates.input_scale_occupancy_spread_le_5pct
+  value: true
+- path: gates.input_scale_probability_spread_le_0_05
+  value: true
+- path: gates.negative_occupancy_max_le_20pct
+  value: true
+- path: gates.negative_occupancy_mean_le_8pct
+  value: true
+- path: gates.positive_detection_fraction_ge_0_85
+  value: false
+- path: gates.positive_onset_latency_le_30ms
+  value: true
+- path: gates.s_sh_detected_all_sr
+  value: false
+- path: gates.sample_rate_probability_spread_le_0_08
+  value: true
+- path: negative_cases[0]
+  value: bright_vowel
+- path: negative_cases[1]
+  value: air
+- path: negative_cases[2]
+  value: breath
+- path: negative_cases[3]
+  value: falsetto
+- path: negative_cases[4]
+  value: female_upper
+- path: negative_cases[5]
+  value: distorted_vocal
+- path: positive_cases[0]
+  value: s
+- path: positive_cases[1]
+  value: sh
+- path: positive_cases[2]
+  value: ch
+knowledge_candidate:
+  claim: Level-normalized contextual sibilance detection can reduce bright-vocal false
+    events relative to an absolute high-band trigger while preserving controlled sibilant-event
+    detection.
+  evidence_type: MEASURED
+  scope: Deterministic Vo.Prep v2.3 adversarial screen only; real-vocal multilingual
+    naturalness and bleed conditions remain separate gates.
+  promotion_requested: PROVISIONAL
+source_proposal:
+  decision_id: VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:auto
+  decision: REJECT
+  rationale: If any predeclared gate fails, retain the failed phoneme/confounder cases
+    as negative evidence and keep the current product baseline unchanged pending bounded
+    refinement.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  retained_findings:
+  - Per-case probability, occupancy, onset, duration, sample-rate and scale-invariance
+    measurements.
+  - Simple absolute high-band baseline results and current contextual detector results.
+  reusable_findings:
+  - Which bright/noisy vocal conditions remain inseparable from controlled sibilance
+    under the current feature family.
+  - Whether ratio-domain detector behavior remains stable across level scaling and
+    sample rates.
+  revisit_if:
+  - A bounded contextual-feature or threshold refinement directly targets the failed
+    confounder without weakening S/SH/CH/T detection.
+  - Real-vocal evidence contradicts the synthetic stress ranking.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Integrated level-matched listening is still required before final Macro/Phrase product
+  lock.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Human level-matched listening is required for final naturalness sign-off.
+- Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

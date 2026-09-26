@@ -1,0 +1,61 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926
+job_id: VOPRIPRO-VOPREP-INTEGRATION-002
+source_run: research/runs/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+parent_decision_id: VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:auto
+rationale: >-
+  The v2 source-derived positive controls removed the main ambiguity from v1:
+  Plosive Guard and Sibilance Guard both engaged above their locked probability
+  and reduction gates across 44.1/48/88.2/96 kHz. The all-modules 50% chain
+  nevertheless failed two unchanged plosive interaction gates. Plosive-event
+  VoPriPro peak-GR improvement was only about 0.0131 dB versus the required
+  0.10 dB, and post-plosive mean-GR shift reached about 0.4019 dB versus the
+  0.35 dB limit. Sibilance interaction, neutral behavior, phrase-spread behavior,
+  finite-state safety, and sample-rate spread all passed. Therefore the tested
+  all-modules 50% chain is rejected as eligible for advancement under the v2
+  downstream-benefit/recovery hypothesis; the result does not reject the
+  Vo.Prep -> VoPriPro product relationship or the individually successful
+  Sibilance/Macro findings.
+scope: >-
+  Reject only the tested Vo.Prep Plosive/Macro/Sibilance 50% -> VoPriPro
+  Natural50 synthetic source-code-translation candidate as eligible for the next
+  integration stage under the predeclared v2 gates. Do not generalize this to
+  actual VST3 behavior, real-vocal perceptual quality, other Vo.Prep Amounts,
+  isolated modules, or the product-family ordering itself.
+declared_rejection_criteria:
+  - Any positive-control probability or reduction gate fails, making downstream event interpretation invalid.
+  - Any unchanged downstream interaction, neutral, recovery, phrase, finite, or sample-rate gate fails.
+triggered_criteria:
+  - Vo.Prep improves downstream VoPriPro plosive-event peak GR by less than 0.10 dB.
+  - Post-plosive downstream mean-GR shift exceeds 0.35 dB.
+retained_findings:
+  - Plosive positive-control probability was at least about 0.8498 and Plosive Guard reduction at least about 1.1518 dB, so the v2 plosive interaction is interpretable.
+  - Sibilance positive-control probability was at least about 0.7431 and Sibilance Guard reduction at least about 0.8669 dB.
+  - Sibilance preprocessing improved downstream VoPriPro event peak GR by at least about 0.2857 dB and kept post-event mean-GR shift below about 0.0194 dB.
+  - Neutral mean-GR shift stayed below about 0.0941 dB with no false event reduction.
+  - Macro Level moved the phrase case by at least about 1.6242 dB and improved phrase RMS spread by about 0.8234 dB.
+  - Downstream peak-GR sample-rate spread was about 0.1062 dB, below the 0.15 dB gate.
+  - The tested plosive case improved downstream event peak GR by only about 0.0131 dB and left about 0.4019 dB maximum absolute post-event mean-GR shift.
+reusable_findings:
+  - Source-derived detector positive controls can distinguish detector-engagement failure from actual cross-stage interaction failure.
+  - A front-end event processor can engage strongly without materially reducing a downstream compressor whose detector is already protected against that event class.
+  - Cross-product failures should be decomposed by module before changing product boundaries or relaxing locked gates.
+revisit_if:
+  - A module-isolation experiment separates Plosive Guard from Macro Level and identifies a bounded interaction path.
+  - Actual VST3 cross-product measurement materially disagrees with the source-code translation.
+  - Vo.Prep or VoPriPro production DSP changes materially.
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOPRIPRO-VOPREP-INTEGRATION-001
+    - VOPRIPRO-VOPREP-INTEGRATION-002
+  related_decisions:
+    - VOPRIPRO-VOPREP-INTEGRATION-001:assistant-review-20260926
+    - VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:auto
+created_at: '2026-09-26'
+immutable: true
+review_gaps: []

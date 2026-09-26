@@ -17,23 +17,15 @@
   "human_gates": [],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [
-      "research-bot/VO-PREP-PLOSIVE-ADVERSARIAL-001/auto-963990518e5a",
-      "research-bot/VO-PREP-SIBILANCE-ADVERSARIAL-001/auto-402039111767"
-    ],
-    "claimed_count": 2,
-    "claimed_jobs": [
-      "VO-PREP-PLOSIVE-ADVERSARIAL-001",
-      "VO-PREP-SIBILANCE-ADVERSARIAL-001"
-    ],
+    "claimed_branches": [],
+    "claimed_count": 0,
+    "claimed_jobs": [],
     "dependency_blocked_count": 0,
     "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VO-PREP-PLOSIVE-ADVERSARIAL-001/auto-963990518e5a",
-    "job_id": "VO-PREP-PLOSIVE-ADVERSARIAL-001",
-    "kind": "EVIDENCE_INTAKE",
-    "priority": 90
+    "kind": "IDLE",
+    "priority": -999
   }
 }

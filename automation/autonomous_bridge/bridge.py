@@ -317,10 +317,16 @@ def evaluate_continuation(
     human_gate_count = 0
 
     architecture_counts: dict[str, int] = {}
-    for d in decisions:
-        arch = str(d.get("selected_architecture") or "")
-        if arch:
-            architecture_counts[arch] = architecture_counts.get(arch, 0) + 1
+    prior_jobs = _job_dir(root, str(track["track_id"]))
+    if prior_jobs.exists():
+        for job_path in prior_jobs.glob("*.yaml"):
+            try:
+                job_data = load_yaml(job_path)
+            except Exception:
+                continue
+            arch = str(job_data.get("selected_architecture") or "")
+            if arch:
+                architecture_counts[arch] = architecture_counts.get(arch, 0) + 1
 
     for candidate in proposals:
         if not isinstance(candidate, dict):
@@ -459,6 +465,7 @@ def generate_job_and_action(
         "fingerprint": fingerprint,
         "loop_depth": next_depth,
         "experiment_type": str(accepted.get("experiment_type") or "EXPERIMENT"),
+        "selected_architecture": str((accepted.get("fingerprint_material") or {}).get("architecture") or ""),
         "authority": "CIPI_RESEARCH_JOB",
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,

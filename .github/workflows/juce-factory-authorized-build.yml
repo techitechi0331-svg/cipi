@@ -1,24 +1,17 @@
-name: juce-factory
+name: juce-factory-authorized-build
 
 on:
   pull_request:
     paths:
-      - "juce_factory/**"
-      - "automation/factory/**"
+      - "research/incubator/factory_build_requests/**"
       - "automation/incubator/factory_handoff.py"
       - "automation/incubator/factory_build_authorization.py"
-      - "automation/schemas/factory_evidence_record.schema.json"
-      - "automation/schemas/incubator_manufacturing_review.schema.json"
-      - "automation/schemas/incubator_factory_handoff_receipt.schema.json"
-      - "automation/schemas/factory_build_authorization_review.schema.json"
-      - "automation/schemas/factory_build_authorization.schema.json"
-      - "research/factory_evidence/**"
-      - "research/incubator/manufacturing_reviews/**"
-      - "research/incubator/factory_contracts/**"
-      - "research/incubator/factory_build_authorizations/**"
-      - "research/incubator/factory_build_requests/**"
-      - "tools/validate_incubator.py"
-      - ".github/workflows/juce-factory.yml"
+      - "juce_factory/factory/authorized_build.py"
+      - "juce_factory/factory/contract.py"
+      - "juce_factory/factory/generator.py"
+      - "juce_factory/factory/result_bundle.py"
+      - "juce_factory/schemas/plugin_contract.schema.json"
+      - "juce_factory/schemas/authorized_build_result_binding.schema.json"
       - ".github/workflows/juce-factory-authorized-build.yml"
   workflow_dispatch:
 
@@ -26,59 +19,82 @@ permissions:
   contents: read
 
 concurrency:
-  group: juce-factory-${{ github.ref }}
+  group: juce-factory-authorized-build-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  contract-and-generator:
+  discover:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.discover.outputs.matrix }}
+      has_requests: ${{ steps.discover.outputs.has_requests }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Contract and generator tests
-        run: python -m unittest discover -s juce_factory/tests -v
-
-      - name: Validate Incubator and Factory handoff policy
+      - name: Validate Incubator authorization policy
         run: python tools/validate_incubator.py
 
-      - name: CLI self-test
-        run: python -m juce_factory.factory.cli self-test
+      - name: Discover authorized build requests
+        id: discover
+        shell: bash
+        run: |
+          set -euo pipefail
+          matrix="$(python -m juce_factory.factory.authorized_build discover --root . --matrix)"
+          count="$(python -c 'import json,sys; print(len(json.loads(sys.argv[1])["include"]))' "$matrix")"
+          if [ "$count" -gt 0 ]; then
+            echo "has_requests=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_requests=false" >> "$GITHUB_OUTPUT"
+            matrix='{"include":[{"request_id":"no-request","request_path":"no-request"}]}'
+          fi
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          echo "Authorized requests: $count"
 
-      - name: Validate Golden Contract
-        run: python -m juce_factory.factory.cli validate juce_factory/examples/golden_gain.contract.json
-
-  golden-vst3-windows:
-    needs: contract-and-generator
+  candidate-build:
+    needs: discover
+    if: needs.discover.outputs.has_requests == 'true'
     runs-on: windows-2025-vs2026
-    timeout-minutes: 60
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate Golden Plugin
+      - name: Revalidate authorized build request
+        id: request_validate
         shell: pwsh
         run: |
-          python -m juce_factory.factory.cli generate juce_factory/examples/golden_gain.contract.json --output generated/GoldenGain
-          if ($LASTEXITCODE -ne 0) { throw "Factory generation failed." }
+          python -m juce_factory.factory.authorized_build validate --root . --request "${{ matrix.request_path }}"
+          if ($LASTEXITCODE -ne 0) { throw "Authorized build request validation failed." }
+
+      - name: Generate authorized JUCE project
+        id: generate
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.authorized_build generate --root . --request "${{ matrix.request_path }}" --output generated/Candidate
+          if ($LASTEXITCODE -ne 0) { throw "Authorized Factory generation failed." }
 
       - name: Configure
         id: configure
         shell: pwsh
-        run: cmake -S generated/GoldenGain -B generated/GoldenGain/build -G "Visual Studio 18 2026" -A x64
+        run: cmake -S generated/Candidate -B generated/Candidate/build -G "Visual Studio 18 2026" -A x64
 
       - name: Build Release
         id: build
         shell: pwsh
-        run: cmake --build generated/GoldenGain/build --config Release --parallel 4
+        run: cmake --build generated/Candidate/build --config Release --parallel 4
 
-      - name: Run Factory-owned DSP and state validation matrix
+      - name: Run Factory-owned validation matrix
         id: factory_validation
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path factory-logs | Out-Null
-          $testExe = Get-ChildItem -Path generated/GoldenGain/build -Recurse -File -Filter *FactoryValidation.exe | Select-Object -First 1
+          $testExe = Get-ChildItem -Path generated/Candidate/build -Recurse -File -Filter *FactoryValidation.exe | Select-Object -First 1
           if (-not $testExe) { throw "Factory validation executable was not produced." }
           & $testExe.FullName 2>&1 | Tee-Object -FilePath factory-logs/factory-validation.log
           if ($LASTEXITCODE -ne 0) { throw "Factory validation matrix failed with exit code $LASTEXITCODE." }
@@ -88,8 +104,8 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path factory-staging | Out-Null
-          $bundle = Get-ChildItem -Path generated/GoldenGain/build -Recurse -Directory -Filter *.vst3 | Select-Object -First 1
-          if (-not $bundle) { throw "Golden VST3 bundle was not produced." }
+          $bundle = Get-ChildItem -Path generated/Candidate/build -Recurse -Directory -Filter *.vst3 | Select-Object -First 1
+          if (-not $bundle) { throw "Authorized VST3 bundle was not produced." }
           Copy-Item -LiteralPath $bundle.FullName -Destination factory-staging -Recurse -Force
 
       - name: Download pinned pluginval
@@ -107,7 +123,6 @@ jobs:
         id: pluginval
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force -Path factory-logs | Out-Null
           $pluginval = Get-ChildItem -Path pluginval -Recurse -File -Filter pluginval.exe | Select-Object -First 1
           if (-not $pluginval) { throw "pluginval.exe was not found." }
           $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
@@ -126,8 +141,7 @@ jobs:
       - name: Configure Steinberg official validator
         id: steinberg_configure
         shell: pwsh
-        run: |
-          cmake -S vst3sdk -B vst3sdk-build -G "Visual Studio 18 2026" -A x64 -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=ON -DSMTG_ENABLE_VSTGUI_SUPPORT=OFF -DSMTG_CREATE_PLUGIN_LINK=0
+        run: cmake -S vst3sdk -B vst3sdk-build -G "Visual Studio 18 2026" -A x64 -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=ON -DSMTG_ENABLE_VSTGUI_SUPPORT=OFF -DSMTG_CREATE_PLUGIN_LINK=0
 
       - name: Build Steinberg official validator
         id: steinberg_build
@@ -138,7 +152,6 @@ jobs:
         id: steinberg_validator
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force -Path factory-logs | Out-Null
           $validator = Get-ChildItem -Path vst3sdk-build -Recurse -File -Filter validator.exe | Select-Object -First 1
           if (-not $validator) { throw "Steinberg validator.exe was not produced." }
           $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
@@ -146,11 +159,11 @@ jobs:
           & $validator.FullName $bundle.FullName 2>&1 | Tee-Object -FilePath factory-logs/steinberg-validator.log
           if ($LASTEXITCODE -ne 0) { throw "Steinberg validator failed with exit code $LASTEXITCODE." }
 
-      - name: Write Factory validation report
+      - name: Write validation report
         id: validation_report
         shell: pwsh
         run: |
-          $manifest = Get-Content generated/GoldenGain/factory_manifest.json -Raw | ConvertFrom-Json
+          $manifest = Get-Content generated/Candidate/factory_manifest.json -Raw | ConvertFrom-Json
           $report = [ordered]@{
             factory_status = "VALIDATION_PASS"
             sample_rates = @($manifest.validation_matrix.sample_rates)
@@ -165,19 +178,20 @@ jobs:
           }
           $report | ConvertTo-Json -Depth 6 | Set-Content -Encoding utf8 factory-logs/validation_report.json
 
-      - name: Promote validation-passed artifact and write provenance
+      - name: Stage validation-passed candidate
         id: promote
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path factory-out/passed | Out-Null
           $bundle = Get-ChildItem -Path factory-staging -Directory -Filter *.vst3 | Select-Object -First 1
           Copy-Item -LiteralPath $bundle.FullName -Destination factory-out/passed -Recurse -Force
-          Copy-Item generated/GoldenGain/factory_manifest.json factory-out/factory_manifest.json
-          Copy-Item generated/GoldenGain/plugin_contract.json factory-out/plugin_contract.json
+          Copy-Item generated/Candidate/factory_manifest.json factory-out/factory_manifest.json
+          Copy-Item generated/Candidate/plugin_contract.json factory-out/plugin_contract.json
           Copy-Item factory-logs/validation_report.json factory-out/validation_report.json
+          Copy-Item "${{ matrix.request_path }}/factory_build_authorization.json" factory-out/factory_build_authorization.json
 
-          $contractHash = (Get-FileHash generated/GoldenGain/plugin_contract.json -Algorithm SHA256).Hash.ToLowerInvariant()
-          $manifest = Get-Content generated/GoldenGain/factory_manifest.json -Raw | ConvertFrom-Json
+          $contractHash = (Get-FileHash generated/Candidate/plugin_contract.json -Algorithm SHA256).Hash.ToLowerInvariant()
+          $manifest = Get-Content generated/Candidate/factory_manifest.json -Raw | ConvertFrom-Json
           $provenance = [ordered]@{
             factory_status = "VALIDATION_PASS"
             source_revision = "${{ github.event.pull_request.head.sha || github.sha }}"
@@ -203,7 +217,7 @@ jobs:
         id: result_bundle
         shell: pwsh
         run: |
-          python -m juce_factory.factory.cli bundle-pass --manifest generated/GoldenGain/factory_manifest.json --validation-report factory-out/validation_report.json --provenance factory-out/provenance.json --sha256 factory-out/sha256.txt --output factory-out/factory_result_bundle.json
+          python -m juce_factory.factory.cli bundle-pass --manifest generated/Candidate/factory_manifest.json --validation-report factory-out/validation_report.json --provenance factory-out/provenance.json --sha256 factory-out/sha256.txt --output factory-out/factory_result_bundle.json
           if ($LASTEXITCODE -ne 0) { throw "Factory Result Bundle generation failed." }
 
       - name: Build bounded CIPI evidence preview
@@ -213,14 +227,22 @@ jobs:
           python -m automation.factory.intake factory-out/factory_result_bundle.json --output-root factory-out/cipi-evidence-preview
           if ($LASTEXITCODE -ne 0) { throw "Factory evidence preview intake failed." }
 
-      - name: Quarantine failed Factory candidate
+      - name: Bind result to exact Build Authorization
+        id: result_binding
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.authorized_build bind-result --root . --request "${{ matrix.request_path }}" --bundle factory-out/factory_result_bundle.json --output factory-out/authorized_build_result_binding.json
+          if ($LASTEXITCODE -ne 0) { throw "Authorized build result binding failed." }
+
+      - name: Quarantine failed authorized candidate
         if: failure()
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path factory-quarantine | Out-Null
-
-          $failureClass = "UNKNOWN_FACTORY_FAILURE"
-          if ("${{ steps.configure.outcome }}" -eq "failure") { $failureClass = "CONFIGURE_ERROR" }
+          $failureClass = "UNKNOWN_AUTHORIZED_FACTORY_FAILURE"
+          if ("${{ steps.request_validate.outcome }}" -eq "failure") { $failureClass = "AUTHORIZED_REQUEST_VALIDATION_ERROR" }
+          elseif ("${{ steps.generate.outcome }}" -eq "failure") { $failureClass = "AUTHORIZED_GENERATION_ERROR" }
+          elseif ("${{ steps.configure.outcome }}" -eq "failure") { $failureClass = "CONFIGURE_ERROR" }
           elseif ("${{ steps.build.outcome }}" -eq "failure") { $failureClass = "BUILD_ERROR" }
           elseif ("${{ steps.factory_validation.outcome }}" -eq "failure") { $failureClass = "FACTORY_DSP_VALIDATION_ERROR" }
           elseif ("${{ steps.stage.outcome }}" -eq "failure") { $failureClass = "PACKAGING_ERROR" }
@@ -234,6 +256,7 @@ jobs:
           elseif ("${{ steps.promote.outcome }}" -eq "failure") { $failureClass = "PROMOTION_STAGING_ERROR" }
           elseif ("${{ steps.result_bundle.outcome }}" -eq "failure") { $failureClass = "RESULT_BUNDLE_ERROR" }
           elseif ("${{ steps.evidence_preview.outcome }}" -eq "failure") { $failureClass = "EVIDENCE_PREVIEW_ERROR" }
+          elseif ("${{ steps.result_binding.outcome }}" -eq "failure") { $failureClass = "RESULT_BINDING_ERROR" }
 
           function Convert-StepOutcome([string]$outcome) {
             switch ($outcome) {
@@ -259,17 +282,20 @@ jobs:
           }
           $status | ConvertTo-Json | Set-Content -Encoding utf8 factory-quarantine/failure.json
 
-          if (Test-Path generated/GoldenGain/factory_manifest.json) {
-            Copy-Item generated/GoldenGain/factory_manifest.json factory-quarantine/factory_manifest.json
+          if (Test-Path generated/Candidate/factory_manifest.json) {
+            Copy-Item generated/Candidate/factory_manifest.json factory-quarantine/factory_manifest.json
           }
-          if (Test-Path generated/GoldenGain/plugin_contract.json) {
-            Copy-Item generated/GoldenGain/plugin_contract.json factory-quarantine/plugin_contract.json
+          if (Test-Path generated/Candidate/plugin_contract.json) {
+            Copy-Item generated/Candidate/plugin_contract.json factory-quarantine/plugin_contract.json
+          }
+          if (Test-Path "${{ matrix.request_path }}/factory_build_authorization.json") {
+            Copy-Item "${{ matrix.request_path }}/factory_build_authorization.json" factory-quarantine/factory_build_authorization.json
           }
           if (Test-Path factory-logs) {
             Copy-Item factory-logs factory-quarantine/logs -Recurse -Force
           }
 
-      - name: Build quarantined Factory Result Bundle and evidence preview
+      - name: Build quarantined Result Bundle and authorization binding
         if: failure()
         shell: pwsh
         run: |
@@ -279,29 +305,32 @@ jobs:
 
             python -m automation.factory.intake factory-quarantine/factory_result_bundle.json --output-root factory-quarantine/cipi-evidence-preview
             if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory evidence preview failed." }
+
+            python -m juce_factory.factory.authorized_build bind-result --root . --request "${{ matrix.request_path }}" --bundle factory-quarantine/factory_result_bundle.json --output factory-quarantine/authorized_build_result_binding.json
+            if ($LASTEXITCODE -ne 0) { throw "Quarantined authorized-build result binding failed." }
           } else {
-            Write-Host "No generated Factory manifest exists; retaining infrastructure failure logs only."
+            Write-Host "No generated Factory manifest exists; retaining authorization and infrastructure failure logs only."
           }
 
-      - name: Upload quarantined Factory candidate
+      - name: Upload quarantined authorized candidate
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: JUCE-Factory-Golden-QUARANTINE
+          name: JUCE-Factory-${{ matrix.request_id }}-QUARANTINE
           path: factory-quarantine
           if-no-files-found: error
 
-      - name: Upload Factory logs
+      - name: Upload candidate logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: JUCE-Factory-Golden-logs
+          name: JUCE-Factory-${{ matrix.request_id }}-logs
           path: factory-logs
           if-no-files-found: ignore
 
-      - name: Upload validation-passed Factory artifact
+      - name: Upload validation-passed authorized candidate
         uses: actions/upload-artifact@v4
         with:
-          name: JUCE-Factory-Golden-VST3
+          name: JUCE-Factory-${{ matrix.request_id }}-VST3
           path: factory-out
           if-no-files-found: error

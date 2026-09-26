@@ -321,6 +321,13 @@ adapters:
     network_required: false
     purpose: "Screen source-translated Vo.Prep Plosive/Macro/Sibilance 50% into VoPriPro Natural50 on deterministic synthetic cases before any actual cross-product real-vocal/VST3 integration work."
 
+  vopripro_voprep_integration_screen_v2:
+    tracks:
+      - VOPRIPRO_FORMAL
+    max_timeout_minutes: 8
+    network_required: false
+    purpose: "Repeat the Vo.Prep -> VoPriPro integration screen with source-derived Plosive/Sibilance regression positive controls and unchanged downstream interaction gates before actual VST3/real-vocal integration."
+
   voprep_plosive_adversarial_v1:
     tracks:
       - VO_PREP_FORMAL

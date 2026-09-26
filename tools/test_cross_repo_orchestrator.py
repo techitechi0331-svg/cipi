@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "automation" / "cross_repo"))
 
 from core import match_dispatched_run, select_queued_action, should_resume_external_job, validate_action  # noqa: E402
-from orchestrate import backfill_completed_artifacts  # noqa: E402
+from orchestrate import backfill_completed_artifacts, reconcile_retried_failed_actions  # noqa: E402
 from failure import classify_failure  # noqa: E402
 
 
@@ -67,6 +67,23 @@ class FakeArtifactClient:
         with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as zf:
             zf.writestr("macro_result.json", '{"schema_version":"1.0","ok":true}\n')
         return buffer.getvalue()
+
+
+class FakeRecoveryClient(FakeArtifactClient):
+    def list_workflow_runs(self, repo: str, workflow_file: str, per_page: int = 15) -> list[dict]:
+        return [{
+            "id": 123,
+            "run_attempt": 2,
+            "status": "completed",
+            "conclusion": "success",
+            "event": "workflow_dispatch",
+            "head_branch": "main",
+            "head_sha": "abc123",
+            "created_at": "2026-09-26T00:00:00Z",
+            "updated_at": "2026-09-26T00:05:00Z",
+            "run_started_at": "2026-09-26T00:01:00Z",
+            "html_url": "https://github.com/techitechi0331-svg/example/actions/runs/123",
+        }]
 
 
 def main() -> int:
@@ -128,6 +145,34 @@ def main() -> int:
     resume, _ = should_resume_external_job(job, set())
     assert resume is False
 
+
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        failed_dir = root / "research/cross_repo/actions/failed"
+        failed_action = action("TEST-RECOVERY-001", "build", 0)
+        failed_action.update({
+            "state": "FAILED",
+            "run_id": 123,
+            "conclusion": "failure",
+            "dispatched_at": "2026-09-26T00:00:00Z",
+            "failure_classification": {"category": "INFRA_TRANSIENT"},
+        })
+        write(failed_dir / "recover.yaml", failed_action)
+        write(
+            root / "research/cross_repo/failures/test/123-attempt-1.yaml",
+            {"schema_version": "1.0", "run_id": 123, "run_attempt": 1},
+        )
+        recovered = reconcile_retried_failed_actions(root, REGISTRY, FakeRecoveryClient())
+        assert recovered["recovered"] == 1
+        assert recovered["artifacts"] == 1
+        completed_path = root / "research/cross_repo/actions/completed/recover.yaml"
+        assert completed_path.exists()
+        completed_action = yaml.safe_load(completed_path.read_text(encoding="utf-8"))
+        assert completed_action["state"] == "COMPLETED"
+        assert completed_action["run_attempt"] == 2
+        assert completed_action["recovered_from_failed_attempt"] == 1
+        assert not (failed_dir / "recover.yaml").exists()
 
     transient = classify_failure(
         {"conclusion": "failure"},

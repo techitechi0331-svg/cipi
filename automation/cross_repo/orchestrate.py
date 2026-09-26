@@ -438,6 +438,96 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
     return stats
 
 
+
+def reconcile_retried_failed_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str, int]:
+    failed = root / "research" / "cross_repo" / "actions" / "failed"
+    stats = {"recovered": 0, "artifacts": 0, "events": 0, "health_changes": 0}
+    if not failed.exists():
+        return stats
+
+    for path in sorted(failed.glob("*.yaml")):
+        action = load_yaml(path)
+        run_id = action.get("run_id")
+        if action.get("state") != "FAILED" or not isinstance(run_id, int):
+            continue
+
+        try:
+            repo, workflow_file, _ = workflow_spec(registry, action)
+            policy = workflow_policy(registry, action)
+            runs = gh.list_workflow_runs(repo, workflow_file, per_page=15)
+        except Exception as exc:
+            print(f"failed-action recovery warning: {action.get('action_id')}: {exc}")
+            continue
+
+        run = next((r for r in runs if r.get("id") == run_id), None)
+        if run is None or run.get("status") != "completed" or run.get("conclusion") != "success":
+            continue
+
+        repo_key = str(action.get("repo_key") or "")
+        failure_dir = root / "research" / "cross_repo" / "failures" / repo_key
+        recorded_attempts: list[int] = []
+        if failure_dir.exists():
+            for failure_path in failure_dir.glob(f"{run_id}-attempt-*.yaml"):
+                try:
+                    recorded_attempts.append(int(load_yaml(failure_path).get("run_attempt") or 1))
+                except Exception:
+                    continue
+        current_attempt = int(run.get("run_attempt") or 1)
+        if not recorded_attempts or current_attempt <= max(recorded_attempts):
+            continue
+
+        workflow_key = str(action.get("workflow_key") or "")
+        if append_event(
+            root,
+            repo_key,
+            repo,
+            workflow_key,
+            workflow_file,
+            run,
+            "CIPI_RECOVERED_RERUN",
+            str(action.get("action_id") or ""),
+        ):
+            stats["events"] += 1
+
+        stats["artifacts"] += ingest_run_artifacts(
+            root,
+            gh=gh,
+            repo_key=repo_key,
+            repo=repo,
+            run=run,
+            mode=str(policy["artifact_ingest"]),
+        )
+
+        health = assess_wait(
+            action,
+            run,
+            runner_class=str(policy["runner_class"]),
+            runner_wait_minutes=int(policy["runner_wait_minutes"]),
+        )
+        health_path = (
+            root / "research" / "cross_repo" / "health" /
+            repo_key / f"{action['action_id']}.yaml"
+        )
+        if write_yaml_if_changed(health_path, health):
+            stats["health_changes"] += 1
+
+        previous_failure = action.get("failure_classification")
+        action["state"] = "COMPLETED"
+        action["conclusion"] = "success"
+        action["completed_at"] = run.get("updated_at") or now_iso()
+        action["run_attempt"] = current_attempt
+        action["recovered_from_failed_attempt"] = max(recorded_attempts)
+        action["recovered_at"] = now_iso()
+        action["previous_failure_classification"] = previous_failure
+        action["failure_classification"] = None
+        dst = root / "research" / "cross_repo" / "actions" / "completed" / path.name
+        write_yaml(dst, action)
+        path.unlink()
+        stats["recovered"] += 1
+
+    return stats
+
+
 def backfill_completed_artifacts(root: Path, registry: dict, gh: GitHubClient) -> int:
     completed = root / "research" / "cross_repo" / "actions" / "completed"
     if not completed.exists():
@@ -597,12 +687,14 @@ def main() -> int:
 
     gh = GitHubClient(token)
     reconciliation = reconcile_actions(root, registry, gh)
+    recovery = reconcile_retried_failed_actions(root, registry, gh)
     backfilled = backfill_completed_artifacts(root, registry, gh)
     observed = observe_latest(root, registry, gh)
     resumed = resume_jobs(root)
     dispatched = dispatch_one(root, registry, gh)
     changed = (
         any(reconciliation.values())
+        or any(recovery.values())
         or backfilled > 0
         or observed > 0
         or resumed > 0
@@ -612,6 +704,7 @@ def main() -> int:
     print(
         "CIPI cross-repo orchestrator:",
         *(f"{key}={value}" for key, value in reconciliation.items()),
+        *(f"recovery_{key}={value}" for key, value in recovery.items()),
         f"backfilled_artifacts={backfilled}",
         f"observed={observed}",
         f"resumed={resumed}",
@@ -622,12 +715,13 @@ def main() -> int:
         {
             "configured": True,
             "changed": changed,
-            "completed_actions": reconciliation["completed"],
+            "completed_actions": reconciliation["completed"] + recovery["recovered"],
             "failed_actions": reconciliation["failed"],
+            "recovered_actions": recovery["recovered"],
             "retried_actions": reconciliation["retried"],
-            "artifact_records": reconciliation["artifacts"] + backfilled,
-            "runner_health_changes": reconciliation["health_changes"],
-            "observed_events": observed,
+            "artifact_records": reconciliation["artifacts"] + recovery["artifacts"] + backfilled,
+            "runner_health_changes": reconciliation["health_changes"] + recovery["health_changes"],
+            "observed_events": observed + recovery["events"],
             "resumed_jobs": resumed,
             "dispatched_action": dispatched or "",
         },

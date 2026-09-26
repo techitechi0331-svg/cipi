@@ -1,0 +1,39 @@
+schema_version: '1.0'
+job_id: VL2A-CIRCUIT-HA100X-001-R4-7D4AABA3
+track_id: VL2A-CIRCUIT-HA100X-001
+root_research_id: VL2A-CIRCUIT-HA100X-001
+parent_job_id: VL2A-CIRCUIT-HA100X-001-R3-8039A97F
+parent_run_id: melon-funnel-ha100x-47a2595be6df
+hypothesis_id: HYP-VL2A-HA100X-LINEAR-FIRST
+experiment_id: MELON-FUNNEL-HA100X-47A2595BE6DF-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VL2A-CIRCUIT-HA100X-001-R3-8039A97F
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VL2A-CIRCUIT-HA100X-001-R4-7D4AABA3
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+continuation_reason: HF parasitic sensitivity has been bounded under the catalog envelope.
+  Run an independent-seed robustness/falsification pass before closing the linear-first
+  hypothesis.
+expected_information_gain: 0.8673960869971342
+fingerprint: 7d4aaba3bf1ad6226343dd165b6a552783face29e66b6d76b92360ad330af3bd
+loop_depth: 4
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: HA100X_LINEAR_LTI_LOAD_AWARE
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

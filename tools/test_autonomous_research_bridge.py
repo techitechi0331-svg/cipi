@@ -64,9 +64,6 @@ def track(track_id: str = "TRACK-1", **overrides) -> dict:
         }
     }
     value.update(overrides)
-    unhashed = dict(value)
-    unhashed.pop("bundle_hash", None)
-    value["bundle_hash"] = canonical_hash(unhashed)
     return value
 
 
@@ -118,6 +115,9 @@ def macro_result(track_id: str = "TRACK-1", run_id: str = "RUN-1", depth: int = 
         "product_release_authority": False, "bundle_hash": "a" * 64,
     }
     value.update(overrides)
+    unhashed = dict(value)
+    unhashed.pop("bundle_hash", None)
+    value["bundle_hash"] = canonical_hash(unhashed)
     return value
 
 

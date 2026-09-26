@@ -1,0 +1,153 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:review-brief-v1
+job_id: VO-PREP-PLOSIVE-THRESHOLD-R2-001
+run_id: gha-36229385080-1
+source_run: research/runs/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-triage.yaml
+triage_id: VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-PLOSIVE-THRESHOLD-R2-001.yaml
+research_question: Can a small activation-threshold calibration recover soft and repeated
+  plosive recall for the frozen Vo.Prep v2.2 contextual detector without giving back
+  its measured synthetic false-positive margin?
+hypothesis: The highest passing threshold in the predeclared 0.72/0.70 family will
+  recover plosive_soft and both repeated events while preserving nominal/strong latency,
+  zero-or-near-zero negative occupancy, sample-rate stability and +/-12 dB input-scale
+  invariance.
+counter_hypotheses:
+- Threshold-only calibration cannot recover the second repeated plosive because local-baseline/re-arm
+  behavior, not activation threshold, is limiting recall.
+- Lowering activation enough to recover soft/repeated events creates false detections
+  on long-LF, proximity, fry or growl negatives.
+- A passing threshold is not stable across 44.1/48/96 kHz or +/-12 dB input scaling.
+acceptance_criteria:
+- Select the highest activation threshold that passes every gate.
+- Positive detection fraction is >= 0.90.
+- Soft, nominal and strong cases are detected at every tested sample rate.
+- Both repeated-plosive events are detected at every tested sample rate.
+- Worst positive first-onset latency is <= 20 ms.
+- Mean negative occupancy is <= 1% and worst negative occupancy is <= 5%.
+- Candidate mean negative occupancy is <= 35% of the unchanged LF-only baseline mean.
+- Maximum event duration is <= 125 ms.
+- Maximum probability spread across 44.1/48/96 kHz is <= 0.06.
+- Across -12/0/+12 dB scaling, maximum probability spread is <= 0.05 and occupancy
+  spread <= 3 percentage points.
+rejection_criteria:
+- Neither 0.72 nor 0.70 passes every gate.
+- Passing requires adding a new feature, changing release/cap, or relaxing a predeclared
+  gate.
+- Raw audio is persisted or product DSP is mutated.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 291abbc95056957444a511dda9d009c9f17815ff
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: baseline_threshold
+  value: 0.75
+- path: candidate_thresholds[0]
+  value: 0.72
+- path: candidate_thresholds[1]
+  value: 0.7
+- path: decision
+  value: GO_TO_REAL_VOCAL
+- path: feature_family_changed
+  value: false
+- path: raw_audio_persisted
+  value: false
+- path: selected_gates.event_duration_le_125ms
+  value: true
+- path: selected_gates.false_occupancy_le_35pct_of_lf_only
+  value: true
+- path: selected_gates.input_scale_occupancy_spread_le_3pct
+  value: true
+- path: selected_gates.input_scale_probability_spread_le_0_05
+  value: true
+- path: selected_gates.negative_occupancy_max_le_5pct
+  value: true
+- path: selected_gates.negative_occupancy_mean_le_1pct
+  value: true
+- path: selected_gates.nominal_detected_all_sr
+  value: true
+- path: selected_gates.positive_detection_fraction_ge_0_90
+  value: true
+- path: selected_gates.positive_onset_latency_le_20ms
+  value: true
+- path: selected_gates.repeated_two_events_all_sr
+  value: true
+- path: selected_gates.sample_rate_probability_spread_le_0_06
+  value: true
+- path: selected_gates.soft_detected_all_sr
+  value: true
+- path: selected_gates.strong_detected_all_sr
+  value: true
+- path: selected_threshold
+  value: 0.7
+- path: summaries[0].false_occupancy_ratio
+  value: 0.0
+- path: summaries[0].gates.event_duration_le_125ms
+  value: true
+- path: summaries[0].gates.false_occupancy_le_35pct_of_lf_only
+  value: true
+- path: summaries[0].gates.input_scale_occupancy_spread_le_3pct
+  value: true
+- path: summaries[0].gates.input_scale_probability_spread_le_0_05
+  value: true
+- path: summaries[0].gates.negative_occupancy_max_le_5pct
+  value: true
+- path: summaries[0].gates.negative_occupancy_mean_le_1pct
+  value: true
+- path: summaries[0].gates.nominal_detected_all_sr
+  value: true
+- path: summaries[0].gates.positive_detection_fraction_ge_0_90
+  value: false
+- path: summaries[0].gates.positive_onset_latency_le_20ms
+  value: true
+- path: summaries[0].gates.repeated_two_events_all_sr
+  value: false
+- path: summaries[0].gates.sample_rate_probability_spread_le_0_06
+  value: true
+knowledge_candidate:
+  claim: A small activation-threshold calibration may recover soft/repeated plosive
+    recall without changing the Vo.Prep contextual feature family.
+  evidence_type: HYPOTHESIS
+  scope: Vo.Prep Plosive Guard v2.2 deterministic R2 calibration only; real-vocal
+    validation remains required.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Integrated level-matched listening is still required before final Macro/Phrase product
+  lock.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Human level-matched listening is required for final naturalness sign-off.
+- Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

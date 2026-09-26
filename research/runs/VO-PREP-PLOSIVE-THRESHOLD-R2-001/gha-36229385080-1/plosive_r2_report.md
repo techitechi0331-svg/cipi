@@ -1,0 +1,107 @@
+# Vo.Prep Plosive Guard R2 threshold calibration
+
+Decision: GO_TO_REAL_VOCAL
+
+Frozen feature family; only activation threshold varies.
+
+[
+  {
+    "threshold": 0.75,
+    "positive_detection_fraction": 0.75,
+    "soft_detected_all_sr": false,
+    "nominal_detected_all_sr": true,
+    "strong_detected_all_sr": true,
+    "repeated_two_events_all_sr": false,
+    "max_positive_onset_latency_ms": 16.312500000000007,
+    "negative_occupancy_mean_pct": 0.0,
+    "negative_occupancy_max_pct": 0.0,
+    "lf_only_negative_occupancy_mean_pct": 1.2622616948013774,
+    "false_occupancy_ratio": 0.0,
+    "max_probability_sample_rate_spread": 0.0026193492899950765,
+    "max_active_duration_ms": 11.833333333333334,
+    "max_input_scale_probability_spread": 0.01447727070028515,
+    "max_input_scale_occupancy_spread_pct": 0.6296296296296298,
+    "gates": {
+      "positive_detection_fraction_ge_0_90": false,
+      "soft_detected_all_sr": false,
+      "nominal_detected_all_sr": true,
+      "strong_detected_all_sr": true,
+      "repeated_two_events_all_sr": false,
+      "positive_onset_latency_le_20ms": true,
+      "negative_occupancy_mean_le_1pct": true,
+      "negative_occupancy_max_le_5pct": true,
+      "false_occupancy_le_35pct_of_lf_only": true,
+      "event_duration_le_125ms": true,
+      "sample_rate_probability_spread_le_0_06": true,
+      "input_scale_probability_spread_le_0_05": true,
+      "input_scale_occupancy_spread_le_3pct": true
+    },
+    "passes": false
+  },
+  {
+    "threshold": 0.72,
+    "positive_detection_fraction": 1.0,
+    "soft_detected_all_sr": true,
+    "nominal_detected_all_sr": true,
+    "strong_detected_all_sr": true,
+    "repeated_two_events_all_sr": false,
+    "max_positive_onset_latency_ms": 16.1904761904762,
+    "negative_occupancy_mean_pct": 0.0,
+    "negative_occupancy_max_pct": 0.0,
+    "lf_only_negative_occupancy_mean_pct": 1.2622616948013774,
+    "false_occupancy_ratio": 0.0,
+    "max_probability_sample_rate_spread": 0.0026193492899950765,
+    "max_active_duration_ms": 12.517006802721088,
+    "max_input_scale_probability_spread": 0.01447727070028515,
+    "max_input_scale_occupancy_spread_pct": 0.7962962962962963,
+    "gates": {
+      "positive_detection_fraction_ge_0_90": true,
+      "soft_detected_all_sr": true,
+      "nominal_detected_all_sr": true,
+      "strong_detected_all_sr": true,
+      "repeated_two_events_all_sr": false,
+      "positive_onset_latency_le_20ms": true,
+      "negative_occupancy_mean_le_1pct": true,
+      "negative_occupancy_max_le_5pct": true,
+      "false_occupancy_le_35pct_of_lf_only": true,
+      "event_duration_le_125ms": true,
+      "sample_rate_probability_spread_le_0_06": true,
+      "input_scale_probability_spread_le_0_05": true,
+      "input_scale_occupancy_spread_le_3pct": true
+    },
+    "passes": false
+  },
+  {
+    "threshold": 0.7,
+    "positive_detection_fraction": 1.0,
+    "soft_detected_all_sr": true,
+    "nominal_detected_all_sr": true,
+    "strong_detected_all_sr": true,
+    "repeated_two_events_all_sr": true,
+    "max_positive_onset_latency_ms": 15.656249999999982,
+    "negative_occupancy_mean_pct": 0.0,
+    "negative_occupancy_max_pct": 0.0,
+    "lf_only_negative_occupancy_mean_pct": 1.2622616948013774,
+    "false_occupancy_ratio": 0.0,
+    "max_probability_sample_rate_spread": 0.0026193492899950765,
+    "max_active_duration_ms": 12.879818594104309,
+    "max_input_scale_probability_spread": 0.01447727070028515,
+    "max_input_scale_occupancy_spread_pct": 0.5185185185185186,
+    "gates": {
+      "positive_detection_fraction_ge_0_90": true,
+      "soft_detected_all_sr": true,
+      "nominal_detected_all_sr": true,
+      "strong_detected_all_sr": true,
+      "repeated_two_events_all_sr": true,
+      "positive_onset_latency_le_20ms": true,
+      "negative_occupancy_mean_le_1pct": true,
+      "negative_occupancy_max_le_5pct": true,
+      "false_occupancy_le_35pct_of_lf_only": true,
+      "event_duration_le_125ms": true,
+      "sample_rate_probability_spread_le_0_06": true,
+      "input_scale_probability_spread_le_0_05": true,
+      "input_scale_occupancy_spread_le_3pct": true
+    },
+    "passes": true
+  }
+]

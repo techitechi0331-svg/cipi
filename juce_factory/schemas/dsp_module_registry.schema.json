@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/juce-factory/dsp_module_registry.schema.json",
+  "title": "CIPI JUCE Factory DSP Module Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "modules"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "module_id",
+          "implementation_id",
+          "certification_status",
+          "factory_build_eligible",
+          "contract_versions",
+          "required_parameter_ids",
+          "supported_layouts",
+          "validation_profile",
+          "source_revision_required",
+          "product_release_authority"
+        ],
+        "properties": {
+          "module_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "implementation_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.]*$"
+          },
+          "certification_status": {
+            "const": "FACTORY_CERTIFIED"
+          },
+          "factory_build_eligible": {
+            "type": "boolean"
+          },
+          "contract_versions": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required_parameter_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+            }
+          },
+          "supported_layouts": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "mono",
+                "stereo"
+              ]
+            }
+          },
+          "validation_profile": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "source_revision_required": {
+            "type": "boolean"
+          },
+          "product_release_authority": {
+            "const": false
+          }
+        }
+      }
+    }
+  }
+}

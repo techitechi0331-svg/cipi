@@ -1,0 +1,6 @@
+schema_version: "1.0"
+event: MELON_R2_COMPLETE_RECHECK
+reason: "Reconcile completed MELON macro run for autonomous pilot continuation."
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

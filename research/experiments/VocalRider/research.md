@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `d32c70f3df8313358c6a13d4d03eca6c702f4f26`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `66a6b4d4b4eec5e4e8842473b5f54b97a6e713be`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -91,6 +91,43 @@ Standalone-core deterministic matrix, nominal 48 kHz / Amount 50%:
 
 This promotes sample-rate stability, finite-state behaviour, range bounding, silence return and the synthetic short-burst freeze from HYPOTHESIS to MEASURED for the standalone core.
 
+
+## MEASURED — HUST Solfege real-vocal objective validation
+
+Dedicated-Repo workflow `vocal-rider-real-vocal` run `36199972021` completed successfully on the self-hosted Windows runner.
+
+Corpus / cases:
+- HUST_Solfege `man1_twinkle.wav`, `man4_twinkle.wav`, `woman1_twinkle.wav`, `woman3_twinkle.wav`;
+- Amount 0 / 25 / 50 / 75 for each file;
+- 16 DSP cases total;
+- hard failures: 0;
+- cases containing >0 dBFS samples: 0;
+- Amount 0 maximum absolute delay-aligned difference: 0.0000 for all four files;
+- Amount 50 delay-aligned active-RMS-matched A/B renders were generated successfully;
+- evidence artifact digest: `sha256:8a4354d8dd0e68411d13e4c4d371244ec2588d5fcc5074ae013ffe64f70a85ee`.
+
+Amount 50 active-400 ms variability changed as follows:
+
+| File | Active 400 ms std: input -> output | Change | P90-P10: input -> output | Change |
+|---|---:|---:|---:|---:|
+| man1 | 14.0226 -> 14.1850 dB | +1.16% | 36.7533 -> 38.1020 dB | +3.67% |
+| man4 | 14.1169 -> 14.4469 dB | +2.34% | 36.9162 -> 37.5559 dB | +1.73% |
+| woman1 | 11.6375 -> 11.6369 dB | -0.01% | 30.3418 -> 30.2548 dB | -0.29% |
+| woman3 | 13.1285 -> 12.9249 dB | -1.55% | 36.3553 -> 34.7368 dB | -4.45% |
+
+Interpretation:
+- the real-vocal integrity gate passes;
+- the present 400 ms statistics do **not** show consistent phrase-level stabilization across this four-file corpus;
+- two male files worsened slightly, one female file was effectively unchanged, and one female file improved modestly;
+- therefore this result does not justify promoting the current Auto Target / Amount 50 tuning as musically optimal.
+
+Headroom-guard diagnostic:
+- Amount 50 maximum ride speed was ~13.20 / 12.91 dB/s on the two male files;
+- it reached ~600 dB/s on the two female files because the peak-safety Headroom Guard can rapidly remove positive ride;
+- this is not automatically a defect, but it is a targeted listening / measurement risk because the product goal is broad fader-like riding rather than fast compression.
+
+The current real-vocal workflow's PASS status is an integrity/rendering PASS, not a sound-quality or leveling-effectiveness PASS.
+
 ### VST3 latency observation
 
 pluginval's early Plugin Info phase printed `Reported latency: 0`, even though the prototype sets 50 ms-equivalent latency in `prepareToPlay`.
@@ -119,7 +156,7 @@ Revision:
 - neutral and already-negative requested ride pass unchanged;
 - add a deterministic regression test for 0 dB and -3 dB requests under near-full-scale peaks.
 
-Classification: the flaw itself is INFERRED from source review; the corrected behavior remains unmeasured in the dedicated Repo until runner CI executes.
+Classification: the flaw itself is INFERRED from source review. The corrected path is now MEASURED on the HUST real-vocal workflow for Amount 0 delay-only identity and no >0 dBFS samples; the dedicated deterministic neutral/-3 dB guard regression still awaits the research-workflow rerun.
 
 ### Persistent section-offset adaptation v0.2
 
@@ -308,22 +345,24 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 4. 50 ms lookahead must be compared against 0 / 20 / 100 ms on real vocals.
 5. Auto Target must be tested on first-phrase edge cases and songs with intentional section-level dynamics.
 6. A dedicated whisper condition is required so breath rejection does not reject legitimate airy singing.
-7. Real-vocal listening, Steinberg validator and Cubase Pro 14 validation remain pending.
+7. Real-vocal objective validation has completed, but subjective level-matched listening, Steinberg validator and Cubase Pro 14 validation remain pending.
 8. pluginval passed on the prior CIPI research branch, and the explicit post-prepare processor gate reports the intended 50 ms latency across 44.1/48/88.2/96/192 kHz and 32–1024 sample blocks; Cubase compensation is still unverified.
 9. Intentional macro-dynamics preservation remains an explicit measurement target and must be rerun in the dedicated Repo CI after the current Headroom Guard regression fix.
-10. Dedicated-Repo Windows research/real-vocal workflows currently depend on an eligible self-hosted runner.
+10. The HUST four-file Amount 50 result does not show consistent 400 ms stabilization; a better real-vocal effectiveness metric and/or Auto Target revision is required before parameter promotion.
+11. Female real-vocal cases exercised ~600 dB/s peak-safety ride reduction; determine by measurement/listening whether this guard action is transparent or too compressor-like.
 
 ## Current location
 
-Dedicated product Repo measurement/revision stage. Prior CIPI-branch core/VST3/pluginval evidence exists, but dedicated-Repo CI is currently runner-blocked. Independent review found and fixed a Headroom Guard design error that could turn neutral ride into attenuation; deterministic regression now locks the guard to boost-only behavior. A processor-level regression also requires Amount 0% / Output 0 dB to be delayed unity and verifies that the first non-zero sample lands exactly at the reported 50 ms latency. These new gates are implemented but remain unmeasured in the dedicated Repo until runner CI executes. Musical-behaviour and real-vocal validation remain open.
+Dedicated product Repo measurement/revision stage. The self-hosted runner is active. HUST real-vocal objective validation passes its integrity/rendering gates, but its current 400 ms statistics do not demonstrate consistent leveling effectiveness. The Headroom Guard boost-only fix is exercised successfully by the real-vocal Amount 0 path; dedicated deterministic guard/latency regression and the full research gate are being rerun after CI-environment fixes. Musical-effectiveness validation and listening remain open.
 
 ## Next stage
 
-1. Run the dedicated-Repo deterministic/core/plugin regression suite, including the new boost-only Headroom Guard test.
-2. Rerun the intentional section-dynamics and event-protection probes.
-3. Run HUST_Solfege real-vocal validation for male/female singing and render level-matched A/B evidence.
-4. Run pluginval and the pinned Steinberg VST3 validator.
-5. Keep Cubase Pro 14 scan/instantiate/playback/automation/save-reload as the final human host gate.
+1. Finish the dedicated-Repo deterministic/core/plugin regression suite, including boost-only Headroom Guard and exact delayed-unity latency tests.
+2. Rerun intentional section-dynamics and event-protection probes on the corrected build.
+3. Refine the real-vocal effectiveness measurement so it distinguishes useful local phrase leveling from intentional song-level dynamics; use the existing HUST A/B set as the first corpus.
+4. If the refined metric confirms weak or inconsistent leveling, revise Auto Target / local-history behavior before changing exposed controls.
+5. Run pluginval and the pinned Steinberg VST3 validator.
+6. Keep level-matched human listening and Cubase Pro 14 scan/instantiate/playback/automation/save-reload as final human gates.
 
 ## Why next
 

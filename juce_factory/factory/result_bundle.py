@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .contract import canonical_json
@@ -44,12 +44,19 @@ def _require_git_sha(value: Any, label: str) -> str:
 
 
 def _normalized_artifact_path(value: str) -> str:
+    if not isinstance(value, str):
+        raise ResultBundleError("artifact path must be a string")
     normalized = value.replace("\\", "/")
-    path = Path(normalized)
-    if path.is_absolute() or ".." in path.parts or normalized.startswith("/"):
+    if not normalized or normalized.startswith("/") or normalized.startswith("//"):
         raise ResultBundleError(f"unsafe artifact path: {value}")
-    if not normalized or normalized.endswith("/"):
-        raise ResultBundleError(f"invalid artifact file path: {value}")
+    parts = normalized.split("/")
+    if any(part in {"", ".", ".."} for part in parts):
+        raise ResultBundleError(f"unsafe artifact path: {value}")
+    if re.fullmatch(r"[A-Za-z]:", parts[0]) or re.match(r"^[A-Za-z]:/", normalized):
+        raise ResultBundleError(f"unsafe artifact path: {value}")
+    path = PurePosixPath(normalized)
+    if path.is_absolute():
+        raise ResultBundleError(f"unsafe artifact path: {value}")
     return normalized
 
 
@@ -114,10 +121,20 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
     _require_sha256(data["bundle_hash"], "bundle_hash")
     if not isinstance(data["formats"], list) or not data["formats"]:
         raise ResultBundleError("formats must be a non-empty array")
+    if len(set(data["formats"])) != len(data["formats"]) or any(
+        value != "VST3" for value in data["formats"]
+    ):
+        raise ResultBundleError("formats must contain only unique supported VST3 entries")
+    if data["platform"] != "windows_x64":
+        raise ResultBundleError("platform must be windows_x64")
     if not isinstance(data["validation_matrix"], dict):
         raise ResultBundleError("validation_matrix must be an object")
     if not isinstance(data["validators"], dict):
         raise ResultBundleError("validators must be an object")
+    allowed_validator_states = {"PASS", "FAIL", "NOT_RUN", "UNKNOWN"}
+    for key, value in data["validators"].items():
+        if not isinstance(key, str) or not key.strip() or value not in allowed_validator_states:
+            raise ResultBundleError("validators contains an invalid key or state")
     if not isinstance(data["artifact_hashes"], dict):
         raise ResultBundleError("artifact_hashes must be an object")
     for artifact, digest in data["artifact_hashes"].items():
@@ -145,6 +162,8 @@ def validate_result_bundle(data: dict[str, Any]) -> None:
     else:
         if not isinstance(data["failure_class"], str) or not data["failure_class"].strip():
             raise ResultBundleError("QUARANTINED requires a non-empty failure_class")
+        if data["artifact_hashes"]:
+            raise ResultBundleError("QUARANTINED must not expose promoted artifact hashes")
 
     expected = _hash_payload(data)
     if data["bundle_hash"] != expected:
@@ -277,7 +296,7 @@ def build_quarantine_bundle(
         "platform": manifest.get("target_os"),
         "formats": manifest.get("formats"),
         "validation_matrix": manifest.get("validation_matrix"),
-        "validators": {},
+        "validators": dict(failure.get("validators", {})),
         "artifact_hashes": {},
         "failure_class": failure_class,
         "raw_audio_persisted": False,

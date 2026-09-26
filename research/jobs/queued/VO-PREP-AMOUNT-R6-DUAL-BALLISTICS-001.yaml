@@ -1,0 +1,94 @@
+schema_version: '1.0'
+job_id: VO-PREP-AMOUNT-R6-DUAL-BALLISTICS-001
+state: QUEUED
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: Does the previously validated Peak Assist timing principle, updated to the current 70 ms Body release, repair the current high-Amount ripple/generalization failure while retaining selective transient control better than the simple shared 8/70 baseline?
+hypothesis: Body 8/70 plus PeakExtra 3/20 at 6.5 dB crest will pass all original Amount gates on f7/f8/m7/m8, improve Amount-100 ripple by at least 15 percent versus shared 8/70, add at least 0.15 dB event-vs-non-event GR contrast with limited non-event movement, remain input-gain invariant, and then pass the unchanged gates on fresh f9/m9/m10/m11.
+counter_hypotheses:
+  - The faster PeakExtra envelope increases rather than reduces high-Amount ripple.
+  - The dual topology improves transient control but fails Amount smoothness/generalization.
+  - The 70 ms shared baseline remains the better complexity/quality trade-off.
+  - The previous 8/80 Peak Assist result does not transfer to the refined 8/70 Body core.
+baseline:
+  - Current shared detector fusion max(Slow, Fast-6 dB) into one 8 ms attack / 70 ms release GR envelope.
+variants:
+  - Slow Body curve with 8/70 ballistics plus PeakExtra derived from max(Slow, Fast-6.5 dB), using 3 ms attack / 20 ms release, summed in dB before the same single audio gain cell.
+metrics:
+  - baseline_amount100_ripple_db
+  - candidate_amount100_ripple_db
+  - selection_ripple_improvement_ratio
+  - selection_event_metrics
+  - selection_extra_gates
+  - gain_invariance_probe
+  - holdout_accessed
+  - holdout_passes
+  - raw_audio_persisted
+acceptance:
+  - The simple baseline is the current shared 8/70 architecture; no other timing candidate is introduced.
+  - The complex candidate uses Body 8/70, PeakExtra 3/20, Peak crest 6.5 dB, no Hold, no lookahead and one audio gain cell.
+  - Selection uses f7, f8, m7 and m8 with two qualifying files per singer.
+  - Fresh holdout uses f9, m9, m10 and m11 with two qualifying files per singer.
+  - Holdout audio is not streamed or decoded until every selection, event-selectivity and gain-invariance gate passes.
+  - Amount 0 is exact bypass.
+  - Amount 25 mean GR is 0.75 to 2.25 dB and p95 is no more than 4 dB.
+  - Amount 50 mean GR is 2.5 to 3.75 dB, p95 no more than 6 dB and fraction above 10 dB no more than 0.5 percent.
+  - Amount 75 mean GR is 3.75 to 5.5 dB and p99 no more than 9 dB.
+  - Amount 100 mean GR is 5.0 to 7.0 dB, p99 no more than 10 dB and fraction above 10 dB no more than 2 percent.
+  - Selection aggregate ripple is no more than 0.075 dB at every nonzero Amount.
+  - Final holdout aggregate ripple is no more than 0.080 dB at every nonzero Amount.
+  - Cross-singer mean-GR standard deviation at Amount 50 is no more than 1.0 dB.
+  - Mean and p95 GR remain monotonic with Amount.
+  - Selection mapping RMSE is no more than 0.50 dB.
+  - Final holdout mapping RMSE is no more than 0.65 dB.
+  - Learn-solver residual is no more than 0.02 dB.
+  - Candidate Amount-100 ripple improves by at least 15 percent versus the shared 8/70 baseline.
+  - Candidate event-vs-non-event GR contrast improves by at least 0.15 dB over baseline on crest-defined events.
+  - Mean per-file non-event p95 absolute GR delta versus baseline is no more than 0.25 dB.
+  - At least 60 percent of qualifying files show positive event extra GR.
+  - Candidate Threshold-shift and post-lock mean-GR gain-invariance errors are each no more than 0.005 dB across +/-12 dB.
+  - Raw public audio is not persisted.
+rejection:
+  - Candidate fails any selection Amount or temporal-selectivity gate.
+  - Candidate fails gain invariance.
+  - Fresh holdout fails any unchanged gate.
+  - Holdout data is accessed before selection passes.
+  - Passing requires relaxing a criterion or adding another timing candidate after results are visible.
+  - Raw public audio is persisted.
+max_runs: 1
+timeout_minutes: 20
+random_seed: 20260926
+experiment_adapter: voprep_amount_mapping_r6_v1
+allowed_operations:
+  - stream_public_audio_to_runner_memory
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - raw_audio_persistence
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: The previously validated Peak Assist time separation may transfer from the 8/80 Body baseline to the refined 8/70 Body core while improving both transient selectivity and high-Amount envelope behavior.
+  evidence_type: HYPOTHESIS
+  scope: Vo.Prep frozen detector/static curve with explicit Learn solve; shared 8/70 baseline versus Body 8/70 + PeakExtra 3/20; selection f7/f8/m7/m8 and fresh holdout f9/m9/m10/m11.
+  promotion_requested: HYPOTHESIS
+review_policy:
+  required_human_gates:
+    - Level-matched blind real-vocal listening before any dual-ballistics product adoption.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-R5-SOFT-RANGE-001
+    - VO-PREP-AMOUNT-R4-LEARN-SOLVE-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:auto"
+    - "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01"

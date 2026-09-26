@@ -122,6 +122,14 @@ def validate_macro_result(data: dict[str, Any]) -> list[str]:
         errors.append("invalid route")
     if not isinstance(data.get("continuation_candidates"), list):
         errors.append("continuation_candidates must be a list")
+    declared_hash = data.get("bundle_hash")
+    if isinstance(declared_hash, str):
+        unhashed = dict(data)
+        unhashed.pop("bundle_hash", None)
+        if declared_hash != canonical_hash(unhashed):
+            errors.append("bundle_hash mismatch")
+    else:
+        errors.append("bundle_hash must be a string")
     try:
         if int(data.get("loop_depth", 0)) < 1:
             errors.append("loop_depth must be >= 1")

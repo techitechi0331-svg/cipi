@@ -30,7 +30,7 @@ completed:
   - revision
 
 unresolved:
-  - Vo.Prep -> VoPriPro synthetic integration v1 is ITERATE: the ad-hoc plosive case failed to engage Plosive Guard, and the sibilance downstream-GR benefit narrowly missed its unchanged gate. A source-derived positive-control v2 screen is required.
+  - Vo.Prep -> VoPriPro integration v1 remains ITERATE. VOPRIPRO-VOPREP-INTEGRATION-002 is queued with source-derived Plosive/Sibilance positive controls, explicit detector-probability engagement gates, unchanged downstream benefit/recovery gates, and 88.2 kHz added to the sample-rate matrix.
   - Existing Vo.Prep Amount R2-R4 product mappings are not eligible for direct transfer; current VoPriPro AMOUNT remains baseline while its own perceptual uniformity still needs listening/generalisation evidence.
   - Direct fixed 8/70 ms ballistics transfer was rejected by short-transient, 100 ms body, long-body and repeated-phrase gates; current Character timing remains baseline.
   - Direct Vo.Prep Slow-RMS/Fast-Peak detector transfer v1 was rejected by predeclared sustained-body and short-transient gates; current VoPriPro detector remains baseline.

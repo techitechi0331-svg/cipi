@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "modules": [
+    {
+      "module_id": "golden_gain_v1",
+      "implementation_id": "builtin.golden_gain_v1",
+      "certification_status": "FACTORY_CERTIFIED",
+      "factory_build_eligible": true,
+      "contract_versions": [
+        1
+      ],
+      "required_parameter_ids": [
+        "gain_db"
+      ],
+      "supported_layouts": [
+        "mono",
+        "stereo"
+      ],
+      "validation_profile": "golden_gain_v1",
+      "source_revision_required": true,
+      "product_release_authority": false
+    }
+  ]
+}

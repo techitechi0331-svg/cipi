@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,7 @@ from juce_factory.factory.contract import canonical_json, contract_sha256, valid
 
 HANDOFF_VERSION = "1.0"
 NON_AUTOMATION_AUTHORITIES = {"HUMAN", "ASSISTANT_REVIEW"}
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 PASS_GATES = {
     "baseline_improvement_pass",
     "holdout_pass",
@@ -42,6 +44,10 @@ def _canonical_rel(path: str | Path, root: Path) -> str:
     except ValueError as exc:
         raise FactoryHandoffError(f"path is outside repository root: {path}") from exc
     return rel.as_posix()
+
+
+def _file_sha256(path: str | Path) -> str:
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def _receipt_hash(data: dict[str, Any]) -> str:
@@ -167,9 +173,13 @@ def build_contract_candidate(
         "handoff_kind": "INCUBATOR_TO_FACTORY_CONTRACT_CANDIDATE",
         "plugin_proposal_id": pid,
         "source_proposal": _canonical_rel(proposal_path, repo_root),
+        "source_proposal_sha256": _file_sha256(proposal_path),
         "source_incubate_decision": decision_rel,
+        "source_incubate_decision_sha256": _file_sha256(decision_path),
         "source_product_evidence": evidence_rel,
+        "source_product_evidence_sha256": _file_sha256(evidence_path),
         "source_manufacturing_review": _canonical_rel(review_path, repo_root),
+        "source_manufacturing_review_sha256": _file_sha256(review_path),
         "review_authority": review["review"]["authority"],
         "contract_sha256": contract_sha256(contract),
         "status": "CONTRACT_CANDIDATE",
@@ -190,9 +200,13 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
         "handoff_kind",
         "plugin_proposal_id",
         "source_proposal",
+        "source_proposal_sha256",
         "source_incubate_decision",
+        "source_incubate_decision_sha256",
         "source_product_evidence",
+        "source_product_evidence_sha256",
         "source_manufacturing_review",
+        "source_manufacturing_review_sha256",
         "review_authority",
         "contract_sha256",
         "status",
@@ -226,8 +240,16 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
     ):
         if receipt[key] is not False:
             raise FactoryHandoffError(f"{key} must be false")
-    if not isinstance(receipt["contract_sha256"], str) or len(receipt["contract_sha256"]) != 64:
-        raise FactoryHandoffError("contract_sha256 must be a SHA-256 digest")
+    for key in (
+        "contract_sha256",
+        "source_proposal_sha256",
+        "source_incubate_decision_sha256",
+        "source_product_evidence_sha256",
+        "source_manufacturing_review_sha256",
+        "receipt_hash",
+    ):
+        if not isinstance(receipt[key], str) or not _SHA256.fullmatch(receipt[key]):
+            raise FactoryHandoffError(f"{key} must be a lowercase SHA-256 digest")
     for key in (
         "plugin_proposal_id",
         "source_proposal",

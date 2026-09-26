@@ -145,3 +145,32 @@ cannot carry product release, Cubase or listening authority.
 
 A future generic candidate-build workflow must consume both the Plugin Contract and
 its Build Authorization and reverify pinned source hashes before generation/build.
+
+
+## Generic authorized candidate build
+
+The `juce-factory-authorized-build` workflow scans only
+`research/incubator/factory_build_requests/`.
+
+Every request is revalidated immediately before generation. The scan is bounded to
+8 authorized requests and the Windows build matrix is limited to 2 parallel jobs.
+
+For each authorized request, Factory runs:
+
+1. Build Authorization + source provenance revalidation;
+2. Plugin Contract semantic-hash verification;
+3. deterministic JUCE project generation;
+4. Release VST3 build;
+5. Factory-owned DSP/state validation matrix;
+6. pluginval strictness 5;
+7. Steinberg official VST3 validator;
+8. Factory Result Bundle + CIPI evidence preview;
+9. Authorized Build Result Binding tying the result bundle to the exact
+   `authorization_hash`.
+
+Successful output remains a **validation-passed candidate artifact**, not a release.
+Failed builds are quarantined and, when a Factory manifest exists, receive their own
+quarantine Result Bundle and authorization/result binding.
+
+The workflow never grants final product decision, release authority, Cubase
+confirmation or listening approval.

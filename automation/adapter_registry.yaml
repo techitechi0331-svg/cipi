@@ -369,3 +369,10 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Bounded Sibilance Guard activation-threshold calibration over the frozen v2.3 feature family using absolute negative-occupancy gates; highest passing threshold may advance to real-vocal validation only."
+
+  vopripro_sidechain_hpf_transfer_v1:
+    tracks:
+      - VOPRIPRO_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare current 80 Hz VoPriPro Natural50 sidechain HPF against bounded 60/40 Hz candidates for low-vocal pitch-bias reduction without materially worsening rumble/plosive or HF-transient behavior."

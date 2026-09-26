@@ -255,7 +255,9 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             action_path = next((root / "research/cross_repo/actions/queued").glob("*.yaml"))
             action = yaml.safe_load(action_path.read_text())
             self.assertEqual(action["repo_key"], "melon")
-            self.assertEqual(action["inputs"]["loop_depth"], 1)
+            context = json.loads(action["inputs"]["cipi_context_json"])
+            self.assertEqual(context["loop_depth"], 1)
+            self.assertEqual(context["track_id"], "TRACK-1")
             self.assertFalse(action["automatic_product_decision"])
 
     def test_idempotency(self):

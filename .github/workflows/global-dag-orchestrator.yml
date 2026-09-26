@@ -126,6 +126,12 @@ jobs:
             echo "Cross-Repo Orchestrator already active; skipping duplicate dispatch."
           fi
 
+      - name: Cross-Repo token missing
+        if: steps.dag.outputs.next_kind == 'EXTERNAL_BLOCK'
+        run: |
+          echo "Cross-Repo work is queued but blocked because CIPI_CROSS_REPO_TOKEN is not configured."
+          echo "Queued action: ${{ steps.dag.outputs.action_id }}"
+
       - name: No executable DAG node
         if: steps.dag.outputs.next_kind == 'IDLE'
         run: echo "No executable node. Blocked/human-gate states remain visible in the health dashboard."

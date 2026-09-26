@@ -14,33 +14,18 @@
       "queued": 0
     }
   },
-  "human_gates": [
-    {
-      "gates": [
-        "Level-matched real-vocal listening remains mandatory before a perceptual chain recommendation.",
-        "Actual VST3/Cubase validation remains mandatory before release guidance."
-      ],
-      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001"
-    }
-  ],
+  "human_gates": [],
   "local": {
     "blocked_count": 0,
     "claimed_branches": [],
     "claimed_count": 0,
     "claimed_jobs": [],
     "dependency_blocked_count": 0,
-    "ready_job": {
-      "branch": "research-bot/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/auto-05666f5ab954",
-      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
-      "kind": "LOCAL_RESEARCH",
-      "priority": 93
-    }
+    "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/auto-05666f5ab954",
-    "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
-    "kind": "LOCAL_RESEARCH",
-    "priority": 93
+    "kind": "IDLE",
+    "priority": -999
   }
 }

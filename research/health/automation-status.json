@@ -17,10 +17,10 @@
   "human_gates": [
     {
       "gates": [
-        "Actual real-vocal listening remains mandatory before perceptual product claims.",
+        "Level-matched real-vocal listening remains mandatory before a perceptual chain recommendation.",
         "Actual VST3/Cubase validation remains mandatory before release guidance."
       ],
-      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001"
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001"
     }
   ],
   "local": {
@@ -30,17 +30,17 @@
     "claimed_jobs": [],
     "dependency_blocked_count": 0,
     "ready_job": {
-      "branch": "research-bot/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/auto-5862cd3d7b73",
-      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "branch": "research-bot/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/auto-05666f5ab954",
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
       "kind": "LOCAL_RESEARCH",
-      "priority": 92
+      "priority": 93
     }
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/auto-5862cd3d7b73",
-    "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+    "branch": "research-bot/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/auto-05666f5ab954",
+    "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
     "kind": "LOCAL_RESEARCH",
-    "priority": 92
+    "priority": 93
   }
 }

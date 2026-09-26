@@ -113,10 +113,12 @@ No Amount mapping, shelf/split audio processing, Macro Level or VoPriPro is part
 
 For each selected phone instance, internally measure:
 
-- whether baseline threshold activated in the evaluation interval;
-- whether candidate threshold activated;
+- whether the baseline threshold starts a new detector event in the evaluation interval;
+- whether the candidate threshold starts a new detector event;
 - active occupancy;
 - maximum active-run duration.
+
+Target-phone evaluation may include the small pre/post boundary tolerance declared above. Confounder-phone event-start classification uses the labelled interval itself, with no boundary padding, so an event that legitimately starts in an adjacent target consonant and merely releases into the following phone is not counted as a new confounder trigger.
 
 Per-instance rows and event timecodes are **not** persisted.
 
@@ -125,11 +127,11 @@ Persist only aggregates:
 - target instance count;
 - confounder instance count;
 - singer/source coverage;
-- baseline target hit rate;
-- candidate target hit rate;
-- candidate-only target count and rate;
-- baseline confounder hit rate;
-- candidate confounder hit rate;
+- baseline target event-start hit rate;
+- candidate target event-start hit rate;
+- candidate-only target event-start count and rate;
+- baseline confounder event-start hit rate;
+- candidate confounder event-start hit rate;
 - candidate-only confounder count and rate;
 - candidate-minus-baseline confounder hit-rate delta;
 - worst per-singer confounder hit-rate delta;

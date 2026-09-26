@@ -10,7 +10,16 @@ from typing import Any
 from juce_factory.factory.contract import canonical_json
 from juce_factory.factory.result_bundle import validate_result_bundle
 
-EVIDENCE_SCHEMA_VERSION = "1.0"
+EVIDENCE_SCHEMA_VERSION = "1.1"
+SUPPORTED_EVIDENCE_SCHEMA_VERSIONS = {"1.0", "1.1"}
+_MODULE_PROVENANCE_FIELDS = {
+    "dsp_module_id",
+    "dsp_implementation_id",
+    "dsp_certification_status",
+    "dsp_validation_profile",
+    "dsp_module_spec_sha256",
+    "dsp_module_registry_sha256",
+}
 _PLUGIN_ID = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _GIT_SHA = re.compile(r"^[0-9a-f]{40}$")
@@ -53,8 +62,15 @@ def build_evidence_record(bundle: dict[str, Any]) -> dict[str, Any]:
             f"{bundle['failure_class']} for contract {bundle['contract_sha256']}."
         )
 
+    evidence_version = "1.1" if bundle["schema_version"] == "1.1" else "1.0"
+    module_provenance = (
+        {key: bundle[key] for key in _MODULE_PROVENANCE_FIELDS}
+        if evidence_version == "1.1"
+        else {}
+    )
+
     record: dict[str, Any] = {
-        "schema_version": EVIDENCE_SCHEMA_VERSION,
+        "schema_version": evidence_version,
         "evidence_id": f"FACTORY-{bundle['bundle_hash'][:16].upper()}",
         "source_system": "JUCE_FACTORY",
         "source_bundle_hash": bundle["bundle_hash"],
@@ -78,6 +94,7 @@ def build_evidence_record(bundle: dict[str, Any]) -> dict[str, Any]:
         "product_release_authority": False,
         "cubase_confirmed": False,
         "listening_confirmed": False,
+        **module_provenance,
     }
     record["record_hash"] = _record_hash(record)
     validate_evidence_record(record)
@@ -85,7 +102,7 @@ def build_evidence_record(bundle: dict[str, Any]) -> dict[str, Any]:
 
 
 def validate_evidence_record(record: dict[str, Any]) -> None:
-    required = {
+    base_required = {
         "schema_version", "evidence_id", "source_system", "source_bundle_hash",
         "plugin_id", "plugin_version", "factory_status", "evidence_type", "scope",
         "claim", "contract_sha256", "generated_source_sha256", "source_revision",
@@ -95,14 +112,22 @@ def validate_evidence_record(record: dict[str, Any]) -> None:
         "product_release_authority", "cubase_confirmed", "listening_confirmed",
         "record_hash",
     }
+    version = record.get("schema_version")
+    if version not in SUPPORTED_EVIDENCE_SCHEMA_VERSIONS:
+        raise FactoryEvidenceIntakeError("unsupported Factory evidence schema_version")
+
+    required = set(base_required)
+    allowed = set(base_required)
+    if version == "1.1":
+        required |= _MODULE_PROVENANCE_FIELDS
+        allowed |= _MODULE_PROVENANCE_FIELDS
+
     missing = sorted(required - set(record))
-    unknown = sorted(set(record) - required)
+    unknown = sorted(set(record) - allowed)
     if missing:
         raise FactoryEvidenceIntakeError(f"Factory evidence record missing fields: {missing}")
     if unknown:
         raise FactoryEvidenceIntakeError(f"Factory evidence record contains unknown fields: {unknown}")
-    if record["schema_version"] != EVIDENCE_SCHEMA_VERSION:
-        raise FactoryEvidenceIntakeError("unsupported Factory evidence schema_version")
     if record["source_system"] != "JUCE_FACTORY":
         raise FactoryEvidenceIntakeError("unexpected Factory evidence source_system")
     if not isinstance(record["plugin_id"], str) or not _PLUGIN_ID.fullmatch(record["plugin_id"]):
@@ -115,6 +140,17 @@ def validate_evidence_record(record: dict[str, Any]) -> None:
     for key in ("source_revision", "validation_revision", "validation_base_revision"):
         if not isinstance(record[key], str) or not _GIT_SHA.fullmatch(record[key]):
             raise FactoryEvidenceIntakeError(f"{key} must be a lowercase 40-character Git SHA")
+    if version == "1.1":
+        for key in ("dsp_module_spec_sha256", "dsp_module_registry_sha256"):
+            if not isinstance(record[key], str) or not _SHA256.fullmatch(record[key]):
+                raise FactoryEvidenceIntakeError(f"{key} must be a lowercase SHA-256 digest")
+        for key in ("dsp_module_id", "dsp_implementation_id", "dsp_validation_profile"):
+            if not isinstance(record[key], str) or not record[key].strip():
+                raise FactoryEvidenceIntakeError(f"{key} must be non-empty")
+        if record["dsp_certification_status"] != "FACTORY_CERTIFIED":
+            raise FactoryEvidenceIntakeError(
+                "dsp_certification_status must be FACTORY_CERTIFIED"
+            )
     expected_id = f"FACTORY-{record['source_bundle_hash'][:16].upper()}"
     if record["evidence_id"] != expected_id:
         raise FactoryEvidenceIntakeError("Factory evidence_id does not match source bundle hash")
@@ -140,7 +176,6 @@ def validate_evidence_record(record: dict[str, Any]) -> None:
             raise FactoryEvidenceIntakeError("QUARANTINED evidence requires failure_class")
     if record["record_hash"] != _record_hash(record):
         raise FactoryEvidenceIntakeError("Factory evidence record hash mismatch")
-
 
 def write_evidence_record(bundle: dict[str, Any], output_root: str | Path) -> Path:
     record = build_evidence_record(bundle)

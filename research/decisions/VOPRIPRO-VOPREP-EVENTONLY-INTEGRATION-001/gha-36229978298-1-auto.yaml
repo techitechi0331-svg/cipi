@@ -1,0 +1,31 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:auto
+job_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001
+source_run: research/runs/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: ITERATE
+review_status: PENDING
+rationale: The declared acceptance gate passed. Automation records evidence but does
+  not promote knowledge or finalize product decisions.
+scope: Automated acceptance evidence for VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001;
+  promotion requires review.
+declared_rejection_criteria:
+- Any event-localization, neutrality, recovery, finite-state, phrase, or sample-rate
+  gate fails.
+triggered_criteria: []
+retained_findings:
+- The complete accepted run evidence is retained; passing an experiment gate does
+  not itself promote shared knowledge.
+reusable_findings: []
+revisit_if: []
+review_gaps: []
+lineage:
+  supersedes: []
+  related_jobs:
+  - VOPRIPRO-VOPREP-INTEGRATION-002
+  - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001
+  related_decisions:
+  - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:assistant-review-20260926
+created_at: '2026-09-26T08:31:58.396836Z'
+immutable: true

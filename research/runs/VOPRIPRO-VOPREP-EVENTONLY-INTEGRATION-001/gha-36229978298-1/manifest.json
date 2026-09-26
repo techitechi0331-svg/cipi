@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vopripro/experiments/eventonly_integration_v1.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-26T08:31:58.396836Z",
+  "environment": {
+    "experiment_adapter": "vopripro_voprep_eventonly_integration_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+  "random_seed": 20260926,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36229978298-1",
+  "schema_version": "1.0",
+  "source_commit": "eb8da19c65177cff066878201edce1ee63d541a6",
+  "started_at": "2026-09-26T08:30:34.084908Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

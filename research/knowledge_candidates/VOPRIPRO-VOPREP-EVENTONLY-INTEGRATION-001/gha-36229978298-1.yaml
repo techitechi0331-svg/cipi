@@ -1,0 +1,7 @@
+claim: Vo.Prep event-only processing may advance to actual cross-product validation
+  only if Plosive/Sibilance cleanup remains localized, Macro is truly disabled, and
+  downstream VoPriPro interaction stays inside the predeclared compatibility budget.
+evidence_type: HYPOTHESIS
+scope: Deterministic source-derived event-only compatibility screen only.
+source_run: research/runs/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1
+promotion_requested: HYPOTHESIS

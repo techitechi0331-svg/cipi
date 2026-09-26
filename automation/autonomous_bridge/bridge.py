@@ -469,7 +469,7 @@ def generate_job_and_action(
     for key, value in inputs.items():
         if isinstance(value, (str, int, float, bool)):
             scalar_inputs[str(key)] = value
-    scalar_inputs.update({
+    cipi_context = {
         "track_id": track_id,
         "research_id": research_id,
         "job_id": job_id,
@@ -479,7 +479,10 @@ def generate_job_and_action(
         "hypothesis_id": hypothesis_id,
         "experiment_id": experiment_id,
         "research_question": str(track.get("research_question") or "bounded MELON research"),
-    })
+    }
+    scalar_inputs["cipi_context_json"] = json.dumps(
+        cipi_context, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    )
     action = {
         "schema_version": "1.0",
         "action_id": action_id,

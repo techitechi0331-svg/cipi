@@ -9,6 +9,7 @@ on:
     paths:
       - "research/jobs/**"
       - "research/cross_repo/actions/**"
+      - "research/cross_repo/artifacts/**"
       - "research/cross_repo/health/**"
       - "research/autonomous_bridge/**"
       - "research/health/autonomous-bridge.json"

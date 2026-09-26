@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/incubator/factory_handoff_receipt.schema.json",
+  "title": "CIPI Incubator to Factory Contract Candidate Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "handoff_kind",
+    "plugin_proposal_id",
+    "source_proposal",
+    "source_incubate_decision",
+    "source_product_evidence",
+    "source_manufacturing_review",
+    "review_authority",
+    "contract_sha256",
+    "status",
+    "automatic_final_decision",
+    "factory_build_authorized",
+    "product_release_authority",
+    "cubase_confirmed",
+    "listening_confirmed",
+    "receipt_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "handoff_kind": {
+      "const": "INCUBATOR_TO_FACTORY_CONTRACT_CANDIDATE"
+    },
+    "plugin_proposal_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_proposal": {
+      "type": "string",
+      "pattern": "^research/incubator/proposals/.+\\.yaml$"
+    },
+    "source_incubate_decision": {
+      "type": "string",
+      "pattern": "^research/incubator/decisions/.+\\.yaml$"
+    },
+    "source_product_evidence": {
+      "type": "string",
+      "pattern": "^research/incubator/evidence/.+\\.yaml$"
+    },
+    "source_manufacturing_review": {
+      "type": "string",
+      "pattern": "^research/incubator/manufacturing_reviews/.+\\.yaml$"
+    },
+    "review_authority": {
+      "enum": [
+        "HUMAN",
+        "ASSISTANT_REVIEW"
+      ]
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "const": "CONTRACT_CANDIDATE"
+    },
+    "automatic_final_decision": {
+      "const": false
+    },
+    "factory_build_authorized": {
+      "const": false
+    },
+    "product_release_authority": {
+      "const": false
+    },
+    "cubase_confirmed": {
+      "const": false
+    },
+    "listening_confirmed": {
+      "const": false
+    },
+    "receipt_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

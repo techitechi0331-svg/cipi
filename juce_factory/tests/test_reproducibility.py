@@ -14,7 +14,7 @@ from juce_factory.factory.reproducibility import (
     compare_pass_bundles,
     validate_comparison_report,
 )
-from juce_factory.factory.result_bundle import build_pass_bundle
+from juce_factory.factory.result_bundle import _hash_payload, build_pass_bundle
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,6 +72,22 @@ class FactoryReproducibilityTests(unittest.TestCase):
             hashes_path,
         )
 
+
+    def _downgrade_to_v1_0(self, bundle: dict) -> dict:
+        legacy = copy.deepcopy(bundle)
+        legacy["schema_version"] = "1.0"
+        for key in (
+            "dsp_module_id",
+            "dsp_implementation_id",
+            "dsp_certification_status",
+            "dsp_validation_profile",
+            "dsp_module_spec_sha256",
+            "dsp_module_registry_sha256",
+        ):
+            legacy.pop(key, None)
+        legacy["bundle_hash"] = _hash_payload(legacy)
+        return legacy
+
     def test_identical_recorded_inputs_and_hashes_match(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
@@ -124,6 +140,53 @@ class FactoryReproducibilityTests(unittest.TestCase):
             self.assertFalse(report["same_recorded_factory_context"])
 
 
+
+
+    def test_v1_0_and_v1_1_are_not_same_recorded_context(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            current = self._bundle(root / "a", "a" * 64)
+            legacy = self._downgrade_to_v1_0(
+                self._bundle(root / "b", "a" * 64)
+            )
+            report = compare_pass_bundles(current, legacy)
+            self.assertEqual(
+                report["classification"],
+                "NOT_COMPARABLE_RECORDED_CONTEXT_DIFF",
+            )
+            self.assertTrue(report["same_contract"])
+            self.assertTrue(report["same_generated_source"])
+            self.assertFalse(report["same_recorded_factory_context"])
+
+    def test_registry_hash_difference_is_recorded_context_difference(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = self._bundle(root / "a", "a" * 64)
+            second = self._bundle(root / "b", "a" * 64)
+            second["dsp_module_registry_sha256"] = "f" * 64
+            second["bundle_hash"] = _hash_payload(second)
+
+            report = compare_pass_bundles(first, second)
+            self.assertEqual(
+                report["classification"],
+                "NOT_COMPARABLE_RECORDED_CONTEXT_DIFF",
+            )
+            self.assertFalse(report["same_recorded_factory_context"])
+
+    def test_module_spec_hash_difference_is_recorded_context_difference(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = self._bundle(root / "a", "a" * 64)
+            second = self._bundle(root / "b", "a" * 64)
+            second["dsp_module_spec_sha256"] = "e" * 64
+            second["bundle_hash"] = _hash_payload(second)
+
+            report = compare_pass_bundles(first, second)
+            self.assertEqual(
+                report["classification"],
+                "NOT_COMPARABLE_RECORDED_CONTEXT_DIFF",
+            )
+            self.assertFalse(report["same_recorded_factory_context"])
 
     def test_report_schema_required_fields_match_runtime_report(self):
         schema = json.loads(

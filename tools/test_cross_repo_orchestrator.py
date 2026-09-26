@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "automation" / "cross_repo"))
 
 from core import match_dispatched_run, select_queued_action, should_resume_external_job, validate_action  # noqa: E402
 from orchestrate import backfill_completed_artifacts  # noqa: E402
+from failure import classify_failure  # noqa: E402
 
 
 REGISTRY = {
@@ -127,6 +128,20 @@ def main() -> int:
     resume, _ = should_resume_external_job(job, set())
     assert resume is False
 
+
+    transient = classify_failure(
+        {"conclusion": "failure"},
+        [{"steps": [{"name": "Upload research evidence", "conclusion": "failure"}]}],
+    )
+    assert transient["category"] == "INFRA_TRANSIENT"
+    assert transient["retry_safe"] is True
+
+    product_failure = classify_failure(
+        {"conclusion": "failure"},
+        [{"steps": [{"name": "Validate VST3", "conclusion": "failure"}]}],
+    )
+    assert product_failure["category"] == "PRODUCT_OR_TEST_FAILURE"
+    assert product_failure["retry_safe"] is False
     print("CIPI cross-repo orchestrator tests: PASS")
     return 0
 

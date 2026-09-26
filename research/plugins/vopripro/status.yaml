@@ -30,7 +30,7 @@ completed:
   - revision
 
 unresolved:
-  - Vo.Prep -> VoPriPro all-modules 50% integration v2 is REJECTED for its downstream-benefit/recovery hypothesis, but decomposition passed: Plosive-only attenuated the source event by >=~0.795 dB while changing VoPriPro event peak GR by <=~0.0126 dB and post-event mean GR by <=~0.0211 dB; Macro-only produced >=~0.423 dB post-event GR shift and explained the v2 residual. VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001 is queued with Macro OFF.
+  - Vo.Prep event-only -> VoPriPro compatibility PASSED in the deterministic source-derived matrix: Plosive 50% + Sibilance 50% + Macro Level 0% passed all locked neutral/event/recovery/phrase/sample-rate gates. It is eligible for actual cross-product VST3 and level-matched real-vocal validation, but is not yet a perceptual/default-chain claim. The rejected all-modules 50% v2 remains negative evidence for Macro overlap.
   - Existing Vo.Prep Amount R2-R4 product mappings are not eligible for direct transfer; current VoPriPro AMOUNT remains baseline while its own perceptual uniformity still needs listening/generalisation evidence.
   - Direct fixed 8/70 ms ballistics transfer was rejected by short-transient, 100 ms body, long-body and repeated-phrase gates; current Character timing remains baseline.
   - Direct Vo.Prep Slow-RMS/Fast-Peak detector transfer v1 was rejected by predeclared sustained-body and short-transient gates; current VoPriPro detector remains baseline.
@@ -42,8 +42,8 @@ unresolved:
   - Final precision review remains pending after subjective and target-host evidence.
 
 next_stage: audio_ab
-why_next: "Current main remains the protected production baseline and has passed the existing objective gates. Human level-matched listening remains the decisive product gate. Direct detector fusion and fixed 8/70 ms ballistics were rejected, existing Vo.Prep Amount mappings do not justify direct transfer, and integration v1 requires a source-derived positive-control iteration before any actual cross-product product claim."
-next_confirmation: "Whether Natural50 should be kept, revised, or rolled back after strict level-matched listening, and whether module-isolated Vo.Prep event processing remains complementary to VoPriPro without material double-processing."
+why_next: "Current VoPriPro main remains the protected production baseline and has passed the existing objective gates. Event-only Vo.Prep compatibility has now passed the deterministic source-derived screen, while Macro overlap remains separate negative evidence. Human level-matched listening, actual cross-product VST3 validation and the target Cubase Pro 14 host remain the decisive open gates."
+next_confirmation: "Whether Natural50 and the event-only Vo.Prep -> VoPriPro chain remain KEEP candidates under level-matched real-vocal listening and actual VST3/Cubase validation, without reintroducing Macro overlap."
 
 blockers:
   - Human listening is required to convert the generated gain-matched A/B pack into perceptual evidence.

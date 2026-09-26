@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/juce-factory/authorized_build_result_binding.schema.json",
+  "title": "CIPI JUCE Factory Authorized Build Result Binding v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "binding_kind",
+    "request_id",
+    "plugin_id",
+    "plugin_version",
+    "contract_sha256",
+    "authorization_hash",
+    "authorization_authority",
+    "factory_result_bundle_hash",
+    "factory_status",
+    "automatic_final_decision",
+    "factory_build_authorized",
+    "product_release_authority",
+    "cubase_confirmed",
+    "listening_confirmed",
+    "binding_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "binding_kind": {
+      "const": "AUTHORIZED_FACTORY_BUILD_RESULT"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "plugin_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plugin_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorization_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorization_authority": {
+      "enum": [
+        "HUMAN",
+        "ASSISTANT_REVIEW"
+      ]
+    },
+    "factory_result_bundle_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "factory_status": {
+      "enum": [
+        "VALIDATION_PASS",
+        "QUARANTINED"
+      ]
+    },
+    "automatic_final_decision": {
+      "const": false
+    },
+    "factory_build_authorized": {
+      "const": true
+    },
+    "product_release_authority": {
+      "const": false
+    },
+    "cubase_confirmed": {
+      "const": false
+    },
+    "listening_confirmed": {
+      "const": false
+    },
+    "binding_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

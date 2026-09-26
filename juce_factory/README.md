@@ -83,3 +83,35 @@ These gates establish manufacturing and host-safety evidence only. They do not e
 ## Next gates
 
 Phase 3 should add a versioned Factory Result Bundle and CIPI failure-evidence ingestion, then reproducibility comparison across repeated builds. Queue/batch/resume and UI template expansion should follow only after those evidence/provenance gates are stable.
+
+
+## Factory Result Bundle and CIPI evidence preview
+
+Factory 0.2 adds a versioned Result Bundle after technical validation.
+
+The bundle records:
+
+- the semantic Plugin Contract SHA-256;
+- a deterministic generated-source tree SHA-256;
+- the source branch revision;
+- the exact validation checkout/merge revision;
+- the validation base revision;
+- Factory/JUCE versions and declared validation matrix;
+- mandatory validator outcomes;
+- hashes of promoted VST3 files;
+- a self-hash for tamper detection.
+
+The workflow also creates a bounded CIPI evidence **preview**. It is not written to
+canonical CIPI knowledge automatically. Both PASS and quarantine outcomes remain
+`MEASURED` manufacturing/host-safety evidence only.
+
+Factory Result Bundles and evidence records explicitly carry no authority for:
+
+- CIPI knowledge promotion;
+- a final product decision;
+- product release;
+- Cubase confirmation;
+- listening or subjective audio-quality approval.
+
+A quarantined result records the technical failure class and partial validator
+outcomes. It does not automatically reject the DSP or product concept.

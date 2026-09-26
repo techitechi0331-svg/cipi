@@ -14,7 +14,7 @@
     "contract_sha256",
     "generated_source_sha256",
     "factory_version",
-    "factory_revision",
+    "source_revision",
     "validation_revision",
     "validation_base_revision",
     "dsp_source_revision",
@@ -69,10 +69,6 @@
     "factory_version": {
       "type": "string",
       "minLength": 1
-    },
-    "factory_revision": {
-      "type": "string",
-      "pattern": "^[0-9a-f]{40}$"
     },
     "dsp_source_revision": {
       "type": "string",
@@ -153,6 +149,10 @@
       "pattern": "^[0-9a-f]{40}$"
     },
     "validation_base_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "source_revision": {
       "type": "string",
       "pattern": "^[0-9a-f]{40}$"
     }

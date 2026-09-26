@@ -43,16 +43,27 @@ GitHub Actions infrastructure state is directly observed:
 
 Therefore the current R1 CI failures are **not evidence that the new C++ fails to compile or that the DSP tests fail**. They are an external runner-allocation block.
 
+Cross-repository comparison further narrows the operational scope:
+
+- private `Vo.Prep` runs `36238941248`, `36238925246`, `36238826649` and `36204552770` all show GitHub-hosted Windows jobs with `runner_id=0` and zero workflow steps;
+- private `Vocal-One-Knob-Doubler` run `36171858974` shows the same condition on `ubuntu-latest`;
+- public `cipi` Cross-Repo Orchestrator run `36249606992`, at 2026-09-26 14:45 UTC, successfully received GitHub-hosted `ubuntu-latest` runner `1000002745` and completed;
+- the CIPI workflow itself is configured for `ubuntu-latest`, while the affected product repositories are private.
+
 ## INFERRED
 
 - The existing v0.3 detector is intentionally transient-sensitive: a slow spectral baseline is combined with a local spectral reference, so a fast vowel/formant transition is a more relevant stress case than a stationary vowel.
 - A static steady-state tone/formant test is insufficient as the primary false-positive probe because it does not represent the transition condition this detector is designed to react to.
 - Harmonic-aware protection should be applied only to the harshness/prominence term, not globally to the full spectral gain curve, so that independent sibilance control remains available.
 - Low-pass conditioning before periodicity estimation reduces the chance that a newly appearing high-frequency narrow tone becomes the pitch reference itself.
+- The runner-allocation problem is not specific to Vocal Surface and is not limited to Windows; it affects multiple private repositories while a public repository on the same account still receives GitHub-hosted runners.
+- This pattern is consistent with a private-repository GitHub-hosted usage/billing/budget gate, but CIPI does not have billing-dashboard authority and therefore cannot promote that cause beyond INFERRED/HYPOTHESIS without direct account evidence.
 
 ## HYPOTHESIS
 
 Candidate A may improve discrimination between legitimate voiced harmonic structure and inharmonic narrow prominence without materially weakening the existing nominal-50 harshness/sibilance behavior.
+
+The current private-repository hosted-runner block may be caused by exhausted included GitHub Actions usage, an Actions budget/spend stop, or another account-level private-hosted entitlement/billing restriction. This requires direct Billing & Licensing evidence to confirm.
 
 Candidate A is **not adopted** until all of the following are observed on the actual C++ implementation:
 
@@ -75,6 +86,8 @@ Candidate A is **not adopted** until all of the following are observed on the ac
 Current GitHub-hosted Windows jobs are failing before runner assignment (`runner_id=0`, zero steps). This blocks new compiled/reference-test evidence but does not block source review, test design, research logging or real-vocal test preparation.
 
 Resume condition: a Windows GitHub-hosted runner is assigned again, or an explicitly configured compatible Windows runner is made available to this product repo.
+
+Operational check before retry: inspect the repository-owner account's GitHub **Settings → Billing & Licensing** Actions usage and **Budgets and alerts**. If private hosted usage is stopped by quota/budget/payment state, resolve that account gate first; repeated workflow dispatches are intentionally avoided because they currently fail before step 1.
 
 ## Next executable work
 

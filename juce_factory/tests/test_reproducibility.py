@@ -10,6 +10,7 @@ from juce_factory.factory.contract import load_contract
 from juce_factory.factory.generator import generate_project
 from juce_factory.factory.reproducibility import (
     ReproducibilityComparisonError,
+    _report_hash,
     compare_pass_bundles,
     validate_comparison_report,
 )
@@ -121,6 +122,18 @@ class FactoryReproducibilityTests(unittest.TestCase):
             )
             self.assertTrue(report["same_generated_source"])
             self.assertFalse(report["same_recorded_factory_context"])
+
+
+    def test_semantically_inconsistent_report_is_rejected_even_with_fresh_hash(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first = self._bundle(root / "a", "a" * 64)
+            second = self._bundle(root / "b", "a" * 64)
+            report = compare_pass_bundles(first, second)
+            report["artifact_hash_match"] = False
+            report["report_hash"] = _report_hash(report)
+            with self.assertRaises(ReproducibilityComparisonError):
+                validate_comparison_report(report)
 
     def test_report_tamper_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:

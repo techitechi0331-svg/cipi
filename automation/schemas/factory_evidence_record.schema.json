@@ -17,7 +17,9 @@
     "claim",
     "contract_sha256",
     "generated_source_sha256",
-    "factory_revision",
+    "source_revision",
+    "validation_base_revision",
+    "validation_revision",
     "dsp_source_revision",
     "failure_class",
     "raw_audio_persisted",
@@ -76,10 +78,6 @@
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
     },
-    "factory_revision": {
-      "type": "string",
-      "minLength": 1
-    },
     "dsp_source_revision": {
       "type": "string",
       "minLength": 1
@@ -119,6 +117,18 @@
     "record_hash": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "validation_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "validation_base_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
     }
   }
 }

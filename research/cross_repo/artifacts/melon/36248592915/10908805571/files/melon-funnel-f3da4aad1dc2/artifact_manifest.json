@@ -1,0 +1,18 @@
+{
+  "evidence_hash": "9dab1be52bc2e99bdb95b911482326a89b24fe5925b272e49a14231f04ecf3c0",
+  "evidence_hash_scope": "canonical mapping of primary evidence relative paths to SHA256",
+  "hash_algorithm": "SHA256",
+  "primary_files": {
+    "budget_recommendation.json": "f47c2cb6effea52eef01c1f10702cf55967087a4d861e41526669336eb486add",
+    "candidates/melon-dynamic_gain_release_v1-122f4c798da010227c62.json": "be398ac393d5cca5b933ef79baf92851c495b79dda0f8cf81776c7dbe0aad821",
+    "candidates/melon-dynamic_gain_release_v1-2c4cf5c2ee43eee6d262.json": "179421be9489258cf264844b6b71a07d9413d7af2c758a5c30c77e04d4d44670",
+    "candidates/melon-dynamic_gain_release_v1-52223bf3f6c960cde7f2.json": "d8e920ab739434ded3dc728ca1c7646a487b10ff476074c836ffcc74e255a22d",
+    "candidates/melon-dynamic_gain_release_v1-c2d8a47ed834d7c7ba46.json": "a9d922e70be683ee1e5b7ae3a485fb9a896a8cfcb07e2448aa21f6df4644ffa4",
+    "efficiency_metrics.json": "0f1bc37890e0a4185a45f94fe8b987b9d281057d4ce29ad624d8a80fe2d2a0eb",
+    "precision_review.json": "f785019c3ea9282f5f09c4cec275445a9964633e9b696290ca1fdef73c8fb0e4",
+    "stage1_screening.json": "9b917d385070d84fceb07fe706d80d575b16b5c3c57f53a0ccb40d8ba9959c42",
+    "stage2_multiseed.json": "957be6962d51bc4c7f91df2e71aa0662198db9395e67d28cf398b5d4d00f0c25",
+    "stage3_deep_validation.json": "5e5fca6c95cfcc6f6159c44e98b90ae756832b40ed23eadc45128632664f64dd"
+  },
+  "schema_version": "1.0"
+}

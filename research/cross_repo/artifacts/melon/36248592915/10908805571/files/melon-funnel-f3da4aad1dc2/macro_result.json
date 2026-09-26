@@ -1,0 +1,355 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "2dce7509144e59a31032beae49949bf637cb4d55d2f701a68e3b3ce09c8f3e2c",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "EXP-MELON-BRIDGE-PILOT-R1"
+      ],
+      "estimated_cost": {
+        "candidates": 12,
+        "runtime_seconds": 120
+      },
+      "expected_information_gain": 0.9124999999999999,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "MELON_DYNAMIC_GAIN_DISCOVERY",
+        "benchmark_profile": [
+          "high_fidelity_v1",
+          "release_scientific_v1",
+          "screening_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for melon-dynamic_gain_release_v1-122f4c798da010227c62: candidate and matched baseline remain non-dominated/equal across multi-seed validation",
+        "input_set": "MELON_SYNTHETIC_VALIDATION_SET",
+        "objective_set": [
+          "settling",
+          "thd",
+          "crest_error",
+          "complexity"
+        ],
+        "reference_model": "MATCHED_FIXED_RELEASE_BASELINE",
+        "relevant_constraints": [
+          "numerical_stability",
+          "latency_consistency",
+          "adversarial_safety"
+        ],
+        "sample_rate": null,
+        "scope": [
+          "fixed",
+          "melon-dynamic_gain_release_v1-122f4c798da010227c62",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 120,
+          "population": 6,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for melon-dynamic_gain_release_v1-122f4c798da010227c62: candidate and matched baseline remain non-dominated/equal across multi-seed validation",
+      "id": "melon-funnel-f3da4aad1dc2-iterate-1",
+      "novelty": 0.75,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 120,
+          "population": 6,
+          "preflight_mode": "fast",
+          "seed": 2026092602,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "melon-dynamic_gain_release_v1-122f4c798da010227c62",
+          "fixed"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "candidate and matched baseline remain non-dominated/equal across multi-seed validation"
+    }
+  ],
+  "efficiency_metrics": {
+    "candidate_evaluations_requested_stage1": 12,
+    "candidates_evaluated_stage1": 9,
+    "candidates_generated_or_seen_stage1": 9,
+    "candidates_generated_stage1": 9,
+    "candidates_seen_stage1": 12,
+    "constraint_rejected": 0,
+    "constraint_rejection_rate": 0.0,
+    "deep_validation_count": 1,
+    "deep_validation_rate": 0.25,
+    "duplicate_rate": 0.0,
+    "duplicates_observed_stage1": 0,
+    "elapsed_seconds": 17.875,
+    "generation_best_objectives": [
+      [
+        381.75,
+        0.002589216624417319,
+        0.9481662346280204,
+        5.5
+      ],
+      [
+        381.75,
+        0.0025894704513124214,
+        0.9481662346280204,
+        5.5
+      ]
+    ],
+    "generation_front_turnover": [
+      0.5
+    ],
+    "generation_hypervolume": [
+      0.3514813644024163,
+      0.35148128869777473
+    ],
+    "generation_improvement_events": 0,
+    "generation_improvement_rate": 0.0,
+    "holdout_count": 0,
+    "holdout_ledger_records": [],
+    "hypervolume_gain": -7.57046415555962e-08,
+    "hypervolume_improvement_events": 0,
+    "hypervolume_improvement_rate": 0.0,
+    "hypervolume_reference": [
+      2000.0,
+      1.0,
+      2.0,
+      32.0
+    ],
+    "mean_front_turnover": 0.5,
+    "measurements_executed_stage1": 9,
+    "mutation_operator_yield": {
+      "CROSSOVER": {
+        "attempts": 2,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 0,
+        "semantic_duplicates": 0,
+        "stage2_entries": 0
+      },
+      "INITIAL_GENERATION": {
+        "attempts": 6,
+        "constraint_rejected": 0,
+        "deep_entries": 1,
+        "pareto_entries": 4,
+        "semantic_duplicates": 0,
+        "stage2_entries": 4
+      },
+      "MEMORY_MUTATION": {
+        "attempts": 1,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 0,
+        "semantic_duplicates": 0,
+        "stage2_entries": 0
+      }
+    },
+    "new_semantic_candidate_rate": 0.75,
+    "overall_stage1_candidates_per_second": 0.5034965034965035,
+    "species_funnel": {
+      "crest_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "dual_stage": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 2,
+        "survived_stage1_pareto": 0
+      },
+      "fixed": {
+        "adversarial_passed": 1,
+        "archive_survived": 1,
+        "deep_validated": 1,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "gr_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "hybrid": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 2,
+        "survived_stage1_pareto": 0
+      },
+      "memory_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 0,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "state_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 0
+      }
+    },
+    "species_survival_rate": 0.5714285714285714,
+    "stage1_cache_hits": 0,
+    "stage1_candidate_evaluations_per_second": 8.59598853869294,
+    "stage1_measurements_per_second": 8.59598853869294,
+    "stage1_pareto": 4,
+    "stage1_species_count": 7,
+    "stage1_unique_candidates_per_second": 8.59598853869294,
+    "stage2_archive": 3,
+    "stage2_archive_rate": 0.75,
+    "stage2_cache_hit_rate": 0.0,
+    "stage2_cache_hits": 0,
+    "stage2_candidates": 4,
+    "stage2_epsilon_compression_rate": 0.0,
+    "stage2_epsilon_density": 0.75,
+    "stage2_epsilon_front": 3,
+    "stage2_epsilon_method": "EPSILON_BOX_V1",
+    "stage2_epsilon_pareto": 3,
+    "stage2_epsilon_species_anchors": 0,
+    "stage2_epsilon_species_count": 3,
+    "stage2_epsilon_tolerance_pareto": 3,
+    "stage2_measurement_runs": 12,
+    "stage2_pareto": 3,
+    "stage2_pareto_density": 0.75,
+    "stage2_pareto_species_count": 3,
+    "stage2_species_count": 4,
+    "stage2_survival_rate": 0.75,
+    "survivor_reuse_count": 3,
+    "survivor_reuse_rate": 0.25,
+    "unique_semantic_candidates_stage1": 9,
+    "workers": 1
+  },
+  "elapsed_seconds": 17.875,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 9,
+    "deep_validation_count": 1,
+    "runtime_seconds": 17.875,
+    "stage2_measurement_runs": 12
+  },
+  "experiment_id": "EXP-MELON-BRIDGE-PILOT-R1",
+  "hypothesis_id": "HYP-MELON-BRIDGE-PILOT",
+  "job_id": "MELON-BRIDGE-PILOT-001-R1-1F3BD3C9",
+  "loop_depth": 1,
+  "measured_candidates": 9,
+  "novelty": 0.75,
+  "parent_job_id": null,
+  "parent_run_id": null,
+  "precision_review": {
+    "automatic_final_decision": false,
+    "checks": {
+      "ablation_multiseed": true,
+      "authority_bounded": true,
+      "baseline_multiseed": true,
+      "blind_holdout_explicit_only": true,
+      "budget_semantics_valid": true,
+      "cache_accounting_present": true,
+      "cache_provenance_present": true,
+      "deep_validation_scientific": true,
+      "duplicates_retained": true,
+      "epsilon_relation_valid": true,
+      "full_validation_commit_known": true,
+      "high_fidelity_before_cipi": true,
+      "holdout_not_leaked": true,
+      "holdout_not_reused": true,
+      "negative_evidence_retained": true,
+      "scale_metric_multiobjective": true,
+      "species_diversity_measured": true,
+      "stage1_selection_evidence_present": true,
+      "stage1_uses_cheap_screening": true,
+      "stage2_archive_bounded": true,
+      "stage2_epsilon_accounted": true,
+      "stage2_epsilon_species_preserved": true,
+      "stage2_is_multiseed": true,
+      "stage2_keeps_multiobjective_data": true,
+      "survivor_reuse_separated": true,
+      "trigger_matches_effective_config": true
+    },
+    "cipi_promotion_authority": false,
+    "conclusion": "PASS_WITH_OPEN_RESEARCH_GATES",
+    "passed": true,
+    "product_release_authority": false,
+    "schema_version": "1.0"
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "MELON-BRIDGE-PILOT-001",
+  "research_question": "Can the MELON dynamic-gain research funnel reduce uncertainty across three bounded macro runs without duplicate-job generation, authority escalation, blind-holdout use, or product integration?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.0,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 4,
+    "stage2_archive": 3,
+    "stage2_pareto": 3
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "MELON-BRIDGE-PILOT-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-f3da4aad1dc2",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "62780b13a21cdcbe49d668e47929fee56c12f755",
+  "stop_reason": "MAX_GENERATIONS",
+  "timestamp": "2026-09-26T14:28:34.568790+00:00",
+  "track_id": "MELON-BRIDGE-PILOT-001",
+  "unresolved_questions": [
+    {
+      "id": "melon-dynamic_gain_release_v1-122f4c798da010227c62",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "candidate and matched baseline remain non-dominated/equal across multi-seed validation"
+    }
+  ]
+}

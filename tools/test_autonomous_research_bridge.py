@@ -10,6 +10,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "automation" / "autonomous_bridge"))
+sys.path.insert(0, str(ROOT / "automation" / "cross_repo"))
 
 from bridge import (  # noqa: E402
     bootstrap_track,
@@ -19,6 +20,7 @@ from bridge import (  # noqa: E402
     history_records,
     reconcile,
 )
+from core import load_registry, validate_action  # noqa: E402
 
 
 def write_yaml(path: Path, data: dict) -> None:
@@ -277,6 +279,8 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             self.assertEqual(context["loop_depth"], 1)
             self.assertEqual(context["track_id"], "TRACK-1")
             self.assertFalse(action["automatic_product_decision"])
+            registry = load_registry(ROOT / "automation/cross_repo/registry.yaml")
+            self.assertEqual(validate_action(action, registry), [])
 
     def test_idempotency(self):
         with tempfile.TemporaryDirectory() as td:

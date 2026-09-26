@@ -257,3 +257,32 @@ This means adding or editing Registry data alone still cannot execute new DSP co
 Implementation Adapter eligibility remains a manufacturing property only. It does
 not establish subjective audio quality, Cubase approval, final product status,
 release authority, or CIPI knowledge promotion.
+
+
+## Renderer extraction
+
+Factory 0.5 moves Golden Gain's DSP/UI/validation source rendering out of the common
+Factory generator into `golden_gain_renderer.py`.
+
+The common generator now owns product-shell concerns:
+
+- Plugin Contract validation;
+- Registry + Implementation Adapter gating;
+- common CMake/JUCE product shell;
+- generated-source hashing;
+- Factory manifest/provenance.
+
+The Golden renderer owns only module-specific generated sources:
+
+- `PluginProcessor.h/.cpp`;
+- `PluginEditor.h/.cpp`;
+- `FactoryValidation.cpp`.
+
+The extraction is guarded by a generated-source SHA-256 baseline captured from
+successful Windows CI run 36250649488:
+
+`031f578e2fb777adcc3097411a3cefa1de1b3a007319b0da60a756da4c790329`
+
+The renderer refactor is accepted only while the generated CMake/C++ source tree
+matches that pre-extraction baseline exactly. This baseline is a structural
+regression guard, not an audio-quality or release verdict.

@@ -278,3 +278,37 @@ Candidate chain:
 - VoPriPro Natural50
 
 This is a new compatibility hypothesis, not a relaxation of v2. Plosive is now judged by localized cleanup plus downstream neutrality because VoPriPro already uses an 80 Hz sidechain HPF; Sibilance retains a downstream-GR benefit gate. Neutral, phrase-step, recovery and sample-rate gates remain explicit.
+
+
+## 2026-09-26 Event-only integration screen review
+
+Run:
+- `VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001`
+- `research/runs/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1`
+
+Review decision:
+- **ITERATE — eligible for actual cross-product validation, not promoted as a default chain.**
+
+All predeclared compatibility gates passed for:
+- Vo.Prep Plosive **50%**
+- Vo.Prep Macro Level **0%**
+- Vo.Prep Sibilance **50%**
+- VoPriPro Natural50
+
+Key measurements:
+- Macro disabled movement: **0 dB**
+- neutral downstream mean-GR shift: **0 dB**
+- neutral false event reduction: **0 dB**
+- Plosive event RMS attenuation >= **0.7945 dB**
+- Plosive downstream event peak-GR change <= **0.0126 dB** absolute
+- Plosive post-event mean-GR shift <= **0.0211 dB** absolute
+- Sibilance event RMS attenuation >= **0.3097 dB**
+- Sibilance downstream peak-GR improvement >= **0.2857 dB**
+- Sibilance post-event mean-GR shift <= **0.0194 dB** absolute
+- phrase-step false event reduction: **0 dB**
+- phrase RMS-spread delta: **0 dB**
+- downstream peak-GR sample-rate spread: **0.1062 dB**, inside the **0.15 dB** gate.
+
+Interpretation:
+
+The event-only front end is objectively compatible with VoPriPro Natural50 on the deterministic source-derived matrix. This supports moving to actual VST3 cross-product measurement and level-matched real-vocal listening. It does **not** establish audible superiority, a recommended default chain, or Cubase readiness. The all-modules 50% v2 rejection remains valid negative evidence that Macro Level must be treated as a separate slow gain-movement stage rather than silently bundled into this compatibility claim.

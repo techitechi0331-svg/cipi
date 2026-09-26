@@ -1,0 +1,58 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:assistant-review-20260926
+job_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001
+source_run: research/runs/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+parent_decision_id: VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:auto
+rationale: >-
+  Every predeclared event-only compatibility gate passed with Macro Level disabled.
+  Neutral and phrase-step cases were unchanged, Plosive Guard remained localized while
+  attenuating the source-derived event, and Sibilance Guard both attenuated its event
+  and reduced downstream VoPriPro peak GR. The result is sufficient to advance this
+  exact event-only chain to actual cross-product VST3 and real-vocal validation, but
+  it is not perceptual evidence and does not establish a recommended default chain.
+scope: >-
+  Confirm only deterministic source-code-translation compatibility for Vo.Prep
+  Plosive 50% + Sibilance 50% + Macro Level 0% feeding VoPriPro Natural50 across
+  44.1/48/88.2/96 kHz on the declared source-derived matrix. Human listening,
+  actual VST3 processing and Cubase Pro 14 remain open gates.
+declared_rejection_criteria:
+  - Any event-localization, neutrality, recovery, finite-state, phrase, or sample-rate gate fails.
+triggered_criteria: []
+retained_findings:
+  - Macro Level at 0% remained exact unity with maximum absolute gain movement 0 dB.
+  - Neutral material showed 0 dB downstream mean-GR shift and 0 dB false event reduction.
+  - Plosive probability was at least about 0.8498 and Plosive Guard reduction at least about 1.1518 dB.
+  - Plosive event RMS attenuation was at least about 0.7945 dB.
+  - Plosive absolute downstream VoPriPro event peak-GR change stayed below about 0.0126 dB.
+  - Plosive absolute post-event VoPriPro mean-GR shift stayed below about 0.0211 dB.
+  - Sibilance probability was at least about 0.7431 and Sibilance reduction at least about 0.8669 dB.
+  - Sibilance event RMS attenuation was at least about 0.3097 dB.
+  - Sibilance improved downstream VoPriPro event peak GR by at least about 0.2857 dB.
+  - Sibilance absolute post-event VoPriPro mean-GR shift stayed below about 0.0194 dB.
+  - Phrase-step false event reduction and phrase-spread movement were both 0 dB.
+  - Downstream peak-GR sample-rate spread was about 0.1062 dB, inside the 0.15 dB gate.
+reusable_findings:
+  - Event-localized preprocessing can remain complementary to a broadband compressor when phrase-level gain movement is kept separate.
+  - Plosive compatibility should be judged by event cleanup plus downstream neutrality when the downstream compressor already suppresses low-frequency detector dominance.
+  - Sibilance preprocessing can reduce both event energy and downstream broadband compressor reaction without requiring Macro Level.
+revisit_if:
+  - Actual VST3 cross-product measurements materially disagree with the source-code translation.
+  - Level-matched real-vocal listening reveals audible interaction not represented by the deterministic matrix.
+  - Vo.Prep or VoPriPro event/detector DSP changes materially.
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOPRIPRO-VOPREP-INTEGRATION-002
+    - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001
+    - VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001
+  related_decisions:
+    - VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926
+    - VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:assistant-review-20260926
+    - VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:auto
+created_at: '2026-09-26'
+immutable: true
+review_gaps: []

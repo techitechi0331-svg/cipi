@@ -1,0 +1,57 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-MACRO-BOUNDARY-001:manual-20260926:review-01"
+job_id: VO-PREP-MACRO-BOUNDARY-001
+source_run: research/runs/VO-PREP-MACRO-BOUNDARY-001/manual-20260926
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Macro Boundary R1 does not qualify as final boundary confirmation because three
+  predeclared gates failed: 50 ms absolute spread preservation, 10 ms absolute
+  p99-peak preservation, and median Macro p95 gain-movement. At the same time,
+  the run provides strong positive evidence that the current Macro does not
+  replace VoPriPro broadband dynamics: median downstream mean-GR change was only
+  0.0230 dB, median downstream p95-GR change was 0.0115 dB, and worst mean-GR
+  retention was 99.33 percent. Phrase-scale efficacy also passed. The rejected
+  object is therefore the R1 final-proof protocol/result, not Macro Level itself.
+  A second diagnostic revision is required to separate slow broadband gain offset
+  from genuine within-window transient-shape flattening without retroactively
+  relaxing any R1 gate.
+declared_rejection_criteria:
+  - "Any predeclared Macro Boundary R1 acceptance gate fails."
+triggered_criteria:
+  - "Median absolute 50 ms spread change was 0.3364423019 dB versus the 0.20 dB ceiling."
+  - "Median absolute 10 ms p99 peak change was 0.2939691544 dB versus the 0.20 dB ceiling; worst case was 1.2642680407 dB versus 0.60 dB."
+  - "Median Macro p95 absolute gain movement was 1.7760179043 dB versus the 1.50 dB ceiling."
+retained_findings:
+  - "Median 2 s phrase-spread reduction was 0.3952848052 dB."
+  - "Median 1 s phrase-spread reduction was 0.2594934540 dB."
+  - "9 of 11 files stayed within the 2 s no-worse tolerance."
+  - "Median absolute downstream VoPriPro mean-GR change E versus F was 0.0230433941 dB."
+  - "Median absolute downstream VoPriPro p95-GR change E versus F was 0.0114789009 dB."
+  - "Worst downstream mean-GR retention F/E was 0.9933215633."
+  - "Combined gain-movement gate passed 11 of 11 files."
+  - "No VoPriPro limiter-risk flag was observed in D/E/F in this offline replay."
+  - "All measurements were finite."
+reusable_findings:
+  - "A slow phrase-level gain stage can materially improve 1–2 s spread while leaving a following broadband compressor workload almost unchanged."
+  - "Absolute short-window peak/level differences are not sufficient by themselves to distinguish slow gain offset from within-window transient-shape destruction."
+  - "Boundary validation should measure both product-role overlap and shape-normalized short-term dynamics."
+revisit_if:
+  - "A new predeclared diagnostic protocol measures scale-invariant crest/shape preservation and slow-gain-compensated short-window dynamics."
+  - "Outlier files with phrase worsening or gain-ceiling occupancy are characterized before any Macro tuning change."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SYNC-001
+    - VO-PREP-PRODUCT-BOUNDARY-001
+  related_decisions:
+    - "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01"
+created_at: "2026-09-26"
+immutable: true
+scope: >-
+  Vo.Prep Macro Boundary R1 final-proof attempt on 11 private vocal files using
+  anonymized derived metrics only. This rejects R1 as sufficient final proof;
+  it does not reject Macro Level v2.1 from the product.
+review_gaps: []

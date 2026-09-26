@@ -1,0 +1,12 @@
+{
+  "broadband_compressor_allowed_in_voprep": false,
+  "transparent_compressor_algorithm_rejected": false,
+  "transparent_compressor_voprep_scope_rejected": true,
+  "macro_retained_pending_boundary_research": true,
+  "plosive_guard_retained": true,
+  "sibilance_guard_retained": true,
+  "vopripro_broadband_dynamics_owner": true,
+  "existing_research_branches_deleted": 0,
+  "negative_results_deleted": 0,
+  "product_dsp_changes": 0
+}

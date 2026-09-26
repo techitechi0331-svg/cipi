@@ -1,0 +1,57 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01"
+job_id: VO-PREP-PRODUCT-BOUNDARY-001
+source_run: research/runs/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926
+event_type: REVIEW
+authority: HUMAN_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Vo.Prep is fixed as a Problem / Event Preparation Plugin. Broadband vocal
+  dynamics preparation is already owned by VoPriPro / VocalPrepComp. Shipping
+  the Vo.Prep transparent-compressor research as a Vo.Prep product feature would
+  duplicate product role, user intent, UI responsibility and DSP ownership.
+  Therefore adoption of the broadband transparent compressor into Vo.Prep is
+  rejected by product scope. This decision does not reject the compressor
+  algorithm or erase its measurements; the research remains reusable Dynamics
+  knowledge and may be reused in VoPriPro research or a future dedicated product.
+declared_rejection_criteria:
+  - "A proposed Vo.Prep feature performs broadband vocal dynamics control rather than specific problem/event preparation."
+  - "A proposed Vo.Prep feature duplicates VoPriPro responsibility for broadband dynamics preparation."
+  - "A proposed Vo.Prep feature requires product-facing compressor Amount, Threshold, Ratio, Knee, Character, or equivalent broadband-dynamics controls."
+triggered_criteria:
+  - "The transparent-compressor line performs broadband gain reduction and overlaps VoPriPro product responsibility."
+  - "Productization would introduce compressor Amount/operating-point/threshold responsibility into Vo.Prep."
+retained_findings:
+  - "Slow body detector: 25 ms exponential RMS."
+  - "Fast detector: instantaneous sample peak."
+  - "Fusion: max(Slow, Fast - 6 dB)."
+  - "Static curve: 1.5:1 ratio with 18 dB soft knee."
+  - "Ballistics: 8 ms attack and 70 ms fixed release, with Hold 0 and lookahead 0."
+  - "Operating-point, Amount-mapping, stereo-link, gain-ballistics and compression-curve research are preserved."
+  - "The frozen transparent core reached GO_FOR_BLIND on objective real-vocal validation; human listening remained a separate gate."
+  - "Amount R1-R4 negative results remain valid negative evidence and are not deleted."
+  - "Vo.Prep main Plosive Guard, Macro Level, Sibilance Guard and utility path remain protected."
+reusable_findings:
+  - "Separate problem/event preprocessing from broadband dynamics preparation when the two roles create overlapping product responsibility."
+  - "A technically viable DSP subsystem may be rejected for one product scope while remaining reusable research knowledge."
+  - "Preserve scope-rejected research and negative results rather than rewriting scope rejection as algorithm failure."
+revisit_if:
+  - "VoPriPro product responsibility is explicitly changed by a future product-boundary decision."
+  - "A future dedicated transparent-compressor product is created and reuses this research outside Vo.Prep."
+  - "A future Vo.Prep boundary decision demonstrates that a candidate is problem/event-specific rather than broadband dynamics processing."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-AMOUNT-MAP-001
+    - VO-PREP-AMOUNT-R2-001
+    - VO-PREP-AMOUNT-R3-VOCALSET-001
+    - VO-PREP-AMOUNT-R4-LEARN-SOLVE-001
+  related_decisions:
+    - "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01"
+created_at: "2026-09-26"
+immutable: true
+scope: >-
+  Product-scope rejection of broadband Transparent Compressor adoption inside
+  Vo.Prep only. The compressor DSP research itself is not rejected.
+review_gaps: []

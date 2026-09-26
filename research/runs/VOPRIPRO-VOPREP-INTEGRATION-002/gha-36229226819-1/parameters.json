@@ -1,0 +1,27 @@
+{
+  "baseline": [
+    "dry_into_vopripro_natural50"
+  ],
+  "experiment_adapter": "vopripro_voprep_integration_screen_v2",
+  "job_file": "research/jobs/queued/VOPRIPRO-VOPREP-INTEGRATION-002.yaml",
+  "metrics": [
+    "all_finite",
+    "neutral_max_abs_mean_gr_delta_db",
+    "neutral_max_event_module_reduction_db",
+    "plosive_min_probability",
+    "plosive_min_guard_reduction_db",
+    "plosive_min_event_peak_gr_improvement_db",
+    "plosive_max_abs_post_event_mean_gr_delta_db",
+    "sibilance_min_probability",
+    "sibilance_min_guard_reduction_db",
+    "sibilance_min_event_peak_gr_improvement_db",
+    "sibilance_max_abs_post_event_mean_gr_delta_db",
+    "phrase_min_macro_movement_db",
+    "phrase_min_spread_improvement_db",
+    "phrase_max_spread_improvement_db",
+    "downstream_peak_gr_sr_spread_db"
+  ],
+  "variants": [
+    "voprep50_source_positive_controls_into_vopripro_natural50"
+  ]
+}

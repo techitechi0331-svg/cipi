@@ -1,0 +1,8 @@
+claim: Vo.Prep -> VoPriPro may advance to actual integration validation only if verified
+  source-derived event positive controls engage first and the unchanged downstream
+  interaction budget then passes.
+evidence_type: HYPOTHESIS
+scope: Synthetic mono source-code-translation integration screen using source-derived
+  positive controls only.
+source_run: research/runs/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1
+promotion_requested: HYPOTHESIS

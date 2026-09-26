@@ -43,16 +43,16 @@
     "track_stop_reasons": {}
   },
   "cross_repo": {
-    "blocked_action": {
-      "action_id": "MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9",
-      "kind": "EXTERNAL_BLOCK",
-      "priority": 80,
-      "reason": "CIPI_CROSS_REPO_TOKEN_MISSING"
-    },
-    "blocked_reason": "CIPI_CROSS_REPO_TOKEN_MISSING",
-    "enabled": false,
+    "blocked_action": null,
+    "blocked_reason": null,
+    "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9",
+      "kind": "CROSS_REPO",
+      "priority": 80,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 0,
       "dispatched": 0,
@@ -73,8 +73,8 @@
   "schema_version": "1.0",
   "selected": {
     "action_id": "MELON-MELON-BRIDGE-PILOT-001-R1-1F3BD3C9",
-    "kind": "EXTERNAL_BLOCK",
+    "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "CIPI_CROSS_REPO_TOKEN_MISSING"
+    "reason": "ready_external_action"
   }
 }

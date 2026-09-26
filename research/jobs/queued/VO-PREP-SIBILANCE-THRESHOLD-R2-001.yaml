@@ -1,0 +1,89 @@
+schema_version: "1.0"
+job_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001
+state: QUEUED
+priority: 98
+track:
+  id: VO_PREP_FORMAL
+  path: research/plugins/vo-prep
+research_question: "Can a small activation-threshold calibration make the frozen Vo.Prep v2.3 contextual sibilance detector decision-consistent for S/SH/CH/T across 44.1/48/96 kHz while retaining the measured near-zero negative occupancy?"
+hypothesis: "The highest passing threshold in the predeclared 0.62/0.60/0.58 family will detect S/SH/CH/T at every tested sample rate while preserving near-zero occupancy on bright-vowel, air, breath, falsetto, female-upper and distorted-vocal negatives."
+counter_hypotheses:
+  - "The observed 44.1/48 kHz SH/CH misses require a feature/filter correction rather than activation calibration."
+  - "Lowering activation enough to make SH/CH decision-consistent produces breath or bright-vocal false events."
+  - "A passing threshold has unacceptable input-scale or sample-rate sensitivity."
+baseline:
+  - "Current v2.3 feature family with activation 0.65, release 0.45 and 350 ms cap."
+variants:
+  - "Same frozen feature family, activation 0.62, release 0.45, 350 ms cap."
+  - "Same frozen feature family, activation 0.60, release 0.45, 350 ms cap."
+  - "Same frozen feature family, activation 0.58, release 0.45, 350 ms cap."
+metrics:
+  - positive_detection_fraction
+  - all_positive_cases_detected_all_sr
+  - s_sh_detected_all_sr
+  - max_positive_onset_latency_ms
+  - negative_occupancy_mean_pct
+  - negative_occupancy_max_pct
+  - max_probability_sample_rate_spread
+  - max_active_duration_ms
+  - max_input_scale_probability_spread
+  - max_input_scale_occupancy_spread_pct
+acceptance:
+  - "Select the highest activation threshold that passes every gate."
+  - "S/SH/CH/T are all detected at every tested sample rate."
+  - "Positive detection fraction is >= 0.99."
+  - "Worst positive first-onset latency is <= 30 ms."
+  - "Mean negative occupancy is <= 0.5% and worst negative occupancy is <= 2%."
+  - "Maximum event duration is <= 355 ms."
+  - "Maximum probability spread across 44.1/48/96 kHz is <= 0.08."
+  - "Across -12/0/+12 dB scaling, maximum probability spread is <= 0.05 and occupancy spread <= 5 percentage points."
+rejection:
+  - "No candidate in 0.62/0.60/0.58 passes every gate."
+  - "Passing requires changing the feature family, release/cap, or relaxing a predeclared gate."
+  - "Raw audio is persisted or product DSP is mutated."
+max_runs: 1
+timeout_minutes: 5
+random_seed: 20260926
+experiment_adapter: voprep_sibilance_threshold_r2_v1
+allowed_operations:
+  - deterministic_synthetic_signal_generation
+  - deterministic_detector_replay
+  - bounded_threshold_family_comparison
+  - derived_metric_export
+prohibited_operations:
+  - network_write
+  - arbitrary_shell
+  - raw_audio_persistence
+  - product_dsp_mutation
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_release
+knowledge_candidate:
+  claim: "A small activation-threshold calibration may remove sample-rate decision flips in the Vo.Prep contextual sibilance detector without giving back its negative-case safety margin."
+  evidence_type: HYPOTHESIS
+  scope: "Vo.Prep Sibilance Guard v2.3 deterministic R2 calibration only; real-vocal multilingual/listening validation remains required."
+  promotion_requested: HYPOTHESIS
+rejection_record:
+  reason: "If the bounded threshold family cannot make all positive decisions consistent while retaining absolute negative-occupancy gates, threshold-only tuning is insufficient and feature/filter refinement must be studied separately."
+  retained_findings:
+    - "All candidate-by-case detection, occupancy, latency, duration, sample-rate and scale-invariance metrics."
+    - "The v1 undefined relative false-occupancy ratio remains preserved as a protocol defect; R2 does not reinterpret it."
+  reusable_findings:
+    - "Absolute negative-occupancy gates are safer than a relative ratio when the baseline denominator can be zero."
+    - "Decision consistency across sample rates should be checked explicitly near activation thresholds."
+  revisit_if:
+    - "A bounded filter/feature normalization study directly targets remaining sample-rate decision flips."
+    - "Real-vocal evidence contradicts the synthetic threshold ordering."
+  scope: "Vo.Prep Sibilance Guard threshold-only R2 calibration."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SIBILANCE-ADVERSARIAL-001
+    - MICRODOUBLE-SIBILANCE-R3-GATE-001
+  related_decisions:
+    - "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:review-01"
+continuation:
+  on_accept: []
+  on_reject: []

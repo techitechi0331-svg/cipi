@@ -341,3 +341,17 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Compare the current Vo.Prep Sibilance Guard v2.3 contextual detector against a simple absolute 4-12 kHz level trigger on deterministic sibilant/confounder signals across sample rates and input scales."
+
+  voprep_plosive_threshold_r2_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Bounded Plosive Guard activation-threshold calibration over the frozen v2.2 feature family; highest passing threshold may advance to real-vocal validation only."
+
+  voprep_sibilance_threshold_r2_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Bounded Sibilance Guard activation-threshold calibration over the frozen v2.3 feature family using absolute negative-occupancy gates; highest passing threshold may advance to real-vocal validation only."

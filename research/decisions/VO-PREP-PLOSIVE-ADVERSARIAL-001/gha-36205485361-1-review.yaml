@@ -1,0 +1,54 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:review-01"
+job_id: VO-PREP-PLOSIVE-ADVERSARIAL-001
+source_run: research/runs/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ITERATE
+review_status: CONFIRMED
+parent_decision_id: "VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:auto"
+rationale: >-
+  The v2.2 contextual detector is strongly conservative rather than
+  false-positive-prone on the declared synthetic matrix. Context negative
+  occupancy was 0 percent across every declared negative case and every sample
+  rate, while the LF-only baseline averaged 1.2623 percent negative occupancy.
+  The failure is recall-side: plosive_soft never crossed the 0.75 activation
+  threshold and the repeated-plosive case detected only the first event at each
+  sample rate, yielding 0.75 positive detection fraction and failure of the
+  two-event gate. Nominal/strong detection, latency, duration, sample-rate
+  stability and input-scale invariance passed. The current product baseline
+  therefore remains unchanged while a bounded activation-threshold calibration
+  is tested. No feature-family expansion is justified yet.
+scope: >-
+  Review of the deterministic Vo.Prep Plosive Guard v2.2 adversarial screen.
+  ITERATE means the current detector is retained as baseline and only a minimal
+  threshold calibration may proceed; it is not product adoption of a new
+  detector and not a claim of real-vocal generalization.
+declared_rejection_criteria:
+  - Any declared acceptance condition fails.
+triggered_criteria:
+  - "Positive detection fraction was 0.75 versus the locked >=0.90 gate because plosive_soft was missed at every sample rate."
+  - "Repeated-plosive detected only one event at each sample rate, failing the two-event gate."
+retained_findings:
+  - "Context negative occupancy mean and maximum were both 0 percent on the declared negative matrix."
+  - "LF-only negative occupancy mean was 1.2622616948 percent."
+  - "Nominal, strong and repeated cases each produced at least one detection at every sample rate."
+  - "Worst nominal/strong onset latency was 16.3125 ms."
+  - "Maximum context active duration was 11.8333 ms, below the 125 ms cap gate."
+  - "Maximum cross-sample-rate probability spread was 0.00261935."
+  - "Maximum input-scale probability spread was 0.01447727 and occupancy spread was 0.62963 percentage points."
+reusable_findings:
+  - "A contextual LF detector can eliminate the tested sustained-LF false events while still becoming too conservative for soft and repeated plosives."
+  - "When negatives have large margin below activation, a predeclared small threshold family is a lower-complexity next test than adding new features."
+revisit_if:
+  - "A small activation-threshold family restores soft/repeated recall without materially increasing declared negative occupancy."
+  - "Real-vocal evidence shows the synthetic soft/repeated failure is not representative."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SYNC-001
+  related_decisions:
+    - "VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

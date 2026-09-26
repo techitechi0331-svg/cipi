@@ -1,0 +1,38 @@
+schema_version: '1.0'
+job_id: MELON-BRIDGE-PILOT-001-R2-957D17D9
+track_id: MELON-BRIDGE-PILOT-001
+root_research_id: MELON-BRIDGE-PILOT-001
+parent_job_id: MELON-BRIDGE-PILOT-001-R1-1F3BD3C9
+parent_run_id: melon-funnel-f3da4aad1dc2
+hypothesis_id: HYP-MELON-BRIDGE-PILOT
+experiment_id: MELON-FUNNEL-F3DA4AAD1DC2-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- MELON-BRIDGE-PILOT-001-R1-1F3BD3C9
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-MELON-BRIDGE-PILOT-001-R2-957D17D9
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 36
+  max_runtime: 900
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: candidate and matched baseline remain non-dominated/equal across
+  multi-seed validation
+expected_information_gain: 0.9124999999999999
+fingerprint: 957d17d98fdd52e1338c40ccf8d863abcf50baa484a88e57ae4798ee1f501310
+loop_depth: 2
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: MELON_DYNAMIC_GAIN_DISCOVERY
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

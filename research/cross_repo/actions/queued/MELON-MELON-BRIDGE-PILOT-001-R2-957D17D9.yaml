@@ -1,0 +1,36 @@
+schema_version: '1.0'
+action_id: MELON-MELON-BRIDGE-PILOT-001-R2-957D17D9
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 12
+  max_runtime_seconds: 120
+  population: 6
+  preflight_mode: fast
+  seed: 2026092602
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 4
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"experiment_id":"MELON-FUNNEL-F3DA4AAD1DC2-ITERATE-1","hypothesis_id":"HYP-MELON-BRIDGE-PILOT","job_id":"MELON-BRIDGE-PILOT-001-R2-957D17D9","loop_depth":2,"parent_job_id":"MELON-BRIDGE-PILOT-001-R1-1F3BD3C9","parent_run_id":"melon-funnel-f3da4aad1dc2","research_id":"MELON-BRIDGE-PILOT-001","research_question":"Can
+    the MELON dynamic-gain research funnel reduce uncertainty across three bounded
+    macro runs without duplicate-job generation, authority escalation, blind-holdout
+    use, or product integration?","track_id":"MELON-BRIDGE-PILOT-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: MELON-BRIDGE-PILOT-001
+bridge_job_id: MELON-BRIDGE-PILOT-001-R2-957D17D9
+continuation_fingerprint: 957d17d98fdd52e1338c40ccf8d863abcf50baa484a88e57ae4798ee1f501310
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

@@ -707,3 +707,45 @@ State/Automation audit:
 Decision:
 - Phase03G G054 -> final integration candidate
 - residual HP/LF research branches -> not part of final production path.
+
+
+## 2026-09-26 final pre-host validation
+
+Final validation run `36199539214`: **SUCCESS**.
+
+Final production selection:
+- Peak v8
+- stateful optical v3 structure
+- optical mean tau = 8 ms
+- optical amount = 0.054
+- rejected residual HP/LF research branches absent from production
+
+Final gates:
+- PR50 real-vocal median GR ~5.552 dB: PASS
+- matched-GR 60 ms retention ~0.50847: PASS
+- sample-rate GR spread ~0.0330 dB: PASS
+- level-matched optical color A/B max band:
+  - breathy ~0.191 dB
+  - straight ~0.059 dB
+  - forte ~0.743 dB
+  - strict <=0.75 dB gate: PASS
+- pluginval 1.0.4 strictness 10: SUCCESS
+- source/state/parameter audit: PASS
+
+State/Automation run `36193405591`: PASS.
+- max automation delta ~0.008854 dB
+- state restore delta 0
+- normalized roundtrip delta ~6e-8
+
+Exact final-VST3 host-latency run `36232663877`: PASS.
+- pre-prepare: 0 samples
+- prepared: 6 samples at 44.1/48/96 kHz tested contexts
+
+Final contradiction review:
+- no unresolved engineering contradiction found;
+- pluginval latency-0 info is pre-prepare and is reconciled by the exact
+  post-prepare host probe.
+
+Decision:
+- **PROMOTE TO PRE-HOST FINAL CANDIDATE**
+- only remaining release gate: Cubase Pro 14 real-host confirmation.

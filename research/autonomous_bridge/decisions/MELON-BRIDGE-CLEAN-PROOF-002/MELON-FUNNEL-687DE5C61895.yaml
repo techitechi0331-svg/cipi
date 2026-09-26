@@ -1,0 +1,21 @@
+schema_version: '1.0'
+decision_id: MELON-BRIDGE-CLEAN-PROOF-002:melon-funnel-687de5c61895:continuation
+track_id: MELON-BRIDGE-CLEAN-PROOF-002
+run_id: melon-funnel-687de5c61895
+job_id: MELON-BRIDGE-CLEAN-PROOF-002-R3-A95D195A
+loop_depth: 3
+decision: STOP
+stop_reason: BUDGET_EXHAUSTED
+continuation_fingerprint: null
+accepted_candidate_id: null
+selected_architecture: null
+rejections:
+- reason: max_loop_depth
+proposal_count: 1
+duplicate_suppressions: 0
+human_gate_proposals: 0
+processed_artifact_hash: f890df524ad910afbf449af672af76e4e9d91b81b30d364a917519600ac742ce
+authority: CIPI_CONTINUATION_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

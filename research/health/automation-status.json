@@ -13,14 +13,14 @@
     "bridge_version": "cipi-autonomous-research-bridge/1.0",
     "budget_status": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
-        "candidates": 16,
+        "candidates": 24,
         "candidates_limit": 30,
-        "loop_depth": 2,
+        "loop_depth": 3,
         "loop_depth_limit": 3,
-        "runs": 2,
+        "runs": 3,
         "runs_limit": 3,
         "runtime_limit_seconds": 900.0,
-        "runtime_seconds": 48.171000000002095
+        "runtime_seconds": 67.9989999999998
       },
       "MELON-BRIDGE-PILOT-001": {
         "candidates": 26,
@@ -33,24 +33,25 @@
         "runtime_seconds": 56.14099999999962
       }
     },
-    "continuation_candidates": 5,
+    "continuation_candidates": 6,
     "current_loop_depth": {
-      "MELON-BRIDGE-CLEAN-PROOF-002": 2,
+      "MELON-BRIDGE-CLEAN-PROOF-002": 3,
       "MELON-BRIDGE-PILOT-001": 3
     },
     "duplicate_suppressions": 0,
     "generated_jobs": 6,
     "human_gates": 0,
     "invalid_results": 0,
-    "melon_runs": 5,
+    "melon_runs": 6,
     "next_scheduler_action": "NO_READY_WORK",
-    "no_improvement_count": 3,
+    "no_improvement_count": 4,
     "queued_actions": [],
-    "rejected_continuations": 1,
+    "rejected_continuations": 2,
     "result_missing": 0,
     "runner_wait": 0,
     "schema_version": "1.0",
     "track_stop_reasons": {
+      "MELON-BRIDGE-CLEAN-PROOF-002": "BUDGET_EXHAUSTED",
       "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED"
     }
   },
@@ -61,8 +62,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 5,
-      "dispatched": 1,
+      "completed": 6,
+      "dispatched": 0,
       "failed": 0,
       "quarantined": 0,
       "queued": 0
@@ -79,9 +80,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

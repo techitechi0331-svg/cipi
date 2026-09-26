@@ -57,6 +57,8 @@ ADAPTERS = {
     "vocal_resonance_raw_patch_sufficiency_v2",
     "voprep_amount_mapping_r5_v1",
     "voprep_sidechain_hpf_real_v1",
+    "voprep_plosive_adversarial_v1",
+    "voprep_sibilance_adversarial_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3030,6 +3032,104 @@ def _voprep_amount_mapping_r3(repo_root: Path, timeout_seconds: int) -> dict[str
     }
 
 
+def _voprep_plosive_adversarial(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "plosive_adversarial_v1.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-plosive-adv-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Plosive adversarial subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+
+        result = json.loads((out / "plosive_adversarial_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "plosive_adversarial_results.json": (out / "plosive_adversarial_results.json").read_text(encoding="utf-8"),
+            "plosive_adversarial_report.md": (out / "plosive_adversarial_report.md").read_text(encoding="utf-8"),
+            "plosive_adversarial_matrix.csv": (out / "plosive_adversarial_matrix.csv").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": result,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/plosive_adversarial_v1.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Deterministic adversarial screen of the current Vo.Prep Plosive Guard "
+            "v2.2 context detector against a simple LF-onset-only baseline. Passing "
+            "authorizes real-vocal false-positive/false-negative validation only; "
+            "failure keeps product DSP unchanged and records bounded negative evidence."
+        ),
+    }
+
+
+def _voprep_sibilance_adversarial(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vo-prep"
+        / "experiments" / "sibilance_adversarial_v1.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-voprep-sibilance-adv-") as td:
+        out = Path(td)
+        try:
+            subprocess.run(
+                [sys.executable, str(script), "--out-dir", str(out)],
+                cwd=repo_root,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+            )
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(
+                "Vo.Prep Sibilance adversarial subprocess failed.\n"
+                f"returncode={exc.returncode}\n"
+                f"stdout_tail:\n{(exc.stdout or '')[-8000:]}\n"
+                f"stderr_tail:\n{(exc.stderr or '')[-12000:]}"
+            ) from exc
+
+        result = json.loads((out / "sibilance_adversarial_results.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "sibilance_adversarial_results.json": (out / "sibilance_adversarial_results.json").read_text(encoding="utf-8"),
+            "sibilance_adversarial_report.md": (out / "sibilance_adversarial_report.md").read_text(encoding="utf-8"),
+            "sibilance_adversarial_matrix.csv": (out / "sibilance_adversarial_matrix.csv").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(result.get("acceptance_met", False))
+    return {
+        "metrics": result,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vo-prep/experiments/sibilance_adversarial_v1.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Deterministic adversarial screen of the current Vo.Prep Sibilance Guard "
+            "v2.3 contextual detector against a simple absolute high-band level trigger. "
+            "Passing authorizes real-vocal false-positive/false-negative validation only; "
+            "failure keeps product DSP unchanged and records bounded negative evidence."
+        ),
+    }
+
+
 def _voprep_sidechain_hpf_pilot(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     script = (
         repo_root / "research" / "plugins" / "vo-prep"
@@ -3661,6 +3761,10 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _voprep_amount_mapping_r3(repo_root, timeout_seconds)
     if name == "voprep_sidechain_hpf_pilot_v1":
         return _voprep_sidechain_hpf_pilot(repo_root, timeout_seconds)
+    if name == "voprep_plosive_adversarial_v1":
+        return _voprep_plosive_adversarial(repo_root, timeout_seconds)
+    if name == "voprep_sibilance_adversarial_v1":
+        return _voprep_sibilance_adversarial(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_normative_prior_v1":
         return _vocal_resonance_clean_normative_prior(repo_root, timeout_seconds)
     if name == "vocal_resonance_self_counterfactual_inpainting_v1":

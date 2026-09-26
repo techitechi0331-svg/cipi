@@ -176,3 +176,24 @@ No acceptance threshold is relaxed after the result.
 
 The next screen must use the current Vo.Prep repository's own regression-test positive controls for Plosive and Sibilance so detector engagement is verified before downstream VoPriPro interaction is interpreted.
 
+
+
+## 2026-09-26 Vo.Prep -> VoPriPro integration screen v2 queued
+
+Research Job:
+- `VOPRIPRO-VOPREP-INTEGRATION-002`
+
+Reason for iteration:
+- v1's ad-hoc plosive event did not engage Plosive Guard, so its downstream plosive result was not attributable to the intended module;
+- the v1 Sibilance case engaged but missed the unchanged downstream peak-GR improvement gate by a narrow margin;
+- no gate is weakened after seeing v1.
+
+v2 changes only the evidence quality of the event stimuli and engagement checks:
+- Plosive reuses the current Vo.Prep `Tests/PlosiveGuardTests.cpp` scenario-0 positive control;
+- Sibilance reuses the current Vo.Prep `Tests/SibilanceGuardTests.cpp` scenario-0 positive control;
+- Plosive probability must reach at least 0.80 and reduction at least 0.50 dB at every tested sample rate;
+- Sibilance probability must reach at least 0.65 and reduction at least 0.30 dB at every tested sample rate;
+- downstream plosive/sibilance benefit, post-event recovery, neutral, phrase-spread and sample-rate tolerances remain locked;
+- 88.2 kHz is added so the event-positive-control matrix matches the source product's tested sample-rate family more closely.
+
+This remains a deterministic source-code-translation screen. It does not replace actual VST3 processing, level-matched real-vocal listening, the VoPriPro limiter path, or Cubase Pro 14 validation.

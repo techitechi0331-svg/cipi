@@ -1,0 +1,272 @@
+{
+  "artifact_manifest": "artifact_manifest.json",
+  "automatic_final_decision": false,
+  "blind_holdout_consumed": false,
+  "budget_recommendation": {
+    "action": "HOLD_STANDARD_16X4",
+    "automatic_execution": false,
+    "current_profile": {
+      "generations": 2,
+      "max_candidates": 12,
+      "population": 6
+    },
+    "reasons": [
+      "multiobjective scale-up gate is not yet satisfied"
+    ],
+    "suggested_next_profile": {
+      "generations": 2,
+      "max_candidates": 12,
+      "population": 6
+    }
+  },
+  "cipi_promotion_authority": false,
+  "config": {
+    "blind_holdout": false,
+    "generations": 2,
+    "max_candidates": 12,
+    "max_runtime_seconds": 120.0,
+    "population_size": 6,
+    "sample_rate": 12000,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage2_seeds": [
+      3101,
+      3102,
+      3103
+    ],
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "deep_validation_count": 1,
+  "effective_config": {
+    "blind_holdout": false,
+    "generations": 2,
+    "max_candidates": 12,
+    "max_runtime_seconds": 120.0,
+    "population_size": 6,
+    "sample_rate": 12000,
+    "seed": 2026092602,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage2_seeds": [
+      3101,
+      3102,
+      3103
+    ],
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "efficiency": {
+    "candidate_evaluations_requested_stage1": 12,
+    "candidates_evaluated_stage1": 8,
+    "candidates_generated_or_seen_stage1": 9,
+    "candidates_generated_stage1": 9,
+    "candidates_seen_stage1": 12,
+    "constraint_rejected": 0,
+    "constraint_rejection_rate": 0.0,
+    "deep_validation_count": 1,
+    "deep_validation_rate": 0.25,
+    "duplicate_rate": 0.1111111111111111,
+    "duplicates_observed_stage1": 1,
+    "elapsed_seconds": 20.110000000000582,
+    "generation_best_objectives": [
+      [
+        389.75,
+        0.0025867479864521495,
+        1.1104926481613946,
+        5.5
+      ],
+      [
+        389.75,
+        0.0025886741594425603,
+        1.1104926481613946,
+        5.5
+      ]
+    ],
+    "generation_front_turnover": [
+      0.5
+    ],
+    "generation_hypervolume": [
+      0.28908109772503265,
+      0.2890807402238037
+    ],
+    "generation_improvement_events": 0,
+    "generation_improvement_rate": 0.0,
+    "holdout_count": 0,
+    "holdout_ledger_records": [],
+    "hypervolume_gain": -3.5750122895361613e-07,
+    "hypervolume_improvement_events": 0,
+    "hypervolume_improvement_rate": 0.0,
+    "hypervolume_reference": [
+      2000.0,
+      1.0,
+      2.0,
+      32.0
+    ],
+    "mean_front_turnover": 0.5,
+    "measurements_executed_stage1": 8,
+    "mutation_operator_yield": {
+      "CROSSOVER": {
+        "attempts": 2,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 0,
+        "semantic_duplicates": 0,
+        "stage2_entries": 0
+      },
+      "INITIAL_GENERATION": {
+        "attempts": 6,
+        "constraint_rejected": 0,
+        "deep_entries": 1,
+        "pareto_entries": 5,
+        "semantic_duplicates": 0,
+        "stage2_entries": 3
+      },
+      "PARAMETER_MUTATION": {
+        "attempts": 1,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 1,
+        "semantic_duplicates": 1,
+        "stage2_entries": 1
+      }
+    },
+    "new_semantic_candidate_rate": 0.6666666666666666,
+    "overall_stage1_candidates_per_second": 0.39781203381401137,
+    "species_funnel": {
+      "crest_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "dual_stage": {
+        "adversarial_passed": 1,
+        "archive_survived": 1,
+        "deep_validated": 1,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "fixed": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 2,
+        "survived_stage1_pareto": 2
+      },
+      "gr_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "hybrid": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 2,
+        "survived_stage1_pareto": 0
+      },
+      "memory_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "state_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 0
+      }
+    },
+    "species_survival_rate": 0.5714285714285714,
+    "stage1_cache_hits": 0,
+    "stage1_candidate_evaluations_per_second": 8.528784648170168,
+    "stage1_measurements_per_second": 8.528784648170168,
+    "stage1_pareto": 6,
+    "stage1_species_count": 7,
+    "stage1_unique_candidates_per_second": 8.528784648170168,
+    "stage2_archive": 4,
+    "stage2_archive_rate": 1.0,
+    "stage2_cache_hit_rate": 0.0,
+    "stage2_cache_hits": 0,
+    "stage2_candidates": 4,
+    "stage2_epsilon_compression_rate": 0.0,
+    "stage2_epsilon_density": 1.0,
+    "stage2_epsilon_front": 4,
+    "stage2_epsilon_method": "EPSILON_BOX_V1",
+    "stage2_epsilon_pareto": 4,
+    "stage2_epsilon_species_anchors": 0,
+    "stage2_epsilon_species_count": 4,
+    "stage2_epsilon_tolerance_pareto": 4,
+    "stage2_measurement_runs": 12,
+    "stage2_pareto": 4,
+    "stage2_pareto_density": 1.0,
+    "stage2_pareto_species_count": 4,
+    "stage2_species_count": 4,
+    "stage2_survival_rate": 1.0,
+    "survivor_reuse_count": 3,
+    "survivor_reuse_rate": 0.25,
+    "unique_semantic_candidates_stage1": 8,
+    "workers": 1
+  },
+  "evidence_hash": "5571ae33a39abfd24cbb4c4bc1a7256dda1c76da66ed12ace7c1ab419a94f5c7",
+  "funnel_version": "melon-research-funnel/0.5",
+  "manifest": "manifest.json",
+  "precision_review_passed": true,
+  "requested_config": {
+    "blind_holdout": false,
+    "generations": 2,
+    "max_candidates": 12,
+    "max_runtime_seconds": 120.0,
+    "population_size": 6,
+    "sample_rate": 12000,
+    "seed": 2026092602,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage2_seeds": [
+      3101,
+      3102,
+      3103
+    ],
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "routes": {
+    "REJECTED_CURRENT_SCOPE": 1
+  },
+  "run_id": "melon-funnel-679d71d9923d",
+  "schema_version": "1.0",
+  "seed": 2026092602,
+  "stage1_pareto": 6,
+  "stage1_stop_reason": "MAX_GENERATIONS",
+  "stage2_archive": 4,
+  "stage2_epsilon_front": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-26T14:37:50.749158+00:00"
+}

@@ -1,0 +1,217 @@
+{
+  "benchmark_profile": "release_core_v1",
+  "blocks": [
+    {
+      "allowed_connections": [
+        "*"
+      ],
+      "block_id": "input",
+      "causality": "causal",
+      "constraints": {
+        "max_abs": 4.0
+      },
+      "inputs": [
+        "audio"
+      ],
+      "latency": 0,
+      "outputs": [
+        "audio"
+      ],
+      "parameters": {},
+      "state": {},
+      "type": "OBSERVATION"
+    },
+    {
+      "allowed_connections": [
+        "*"
+      ],
+      "block_id": "detector",
+      "causality": "causal",
+      "constraints": {},
+      "inputs": [
+        "audio"
+      ],
+      "latency": 0,
+      "outputs": [
+        "level_db",
+        "crest"
+      ],
+      "parameters": {
+        "kind": "peak_rms"
+      },
+      "state": {},
+      "type": "DETECTOR"
+    },
+    {
+      "allowed_connections": [
+        "*"
+      ],
+      "block_id": "release_state",
+      "causality": "causal",
+      "constraints": {},
+      "inputs": [
+        "control_features"
+      ],
+      "latency": 0,
+      "outputs": [
+        "state"
+      ],
+      "parameters": {
+        "stage_split_db": 5.736627
+      },
+      "state": {
+        "value": 0.0
+      },
+      "type": "STATE"
+    },
+    {
+      "allowed_connections": [
+        "*"
+      ],
+      "block_id": "release_control",
+      "causality": "causal",
+      "constraints": {},
+      "inputs": [
+        "level_db",
+        "state"
+      ],
+      "latency": 0,
+      "outputs": [
+        "gain_reduction_db"
+      ],
+      "parameters": {
+        "attack_ms": 2.0,
+        "law": "dual_stage",
+        "makeup_db": 0.0,
+        "max_gr_db": 24.0,
+        "ratio": 4.0,
+        "release_fast_ms": 69.041875,
+        "release_ms": 80.234772,
+        "release_slow_ms": 226.328961,
+        "stage_split_db": 5.736627,
+        "threshold_db": -18.0
+      },
+      "state": {
+        "gr_db": 0.0
+      },
+      "type": "CONTROL"
+    },
+    {
+      "allowed_connections": [
+        "*"
+      ],
+      "block_id": "gain",
+      "causality": "causal",
+      "constraints": {},
+      "inputs": [
+        "audio",
+        "gain_reduction_db"
+      ],
+      "latency": 0,
+      "outputs": [
+        "audio"
+      ],
+      "parameters": {
+        "max_gain_db": 6.0
+      },
+      "state": {},
+      "type": "GAIN"
+    },
+    {
+      "allowed_connections": [
+        "*"
+      ],
+      "block_id": "output",
+      "causality": "causal",
+      "constraints": {},
+      "inputs": [
+        "audio"
+      ],
+      "latency": 0,
+      "outputs": [
+        "audio"
+      ],
+      "parameters": {},
+      "state": {},
+      "type": "OUTPUT"
+    }
+  ],
+  "candidate_id": "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+  "connections": [
+    {
+      "kind": "signal",
+      "source": "input",
+      "target": "detector"
+    },
+    {
+      "kind": "signal",
+      "source": "detector",
+      "target": "release_state"
+    },
+    {
+      "kind": "signal",
+      "source": "release_state",
+      "target": "release_control"
+    },
+    {
+      "kind": "signal",
+      "source": "release_control",
+      "target": "gain"
+    },
+    {
+      "kind": "signal",
+      "source": "input",
+      "target": "gain"
+    },
+    {
+      "kind": "signal",
+      "source": "gain",
+      "target": "output"
+    }
+  ],
+  "constraints": {
+    "allow_noncausal": false,
+    "max_dc_offset": 0.02,
+    "max_feedback_abs": 0.98,
+    "max_gain_db": 12.0,
+    "max_gain_reduction_db": 24.5,
+    "max_latency_samples": 0
+  },
+  "counter_hypotheses": [
+    "Any apparent improvement is parameter tuning rather than topology-dependent behavior.",
+    "The release law improves settling but causes greater modulation distortion or instability.",
+    "The fixed-release baseline remains Pareto-competitive across the measured scope."
+  ],
+  "expected_complexity": 7.0,
+  "expected_latency": 0,
+  "family": "dynamic_gain_release_v1",
+  "generation": 0,
+  "hypothesis": "A dual_stage release law may improve release settling and crest preservation versus a fixed release under at least one declared benchmark condition.",
+  "metadata": {
+    "generator_version": "melon-generator/0.1"
+  },
+  "mutation_history": [
+    {
+      "kind": "INITIAL_GENERATION",
+      "species": "dual_stage"
+    }
+  ],
+  "parameters": {
+    "release": {
+      "attack_ms": 2.0,
+      "law": "dual_stage",
+      "makeup_db": 0.0,
+      "max_gr_db": 24.0,
+      "ratio": 4.0,
+      "release_fast_ms": 69.041875,
+      "release_ms": 80.234772,
+      "release_slow_ms": 226.328961,
+      "stage_split_db": 5.736627,
+      "threshold_db": -18.0
+    }
+  },
+  "parents": [],
+  "schema_version": "1.0",
+  "seed": 2026095629,
+  "species": "dual_stage"
+}

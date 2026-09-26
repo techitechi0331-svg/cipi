@@ -1,0 +1,493 @@
+{
+  "budget_semantics": {
+    "cache_hits": 0,
+    "candidates_generated": 9,
+    "candidates_seen": 12,
+    "configured_max_unique_semantic_candidates": 12,
+    "max_candidates_meaning": "max unique semantic candidates; independent of cache state",
+    "measurements_executed": 8,
+    "unique_semantic_candidates": 8
+  },
+  "duplicate_candidates": [
+    {
+      "candidate_id": "melon-dynamic_gain_release_v1-8c8b77478d0175c4266c",
+      "generation": 1,
+      "original_candidate_id": "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+      "reason": "SEMANTIC_DUPLICATE_REUSED",
+      "semantic_fingerprint": "1a08271d000de04d162e33a5e6e663c6e9cd6e9cf50ff91b5ab300396d414227",
+      "species": "fixed"
+    }
+  ],
+  "evaluated_candidates": 8,
+  "generation_records": [
+    {
+      "benchmark_profile": "screening_v1",
+      "cache_hits_this_generation": 0,
+      "duplicate_candidate_ids": [],
+      "generation": 1,
+      "measured_this_generation": 6,
+      "measurement_elapsed_seconds": 0.6559999999990396,
+      "measurements_executed_this_generation": 6,
+      "pareto_ids": [
+        "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+        "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+        "melon-dynamic_gain_release_v1-d6b0fb7e130b82ea5fdf",
+        "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+        "melon-dynamic_gain_release_v1-f373dad75c45650cb03b"
+      ],
+      "persistent_cache_hit_ids": [],
+      "population": [
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "4318c71fff8a76ff2ca30cb9a0ca757827e3967f89c3921b7fc21d5f3c41b66d",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "fixed"
+            }
+          ],
+          "objectives": [
+            549.9166666666666,
+            0.0025886741594425603,
+            1.1133449459517997,
+            5.5
+          ],
+          "parents": [],
+          "seed": 2026092602,
+          "source_result_hash": "975b67e73ee8591a60d0a0b707ffb1082f6bff0d31431a058c970c0f11f96622",
+          "species": "fixed"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "70e79396b58ed00a62d4d80bf47b049e817cd442d26a8e97fc0f27b9e8c4ddbc",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-d6b0fb7e130b82ea5fdf",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "gr_dependent"
+            }
+          ],
+          "objectives": [
+            620.75,
+            0.0025881805125172333,
+            1.2548445197187292,
+            5.5
+          ],
+          "parents": [],
+          "seed": 2026093611,
+          "source_result_hash": "1778d0612c7456dab8db323362161a05d6daa0380c95b7cb4ad3527a21faaeb4",
+          "species": "gr_dependent"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "f4bd577996968d20377ed1f5d0767158daa68a801511050148b7d6eb0923ce7b",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "crest_dependent"
+            }
+          ],
+          "objectives": [
+            540.0833333333334,
+            0.0025899870585247894,
+            1.1104926481613946,
+            5.5
+          ],
+          "parents": [],
+          "seed": 2026094620,
+          "source_result_hash": "9d832c99b72af3dbca2e293eb90b3c7cae27c64950624639d34fa695878884fa",
+          "species": "crest_dependent"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "0ad3d1b9e7166ac08df9532f5accf9df2ad8d9d86568090d990463fea1034b6c",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "dual_stage"
+            }
+          ],
+          "objectives": [
+            389.75,
+            0.00259738402198279,
+            1.285502671507059,
+            7.0
+          ],
+          "parents": [],
+          "seed": 2026095629,
+          "source_result_hash": "c86a98b0192e91724714a3a72dc33e3ac5810f54c5fcfe8f1bb9c0d84f16ee6f",
+          "species": "dual_stage"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "dac2ebde2e32f48d45735c93a1d59d0e79aa220f46ff35cfcf8b1c97f5da53c0",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-f373dad75c45650cb03b",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "memory_dependent"
+            }
+          ],
+          "objectives": [
+            750.0,
+            0.0025867479864521495,
+            1.2781328157572105,
+            7.0
+          ],
+          "parents": [],
+          "seed": 2026096638,
+          "source_result_hash": "3c831cfecd60b37beb94a4eb2409d4f5ad54382c57a72fa194bc971c8690df14",
+          "species": "memory_dependent"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "2c32a6c3512a6d015622f23c3d4ab624d56312e0a60b267a818054baed343f47",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-809d3b6c3368e0941eea",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "state_dependent"
+            }
+          ],
+          "objectives": [
+            554.4166666666666,
+            0.0025907278422411333,
+            1.381855718250847,
+            7.0
+          ],
+          "parents": [],
+          "seed": 2026097647,
+          "source_result_hash": "3d29a193f2cb8faf4e743994afafdf8a824fbf49112cadba2713e1a349efbb46",
+          "species": "state_dependent"
+        }
+      ],
+      "population_slots_seen": 6,
+      "rejected_candidate_ids": [],
+      "stop_after_generation": null,
+      "survivor_evidence": {
+        "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63": {
+          "crowding_score": 3.3822292490258357,
+          "novelty_score": 0.45080175985676035,
+          "pareto": true,
+          "selection_reason": "SPECIES_PARETO_CROWDING_NOVELTY",
+          "species": "dual_stage"
+        },
+        "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5": {
+          "crowding_score": 1.7415896856625996,
+          "novelty_score": 0.41966022004988784,
+          "pareto": true,
+          "selection_reason": "SPECIES_PARETO_CROWDING_NOVELTY",
+          "species": "fixed"
+        },
+        "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02": {
+          "crowding_score": 2.6376859033616356,
+          "novelty_score": 0.41978212981750335,
+          "pareto": true,
+          "selection_reason": "SPECIES_PARETO_CROWDING_NOVELTY",
+          "species": "crest_dependent"
+        }
+      },
+      "survivor_ids": [
+        "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+        "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+        "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5"
+      ],
+      "survivor_reasons": {
+        "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63": "SPECIES_PARETO_CROWDING_NOVELTY",
+        "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5": "SPECIES_PARETO_CROWDING_NOVELTY",
+        "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02": "SPECIES_PARETO_CROWDING_NOVELTY"
+      },
+      "survivor_reuse_candidate_ids": [],
+      "unique_semantic_candidates_this_generation": 6
+    },
+    {
+      "benchmark_profile": "screening_v1",
+      "cache_hits_this_generation": 0,
+      "duplicate_candidate_ids": [
+        "melon-dynamic_gain_release_v1-8c8b77478d0175c4266c"
+      ],
+      "generation": 2,
+      "measured_this_generation": 2,
+      "measurement_elapsed_seconds": 0.23500000000058208,
+      "measurements_executed_this_generation": 2,
+      "pareto_ids": [
+        "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+        "melon-dynamic_gain_release_v1-8c8b77478d0175c4266c",
+        "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+        "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02"
+      ],
+      "persistent_cache_hit_ids": [],
+      "population": [
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "f4bd577996968d20377ed1f5d0767158daa68a801511050148b7d6eb0923ce7b",
+          "cache_status": "IN_RUN_SEMANTIC_REUSE",
+          "candidate_id": "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "crest_dependent"
+            }
+          ],
+          "objectives": [
+            540.0833333333334,
+            0.0025899870585247894,
+            1.1104926481613946,
+            5.5
+          ],
+          "parents": [],
+          "seed": 2026094620,
+          "source_result_hash": "9d832c99b72af3dbca2e293eb90b3c7cae27c64950624639d34fa695878884fa",
+          "species": "crest_dependent"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "0ad3d1b9e7166ac08df9532f5accf9df2ad8d9d86568090d990463fea1034b6c",
+          "cache_status": "IN_RUN_SEMANTIC_REUSE",
+          "candidate_id": "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "dual_stage"
+            }
+          ],
+          "objectives": [
+            389.75,
+            0.00259738402198279,
+            1.285502671507059,
+            7.0
+          ],
+          "parents": [],
+          "seed": 2026095629,
+          "source_result_hash": "c86a98b0192e91724714a3a72dc33e3ac5810f54c5fcfe8f1bb9c0d84f16ee6f",
+          "species": "dual_stage"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "4318c71fff8a76ff2ca30cb9a0ca757827e3967f89c3921b7fc21d5f3c41b66d",
+          "cache_status": "IN_RUN_SEMANTIC_REUSE",
+          "candidate_id": "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "fixed"
+            }
+          ],
+          "objectives": [
+            549.9166666666666,
+            0.0025886741594425603,
+            1.1133449459517997,
+            5.5
+          ],
+          "parents": [],
+          "seed": 2026092602,
+          "source_result_hash": "975b67e73ee8591a60d0a0b707ffb1082f6bff0d31431a058c970c0f11f96622",
+          "species": "fixed"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "5cb41d5487c5d6bfb23b98cd48e871809354505848620934a1a65753b423f356",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-0559e883b8cc0baaf1d7",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "dual_stage"
+            },
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "crest_dependent"
+            },
+            {
+              "kind": "CROSSOVER",
+              "seed": 1375453315
+            }
+          ],
+          "objectives": [
+            547.9166666666666,
+            0.002591735024709828,
+            1.1637229903735755,
+            7.0
+          ],
+          "parents": [
+            "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+            "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02"
+          ],
+          "seed": 1375453315,
+          "source_result_hash": "cfa51c014a5d9acfecda09d1804b357210f17a109dec13a8ad79ec0e464c849e",
+          "species": "hybrid"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "7176e3959a3de80b4dc89083f4b5cb26d08259b004c40bd946976750883cf589",
+          "cache_status": "CACHE_MISS",
+          "candidate_id": "melon-dynamic_gain_release_v1-ee0eba1636dc49066a75",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "crest_dependent"
+            },
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "fixed"
+            },
+            {
+              "kind": "CROSSOVER",
+              "seed": 996768430
+            }
+          ],
+          "objectives": [
+            668.4166666666666,
+            0.002588700885427759,
+            1.2612673107826824,
+            7.0
+          ],
+          "parents": [
+            "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+            "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5"
+          ],
+          "seed": 996768430,
+          "source_result_hash": "412daaf43dc6c2635f415ec677a45f94e8547d1e4b1d6c31001e01044db04ea7",
+          "species": "hybrid"
+        },
+        {
+          "benchmark_profile": "screening_v1",
+          "benchmark_version": "melon-benchmark/0.5",
+          "cache_hit": false,
+          "cache_key": "4318c71fff8a76ff2ca30cb9a0ca757827e3967f89c3921b7fc21d5f3c41b66d",
+          "cache_status": "IN_RUN_SEMANTIC_REUSE",
+          "candidate_id": "melon-dynamic_gain_release_v1-8c8b77478d0175c4266c",
+          "family": "dynamic_gain_release_v1",
+          "input_hash": "8d45479d5105ec50ee18d2af146856fb4b73b141398ecbc193b43fc1d845e785",
+          "mutation_history": [
+            {
+              "kind": "INITIAL_GENERATION",
+              "species": "fixed"
+            },
+            {
+              "from": 0.0,
+              "kind": "PARAMETER_MUTATION",
+              "parameter": "makeup_db",
+              "seed": 1206685945,
+              "to": 0.0
+            }
+          ],
+          "objectives": [
+            549.9166666666666,
+            0.0025886741594425603,
+            1.1133449459517997,
+            5.5
+          ],
+          "parents": [
+            "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5"
+          ],
+          "seed": 1206685945,
+          "source_result_hash": "975b67e73ee8591a60d0a0b707ffb1082f6bff0d31431a058c970c0f11f96622",
+          "species": "fixed"
+        }
+      ],
+      "population_slots_seen": 6,
+      "rejected_candidate_ids": [],
+      "stop_after_generation": "MAX_GENERATIONS",
+      "survivor_ids": [],
+      "survivor_reasons": {},
+      "survivor_reuse_candidate_ids": [
+        "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+        "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+        "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5"
+      ],
+      "unique_semantic_candidates_this_generation": 2
+    }
+  ],
+  "pareto_ids": [
+    "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+    "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+    "melon-dynamic_gain_release_v1-8c8b77478d0175c4266c",
+    "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+    "melon-dynamic_gain_release_v1-d6b0fb7e130b82ea5fdf",
+    "melon-dynamic_gain_release_v1-f373dad75c45650cb03b"
+  ],
+  "persistent_cache_hits": 0,
+  "profile": "screening_v1",
+  "rejected_candidates": [],
+  "stop_reason": "MAX_GENERATIONS",
+  "survivor_reuse_candidates": [
+    {
+      "candidate_id": "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+      "generation": 0,
+      "original_candidate_id": "melon-dynamic_gain_release_v1-de2b60288cb7e2df8f02",
+      "reason": "SURVIVOR_REUSE",
+      "semantic_fingerprint": "ca5284ac563041d9e9df15721791e3320196aa4b12344c9d373027f7185b6bab",
+      "species": "crest_dependent"
+    },
+    {
+      "candidate_id": "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+      "generation": 0,
+      "original_candidate_id": "melon-dynamic_gain_release_v1-7ef9ba433dacdd89cf63",
+      "reason": "SURVIVOR_REUSE",
+      "semantic_fingerprint": "87305d5ace05bed7af771323f6de9f64260fc29afa286fe8ff4069f77ac43cfa",
+      "species": "dual_stage"
+    },
+    {
+      "candidate_id": "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+      "generation": 0,
+      "original_candidate_id": "melon-dynamic_gain_release_v1-9c1515f5300bcfa431c5",
+      "reason": "SURVIVOR_REUSE",
+      "semantic_fingerprint": "1a08271d000de04d162e33a5e6e663c6e9cd6e9cf50ff91b5ab300396d414227",
+      "species": "fixed"
+    }
+  ]
+}

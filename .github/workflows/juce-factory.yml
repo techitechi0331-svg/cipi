@@ -19,6 +19,7 @@ on:
       - "research/incubator/factory_build_requests/**"
       - "tools/validate_incubator.py"
       - ".github/workflows/juce-factory.yml"
+      - ".github/workflows/juce-factory-authorized-build.yml"
   workflow_dispatch:
 
 permissions:

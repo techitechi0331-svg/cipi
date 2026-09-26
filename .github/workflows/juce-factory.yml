@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "juce_factory/**"
+      - "automation/factory/**"
+      - "automation/schemas/factory_evidence_record.schema.json"
+      - "research/factory_evidence/**"
       - ".github/workflows/juce-factory.yml"
   workflow_dispatch:
 
@@ -129,6 +132,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Steinberg validator failed with exit code $LASTEXITCODE." }
 
       - name: Write Factory validation report
+        id: validation_report
         shell: pwsh
         run: |
           $manifest = Get-Content generated/GoldenGain/factory_manifest.json -Raw | ConvertFrom-Json
@@ -147,6 +151,7 @@ jobs:
           $report | ConvertTo-Json -Depth 6 | Set-Content -Encoding utf8 factory-logs/validation_report.json
 
       - name: Promote validation-passed artifact and write provenance
+        id: promote
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path factory-out/passed | Out-Null
@@ -160,10 +165,12 @@ jobs:
           $manifest = Get-Content generated/GoldenGain/factory_manifest.json -Raw | ConvertFrom-Json
           $provenance = [ordered]@{
             factory_status = "VALIDATION_PASS"
-            git_sha = "${{ github.sha }}"
-            juce_version = "9.0.2"
+            source_revision = "${{ github.event.pull_request.head.sha || github.sha }}"
+            validation_revision = "${{ github.sha }}"
+            validation_base_revision = "${{ github.event.pull_request.base.sha || github.sha }}"
+            juce_version = $manifest.juce_version
             build_type = "Release"
-            platform = "windows-x64"
+            platform = $manifest.target_os
             validators = @("factory-owned-matrix", "pluginval-1.0.4-strictness-5", "steinberg-vst3-validator")
             contract_file_sha256 = $contractHash
             contract_semantic_sha256 = $manifest.contract_sha256
@@ -176,6 +183,20 @@ jobs:
             $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
             "$hash  $($_.FullName.Substring((Resolve-Path factory-out).Path.Length + 1))"
           } | Set-Content -Encoding ascii factory-out/sha256.txt
+
+      - name: Build Factory Result Bundle
+        id: result_bundle
+        shell: pwsh
+        run: |
+          python -m juce_factory.factory.cli bundle-pass --manifest generated/GoldenGain/factory_manifest.json --validation-report factory-out/validation_report.json --provenance factory-out/provenance.json --sha256 factory-out/sha256.txt --output factory-out/factory_result_bundle.json
+          if ($LASTEXITCODE -ne 0) { throw "Factory Result Bundle generation failed." }
+
+      - name: Build bounded CIPI evidence preview
+        id: evidence_preview
+        shell: pwsh
+        run: |
+          python -m automation.factory.intake factory-out/factory_result_bundle.json --output-root factory-out/cipi-evidence-preview
+          if ($LASTEXITCODE -ne 0) { throw "Factory evidence preview intake failed." }
 
       - name: Quarantine failed Factory candidate
         if: failure()
@@ -194,11 +215,31 @@ jobs:
           elseif ("${{ steps.steinberg_configure.outcome }}" -eq "failure") { $failureClass = "STEINBERG_CONFIGURE_ERROR" }
           elseif ("${{ steps.steinberg_build.outcome }}" -eq "failure") { $failureClass = "STEINBERG_BUILD_ERROR" }
           elseif ("${{ steps.steinberg_validator.outcome }}" -eq "failure") { $failureClass = "STEINBERG_VALIDATOR_ERROR" }
+          elseif ("${{ steps.validation_report.outcome }}" -eq "failure") { $failureClass = "VALIDATION_REPORT_ERROR" }
+          elseif ("${{ steps.promote.outcome }}" -eq "failure") { $failureClass = "PROMOTION_STAGING_ERROR" }
+          elseif ("${{ steps.result_bundle.outcome }}" -eq "failure") { $failureClass = "RESULT_BUNDLE_ERROR" }
+          elseif ("${{ steps.evidence_preview.outcome }}" -eq "failure") { $failureClass = "EVIDENCE_PREVIEW_ERROR" }
+
+          function Convert-StepOutcome([string]$outcome) {
+            switch ($outcome) {
+              "success" { return "PASS" }
+              "failure" { return "FAIL" }
+              "skipped" { return "NOT_RUN" }
+              default { return "UNKNOWN" }
+            }
+          }
 
           $status = [ordered]@{
             factory_status = "QUARANTINED"
             failure_class = $failureClass
-            git_sha = "${{ github.sha }}"
+            source_revision = "${{ github.event.pull_request.head.sha || github.sha }}"
+            validation_revision = "${{ github.sha }}"
+            validation_base_revision = "${{ github.event.pull_request.base.sha || github.sha }}"
+            validators = [ordered]@{
+              factory_owned_validation = Convert-StepOutcome "${{ steps.factory_validation.outcome }}"
+              pluginval = Convert-StepOutcome "${{ steps.pluginval.outcome }}"
+              steinberg_validator = Convert-StepOutcome "${{ steps.steinberg_validator.outcome }}"
+            }
             release_authority = $false
           }
           $status | ConvertTo-Json | Set-Content -Encoding utf8 factory-quarantine/failure.json
@@ -211,6 +252,20 @@ jobs:
           }
           if (Test-Path factory-logs) {
             Copy-Item factory-logs factory-quarantine/logs -Recurse -Force
+          }
+
+      - name: Build quarantined Factory Result Bundle and evidence preview
+        if: failure()
+        shell: pwsh
+        run: |
+          if ((Test-Path factory-quarantine/factory_manifest.json) -and (Test-Path factory-quarantine/failure.json)) {
+            python -m juce_factory.factory.cli bundle-quarantine --manifest factory-quarantine/factory_manifest.json --failure factory-quarantine/failure.json --output factory-quarantine/factory_result_bundle.json
+            if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory Result Bundle generation failed." }
+
+            python -m automation.factory.intake factory-quarantine/factory_result_bundle.json --output-root factory-quarantine/cipi-evidence-preview
+            if ($LASTEXITCODE -ne 0) { throw "Quarantined Factory evidence preview failed." }
+          } else {
+            Write-Host "No generated Factory manifest exists; retaining infrastructure failure logs only."
           }
 
       - name: Upload quarantined Factory candidate

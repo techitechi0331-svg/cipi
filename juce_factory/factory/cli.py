@@ -8,6 +8,13 @@ from pathlib import Path
 from . import FACTORY_VERSION
 from .contract import ContractError, load_contract
 from .generator import generate_project
+from .result_bundle import (
+    ResultBundleError,
+    build_pass_bundle,
+    build_quarantine_bundle,
+    validate_result_bundle,
+    write_result_bundle,
+)
 
 
 def _example_contract_path() -> Path:
@@ -28,6 +35,24 @@ def main() -> int:
 
     sub.add_parser("self-test", help="validate and generate the Golden Plugin in a temporary directory")
 
+    validate_result = sub.add_parser("validate-result", help="validate a Factory Result Bundle")
+    validate_result.add_argument("bundle")
+
+    bundle_pass = sub.add_parser("bundle-pass", help="write a VALIDATION_PASS Factory Result Bundle")
+    bundle_pass.add_argument("--manifest", required=True)
+    bundle_pass.add_argument("--validation-report", required=True)
+    bundle_pass.add_argument("--provenance", required=True)
+    bundle_pass.add_argument("--sha256", required=True)
+    bundle_pass.add_argument("--output", required=True)
+
+    bundle_quarantine = sub.add_parser(
+        "bundle-quarantine",
+        help="write a QUARANTINED Factory Result Bundle",
+    )
+    bundle_quarantine.add_argument("--manifest", required=True)
+    bundle_quarantine.add_argument("--failure", required=True)
+    bundle_quarantine.add_argument("--output", required=True)
+
     args = parser.parse_args()
     try:
         if args.command == "validate":
@@ -38,6 +63,28 @@ def main() -> int:
             contract = load_contract(args.contract)
             out = generate_project(contract, args.output)
             print(json.dumps({"status": "GENERATED", "output": str(out)}))
+            return 0
+        if args.command == "validate-result":
+            bundle = json.loads(Path(args.bundle).read_text(encoding="utf-8-sig"))
+            if not isinstance(bundle, dict):
+                raise ResultBundleError("Factory Result Bundle must be a JSON object")
+            validate_result_bundle(bundle)
+            print(json.dumps({"status": "FACTORY_RESULT_VALID", "bundle_hash": bundle["bundle_hash"]}))
+            return 0
+        if args.command == "bundle-pass":
+            bundle = build_pass_bundle(
+                args.manifest,
+                args.validation_report,
+                args.provenance,
+                args.sha256,
+            )
+            write_result_bundle(args.output, bundle)
+            print(json.dumps({"status": "FACTORY_RESULT_WRITTEN", "bundle_hash": bundle["bundle_hash"]}))
+            return 0
+        if args.command == "bundle-quarantine":
+            bundle = build_quarantine_bundle(args.manifest, args.failure)
+            write_result_bundle(args.output, bundle)
+            print(json.dumps({"status": "FACTORY_RESULT_WRITTEN", "bundle_hash": bundle["bundle_hash"]}))
             return 0
         if args.command == "self-test":
             contract = load_contract(_example_contract_path())
@@ -57,7 +104,7 @@ def main() -> int:
                     raise RuntimeError(f"self-test generated files missing: {missing}")
             print(json.dumps({"status": "SELF_TEST_PASS", "factory_version": FACTORY_VERSION}))
             return 0
-    except (ContractError, FileExistsError, ValueError, RuntimeError) as exc:
+    except (ContractError, ResultBundleError, FileExistsError, ValueError, RuntimeError) as exc:
         print(json.dumps({"status": "FACTORY_ERROR", "error": str(exc)}))
         return 2
     return 2

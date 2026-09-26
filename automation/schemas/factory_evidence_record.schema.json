@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/schemas/factory_evidence_record.schema.json",
+  "title": "CIPI Factory Evidence Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "source_system",
+    "source_bundle_hash",
+    "plugin_id",
+    "plugin_version",
+    "factory_status",
+    "evidence_type",
+    "scope",
+    "claim",
+    "contract_sha256",
+    "generated_source_sha256",
+    "source_revision",
+    "validation_base_revision",
+    "validation_revision",
+    "dsp_source_revision",
+    "failure_class",
+    "raw_audio_persisted",
+    "automatic_final_decision",
+    "promotion_requested",
+    "promotion_authority",
+    "product_release_authority",
+    "cubase_confirmed",
+    "listening_confirmed",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^FACTORY-[0-9A-F]{16}$"
+    },
+    "source_system": {
+      "const": "JUCE_FACTORY"
+    },
+    "source_bundle_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "plugin_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+    },
+    "plugin_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "factory_status": {
+      "enum": [
+        "VALIDATION_PASS",
+        "QUARANTINED"
+      ]
+    },
+    "evidence_type": {
+      "const": "MEASURED"
+    },
+    "scope": {
+      "const": "manufacturing_and_host_safety_only"
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 20
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "generated_source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dsp_source_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "failure_class": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "raw_audio_persisted": {
+      "const": false
+    },
+    "automatic_final_decision": {
+      "const": false
+    },
+    "promotion_requested": {
+      "const": false
+    },
+    "promotion_authority": {
+      "const": false
+    },
+    "product_release_authority": {
+      "const": false
+    },
+    "cubase_confirmed": {
+      "const": false
+    },
+    "listening_confirmed": {
+      "const": false
+    },
+    "record_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "validation_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "validation_base_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "factory_status": {
+            "const": "VALIDATION_PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_class": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "factory_status": {
+            "const": "QUARANTINED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_class": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}

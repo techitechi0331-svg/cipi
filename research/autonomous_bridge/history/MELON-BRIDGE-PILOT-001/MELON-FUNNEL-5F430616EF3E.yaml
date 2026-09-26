@@ -1,0 +1,29 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-5f430616ef3e
+processed_artifact_hash: 2cdee93d74784a7f47e366ddd15c18c336c83f82038b7a5266466799ed108d3e
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36249379126/10908408118/files/melon-funnel-5f430616ef3e/macro_result.json
+track_id: MELON-BRIDGE-PILOT-001
+job_id: MELON-BRIDGE-PILOT-001-R3-35A965E3
+parent_job_id: MELON-BRIDGE-PILOT-001-R2-957D17D9
+parent_run_id: melon-funnel-679d71d9923d
+root_research_id: MELON-BRIDGE-PILOT-001
+hypothesis_id: HYP-MELON-BRIDGE-PILOT
+experiment_id: MELON-FUNNEL-679D71D9923D-REPLICATION-1
+loop_depth: 3
+route: CONTINUE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 0.75
+improvement_signal: 0.0
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 9
+  deep_validation_count: 1
+  runtime_seconds: 18.15599999999904
+  stage2_measurement_runs: 12
+measured_candidates: 9
+stop_reason: MAX_GENERATIONS
+bundle_hash: 041137fc7d644b898bbc17f757cdf3275601cc84ee9cfaf5213ec755d217e013
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

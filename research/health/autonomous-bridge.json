@@ -8,31 +8,33 @@
   "bridge_version": "cipi-autonomous-research-bridge/1.0",
   "budget_status": {
     "MELON-BRIDGE-PILOT-001": {
-      "candidates": 17,
+      "candidates": 26,
       "candidates_limit": 36,
-      "loop_depth": 2,
+      "loop_depth": 3,
       "loop_depth_limit": 3,
-      "runs": 2,
+      "runs": 3,
       "runs_limit": 3,
       "runtime_limit_seconds": 900.0,
-      "runtime_seconds": 37.98500000000058
+      "runtime_seconds": 56.14099999999962
     }
   },
-  "continuation_candidates": 2,
+  "continuation_candidates": 3,
   "current_loop_depth": {
-    "MELON-BRIDGE-PILOT-001": 2
+    "MELON-BRIDGE-PILOT-001": 3
   },
   "duplicate_suppressions": 0,
   "generated_jobs": 3,
   "human_gates": 0,
   "invalid_results": 0,
-  "melon_runs": 2,
+  "melon_runs": 3,
   "next_scheduler_action": "NO_READY_WORK",
-  "no_improvement_count": 2,
+  "no_improvement_count": 3,
   "queued_actions": [],
-  "rejected_continuations": 0,
+  "rejected_continuations": 1,
   "result_missing": 0,
   "runner_wait": 0,
   "schema_version": "1.0",
-  "track_stop_reasons": {}
+  "track_stop_reasons": {
+    "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED"
+  }
 }

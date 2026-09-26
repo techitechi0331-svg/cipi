@@ -1,0 +1,53 @@
+schema_version: "1.0"
+decision_id: "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:review-01"
+job_id: VO-PREP-SC-HPF-REAL-001
+source_run: research/runs/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: ARCHIVE
+review_status: CONFIRMED
+rationale: >-
+  The detector-only 40 Hz second-order HPF passed every declared real-vocal
+  objective validation and gated confirmation criterion, so its measurements
+  are retained as positive dynamics research. However, the Vo.Prep Product
+  Boundary Revision now excludes broadband transparent-compressor productization
+  from Vo.Prep and assigns broadband dynamics preparation to VoPriPro.
+  Therefore this candidate is archived from the Vo.Prep product line rather
+  than advanced to blind listening for Vo.Prep adoption. The archive is a
+  product-scope decision, not a rejection of the filter result or its measured
+  utility for broadband compressor sidechains.
+scope: >-
+  Scope archive of the 40 Hz detector-only HPF research from the frozen Vo.Prep
+  transparent-compressor line. The objective result remains reusable for
+  VoPriPro or a future dedicated transparent-compressor product.
+declared_rejection_criteria:
+  - "Not applicable: the run passed its technical gates; this review archives it because the parent product line is scope-frozen."
+triggered_criteria: []
+retained_findings:
+  - "Validation clean mean-GR absolute delta was 0.005159873647465674 dB."
+  - "Validation rumble excess-GR reduction was 0.7351043887229355 and plosive excess-GR reduction was 0.17034021959672924; positive fractions were both 1.0."
+  - "Confirmation clean mean-GR absolute delta was 0.0041768211447698045 dB."
+  - "Confirmation rumble excess-GR reduction was 0.737451385518135 and plosive excess-GR reduction was 0.20211374555654038; positive fractions were both 1.0."
+  - "Validation and confirmation male clean-vocal mean-GR deltas were 0.006825389634820822 dB and 0.0035907352824853245 dB respectively."
+  - "Raw public audio was not persisted."
+reusable_findings:
+  - "A detector-only 40 Hz second-order HPF can strongly reduce added subsonic/very-low-frequency compressor drive while leaving clean-vocal GR statistics nearly unchanged on the tested singer cohorts."
+  - "Synthetic sidechain-filter screening transferred to real-vocal objective behavior when the candidate cutoff was frozen before real-vocal evaluation."
+  - "A technically successful DSP experiment can be archived from one product scope while remaining reusable research."
+revisit_if:
+  - "VoPriPro explicitly opens a detector-side HPF comparison against its current 80 Hz detector path."
+  - "A future dedicated transparent-compressor product reuses this sidechain research."
+  - "The Vo.Prep product boundary is explicitly revised by a later product decision."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VO-PREP-SC-HPF-PILOT-001
+    - VO-PREP-PRODUCT-BOUNDARY-001
+  related_decisions:
+    - "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:auto"
+    - "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:review-01"
+    - "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01"
+parent_decision_id: "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

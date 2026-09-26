@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "juce_factory/**"
+      - "automation/factory/**"
+      - "automation/schemas/factory_evidence_record.schema.json"
+      - "research/factory_evidence/**"
       - ".github/workflows/juce-factory.yml"
   workflow_dispatch:
 

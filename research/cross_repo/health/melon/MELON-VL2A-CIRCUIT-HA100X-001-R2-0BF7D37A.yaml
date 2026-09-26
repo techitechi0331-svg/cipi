@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36271948449
+run_status: completed
+run_conclusion: success
+since: '2026-09-26T21:09:16Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

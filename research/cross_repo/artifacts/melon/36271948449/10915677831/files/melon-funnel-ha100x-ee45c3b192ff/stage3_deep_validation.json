@@ -1,0 +1,16 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "HA100X-006-ddb69925",
+    "promotion_authority": false,
+    "reason": "Bound T4-dependent secondary loading; p90 absolute transfer interaction is 1.735639 dB. Next isolate leakage/capacitance sensitivity at 15-20 kHz.",
+    "route": "ITERATE",
+    "scientific": {
+      "catalog_pass_fraction": 0.4166666666666667,
+      "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+      "falsification_signal": "LINEAR_FAMILY_CAN_EXPLAIN_CATALOG_WITH_FLATTER_30HZ_THAN_CURRENT_HEURISTIC",
+      "information_gain_signal": 0.7637133341959196
+    },
+    "species": "ha100x_lti_load_interaction"
+  }
+]

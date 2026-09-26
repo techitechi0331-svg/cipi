@@ -1,0 +1,174 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "7e477d391eb7d6eea9d9abe8e8bdcdd660ded154e2b42d274c794c1758332098",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "MELON-FUNNEL-HA100X-76E7F34E7021-ITERATE-1"
+      ],
+      "estimated_cost": {
+        "candidates": 12,
+        "runtime_seconds": 90
+      },
+      "expected_information_gain": 0.8472573331608161,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "HA100X_LINEAR_LTI_LOAD_AWARE",
+        "benchmark_profile": [
+          "ha100x_catalog_v1",
+          "la2a_source_load_matrix_v1",
+          "vl2a_linear_first_falsification_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for HA100X-006-ddb69925: Bound T4-dependent secondary loading; p90 absolute transfer interaction is 1.735639 dB. Next isolate leakage/capacitance sensitivity at 15-20 kHz.",
+        "input_set": "VL2A_HA100X_SOURCE_LOAD_MATRIX_V1",
+        "objective_set": [
+          "catalog_envelope",
+          "lf_identifiability",
+          "hf_identifiability",
+          "source_load_sensitivity",
+          "complexity"
+        ],
+        "reference_model": "UTC_HA100X_SOURCE_CONSTRAINTS_PLUS_LA2A_LOADING_TOPOLOGY",
+        "relevant_constraints": [
+          "turns_ratio_nominal_10",
+          "utc_30Hz_20kHz_plusminus1dB",
+          "no_hysteresis_v1",
+          "no_saturation_v1",
+          "product_integration_off"
+        ],
+        "research_domain": "VL2A_HA100X_INPUT_TRANSFORMER",
+        "sample_rate": null,
+        "scope": [
+          "HA100X-006-ddb69925",
+          "ha100x_lti_load_interaction",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for HA100X-006-ddb69925: Bound T4-dependent secondary loading; p90 absolute transfer interaction is 1.735639 dB. Next isolate leakage/capacitance sensitivity at 15-20 kHz.",
+      "id": "melon-funnel-ha100x-ee45c3b192ff-iterate-1",
+      "novelty": 1.0,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "seed": 2026092703,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "HA100X-006-ddb69925",
+          "ha100x_lti_load_interaction"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Bound T4-dependent secondary loading; p90 absolute transfer interaction is 1.735639 dB. Next isolate leakage/capacitance sensitivity at 15-20 kHz."
+    }
+  ],
+  "efficiency_metrics": {
+    "deep_validation_count": 1,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.008922,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.7637133341959196,
+    "measurements_executed_stage1": 12,
+    "new_semantic_candidate_rate": 1.0,
+    "stage2_measurement_runs": 4
+  },
+  "elapsed_seconds": 0.008922,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 12,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.008922,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "MELON-FUNNEL-HA100X-76E7F34E7021-ITERATE-1",
+  "hypothesis_id": "HYP-VL2A-HA100X-LINEAR-FIRST",
+  "job_id": "VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A",
+  "loop_depth": 2,
+  "measured_candidates": 12,
+  "novelty": 1.0,
+  "parent_job_id": "VL2A-CIRCUIT-HA100X-001-R1-256E3F1E",
+  "parent_run_id": "melon-funnel-ha100x-76e7f34e7021",
+  "precision_review": {
+    "checks": {
+      "bounded_candidate_count": true,
+      "catalog_compatible_candidate_exists": true,
+      "fixed_source_backed_turns_ratio": true,
+      "hysteresis_locked": true,
+      "nonlinearity_locked": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true
+    },
+    "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VL2A-CIRCUIT-HA100X-001",
+  "research_question": "Can a source-constrained, load-aware linear HA-100X model explain the documented transformer envelope and reconstructed LA-2A loading more consistently than the current VL2A 12 Hz HP / 25 ms state / tanh heuristic, without requiring unsupported magnetic nonlinearity and without changing product behavior?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.7637133341959196,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 5,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VL2A-CIRCUIT-HA100X-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-ha100x-ee45c3b192ff",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "b8dc7b481c978b26337a791378405a096b902407",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-26T21:09:37.352477+00:00",
+  "track_id": "VL2A-CIRCUIT-HA100X-001",
+  "unresolved_questions": [
+    {
+      "id": "HA100X-006-ddb69925",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Bound T4-dependent secondary loading; p90 absolute transfer interaction is 1.735639 dB. Next isolate leakage/capacitance sensitivity at 15-20 kHz."
+    }
+  ]
+}

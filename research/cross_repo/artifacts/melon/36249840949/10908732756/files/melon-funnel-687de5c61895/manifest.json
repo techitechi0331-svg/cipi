@@ -1,0 +1,98 @@
+{
+  "artifact_manifest": "artifact_manifest.json",
+  "automatic_final_decision": false,
+  "blind_holdout_consumed": false,
+  "cipi_promotion_authority": false,
+  "commit_sha": "62780b13a21cdcbe49d668e47929fee56c12f755",
+  "config": {
+    "blind_holdout": false,
+    "generations": 2,
+    "max_candidates": 10,
+    "max_runtime_seconds": 120.0,
+    "population_size": 5,
+    "sample_rate": 12000,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage2_seeds": [
+      3101,
+      3102,
+      3103
+    ],
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "effective_config": {
+    "blind_holdout": false,
+    "generations": 2,
+    "max_candidates": 10,
+    "max_runtime_seconds": 120.0,
+    "population_size": 5,
+    "sample_rate": 12000,
+    "seed": 2026092703,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage2_seeds": [
+      3101,
+      3102,
+      3103
+    ],
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "environment": {
+    "implementation": "CPython",
+    "machine": "AMD64",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "evidence_hash": "87c07b7b3b67aabca5c3aa0bc1a1784fba03d16823b8165af8be835a54d0b518",
+  "full_validation_commit": null,
+  "full_validation_commit_required": false,
+  "holdout_ledger_records": [],
+  "requested_config": {
+    "blind_holdout": false,
+    "generations": 2,
+    "max_candidates": 10,
+    "max_runtime_seconds": 120.0,
+    "population_size": 5,
+    "sample_rate": 12000,
+    "seed": 2026092703,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage2_seeds": [
+      3101,
+      3102,
+      3103
+    ],
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "run_id": "melon-funnel-687de5c61895",
+  "schema_version": "1.0",
+  "seed": 2026092703,
+  "stage_artifacts": [
+    "budget_recommendation.json",
+    "candidates/melon-dynamic_gain_release_v1-669cf4e4e7eb557e6b5b.json",
+    "candidates/melon-dynamic_gain_release_v1-752068c56d948c1801e7.json",
+    "candidates/melon-dynamic_gain_release_v1-85537708d0959e205ad4.json",
+    "candidates/melon-dynamic_gain_release_v1-c6c3ede90983693ea834.json",
+    "efficiency_metrics.json",
+    "precision_review.json",
+    "stage1_screening.json",
+    "stage2_multiseed.json",
+    "stage3_deep_validation.json"
+  ],
+  "timestamp": "2026-09-26T14:50:32.718556+00:00",
+  "versions": {
+    "benchmark": "melon-benchmark/0.5",
+    "cache": "melon-cache/0.2",
+    "dsp": "melon-dsp/0.1",
+    "funnel": "melon-research-funnel/0.5"
+  }
+}

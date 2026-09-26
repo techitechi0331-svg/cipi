@@ -1,0 +1,467 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "melon-dynamic_gain_release_v1-85537708d0959e205ad4",
+    "high_fidelity_validation": null,
+    "promotion_authority": false,
+    "reason": "candidate and matched baseline remain non-dominated/equal across multi-seed validation",
+    "route": "ITERATE",
+    "scientific": {
+      "ablations": [
+        {
+          "candidate_id": "melon-dynamic_gain_release_v1-85537708d0959e205ad4",
+          "delta_from_full": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "label": "full",
+          "objectives": {
+            "complexity_proxy": 7.0,
+            "crest_error": 1.6300358284401448,
+            "settling_ms": 338.4166666666667,
+            "thd_ratio": 0.0002960506627258616
+          },
+          "per_seed_deltas": [
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "spread_delta_from_full": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "validation_seeds": [
+            2201,
+            2202,
+            2203
+          ],
+          "worst_delta_from_full": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "candidate_id": "melon-dynamic_gain_release_v1-4ed6e8d11084fe7ea1da",
+          "delta_from_full": [
+            161.75,
+            -0.00013142543816216487,
+            -0.43240831969558435,
+            0.0
+          ],
+          "label": "no_dual_stage_split",
+          "objectives": {
+            "complexity_proxy": 7.0,
+            "crest_error": 1.1976275087445605,
+            "settling_ms": 500.1666666666667,
+            "thd_ratio": 0.00016462522456369674
+          },
+          "per_seed_deltas": [
+            [
+              165.08333333333331,
+              -0.00013142543816216487,
+              -0.43240831969558435,
+              0.0
+            ],
+            [
+              148.0,
+              -0.00013142543816216487,
+              -0.4334831495130129,
+              0.0
+            ],
+            [
+              161.75,
+              -0.00013142543816216487,
+              -0.41266403019159803,
+              0.0
+            ]
+          ],
+          "spread_delta_from_full": [
+            17.083333333333314,
+            0.0,
+            0.020819119321414892,
+            0.0
+          ],
+          "validation_seeds": [
+            2201,
+            2202,
+            2203
+          ],
+          "worst_delta_from_full": [
+            165.08333333333331,
+            -0.00013142543816216487,
+            -0.41266403019159803,
+            0.0
+          ]
+        },
+        {
+          "candidate_id": "melon-dynamic_gain_release_v1-06c9c5f55ae5bf7eb59a",
+          "delta_from_full": [
+            161.75,
+            -0.00013142543816216487,
+            -0.43240831969558435,
+            -1.5
+          ],
+          "label": "matched_fixed",
+          "objectives": {
+            "complexity_proxy": 5.5,
+            "crest_error": 1.1976275087445605,
+            "settling_ms": 500.1666666666667,
+            "thd_ratio": 0.00016462522456369674
+          },
+          "per_seed_deltas": [
+            [
+              165.08333333333331,
+              -0.00013142543816216487,
+              -0.43240831969558435,
+              -1.5
+            ],
+            [
+              148.0,
+              -0.00013142543816216487,
+              -0.4334831495130129,
+              -1.5
+            ],
+            [
+              161.75,
+              -0.00013142543816216487,
+              -0.41266403019159803,
+              -1.5
+            ]
+          ],
+          "spread_delta_from_full": [
+            17.083333333333314,
+            0.0,
+            0.020819119321414892,
+            0.0
+          ],
+          "validation_seeds": [
+            2201,
+            2202,
+            2203
+          ],
+          "worst_delta_from_full": [
+            165.08333333333331,
+            -0.00013142543816216487,
+            -0.41266403019159803,
+            -1.5
+          ]
+        }
+      ],
+      "adversarial": {
+        "candidate_id": "melon-dynamic_gain_release_v1-85537708d0959e205ad4",
+        "cases": [
+          {
+            "clipping_samples": 0,
+            "dc": 0.00046206029930711943,
+            "failure_reasons": [],
+            "final_gr_db": -0.14049336202284574,
+            "finite": true,
+            "min_gr_db": -13.350237112664328,
+            "name": "adv_20db_level_jump",
+            "passed": true,
+            "peak": 0.6273179708807369
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.0055368384990590585,
+            "failure_reasons": [],
+            "final_gr_db": -12.477655261334455,
+            "finite": true,
+            "min_gr_db": -12.68662138555527,
+            "name": "adv_continuous_transients",
+            "passed": true,
+            "peak": 0.9203383319504745
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.00030666368291830387,
+            "failure_reasons": [],
+            "final_gr_db": -7.466218310567477,
+            "finite": true,
+            "min_gr_db": -9.73231761414893,
+            "name": "adv_extreme_crest",
+            "passed": true,
+            "peak": 0.9294406775019822
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 1.1584092313436295e-05,
+            "failure_reasons": [],
+            "final_gr_db": -12.787643461863178,
+            "finite": true,
+            "min_gr_db": -12.788124254695328,
+            "name": "adv_extreme_high",
+            "passed": true,
+            "peak": 0.8072670023028521
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.0009112611202789938,
+            "failure_reasons": [],
+            "final_gr_db": -12.76199855655125,
+            "finite": true,
+            "min_gr_db": -12.77478784301525,
+            "name": "adv_extreme_low",
+            "passed": true,
+            "peak": 0.3134914536986404
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.00035018483173872425,
+            "failure_reasons": [],
+            "final_gr_db": -13.342063241557197,
+            "finite": true,
+            "min_gr_db": -13.34361967897149,
+            "name": "adv_long_high_input",
+            "passed": true,
+            "peak": 0.49991187892194017
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.0062115619029976905,
+            "failure_reasons": [],
+            "final_gr_db": -12.868311142835784,
+            "finite": true,
+            "min_gr_db": -13.10484519190848,
+            "name": "adv_fast_input_modulation",
+            "passed": true,
+            "peak": 0.7225423510481231
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.00057461652802837,
+            "failure_reasons": [],
+            "final_gr_db": -11.464081406967598,
+            "finite": true,
+            "min_gr_db": -11.597834953081783,
+            "name": "adv_noise_plus_tone",
+            "passed": true,
+            "peak": 0.573871251748146
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.0006489811906733825,
+            "failure_reasons": [],
+            "final_gr_db": -0.05215903832161289,
+            "finite": true,
+            "min_gr_db": -0.10884851871817088,
+            "name": "adv_breath_like_noise",
+            "passed": true,
+            "peak": 0.13755164264500885
+          },
+          {
+            "clipping_samples": 0,
+            "dc": -1.013625993978373e-05,
+            "failure_reasons": [],
+            "final_gr_db": -7.318358085741879,
+            "finite": true,
+            "min_gr_db": -7.452579135880535,
+            "name": "adv_sibilance_like_noise",
+            "passed": true,
+            "peak": 0.24265836887869358
+          },
+          {
+            "clipping_samples": 0,
+            "dc": 0.0005416281314610153,
+            "failure_reasons": [],
+            "final_gr_db": -0.0006645391883521724,
+            "finite": true,
+            "min_gr_db": -13.282084854455496,
+            "name": "adv_silence_recovery",
+            "passed": true,
+            "peak": 0.5857655927723492
+          }
+        ],
+        "passed": true,
+        "version": "melon-adversarial/0.2"
+      },
+      "blind_holdout": null,
+      "blind_holdout_consumed": false,
+      "blind_holdout_version": "1c26b3256f098d9c0f2be418b3a10b5ab79f18e567f704793a6dfdf93fcbdca8",
+      "candidate_id": "melon-dynamic_gain_release_v1-85537708d0959e205ad4",
+      "generalization_gap": {
+        "median_crest_error": -0.022945794700259814,
+        "median_settling_ms": 2.4166666666666856,
+        "median_thd_ratio": 0.0,
+        "worst_crest_error": -0.01942232291396273,
+        "worst_settling_ms": -1.0,
+        "worst_thd_ratio": 0.0
+      },
+      "matched_baseline": {
+        "baseline_id": "melon-dynamic_gain_release_v1-06c9c5f55ae5bf7eb59a",
+        "baseline_objectives": {
+          "complexity_proxy": 5.5,
+          "crest_error": 1.1976275087445605,
+          "settling_ms": 500.1666666666667,
+          "thd_ratio": 0.00016462522456369674
+        },
+        "candidate_id": "melon-dynamic_gain_release_v1-85537708d0959e205ad4",
+        "candidate_objectives": {
+          "complexity_proxy": 7.0,
+          "crest_error": 1.6300358284401448,
+          "settling_ms": 338.4166666666667,
+          "thd_ratio": 0.0002960506627258616
+        },
+        "deltas": [
+          -161.75,
+          0.00013142543816216487,
+          0.43240831969558435,
+          1.5
+        ],
+        "per_seed": [
+          {
+            "baseline_objectives": {
+              "complexity_proxy": 5.5,
+              "crest_error": 1.1976275087445605,
+              "settling_ms": 498.0833333333333,
+              "thd_ratio": 0.00016462522456369674
+            },
+            "candidate_objectives": {
+              "complexity_proxy": 7.0,
+              "crest_error": 1.6300358284401448,
+              "settling_ms": 333.0,
+              "thd_ratio": 0.0002960506627258616
+            },
+            "deltas": [
+              -165.08333333333331,
+              0.00013142543816216487,
+              0.43240831969558435,
+              1.5
+            ],
+            "relation": "NON_DOMINATED",
+            "seed": 2201
+          },
+          {
+            "baseline_objectives": {
+              "complexity_proxy": 5.5,
+              "crest_error": 1.2014458283432075,
+              "settling_ms": 508.75,
+              "thd_ratio": 0.00016462522456369674
+            },
+            "candidate_objectives": {
+              "complexity_proxy": 7.0,
+              "crest_error": 1.6349289778562204,
+              "settling_ms": 360.75,
+              "thd_ratio": 0.0002960506627258616
+            },
+            "deltas": [
+              -148.0,
+              0.00013142543816216487,
+              0.4334831495130129,
+              1.5
+            ],
+            "relation": "NON_DOMINATED",
+            "seed": 2202
+          },
+          {
+            "baseline_objectives": {
+              "complexity_proxy": 5.5,
+              "crest_error": 1.0825736968144382,
+              "settling_ms": 500.1666666666667,
+              "thd_ratio": 0.00016462522456369674
+            },
+            "candidate_objectives": {
+              "complexity_proxy": 7.0,
+              "crest_error": 1.4952377270060362,
+              "settling_ms": 338.4166666666667,
+              "thd_ratio": 0.0002960506627258616
+            },
+            "deltas": [
+              -161.75,
+              0.00013142543816216487,
+              0.41266403019159803,
+              1.5
+            ],
+            "relation": "NON_DOMINATED",
+            "seed": 2203
+          }
+        ],
+        "relation": "NON_DOMINATED",
+        "spread_deltas": [
+          17.083333333333314,
+          0.0,
+          0.020819119321414892,
+          0.0
+        ],
+        "validation_seeds": [
+          2201,
+          2202,
+          2203
+        ],
+        "worst_deltas": [
+          -148.0,
+          0.00013142543816216487,
+          0.4334831495130129,
+          1.5
+        ]
+      },
+      "research": {
+        "all_finite": true,
+        "crest_spread_error": 0.22211591585479562,
+        "input_hashes": [
+          "8aea2e93f3a60fc53f38231702a4a6db4e2356b6a592bf40a8bc7dac3ad79a17",
+          "302e2147d58fb3a8adb7a47120a778a8a7a0fad0a9466582e9fa7515cd265d18",
+          "1019debeb43d50d93a89f3e3ca13399c8fc9e2df4873040fef1ba3f22e65c9c8"
+        ],
+        "mean_crest_error": 1.5798561029419917,
+        "mean_settling_ms": 337.8333333333333,
+        "mean_thd_ratio": 0.0002960506627258616,
+        "median_crest_error": 1.6529816231404046,
+        "median_settling_ms": 336.0,
+        "median_thd_ratio": 0.0002960506627258616,
+        "runs": 3,
+        "settling_spread_ms": 46.0,
+        "split": "RESEARCH",
+        "thd_spread_ratio": 0.0,
+        "worst_crest_error": 1.654351300770183,
+        "worst_settling_ms": 361.75,
+        "worst_thd_ratio": 0.0002960506627258616
+      },
+      "validation": {
+        "all_finite": true,
+        "crest_spread_error": 0.1396912508501842,
+        "input_hashes": [
+          "6d9a7533b105bb53ce1fcdd4558ccf08fb0daf6d6988a354ae3d5d803abe47f0",
+          "2961d73d740a7a318bfabe51983d43ffe67137d3b4a01d88a6f11b84991b4415",
+          "92c1133db083ce620d29af3f890723ed04f1e7d57cc8652ef5734895bdbcb9c3"
+        ],
+        "mean_crest_error": 1.586734177767467,
+        "mean_settling_ms": 344.05555555555554,
+        "mean_thd_ratio": 0.0002960506627258616,
+        "median_crest_error": 1.6300358284401448,
+        "median_settling_ms": 338.4166666666667,
+        "median_thd_ratio": 0.0002960506627258616,
+        "runs": 3,
+        "settling_spread_ms": 27.75,
+        "split": "VALIDATION",
+        "thd_spread_ratio": 0.0,
+        "worst_crest_error": 1.6349289778562204,
+        "worst_settling_ms": 360.75,
+        "worst_thd_ratio": 0.0002960506627258616
+      },
+      "version": "melon-scientific/0.3"
+    },
+    "species": "dual_stage"
+  }
+]

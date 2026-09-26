@@ -1,0 +1,164 @@
+{
+  "candidate_evaluations_requested_stage1": 10,
+  "candidates_evaluated_stage1": 8,
+  "candidates_generated_or_seen_stage1": 8,
+  "candidates_generated_stage1": 8,
+  "candidates_seen_stage1": 10,
+  "constraint_rejected": 0,
+  "constraint_rejection_rate": 0.0,
+  "deep_validation_count": 1,
+  "deep_validation_rate": 0.25,
+  "duplicate_rate": 0.0,
+  "duplicates_observed_stage1": 0,
+  "elapsed_seconds": 19.8279999999977,
+  "generation_best_objectives": [
+    [
+      347.3333333333333,
+      0.002588027111622797,
+      0.9970797857014448,
+      5.5
+    ],
+    [
+      347.3333333333333,
+      0.002588360460669866,
+      0.9970797857014448,
+      5.5
+    ]
+  ],
+  "generation_front_turnover": [
+    0.75
+  ],
+  "generation_hypervolume": [
+    0.3352932393510569,
+    0.3352930148547604
+  ],
+  "generation_improvement_events": 0,
+  "generation_improvement_rate": 0.0,
+  "holdout_count": 0,
+  "holdout_ledger_records": [],
+  "hypervolume_gain": -2.2449629655252323e-07,
+  "hypervolume_improvement_events": 0,
+  "hypervolume_improvement_rate": 0.0,
+  "hypervolume_reference": [
+    2000.0,
+    1.0,
+    2.0,
+    32.0
+  ],
+  "mean_front_turnover": 0.75,
+  "measurements_executed_stage1": 8,
+  "mutation_operator_yield": {
+    "CROSSOVER": {
+      "attempts": 1,
+      "constraint_rejected": 0,
+      "deep_entries": 0,
+      "pareto_entries": 0,
+      "semantic_duplicates": 0,
+      "stage2_entries": 0
+    },
+    "INITIAL_GENERATION": {
+      "attempts": 5,
+      "constraint_rejected": 0,
+      "deep_entries": 1,
+      "pareto_entries": 5,
+      "semantic_duplicates": 0,
+      "stage2_entries": 4
+    },
+    "TOPOLOGY_MUTATION": {
+      "attempts": 2,
+      "constraint_rejected": 0,
+      "deep_entries": 0,
+      "pareto_entries": 1,
+      "semantic_duplicates": 0,
+      "stage2_entries": 0
+    }
+  },
+  "new_semantic_candidate_rate": 0.8,
+  "overall_stage1_candidates_per_second": 0.40346984062945973,
+  "species_funnel": {
+    "crest_dependent": {
+      "adversarial_passed": 0,
+      "archive_survived": 1,
+      "deep_validated": 0,
+      "entered_stage2": 1,
+      "epsilon_survived": 1,
+      "generated_or_seen": 1,
+      "survived_stage1_pareto": 1
+    },
+    "dual_stage": {
+      "adversarial_passed": 1,
+      "archive_survived": 1,
+      "deep_validated": 1,
+      "entered_stage2": 1,
+      "epsilon_survived": 1,
+      "generated_or_seen": 1,
+      "survived_stage1_pareto": 1
+    },
+    "fixed": {
+      "adversarial_passed": 0,
+      "archive_survived": 1,
+      "deep_validated": 0,
+      "entered_stage2": 1,
+      "epsilon_survived": 1,
+      "generated_or_seen": 1,
+      "survived_stage1_pareto": 1
+    },
+    "gr_dependent": {
+      "adversarial_passed": 0,
+      "archive_survived": 1,
+      "deep_validated": 0,
+      "entered_stage2": 1,
+      "epsilon_survived": 1,
+      "generated_or_seen": 2,
+      "survived_stage1_pareto": 2
+    },
+    "hybrid": {
+      "adversarial_passed": 0,
+      "archive_survived": 0,
+      "deep_validated": 0,
+      "entered_stage2": 0,
+      "epsilon_survived": 0,
+      "generated_or_seen": 1,
+      "survived_stage1_pareto": 0
+    },
+    "memory_dependent": {
+      "adversarial_passed": 0,
+      "archive_survived": 0,
+      "deep_validated": 0,
+      "entered_stage2": 0,
+      "epsilon_survived": 0,
+      "generated_or_seen": 2,
+      "survived_stage1_pareto": 1
+    }
+  },
+  "species_survival_rate": 0.6666666666666666,
+  "stage1_cache_hits": 0,
+  "stage1_candidate_evaluations_per_second": 8.830022075064548,
+  "stage1_measurements_per_second": 8.830022075064548,
+  "stage1_pareto": 6,
+  "stage1_species_count": 6,
+  "stage1_unique_candidates_per_second": 8.830022075064548,
+  "stage2_archive": 4,
+  "stage2_archive_rate": 1.0,
+  "stage2_cache_hit_rate": 0.0,
+  "stage2_cache_hits": 0,
+  "stage2_candidates": 4,
+  "stage2_epsilon_compression_rate": 0.0,
+  "stage2_epsilon_density": 1.0,
+  "stage2_epsilon_front": 4,
+  "stage2_epsilon_method": "EPSILON_BOX_V1",
+  "stage2_epsilon_pareto": 3,
+  "stage2_epsilon_species_anchors": 1,
+  "stage2_epsilon_species_count": 4,
+  "stage2_epsilon_tolerance_pareto": 3,
+  "stage2_measurement_runs": 12,
+  "stage2_pareto": 4,
+  "stage2_pareto_density": 1.0,
+  "stage2_pareto_species_count": 4,
+  "stage2_species_count": 4,
+  "stage2_survival_rate": 1.0,
+  "survivor_reuse_count": 2,
+  "survivor_reuse_rate": 0.2,
+  "unique_semantic_candidates_stage1": 8,
+  "workers": 1
+}

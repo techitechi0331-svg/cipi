@@ -1,0 +1,73 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36249840949
+run_attempt: 1
+artifact_id: 10908732756
+artifact_name: melon-research-36249840949
+expired: false
+size_in_bytes: 24145
+created_at: '2026-09-26T14:50:37Z'
+expires_at: '2026-10-26T14:50:34Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-687de5c61895/artifact_manifest.json
+  status: ingested
+  size: 1426
+  sha256: e891e88f0eb01117f2b9bc2c5a0f81fe4968eed82b19fe35edb4ce560dddf9f7
+- path: melon-funnel-687de5c61895/budget_recommendation.json
+  status: ingested
+  size: 344
+  sha256: e0ec172808051de3af32791867b22683878dfd38d20dfe7ab9e14c3830e5e07b
+- path: melon-funnel-687de5c61895/candidates/melon-dynamic_gain_release_v1-669cf4e4e7eb557e6b5b.json
+  status: ingested
+  size: 3891
+  sha256: 45c3897cf251231c8e3ad76b235948a1a7c65f50d611787832c2b7529b3cd36e
+- path: melon-funnel-687de5c61895/candidates/melon-dynamic_gain_release_v1-752068c56d948c1801e7.json
+  status: ingested
+  size: 4023
+  sha256: a1e45ed8fc9fb095090f40b353ff7cd6c992fec2422369100123c3773bad0fcb
+- path: melon-funnel-687de5c61895/candidates/melon-dynamic_gain_release_v1-85537708d0959e205ad4.json
+  status: ingested
+  size: 4647
+  sha256: 6586883db97883f292d8247f0346339992f25baaa451fb6c5e26725a209fb77c
+- path: melon-funnel-687de5c61895/candidates/melon-dynamic_gain_release_v1-c6c3ede90983693ea834.json
+  status: ingested
+  size: 4002
+  sha256: 1796b3f902f24269b8e334a9b0f25e1208004239c7dee98934a0fc19050da424
+- path: melon-funnel-687de5c61895/efficiency_metrics.json
+  status: ingested
+  size: 4380
+  sha256: bc5659d99cf7fef5ac934013b9d65881ecc8665aea10aa8fd11de48f0d090f64
+- path: melon-funnel-687de5c61895/macro_result.json
+  status: ingested
+  size: 11757
+  sha256: f890df524ad910afbf449af672af76e4e9d91b81b30d364a917519600ac742ce
+- path: melon-funnel-687de5c61895/precision_review.json
+  status: ingested
+  size: 1221
+  sha256: f785019c3ea9282f5f09c4cec275445a9964633e9b696290ca1fdef73c8fb0e4
+- path: melon-funnel-687de5c61895/stage1_screening.json
+  status: ingested
+  size: 15656
+  sha256: 2e70fbb5dc756782ba061b57e68ca2dfde208807a23119e3364bc97f2f2329f6
+- path: melon-funnel-687de5c61895/manifest.json
+  status: ingested
+  size: 2731
+  sha256: d9ce721f57430b522219c0518838d47920eed02aa690de89d531c5543f00aeb0
+- path: melon-funnel-687de5c61895/stage3_deep_validation.json
+  status: ingested
+  size: 14357
+  sha256: 277e3a3ed394eb0c47c8b1ea671a224db5f9b84970686ca8ba17175e7484d60b
+- path: melon-funnel-687de5c61895/summary.json
+  status: ingested
+  size: 7185
+  sha256: e5ca37c6db14c40eda1b7d16706770ba4974285edd6a9600518be34b4b122fd3
+- path: melon-funnel-687de5c61895/stage2_multiseed.json
+  status: ingested
+  size: 15033
+  sha256: 9eae4d957fba60b94a2d9498eebca7ed6ed7931e3c80b183415eac69c919aab0
+archive_sha256: c9dcfb2469e8aca3828ab9f5dbaff04d4f5af7a8064d9673dad24b5cce267c34
+ingest_status: text_evidence_ingested

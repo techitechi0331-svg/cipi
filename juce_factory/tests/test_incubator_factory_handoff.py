@@ -116,6 +116,13 @@ class IncubatorFactoryHandoffTests(unittest.TestCase):
             self.assertFalse(receipt["product_release_authority"])
             self.assertFalse(receipt["cubase_confirmed"])
             self.assertFalse(receipt["listening_confirmed"])
+            for key in (
+                "source_proposal_sha256",
+                "source_incubate_decision_sha256",
+                "source_product_evidence_sha256",
+                "source_manufacturing_review_sha256",
+            ):
+                self.assertEqual(len(receipt[key]), 64)
 
             out = write_candidate(contract, receipt, root / "out")
             self.assertTrue((out / "plugin_contract_candidate.json").exists())
@@ -196,6 +203,18 @@ class IncubatorFactoryHandoffTests(unittest.TestCase):
                 build_contract_candidate(
                     paths["proposal"], paths["decision"], paths["evidence"], paths["review"], root=root
                 )
+
+
+    def test_source_hash_tamper_is_rejected_even_with_fresh_receipt_hash(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _, _, receipt = self._build(root)
+            receipt["source_product_evidence_sha256"] = "0" * 64
+            receipt["receipt_hash"] = _receipt_hash(receipt)
+            validate_receipt(receipt)
+            self.assertEqual(receipt["source_product_evidence_sha256"], "0" * 64)
+            # Receipt remains internally valid, but a consumer can now compare the pinned hash
+            # against the source file and detect later source mutation without trusting the path alone.
 
     def test_receipt_semantic_tamper_is_rejected_even_with_fresh_hash(self):
         with tempfile.TemporaryDirectory() as td:

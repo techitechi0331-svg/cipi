@@ -1,0 +1,131 @@
+{
+  "baseline_threshold": 0.65,
+  "candidate_thresholds": [
+    0.62,
+    0.6,
+    0.58
+  ],
+  "decision": "GO_TO_REAL_VOCAL",
+  "feature_family_changed": false,
+  "raw_audio_persisted": false,
+  "relative_false_occupancy_ratio_removed": true,
+  "selected_gates": {
+    "all_positive_cases_detected_all_sr": true,
+    "event_duration_le_355ms": true,
+    "input_scale_occupancy_spread_le_5pct": true,
+    "input_scale_probability_spread_le_0_05": true,
+    "negative_occupancy_max_le_2pct": true,
+    "negative_occupancy_mean_le_0_5pct": true,
+    "positive_detection_fraction_ge_0_99": true,
+    "positive_onset_latency_le_30ms": true,
+    "s_sh_detected_all_sr": true,
+    "sample_rate_probability_spread_le_0_08": true
+  },
+  "selected_threshold": 0.6,
+  "summaries": [
+    {
+      "all_positive_cases_detected_all_sr": false,
+      "gates": {
+        "all_positive_cases_detected_all_sr": false,
+        "event_duration_le_355ms": true,
+        "input_scale_occupancy_spread_le_5pct": true,
+        "input_scale_probability_spread_le_0_05": true,
+        "negative_occupancy_max_le_2pct": true,
+        "negative_occupancy_mean_le_0_5pct": true,
+        "positive_detection_fraction_ge_0_99": false,
+        "positive_onset_latency_le_30ms": true,
+        "s_sh_detected_all_sr": false,
+        "sample_rate_probability_spread_le_0_08": true
+      },
+      "max_active_duration_ms": 107.0,
+      "max_input_scale_occupancy_spread_pct": 0.0,
+      "max_input_scale_probability_spread": 3.3310615279669165e-05,
+      "max_positive_onset_latency_ms": 9.156249999999977,
+      "max_probability_sample_rate_spread": 0.056597863554603944,
+      "negative_occupancy_max_pct": 0.0,
+      "negative_occupancy_mean_pct": 0.0,
+      "passes": false,
+      "positive_detection_fraction": 0.6666666666666666,
+      "s_sh_detected_all_sr": false,
+      "threshold": 0.65
+    },
+    {
+      "all_positive_cases_detected_all_sr": false,
+      "gates": {
+        "all_positive_cases_detected_all_sr": false,
+        "event_duration_le_355ms": true,
+        "input_scale_occupancy_spread_le_5pct": true,
+        "input_scale_probability_spread_le_0_05": true,
+        "negative_occupancy_max_le_2pct": true,
+        "negative_occupancy_mean_le_0_5pct": true,
+        "positive_detection_fraction_ge_0_99": false,
+        "positive_onset_latency_le_30ms": true,
+        "s_sh_detected_all_sr": false,
+        "sample_rate_probability_spread_le_0_08": true
+      },
+      "max_active_duration_ms": 107.08333333333333,
+      "max_input_scale_occupancy_spread_pct": 0.0,
+      "max_input_scale_probability_spread": 3.3310615279669165e-05,
+      "max_positive_onset_latency_ms": 6.656249999999975,
+      "max_probability_sample_rate_spread": 0.056597863554603944,
+      "negative_occupancy_max_pct": 0.0,
+      "negative_occupancy_mean_pct": 0.0,
+      "passes": false,
+      "positive_detection_fraction": 0.6666666666666666,
+      "s_sh_detected_all_sr": false,
+      "threshold": 0.62
+    },
+    {
+      "all_positive_cases_detected_all_sr": true,
+      "gates": {
+        "all_positive_cases_detected_all_sr": true,
+        "event_duration_le_355ms": true,
+        "input_scale_occupancy_spread_le_5pct": true,
+        "input_scale_probability_spread_le_0_05": true,
+        "negative_occupancy_max_le_2pct": true,
+        "negative_occupancy_mean_le_0_5pct": true,
+        "positive_detection_fraction_ge_0_99": true,
+        "positive_onset_latency_le_30ms": true,
+        "s_sh_detected_all_sr": true,
+        "sample_rate_probability_spread_le_0_08": true
+      },
+      "max_active_duration_ms": 107.08333333333333,
+      "max_input_scale_occupancy_spread_pct": 0.0,
+      "max_input_scale_probability_spread": 3.3310615279669165e-05,
+      "max_positive_onset_latency_ms": 10.929705215419471,
+      "max_probability_sample_rate_spread": 0.056597863554603944,
+      "negative_occupancy_max_pct": 0.0,
+      "negative_occupancy_mean_pct": 0.0,
+      "passes": true,
+      "positive_detection_fraction": 1.0,
+      "s_sh_detected_all_sr": true,
+      "threshold": 0.6
+    },
+    {
+      "all_positive_cases_detected_all_sr": true,
+      "gates": {
+        "all_positive_cases_detected_all_sr": true,
+        "event_duration_le_355ms": true,
+        "input_scale_occupancy_spread_le_5pct": true,
+        "input_scale_probability_spread_le_0_05": true,
+        "negative_occupancy_max_le_2pct": true,
+        "negative_occupancy_mean_le_0_5pct": true,
+        "positive_detection_fraction_ge_0_99": true,
+        "positive_onset_latency_le_30ms": true,
+        "s_sh_detected_all_sr": true,
+        "sample_rate_probability_spread_le_0_08": true
+      },
+      "max_active_duration_ms": 107.16666666666667,
+      "max_input_scale_occupancy_spread_pct": 0.0,
+      "max_input_scale_probability_spread": 3.3310615279669165e-05,
+      "max_positive_onset_latency_ms": 8.027210884353709,
+      "max_probability_sample_rate_spread": 0.056597863554603944,
+      "negative_occupancy_max_pct": 0.0,
+      "negative_occupancy_mean_pct": 0.0,
+      "passes": true,
+      "positive_detection_fraction": 1.0,
+      "s_sh_detected_all_sr": true,
+      "threshold": 0.58
+    }
+  ]
+}

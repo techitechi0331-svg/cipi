@@ -1,0 +1,24 @@
+{
+  "baseline": [
+    "Current v2.3 feature family with activation 0.65, release 0.45 and 350 ms cap."
+  ],
+  "experiment_adapter": "voprep_sibilance_threshold_r2_v1",
+  "job_file": "research/jobs/queued/VO-PREP-SIBILANCE-THRESHOLD-R2-001.yaml",
+  "metrics": [
+    "positive_detection_fraction",
+    "all_positive_cases_detected_all_sr",
+    "s_sh_detected_all_sr",
+    "max_positive_onset_latency_ms",
+    "negative_occupancy_mean_pct",
+    "negative_occupancy_max_pct",
+    "max_probability_sample_rate_spread",
+    "max_active_duration_ms",
+    "max_input_scale_probability_spread",
+    "max_input_scale_occupancy_spread_pct"
+  ],
+  "variants": [
+    "Same frozen feature family, activation 0.62, release 0.45, 350 ms cap.",
+    "Same frozen feature family, activation 0.60, release 0.45, 350 ms cap.",
+    "Same frozen feature family, activation 0.58, release 0.45, 350 ms cap."
+  ]
+}

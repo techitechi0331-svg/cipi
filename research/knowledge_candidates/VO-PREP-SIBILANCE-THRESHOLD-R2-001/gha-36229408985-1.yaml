@@ -1,0 +1,8 @@
+claim: A small activation-threshold calibration may remove sample-rate decision flips
+  in the Vo.Prep contextual sibilance detector without giving back its negative-case
+  safety margin.
+evidence_type: HYPOTHESIS
+scope: Vo.Prep Sibilance Guard v2.3 deterministic R2 calibration only; real-vocal
+  multilingual/listening validation remains required.
+source_run: research/runs/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1
+promotion_requested: HYPOTHESIS

@@ -1,0 +1,151 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:review-brief-v1
+job_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001
+run_id: gha-36229408985-1
+source_run: research/runs/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-triage.yaml
+triage_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:triage-v1
+job_path: research/jobs/completed/VO-PREP-SIBILANCE-THRESHOLD-R2-001.yaml
+research_question: Can a small activation-threshold calibration make the frozen Vo.Prep
+  v2.3 contextual sibilance detector decision-consistent for S/SH/CH/T across 44.1/48/96
+  kHz while retaining the measured near-zero negative occupancy?
+hypothesis: The highest passing threshold in the predeclared 0.62/0.60/0.58 family
+  will detect S/SH/CH/T at every tested sample rate while preserving near-zero occupancy
+  on bright-vowel, air, breath, falsetto, female-upper and distorted-vocal negatives.
+counter_hypotheses:
+- The observed 44.1/48 kHz SH/CH misses require a feature/filter correction rather
+  than activation calibration.
+- Lowering activation enough to make SH/CH decision-consistent produces breath or
+  bright-vocal false events.
+- A passing threshold has unacceptable input-scale or sample-rate sensitivity.
+acceptance_criteria:
+- Select the highest activation threshold that passes every gate.
+- S/SH/CH/T are all detected at every tested sample rate.
+- Positive detection fraction is >= 0.99.
+- Worst positive first-onset latency is <= 30 ms.
+- Mean negative occupancy is <= 0.5% and worst negative occupancy is <= 2%.
+- Maximum event duration is <= 355 ms.
+- Maximum probability spread across 44.1/48/96 kHz is <= 0.08.
+- Across -12/0/+12 dB scaling, maximum probability spread is <= 0.05 and occupancy
+  spread <= 5 percentage points.
+rejection_criteria:
+- No candidate in 0.62/0.60/0.58 passes every gate.
+- Passing requires changing the feature family, release/cap, or relaxing a predeclared
+  gate.
+- Raw audio is persisted or product DSP is mutated.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 80ad02fafd0c9880de02327b0b49b024035dc7e7
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: baseline_threshold
+  value: 0.65
+- path: candidate_thresholds[0]
+  value: 0.62
+- path: candidate_thresholds[1]
+  value: 0.6
+- path: candidate_thresholds[2]
+  value: 0.58
+- path: decision
+  value: GO_TO_REAL_VOCAL
+- path: feature_family_changed
+  value: false
+- path: raw_audio_persisted
+  value: false
+- path: relative_false_occupancy_ratio_removed
+  value: true
+- path: selected_gates.all_positive_cases_detected_all_sr
+  value: true
+- path: selected_gates.event_duration_le_355ms
+  value: true
+- path: selected_gates.input_scale_occupancy_spread_le_5pct
+  value: true
+- path: selected_gates.input_scale_probability_spread_le_0_05
+  value: true
+- path: selected_gates.negative_occupancy_max_le_2pct
+  value: true
+- path: selected_gates.negative_occupancy_mean_le_0_5pct
+  value: true
+- path: selected_gates.positive_detection_fraction_ge_0_99
+  value: true
+- path: selected_gates.positive_onset_latency_le_30ms
+  value: true
+- path: selected_gates.s_sh_detected_all_sr
+  value: true
+- path: selected_gates.sample_rate_probability_spread_le_0_08
+  value: true
+- path: selected_threshold
+  value: 0.6
+- path: summaries[0].all_positive_cases_detected_all_sr
+  value: false
+- path: summaries[0].gates.all_positive_cases_detected_all_sr
+  value: false
+- path: summaries[0].gates.event_duration_le_355ms
+  value: true
+- path: summaries[0].gates.input_scale_occupancy_spread_le_5pct
+  value: true
+- path: summaries[0].gates.input_scale_probability_spread_le_0_05
+  value: true
+- path: summaries[0].gates.negative_occupancy_max_le_2pct
+  value: true
+- path: summaries[0].gates.negative_occupancy_mean_le_0_5pct
+  value: true
+- path: summaries[0].gates.positive_detection_fraction_ge_0_99
+  value: false
+- path: summaries[0].gates.positive_onset_latency_le_30ms
+  value: true
+- path: summaries[0].gates.s_sh_detected_all_sr
+  value: false
+- path: summaries[0].gates.sample_rate_probability_spread_le_0_08
+  value: true
+- path: summaries[0].max_active_duration_ms
+  value: 107.0
+- path: summaries[0].max_input_scale_occupancy_spread_pct
+  value: 0.0
+knowledge_candidate:
+  claim: A small activation-threshold calibration may remove sample-rate decision
+    flips in the Vo.Prep contextual sibilance detector without giving back its negative-case
+    safety margin.
+  evidence_type: HYPOTHESIS
+  scope: Vo.Prep Sibilance Guard v2.3 deterministic R2 calibration only; real-vocal
+    multilingual/listening validation remains required.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Integrated level-matched listening is still required before final Macro/Phrase product
+  lock.
+- Cross-module interaction needs broader real-vocal validation.
+- Cubase Pro 14 release-candidate validation is pending.
+- Human level-matched listening is required for final naturalness sign-off.
+- Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

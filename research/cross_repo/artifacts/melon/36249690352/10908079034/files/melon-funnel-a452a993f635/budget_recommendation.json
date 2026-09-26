@@ -1,0 +1,17 @@
+{
+  "action": "CONSIDER_SCALE_UP_32X6",
+  "automatic_execution": false,
+  "current_profile": {
+    "generations": 2,
+    "max_candidates": 10,
+    "population": 5
+  },
+  "reasons": [
+    "multiobjective hypervolume is still improving with healthy novelty and species survival"
+  ],
+  "suggested_next_profile": {
+    "generations": 6,
+    "max_candidates": 192,
+    "population": 32
+  }
+}

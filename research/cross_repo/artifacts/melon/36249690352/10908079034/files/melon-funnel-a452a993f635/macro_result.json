@@ -1,0 +1,352 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "9b89a0113806ae46744b6397a6bf05067a2f81cc05ae59fb1940a8a5b4da85ed",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "MELON-FUNNEL-669A18D59747-ITERATE-1"
+      ],
+      "estimated_cost": {
+        "candidates": 10,
+        "runtime_seconds": 120
+      },
+      "expected_information_gain": 0.55,
+      "experiment_type": "REPLICATION",
+      "fingerprint_material": {
+        "architecture": "MELON_DYNAMIC_GAIN_DISCOVERY",
+        "benchmark_profile": [
+          "high_fidelity_v1",
+          "release_scientific_v1",
+          "screening_v1"
+        ],
+        "experiment_type": "REPLICATION",
+        "hypothesis": "Test whether the current-scope rejections reproduce under an independent seed before closing the hypothesis.",
+        "input_set": "MELON_SYNTHETIC_VALIDATION_SET",
+        "objective_set": [
+          "settling",
+          "thd",
+          "crest_error",
+          "complexity"
+        ],
+        "reference_model": "MATCHED_FIXED_RELEASE_BASELINE",
+        "relevant_constraints": [
+          "numerical_stability",
+          "latency_consistency",
+          "adversarial_safety"
+        ],
+        "sample_rate": null,
+        "scope": [
+          "falsification",
+          "rejection_reproduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 10,
+          "max_runtime_seconds": 120,
+          "population": 5,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Test whether the current-scope rejections reproduce under an independent seed before closing the hypothesis.",
+      "id": "melon-funnel-a452a993f635-replication-1",
+      "novelty": 0.8,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 10,
+          "max_runtime_seconds": 120,
+          "population": 5,
+          "preflight_mode": "fast",
+          "seed": 2026092703,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "falsification",
+          "rejection_reproduction"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "adversarial gate failed"
+    }
+  ],
+  "efficiency_metrics": {
+    "candidate_evaluations_requested_stage1": 10,
+    "candidates_evaluated_stage1": 8,
+    "candidates_generated_or_seen_stage1": 8,
+    "candidates_generated_stage1": 8,
+    "candidates_seen_stage1": 10,
+    "constraint_rejected": 0,
+    "constraint_rejection_rate": 0.0,
+    "deep_validation_count": 1,
+    "deep_validation_rate": 0.25,
+    "duplicate_rate": 0.0,
+    "duplicates_observed_stage1": 0,
+    "elapsed_seconds": 27.889999999999418,
+    "generation_best_objectives": [
+      [
+        407.5833333333333,
+        0.0025904858870857018,
+        1.005921297163034,
+        5.5
+      ],
+      [
+        417.5833333333333,
+        0.0025889806586551376,
+        0.9912084694052787,
+        5.5
+      ]
+    ],
+    "generation_front_turnover": [
+      0.8333333333333334
+    ],
+    "generation_hypervolume": [
+      0.32488110309254137,
+      0.3296339594132456
+    ],
+    "generation_improvement_events": 1,
+    "generation_improvement_rate": 1.0,
+    "holdout_count": 0,
+    "holdout_ledger_records": [],
+    "hypervolume_gain": 0.004752856320704213,
+    "hypervolume_improvement_events": 1,
+    "hypervolume_improvement_rate": 1.0,
+    "hypervolume_reference": [
+      2000.0,
+      1.0,
+      2.0,
+      32.0
+    ],
+    "mean_front_turnover": 0.8333333333333334,
+    "measurements_executed_stage1": 8,
+    "mutation_operator_yield": {
+      "CONTROL_MUTATION": {
+        "attempts": 1,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 0,
+        "semantic_duplicates": 0,
+        "stage2_entries": 0
+      },
+      "CROSSOVER": {
+        "attempts": 1,
+        "constraint_rejected": 0,
+        "deep_entries": 1,
+        "pareto_entries": 1,
+        "semantic_duplicates": 0,
+        "stage2_entries": 1
+      },
+      "INITIAL_GENERATION": {
+        "attempts": 5,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 3,
+        "semantic_duplicates": 0,
+        "stage2_entries": 2
+      },
+      "TOPOLOGY_MUTATION": {
+        "attempts": 1,
+        "constraint_rejected": 0,
+        "deep_entries": 0,
+        "pareto_entries": 1,
+        "semantic_duplicates": 0,
+        "stage2_entries": 1
+      }
+    },
+    "new_semantic_candidate_rate": 0.8,
+    "overall_stage1_candidates_per_second": 0.2868411617067109,
+    "species_funnel": {
+      "crest_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "dual_stage": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 2,
+        "survived_stage1_pareto": 0
+      },
+      "fixed": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 2,
+        "survived_stage1_pareto": 2
+      },
+      "gr_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 0,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "hybrid": {
+        "adversarial_passed": 0,
+        "archive_survived": 1,
+        "deep_validated": 1,
+        "entered_stage2": 1,
+        "epsilon_survived": 1,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 1
+      },
+      "memory_dependent": {
+        "adversarial_passed": 0,
+        "archive_survived": 0,
+        "deep_validated": 0,
+        "entered_stage2": 0,
+        "epsilon_survived": 0,
+        "generated_or_seen": 1,
+        "survived_stage1_pareto": 0
+      }
+    },
+    "species_survival_rate": 0.6666666666666666,
+    "stage1_cache_hits": 0,
+    "stage1_candidate_evaluations_per_second": 8.830022075064548,
+    "stage1_measurements_per_second": 8.830022075064548,
+    "stage1_pareto": 5,
+    "stage1_species_count": 6,
+    "stage1_unique_candidates_per_second": 8.830022075064548,
+    "stage2_archive": 4,
+    "stage2_archive_rate": 1.0,
+    "stage2_cache_hit_rate": 0.0,
+    "stage2_cache_hits": 0,
+    "stage2_candidates": 4,
+    "stage2_epsilon_compression_rate": 0.0,
+    "stage2_epsilon_density": 1.0,
+    "stage2_epsilon_front": 4,
+    "stage2_epsilon_method": "EPSILON_BOX_V1",
+    "stage2_epsilon_pareto": 4,
+    "stage2_epsilon_species_anchors": 0,
+    "stage2_epsilon_species_count": 4,
+    "stage2_epsilon_tolerance_pareto": 4,
+    "stage2_measurement_runs": 12,
+    "stage2_pareto": 4,
+    "stage2_pareto_density": 1.0,
+    "stage2_pareto_species_count": 4,
+    "stage2_species_count": 4,
+    "stage2_survival_rate": 1.0,
+    "survivor_reuse_count": 2,
+    "survivor_reuse_rate": 0.2,
+    "unique_semantic_candidates_stage1": 8,
+    "workers": 1
+  },
+  "elapsed_seconds": 27.889999999999418,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 8,
+    "deep_validation_count": 1,
+    "runtime_seconds": 27.889999999999418,
+    "stage2_measurement_runs": 12
+  },
+  "experiment_id": "MELON-FUNNEL-669A18D59747-ITERATE-1",
+  "hypothesis_id": "HYP-MELON-BRIDGE-CLEAN-PROOF-002",
+  "job_id": "MELON-BRIDGE-CLEAN-PROOF-002-R2-D09DA9AE",
+  "loop_depth": 2,
+  "measured_candidates": 8,
+  "novelty": 0.8,
+  "parent_job_id": "MELON-BRIDGE-CLEAN-PROOF-002-R1-8604F281",
+  "parent_run_id": "melon-funnel-669a18d59747",
+  "precision_review": {
+    "automatic_final_decision": false,
+    "checks": {
+      "ablation_multiseed": true,
+      "authority_bounded": true,
+      "baseline_multiseed": true,
+      "blind_holdout_explicit_only": true,
+      "budget_semantics_valid": true,
+      "cache_accounting_present": true,
+      "cache_provenance_present": true,
+      "deep_validation_scientific": true,
+      "duplicates_retained": true,
+      "epsilon_relation_valid": true,
+      "full_validation_commit_known": true,
+      "high_fidelity_before_cipi": true,
+      "holdout_not_leaked": true,
+      "holdout_not_reused": true,
+      "negative_evidence_retained": true,
+      "scale_metric_multiobjective": true,
+      "species_diversity_measured": true,
+      "stage1_selection_evidence_present": true,
+      "stage1_uses_cheap_screening": true,
+      "stage2_archive_bounded": true,
+      "stage2_epsilon_accounted": true,
+      "stage2_epsilon_species_preserved": true,
+      "stage2_is_multiseed": true,
+      "stage2_keeps_multiobjective_data": true,
+      "survivor_reuse_separated": true,
+      "trigger_matches_effective_config": true
+    },
+    "cipi_promotion_authority": false,
+    "conclusion": "PASS_WITH_OPEN_RESEARCH_GATES",
+    "passed": true,
+    "product_release_authority": false,
+    "schema_version": "1.0"
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "MELON-BRIDGE-CLEAN-PROOF-002",
+  "research_question": "Can the repaired CIPI-MELON Autonomous Research Bridge complete a fresh three-run macro lineage without manual continuation triggers, duplicate dispatch, authority escalation, blind-holdout use, or product integration?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 1.0,
+    "precision_review_passed": true,
+    "routes": {
+      "REJECTED_CURRENT_SCOPE": 1
+    },
+    "stage1_pareto": 5,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "MELON-BRIDGE-CLEAN-PROOF-002",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-a452a993f635",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "62780b13a21cdcbe49d668e47929fee56c12f755",
+  "stop_reason": "MAX_GENERATIONS",
+  "timestamp": "2026-09-26T14:48:03.874845+00:00",
+  "track_id": "MELON-BRIDGE-CLEAN-PROOF-002",
+  "unresolved_questions": [
+    {
+      "id": "melon-dynamic_gain_release_v1-e6652a0bc1021c53aff0",
+      "kind": "REJECTED_CURRENT_SCOPE",
+      "reason": "adversarial gate failed"
+    }
+  ]
+}

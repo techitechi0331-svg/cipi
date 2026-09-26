@@ -1,0 +1,137 @@
+schema_version: '1.0'
+job_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001
+state: COMPLETED
+priority: 92
+depends_on_jobs:
+- VOPRIPRO-VOPREP-INTEGRATION-002
+track:
+  id: VOPRIPRO_FORMAL
+  path: research/plugins/vopripro
+research_question: Is the failed v2 plosive post-event interaction primarily attributable
+  to Macro Level rather than Plosive Guard itself, while Plosive-only processing remains
+  localized and near-neutral to downstream VoPriPro Natural50 gain reduction?
+hypothesis: On the source-derived plosive positive control, Plosive-only processing
+  will audibly-relevantly attenuate the event while keeping VoPriPro event/post-event
+  GR nearly unchanged, whereas Macro-only processing will account for most of the
+  v2 combined post-event GR shift.
+counter_hypotheses:
+- Plosive Guard itself causes the material post-event VoPriPro GR shift.
+- Plosive Guard materially changes VoPriPro event peak GR despite the 80 Hz sidechain
+  HPF.
+- Macro Level does not account for most of the combined post-event shift.
+- Plosive and Macro interact non-additively enough that simple module attribution
+  is invalid.
+- The decomposition is materially sample-rate dependent.
+baseline:
+- dry_into_vopripro_natural50
+variants:
+- plosive_only_into_vopripro_natural50
+- macro_only_into_vopripro_natural50
+- plosive_macro_into_vopripro_natural50
+metrics:
+- all_finite
+- plosive_only_min_probability
+- plosive_only_min_reduction_db
+- plosive_only_min_event_audio_rms_attenuation_db
+- plosive_only_max_abs_event_vopripro_peak_gr_change_db
+- plosive_only_max_abs_post_event_vopripro_mean_gr_delta_db
+- plosive_only_max_abs_pre_event_audio_rms_delta_db
+- macro_only_min_abs_post_event_vopripro_mean_gr_delta_db
+- macro_only_min_abs_macro_gain_db
+- plosive_macro_min_macro_residual_fraction
+- plosive_macro_max_additive_residual_db
+- plosive_macro_post_event_shift_sr_spread_db
+acceptance:
+- All generated samples and VoPriPro gain-reduction trajectories are finite.
+- Plosive-only positive-control probability reaches at least 0.80 at every tested
+  sample rate.
+- Plosive-only reduction reaches at least 0.50 dB at every tested sample rate.
+- Plosive-only event RMS attenuation is at least 0.25 dB at every tested sample rate.
+- Plosive-only absolute VoPriPro event peak-GR change is no more than 0.10 dB.
+- Plosive-only absolute post-event VoPriPro mean-GR shift is no more than 0.15 dB.
+- Plosive-only pre-event audio RMS movement is no more than 0.10 dB.
+- Macro-only absolute post-event VoPriPro mean-GR shift is at least 0.25 dB.
+- Macro-only maximum gain movement reaches at least 0.50 dB.
+- Macro-only shift accounts for at least 75 percent of the Plosive+Macro post-event
+  shift magnitude.
+- The residual from additive Plosive plus Macro attribution is no more than 0.10 dB.
+- Plosive+Macro post-event shift spread across 44.1/48/88.2/96 kHz is no more than
+  0.05 dB.
+rejection:
+- Any localization, attribution, finite-state, or sample-rate gate fails.
+max_runs: 1
+timeout_minutes: 8
+random_seed: 20260926
+reproduction_conditions:
+  cipi_baseline: ba2ecf6ab20a9eaa0bad1889acc497b4253f39bd
+  voprep_repository: techitechi0331-svg/Vo.Prep
+  voprep_commit: ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6
+  vopripro_repository: techitechi0331-svg/VocalPrepComp
+  vopripro_commit: 58049696815fcc24067870edd6a1b89c3cfd2163
+  source_case: Vo.Prep Tests/PlosiveGuardTests.cpp scenario 0 positive control.
+  variants:
+    dry: Plosive 0%, Level 0%, Sibilance 0%.
+    plosive_only: Plosive 50%, Level 0%, Sibilance 0%.
+    macro_only: Plosive 0%, Level 50%, Sibilance 0%.
+    plosive_macro: Plosive 50%, Level 50%, Sibilance 0%.
+  vopripro_settings: Amount 50%, Character 50%, Input 0 dB, Output 0 dB.
+  sample_rates_hz:
+  - 44100
+  - 48000
+  - 88200
+  - 96000
+  execution_mode: deterministic_source_code_translation_module_decomposition
+  network_required: false
+  raw_audio_required: false
+experiment_adapter: vopripro_voprep_plosive_decomposition_v1
+allowed_operations:
+- deterministic_synthetic_generation
+- source_positive_control_replay
+- module_isolation
+- gain_reduction_measurement
+- csv_json_markdown_output
+prohibited_operations:
+- arbitrary_shell
+- network_write
+- raw_audio_persist
+- product_repo_write
+- main_push
+- confidence_change
+- current_stage_change
+- product_release
+knowledge_candidate:
+  claim: The v2 plosive recovery failure may be attributed primarily to Macro Level
+    only if Plosive-only remains localized and near-neutral to VoPriPro while Macro-only
+    explains most of the combined post-event shift.
+  evidence_type: HYPOTHESIS
+  scope: Source-derived synthetic plosive positive-control module decomposition only.
+  promotion_requested: HYPOTHESIS
+rejection_record:
+  reason: If the decomposition gates fail, preserve the exact module contributions
+    and do not infer a Macro confounder or change product thresholds.
+  retained_findings:
+  - Preserve Plosive-only event attenuation and downstream VoPriPro GR movement.
+  - Preserve Macro-only gain movement and post-event VoPriPro GR shift.
+  - Preserve combined path and additive-residual measurements by sample rate.
+  reusable_findings:
+  - Cross-stage interaction failures should be decomposed by module before changing
+    product boundaries.
+  - A problem-event processor may be complementary even when it does not materially
+    reduce a downstream detector already protected against that event class.
+  revisit_if:
+  - Actual VST3 measurements materially disagree with source-code translation.
+  - Vo.Prep Macro or Plosive DSP changes materially.
+  - VoPriPro sidechain/detector behavior changes materially.
+  scope: Vo.Prep Plosive/Macro decomposition feeding VoPriPro Natural50.
+review_policy:
+  required_human_gates:
+  - Actual real-vocal listening remains mandatory before perceptual product claims.
+  - Actual VST3/Cubase validation remains mandatory before release guidance.
+lineage:
+  supersedes: []
+  related_jobs:
+  - VOPRIPRO-VOPREP-INTEGRATION-001
+  - VOPRIPRO-VOPREP-INTEGRATION-002
+  related_decisions:
+  - VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926
+latest_run: gha-36229620093-1

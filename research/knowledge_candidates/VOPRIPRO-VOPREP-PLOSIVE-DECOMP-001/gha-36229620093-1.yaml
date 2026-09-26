@@ -1,0 +1,7 @@
+claim: The v2 plosive recovery failure may be attributed primarily to Macro Level
+  only if Plosive-only remains localized and near-neutral to VoPriPro while Macro-only
+  explains most of the combined post-event shift.
+evidence_type: HYPOTHESIS
+scope: Source-derived synthetic plosive positive-control module decomposition only.
+source_run: research/runs/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1
+promotion_requested: HYPOTHESIS

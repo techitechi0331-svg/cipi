@@ -1,0 +1,26 @@
+{
+  "baseline": [
+    "dry_into_vopripro_natural50"
+  ],
+  "experiment_adapter": "vopripro_voprep_plosive_decomposition_v1",
+  "job_file": "research/jobs/queued/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001.yaml",
+  "metrics": [
+    "all_finite",
+    "plosive_only_min_probability",
+    "plosive_only_min_reduction_db",
+    "plosive_only_min_event_audio_rms_attenuation_db",
+    "plosive_only_max_abs_event_vopripro_peak_gr_change_db",
+    "plosive_only_max_abs_post_event_vopripro_mean_gr_delta_db",
+    "plosive_only_max_abs_pre_event_audio_rms_delta_db",
+    "macro_only_min_abs_post_event_vopripro_mean_gr_delta_db",
+    "macro_only_min_abs_macro_gain_db",
+    "plosive_macro_min_macro_residual_fraction",
+    "plosive_macro_max_additive_residual_db",
+    "plosive_macro_post_event_shift_sr_spread_db"
+  ],
+  "variants": [
+    "plosive_only_into_vopripro_natural50",
+    "macro_only_into_vopripro_natural50",
+    "plosive_macro_into_vopripro_natural50"
+  ]
+}

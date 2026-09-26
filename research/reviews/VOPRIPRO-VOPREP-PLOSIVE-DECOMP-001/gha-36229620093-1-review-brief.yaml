@@ -1,0 +1,167 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:review-brief-v1
+job_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001
+run_id: gha-36229620093-1
+source_run: research/runs/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1
+route: HUMAN_GATE_REVIEW
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml
+triage_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:triage-v1
+job_path: research/jobs/completed/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001.yaml
+research_question: Is the failed v2 plosive post-event interaction primarily attributable
+  to Macro Level rather than Plosive Guard itself, while Plosive-only processing remains
+  localized and near-neutral to downstream VoPriPro Natural50 gain reduction?
+hypothesis: On the source-derived plosive positive control, Plosive-only processing
+  will audibly-relevantly attenuate the event while keeping VoPriPro event/post-event
+  GR nearly unchanged, whereas Macro-only processing will account for most of the
+  v2 combined post-event GR shift.
+counter_hypotheses:
+- Plosive Guard itself causes the material post-event VoPriPro GR shift.
+- Plosive Guard materially changes VoPriPro event peak GR despite the 80 Hz sidechain
+  HPF.
+- Macro Level does not account for most of the combined post-event shift.
+- Plosive and Macro interact non-additively enough that simple module attribution
+  is invalid.
+- The decomposition is materially sample-rate dependent.
+acceptance_criteria:
+- All generated samples and VoPriPro gain-reduction trajectories are finite.
+- Plosive-only positive-control probability reaches at least 0.80 at every tested
+  sample rate.
+- Plosive-only reduction reaches at least 0.50 dB at every tested sample rate.
+- Plosive-only event RMS attenuation is at least 0.25 dB at every tested sample rate.
+- Plosive-only absolute VoPriPro event peak-GR change is no more than 0.10 dB.
+- Plosive-only absolute post-event VoPriPro mean-GR shift is no more than 0.15 dB.
+- Plosive-only pre-event audio RMS movement is no more than 0.10 dB.
+- Macro-only absolute post-event VoPriPro mean-GR shift is at least 0.25 dB.
+- Macro-only maximum gain movement reaches at least 0.50 dB.
+- Macro-only shift accounts for at least 75 percent of the Plosive+Macro post-event
+  shift magnitude.
+- The residual from additive Plosive plus Macro attribution is no more than 0.10 dB.
+- Plosive+Macro post-event shift spread across 44.1/48/88.2/96 kHz is no more than
+  0.05 dB.
+rejection_criteria:
+- Any localization, attribution, finite-state, or sample-rate gate fails.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: fb736772a409ddfd4781e033f39734fbcc65319d
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance.all_finite
+  value: true
+- path: acceptance.combined_post_event_shift_sr_spread_le_0_05db
+  value: true
+- path: acceptance.decomposition_additive_residual_le_0_10db
+  value: true
+- path: acceptance.macro_accounts_for_ge_75pct_of_combined_shift
+  value: true
+- path: acceptance.macro_engages_ge_0_50db
+  value: true
+- path: acceptance.macro_only_post_event_gr_shift_ge_0_25db
+  value: true
+- path: acceptance.plosive_event_audio_attenuation_ge_0_25db
+  value: true
+- path: acceptance.plosive_guard_reduction_ge_0_50db
+  value: true
+- path: acceptance.plosive_only_event_vopripro_gr_change_le_0_10db
+  value: true
+- path: acceptance.plosive_only_post_event_gr_shift_le_0_15db
+  value: true
+- path: acceptance.plosive_only_pre_event_audio_delta_le_0_10db
+  value: true
+- path: acceptance.plosive_positive_control_probability_ge_0_80
+  value: true
+- path: acceptance_met
+  value: true
+- path: aggregate_metrics.all_finite
+  value: true
+- path: aggregate_metrics.macro_only_min_abs_macro_gain_db
+  value: 1.0668143321435872
+- path: aggregate_metrics.macro_only_min_abs_post_event_vopripro_mean_gr_delta_db
+  value: 0.4230624096392437
+- path: aggregate_metrics.plosive_macro_max_additive_residual_db
+  value: 0.00012428997870550518
+- path: aggregate_metrics.plosive_macro_min_macro_residual_fraction
+  value: 1.0525583368610967
+- path: aggregate_metrics.plosive_macro_post_event_shift_sr_spread_db
+  value: 8.136896024835139e-05
+- path: aggregate_metrics.plosive_only_max_abs_event_vopripro_peak_gr_change_db
+  value: 0.0125650627651126
+- path: aggregate_metrics.plosive_only_max_abs_post_event_vopripro_mean_gr_delta_db
+  value: 0.021098412113997433
+- path: aggregate_metrics.plosive_only_max_abs_pre_event_audio_rms_delta_db
+  value: 0.0
+- path: aggregate_metrics.plosive_only_min_event_audio_rms_attenuation_db
+  value: 0.7945118516240246
+- path: aggregate_metrics.plosive_only_min_probability
+  value: 0.8498187159535602
+- path: aggregate_metrics.plosive_only_min_reduction_db
+  value: 1.1517584542725836
+- path: experiment
+  value: VOPRIPRO_VOPREP_PLOSIVE_DECOMPOSITION_V1
+- path: sample_rates[0]
+  value: 44100
+- path: sample_rates[1]
+  value: 48000
+- path: sample_rates[2]
+  value: 88200
+- path: sample_rates[3]
+  value: 96000
+- path: scope
+  value: 'Diagnostic source-code-translation decomposition of the v2 plosive case:
+    dry vs Plosive-only vs Macro-only vs Plosive+Macro feeding VoPriPro Natural50.
+    This does not alter product DSP or establish perceptual superiority.'
+- path: source_product_refs.voprep_main
+  value: ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6
+knowledge_candidate:
+  claim: The v2 plosive recovery failure may be attributed primarily to Macro Level
+    only if Plosive-only remains localized and near-neutral to VoPriPro while Macro-only
+    explains most of the combined post-event shift.
+  evidence_type: HYPOTHESIS
+  scope: Source-derived synthetic plosive positive-control module decomposition only.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates:
+- Actual real-vocal listening remains mandatory before perceptual product claims.
+- Actual VST3/Cubase validation remains mandatory before release guidance.
+downstream_gate_signals:
+- Existing Vo.Prep Amount R2-R4 product mappings are not eligible for direct transfer;
+  current VoPriPro AMOUNT remains baseline while its own perceptual uniformity still
+  needs listening/generalisation evidence.
+- Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current
+  main Natural50 A/B pack.
+- The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle
+  recordings and does not establish universal singer/generalisation claims.
+- Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally
+  complete on the user's actual machine.
+- Final precision review remains pending after subjective and target-host evidence.
+- Human listening is required to convert the generated gain-matched A/B pack into
+  perceptual evidence.
+- Cubase Pro 14 validation ultimately requires the user's Windows host.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE_AFTER_REVIEW
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

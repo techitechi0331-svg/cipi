@@ -84,7 +84,10 @@ jobs:
         run: |
           git config user.name "cipi-health-bot"
           git config user.email "cipi-health-bot@users.noreply.github.com"
-          git add research/autonomous_bridge research/cross_repo/actions/queued research/health/autonomous-bridge.json research/health/automation-status.json research/health/automation-status.md
+          git add -A -- research/autonomous_bridge research/health/autonomous-bridge.json research/health/automation-status.json research/health/automation-status.md
+          if [ -d research/cross_repo/actions/queued ]; then
+            git add -A -- research/cross_repo/actions/queued
+          fi
           if git diff --cached --quiet; then
             echo "Health dashboard unchanged."
           else

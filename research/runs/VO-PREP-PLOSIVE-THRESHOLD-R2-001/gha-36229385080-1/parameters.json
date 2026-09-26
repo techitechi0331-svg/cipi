@@ -1,0 +1,26 @@
+{
+  "baseline": [
+    "Current v2.2 feature family with activation 0.75, release 0.55 and 120 ms cap."
+  ],
+  "experiment_adapter": "voprep_plosive_threshold_r2_v1",
+  "job_file": "research/jobs/queued/VO-PREP-PLOSIVE-THRESHOLD-R2-001.yaml",
+  "metrics": [
+    "positive_detection_fraction",
+    "soft_detected_all_sr",
+    "nominal_detected_all_sr",
+    "strong_detected_all_sr",
+    "repeated_two_events_all_sr",
+    "max_positive_onset_latency_ms",
+    "negative_occupancy_mean_pct",
+    "negative_occupancy_max_pct",
+    "false_occupancy_ratio",
+    "max_probability_sample_rate_spread",
+    "max_active_duration_ms",
+    "max_input_scale_probability_spread",
+    "max_input_scale_occupancy_spread_pct"
+  ],
+  "variants": [
+    "Same frozen feature family, activation 0.72, release 0.55, 120 ms cap.",
+    "Same frozen feature family, activation 0.70, release 0.55, 120 ms cap."
+  ]
+}

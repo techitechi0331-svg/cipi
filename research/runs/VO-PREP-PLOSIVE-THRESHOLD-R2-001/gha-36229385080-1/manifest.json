@@ -1,0 +1,24 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vo-prep/experiments/plosive_threshold_calibration_r2.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-26T08:19:43.201335Z",
+  "environment": {
+    "experiment_adapter": "voprep_plosive_threshold_r2_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+  "random_seed": 20260926,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36229385080-1",
+  "schema_version": "1.0",
+  "source_commit": "291abbc95056957444a511dda9d009c9f17815ff",
+  "started_at": "2026-09-26T08:18:41.992033Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VL2A-CIRCUIT-HA100X-001-R2-0BF7D37A
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     12 Hz HP / 25 ms state / tanh heuristic, without requiring unsupported magnetic
     nonlinearity and without changing product behavior?","track_id":"VL2A-CIRCUIT-HA100X-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -35,3 +35,7 @@ continuation_fingerprint: 0bf7d37adf0831be48d5f8b0e93b8639448b9fa0b39361b548e972
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 36268630104
+dispatched_at: '2026-09-26T21:09:16.847077Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

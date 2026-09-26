@@ -62,7 +62,10 @@ jobs:
         run: |
           git config user.name "cipi-cross-repo-bot"
           git config user.email "cipi-cross-repo-bot@users.noreply.github.com"
-          git add -A research/cross_repo research/jobs/queued
+          git add -A -- research/cross_repo
+          if [ -d research/jobs/queued ]; then
+            git add -A -- research/jobs/queued
+          fi
           if git diff --cached --quiet; then
             echo "No persistent Cross-Repo changes."
           else

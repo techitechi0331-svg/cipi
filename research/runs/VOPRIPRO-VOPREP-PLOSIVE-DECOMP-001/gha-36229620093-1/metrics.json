@@ -1,0 +1,43 @@
+{
+  "acceptance": {
+    "all_finite": true,
+    "combined_post_event_shift_sr_spread_le_0_05db": true,
+    "decomposition_additive_residual_le_0_10db": true,
+    "macro_accounts_for_ge_75pct_of_combined_shift": true,
+    "macro_engages_ge_0_50db": true,
+    "macro_only_post_event_gr_shift_ge_0_25db": true,
+    "plosive_event_audio_attenuation_ge_0_25db": true,
+    "plosive_guard_reduction_ge_0_50db": true,
+    "plosive_only_event_vopripro_gr_change_le_0_10db": true,
+    "plosive_only_post_event_gr_shift_le_0_15db": true,
+    "plosive_only_pre_event_audio_delta_le_0_10db": true,
+    "plosive_positive_control_probability_ge_0_80": true
+  },
+  "acceptance_met": true,
+  "aggregate_metrics": {
+    "all_finite": true,
+    "macro_only_min_abs_macro_gain_db": 1.0668143321435872,
+    "macro_only_min_abs_post_event_vopripro_mean_gr_delta_db": 0.4230624096392437,
+    "plosive_macro_max_additive_residual_db": 0.00012428997870550518,
+    "plosive_macro_min_macro_residual_fraction": 1.0525583368610967,
+    "plosive_macro_post_event_shift_sr_spread_db": 8.136896024835139e-05,
+    "plosive_only_max_abs_event_vopripro_peak_gr_change_db": 0.0125650627651126,
+    "plosive_only_max_abs_post_event_vopripro_mean_gr_delta_db": 0.021098412113997433,
+    "plosive_only_max_abs_pre_event_audio_rms_delta_db": 0.0,
+    "plosive_only_min_event_audio_rms_attenuation_db": 0.7945118516240246,
+    "plosive_only_min_probability": 0.8498187159535602,
+    "plosive_only_min_reduction_db": 1.1517584542725836
+  },
+  "experiment": "VOPRIPRO_VOPREP_PLOSIVE_DECOMPOSITION_V1",
+  "sample_rates": [
+    44100,
+    48000,
+    88200,
+    96000
+  ],
+  "scope": "Diagnostic source-code-translation decomposition of the v2 plosive case: dry vs Plosive-only vs Macro-only vs Plosive+Macro feeding VoPriPro Natural50. This does not alter product DSP or establish perceptual superiority.",
+  "source_product_refs": {
+    "voprep_main": "ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6",
+    "vopripro_main": "58049696815fcc24067870edd6a1b89c3cfd2163"
+  }
+}

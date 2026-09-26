@@ -43,3 +43,20 @@ The handoff emits only a `CONTRACT_CANDIDATE` plus a provenance receipt. The rec
 pins the SHA-256 of all source records and explicitly keeps Factory build authority,
 final product decision, release authority, Cubase confirmation and listening
 confirmation false.
+
+
+## Factory build authorization
+
+A `CONTRACT_CANDIDATE` still cannot be built automatically.
+
+Before entering the JUCE Factory manufacturing line, CIPI requires a separate
+Factory Build Authorization Review under
+`research/incubator/factory_build_authorizations/`.
+
+This second review must again use `HUMAN` or `ASSISTANT_REVIEW` authority. It pins
+the exact Contract Candidate and handoff receipt by SHA-256 and authorizes only
+`factory_build_authorized=true`.
+
+Even after this gate, final product decision, release authority, Cubase confirmation
+and listening confirmation remain false. Build authorization means only that the
+Factory may manufacture the VST3 candidate and run technical validation.

@@ -133,3 +133,15 @@ A hash match does **not** yet prove bit-reproducible builds. Factory Result Bund
 does not fully capture compiler, linker, Windows SDK and hosted-runner image identity.
 A hash difference is retained as MEASURED investigation evidence and is not an
 automatic product/release failure.
+
+
+## Authorized build boundary
+
+Factory 0.2 does not accept an Incubator `CONTRACT_CANDIDATE` as build permission.
+
+A separate Factory Build Authorization must bind the exact Contract Candidate and
+handoff receipt and set only `factory_build_authorized=true`. The authorization
+cannot carry product release, Cubase or listening authority.
+
+A future generic candidate-build workflow must consume both the Plugin Contract and
+its Build Authorization and reverify pinned source hashes before generation/build.

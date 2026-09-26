@@ -11,6 +11,11 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from automation.incubator.factory_handoff import FactoryHandoffError, validate_review
+from automation.incubator.factory_build_authorization import (
+    FactoryBuildAuthorizationError,
+    build_authorization,
+    validate_authorization_review,
+)
 PROPOSAL_REQUIRED={
  "schema_version","plugin_proposal_id","source_research_proposal","state","working_name",
  "problem","target_user","target_signal","supporting_research","supporting_negative_knowledge",
@@ -114,6 +119,39 @@ def validate_root(root:Path)->list[str]:
                     errors.append(f"{path}: source evidence does not match proposal")
                 elif ev.get("raw_audio_persisted") is not False or not all(ev.get(k) is True for k in PASS_GATES):
                     errors.append(f"{path}: source evidence has an unpassed product-discrimination gate")
+
+    badir=base/"factory_build_authorizations"
+    if badir.exists():
+        for path in sorted(badir.glob("*.yaml")):
+            try:data=yaml.safe_load(path.read_text(encoding="utf-8"))
+            except Exception as exc:errors.append(f"{path}: YAML parse error: {exc}");continue
+            if not isinstance(data,dict):errors.append(f"{path}: root must be mapping");continue
+            try:validate_authorization_review(data)
+            except (FactoryBuildAuthorizationError, ValueError) as exc:
+                errors.append(f"{path}: invalid Factory Build Authorization Review: {exc}")
+                continue
+            pid=data.get("plugin_proposal_id")
+            if pid not in proposals:
+                errors.append(f"{path}: matching proposal not found")
+            contract_rel=str(data.get("source_contract_candidate",""))
+            receipt_rel=str(data.get("source_handoff_receipt",""))
+            contract_path=root/contract_rel
+            receipt_path=root/receipt_rel
+            if not contract_rel.startswith("research/incubator/factory_contracts/") or not contract_path.is_file():
+                errors.append(f"{path}: source_contract_candidate is missing or outside factory_contracts")
+                continue
+            if not receipt_rel.startswith("research/incubator/factory_contracts/") or not receipt_path.is_file():
+                errors.append(f"{path}: source_handoff_receipt is missing or outside factory_contracts")
+                continue
+            try:
+                build_authorization(
+                    contract_path,
+                    receipt_path,
+                    path,
+                    root=root,
+                )
+            except (FactoryBuildAuthorizationError, FactoryHandoffError, ValueError, OSError) as exc:
+                errors.append(f"{path}: Factory Build Authorization provenance failed: {exc}")
     proto=base/"prototypes"
     if proto.exists():
         for path in proto.rglob("metrics.json"):

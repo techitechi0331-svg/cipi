@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/incubator/factory_build_authorization.schema.json",
+  "title": "CIPI JUCE Factory Build Authorization v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authorization_kind",
+    "plugin_proposal_id",
+    "source_contract_candidate",
+    "source_contract_candidate_sha256",
+    "source_handoff_receipt",
+    "source_handoff_receipt_sha256",
+    "source_handoff_receipt_hash",
+    "source_authorization_review",
+    "source_authorization_review_sha256",
+    "contract_sha256",
+    "authority",
+    "status",
+    "automatic_final_decision",
+    "factory_build_authorized",
+    "product_release_authority",
+    "cubase_confirmed",
+    "listening_confirmed",
+    "authorization_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "authorization_kind": {
+      "const": "FACTORY_BUILD_AUTHORIZATION"
+    },
+    "plugin_proposal_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_contract_candidate": {
+      "type": "string",
+      "pattern": "^research/incubator/factory_contracts/.+/plugin_contract_candidate\\.json$"
+    },
+    "source_contract_candidate_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_handoff_receipt": {
+      "type": "string",
+      "pattern": "^research/incubator/factory_contracts/.+/handoff_receipt\\.json$"
+    },
+    "source_handoff_receipt_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_handoff_receipt_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_authorization_review": {
+      "type": "string",
+      "pattern": "^research/incubator/factory_build_authorizations/.+\\.yaml$"
+    },
+    "source_authorization_review_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "contract_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authority": {
+      "enum": [
+        "HUMAN",
+        "ASSISTANT_REVIEW"
+      ]
+    },
+    "status": {
+      "const": "FACTORY_BUILD_AUTHORIZED"
+    },
+    "automatic_final_decision": {
+      "const": false
+    },
+    "factory_build_authorized": {
+      "const": true
+    },
+    "product_release_authority": {
+      "const": false
+    },
+    "cubase_confirmed": {
+      "const": false
+    },
+    "listening_confirmed": {
+      "const": false
+    },
+    "authorization_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

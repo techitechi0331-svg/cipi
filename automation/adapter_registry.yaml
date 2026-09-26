@@ -320,3 +320,17 @@ adapters:
     max_timeout_minutes: 8
     network_required: false
     purpose: "Screen source-translated Vo.Prep Plosive/Macro/Sibilance 50% into VoPriPro Natural50 on deterministic synthetic cases before any actual cross-product real-vocal/VST3 integration work."
+
+  voprep_plosive_adversarial_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare the current Vo.Prep Plosive Guard v2.2 contextual detector against a simple 20-80 Hz LF-onset baseline on deterministic adversarial event/confounder signals across sample rates and input scales."
+
+  voprep_sibilance_adversarial_v1:
+    tracks:
+      - VO_PREP_FORMAL
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: "Compare the current Vo.Prep Sibilance Guard v2.3 contextual detector against a simple absolute 4-12 kHz level trigger on deterministic sibilant/confounder signals across sample rates and input scales."

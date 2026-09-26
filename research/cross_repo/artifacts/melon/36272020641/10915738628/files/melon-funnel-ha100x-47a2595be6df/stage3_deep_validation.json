@@ -1,0 +1,16 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "HA100X-003-6070f854",
+    "promotion_authority": false,
+    "reason": "HF parasitic sensitivity has been bounded under the catalog envelope. Run an independent-seed robustness/falsification pass before closing the linear-first hypothesis.",
+    "route": "ITERATE",
+    "scientific": {
+      "catalog_pass_fraction": 0.5833333333333334,
+      "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+      "falsification_signal": "LINEAR_FAMILY_CAN_EXPLAIN_CATALOG_WITH_FLATTER_30HZ_THAN_CURRENT_HEURISTIC",
+      "information_gain_signal": 0.6630195650143289
+    },
+    "species": "ha100x_lti_hf_identifiability"
+  }
+]

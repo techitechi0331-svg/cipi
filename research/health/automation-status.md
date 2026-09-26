@@ -8,7 +8,7 @@
 - Local blocked / dependency-blocked: **0 / 0**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
-- Cross-Repo queued / dispatched / failed / quarantined: **1 / 0 / 0 / 0**
+- Cross-Repo queued / dispatched / failed / quarantined: **0 / 1 / 0 / 0**
 - Runner/dispatch alerts: **0**
 - Declared human-gate jobs: **0**
 
@@ -25,4 +25,4 @@
 - Human Gates: **0**
 - Runner Wait: **0**
 - Budget Status: **{"MELON-BRIDGE-CLEAN-PROOF-002": {"candidates": 24, "candidates_limit": 30, "loop_depth": 3, "loop_depth_limit": 3, "runs": 3, "runs_limit": 3, "runtime_limit_seconds": 900.0, "runtime_seconds": 67.9989999999998}, "MELON-BRIDGE-PILOT-001": {"candidates": 26, "candidates_limit": 36, "loop_depth": 3, "loop_depth_limit": 3, "runs": 3, "runs_limit": 3, "runtime_limit_seconds": 900.0, "runtime_seconds": 56.14099999999962}, "VL2A-CIRCUIT-HA100X-001": {"candidates": 0, "candidates_limit": 60, "loop_depth": 0, "loop_depth_limit": 5, "runs": 0, "runs_limit": 5, "runtime_limit_seconds": 600.0, "runtime_seconds": 0.0}}**
-- Next Scheduler Action: **MELON-VL2A-CIRCUIT-HA100X-001-R1-256E3F1E**
+- Next Scheduler Action: **NO_READY_WORK**

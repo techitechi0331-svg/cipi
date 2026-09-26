@@ -13,14 +13,14 @@
     "bridge_version": "cipi-autonomous-research-bridge/1.0",
     "budget_status": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
-        "candidates": 0,
+        "candidates": 8,
         "candidates_limit": 30,
-        "loop_depth": 0,
+        "loop_depth": 1,
         "loop_depth_limit": 3,
-        "runs": 0,
+        "runs": 1,
         "runs_limit": 3,
         "runtime_limit_seconds": 900.0,
-        "runtime_seconds": 0.0
+        "runtime_seconds": 20.281000000002678
       },
       "MELON-BRIDGE-PILOT-001": {
         "candidates": 26,
@@ -33,19 +33,21 @@
         "runtime_seconds": 56.14099999999962
       }
     },
-    "continuation_candidates": 3,
+    "continuation_candidates": 4,
     "current_loop_depth": {
-      "MELON-BRIDGE-CLEAN-PROOF-002": 0,
+      "MELON-BRIDGE-CLEAN-PROOF-002": 1,
       "MELON-BRIDGE-PILOT-001": 3
     },
     "duplicate_suppressions": 0,
-    "generated_jobs": 4,
+    "generated_jobs": 5,
     "human_gates": 0,
     "invalid_results": 0,
-    "melon_runs": 3,
-    "next_scheduler_action": "NO_READY_WORK",
-    "no_improvement_count": 3,
-    "queued_actions": [],
+    "melon_runs": 4,
+    "next_scheduler_action": "MELON-MELON-BRIDGE-CLEAN-PROOF-002-R2-D09DA9AE",
+    "no_improvement_count": 4,
+    "queued_actions": [
+      "MELON-MELON-BRIDGE-CLEAN-PROOF-002-R2-D09DA9AE"
+    ],
     "rejected_continuations": 1,
     "result_missing": 0,
     "runner_wait": 0,
@@ -59,13 +61,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "MELON-MELON-BRIDGE-CLEAN-PROOF-002-R2-D09DA9AE",
+      "kind": "CROSS_REPO",
+      "priority": 80,
+      "reason": "ready_external_action"
+    },
     "states": {
-      "completed": 3,
-      "dispatched": 1,
+      "completed": 4,
+      "dispatched": 0,
       "failed": 0,
       "quarantined": 0,
-      "queued": 0
+      "queued": 1
     }
   },
   "human_gates": [],
@@ -79,9 +86,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
+    "action_id": "MELON-MELON-BRIDGE-CLEAN-PROOF-002-R2-D09DA9AE",
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "reason": "ready_external_action"
   }
 }

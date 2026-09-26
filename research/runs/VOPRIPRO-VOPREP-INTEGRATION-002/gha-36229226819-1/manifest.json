@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/plugins/vopripro/experiments/voprep_integration_screen_v2.py --out-dir <temporary>"
+  ],
+  "completed_at": "2026-09-26T08:16:57.077255Z",
+  "environment": {
+    "experiment_adapter": "vopripro_voprep_integration_screen_v2",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+  "random_seed": 20260926,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36229226819-1",
+  "schema_version": "1.0",
+  "source_commit": "ffdb2d8ddd7dcf4d48d22f3815eb14933af293ce",
+  "started_at": "2026-09-26T08:15:32.704509Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

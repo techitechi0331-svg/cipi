@@ -1,0 +1,47 @@
+schema_version: '1.0'
+decision_id: VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:auto
+job_id: VOPRIPRO-VOPREP-INTEGRATION-002
+source_run: research/runs/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: If positive-control engagement fails, do not interpret downstream event
+  metrics; if engagement succeeds but an unchanged downstream gate fails, preserve
+  it as negative product-interaction evidence without relaxing thresholds.
+scope: Vo.Prep 50% -> VoPriPro Natural50 integration screen v2 with source-derived
+  positive controls.
+declared_rejection_criteria:
+- Any positive-control probability or reduction gate fails, making downstream event
+  interpretation invalid.
+- Any unchanged downstream interaction, neutral, recovery, phrase, finite, or sample-rate
+  gate fails.
+triggered_criteria: []
+retained_findings:
+- Preserve every passed and failed gate by case and sample rate.
+- Preserve detector probabilities, module reduction magnitudes, and downstream VoPriPro
+  GR deltas.
+- Preserve the distinction between translation fidelity failure and actual chain interaction
+  failure.
+reusable_findings:
+- Cross-product event interaction tests must verify source-module engagement before
+  attributing downstream effects.
+- Near-misses against predeclared downstream gates remain negative evidence and do
+  not justify post-hoc threshold relaxation.
+revisit_if:
+- Actual VST3 cross-product measurements reveal a material mismatch with the source-code
+  translation.
+- Vo.Prep or VoPriPro production DSP changes materially.
+- A source positive-control transcription error is demonstrated.
+review_gaps:
+- triggered_criteria_need_adapter_or_review
+lineage:
+  supersedes: []
+  related_jobs:
+  - VOPRIPRO-VOPREP-INTEGRATION-001
+  - VOPRIPRO-DETECTOR-TRANSFER-001
+  - VOPRIPRO-BALLISTICS-TRANSFER-001
+  related_decisions:
+  - VOPRIPRO-VOPREP-INTEGRATION-001:assistant-review-20260926
+created_at: '2026-09-26T08:16:57.077255Z'
+immutable: true

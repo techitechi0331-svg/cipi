@@ -1,0 +1,164 @@
+schema_version: '1.0'
+job_id: VOPRIPRO-VOPREP-INTEGRATION-002
+state: COMPLETED
+priority: 90
+depends_on_jobs:
+- VOPRIPRO-VOPREP-INTEGRATION-001
+track:
+  id: VOPRIPRO_FORMAL
+  path: research/plugins/vopripro
+research_question: Does the current Vo.Prep 50% Plosive/Macro/Sibilance chain reduce
+  targeted downstream VoPriPro Natural50 reactions when the event cases are the source
+  product's own verified Plosive and Sibilance regression positive controls?
+hypothesis: Source-derived positive controls will first reproduce intended Vo.Prep
+  detector engagement, after which targeted preprocessing will reduce downstream VoPriPro
+  event peak GR without materially shifting neutral, post-event, phrase-level, or
+  sample-rate behavior.
+counter_hypotheses:
+- The source-code translation fails to reproduce the source product positive-control
+  detector engagement, invalidating downstream interpretation.
+- Plosive Guard engages but does not reduce downstream VoPriPro plosive-event peak
+  GR by the locked minimum.
+- Sibilance Guard engages but still does not reduce downstream VoPriPro sibilance-event
+  peak GR by the unchanged locked minimum.
+- Vo.Prep introduces material neutral false engagement or post-event downstream GR
+  offsets.
+- Macro Level over-flattens or under-corrects the phrase-step case.
+- Cross-product behavior becomes materially sample-rate dependent when 88.2 kHz is
+  added.
+baseline:
+- dry_into_vopripro_natural50
+variants:
+- voprep50_source_positive_controls_into_vopripro_natural50
+metrics:
+- all_finite
+- neutral_max_abs_mean_gr_delta_db
+- neutral_max_event_module_reduction_db
+- plosive_min_probability
+- plosive_min_guard_reduction_db
+- plosive_min_event_peak_gr_improvement_db
+- plosive_max_abs_post_event_mean_gr_delta_db
+- sibilance_min_probability
+- sibilance_min_guard_reduction_db
+- sibilance_min_event_peak_gr_improvement_db
+- sibilance_max_abs_post_event_mean_gr_delta_db
+- phrase_min_macro_movement_db
+- phrase_min_spread_improvement_db
+- phrase_max_spread_improvement_db
+- downstream_peak_gr_sr_spread_db
+acceptance:
+- All generated preprocessed samples and downstream gain-reduction trajectories are
+  finite.
+- Neutral sustained material changes downstream mean GR by no more than 0.25 dB.
+- Neutral sustained material causes no more than 0.25 dB Plosive/Sibilance event reduction.
+- Source-derived Plosive positive control reaches probability at least 0.80 at every
+  tested sample rate.
+- Source-derived Plosive positive control produces at least 0.50 dB Plosive Guard
+  reduction at every tested sample rate.
+- Vo.Prep improves downstream VoPriPro plosive-event peak GR by at least 0.10 dB.
+- Post-plosive downstream mean-GR shift is no more than 0.35 dB.
+- Source-derived Sibilance positive control reaches probability at least 0.65 at every
+  tested sample rate.
+- Source-derived Sibilance positive control produces at least 0.30 dB Sibilance Guard
+  reduction at every tested sample rate.
+- Vo.Prep improves downstream VoPriPro sibilance-event peak GR by at least 0.02 dB.
+- Post-sibilance downstream mean-GR shift is no more than 0.35 dB.
+- Macro Level moves the phrase-step case by at least 0.10 dB.
+- Phrase RMS spread improves by at least 0.05 dB and no more than 1.50 dB.
+- Preprocessed downstream peak-GR sample-rate spread across 44.1/48/88.2/96 kHz is
+  no more than 0.15 dB.
+rejection:
+- Any positive-control probability or reduction gate fails, making downstream event
+  interpretation invalid.
+- Any unchanged downstream interaction, neutral, recovery, phrase, finite, or sample-rate
+  gate fails.
+max_runs: 1
+timeout_minutes: 8
+random_seed: 20260926
+reproduction_conditions:
+  cipi_baseline: f8e458c48cbc2e5860de24fa482283478132c83d
+  voprep_repository: techitechi0331-svg/Vo.Prep
+  voprep_commit: ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6
+  vopripro_repository: techitechi0331-svg/VocalPrepComp
+  vopripro_commit: 58049696815fcc24067870edd6a1b89c3cfd2163
+  voprep_settings: Plosive 50%, Level 50%, Sibilance 50%, Input 0 dB, Output 0 dB,
+    Subsonic OFF.
+  vopripro_settings: Amount 50%, Character 50%, Input 0 dB, Output 0 dB.
+  sample_rates_hz:
+  - 44100
+  - 48000
+  - 88200
+  - 96000
+  positive_controls:
+    plosive: Vo.Prep Tests/PlosiveGuardTests.cpp scenario 0, 140 Hz low baseline plus
+      60 ms sin-squared 45 Hz/120 Hz burst.
+    sibilance: Vo.Prep Tests/SibilanceGuardTests.cpp scenario 0, harmonic vowel replaced
+      by 5.2-11.2 kHz six-tone event with 5 ms attack and 15 ms release.
+  cases:
+  - neutral_body
+  - plosive_on_body
+  - sibilance_on_body
+  - phrase_step
+  execution_mode: deterministic_source_code_translation_screen_v2
+  network_required: false
+  raw_audio_required: false
+experiment_adapter: vopripro_voprep_integration_screen_v2
+allowed_operations:
+- deterministic_synthetic_generation
+- source_code_translation_simulation
+- source_positive_control_replay
+- gain_reduction_measurement
+- csv_json_markdown_output
+prohibited_operations:
+- arbitrary_shell
+- network_write
+- raw_audio_persist
+- product_repo_write
+- main_push
+- confidence_change
+- current_stage_change
+- product_release
+knowledge_candidate:
+  claim: Vo.Prep -> VoPriPro may advance to actual integration validation only if
+    verified source-derived event positive controls engage first and the unchanged
+    downstream interaction budget then passes.
+  evidence_type: HYPOTHESIS
+  scope: Synthetic mono source-code-translation integration screen using source-derived
+    positive controls only.
+  promotion_requested: HYPOTHESIS
+rejection_record:
+  reason: If positive-control engagement fails, do not interpret downstream event
+    metrics; if engagement succeeds but an unchanged downstream gate fails, preserve
+    it as negative product-interaction evidence without relaxing thresholds.
+  retained_findings:
+  - Preserve every passed and failed gate by case and sample rate.
+  - Preserve detector probabilities, module reduction magnitudes, and downstream VoPriPro
+    GR deltas.
+  - Preserve the distinction between translation fidelity failure and actual chain
+    interaction failure.
+  reusable_findings:
+  - Cross-product event interaction tests must verify source-module engagement before
+    attributing downstream effects.
+  - Near-misses against predeclared downstream gates remain negative evidence and
+    do not justify post-hoc threshold relaxation.
+  revisit_if:
+  - Actual VST3 cross-product measurements reveal a material mismatch with the source-code
+    translation.
+  - Vo.Prep or VoPriPro production DSP changes materially.
+  - A source positive-control transcription error is demonstrated.
+  scope: Vo.Prep 50% -> VoPriPro Natural50 integration screen v2 with source-derived
+    positive controls.
+review_policy:
+  required_human_gates:
+  - Level-matched real-vocal listening remains mandatory before a perceptual integration
+    claim.
+  - Actual VST3/Cubase validation remains mandatory before release guidance.
+lineage:
+  supersedes: []
+  related_jobs:
+  - VOPRIPRO-VOPREP-INTEGRATION-001
+  - VOPRIPRO-DETECTOR-TRANSFER-001
+  - VOPRIPRO-BALLISTICS-TRANSFER-001
+  related_decisions:
+  - VOPRIPRO-VOPREP-INTEGRATION-001:assistant-review-20260926
+latest_run: gha-36229226819-1

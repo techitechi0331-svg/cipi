@@ -27,6 +27,7 @@ EXPECTED_FILES = {
 }
 _BINDING_VERSION = "1.0"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
+MAX_AUTHORIZED_REQUESTS = 8
 
 
 class AuthorizedBuildIntakeError(ValueError):
@@ -129,15 +130,21 @@ def discover_authorized_requests(
     if base.is_symlink() or not base.is_dir():
         raise AuthorizedBuildIntakeError("requests root must be a real directory")
 
+    request_dirs = sorted(
+        (entry for entry in base.iterdir() if entry.is_dir()),
+        key=lambda value: value.name,
+    )
+    if len(request_dirs) > MAX_AUTHORIZED_REQUESTS:
+        raise AuthorizedBuildIntakeError(
+            f"authorized request scan exceeds limit {MAX_AUTHORIZED_REQUESTS}: {len(request_dirs)}"
+        )
+
     records: list[dict[str, Any]] = []
     seen_plugin_ids: set[str] = set()
     seen_bundle_ids: set[str] = set()
     seen_codes: set[tuple[str, str]] = set()
 
-    for request_dir in sorted(
-        (entry for entry in base.iterdir() if entry.is_dir()),
-        key=lambda value: value.name,
-    ):
+    for request_dir in request_dirs:
         contract, authorization = load_authorized_request(request_dir, root=repo_root)
         plugin = contract["plugin"]
         plugin_id = plugin["id"]

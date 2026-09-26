@@ -1,0 +1,21 @@
+schema_version: '1.0'
+decision_id: VL2A-CIRCUIT-HA100X-001:melon-funnel-ha100x-67a89f750cf8:continuation
+track_id: VL2A-CIRCUIT-HA100X-001
+run_id: melon-funnel-ha100x-67a89f750cf8
+job_id: VL2A-CIRCUIT-HA100X-001-R5-89143290
+loop_depth: 5
+decision: STOP
+stop_reason: BUDGET_EXHAUSTED
+continuation_fingerprint: null
+accepted_candidate_id: null
+selected_architecture: null
+rejections:
+- reason: max_loop_depth
+proposal_count: 0
+duplicate_suppressions: 0
+human_gate_proposals: 0
+processed_artifact_hash: c051af21b0f733c7203017f7570996a59c47e213c7c5c6259bdaf7607b85477f
+authority: CIPI_CONTINUATION_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

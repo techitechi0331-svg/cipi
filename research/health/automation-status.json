@@ -34,37 +34,38 @@
         "runtime_seconds": 56.14099999999962
       },
       "VL2A-CIRCUIT-HA100X-001": {
-        "candidates": 48,
+        "candidates": 60,
         "candidates_limit": 60,
-        "loop_depth": 4,
+        "loop_depth": 5,
         "loop_depth_limit": 5,
-        "runs": 4,
+        "runs": 5,
         "runs_limit": 5,
         "runtime_limit_seconds": 600.0,
-        "runtime_seconds": 0.035934
+        "runtime_seconds": 0.045344999999999996
       }
     },
     "continuation_candidates": 10,
     "current_loop_depth": {
       "MELON-BRIDGE-CLEAN-PROOF-002": 3,
       "MELON-BRIDGE-PILOT-001": 3,
-      "VL2A-CIRCUIT-HA100X-001": 4
+      "VL2A-CIRCUIT-HA100X-001": 5
     },
     "duplicate_suppressions": 0,
     "generated_jobs": 11,
     "human_gates": 0,
     "invalid_results": 0,
-    "melon_runs": 10,
+    "melon_runs": 11,
     "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 4,
     "queued_actions": [],
-    "rejected_continuations": 2,
+    "rejected_continuations": 3,
     "result_missing": 0,
     "runner_wait": 0,
     "schema_version": "1.0",
     "track_stop_reasons": {
       "MELON-BRIDGE-CLEAN-PROOF-002": "BUDGET_EXHAUSTED",
-      "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED"
+      "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED",
+      "VL2A-CIRCUIT-HA100X-001": "BUDGET_EXHAUSTED"
     }
   },
   "cross_repo": {
@@ -74,8 +75,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 10,
-      "dispatched": 1,
+      "completed": 11,
+      "dispatched": 0,
       "failed": 0,
       "quarantined": 0,
       "queued": 0
@@ -92,9 +93,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

@@ -6,9 +6,11 @@ from pathlib import Path
 import sys
 import yaml
 
-from automation.incubator.factory_handoff import FactoryHandoffError, validate_review
-
 REPO_ROOT=Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from automation.incubator.factory_handoff import FactoryHandoffError, validate_review
 PROPOSAL_REQUIRED={
  "schema_version","plugin_proposal_id","source_research_proposal","state","working_name",
  "problem","target_user","target_signal","supporting_research","supporting_negative_knowledge",

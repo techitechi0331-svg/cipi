@@ -139,13 +139,16 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             out = reconcile(root)
             self.assertEqual(out["counters"]["processed_results"], 1)
             self.assertEqual(len(history_records(root, "TRACK-1")), 1)
+            self.assertEqual(out["health"]["continuation_candidates"], 1)
 
     def test_duplicate_result_ingestion(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td); install_track(root, track()); install_result(root, macro_result())
-            reconcile(root); out = reconcile(root)
+            first = reconcile(root); out = reconcile(root)
             self.assertGreaterEqual(out["counters"]["duplicate_results"], 1)
             self.assertEqual(len(history_records(root, "TRACK-1")), 1)
+            self.assertEqual(first["health"]["continuation_candidates"], out["health"]["continuation_candidates"])
+            self.assertEqual(first["health"]["duplicate_suppressions"], out["health"]["duplicate_suppressions"])
 
     def test_continuation_generation(self):
         with tempfile.TemporaryDirectory() as td:

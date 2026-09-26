@@ -524,6 +524,17 @@ class AuthorizedBuildIntakeTests(unittest.TestCase):
                 schema["properties"]["product_release_authority"]["const"]
             )
 
+
+    def test_request_scan_fanout_is_bounded(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            base = root / "research/incubator/factory_build_requests"
+            base.mkdir(parents=True)
+            for index in range(9):
+                (base / f"request-{index}").mkdir()
+            with self.assertRaises(AuthorizedBuildIntakeError):
+                discover_authorized_requests(root=root)
+
     def test_empty_request_root_is_valid_and_discovers_nothing(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

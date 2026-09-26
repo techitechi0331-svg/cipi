@@ -707,3 +707,38 @@ State/Automation audit:
 Decision:
 - Phase03G G054 -> final integration candidate
 - residual HP/LF research branches -> not part of final production path.
+
+
+## 2026-09-26 RC2 final validation
+
+Final validation run `36199539214` completed SUCCESS.
+
+Final product DSP:
+- Peak v8
+- optical stateful v3
+- mean tau 8 ms
+- amount 0.054
+- no residual HP/LF research structures
+- direct Gain -18..+18 dB
+- accurate GR peak capture
+
+Final gates:
+- PR50 real-vocal median ~5.55 dB: PASS
+- matched-GR release: PASS
+- sample-rate control spread ~0.033 dB: PASS
+- level-matched optical A/B: PASS
+  - worst max-band shift: forte ~0.742962 dB
+- pluginval 1.0.4 strictness 10: SUCCESS
+- state/source audit: PASS
+
+Final VST3 artifact:
+- id `10891448870`
+- digest `sha256:9b314f0298bbf1680eb991eb7e9aae3a64ecc9ac443a89496721722d27ce12fe`
+
+Open precision check:
+- pluginval generic info prints latency 0 before exact post-prepare host latency
+  has been independently verified.
+- dedicated exact VST3 host-latency probe is the remaining assistant-side
+  precision gate.
+
+Cubase Pro 14 remains the user-host-only final gate.

@@ -13,6 +13,9 @@ TRANSIENT_TOKENS = (
     "ensure juce",
     "locate juce",
     "locate cmake",
+    "upload artifact",
+    "upload research evidence",
+    "artifact upload",
 )
 PRODUCT_TOKENS = (
     "configure",

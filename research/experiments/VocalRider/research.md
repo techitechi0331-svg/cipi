@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `66a6b4d4b4eec5e4e8842473b5f54b97a6e713be`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `d6cd407751987eb885c26fd1b7c60a09aa5500d9`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -127,6 +127,46 @@ Headroom-guard diagnostic:
 - this is not automatically a defect, but it is a targeted listening / measurement risk because the product goal is broad fader-like riding rather than fast compression.
 
 The current real-vocal workflow's PASS status is an integrity/rendering PASS, not a sound-quality or leveling-effectiveness PASS.
+
+
+## HYPOTHESIS / prospective measurement plan — local leveling effectiveness
+
+The existing global active-400 ms standard deviation mixes useful local leveling with intentional song-level changes and window-edge effects. It is therefore retained as a diagnostic but is not sufficient by itself to judge Rider quality.
+
+A prospective local-leveling comparison will be added before the next expanded-corpus run:
+
+1. compute aligned 400 ms RMS windows for the delayed reference and processed output;
+2. use the reference window only for activity selection (`> -58 dBFS`) so processing cannot change which windows are evaluated;
+3. maintain an 8 s causal history of active windows, matching the current local-target horizon;
+4. after at least 3 prior active windows, compute each signal's residual from its own prior-history median;
+5. define an eligible correction window when the reference residual magnitude is at least 1.5 dB;
+6. record:
+   - local residual standard-deviation reduction;
+   - fraction of eligible windows whose absolute residual becomes smaller (`shrink_rate`);
+   - mean absolute residual reduction in dB;
+   - sign-flip rate as an over-correction diagnostic.
+
+POST_HOC_DIAGNOSTIC on the existing four Twinkle A/B renders, used only to size the prospective test and **not** as independent acceptance evidence:
+- local residual std reduction: about 1.9–4.6%;
+- eligible-window shrink rate: about 68.4–79.5%;
+- mean absolute residual reduction: about 0.61–0.98 dB;
+- sign-flip rate: about 2.3–7.9%.
+
+Prospective holdout corpus:
+- male: `man1`, `man3`, `man5`;
+- female: `woman1`, `woman2`, `woman3`;
+- songs: `butterfly` and `schoolbell`;
+- total holdout files: 12;
+- the existing four `twinkle` files remain development/diagnostic files and are excluded from the holdout acceptance count.
+
+Provisional holdout gate for Amount 50, declared before rendering the holdout set:
+- at least 9 of 12 holdout files must show positive local residual std reduction;
+- median holdout `shrink_rate` must be >= 0.65;
+- median holdout mean absolute residual reduction must be >= 0.50 dB;
+- no file may exceed 0.15 sign-flip rate without manual review of the corresponding A/B;
+- integrity requirements remain finite output, exact Amount 0 delay-only identity, and no >0 dBFS sample.
+
+These thresholds are research gates, not product-final quality claims. Passing them permits continued tuning/listening; failing them sends the Auto Target / local-history design back to revision.
 
 ### VST3 latency observation
 

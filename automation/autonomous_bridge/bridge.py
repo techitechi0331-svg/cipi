@@ -554,6 +554,7 @@ def evaluate_continuation(
         return {
             "decision": "STOP", "stop_reason": stop, "accepted": None, "rejections": rejections,
             "duplicate_suppressions": duplicate_count, "human_gate_proposals": human_gate_count,
+            "decision_signals": canary_signals,
         }
 
     if _result_driven_canary(track):
@@ -569,6 +570,7 @@ def evaluate_continuation(
         "rejections": rejections,
         "duplicate_suppressions": duplicate_count,
         "human_gate_proposals": human_gate_count,
+        "decision_signals": canary_signals,
     }
 
 
@@ -630,6 +632,7 @@ def generate_job_and_action(
         "fingerprint": fingerprint,
         "loop_depth": next_depth,
         "experiment_type": str(accepted.get("experiment_type") or "EXPERIMENT"),
+        "decision_context": dict(accepted.get("decision_context") or {}) if isinstance(accepted.get("decision_context"), dict) else {},
         "selected_architecture": str((accepted.get("fingerprint_material") or {}).get("architecture") or ""),
         "authority": "CIPI_RESEARCH_JOB",
         "automatic_product_decision": False,
@@ -651,6 +654,8 @@ def generate_job_and_action(
         "loop_depth": next_depth,
         "hypothesis_id": hypothesis_id,
         "experiment_id": experiment_id,
+        "experiment_type": str(accepted.get("experiment_type") or "EXPERIMENT"),
+        "decision_context": dict(accepted.get("decision_context") or {}) if isinstance(accepted.get("decision_context"), dict) else {},
         "research_question": str(track.get("research_question") or "bounded MELON research"),
     }
     if efficiency_policy:
@@ -799,6 +804,8 @@ def _history_payload(result: dict[str, Any], artifact_hash: str, source_path: Pa
         "root_research_id": str(result.get("root_research_id") or result.get("research_id")),
         "hypothesis_id": str(result.get("hypothesis_id") or ""),
         "experiment_id": str(result.get("experiment_id") or ""),
+        "experiment_type": str(result.get("experiment_type") or ""),
+        "decision_signals": dict(result.get("decision_signals") or {}) if isinstance(result.get("decision_signals"), dict) else {},
         "loop_depth": int(result.get("loop_depth", 0)),
         "route": str(result.get("route")),
         "evidence_class": str(result.get("evidence_class")),

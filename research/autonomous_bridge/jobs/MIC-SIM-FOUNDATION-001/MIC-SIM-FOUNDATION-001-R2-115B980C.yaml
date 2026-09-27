@@ -1,0 +1,45 @@
+schema_version: '1.0'
+job_id: MIC-SIM-FOUNDATION-001-R2-115B980C
+track_id: MIC-SIM-FOUNDATION-001
+root_research_id: MIC-SIM-FOUNDATION-001
+parent_job_id: MIC-SIM-FOUNDATION-001-R1-47D07BF2
+parent_run_id: melon-funnel-mic-foundation-390e8ff82de0
+hypothesis_id: HYP-MIC-FOUNDATION-DETERMINISTIC
+experiment_id: MELON-FUNNEL-MIC-FOUNDATION-390E8FF82DE0-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- MIC-SIM-FOUNDATION-001-R1-47D07BF2
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-MIC-SIM-FOUNDATION-001-R2-115B980C
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 240
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: Replicate the deterministic Mic Foundation search with a new
+  seed and narrower bounded parameters before Foundation review.
+expected_information_gain: 0.8400000000000001
+fingerprint: 115b980ced63299897c9e984d05ddedafff2ef15cefdbd5350f37f1f73788490
+loop_depth: 2
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: MIC_CAPTURE_BASELINE_LADDER_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true
+efficiency_policy:
+  policy_id: MIC-SIM-FOUNDATION-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 5
+  full_regression_required: false

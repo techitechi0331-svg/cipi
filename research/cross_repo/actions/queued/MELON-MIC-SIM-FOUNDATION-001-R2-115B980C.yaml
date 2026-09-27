@@ -1,0 +1,42 @@
+schema_version: '1.0'
+action_id: MELON-MIC-SIM-FOUNDATION-001-R2-115B980C
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  population: 4
+  preflight_mode: fast
+  seed: 2026092702
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 4
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":5,"full_regression_required":false,"max_memory_mb":1024,"policy_id":"MIC-SIM-FOUNDATION-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"MELON-FUNNEL-MIC-FOUNDATION-390E8FF82DE0-ITERATE-1","hypothesis_id":"HYP-MIC-FOUNDATION-DETERMINISTIC","job_id":"MIC-SIM-FOUNDATION-001-R2-115B980C","loop_depth":2,"parent_job_id":"MIC-SIM-FOUNDATION-001-R1-47D07BF2","parent_run_id":"melon-funnel-mic-foundation-390e8ff82de0","research_id":"MIC-SIM-FOUNDATION-001","research_question":"Can
+    the independent Mic Simulator research stack produce deterministic, finite, machine-readable
+    and efficiently reusable capture-model evidence through CIPI and MELON before
+    any real-microphone fidelity or product-integration claim is allowed?","track_id":"MIC-SIM-FOUNDATION-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: MIC-SIM-FOUNDATION-001
+bridge_job_id: MIC-SIM-FOUNDATION-001-R2-115B980C
+continuation_fingerprint: 115b980ced63299897c9e984d05ddedafff2ef15cefdbd5350f37f1f73788490
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: MIC-SIM-FOUNDATION-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

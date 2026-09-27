@@ -1,0 +1,51 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-mic-foundation-390e8ff82de0
+processed_artifact_hash: 8767737c113d0f248c3519cca3702ef2fdb8849c3d176a0c9b67903c09f99142
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36297235100/10924960582/files/melon-funnel-mic-foundation-390e8ff82de0/macro_result.json
+track_id: MIC-SIM-FOUNDATION-001
+job_id: MIC-SIM-FOUNDATION-001-R1-47D07BF2
+parent_job_id: null
+parent_run_id: null
+root_research_id: MIC-SIM-FOUNDATION-001
+hypothesis_id: HYP-MIC-FOUNDATION-DETERMINISTIC
+experiment_id: EXP-MIC-FOUNDATION-R1
+loop_depth: 1
+route: CONTINUE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 1.0
+improvement_signal: 0.8
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 8
+  deep_validation_count: 1
+  runtime_seconds: 0.020912
+  stage2_measurement_runs: 4
+measured_candidates: 8
+stop_reason: MAX_CANDIDATES
+bundle_hash: 4dde985a0c64ccaf5e5ce2445c879089b72a9055a86fceb3ea66f92302916e6c
+efficiency_policy:
+  candidate_timeout_seconds: 5
+  full_regression_required: false
+  max_memory_mb: 1024
+  policy_id: MIC-SIM-FOUNDATION-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+efficiency_summary:
+  candidate_count: 8
+  measured_count: 8
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 4
+  deep_stage_survivors: 0
+  runner_runtime_seconds: 0.020912
+  candidates_per_runner_minute: 22953.328232593725
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.01600000000325963
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_SYNTHETIC_FOUNDATION_BATCH
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

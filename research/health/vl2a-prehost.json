@@ -1,15 +1,15 @@
 {
-  "action_id": "VL2A-PREHOST-705C24531C398EEB-R3",
+  "action_id": "VL2A-PREHOST-705C24531C398EEB-R4",
   "authority": "PREHOST_OPERATIONAL_SCHEDULING_ONLY",
   "automatic_product_decision": false,
   "automatic_release_decision": false,
   "candidate_id": "HA100X-R4-012-591362e2",
-  "conclusion": "failure",
-  "run_id": 36317368103,
-  "run_url": "https://github.com/techitechi0331-svg/VocalPrepComp/actions/runs/36317368103",
+  "conclusion": null,
+  "run_id": 36341252254,
+  "run_url": "https://github.com/techitechi0331-svg/VocalPrepComp/actions/runs/36341252254",
   "schema_version": "1.0",
   "source_ref": "integration/vl2a-v060-rc2",
-  "state": "PREHOST_FAILED",
+  "state": "PREHOST_DISPATCHED",
   "track_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
   "validation_path": "/home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36291787400/10921584956/files/melon-funnel-ha100x-shortlist-8ee4eab691cb/ha100x_shortlist_validation.json"
 }

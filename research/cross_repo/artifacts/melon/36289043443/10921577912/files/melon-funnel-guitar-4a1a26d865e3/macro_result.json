@@ -1,0 +1,170 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "cde960ff3fd2b537a8637029652d3f016f5de87ffdf66aafa7974fd7a8a431d1",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "MELON-FUNNEL-GUITAR-579F80C7AB54-ITERATE-1"
+      ],
+      "estimated_cost": {
+        "candidates": 12,
+        "runtime_seconds": 90
+      },
+      "expected_information_gain": 0.8948168589523768,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "VIRTUAL_GUITAR_LIVING_STRING_DAMPING_V1",
+        "benchmark_profile": [
+          "guitar_damping_canary_v1",
+          "living_string_state_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for GTR-DAMP-007: Narrow damping and mute-transition ranges, then replicate with a new seed before any product adoption.",
+        "input_set": "SYNTHETIC_STRING_ENERGY_DECAY_V1",
+        "objective_set": [
+          "decay_time",
+          "numerical_stability",
+          "execution_cost",
+          "mute_transition"
+        ],
+        "reference_model": "EXPLICIT_T60_EXPONENTIAL_PARAMETERIZATION",
+        "relevant_constraints": [
+          "six_persistent_strings",
+          "note_off_not_hard_gain_zero",
+          "deterministic_seed",
+          "product_integration_off",
+          "automatic_promotion_off"
+        ],
+        "research_domain": "VIRTUAL_GUITAR_STRING_DAMPING",
+        "sample_rate": 48000.0,
+        "scope": [
+          "GTR-DAMP-007",
+          "living_string_damping",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for GTR-DAMP-007: Narrow damping and mute-transition ranges, then replicate with a new seed before any product adoption.",
+      "id": "melon-funnel-guitar-4a1a26d865e3-iterate-1",
+      "novelty": 1.0,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "seed": 2026092704,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "GTR-DAMP-007",
+          "living_string_damping"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Narrow damping and mute-transition ranges, then replicate with a new seed before any product adoption."
+    }
+  ],
+  "efficiency_metrics": {
+    "deep_validation_count": 1,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.025601,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.525915705238116,
+    "measurements_executed_stage1": 12,
+    "new_semantic_candidate_rate": 1.0,
+    "stage2_measurement_runs": 4
+  },
+  "elapsed_seconds": 0.025601,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 12,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.025601,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "MELON-FUNNEL-GUITAR-579F80C7AB54-ITERATE-1",
+  "hypothesis_id": "HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING",
+  "job_id": "VIRTUAL-GUITAR-PHYSICAL-001-R2-9FA81D28",
+  "loop_depth": 2,
+  "measured_candidates": 12,
+  "novelty": 1.0,
+  "parent_job_id": "VIRTUAL-GUITAR-PHYSICAL-001-R1-REPAIR-001",
+  "parent_run_id": "melon-funnel-guitar-579f80c7ab54",
+  "precision_review": {
+    "checks": {
+      "automatic_promotion_disabled": true,
+      "bounded_candidate_count": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true,
+      "t60_parameterization_error_below_one_sample": true
+    },
+    "evidence_boundary": "MEASURED_SYNTHETIC_CANARY_NOT_PRODUCT_FIDELITY",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VIRTUAL-GUITAR-PHYSICAL-001",
+  "research_question": "Can a persistent six-string state model with explicit natural decay and damping-based note termination provide a stable first physical-guitar substrate for the Virtual Guitarist architecture while remaining deterministic, measurable, realtime-safe, and free from hard Note-Off gain-zero behavior?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.525915705238116,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 12,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VIRTUAL-GUITAR-PHYSICAL-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-guitar-4a1a26d865e3",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "6afccf65b81e51865edd64fe3deeb89e4cfbd568",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-27T02:37:39.173034+00:00",
+  "track_id": "VIRTUAL-GUITAR-PHYSICAL-001",
+  "unresolved_questions": [
+    {
+      "id": "GTR-DAMP-007",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Narrow damping and mute-transition ranges, then replicate with a new seed before any product adoption."
+    }
+  ]
+}

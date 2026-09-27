@@ -1,0 +1,189 @@
+{
+  "automatic_final_decision": false,
+  "candidate_measurements": [
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-001",
+        "mute_multiplier": 0.9832122056688466,
+        "t60_seconds": 1.9978966162642111
+      },
+      "damping_per_sample": 0.999927971055069,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079452468896557,
+      "finite": true,
+      "measured_t60_seconds": 1.9979166666666666,
+      "muted_damping_per_sample": 0.9831413859310291,
+      "t60_abs_error_seconds": 2.0050402455451533e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-002",
+        "mute_multiplier": 0.9937381930544229,
+        "t60_seconds": 1.5841560371757932
+      },
+      "damping_per_sample": 0.999909159812317,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079113311349425,
+      "finite": true,
+      "measured_t60_seconds": 1.5841666666666667,
+      "muted_damping_per_sample": 0.993647921690458,
+      "t60_abs_error_seconds": 1.0629490873492742e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-003",
+        "mute_multiplier": 0.9672378014127092,
+        "t60_seconds": 2.045843474957058
+      },
+      "damping_per_sample": 0.9999296590826334,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079214398063139,
+      "finite": true,
+      "measured_t60_seconds": 2.0458541666666665,
+      "muted_damping_per_sample": 0.9671697650184462,
+      "t60_abs_error_seconds": 1.0691709608323663e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-004",
+        "mute_multiplier": 0.9808590113578981,
+        "t60_seconds": 1.3364180780548456
+      },
+      "damping_per_sample": 0.9998923212560293,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079054675257043,
+      "finite": true,
+      "measured_t60_seconds": 1.3364375,
+      "muted_damping_per_sample": 0.9807533936915428,
+      "t60_abs_error_seconds": 1.942194515436313e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-005",
+        "mute_multiplier": 0.96095483984426,
+        "t60_seconds": 1.21809635924271
+      },
+      "damping_per_sample": 0.9998818623285719,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007078668749225998,
+      "finite": true,
+      "measured_t60_seconds": 1.2181041666666668,
+      "muted_damping_per_sample": 0.9608413148771332,
+      "t60_abs_error_seconds": 7.807423956673887e-06
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-006",
+        "mute_multiplier": 0.9903378022842468,
+        "t60_seconds": 1.4076093400747316
+      },
+      "damping_per_sample": 0.9998977669387168,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079103730232787,
+      "finite": true,
+      "measured_t60_seconds": 1.407625,
+      "muted_damping_per_sample": 0.9902365570190148,
+      "t60_abs_error_seconds": 1.5659925268307617e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-007",
+        "mute_multiplier": 0.9875690321692994,
+        "t60_seconds": 1.534391936039375
+      },
+      "damping_per_sample": 0.9999062137799569,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079028640121159,
+      "finite": true,
+      "measured_t60_seconds": 1.5343958333333334,
+      "muted_damping_per_sample": 0.9874764118027406,
+      "t60_abs_error_seconds": 3.897293958443626e-06
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-008",
+        "mute_multiplier": 0.9680629903869153,
+        "t60_seconds": 1.5551378293874472
+      },
+      "damping_per_sample": 0.9999074648516351,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079422860770357,
+      "finite": true,
+      "measured_t60_seconds": 1.5551458333333332,
+      "muted_damping_per_sample": 0.9679734105344733,
+      "t60_abs_error_seconds": 8.00394588607034e-06
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-009",
+        "mute_multiplier": 0.9876939135026429,
+        "t60_seconds": 1.3699200807152063
+      },
+      "damping_per_sample": 0.9998949544491167,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079437070736743,
+      "finite": true,
+      "measured_t60_seconds": 1.3699375,
+      "muted_damping_per_sample": 0.9875901606513949,
+      "t60_abs_error_seconds": 1.7419284793707135e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-010",
+        "mute_multiplier": 0.9831297190217779,
+        "t60_seconds": 1.7139528382463247
+      },
+      "damping_per_sample": 0.9999160388060144,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007078996019194438,
+      "finite": true,
+      "measured_t60_seconds": 1.7139583333333333,
+      "muted_damping_per_sample": 0.9830471742767262,
+      "t60_abs_error_seconds": 5.495087008533517e-06
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-011",
+        "mute_multiplier": 0.9789372214816581,
+        "t60_seconds": 1.9281048087951627
+      },
+      "damping_per_sample": 0.999925363913263,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079184328447436,
+      "finite": true,
+      "measured_t60_seconds": 1.928125,
+      "muted_damping_per_sample": 0.9788641574382855,
+      "t60_abs_error_seconds": 2.0191204837427534e-05
+    },
+    {
+      "candidate": {
+        "candidate_id": "GTR-DAMP-012",
+        "mute_multiplier": 0.956595140173271,
+        "t60_seconds": 1.7028423136061082
+      },
+      "damping_per_sample": 0.9999154910080834,
+      "estimated_ops_per_sample": 1,
+      "final_energy": 0.0007079010689621271,
+      "finite": true,
+      "measured_t60_seconds": 1.7028541666666666,
+      "muted_damping_per_sample": 0.9565142992823026,
+      "t60_abs_error_seconds": 1.1853060558397743e-05
+    }
+  ],
+  "cipi_promotion_authority": false,
+  "hypothesis_id": "HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING",
+  "job_id": "VIRTUAL-GUITAR-PHYSICAL-001-R2-9FA81D28",
+  "loop_depth": 2,
+  "product_integration_authority": false,
+  "research_question": "Can a persistent six-string state model with explicit natural decay and damping-based note termination provide a stable first physical-guitar substrate for the Virtual Guitarist architecture while remaining deterministic, measurable, realtime-safe, and free from hard Note-Off gain-zero behavior?",
+  "research_version": "melon-virtual-guitar-damping/1.0",
+  "sample_rate": 48000.0,
+  "schema_version": "1.0",
+  "summary": {
+    "all_finite": true,
+    "information_gain_signal": 0.525915705238116,
+    "max_t60_error_seconds": 2.0191204837427534e-05,
+    "median_t60_seconds": 1.56964693328162
+  },
+  "track_id": "VIRTUAL-GUITAR-PHYSICAL-001"
+}

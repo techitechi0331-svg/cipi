@@ -1,0 +1,15 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "GTR-DAMP-007",
+    "promotion_authority": false,
+    "reason": "Narrow damping and mute-transition ranges, then replicate with a new seed before any product adoption.",
+    "route": "ITERATE",
+    "scientific": {
+      "all_finite": true,
+      "evidence_boundary": "MEASURED_SYNTHETIC_CANARY_NOT_PRODUCT_FIDELITY",
+      "parameter_spread_seconds": 0.8277471157143481
+    },
+    "species": "living_string_damping"
+  }
+]

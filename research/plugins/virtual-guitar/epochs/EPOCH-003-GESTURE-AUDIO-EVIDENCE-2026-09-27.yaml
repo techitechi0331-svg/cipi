@@ -1,0 +1,67 @@
+schema_version: "1.0"
+evidence_id: VG-EPOCH-003-GESTURE-AUDIO-20260927
+project: virtual-guitar
+evidence_class: MEASURED
+source_repository: techitechi0331-svg/virtual-guitar
+source_commit: 60679529ad08afd4eab3b0409bb978e4fb7e49d3
+workflow:
+  name: guitar-core-validation
+  run_id: 36290764890
+  conclusion: success
+  runner: virtual-guitar
+measurements:
+  regression:
+    total_tests: 6
+    passed: 6
+    failed: 0
+    tests:
+      - vg_midi_decision_smoke
+      - vg_gesture_smoke
+      - vg_epoch2_smoke
+      - vg_physical_string_smoke
+      - vg_six_string_audio_smoke
+      - vg_gesture_audio_bridge_smoke
+  decision_microbenchmark:
+    events_processed: 80000
+    elapsed_ms: 106.092
+    ns_per_event: 1326.15
+    checksum: 20779808
+    realtime_claim: false
+  physical_string_render:
+    target_frequency_hz: 164.814
+    realized_frequency_hz: 164.948
+    first_window_rms: 0.224215
+    last_window_rms: 0.0729243
+    finite_output: true
+  gesture_strum_render:
+    scheduled_string_events: 3
+    rms: 0.0430984
+    peak: 0.191839
+    finite_output: true
+    listening_claim: false
+artifact:
+  artifact_id: 10921448905
+  name: guitar-research-epoch-36290764890
+  sha256: afc63c1c8f9a72e8478880267afa2539a0896ae0dbd96769b510063ef1ae31b4
+  contains:
+    - physical_string_e3.wav
+    - physical_string_metrics.json
+    - gesture_strum_em_like.wav
+    - gesture_strum_metrics.json
+    - decision_benchmark.json
+establishes:
+  - six persistent audio-string candidates can coexist and render finite audio
+  - Gesture Engine timing can schedule per-string physical-audio excitation
+  - down/up string ordering remains deterministic
+  - existing decision, gesture, articulation and physical-string regressions remain green
+does_not_establish:
+  - final chord voicing
+  - final physical-guitar realism
+  - subjective listening quality
+  - DAW realtime safety
+  - Cubase compatibility
+  - production readiness
+authority: CIPI_INTEGRATION_EPOCH_EVIDENCE
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+immutable: true

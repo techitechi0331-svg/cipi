@@ -1,0 +1,23 @@
+schema_version: "1.0"
+action_id: MIC-CORE-FOUNDATION-VALIDATION-001
+state: QUEUED
+repo_key: mic_simulator
+workflow_key: core_validation
+ref: main
+inputs:
+  job_id: MIC-CORE-FOUNDATION-VALIDATION-001
+  track_id: MIC-SIM-FOUNDATION-001
+priority: 95
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: >-
+  Run the deterministic Mic Core Foundation validation on the dedicated mic-simulator
+  runner and ingest the machine-readable Result Bundle before any reference-microphone
+  fidelity track or product integration is considered.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

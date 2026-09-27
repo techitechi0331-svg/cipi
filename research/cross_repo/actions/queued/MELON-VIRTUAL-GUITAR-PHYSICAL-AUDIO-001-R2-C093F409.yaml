@@ -28,10 +28,20 @@ max_attempts: 2
 retry_count: 0
 max_retries: 1
 depends_on_jobs: []
-depends_on_actions: []
+depends_on_actions:
+- VIRTUAL-GUITAR-V2.3-POLICY-REGRESSION-AUDIO-001
 track_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
 bridge_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
 continuation_fingerprint: c093f409a538160b6d1a1199dd74da79281bf97bd2d7025b743127f5d3325e32
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+
+policy_gate:
+  policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+  state: PENDING_REGRESSION
+  safe_handoff_from_job: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+  safe_handoff_run: melon-funnel-guitar-audio-5f84ead0ebd0
+  requirement: >-
+    Do not dispatch R2 until v2.3 Efficiency Rule is applied and policy regression passes.
+  interrupt_current_jobs: false

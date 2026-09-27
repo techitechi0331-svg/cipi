@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VL2A-PREHOST-705C24531C398EEB
+repo_key: vl2a
+workflow_key: prehost_stage
+run_id: 36315789581
+run_attempt: 1
+head_sha: e2caacc9a7afee196e8ebb298b670dd6c1ac939c
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Preserve baseline and apply finalist
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "all_candidates_finite": true,
+    "catalog_compatible_candidate_exists": true,
+    "fixed_shortlist_count_five": true,
+    "hysteresis_locked": true,
+    "nonlinearity_locked": true,
+    "product_integration_disabled": true,
+    "synthetic_stress_labelled_not_hardware_tolerance": true,
+    "turns_ratio_fixed_ten": true
+  },
+  "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+  "passed": true
+}

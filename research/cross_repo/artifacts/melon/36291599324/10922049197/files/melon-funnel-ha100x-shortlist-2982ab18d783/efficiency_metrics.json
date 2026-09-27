@@ -1,0 +1,11 @@
+{
+  "deep_validation_count": 1,
+  "duplicate_rate": 0.0,
+  "elapsed_seconds": 0.059895,
+  "hypervolume_gain": 0.0,
+  "hypervolume_improvement_rate": 0.0,
+  "information_gain_signal": 0.58,
+  "measurements_executed_stage1": 5,
+  "new_semantic_candidate_rate": 0.25,
+  "stage2_measurement_runs": 80
+}

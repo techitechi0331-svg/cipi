@@ -88,7 +88,7 @@ Persist:
 - reported latency by sample rate,
 - finite-output checks,
 - neutral Vo.Prep-only RMS delta,
-- neutral chain-vs-VoPriPro-only neutral RMS delta,
+- neutral chain-vs-VoPriPro-only RMS delta,
 - Plosive Vo.Prep-only event attenuation,
 - Plosive chain-vs-VoPriPro-only event attenuation,
 - Plosive post-event chain-vs-VoPriPro RMS delta,

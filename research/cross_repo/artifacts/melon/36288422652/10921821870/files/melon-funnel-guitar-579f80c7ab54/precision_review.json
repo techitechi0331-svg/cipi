@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "automatic_promotion_disabled": true,
+    "bounded_candidate_count": true,
+    "numerical_stability": true,
+    "product_integration_disabled": true,
+    "t60_parameterization_error_below_one_sample": true
+  },
+  "evidence_boundary": "MEASURED_SYNTHETIC_CANARY_NOT_PRODUCT_FIDELITY",
+  "passed": true
+}

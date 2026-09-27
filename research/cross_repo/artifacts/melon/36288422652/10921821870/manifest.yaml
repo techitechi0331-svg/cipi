@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36288422652
+run_attempt: 1
+artifact_id: 10921821870
+artifact_name: melon-research-36288422652
+expired: false
+size_in_bytes: 8159
+created_at: '2026-09-27T02:30:11Z'
+expires_at: '2026-10-27T02:30:09Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-guitar-579f80c7ab54/efficiency_metrics.json
+  status: ingested
+  size: 323
+  sha256: f04dade7f0eb54425c3c2a3086a2f15f1cc0830a8e2cbb428017293112b3568f
+- path: melon-funnel-guitar-579f80c7ab54/macro_result.json
+  status: ingested
+  size: 6241
+  sha256: d55a1a3e22359db9009ae54fd24da2e642893e2110c44901362a4c6b4d54bfb7
+- path: melon-funnel-guitar-579f80c7ab54/manifest.json
+  status: ingested
+  size: 350
+  sha256: 4e0c7fd0bfca9e63c7d0d4a885cf2fde0a1bb09d276a535cdc95262d9c584902
+- path: melon-funnel-guitar-579f80c7ab54/guitar_damping_measurements.json
+  status: ingested
+  size: 6728
+  sha256: 7c1bca935bf3877405fdf7d62c8c93303eb2f0f8644716d1bf2e664df8400491
+- path: melon-funnel-guitar-579f80c7ab54/precision_review.json
+  status: ingested
+  size: 334
+  sha256: e69e64033ccc43fb63a211e6a84d45dd8e481bec23396b7b428af396fe385efd
+- path: melon-funnel-guitar-579f80c7ab54/stage1_screening.json
+  status: ingested
+  size: 5573
+  sha256: 074ed00d02da0ecc42b7c609d4c73b4da6904fd6209a2d7d44fa127e319fc7f2
+- path: melon-funnel-guitar-579f80c7ab54/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-guitar-579f80c7ab54/stage3_deep_validation.json
+  status: ingested
+  size: 501
+  sha256: 2093ae4cc9769251b24b52ce82eb27f2b0464a108fee70cb6ad91983810f4ff6
+- path: melon-funnel-guitar-579f80c7ab54/summary.json
+  status: ingested
+  size: 1619
+  sha256: 8b1ceb6129878a414fb5afc703e7dec877124ba0c136d18a84e3c75abaff60ec
+archive_sha256: 4b1db8959d6cb4c25b3bb54182395aff4fb3a7b092e0dddcaac3ae92312b57c7
+ingest_status: text_evidence_ingested

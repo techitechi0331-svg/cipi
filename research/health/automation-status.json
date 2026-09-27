@@ -67,14 +67,14 @@
         "runtime_seconds": 0.045344999999999996
       },
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": {
-        "candidates": 10,
+        "candidates": 15,
         "candidates_limit": 15,
-        "loop_depth": 2,
+        "loop_depth": 3,
         "loop_depth_limit": 3,
-        "runs": 2,
+        "runs": 3,
         "runs_limit": 3,
         "runtime_limit_seconds": 270.0,
-        "runtime_seconds": 0.090394
+        "runtime_seconds": 0.174399
       }
     },
     "continuation_candidates": 15,
@@ -84,13 +84,13 @@
       "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 1,
       "VL2A-CIRCUIT-HA100X-001": 5,
-      "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 2
+      "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3
     },
     "duplicate_suppressions": 0,
     "generated_jobs": 19,
-    "human_gates": 1,
+    "human_gates": 2,
     "invalid_results": 0,
-    "melon_runs": 17,
+    "melon_runs": 18,
     "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
     "no_improvement_count": 4,
     "queued_actions": [
@@ -104,7 +104,8 @@
       "MELON-BRIDGE-CLEAN-PROOF-002": "BUDGET_EXHAUSTED",
       "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED",
       "VIRTUAL-GUITAR-PHYSICAL-001": "HUMAN_GATE",
-      "VL2A-CIRCUIT-HA100X-001": "BUDGET_EXHAUSTED"
+      "VL2A-CIRCUIT-HA100X-001": "BUDGET_EXHAUSTED",
+      "VL2A-CIRCUIT-HA100X-SHORTLIST-002": "HUMAN_GATE"
     },
     "virtual_guitar_efficiency_policy": {
       "policy_id": "VIRTUAL-GUITAR-EFFICIENCY-V2.3",
@@ -127,8 +128,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 17,
-      "dispatched": 1,
+      "completed": 18,
+      "dispatched": 0,
       "failed": 1,
       "quarantined": 0,
       "queued": 3
@@ -145,9 +146,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

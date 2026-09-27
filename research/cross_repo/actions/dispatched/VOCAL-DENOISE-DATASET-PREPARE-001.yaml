@@ -9,7 +9,7 @@ inputs:
 priority: 95
 attempts: 1
 max_attempts: 2
-retry_count: 0
+retry_count: 1
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions:
@@ -23,3 +23,12 @@ repository: techitechi0331-svg/Vocal_Denoise
 workflow_file: vocal-denoise-dataset-prepare.yml
 run_id: 36332655714
 run_url: https://github.com/techitechi0331-svg/Vocal_Denoise/actions/runs/36332655714
+last_failure_classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Prepare persistent VocalSet cache
+last_retry_at: '2026-09-27T16:27:28.428630Z'
+retry_waiting_for_attempt: 2

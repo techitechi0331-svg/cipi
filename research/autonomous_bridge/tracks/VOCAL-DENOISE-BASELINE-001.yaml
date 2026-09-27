@@ -1,0 +1,86 @@
+schema_version: "1.0"
+track_id: VOCAL-DENOISE-BASELINE-001
+enabled: true
+activation_state: ACTIVE_FOUNDATION
+root_research_id: VOCAL-DENOISE-BASELINE-001
+research_question: >-
+  Can the baseline measurement contract enforce matched Noise Reduction and preserve evidence boundaries before real-audio benchmarking?
+hypothesis_id: HYP-VOCAL-DENOISE-BASELINE-001
+hypothesis: >-
+  A deterministic baseline contract can prevent unmatched-NR comparisons and separate pipeline evidence from perceptual-quality claims.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: false
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+initial_experiment:
+  experiment_id: EXP-VOCAL-DENOISE-BASELINE-001-R1
+  experiment_type: BASELINE_FOUNDATION
+  expected_information_gain: 0.85
+  scope:
+    - vocal_denoise
+    - baseline
+    - matched_nr
+    - metric_plumbing
+  inputs:
+    seed: 2026092702
+    population: 4
+    generations: 2
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: BASELINE_FOUNDATION_CONTRACT_V1
+    architecture: VOCAL_DENOISE_BASELINE_FOUNDATION_V1
+    tested_parameters:
+      authority_bounded: true
+      matched_nr_required: true
+      product_integration: false
+    benchmark_profile:
+      - vocal_denoise_baseline_foundation_v1
+    sample_rate: 48000
+    input_set: SYNTHETIC_OR_METADATA_ONLY_UNTIL_DATA_GATE
+    reference_model: NO_PROPRIETARY_REVERSE_ENGINEERING
+    objective_set:
+      - vocal_preservation
+      - matched_noise_reduction
+      - reproducibility
+      - bounded_cost
+    relevant_constraints:
+      - no_private_audio_commit
+      - no_unlicensed_training
+      - no_auto_promotion
+      - no_auto_release
+    experiment_type: BASELINE_FOUNDATION
+    scope:
+      - vocal_denoise
+      - baseline
+      - matched_nr
+      - metric_plumbing
+efficiency_policy:
+  policy_id: VOCAL-DENOISE-BASELINE-001-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

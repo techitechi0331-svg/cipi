@@ -1,0 +1,109 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+enabled: true
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-001
+
+research_question: >-
+  Can a persistent six-string state model with explicit natural decay and damping-based
+  note termination provide a stable first physical-guitar substrate for the Virtual
+  Guitarist architecture while remaining deterministic, measurable, realtime-safe, and
+  free from hard Note-Off gain-zero behavior?
+
+hypothesis_id: HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING
+hypothesis: >-
+  A persistent six-string damping state with explicit T60 parameterization can provide
+  stable, deterministic natural decay and physically plausible mute transitions suitable
+  for the first virtual-guitar prototype without hard Note-Off gain zeroing.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - REAL_AUDIO_AB
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/virtual-guitar/inventory-2026-09-27.md
+  do_not_reopen: []
+  rejected_directions:
+    - NOTE_OFF_HARD_GAIN_ZERO
+    - RANDOM_ONLY_HUMANIZE
+    - RANDOM_UNRELATED_PERFORMANCE_NOISE
+    - COPY_DELAY_DOUBLE_TRACKING
+
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+
+initial_experiment:
+  experiment_id: EXP-VIRTUAL-GUITAR-DAMPING-R1
+  experiment_type: INITIAL_STRING_DAMPING_IDENTIFIABILITY
+  expected_information_gain: 0.95
+  scope:
+    - virtual_guitar
+    - living_string
+    - natural_decay
+    - note_termination
+  inputs:
+    seed: 2026092701
+    population: 6
+    generations: 2
+    max_candidates: 12
+    max_runtime_seconds: 90
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A persistent six-string damping state with explicit T60 parameterization can provide
+      stable, deterministic natural decay and physically plausible mute transitions suitable
+      for the first virtual-guitar prototype without hard Note-Off gain zeroing.
+    architecture: VIRTUAL_GUITAR_LIVING_STRING_DAMPING_V1
+    tested_parameters:
+      t60_seconds: bounded_broad_then_narrow
+      mute_multiplier: bounded_broad_then_narrow
+    benchmark_profile:
+      - guitar_damping_canary_v1
+      - living_string_state_v1
+    sample_rate: 48000
+    input_set: SYNTHETIC_STRING_ENERGY_DECAY_V1
+    reference_model: EXPLICIT_T60_EXPONENTIAL_PARAMETERIZATION
+    objective_set:
+      - decay_time
+      - numerical_stability
+      - execution_cost
+      - mute_transition
+    relevant_constraints:
+      - six_persistent_strings
+      - note_off_not_hard_gain_zero
+      - deterministic_seed
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: INITIAL_STRING_DAMPING_IDENTIFIABILITY
+    scope:
+      - virtual_guitar
+      - living_string
+      - natural_decay
+      - note_termination

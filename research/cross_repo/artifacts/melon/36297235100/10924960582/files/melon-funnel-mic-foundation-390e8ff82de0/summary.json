@@ -1,0 +1,55 @@
+{
+  "bridge_profile": {
+    "architecture": "MIC_CAPTURE_BASELINE_LADDER_V1",
+    "benchmark_profiles": [
+      "mic_foundation_identifiability_v1",
+      "mic_foundation_determinism_v1"
+    ],
+    "input_set": "SYNTHETIC_MIC_FOUNDATION_TARGET_V1",
+    "objective_set": [
+      "synthetic_identifiability_error",
+      "cost_proxy",
+      "determinism",
+      "numerical_stability"
+    ],
+    "reference_model": "SYNTHETIC_IDENTIFIABILITY_TARGET_NOT_REAL_MICROPHONE",
+    "relevant_constraints": [
+      "no_hardware_fidelity_claim",
+      "deterministic_seed",
+      "bounded_runtime",
+      "product_integration_off",
+      "automatic_promotion_off"
+    ],
+    "research_domain": "MIC_SIMULATOR_FOUNDATION",
+    "sample_rate": 48000
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "mic_foundation_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 8,
+    "max_runtime_seconds": 60.0,
+    "population_size": 4,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "MIC_SIMULATOR_FOUNDATION",
+  "routes": {
+    "ITERATE": 1
+  },
+  "run_id": "melon-funnel-mic-foundation-390e8ff82de0",
+  "seed": 2026092701,
+  "stage1_pareto": 4,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-27T05:32:04.433964+00:00"
+}

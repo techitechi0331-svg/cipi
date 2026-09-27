@@ -1,0 +1,41 @@
+{
+  "benchmark_time_seconds": 0.01600000000325963,
+  "build_time_seconds": 0.0,
+  "cache_hit_rate": 0.0,
+  "cache_hits": 0,
+  "cache_reuse_state": "MELON_DOMAIN_EXPERIMENT_CACHE_V1",
+  "candidate_count": 8,
+  "candidate_timeout_seconds": 5.0,
+  "candidates_per_runner_minute": 22953.328232593725,
+  "cheap_stage_survivors": 4,
+  "dedup_reuse_state": "MELON_SEMANTIC_PAYLOAD_FINGERPRINT_V1",
+  "deep_stage_survivors": 0,
+  "deep_validation_count": 1,
+  "duplicate_hits": 0,
+  "duplicate_rate": 0.0,
+  "elapsed_seconds": 0.020912,
+  "full_regression_required": false,
+  "full_regression_result": "NOT_REQUIRED_FOR_SYNTHETIC_FOUNDATION_BATCH",
+  "hypervolume_gain": 0.0,
+  "hypervolume_improvement_rate": 0.0,
+  "information_gain_signal": 0.8,
+  "max_memory_mb": 1024.0,
+  "measured_count": 8,
+  "measurements_executed_stage1": 8,
+  "new_semantic_candidate_rate": 1.0,
+  "peak_python_memory_mb": 0.040164947509765625,
+  "quality_cost_objectives": [
+    "synthetic_identifiability_error",
+    "estimated_cost_units"
+  ],
+  "quality_cost_pareto_ids": [
+    "MIC-FND-001",
+    "MIC-FND-002",
+    "MIC-FND-003",
+    "MIC-FND-004"
+  ],
+  "queue_wait_seconds": null,
+  "rejected_before_measurement": 0,
+  "runner_runtime_seconds": 0.020912,
+  "stage2_measurement_runs": 4
+}

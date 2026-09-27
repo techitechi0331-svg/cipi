@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36297235100
+run_attempt: 1
+artifact_id: 10924960582
+artifact_name: melon-research-36297235100
+expired: false
+size_in_bytes: 10468
+created_at: '2026-09-27T05:32:08Z'
+expires_at: '2026-10-27T05:32:06Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-mic-foundation-390e8ff82de0/efficiency_metrics.json
+  status: ingested
+  size: 1306
+  sha256: 52b1de643817c131a00c590a9f2117e411c23bfb6e460a896d53768ca6b772bd
+- path: melon-funnel-mic-foundation-390e8ff82de0/macro_result.json
+  status: ingested
+  size: 8390
+  sha256: 8767737c113d0f248c3519cca3702ef2fdb8849c3d176a0c9b67903c09f99142
+- path: melon-funnel-mic-foundation-390e8ff82de0/manifest.json
+  status: ingested
+  size: 338
+  sha256: 457ce8c7082ff8aa2ca0de6524d69bcab7ae3c7d6be0643ea5a68a4fb2f2071f
+- path: melon-funnel-mic-foundation-390e8ff82de0/mic_foundation_measurements.json
+  status: ingested
+  size: 8156
+  sha256: 699260b4a28f6d468807fb35b71f42942ec0b1c6a605cec891bc45982c238fd6
+- path: melon-funnel-mic-foundation-390e8ff82de0/precision_review.json
+  status: ingested
+  size: 489
+  sha256: 5f9b84857d0eb0fb7fb780c95a8c5e2540749062f18cae200353d89f9894b1f1
+- path: melon-funnel-mic-foundation-390e8ff82de0/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-mic-foundation-390e8ff82de0/stage3_deep_validation.json
+  status: ingested
+  size: 554
+  sha256: 8c54b635ccdc3f9b97318bc544c4bfed86e6bf675428d96f2ba2049c68e5ddf6
+- path: melon-funnel-mic-foundation-390e8ff82de0/stage1_screening.json
+  status: ingested
+  size: 6837
+  sha256: 9f5d0c43395d2a72695f3123973a62be112d5c5291849d9f0e1608b836654df0
+- path: melon-funnel-mic-foundation-390e8ff82de0/summary.json
+  status: ingested
+  size: 1638
+  sha256: 7de6c1a79d9058590d688b17db6e641e2b8142d15cc91042103a52a1f510d968
+archive_sha256: cf8dff9037edec812f485e8b1d585c6ad846934a7c9c6ad603015e352a3bb7ca
+ingest_status: text_evidence_ingested

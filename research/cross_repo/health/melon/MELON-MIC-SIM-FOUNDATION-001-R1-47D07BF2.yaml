@@ -3,10 +3,10 @@ action_id: MELON-MIC-SIM-FOUNDATION-001-R1-47D07BF2
 repo_key: melon
 workflow_key: research
 runner_class: self-hosted
-state: QUEUED
+state: COMPLETED
 run_id: 36297235100
-run_status: queued
-run_conclusion: null
+run_status: completed
+run_conclusion: success
 since: '2026-09-27T05:27:04Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

@@ -1,0 +1,50 @@
+schema_version: "1.0"
+analysis_id: VG-EFF-V2.3-GAP-20260927
+policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+basis:
+  - Virtual_Guitar_CIPI_MELON_Integrated_Instruction_v2.2
+  - Virtual_Guitar_Efficiency_Upgrade_Instruction_v2.3
+classification:
+  ALREADY_EXISTS:
+    - MELON progressive research funnel stages
+    - MELON persistent measurement cache
+    - MELON semantic duplicate reuse
+    - MELON Pareto and epsilon-Pareto machinery
+    - MELON multi-seed validation
+    - CIPI No-Wait / Work-Stealing
+    - CIPI Evidence Authority
+    - CIPI Cross-Repo Orchestrator
+    - dedicated virtual-guitar self-hosted runner
+    - current guitar research already batches multiple candidates in one MELON run
+  PARTIAL:
+    - guitar-specific structural constraints
+    - guitar-specific quality/cost objectives
+    - candidate failure isolation
+    - stable-runner performance evidence
+    - workflow path filtering
+    - efficiency metrics
+    - Integration Epoch full-regression marking
+  MISSING:
+    - machine-readable Selective Test Mapping for virtual-guitar
+    - normalized v2.3 Result Bundle efficiency fields
+    - explicit per-batch max_memory budget
+    - explicit per-candidate timeout budget
+    - policy-gated Safe Handoff state in autonomous continuation records
+  CONFLICT:
+    - item: guitar-specific adapter bypasses parts of the generic MELON cache/dedup/Pareto funnel
+      resolution: >-
+        Do not create a second cache/dedup/Pareto system. Adapt guitar-specific candidate
+        identity, constraints and objectives into reusable MELON primitives or compatible
+        adapter hooks, while preserving existing evidence boundaries.
+implementation_order:
+  - SAFE_HANDOFF_POLICY_GATE
+  - RESULT_BUNDLE_EFFICIENCY_FIELDS
+  - GUITAR_CONSTRAINTS_AND_OBJECTIVES
+  - CANDIDATE_BATCH_FAILURE_ISOLATION
+  - SELECTIVE_TEST_MAPPING
+  - STABLE_RUNNER_BENCHMARK_FIELDS
+  - EPOCH_FULL_REGRESSION
+  - CACHE_DEDUP_PARETO_ADAPTER_REUSE
+authority: CIPI_EFFICIENCY_GAP_ANALYSIS
+automatic_product_decision: false
+automatic_knowledge_promotion: false

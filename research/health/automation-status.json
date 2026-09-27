@@ -91,11 +91,9 @@
     "human_gates": 2,
     "invalid_results": 0,
     "melon_runs": 18,
-    "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
+    "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 4,
-    "queued_actions": [
-      "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409"
-    ],
+    "queued_actions": [],
     "rejected_continuations": 3,
     "result_missing": 0,
     "runner_wait": 0,
@@ -126,34 +124,37 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
-      "kind": "CROSS_REPO",
-      "priority": 80,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 18,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 1,
       "quarantined": 0,
-      "queued": 3
+      "queued": 2
     }
   },
-  "human_gates": [],
+  "human_gates": [
+    {
+      "gates": [
+        "FINAL_SUBJECTIVE_PICKUP_TONE",
+        "COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED"
+      ],
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001"
+    }
+  ],
   "local": {
     "blocked_count": 0,
     "claimed_branches": [],
     "claimed_count": 0,
     "claimed_jobs": [],
-    "dependency_blocked_count": 0,
+    "dependency_blocked_count": 1,
     "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
+    "action_id": null,
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "ready_external_action"
+    "reason": "reconcile_dispatched_action"
   }
 }

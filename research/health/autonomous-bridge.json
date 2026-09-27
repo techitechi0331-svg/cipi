@@ -158,10 +158,9 @@
   "human_gates": 3,
   "invalid_results": 0,
   "melon_runs": 22,
-  "next_scheduler_action": "MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
+  "next_scheduler_action": "MELON-VOCAL-DENOISE-DATASET-001-R1-AE7272C3",
   "no_improvement_count": 4,
   "queued_actions": [
-    "MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
     "MELON-VOCAL-DENOISE-DATASET-001-R1-AE7272C3",
     "MELON-VOCAL-DENOISE-PRESERVATION-001-R1-0D4E53D3"
   ],
@@ -276,9 +275,9 @@
     },
     "VOCAL-DENOISE-BASELINE-001": {
       "job_id": "VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
-      "reason": "EXTERNAL_ACTION_QUEUED",
+      "reason": "EXTERNAL_ACTION_DISPATCHED",
       "scheduler_eligible": true,
-      "state": "READY"
+      "state": "WAITING_EXTERNAL"
     },
     "VOCAL-DENOISE-DATASET-001": {
       "job_id": "VOCAL-DENOISE-DATASET-001-R1-AE7272C3",

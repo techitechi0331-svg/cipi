@@ -1,0 +1,45 @@
+schema_version: "1.0"
+evidence_id: GUITAR-E2E-PUSH-CANARY-36289877965
+project: virtual-guitar
+evidence_class: MEASURED
+source_repository: techitechi0331-svg/virtual-guitar
+source_commit: 396da34aefef886b99421644d71e15d9a9ae9ee6
+workflow:
+  name: guitar-canary
+  run_id: 36289877965
+  conclusion: success
+  runner: virtual-guitar
+  runner_labels:
+    - self-hosted
+    - Windows
+    - X64
+job_id: GUITAR-E2E-PUSH-CANARY
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+artifact:
+  artifact_id: 10922031799
+  name: guitar-research-canary-36289877965
+  sha256: 9775cb3ea3313c2ab8de9eefb21202ef8646ee0b0241c3aae7716b2d45fca88f
+result:
+  deterministic_damping_canary: PASS
+  result_bundle_generated: true
+  artifact_uploaded: true
+  production_integration: false
+  automatic_knowledge_promotion: false
+boundary:
+  cross_repo_auto_ingest: BLOCKED_EXTERNAL
+  reason: >-
+    CIPI_CROSS_REPO_TOKEN still receives 404 for the private virtual-guitar workflow.
+    This evidence was observed through the authorized GitHub application and is recorded
+    in CIPI without claiming that automated cross-repo intake is repaired.
+establishes:
+  - dedicated virtual-guitar runner executes the bounded canary
+  - Result Bundle generation succeeds
+  - machine-readable evidence artifact upload succeeds
+does_not_establish:
+  - automated CIPI token access to virtual-guitar
+  - product sound quality
+  - final damping parameters
+authority: CIPI_EXTERNAL_WORKFLOW_EVIDENCE
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+immutable: true

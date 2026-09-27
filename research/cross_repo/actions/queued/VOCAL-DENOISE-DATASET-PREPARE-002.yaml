@@ -1,0 +1,20 @@
+schema_version: "1.0"
+action_id: VOCAL-DENOISE-DATASET-PREPARE-002
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: dataset_prepare
+ref: main
+inputs:
+  force_refresh: "false"
+priority: 96
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+  - VOCAL-DENOISE-PREFLIGHT-001
+reason: >-
+  Retry VocalSet dataset preparation after fixing nested singer-id parsing.
+  Reuse the verified archive and extracted cache when present, rebuild the singer-disjoint split manifest,
+  and upload only bounded metadata evidence.

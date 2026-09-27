@@ -196,10 +196,9 @@
   "human_gates": 3,
   "invalid_results": 0,
   "melon_runs": 30,
-  "next_scheduler_action": "MELON-VOCAL-DENOISE-ARCH-001-R1-44CF01E6",
+  "next_scheduler_action": "MELON-VOCAL-DENOISE-LOSS-001-R1-42E1C279",
   "no_improvement_count": 4,
   "queued_actions": [
-    "MELON-VOCAL-DENOISE-ARCH-001-R1-44CF01E6",
     "MELON-VOCAL-DENOISE-LOSS-001-R1-42E1C279"
   ],
   "registered_tracks": [
@@ -318,9 +317,9 @@
     },
     "VOCAL-DENOISE-ARCH-001": {
       "job_id": "VOCAL-DENOISE-ARCH-001-R1-44CF01E6",
-      "reason": "EXTERNAL_ACTION_QUEUED",
+      "reason": "EXTERNAL_ACTION_DISPATCHED",
       "scheduler_eligible": true,
-      "state": "READY"
+      "state": "WAITING_EXTERNAL"
     },
     "VOCAL-DENOISE-BASELINE-001": {
       "reason": "DUPLICATE_ONLY",

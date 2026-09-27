@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
-state: FAILED
+state: QUEUED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -44,18 +44,24 @@ policy_gate:
     embedded efficiency_policy context and preserve the normal CIPI Result Bundle
     -> Evidence Intake -> Evaluation -> Continuation Decision boundary.
   interrupt_current_jobs: false
-previous_run_id: 36292230386
-dispatched_at: '2026-09-27T03:45:40.000649Z'
-repository: techitechi0331-svg/melon
-workflow_file: melon-research.yml
-run_id: 36292342971
-run_url: https://github.com/techitechi0331-svg/melon/actions/runs/36292342971
-conclusion: failure
-completed_at: '2026-09-27T03:46:06Z'
-failure_classification:
-  category: UNKNOWN_FAILURE
-  retry_safe: false
-  reason: failure is not safely classifiable as transient
-  conclusion: failure
-  failing_steps:
-  - Run staged MELON research from manual inputs
+
+repair_history:
+  - failed_run_id: 36292342971
+    failed_at: '2026-09-27T03:46:06Z'
+    original_failure_category: UNKNOWN_FAILURE
+    root_cause: MISSING_GUITAR_AUDIO_SEMANTIC_IDENTITY_HELPER_AND_MEMORY_PROXY
+    root_cause_evidence: >-
+      MELON physical-audio R2 raised NameError for _semantic_candidate_identity.
+      Review also found the v2.3 Pareto path referenced estimated_delay_memory_bytes
+      without producing that metric.
+    fixed_in_melon_commit: 7cc0b6055d649a962e803becf2b120af478debee
+    validation_run_id: 36314407945
+    validation_result: PASS
+    guitar_audio_regression_step: PASS
+    full_melon_validation: PASS
+    same_failed_sha_rerun_allowed: false
+    recovery_mode: FRESH_DISPATCH_ON_FIXED_MAIN
+
+repair_state: READY_AFTER_VALIDATED_CODE_FIX
+repair_authority: CIPI_MANUAL_EVIDENCE_PRESERVING_REQUEUE
+current_job_interrupted: false

@@ -1,0 +1,40 @@
+schema_version: "1.0"
+decision_id: VG-EPOCH-003-GESTURE-AUDIO-DECISION
+project: virtual-guitar
+decision: CONTINUE_PROTOTYPE
+source_evidence:
+  - VG-EPOCH-003-PHYSICAL-AUDIO-20260927
+  - VG-EPOCH-003-GESTURE-AUDIO-20260927
+lane_review:
+  - topic: PHYSICAL-STRING-AUDIO-V01
+    decision: KEEP
+    reason: waveform substrate works but MELON parameter research is still active
+  - topic: PICK-EXCITATION-TO-WAVEFORM-V01
+    decision: COMPLETE_FOR_NOW
+    reason: causal pick energy/position reaches deterministic waveform generation
+  - topic: OFFLINE-AUDIO-MEASUREMENT-HARNESS-V01
+    decision: KEEP
+    reason: remains required while physical-audio candidates are compared
+  - topic: GESTURE-TO-SIX-STRING-AUDIO-V01
+    decision: COMPLETE_FOR_NOW
+    reason: sample-offset string scheduling and finite multi-string render are regression-tested
+next_ready_topics:
+  - CHORD-DETECTION-AND-GUITAR-VOICING-V01
+  - HAMMER-PULL-SLIDE-TRANSITION-V01
+  - PHYSICAL-STRING-PARAMETER-RESEARCH-CONTINUATION
+priority_note: >-
+  Keep the active MELON physical-audio track running. In parallel, chord/voicing is the
+  highest independent prototype blocker for turning simultaneous MIDI notes into a
+  guitar-playable multi-string performance. Hammer/Pull/Slide remains READY after that
+  dependency boundary.
+human_gate_policy:
+  do_not_bypass:
+    - REAL_AUDIO_AB
+    - HUMAN_LISTENING
+    - CUBASE_HOST_CONFIRMATION
+    - PRODUCT_ADOPTION_DECISION
+    - RELEASE_DECISION
+authority: CIPI_INTEGRATION_EPOCH_EVALUATION
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+production_integration: false

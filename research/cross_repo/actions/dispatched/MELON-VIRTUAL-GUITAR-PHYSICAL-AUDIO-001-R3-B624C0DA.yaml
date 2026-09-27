@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R3-B624C0DA
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     for the Virtual Guitar research prototype while keeping audible realism and product
     adoption behind Human/CIPI gates?","track_id":"VIRTUAL-GUITAR-PHYSICAL-AUDIO-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -41,3 +41,7 @@ policy_gate:
   state: APPLIED
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36314908516
+dispatched_at: '2026-09-27T11:13:17.174336Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

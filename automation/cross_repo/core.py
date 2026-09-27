@@ -270,6 +270,8 @@ def select_queued_action(root: Path, registry: dict[str, Any]) -> tuple[Path, di
         errors = validate_action(action, registry)
         if errors:
             raise ValueError(f"{path}: " + "; ".join(errors))
+        if action.get("blocked_external") is True:
+            continue
         if not action_dependencies_ready(root, action):
             continue
         key = (str(action["repo_key"]), str(action["workflow_key"]))

@@ -85,6 +85,29 @@ tracks:
     next_dispatch_policy: V2_3_ACTIVE
     current_job_interrupted: false
 
+  VIRTUAL-GUITAR-PHYSICAL-REALISM-003:
+    state: APPLIED
+    reason: >-
+      Track 003 supersedes Track 002 after the phased continuation-identity repair.
+      MELON v1.1 validation passed before activation, so first dispatch starts inside
+      the v2.3 policy boundary without interrupting any existing guitar job.
+    safe_handoff:
+      created_after_policy_activation: true
+      prior_job_to_interrupt: false
+      supersedes_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-002
+      incident: VG-REALISM-CONTINUATION-IDENTITY-20260928-001
+    rollout_validation:
+      melon_realism_v1_1:
+        commit: 6b28379daa39aebad1379ef84d45f84efb9e7a4e
+        run_id: 36332136015
+        state: PASS
+        full_melon_tests: PASS
+        guitar_realism_regression: PASS
+        deterministic_smoke: PASS
+        bounded_discovery_smoke: PASS
+    next_dispatch_policy: V2_3_ACTIVE
+    current_job_interrupted: false
+
 state_legend:
   APPLIED: v2.3 is active for the track at a completed Safe Handoff Point
   PENDING_REGRESSION: Safe Handoff reached; next dispatch is held only for v2.3 rollout regression

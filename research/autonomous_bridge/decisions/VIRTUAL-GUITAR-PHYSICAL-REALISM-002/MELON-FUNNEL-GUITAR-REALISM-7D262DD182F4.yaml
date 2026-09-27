@@ -1,0 +1,51 @@
+schema_version: '1.0'
+decision_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-002:melon-funnel-guitar-realism-7d262dd182f4:continuation
+track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-002
+run_id: melon-funnel-guitar-realism-7d262dd182f4
+job_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-002-R2-BD875595
+loop_depth: 2
+decision: STOP
+stop_reason: DUPLICATE_ONLY
+continuation_fingerprint: null
+accepted_candidate_id: null
+selected_architecture: null
+rejections:
+- candidate_id: melon-funnel-guitar-realism-7d262dd182f4-iterate-1
+  reason: DUPLICATE_RESEARCH
+  fingerprint: bd875595affccf90b311a8d510ad968d051e44f1f5f034cfcc11c5e71d9495fe
+proposal_count: 1
+duplicate_suppressions: 1
+human_gate_proposals: 0
+processed_artifact_hash: 0d5e6a4953350643e5c4f2e7fd68b4b911d7f12c00c7e8b74d6e59456936c0e8
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+  policy_version: '2.3'
+  state: APPLIED
+  max_guitar_runner_jobs: 1
+  batch_class: CHEAP
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 5
+  full_regression_at_epoch_end: true
+  selective_test_mapping: true
+  current_main_recheck_required: true
+  adapter_validation_run: 36330853874
+  adapter_validation_commit: e46a9b19298bdb32feee307a0fccdc9f22d1c7a8
+efficiency_summary:
+  candidate_count: 16
+  measured_count: 16
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 16
+  deep_stage_survivors: 0
+  runner_runtime_seconds: 0.089942
+  candidates_per_runner_minute: 10673.545173556293
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.07799999999406282
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_CHEAP_SYNTHETIC_BATCH
+authority: CIPI_CONTINUATION_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

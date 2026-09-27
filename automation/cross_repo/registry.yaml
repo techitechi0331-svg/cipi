@@ -299,8 +299,14 @@ repositories:
         artifact_ingest: metadata_and_text
         allowed_inputs:
           - experiment_id
+          - model_run_id
+          - seed
+          - max_files
         required_inputs:
           - experiment_id
+          - model_run_id
+          - seed
+          - max_files
       export:
         file: vocal-denoise-export.yml
         dispatch: true

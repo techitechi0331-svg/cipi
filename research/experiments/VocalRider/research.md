@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `d6cd407751987eb885c26fd1b7c60a09aa5500d9`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `864653e57eadbad544b88ef877947d5cdabd59e6`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -92,6 +92,20 @@ Standalone-core deterministic matrix, nominal 48 kHz / Amount 50%:
 This promotes sample-rate stability, finite-state behaviour, range bounding, silence return and the synthetic short-burst freeze from HYPOTHESIS to MEASURED for the standalone core.
 
 
+Dedicated-Repo main workflow run `36280483276` after the boost-only Headroom Guard test correction:
+- portable Git/CMake setup: PASS;
+- configure: PASS;
+- deterministic core tests: PASS;
+- processor latency/state tests: PASS;
+- measurement renderer and matrix: PASS;
+- VST3 build and artifact collection: PASS;
+- pluginval scan/open/program tests: PASS;
+- pluginval strictness-5 GUI Editor phase: crashed with Windows exit `-1073741819` on the self-hosted service runner;
+- Steinberg validator was skipped only because the workflow was fail-fast after pluginval.
+
+The pluginval crash is currently classified as an environment-vs-editor issue, not a DSP failure. The runner is installed as a Windows service, so the next service-CI revision uses pluginval's supported `--skip-gui-tests` option while retaining GUI validation as a separate interactive/Cubase gate.
+
+
 ## MEASURED — HUST Solfege real-vocal objective validation
 
 Dedicated-Repo workflow `vocal-rider-real-vocal` run `36199972021` completed successfully on the self-hosted Windows runner.
@@ -167,6 +181,31 @@ Provisional holdout gate for Amount 50, declared before rendering the holdout se
 - integrity requirements remain finite output, exact Amount 0 delay-only identity, and no >0 dBFS sample.
 
 These thresholds are research gates, not product-final quality claims. Passing them permits continued tuning/listening; failing them sends the Auto Target / local-history design back to revision.
+
+
+## MEASURED — prospective 12-file holdout result
+
+Draft PR #1 executed the predeclared 12-file HUST holdout gate without changing product DSP.
+
+Amount 50 result:
+- 12 / 12 holdout files showed positive local residual-standard-deviation reduction;
+- median shrink rate: 0.6933;
+- median mean absolute residual reduction: 0.4653 dB;
+- maximum sign-flip rate: 0.0984;
+- cases containing >0 dBFS samples: 0;
+- overall predeclared holdout gate: **FAIL**, solely because the median mean absolute residual reduction missed the >=0.50 dB requirement.
+
+Interpretation:
+- directionality and local leveling consistency are promising;
+- the current 50% standard setting is slightly below the predeclared correction-depth target;
+- the threshold is **not** relaxed after seeing the result.
+
+Exploratory diagnostic from the same rendered matrix:
+- Amount 75 reaches approximately 0.518 dB median mean absolute residual reduction while retaining positive local residual-std reduction across all 12 holdout files;
+- this suggests the architecture is viable and that standard Amount 50 strength may be conservative;
+- because this comparison uses already-observed holdout data, it is HYPOTHESIS-generating only and cannot be used as independent acceptance evidence for a retuned Amount 50.
+
+Any Amount 50 strength revision must be evaluated on a fresh, previously unused validation set.
 
 ### VST3 latency observation
 
@@ -385,24 +424,23 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 4. 50 ms lookahead must be compared against 0 / 20 / 100 ms on real vocals.
 5. Auto Target must be tested on first-phrase edge cases and songs with intentional section-level dynamics.
 6. A dedicated whisper condition is required so breath rejection does not reject legitimate airy singing.
-7. Real-vocal objective validation has completed, but subjective level-matched listening, Steinberg validator and Cubase Pro 14 validation remain pending.
+7. Real-vocal objective validation and the 12-file prospective holdout have completed; subjective level-matched listening, Steinberg validator and Cubase Pro 14 validation remain pending.
 8. pluginval passed on the prior CIPI research branch, and the explicit post-prepare processor gate reports the intended 50 ms latency across 44.1/48/88.2/96/192 kHz and 32–1024 sample blocks; Cubase compensation is still unverified.
 9. Intentional macro-dynamics preservation remains an explicit measurement target and must be rerun in the dedicated Repo CI after the current Headroom Guard regression fix.
-10. The HUST four-file Amount 50 result does not show consistent 400 ms stabilization; a better real-vocal effectiveness metric and/or Auto Target revision is required before parameter promotion.
+10. The prospective 12-file local-leveling gate failed only the correction-depth criterion (0.4653 dB vs 0.50 dB target); any Amount 50 retune requires a fresh unused validation set.
 11. Female real-vocal cases exercised ~600 dB/s peak-safety ride reduction; determine by measurement/listening whether this guard action is transparent or too compressor-like.
 
 ## Current location
 
-Dedicated product Repo measurement/revision stage. The self-hosted runner is active. HUST real-vocal objective validation passes its integrity/rendering gates, but its current 400 ms statistics do not demonstrate consistent leveling effectiveness. The Headroom Guard boost-only fix is exercised successfully by the real-vocal Amount 0 path; dedicated deterministic guard/latency regression and the full research gate are being rerun after CI-environment fixes. Musical-effectiveness validation and listening remain open.
+Dedicated product Repo measurement/revision stage. The self-hosted runner is active. Main deterministic/core/processor/measurement/VST3 gates now pass. The prospective 12-file holdout shows consistent local leveling but narrowly misses the predeclared Amount 50 correction-depth target. pluginval reaches the GUI Editor phase and crashes on the Windows service runner, so service CI is being rerun with official non-GUI mode while interactive GUI/Cubase validation remains separate. Musical-effectiveness tuning and listening remain open.
 
 ## Next stage
 
-1. Finish the dedicated-Repo deterministic/core/plugin regression suite, including boost-only Headroom Guard and exact delayed-unity latency tests.
-2. Rerun intentional section-dynamics and event-protection probes on the corrected build.
-3. Refine the real-vocal effectiveness measurement so it distinguishes useful local phrase leveling from intentional song-level dynamics; use the existing HUST A/B set as the first corpus.
-4. If the refined metric confirms weak or inconsistent leveling, revise Auto Target / local-history behavior before changing exposed controls.
-5. Run pluginval and the pinned Steinberg VST3 validator.
-6. Keep level-matched human listening and Cubase Pro 14 scan/instantiate/playback/automation/save-reload as final human gates.
+1. Complete pluginval strictness 5 non-GUI validation and the pinned Steinberg VST3 validator on the service runner.
+2. Preserve the 12-file holdout result as MEASURED and do not retune against it.
+3. Design a fresh unused real-vocal validation set for any Amount 50 strength revision.
+4. Rerun intentional section-dynamics and event-protection probes after any strength change.
+5. Keep level-matched human listening and Cubase Pro 14 scan/instantiate/playback/automation/save-reload as final human gates.
 
 ## Why next
 

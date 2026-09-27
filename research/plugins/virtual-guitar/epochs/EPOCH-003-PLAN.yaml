@@ -1,0 +1,64 @@
+schema_version: "1.0"
+decision_id: VG-EPOCH-002-INTEGRATION-DECISION
+project: virtual-guitar
+decision: CONTINUE_PROTOTYPE
+source_evidence:
+  - VG-EPOCH-002-INTEGRATION-20260927
+  - VG-EPOCH-002-GESTURE-20260927
+  - GUITAR-E2E-PUSH-CANARY-36289877965
+lane_review:
+  - lane: A
+    topic: Articulation State Machine v0.1
+    decision: COMPLETE_FOR_NOW
+    reason: explicit deterministic termination transitions are now regression-tested
+  - lane: B
+    topic: Living String Observability v0.2
+    decision: COMPLETE_FOR_NOW
+    reason: required persistent state fields are observable and regression-tested
+  - lane: C
+    topic: MIDI Decision Harness v0.2
+    decision: KEEP
+    reason: remains the integration regression backbone
+  - lane: D
+    topic: Gesture-to-String Bridge v0.1
+    decision: COMPLETE_FOR_NOW
+    reason: gesture events reach persistent strings while timing remains observable
+
+next_epoch:
+  epoch_id: GUITAR-EPOCH-003
+  objective: >-
+    Cross the next prototype-blocking boundary by producing deterministic offline audio
+    from a physical-string research candidate without claiming final guitar realism.
+  max_logical_lanes: 4
+  max_guitar_runner_jobs: 1
+  lanes:
+    - lane: A
+      job: PHYSICAL-STRING-AUDIO-V01
+      reason: human-listening and real-audio AB are impossible until the string state can generate waveform audio
+    - lane: B
+      job: PICK-EXCITATION-TO-WAVEFORM-V01
+      reason: preserve causal linkage between picking decisions and string excitation
+    - lane: C
+      job: OFFLINE-AUDIO-MEASUREMENT-HARNESS-V01
+      reason: measure finite output, decay, level, pitch proxy and CPU before any listening claim
+    - lane: D
+      job: MIDI-DECISION-HARNESS-V03
+      reason: protect existing performance-decision behavior while adding audio generation
+research_boundary:
+  preferred_first_candidate: DETERMINISTIC_PLUCKED_STRING_DELAY_LOOP
+  candidate_status: HYPOTHESIS
+  rationale: >-
+    A bounded deterministic plucked-string delay-loop candidate can test the audio/render
+    pipeline, decay behavior and realtime feasibility. It is not promoted as the final
+    physical-guitar architecture.
+human_gate_policy:
+  do_not_bypass:
+    - REAL_AUDIO_AB
+    - HUMAN_LISTENING
+    - CUBASE_HOST_CONFIRMATION
+    - PRODUCT_ADOPTION_DECISION
+    - RELEASE_DECISION
+authority: CIPI_INTEGRATION_EPOCH_EVALUATION
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+production_integration: false

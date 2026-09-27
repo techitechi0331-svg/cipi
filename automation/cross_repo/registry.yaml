@@ -225,4 +225,15 @@ repositories:
         required_inputs:
           - job_id
           - track_id
+      core_validation:
+        file: mic-core-validation.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - job_id
+          - track_id
+        required_inputs:
+          - job_id
+          - track_id
 

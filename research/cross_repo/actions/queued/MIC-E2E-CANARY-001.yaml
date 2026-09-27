@@ -1,4 +1,4 @@
-schema_version: "1.0"
+schema_version: '1.0'
 action_id: MIC-E2E-CANARY-001
 state: QUEUED
 repo_key: mic_simulator
@@ -14,10 +14,14 @@ retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions: []
-reason: >-
-  Lightweight Mic Simulator end-to-end canary. Validate CIPI Cross-Repo dispatch,
-  dedicated mic-simulator self-hosted runner execution, Result Bundle return,
-  and metadata/text artifact intake before any autonomous microphone research is enabled.
+reason: Lightweight Mic Simulator end-to-end canary. Validate CIPI Cross-Repo dispatch,
+  dedicated mic-simulator self-hosted runner execution, Result Bundle return, and
+  metadata/text artifact intake before any autonomous microphone research is enabled.
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+blocked_external: true
+blocked_reason: REPOSITORY_OR_WORKFLOW_ACCESS_UNAVAILABLE
+blocked_at: '2026-09-27T04:37:04.832666Z'
+last_dispatch_error: 'GitHub API GET https://api.github.com/repos/techitechi0331-svg/mic_simulator/actions/workflows/mic-canary.yml/runs?per_page=5
+  failed: 404 {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/workflow-runs#list-workflow-runs-for-a-workflow","status":"404"}'

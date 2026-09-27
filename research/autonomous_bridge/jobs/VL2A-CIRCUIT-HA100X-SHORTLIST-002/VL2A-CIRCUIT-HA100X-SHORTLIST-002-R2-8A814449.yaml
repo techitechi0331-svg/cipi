@@ -1,0 +1,39 @@
+schema_version: '1.0'
+job_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449
+track_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+root_research_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+parent_job_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002-R1-151E6B71
+parent_run_id: melon-funnel-ha100x-shortlist-beecb3d6e20f
+hypothesis_id: HYP-VL2A-HA100X-SHORTLIST-ROBUSTNESS
+experiment_id: MELON-FUNNEL-HA100X-SHORTLIST-BEECB3D6E20F-ITERATE-1
+priority: 70
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VL2A-CIRCUIT-HA100X-SHORTLIST-002-R1-151E6B71
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 15
+  max_runtime: 270
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: 'Shortlist validation round 1: current leader HA100X-R4-012-591362e2
+  has synthetic stress catalog pass fraction 1.000; repeat with a denser deterministic
+  stress sample before human review.'
+expected_information_gain: 0.685
+fingerprint: 8a814449353a1c471c25430ed6ece38b667d82408c34914d8d299e2a0f629ed9
+loop_depth: 2
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: HA100X_LINEAR_LTI_LOAD_AWARE_SHORTLIST
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

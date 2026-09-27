@@ -1,0 +1,37 @@
+schema_version: '1.0'
+action_id: MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 1
+  max_candidates: 5
+  max_runtime_seconds: 90
+  population: 5
+  preflight_mode: fast
+  seed: 2026092712
+  stage2_archive_limit: 3
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 3
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"experiment_id":"MELON-FUNNEL-HA100X-SHORTLIST-BEECB3D6E20F-ITERATE-1","hypothesis_id":"HYP-VL2A-HA100X-SHORTLIST-ROBUSTNESS","job_id":"VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449","loop_depth":2,"parent_job_id":"VL2A-CIRCUIT-HA100X-SHORTLIST-002-R1-151E6B71","parent_run_id":"melon-funnel-ha100x-shortlist-beecb3d6e20f","research_id":"VL2A-CIRCUIT-HA100X-SHORTLIST-002","research_question":"Among
+    the five fixed Phase-1 HA-100X linear/load-aware survivors, which candidate remains
+    most numerically robust under bounded synthetic parameter stress and the LA-2A
+    source/load/T4 matrix, without treating the stress profile as hardware tolerance
+    truth and without modifying the VL2A product?","track_id":"VL2A-CIRCUIT-HA100X-SHORTLIST-002"}'
+priority: 70
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+bridge_job_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449
+continuation_fingerprint: 8a814449353a1c471c25430ed6ece38b667d82408c34914d8d299e2a0f629ed9
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

@@ -1,0 +1,57 @@
+{
+  "bridge_profile": {
+    "architecture": "DETERMINISTIC_PLUCKED_STRING_DELAY_LOOP_V01",
+    "benchmark_profiles": [
+      "guitar_delay_pitch_grid_v1",
+      "guitar_delay_stability_v1"
+    ],
+    "input_set": "STANDARD_GUITAR_RANGE_MIDI_GRID_V1",
+    "objective_set": [
+      "pitch_error",
+      "decay_proxy",
+      "numerical_stability",
+      "cpu_cost",
+      "memory_cost"
+    ],
+    "reference_model": "IDEAL_EQUAL_TEMPERED_FREQUENCY_PLUS_HALF_SAMPLE_FILTER_DELAY_HYPOTHESIS",
+    "relevant_constraints": [
+      "deterministic_excitation",
+      "process_path_no_allocation",
+      "loop_gain_below_one",
+      "product_integration_off",
+      "automatic_promotion_off",
+      "human_listening_not_claimed"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_PHYSICAL_AUDIO",
+    "sample_rate": 48000.0
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "guitar_audio_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 12,
+    "max_runtime_seconds": 90.0,
+    "population_size": 6,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_PHYSICAL_AUDIO",
+  "routes": {
+    "CANDIDATE_FOR_CIPI_REVIEW": 1
+  },
+  "run_id": "melon-funnel-guitar-audio-e14a8f88f63a",
+  "seed": 2026092706,
+  "stage1_pareto": 12,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-27T11:13:36.978762+00:00"
+}

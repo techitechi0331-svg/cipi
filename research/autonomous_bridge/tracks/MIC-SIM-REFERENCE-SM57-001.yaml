@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: MIC-SIM-REFERENCE-SM57-001
-enabled: false
-activation_state: WAITING_FOR_MELON_SM57_REFERENCE_ADAPTER_MAIN
+enabled: true
+activation_state: ACTIVE_REFERENCE_SM57
 root_research_id: MIC-SIM-REFERENCE-SM57-001
 
 research_question: >-

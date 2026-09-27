@@ -1,0 +1,31 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-ha100x-shortlist-2982ab18d783
+processed_artifact_hash: 4439f46b326ad5dce000687c2701063be4cfc743c4dd5f054c07c2a5be41f906
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36291599324/10922049197/files/melon-funnel-ha100x-shortlist-2982ab18d783/macro_result.json
+track_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+job_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449
+parent_job_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002-R1-151E6B71
+parent_run_id: melon-funnel-ha100x-shortlist-beecb3d6e20f
+root_research_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+hypothesis_id: HYP-VL2A-HA100X-SHORTLIST-ROBUSTNESS
+experiment_id: MELON-FUNNEL-HA100X-SHORTLIST-BEECB3D6E20F-ITERATE-1
+loop_depth: 2
+route: CONTINUE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 0.25
+improvement_signal: 0.58
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 5
+  deep_validation_count: 1
+  runtime_seconds: 0.059895
+  stage2_measurement_runs: 80
+measured_candidates: 5
+stop_reason: FIXED_SHORTLIST_EVALUATED
+bundle_hash: 3708096eebc9ffcdceedfdd6e497297be4abceaa5332689c226f882b0a8ca051
+efficiency_policy: {}
+efficiency_summary: {}
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

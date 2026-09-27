@@ -8,21 +8,21 @@
 - Local blocked / dependency-blocked: **0 / 0**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
-- Cross-Repo queued / dispatched / failed / quarantined: **3 / 1 / 1 / 0**
+- Cross-Repo queued / dispatched / failed / quarantined: **4 / 0 / 1 / 0**
 - Runner/dispatch alerts: **0**
 - Declared human-gate jobs: **0**
 
 ## Autonomous Research Bridge
 
 - Active Research Tracks: **6**
-- Current Loop Depth: **{"MELON-BRIDGE-CLEAN-PROOF-002": 3, "MELON-BRIDGE-PILOT-001": 3, "VIRTUAL-GUITAR-PHYSICAL-001": 3, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 1, "VL2A-CIRCUIT-HA100X-001": 5, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 1}**
-- MELON Runs: **16**
-- Continuation Candidates: **14**
-- Generated Jobs: **18**
+- Current Loop Depth: **{"MELON-BRIDGE-CLEAN-PROOF-002": 3, "MELON-BRIDGE-PILOT-001": 3, "VIRTUAL-GUITAR-PHYSICAL-001": 3, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 1, "VL2A-CIRCUIT-HA100X-001": 5, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 2}**
+- MELON Runs: **17**
+- Continuation Candidates: **15**
+- Generated Jobs: **19**
 - Rejected Continuations: **3**
 - Duplicate Suppressions: **0**
 - No-Improvement Count: **4**
 - Human Gates: **1**
 - Runner Wait: **0**
-- Budget Status: **{"MELON-BRIDGE-CLEAN-PROOF-002": {"candidates": 24, "candidates_limit": 30, "loop_depth": 3, "loop_depth_limit": 3, "runs": 3, "runs_limit": 3, "runtime_limit_seconds": 900.0, "runtime_seconds": 67.9989999999998}, "MELON-BRIDGE-PILOT-001": {"candidates": 26, "candidates_limit": 36, "loop_depth": 3, "loop_depth_limit": 3, "runs": 3, "runs_limit": 3, "runtime_limit_seconds": 900.0, "runtime_seconds": 56.14099999999962}, "VIRTUAL-GUITAR-PHYSICAL-001": {"candidates": 36, "candidates_limit": 60, "loop_depth": 3, "loop_depth_limit": 5, "runs": 3, "runs_limit": 5, "runtime_limit_seconds": 600.0, "runtime_seconds": 0.08185899999999999}, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {"candidates": 12, "candidates_limit": 36, "loop_depth": 1, "loop_depth_limit": 3, "runs": 1, "runs_limit": 3, "runtime_limit_seconds": 450.0, "runtime_seconds": 0.001}, "VL2A-CIRCUIT-HA100X-001": {"candidates": 60, "candidates_limit": 60, "loop_depth": 5, "loop_depth_limit": 5, "runs": 5, "runs_limit": 5, "runtime_limit_seconds": 600.0, "runtime_seconds": 0.045344999999999996}, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": {"candidates": 5, "candidates_limit": 15, "loop_depth": 1, "loop_depth_limit": 3, "runs": 1, "runs_limit": 3, "runtime_limit_seconds": 270.0, "runtime_seconds": 0.030499}}**
+- Budget Status: **{"MELON-BRIDGE-CLEAN-PROOF-002": {"candidates": 24, "candidates_limit": 30, "loop_depth": 3, "loop_depth_limit": 3, "runs": 3, "runs_limit": 3, "runtime_limit_seconds": 900.0, "runtime_seconds": 67.9989999999998}, "MELON-BRIDGE-PILOT-001": {"candidates": 26, "candidates_limit": 36, "loop_depth": 3, "loop_depth_limit": 3, "runs": 3, "runs_limit": 3, "runtime_limit_seconds": 900.0, "runtime_seconds": 56.14099999999962}, "VIRTUAL-GUITAR-PHYSICAL-001": {"candidates": 36, "candidates_limit": 60, "loop_depth": 3, "loop_depth_limit": 5, "runs": 3, "runs_limit": 5, "runtime_limit_seconds": 600.0, "runtime_seconds": 0.08185899999999999}, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {"candidates": 12, "candidates_limit": 36, "loop_depth": 1, "loop_depth_limit": 3, "runs": 1, "runs_limit": 3, "runtime_limit_seconds": 450.0, "runtime_seconds": 0.001}, "VL2A-CIRCUIT-HA100X-001": {"candidates": 60, "candidates_limit": 60, "loop_depth": 5, "loop_depth_limit": 5, "runs": 5, "runs_limit": 5, "runtime_limit_seconds": 600.0, "runtime_seconds": 0.045344999999999996}, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": {"candidates": 10, "candidates_limit": 15, "loop_depth": 2, "loop_depth_limit": 3, "runs": 2, "runs_limit": 3, "runtime_limit_seconds": 270.0, "runtime_seconds": 0.090394}}**
 - Next Scheduler Action: **MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409**

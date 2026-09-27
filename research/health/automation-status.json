@@ -35,14 +35,14 @@
         "runtime_seconds": 56.14099999999962
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
-        "candidates": 12,
+        "candidates": 24,
         "candidates_limit": 60,
-        "loop_depth": 1,
+        "loop_depth": 2,
         "loop_depth_limit": 5,
-        "runs": 1,
+        "runs": 2,
         "runs_limit": 5,
         "runtime_limit_seconds": 600.0,
-        "runtime_seconds": 0.031079
+        "runtime_seconds": 0.056679999999999994
       },
       "VL2A-CIRCUIT-HA100X-001": {
         "candidates": 60,
@@ -55,21 +55,23 @@
         "runtime_seconds": 0.045344999999999996
       }
     },
-    "continuation_candidates": 11,
+    "continuation_candidates": 12,
     "current_loop_depth": {
       "MELON-BRIDGE-CLEAN-PROOF-002": 3,
       "MELON-BRIDGE-PILOT-001": 3,
-      "VIRTUAL-GUITAR-PHYSICAL-001": 1,
+      "VIRTUAL-GUITAR-PHYSICAL-001": 2,
       "VL2A-CIRCUIT-HA100X-001": 5
     },
     "duplicate_suppressions": 0,
-    "generated_jobs": 13,
+    "generated_jobs": 14,
     "human_gates": 0,
     "invalid_results": 0,
-    "melon_runs": 12,
-    "next_scheduler_action": "NO_READY_WORK",
+    "melon_runs": 13,
+    "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B",
     "no_improvement_count": 4,
-    "queued_actions": [],
+    "queued_actions": [
+      "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B"
+    ],
     "rejected_continuations": 3,
     "result_missing": 0,
     "runner_wait": 0,
@@ -85,13 +87,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B",
+      "kind": "CROSS_REPO",
+      "priority": 80,
+      "reason": "ready_external_action"
+    },
     "states": {
-      "completed": 12,
-      "dispatched": 1,
+      "completed": 13,
+      "dispatched": 0,
       "failed": 1,
       "quarantined": 0,
-      "queued": 2
+      "queued": 3
     }
   },
   "human_gates": [],
@@ -105,9 +112,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
+    "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B",
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "reason": "ready_external_action"
   }
 }

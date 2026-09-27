@@ -1,0 +1,38 @@
+schema_version: '1.0'
+job_id: VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-001
+parent_job_id: VIRTUAL-GUITAR-PHYSICAL-001-R2-9FA81D28
+parent_run_id: melon-funnel-guitar-4a1a26d865e3
+hypothesis_id: HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING
+experiment_id: MELON-FUNNEL-GUITAR-4A1A26D865E3-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VIRTUAL-GUITAR-PHYSICAL-001-R2-9FA81D28
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+continuation_reason: Narrow damping and mute-transition ranges, then replicate with
+  a new seed before any product adoption.
+expected_information_gain: 0.8948168589523768
+fingerprint: 3927b98b7dd36c490ea821565ccb8b002827da467f67dd88d180c4c33e8de552
+loop_depth: 3
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: VIRTUAL_GUITAR_LIVING_STRING_DAMPING_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

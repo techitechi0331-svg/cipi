@@ -35,14 +35,14 @@
         "runtime_seconds": 56.14099999999962
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
-        "candidates": 24,
+        "candidates": 36,
         "candidates_limit": 60,
-        "loop_depth": 2,
+        "loop_depth": 3,
         "loop_depth_limit": 5,
-        "runs": 2,
+        "runs": 3,
         "runs_limit": 5,
         "runtime_limit_seconds": 600.0,
-        "runtime_seconds": 0.056679999999999994
+        "runtime_seconds": 0.08185899999999999
       },
       "VL2A-CIRCUIT-HA100X-001": {
         "candidates": 60,
@@ -59,14 +59,14 @@
     "current_loop_depth": {
       "MELON-BRIDGE-CLEAN-PROOF-002": 3,
       "MELON-BRIDGE-PILOT-001": 3,
-      "VIRTUAL-GUITAR-PHYSICAL-001": 2,
+      "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VL2A-CIRCUIT-HA100X-001": 5
     },
     "duplicate_suppressions": 0,
     "generated_jobs": 14,
-    "human_gates": 0,
+    "human_gates": 1,
     "invalid_results": 0,
-    "melon_runs": 13,
+    "melon_runs": 14,
     "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 4,
     "queued_actions": [],
@@ -77,6 +77,7 @@
     "track_stop_reasons": {
       "MELON-BRIDGE-CLEAN-PROOF-002": "BUDGET_EXHAUSTED",
       "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED",
+      "VIRTUAL-GUITAR-PHYSICAL-001": "HUMAN_GATE",
       "VL2A-CIRCUIT-HA100X-001": "BUDGET_EXHAUSTED"
     }
   },
@@ -87,8 +88,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 13,
-      "dispatched": 1,
+      "completed": 14,
+      "dispatched": 0,
       "failed": 1,
       "quarantined": 0,
       "queued": 2
@@ -105,9 +106,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

@@ -35,6 +35,7 @@ unresolved:
   - Direct fixed 8/70 ms ballistics transfer was rejected by short-transient, 100 ms body, long-body and repeated-phrase gates; current Character timing remains baseline.
   - Direct Vo.Prep Slow-RMS/Fast-Peak detector transfer v1 was rejected by predeclared sustained-body and short-transient gates; current VoPriPro detector remains baseline.
   - Product boundary is now fixed: VoPriPro owns broadband dynamics; Vo.Prep owns problem/event preparation. Transfer candidates still require same-corpus comparison before adoption.
+  - Actual Vo.Prep -> VoPriPro binary-chain validation remains BLOCKED_EXTERNAL: retry run 36317807820 confirmed the Actions credential is configured but receives HTTP 403 when reading the private Vo.Prep repository; no VST3 compatibility result is inferred from this infrastructure block.
   - Human level-matched KEEP/REVISE/ROLLBACK listening decision is pending for the current main Natural50 A/B pack.
   - The current objective real-vocal snapshot covers four adult HUST_Solfege Twinkle recordings and does not establish universal singer/generalisation claims.
   - Cubase Pro 14 scan/load/playback/automation/save-reopen verification is not formally complete on the user's actual machine.
@@ -46,6 +47,7 @@ why_next: "Current VoPriPro main remains the protected production baseline and h
 next_confirmation: "Whether Natural50 and the event-only Vo.Prep -> VoPriPro chain remain KEEP candidates under level-matched real-vocal listening and actual VST3/Cubase validation, without reintroducing Macro overlap."
 
 blockers:
+  - Actual cross-product VST3 execution requires CIPI_CROSS_REPO_TOKEN read access to techitechi0331-svg/Vo.Prep; retry run 36317807820 currently receives HTTP 403.
   - Human listening is required to convert the generated gain-matched A/B pack into perceptual evidence.
   - Cubase Pro 14 validation ultimately requires the user's Windows host.
 

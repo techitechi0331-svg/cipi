@@ -44,7 +44,9 @@ jobs:
           '@ | Set-Content -Path result\actual_vst3_chain.json -Encoding utf8
 
       - name: Checkout pinned Vo.Prep
+        id: checkout_voprep
         if: env.CROSS_REPO_CONFIGURED == 'true'
+        continue-on-error: true
         uses: actions/checkout@v4
         with:
           repository: techitechi0331-svg/Vo.Prep
@@ -53,8 +55,26 @@ jobs:
           token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
           persist-credentials: false
 
+      - name: Record blocked external state when Vo.Prep credential cannot read repository
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome != 'success'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path result | Out-Null
+          @'
+          {
+            "schema": "voprep-actual-vst3-chain-v1",
+            "decision": "BLOCKED_EXTERNAL",
+            "reason": "CIPI_CROSS_REPO_TOKEN is configured but cannot read techitechi0331-svg/Vo.Prep",
+            "access_stage": "checkout_voprep",
+            "raw_audio_persisted": false,
+            "product_dsp_mutated": false
+          }
+          '@ | Set-Content -Path result\actual_vst3_chain.json -Encoding utf8
+
       - name: Checkout pinned VoPriPro
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        id: checkout_vopripro
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success'
+        continue-on-error: true
         uses: actions/checkout@v4
         with:
           repository: techitechi0331-svg/VocalPrepComp
@@ -63,8 +83,24 @@ jobs:
           token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
           persist-credentials: false
 
+      - name: Record blocked external state when VoPriPro credential cannot read repository
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome != 'success'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path result | Out-Null
+          @'
+          {
+            "schema": "voprep-actual-vst3-chain-v1",
+            "decision": "BLOCKED_EXTERNAL",
+            "reason": "CIPI_CROSS_REPO_TOKEN is configured but cannot read techitechi0331-svg/VocalPrepComp",
+            "access_stage": "checkout_vopripro",
+            "raw_audio_persisted": false,
+            "product_dsp_mutated": false
+          }
+          '@ | Set-Content -Path result\actual_vst3_chain.json -Encoding utf8
+
       - name: Checkout pinned JUCE 9.0.2
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         uses: actions/checkout@v4
         with:
           repository: juce-framework/JUCE
@@ -73,28 +109,28 @@ jobs:
           persist-credentials: false
 
       - name: Configure and build pinned Vo.Prep VST3
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
           cmake -S product-voprep -B product-voprep\build -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
           cmake --build product-voprep\build --config Release --target VoPrepMacro_VST3 --parallel 4
 
       - name: Configure and build pinned VoPriPro VST3
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
           cmake -S product-vopripro -B product-vopripro\build -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
           cmake --build product-vopripro\build --config Release --target VocalPrepComp_VST3 --parallel 4
 
       - name: Configure and build JUCE headless chain host
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
           cmake -S research\plugins\vo-prep\experiments\vst3_chain_probe -B chain-build -G "Visual Studio 17 2022" -A x64 -DJUCE_SOURCE_DIR="$env:GITHUB_WORKSPACE\JUCE"
           cmake --build chain-build --config Release --target VoPrepActualVst3ChainProbe --parallel 4
 
       - name: Locate actual VST3 bundles and host
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         id: locate
         shell: pwsh
         run: |
@@ -111,7 +147,7 @@ jobs:
           "host=$($hostExe.FullName)" >> $env:GITHUB_OUTPUT
 
       - name: Run actual VST3 binary chain matrix
-        if: env.CROSS_REPO_CONFIGURED == 'true'
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path result | Out-Null
@@ -122,7 +158,7 @@ jobs:
           }
 
       - name: Add provenance metadata
-        if: env.CROSS_REPO_CONFIGURED == 'true' && always()
+        if: always()
         shell: pwsh
         run: |
           if (Test-Path result\actual_vst3_chain.json) {

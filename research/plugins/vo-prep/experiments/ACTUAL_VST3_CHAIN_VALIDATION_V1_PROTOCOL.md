@@ -155,3 +155,16 @@ Passing does **not**:
 - authorize release.
 
 Passing only confirms that the actual VST3 pair preserves the reviewed event-only compatibility envelope and may advance to real-vocal level-matched A/B.
+
+## 2026-09-27 retry note
+
+This retry changes **no DSP, parameter, threshold, corpus, metric, or acceptance gate**.
+
+Reason for rerun:
+- CIPI cross-repository orchestration and runner-state handling changed after the first safe `BLOCKED_EXTERNAL` execution;
+- the exact locked v1 gate is therefore re-executed to determine whether the external-access prerequisite is now satisfied.
+
+Interpretation remains unchanged:
+- a workflow success is not a DSP PASS by itself;
+- `BLOCKED_EXTERNAL` remains a valid non-result;
+- only the emitted JSON decision and every predeclared gate may advance the binary-chain claim.

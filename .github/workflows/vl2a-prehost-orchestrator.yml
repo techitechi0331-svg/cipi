@@ -78,12 +78,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          ACTIVE="$(gh run list --workflow cross-repo-orchestrator.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress")] | length')"
-          if [ "$ACTIVE" = "0" ]; then
-            gh workflow run cross-repo-orchestrator.yml --ref main
-          else
-            echo "Cross-Repo Orchestrator already active."
-          fi
+          # Always enqueue one post-commit pass. An already-active Cross-Repo
+          # run may have checked out main before this action was committed.
+          # Cross-Repo's concurrency group serializes the passes safely.
+          gh workflow run cross-repo-orchestrator.yml --ref main
 
       - name: Report final human gate
         if: steps.prehost.outputs.state == 'CUBASE_READY_HUMAN_GATE'

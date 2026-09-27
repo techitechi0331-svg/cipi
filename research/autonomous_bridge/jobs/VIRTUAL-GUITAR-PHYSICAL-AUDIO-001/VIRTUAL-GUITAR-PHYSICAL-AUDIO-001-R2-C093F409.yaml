@@ -1,0 +1,38 @@
+schema_version: '1.0'
+job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
+track_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+parent_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+parent_run_id: melon-funnel-guitar-audio-5f84ead0ebd0
+hypothesis_id: HYP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-V01
+experiment_id: MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 36
+  max_runtime: 450
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: Narrow delay-compensation and loop-gain ranges, then replicate
+  before any audio/product adoption.
+expected_information_gain: 0.8
+fingerprint: c093f409a538160b6d1a1199dd74da79281bf97bd2d7025b743127f5d3325e32
+loop_depth: 2
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: DETERMINISTIC_PLUCKED_STRING_DELAY_LOOP_V01
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

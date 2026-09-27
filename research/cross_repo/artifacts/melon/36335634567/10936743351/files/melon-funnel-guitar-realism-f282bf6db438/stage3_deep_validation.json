@@ -1,0 +1,20 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "GTR-REALISM-001",
+    "promotion_authority": false,
+    "reason": "Continue bounded mechanism-identifiability search; no audible-fidelity conclusion is permitted from synthetic proxies.",
+    "route": "ITERATE",
+    "scientific": {
+      "all_finite": true,
+      "body_coloration_db": 0.3482559811343106,
+      "evidence_boundary": "MEASURED_SYNTHETIC_MECHANISM_IDENTIFIABILITY_NOT_REAL_GUITAR_FIDELITY",
+      "inharmonicity_p95_cents": 14.045515350798627,
+      "mechanism_activation_count": 6,
+      "mechanism_coverage_penalty": 0.0,
+      "pick_transient_index": 0.07378944758426811,
+      "spectral_evolution_db": 13.371626715876387
+    },
+    "species": "richer_physical_string_mechanism_proxy"
+  }
+]

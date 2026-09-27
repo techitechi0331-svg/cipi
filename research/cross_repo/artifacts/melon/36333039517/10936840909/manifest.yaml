@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36333039517
+run_attempt: 1
+artifact_id: 10936840909
+artifact_name: melon-research-36333039517
+expired: false
+size_in_bytes: 10249
+created_at: '2026-09-27T16:23:35Z'
+expires_at: '2026-10-27T16:23:32Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/efficiency_metrics.json
+  status: ingested
+  size: 3477
+  sha256: 92a857054dcacfb3425c177cd5884c095ca81fc8237fac58217b4713eaeb3008
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/macro_result.json
+  status: ingested
+  size: 11662
+  sha256: 98403f9c12d556a9737bec8b4a16f58370ff49c7c97936f9639784eb3dc156a8
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/precision_review.json
+  status: ingested
+  size: 471
+  sha256: 2638d43e5b4c86e844683bd3f4b86c7fe8dc11149840b65327c96bfc3de1c3d0
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/manifest.json
+  status: ingested
+  size: 352
+  sha256: 649077790e02f9217ab3267e8234c0e56116699efc52bfbfba31a7828c46a4db
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/stage1_screening.json
+  status: ingested
+  size: 9853
+  sha256: 1004afc77daa7361159726e284608eb02f17677071712a681b1a656346f00de5
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/stage3_deep_validation.json
+  status: ingested
+  size: 565
+  sha256: e86d8a9bd00d20b15d01a8153783a9de776401d33c13f25b7ed54ec207b9578a
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/summary.json
+  status: ingested
+  size: 1618
+  sha256: 929231fbba76e12d74d1ce77ec2bba7b1f4a9239314fc79429b9f8cd1d86b094
+- path: melon-funnel-vocal-denoise-arch-f3636bbc3fe9/vocal_denoise_foundation_measurements.json
+  status: ingested
+  size: 11249
+  sha256: 033f149d696dad9313f4abb8a6ae7c7a4e9e787d69df5c50279f170fc3f42e22
+archive_sha256: 1e8b08b07731977df519a767b6f798f79977d6e73cf1369ce2d8570e7c997bbb
+ingest_status: text_evidence_ingested

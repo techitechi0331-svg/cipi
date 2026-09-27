@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: VL2A-PREHOST-705C24531C398EEB-R1
+repo_key: vl2a
+workflow_key: prehost_stage
+runner_class: self-hosted
+state: QUEUED
+run_id: 36316608741
+run_status: queued
+run_conclusion: null
+since: '2026-09-27T11:42:33Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

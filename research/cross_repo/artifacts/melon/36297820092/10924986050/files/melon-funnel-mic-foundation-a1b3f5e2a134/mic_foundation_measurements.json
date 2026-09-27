@@ -1,0 +1,186 @@
+{
+  "automatic_final_decision": false,
+  "candidate_measurements": [
+    {
+      "cache_hit": true,
+      "cache_key": "c85edd5e4814c38f7a7ad01b20a50336b16d676f5aaa7832342e8535abb26c17",
+      "candidate": {
+        "architecture": "flat_gain",
+        "candidate_id": "MIC-FND-001",
+        "geometry_weight": 0.0,
+        "phase_delay_samples": 0,
+        "spectral_mix": 0.0
+      },
+      "estimated_cost_units": 1.0,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 0,
+      "measured": false,
+      "semantic_fingerprint": "5a8b00d31cd7848ea1544c9570f14bf4d6d35496bb52a801bac3a5e9c28f363e",
+      "status": "success",
+      "synthetic_identifiability_error": 0.31
+    },
+    {
+      "cache_hit": true,
+      "cache_key": "88d7a5ca90c36c8e5472cdc58e543418fb491223a331eb4cab913e699a77644f",
+      "candidate": {
+        "architecture": "static_spectral",
+        "candidate_id": "MIC-FND-002",
+        "geometry_weight": 0.0,
+        "phase_delay_samples": 0,
+        "spectral_mix": 0.08
+      },
+      "estimated_cost_units": 1.32,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 0,
+      "measured": false,
+      "semantic_fingerprint": "13f1475dffc44a9c645fb307910c80f94d8816508ab94ba4accac1a3134c8070",
+      "status": "success",
+      "synthetic_identifiability_error": 0.23
+    },
+    {
+      "cache_hit": true,
+      "cache_key": "eee2b4fd16f655ff9f05791b804ead022d2a64e6f7da518eea568e6ed2dc7bbb",
+      "candidate": {
+        "architecture": "spectral_phase",
+        "candidate_id": "MIC-FND-003",
+        "geometry_weight": 0.0,
+        "phase_delay_samples": 1,
+        "spectral_mix": 0.08
+      },
+      "estimated_cost_units": 2.8200000000000003,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 1,
+      "measured": false,
+      "semantic_fingerprint": "cdfbb234310b1161bb44194cf3a070afefff07076910f7033978320e7d47934a",
+      "status": "success",
+      "synthetic_identifiability_error": 0.13
+    },
+    {
+      "cache_hit": true,
+      "cache_key": "65bdae4a51e80b0110f4957357c2f0b08d64dfad1989f67c7e84e1f115eb25b6",
+      "candidate": {
+        "architecture": "spectral_geometry",
+        "candidate_id": "MIC-FND-004",
+        "geometry_weight": 0.65,
+        "phase_delay_samples": 1,
+        "spectral_mix": 0.08
+      },
+      "estimated_cost_units": 4.7700000000000005,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 1,
+      "measured": false,
+      "semantic_fingerprint": "439d8a685d72587f6b0fef300146b23bf78f3f10c33e0f51b1f08178cf15f513",
+      "status": "success",
+      "synthetic_identifiability_error": 0.0
+    },
+    {
+      "cache_hit": false,
+      "cache_key": "8fdaac7fc37cc47d87bd26768e043a9d23d0cdab53db985ce4f187b0c2950b34",
+      "candidate": {
+        "architecture": "bounded_parametric_capture",
+        "candidate_id": "MIC-FND-005",
+        "geometry_weight": 0.8052020892359952,
+        "phase_delay_samples": 0,
+        "spectral_mix": 0.06255509145493522
+      },
+      "estimated_cost_units": 3.6658266335277268,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 0,
+      "measured": true,
+      "measurement_seconds": 0.0,
+      "semantic_fingerprint": "e870de6d154fafddf1ff63fb28cf8389c1400894a0989550c3e447eeb421c57c",
+      "source_result_hash": "7eb31dbf591ad90bed536fdc61beea52a3564ff2f9b652160f08d95a10fdbf34",
+      "status": "success",
+      "synthetic_identifiability_error": 0.14848532639226383
+    },
+    {
+      "cache_hit": false,
+      "cache_key": "a689e574504a21b6c062d3a6def569fcb458b928df2ca0c99204136371312b12",
+      "candidate": {
+        "architecture": "bounded_parametric_capture",
+        "candidate_id": "MIC-FND-006",
+        "geometry_weight": 0.4146236636647175,
+        "phase_delay_samples": 2,
+        "spectral_mix": 0.0
+      },
+      "estimated_cost_units": 5.243870990994152,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 2,
+      "measured": true,
+      "measurement_seconds": 0.0,
+      "semantic_fingerprint": "4366a274919fb9a9d2fc9d6436326f6d2df844855495622212744115d54ffbe3",
+      "source_result_hash": "a35043de5a319c7927836fc985b5a929ad08107d844be6c19ca79c60f3368b9e",
+      "status": "success",
+      "synthetic_identifiability_error": 0.2270752672670565
+    },
+    {
+      "cache_hit": false,
+      "cache_key": "4ee32ae66e97cf0f88a85badc2faf9babab9c2c575be2d36a3b14f618d2c510b",
+      "candidate": {
+        "architecture": "bounded_parametric_capture",
+        "candidate_id": "MIC-FND-007",
+        "geometry_weight": 0.5537889879119786,
+        "phase_delay_samples": 1,
+        "spectral_mix": 0.04604384209063318
+      },
+      "estimated_cost_units": 4.345542332098469,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 1,
+      "measured": true,
+      "measurement_seconds": 0.0,
+      "semantic_fingerprint": "7b6b675f180377bbc2b469158b4d1fafd98053ab5aaf074262ce53c372909cce",
+      "source_result_hash": "2820c616f39b5fa603e2b6d307843890477b1d439ffdb8ed8efbc3b5cf50681d",
+      "status": "success",
+      "synthetic_identifiability_error": 0.0531983603269711
+    },
+    {
+      "cache_hit": false,
+      "cache_key": "f74c67f08fe4ad7900176f9a8698cf23b880eb6c8bd1ee135f83bcae116962c3",
+      "candidate": {
+        "architecture": "bounded_parametric_capture",
+        "candidate_id": "MIC-FND-008",
+        "geometry_weight": 0.7560725610221433,
+        "phase_delay_samples": 0,
+        "spectral_mix": 0.09783398362657796
+      },
+      "estimated_cost_units": 3.659553617572742,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+      "finite": true,
+      "latency_samples": 0,
+      "measured": true,
+      "measurement_seconds": 0.0,
+      "semantic_fingerprint": "43c4452c598becb851acc80fd0e3d31c6f18d16551cadfd32428c3b6902d6966",
+      "source_result_hash": "5160cb395b99558755c16d9ceb4829a326218f659a68cb8b85425749d62e9c65",
+      "status": "success",
+      "synthetic_identifiability_error": 0.13904849583100662
+    }
+  ],
+  "cipi_promotion_authority": false,
+  "hypothesis_id": "HYP-MIC-FOUNDATION-DETERMINISTIC",
+  "job_id": "MIC-SIM-FOUNDATION-001-R2-115B980C",
+  "listening_authority": false,
+  "loop_depth": 2,
+  "product_integration_authority": false,
+  "research_question": "Can the independent Mic Simulator research stack produce deterministic, finite, machine-readable and efficiently reusable capture-model evidence through CIPI and MELON before any real-microphone fidelity or product-integration claim is allowed?",
+  "research_version": "melon-mic-foundation/1.0",
+  "sample_rate": 48000,
+  "schema_version": "1.0",
+  "summary": {
+    "all_finite": true,
+    "best_synthetic_identifiability_error": 0.0,
+    "information_gain_signal": 0.55
+  },
+  "synthetic_target": {
+    "geometry_weight": 0.65,
+    "phase_delay_samples": 1,
+    "spectral_mix": 0.08
+  },
+  "track_id": "MIC-SIM-FOUNDATION-001"
+}

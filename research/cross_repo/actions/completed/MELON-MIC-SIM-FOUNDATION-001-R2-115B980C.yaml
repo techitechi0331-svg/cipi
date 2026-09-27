@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-MIC-SIM-FOUNDATION-001-R2-115B980C
-state: DISPATCHED
+state: COMPLETED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -44,3 +44,8 @@ previous_run_id: 36297469572
 dispatched_at: '2026-09-27T05:39:14.583752Z'
 repository: techitechi0331-svg/melon
 workflow_file: melon-research.yml
+run_id: 36297820092
+run_url: https://github.com/techitechi0331-svg/melon/actions/runs/36297820092
+conclusion: success
+completed_at: '2026-09-27T05:39:43Z'
+failure_classification: null

@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36297820092
+run_attempt: 1
+artifact_id: 10924986050
+artifact_name: melon-research-36297820092
+expired: false
+size_in_bytes: 10291
+created_at: '2026-09-27T05:39:38Z'
+expires_at: '2026-10-27T05:39:35Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/macro_result.json
+  status: ingested
+  size: 8525
+  sha256: 0c394efd3ef37daa1bcf33dc51311543169708c095a43d668563899c144ef4f7
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/efficiency_metrics.json
+  status: ingested
+  size: 1325
+  sha256: 89fd5fd2bc4844b496cf2cf96004c6467ac4dd4271d97ca1ed062536cc3a49af
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/manifest.json
+  status: ingested
+  size: 338
+  sha256: 5dadd1ed3b23181054eb6757b8659f0c7f47a938d24baef8a11903316b99f8c2
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/mic_foundation_measurements.json
+  status: ingested
+  size: 7645
+  sha256: caf5776685c8b4b15624d6e788868544983fcfb4f22128eca0b8beccfe6b5f34
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/precision_review.json
+  status: ingested
+  size: 489
+  sha256: 5f9b84857d0eb0fb7fb780c95a8c5e2540749062f18cae200353d89f9894b1f1
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/stage1_screening.json
+  status: ingested
+  size: 6341
+  sha256: 1eedc795b58d5060f4633027f0830af8118938a89526449672c34d79e743da46
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/stage3_deep_validation.json
+  status: ingested
+  size: 554
+  sha256: 8c54b635ccdc3f9b97318bc544c4bfed86e6bf675428d96f2ba2049c68e5ddf6
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/summary.json
+  status: ingested
+  size: 1638
+  sha256: 3c7d0a7fbd52421dae0c2e08c61cd882285138d491a95c42191669ec897ddaa8
+- path: melon-funnel-mic-foundation-a1b3f5e2a134/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+archive_sha256: 4ca8753b4c1e66e54cf178739eaaf749c4b1d786c2174a877916c4acaf7d3236
+ingest_status: text_evidence_ingested

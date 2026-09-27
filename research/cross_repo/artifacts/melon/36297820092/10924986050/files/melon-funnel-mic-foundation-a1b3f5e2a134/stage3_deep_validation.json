@@ -1,0 +1,15 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "MIC-FND-004",
+    "promotion_authority": false,
+    "reason": "Replicate the deterministic Mic Foundation search with a new seed and narrower bounded parameters before Foundation review.",
+    "route": "ITERATE",
+    "scientific": {
+      "all_finite": true,
+      "best_synthetic_identifiability_error": 0.0,
+      "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY"
+    },
+    "species": "mic_foundation_capture_architecture"
+  }
+]

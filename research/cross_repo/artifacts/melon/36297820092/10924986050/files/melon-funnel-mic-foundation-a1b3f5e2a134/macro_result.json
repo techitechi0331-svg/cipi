@@ -1,0 +1,228 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "e89fa3ab0706a744fa0f0b1bee94da18c206a0db29dbe3ee2a7a283c01c0ab4a",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "MELON-FUNNEL-MIC-FOUNDATION-390E8FF82DE0-ITERATE-1"
+      ],
+      "estimated_cost": {
+        "candidates": 8,
+        "runtime_seconds": 60
+      },
+      "expected_information_gain": 0.89,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "MIC_CAPTURE_BASELINE_LADDER_V1",
+        "benchmark_profile": [
+          "mic_foundation_determinism_v1",
+          "mic_foundation_identifiability_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for MIC-FND-004: Replicate the deterministic Mic Foundation search with a new seed and narrower bounded parameters before Foundation review.",
+        "input_set": "SYNTHETIC_MIC_FOUNDATION_TARGET_V1",
+        "objective_set": [
+          "synthetic_identifiability_error",
+          "cost_proxy",
+          "determinism",
+          "numerical_stability"
+        ],
+        "reference_model": "SYNTHETIC_IDENTIFIABILITY_TARGET_NOT_REAL_MICROPHONE",
+        "relevant_constraints": [
+          "no_hardware_fidelity_claim",
+          "deterministic_seed",
+          "bounded_runtime",
+          "product_integration_off",
+          "automatic_promotion_off"
+        ],
+        "research_domain": "MIC_SIMULATOR_FOUNDATION",
+        "sample_rate": 48000,
+        "scope": [
+          "MIC-FND-004",
+          "mic_foundation_capture_architecture",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 8,
+          "max_runtime_seconds": 60,
+          "population": 4,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for MIC-FND-004: Replicate the deterministic Mic Foundation search with a new seed and narrower bounded parameters before Foundation review.",
+      "id": "melon-funnel-mic-foundation-a1b3f5e2a134-iterate-1",
+      "novelty": 1.0,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 8,
+          "max_runtime_seconds": 60,
+          "population": 4,
+          "preflight_mode": "fast",
+          "seed": 2026092703,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "MIC-FND-004",
+          "mic_foundation_capture_architecture"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Replicate the deterministic Mic Foundation search with a new seed and narrower bounded parameters before Foundation review."
+    }
+  ],
+  "efficiency_metrics": {
+    "benchmark_time_seconds": 0.09300000000803266,
+    "build_time_seconds": 0.0,
+    "cache_hit_rate": 0.5,
+    "cache_hits": 4,
+    "cache_reuse_state": "MELON_DOMAIN_EXPERIMENT_CACHE_V1",
+    "candidate_count": 8,
+    "candidate_timeout_seconds": 5.0,
+    "candidates_per_runner_minute": 5170.408031367142,
+    "cheap_stage_survivors": 5,
+    "dedup_reuse_state": "MELON_SEMANTIC_PAYLOAD_FINGERPRINT_V1",
+    "deep_stage_survivors": 0,
+    "deep_validation_count": 1,
+    "duplicate_hits": 0,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.092836,
+    "full_regression_required": false,
+    "full_regression_result": "NOT_REQUIRED_FOR_SYNTHETIC_FOUNDATION_BATCH",
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.55,
+    "max_memory_mb": 1024.0,
+    "measured_count": 4,
+    "measurements_executed_stage1": 4,
+    "new_semantic_candidate_rate": 1.0,
+    "peak_python_memory_mb": 0.03122711181640625,
+    "quality_cost_objectives": [
+      "synthetic_identifiability_error",
+      "estimated_cost_units"
+    ],
+    "quality_cost_pareto_ids": [
+      "MIC-FND-001",
+      "MIC-FND-002",
+      "MIC-FND-003",
+      "MIC-FND-004",
+      "MIC-FND-007"
+    ],
+    "queue_wait_seconds": null,
+    "rejected_before_measurement": 0,
+    "runner_runtime_seconds": 0.092836,
+    "stage2_measurement_runs": 4
+  },
+  "efficiency_policy": {
+    "candidate_timeout_seconds": 5,
+    "full_regression_required": false,
+    "max_memory_mb": 1024,
+    "policy_id": "MIC-SIM-FOUNDATION-EFFICIENCY-V1",
+    "policy_version": "1.0",
+    "state": "ACTIVE"
+  },
+  "efficiency_summary": {
+    "benchmark_time_seconds": 0.09300000000803266,
+    "build_time_seconds": 0.0,
+    "cache_hits": 4,
+    "candidate_count": 8,
+    "candidates_per_runner_minute": 5170.408031367142,
+    "cheap_stage_survivors": 5,
+    "deep_stage_survivors": 0,
+    "duplicate_hits": 0,
+    "full_regression_required": false,
+    "full_regression_result": "NOT_REQUIRED_FOR_SYNTHETIC_FOUNDATION_BATCH",
+    "measured_count": 4,
+    "queue_wait_seconds": null,
+    "rejected_before_measurement": 0,
+    "runner_runtime_seconds": 0.092836
+  },
+  "elapsed_seconds": 0.092836,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 4,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.092836,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "MELON-FUNNEL-MIC-FOUNDATION-390E8FF82DE0-ITERATE-1",
+  "hypothesis_id": "HYP-MIC-FOUNDATION-DETERMINISTIC",
+  "job_id": "MIC-SIM-FOUNDATION-001-R2-115B980C",
+  "loop_depth": 2,
+  "measured_candidates": 4,
+  "novelty": 1.0,
+  "parent_job_id": "MIC-SIM-FOUNDATION-001-R1-47D07BF2",
+  "parent_run_id": "melon-funnel-mic-foundation-390e8ff82de0",
+  "precision_review": {
+    "checks": {
+      "automatic_promotion_disabled": true,
+      "bounded_candidate_count": true,
+      "candidate_timeout_respected": true,
+      "memory_hard_ceiling_respected": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true,
+      "real_microphone_fidelity_not_claimed": true,
+      "synthetic_identifiability_anchor_present": true
+    },
+    "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "MIC-SIM-FOUNDATION-001",
+  "research_question": "Can the independent Mic Simulator research stack produce deterministic, finite, machine-readable and efficiently reusable capture-model evidence through CIPI and MELON before any real-microphone fidelity or product-integration claim is allowed?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.55,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 5,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "MIC-SIM-FOUNDATION-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-mic-foundation-a1b3f5e2a134",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "c076a33f035d194581e61cac4a702a5307b1bf85",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-27T05:39:34.201718+00:00",
+  "track_id": "MIC-SIM-FOUNDATION-001",
+  "unresolved_questions": [
+    {
+      "id": "MIC-FND-004",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Replicate the deterministic Mic Foundation search with a new seed and narrower bounded parameters before Foundation review."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "automatic_promotion_disabled": true,
+    "bounded_candidate_count": true,
+    "candidate_timeout_respected": true,
+    "memory_hard_ceiling_respected": true,
+    "numerical_stability": true,
+    "product_integration_disabled": true,
+    "real_microphone_fidelity_not_claimed": true,
+    "synthetic_identifiability_anchor_present": true
+  },
+  "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_IDENTIFIABILITY_NOT_HARDWARE_FIDELITY",
+  "passed": true
+}

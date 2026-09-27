@@ -9,11 +9,14 @@
       "MIC-SIM-FOUNDATION-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
     ],
     "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-    "active_tracks": [],
+    "active_tracks": [
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002"
+    ],
     "authority": "OPERATIONAL_SCHEDULING_ONLY",
     "automatic_knowledge_promotion": false,
     "automatic_product_decision": false,
@@ -69,6 +72,16 @@
         "runtime_limit_seconds": 450.0,
         "runtime_seconds": 0.09239900000000001
       },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": {
+        "candidates": 0,
+        "candidates_limit": 48,
+        "loop_depth": 0,
+        "loop_depth_limit": 4,
+        "runs": 0,
+        "runs_limit": 4,
+        "runtime_limit_seconds": 600.0,
+        "runtime_seconds": 0.0
+      },
       "VL2A-CIRCUIT-HA100X-001": {
         "candidates": 60,
         "candidates_limit": 60,
@@ -97,6 +110,7 @@
       "MIC-SIM-FOUNDATION-001": 2,
       "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 0,
       "VL2A-CIRCUIT-HA100X-001": 5,
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3
     },
@@ -107,10 +121,11 @@
       "MIC-SIM-FOUNDATION-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
     ],
-    "generated_jobs": 22,
+    "generated_jobs": 23,
     "human_gate_tracks": [
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
@@ -119,26 +134,29 @@
     "human_gates": 3,
     "invalid_results": 0,
     "melon_runs": 22,
-    "next_scheduler_action": "NO_READY_WORK",
+    "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-002-R1-BA36759E",
     "no_improvement_count": 4,
-    "queued_actions": [],
+    "queued_actions": [
+      "MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-002-R1-BA36759E"
+    ],
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
       "MIC-SIM-FOUNDATION-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
     ],
     "rejected_continuations": 4,
     "research_quality_metrics": {
-      "budget_exhaustion_rate": 0.42857142857142855,
+      "budget_exhaustion_rate": 0.375,
       "cache_hit_rate": 0.0,
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.42857142857142855,
+      "human_gate_rate": 0.375,
       "new_information_per_compute_second": 12.150038371447804,
       "new_information_per_run": 0.555250678555979,
       "pareto_front_turnover": null,
@@ -196,6 +214,12 @@
         "scheduler_eligible": false,
         "state": "HUMAN_GATE"
       },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": {
+        "job_id": "VIRTUAL-GUITAR-PHYSICAL-REALISM-002-R1-BA36759E",
+        "reason": "EXTERNAL_ACTION_QUEUED",
+        "scheduler_eligible": true,
+        "state": "READY"
+      },
       "VL2A-CIRCUIT-HA100X-001": {
         "reason": "BUDGET_EXHAUSTED",
         "scheduler_eligible": false,
@@ -241,7 +265,7 @@
       "dispatched": 0,
       "failed": 5,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [

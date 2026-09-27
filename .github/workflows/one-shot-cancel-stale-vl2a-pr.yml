@@ -1,0 +1,43 @@
+name: One-Shot Cancel Stale VL2A PR Runs
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - ".github/workflows/one-shot-cancel-stale-vl2a-pr.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+    steps:
+      - name: Require cross-repo token
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "CIPI_CROSS_REPO_TOKEN is not configured"
+            exit 1
+          fi
+
+      - name: Cancel only stale merged-PR branch runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPO="techitechi0331-svg/VocalPrepComp"
+          BRANCH="feat/vl2a-prehost-pipeline-v1"
+
+          gh api "repos/$REPO/actions/runs?branch=$BRANCH&per_page=100" \
+            --jq '.workflow_runs[] | select(.event=="pull_request" and (.status=="queued" or .status=="in_progress")) | .id' \
+            > stale-run-ids.txt
+
+          echo "Stale run IDs:"
+          cat stale-run-ids.txt || true
+
+          while read -r RUN_ID; do
+            [ -z "$RUN_ID" ] && continue
+            echo "Cancelling stale PR run $RUN_ID"
+            gh api --method POST "repos/$REPO/actions/runs/$RUN_ID/cancel" >/dev/null || true
+          done < stale-run-ids.txt

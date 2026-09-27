@@ -74,6 +74,7 @@ class PreHostPromoterTests(unittest.TestCase):
             self.assertFalse(action["automatic_product_decision"])
             self.assertTrue(action["research_staging_write_only"])
             self.assertEqual(action["inputs"]["source_ref"], "integration/vl2a-v060-rc2")
+            self.assertEqual(action["prehost_protocol_revision"], mod.PREHOST_PROTOCOL_REVISION)
 
             second = mod.reconcile(root)
             self.assertFalse(second["action_created"])
@@ -96,6 +97,37 @@ class PreHostPromoterTests(unittest.TestCase):
             third = mod.reconcile(root)
             self.assertEqual(third["health"]["state"], "CUBASE_READY_HUMAN_GATE")
             self.assertFalse(third["action_created"])
+
+    def test_old_protocol_action_does_not_block_revised_protocol(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.seed(root)
+            old = {
+                "schema_version": "1.0",
+                "action_id": "VL2A-PREHOST-OLDPROTOCOL",
+                "state": "FAILED",
+                "repo_key": "vl2a",
+                "workflow_key": "prehost_stage",
+                "ref": "main",
+                "inputs": {},
+                "priority": 95,
+                "attempts": 1,
+                "max_attempts": 2,
+                "retry_count": 0,
+                "max_retries": 1,
+                "depends_on_jobs": [],
+                "depends_on_actions": [],
+                "track_id": TRACK,
+                "prehost_candidate_id": CANDIDATE["candidate_id"],
+            }
+            write_yaml(
+                root / "research/cross_repo/actions/failed/VL2A-PREHOST-OLDPROTOCOL.yaml",
+                old,
+            )
+            result = mod.reconcile(root)
+            self.assertTrue(result["action_created"])
+            self.assertEqual(result["health"]["state"], "PREHOST_QUEUED")
+            self.assertNotEqual(result["health"]["action_id"], old["action_id"])
 
     def test_rejects_weak_finalist(self):
         with tempfile.TemporaryDirectory() as td:

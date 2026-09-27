@@ -160,11 +160,9 @@
     "human_gates": 3,
     "invalid_results": 0,
     "melon_runs": 27,
-    "next_scheduler_action": "MELON-VOCAL-DENOISE-PRESERVATION-001-R2-23A7B97F",
+    "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 4,
-    "queued_actions": [
-      "MELON-VOCAL-DENOISE-PRESERVATION-001-R2-23A7B97F"
-    ],
+    "queued_actions": [],
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
@@ -297,9 +295,9 @@
       },
       "VOCAL-DENOISE-PRESERVATION-001": {
         "job_id": "VOCAL-DENOISE-PRESERVATION-001-R2-23A7B97F",
-        "reason": "EXTERNAL_ACTION_QUEUED",
+        "reason": "EXTERNAL_ACTION_DISPATCHED",
         "scheduler_eligible": true,
-        "state": "READY"
+        "state": "WAITING_EXTERNAL"
       },
       "VOCAL-DENOISE-ROBUSTNESS-001": {
         "reason": "TRACK_DISABLED",
@@ -347,18 +345,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MELON-VOCAL-DENOISE-PRESERVATION-001-R2-23A7B97F",
-      "kind": "CROSS_REPO",
-      "priority": 80,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 31,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 5,
       "quarantined": 0,
-      "queued": 2
+      "queued": 1
     }
   },
   "human_gates": [
@@ -387,9 +380,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MELON-VOCAL-DENOISE-PRESERVATION-001-R2-23A7B97F",
+    "action_id": null,
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "ready_external_action"
+    "reason": "reconcile_dispatched_action"
   }
 }

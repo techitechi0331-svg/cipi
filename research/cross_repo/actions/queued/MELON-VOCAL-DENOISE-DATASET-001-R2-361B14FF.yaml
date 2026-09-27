@@ -1,0 +1,41 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-DATASET-001-R2-361B14FF
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  population: 4
+  preflight_mode: fast
+  seed: 2026092702
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 4
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-DENOISE-DATASET-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"MELON-FUNNEL-VOCAL-DENOISE-DATASET-6669A8551EA3-ITERATE-1","hypothesis_id":"HYP-VOCAL-DENOISE-DATASET-001","job_id":"VOCAL-DENOISE-DATASET-001-R2-361B14FF","loop_depth":2,"parent_job_id":"VOCAL-DENOISE-DATASET-001-R1-AE7272C3","parent_run_id":"melon-funnel-vocal-denoise-dataset-6669a8551ea3","research_id":"VOCAL-DENOISE-DATASET-001","research_question":"Can
+    dataset provenance, licensing, singer/noise split policy and fail-closed training
+    eligibility be made deterministic and machine-auditable before any training?","track_id":"VOCAL-DENOISE-DATASET-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-DENOISE-DATASET-001
+bridge_job_id: VOCAL-DENOISE-DATASET-001-R2-361B14FF
+continuation_fingerprint: 361b14ffeb11db9cb515d01ff991e581ad471bf827c553b04914cf8270d6a7d0
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-DENOISE-DATASET-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

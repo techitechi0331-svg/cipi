@@ -1,0 +1,69 @@
+schema_version: "1.0"
+evidence_id: VG-EPOCH-003-PHYSICAL-AUDIO-20260927
+project: virtual-guitar
+evidence_class: MEASURED
+source_repository: techitechi0331-svg/virtual-guitar
+source_commit: 29c90e64e96cf1af7b56e7e98d7c20514d52becc
+workflow:
+  name: guitar-core-validation
+  run_id: 36290321447
+  conclusion: success
+  runner: virtual-guitar
+  runner_labels:
+    - self-hosted
+    - Windows
+    - X64
+measurements:
+  regression:
+    total_tests: 4
+    passed: 4
+    failed: 0
+    tests:
+      - vg_midi_decision_smoke
+      - vg_gesture_smoke
+      - vg_epoch2_smoke
+      - vg_physical_string_smoke
+  decision_microbenchmark:
+    events_processed: 80000
+    elapsed_ms: 94.2705
+    ns_per_event: 1178.38
+    checksum: 20779808
+    realtime_claim: false
+  physical_audio_render:
+    sample_rate: 48000
+    duration_seconds: 2.0
+    target_frequency_hz: 164.814
+    realized_frequency_hz: 164.948
+    approximate_pitch_error_cents: 1.407
+    first_window_rms: 0.224215
+    last_window_rms: 0.0729243
+    render_elapsed_ms: 0.3729
+    ns_per_sample: 3.88437
+    finite_output: true
+    decay_observed: true
+    listening_claim: false
+artifact:
+  artifact_id: 10921663200
+  name: guitar-research-epoch-36290321447
+  sha256: 85750c6fb21e13107d23a08a382c1b6f7ae0516c240a11b26b604f02a6739db2
+  contains:
+    - decision_benchmark.json
+    - physical_string_metrics.json
+    - physical_string_e3.wav
+establishes:
+  - deterministic waveform audio can be rendered from the first physical-string candidate
+  - the current candidate remains finite and decays over the bounded render
+  - existing decision/gesture/articulation regressions remain green
+  - offline WAV evidence generation works on the dedicated runner
+does_not_establish:
+  - audible guitar realism
+  - superiority to samples or other physical models
+  - final loop gain or pick-position constants
+  - final delay compensation
+  - DAW realtime safety
+  - Cubase compatibility
+  - production readiness
+authority: CIPI_INTEGRATION_EPOCH_EVIDENCE
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+immutable: true

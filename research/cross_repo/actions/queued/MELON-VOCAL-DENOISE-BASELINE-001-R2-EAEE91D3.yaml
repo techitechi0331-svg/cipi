@@ -1,0 +1,41 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  population: 4
+  preflight_mode: fast
+  seed: 2026092703
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 4
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-DENOISE-BASELINE-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"MELON-FUNNEL-VOCAL-DENOISE-BASELINE-93E4A9A0A103-ITERATE-1","hypothesis_id":"HYP-VOCAL-DENOISE-BASELINE-001","job_id":"VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3","loop_depth":2,"parent_job_id":"VOCAL-DENOISE-BASELINE-001-R1-3A274FBF","parent_run_id":"melon-funnel-vocal-denoise-baseline-93e4a9a0a103","research_id":"VOCAL-DENOISE-BASELINE-001","research_question":"Can
+    the baseline measurement contract enforce matched Noise Reduction and preserve
+    evidence boundaries before real-audio benchmarking?","track_id":"VOCAL-DENOISE-BASELINE-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-DENOISE-BASELINE-001
+bridge_job_id: VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3
+continuation_fingerprint: eaee91d307783ff8aaee683cf94a06f82ba1847680d2c9a30b7808140f2862ba
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-DENOISE-BASELINE-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

@@ -97,11 +97,11 @@
         "runtime_seconds": 0.174399
       },
       "VOCAL-DENOISE-BASELINE-001": {
-        "candidates": 0,
+        "candidates": 8,
         "candidates_limit": 24,
-        "loop_depth": 0,
+        "loop_depth": 1,
         "loop_depth_limit": 3,
-        "runs": 0,
+        "runs": 1,
         "runs_limit": 3,
         "runtime_limit_seconds": 300.0,
         "runtime_seconds": 0.0
@@ -127,7 +127,7 @@
         "runtime_seconds": 0.0
       }
     },
-    "continuation_candidates": 18,
+    "continuation_candidates": 19,
     "current_loop_depth": {
       "MELON-BRIDGE-CLEAN-PROOF-002": 3,
       "MELON-BRIDGE-PILOT-001": 3,
@@ -136,7 +136,7 @@
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
       "VL2A-CIRCUIT-HA100X-001": 5,
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
-      "VOCAL-DENOISE-BASELINE-001": 0,
+      "VOCAL-DENOISE-BASELINE-001": 1,
       "VOCAL-DENOISE-DATASET-001": 0,
       "VOCAL-DENOISE-PRESERVATION-001": 0
     },
@@ -153,7 +153,7 @@
       "VOCAL-DENOISE-DATASET-001",
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
-    "generated_jobs": 25,
+    "generated_jobs": 26,
     "human_gate_tracks": [
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
@@ -161,11 +161,11 @@
     ],
     "human_gates": 3,
     "invalid_results": 0,
-    "melon_runs": 22,
-    "next_scheduler_action": "MELON-VOCAL-DENOISE-DATASET-001-R1-AE7272C3",
+    "melon_runs": 23,
+    "next_scheduler_action": "MELON-VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3",
     "no_improvement_count": 4,
     "queued_actions": [
-      "MELON-VOCAL-DENOISE-DATASET-001-R1-AE7272C3",
+      "MELON-VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3",
       "MELON-VOCAL-DENOISE-PRESERVATION-001-R1-0D4E53D3"
     ],
     "registered_tracks": [
@@ -199,7 +199,7 @@
       "pareto_front_turnover": null,
       "ranking_stability": null,
       "replication_consistency": null,
-      "research_compute_to_runner_wall_ratio": 0.05121107230895621,
+      "research_compute_to_runner_wall_ratio": 0.043537460705553414,
       "semantic_duplicate_rate": 0.0
     },
     "result_missing": 0,
@@ -221,13 +221,13 @@
       "artifact_upload_seconds": null,
       "checkout_seconds": null,
       "environment_setup_seconds": null,
-      "known_runner_samples": 6,
+      "known_runner_samples": 7,
       "macro_export_seconds": null,
       "preflight_seconds": null,
       "queue_wait_seconds": 0.0,
       "research_compute_seconds": 124.64774999999942,
-      "runner_job_seconds": 2434.0,
-      "total_wall_seconds": 2434.0
+      "runner_job_seconds": 2863.0,
+      "total_wall_seconds": 2863.0
     },
     "track_lifecycle": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -278,16 +278,16 @@
         "state": "DISABLED"
       },
       "VOCAL-DENOISE-BASELINE-001": {
-        "job_id": "VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
-        "reason": "EXTERNAL_ACTION_DISPATCHED",
-        "scheduler_eligible": true,
-        "state": "WAITING_EXTERNAL"
-      },
-      "VOCAL-DENOISE-DATASET-001": {
-        "job_id": "VOCAL-DENOISE-DATASET-001-R1-AE7272C3",
+        "job_id": "VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3",
         "reason": "EXTERNAL_ACTION_QUEUED",
         "scheduler_eligible": true,
         "state": "READY"
+      },
+      "VOCAL-DENOISE-DATASET-001": {
+        "job_id": "VOCAL-DENOISE-DATASET-001-R1-AE7272C3",
+        "reason": "EXTERNAL_ACTION_DISPATCHED",
+        "scheduler_eligible": true,
+        "state": "WAITING_EXTERNAL"
       },
       "VOCAL-DENOISE-LOSS-001": {
         "reason": "TRACK_DISABLED",
@@ -346,7 +346,7 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 26,
+      "completed": 27,
       "dispatched": 1,
       "failed": 5,
       "quarantined": 0,

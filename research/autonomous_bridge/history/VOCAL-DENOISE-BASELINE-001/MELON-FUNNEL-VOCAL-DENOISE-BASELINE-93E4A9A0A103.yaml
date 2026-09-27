@@ -1,0 +1,81 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-vocal-denoise-baseline-93e4a9a0a103
+processed_artifact_hash: 57213822f7f735fec37b56bd189071afc77e42be5c53212af42eeb76f31f0e68
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36321785313/10932598815/files/melon-funnel-vocal-denoise-baseline-93e4a9a0a103/macro_result.json
+track_id: VOCAL-DENOISE-BASELINE-001
+job_id: VOCAL-DENOISE-BASELINE-001-R1-3A274FBF
+parent_job_id: null
+parent_run_id: null
+root_research_id: VOCAL-DENOISE-BASELINE-001
+hypothesis_id: HYP-VOCAL-DENOISE-BASELINE-001
+experiment_id: EXP-VOCAL-DENOISE-BASELINE-001-R1
+loop_depth: 1
+route: CONTINUE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 1.0
+improvement_signal: 0.8
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 8
+  deep_validation_count: 1
+  runtime_seconds: 0.0
+  stage2_measurement_runs: 0
+measured_candidates: 8
+stop_reason: MAX_CANDIDATES
+bundle_hash: 7c91b4ecc68c667be3ab8238cc50780292b062bd7f4be5473cdb6eac3c2bad21
+efficiency_policy:
+  candidate_timeout_seconds: 10
+  full_regression_required: false
+  max_memory_mb: 2048
+  policy_id: VOCAL-DENOISE-BASELINE-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+efficiency_summary:
+  candidate_count: 8
+  measured_count: 8
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 4
+  deep_stage_survivors: 0
+  runner_runtime_seconds: 0.0
+  research_compute_seconds: 0.0
+  runner_job_seconds: null
+  total_wall_seconds: null
+  information_gain_signal: 0.8
+  cache_hit_rate: 0.0
+  duplicate_rate: 0.0
+  candidates_per_runner_minute: 480000000000.0
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.0
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_FOUNDATION_CONTRACT
+time_metrics:
+  queue_wait_seconds: null
+  runner_job_seconds: null
+  checkout_seconds: null
+  environment_setup_seconds: null
+  preflight_seconds: null
+  research_compute_seconds: 0.0
+  macro_export_seconds: null
+  artifact_upload_seconds: null
+  total_wall_seconds: null
+research_quality_metrics:
+  budget_exhaustion_rate: null
+  cache_hit_rate: 0.0
+  duplicate_research_rate: 0.0
+  early_convergence_rate: null
+  falsification_rate: null
+  human_gate_rate: null
+  new_information_per_compute_second: null
+  new_information_per_run: 0.8
+  pareto_front_turnover: null
+  ranking_stability: null
+  replication_consistency: null
+  research_compute_to_runner_wall_ratio: null
+  semantic_duplicate_rate: 0.0
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

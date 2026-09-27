@@ -20,8 +20,3 @@ reason: Lightweight Mic Simulator end-to-end canary. Validate CIPI Cross-Repo di
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
-blocked_external: true
-blocked_reason: REPOSITORY_OR_WORKFLOW_ACCESS_UNAVAILABLE
-blocked_at: '2026-09-27T04:37:04.832666Z'
-last_dispatch_error: 'GitHub API GET https://api.github.com/repos/techitechi0331-svg/mic_simulator/actions/workflows/mic-canary.yml/runs?per_page=5
-  failed: 404 {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/workflow-runs#list-workflow-runs-for-a-workflow","status":"404"}'

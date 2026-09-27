@@ -2,7 +2,7 @@
 
 > Operational status only. This is not a sound-quality score or release decision.
 
-- Next scheduler action: **IDLE**
+- Next scheduler action: **CROSS_REPO**
 - Local READY job: **-**
 - Claimed evidence branches: **0**
 - Local blocked / dependency-blocked: **0 / 0**

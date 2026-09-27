@@ -106,13 +106,13 @@
   "virtual_guitar_efficiency_policy": {
     "policy_id": "VIRTUAL-GUITAR-EFFICIENCY-V2.3",
     "registration_state": "PENDING_POLICY",
-    "rollout_state": "PER_TRACK_SAFE_HANDOFF",
+    "rollout_state": "ACTIVE_ALL_CURRENT_TRACKS",
     "tracks": {
       "VIRTUAL-GUITAR-PHYSICAL-001": {
         "state": "APPLIED"
       },
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {
-        "state": "PENDING_REGRESSION"
+        "state": "APPLIED"
       }
     }
   }

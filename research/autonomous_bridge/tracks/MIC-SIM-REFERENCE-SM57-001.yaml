@@ -1,0 +1,137 @@
+schema_version: "1.0"
+track_id: MIC-SIM-REFERENCE-SM57-001
+enabled: false
+activation_state: WAITING_FOR_MELON_REFERENCE_ADAPTER_MAIN
+root_research_id: MIC-SIM-REFERENCE-SM57-001
+
+research_question: >-
+  Can an SM57 reference track convert official manufacturer source facts into a
+  bounded multi-dimensional evidence architecture, identify the measurements still
+  required for frequency, polar, proximity, phase, transient, electronics and
+  level-dependent behavior, and do so without treating EQ matching as hardware fidelity?
+
+hypothesis_id: HYP-MIC-SM57-REFERENCE-EVIDENCE
+hypothesis: >-
+  A reference-evidence ladder that separates official SOURCE_FACTS from measured
+  transfer behavior and explicitly tracks frequency, polar/off-axis, proximity/distance,
+  phase/group delay, transient, electronics/impedance, sensitivity/level and level
+  dependency will produce higher-information and safer SM57 research than a
+  frequency-response-only model.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - CONTROLLED_REAL_AUDIO_REFERENCE
+  - PHASE_GROUP_DELAY_MEASUREMENT
+  - TRANSIENT_MEASUREMENT
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/mic-simulator/sm57-reference-inventory-2026-09-28.md
+  do_not_reopen:
+    - MIC_FOUNDATION_RUNNER_CONNECTIVITY
+    - MIC_FOUNDATION_RESULT_BUNDLE_PLUMBING
+    - MIC_FOUNDATION_SYNTHETIC_IDENTIFIABILITY
+    - INDEPENDENT_MIC_SIMULATOR_REPO_OWNERSHIP
+    - VERSIONED_OPTIONAL_VIRTUAL_GUITAR_INTEGRATION_POLICY
+  rejected_directions:
+    - EQ_CURVE_ONLY_EQUALS_SM57_FIDELITY
+    - FREQUENCY_RANGE_EQUALS_EXACT_TRANSFER_FUNCTION
+    - INFER_PHASE_FROM_MAGNITUDE_WITHOUT_EVIDENCE
+    - SYNTHETIC_GEOMETRY_AS_MEASURED_SM57_GEOMETRY
+    - BUILD_OR_CI_SUCCESS_AS_AUDIO_FIDELITY
+    - AUTO_PROMOTION_OR_AUTO_RELEASE
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+
+initial_experiment:
+  experiment_id: EXP-MIC-SM57-REFERENCE-R1
+  experiment_type: REFERENCE_EVIDENCE_MAPPING
+  expected_information_gain: 0.92
+  scope:
+    - mic_simulator
+    - reference_sm57
+    - source_fact_mapping
+    - multidimensional_evidence
+  inputs:
+    seed: 2026092801
+    population: 4
+    generations: 2
+    max_candidates: 8
+    max_runtime_seconds: 75
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      Official SM57 source facts can be mapped into a falsifiable multi-dimensional
+      evidence plan without converting missing phase, transient or level-dependent
+      data into inferred hardware-fidelity claims.
+    architecture: MIC_REFERENCE_EVIDENCE_LADDER_V1
+    tested_parameters:
+      reference_model: SM57
+      evidence_dimensions:
+        - frequency_response
+        - polar_off_axis
+        - proximity_distance
+        - phase_group_delay
+        - transient_behavior
+        - electronics_impedance
+        - sensitivity_level
+        - level_dependency
+    benchmark_profile:
+      - sm57_reference_evidence_v1
+    sample_rate: 48000
+    input_set: SHURE_SM57_OFFICIAL_SOURCE_FACTS_V1
+    reference_model: SHURE_SM57_SOURCE_FACTS_V1_NOT_HARDWARE_AUDIO_CAPTURE
+    objective_set:
+      - source_fact_coverage
+      - reference_dimension_coverage
+      - unsupported_claim_risk
+      - measurement_readiness
+      - cost_proxy
+    relevant_constraints:
+      - official_provenance_required
+      - no_eq_only_fidelity_claim
+      - real_audio_required_for_phase_transient_level_dependency
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: REFERENCE_EVIDENCE_MAPPING
+    scope:
+      - mic_simulator
+      - reference_sm57
+      - source_fact_mapping
+      - multidimensional_evidence
+
+efficiency_policy:
+  policy_id: MIC-SIM-REFERENCE-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 5
+  full_regression_required: false

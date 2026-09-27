@@ -1,0 +1,36 @@
+schema_version: "1.0"
+incident_id: VG-REALISM-CONTINUATION-IDENTITY-20260928-001
+track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-002
+classification: ORCHESTRATION_SEMANTIC_IDENTITY_GAP
+status: FIX_IN_VALIDATION
+observed_state:
+  completed_runs: 2
+  measured_candidates: 32
+  scheduler_stop_reason: DUPLICATE_ONLY
+  scientific_convergence_claim: false
+root_cause: >-
+  The MELON realism adapter changed its internal search bounds between loop 1 and loop 2,
+  but those phase/bounds semantics were not represented in the macro continuation
+  fingerprint. Seed is intentionally excluded from semantic identity, so CIPI correctly
+  suppressed the proposed next experiment as duplicate under the information it received.
+preserved_evidence:
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-002 R1
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-002 R2
+  - VG-HUMAN-LISTENING-20260927-001
+repair:
+  melon_commit: 6b28379daa39aebad1379ef84d45f84efb9e7a4e
+  changes:
+    - Search phase and actual parameter-bound hash become macro-fingerprinted semantics.
+    - Realism cache/version advances to 1.1.
+    - Regression directly verifies loop-1 and loop-2 continuation fingerprint material differs.
+    - Bounded realism study returns to Human Gate after three semantic phases.
+  validation_run_id: 36332136015
+  validation_state: IN_PROGRESS
+recovery_policy:
+  mutate_prior_immutable_decision: false
+  delete_prior_evidence: false
+  successor_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-003
+  successor_activation: AFTER_MELON_V1_1_VALIDATION_PASS
+authority: CIPI_RESEARCH_INCIDENT_RECORD
+automatic_product_decision: false
+automatic_knowledge_promotion: false

@@ -242,7 +242,7 @@
     "pareto_front_turnover": null,
     "ranking_stability": null,
     "replication_consistency": null,
-    "research_compute_to_runner_wall_ratio": 0.03695727229769701,
+    "research_compute_to_runner_wall_ratio": 0.023298701172966316,
     "semantic_duplicate_rate": 0.0
   },
   "result_missing": 0,
@@ -267,13 +267,13 @@
     "artifact_upload_seconds": null,
     "checkout_seconds": null,
     "environment_setup_seconds": null,
-    "known_runner_samples": 21,
+    "known_runner_samples": 22,
     "macro_export_seconds": null,
     "preflight_seconds": null,
     "queue_wait_seconds": 0.0,
     "research_compute_seconds": 125.13732400000208,
-    "runner_job_seconds": 3386.0,
-    "total_wall_seconds": 3386.0
+    "runner_job_seconds": 5371.0,
+    "total_wall_seconds": 5371.0
   },
   "track_lifecycle": {
     "MELON-BRIDGE-CLEAN-PROOF-002": {

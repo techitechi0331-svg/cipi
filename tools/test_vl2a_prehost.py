@@ -97,6 +97,42 @@ class PreHostPromoterTests(unittest.TestCase):
             self.assertEqual(third["health"]["state"], "CUBASE_READY_HUMAN_GATE")
             self.assertFalse(third["action_created"])
 
+    def test_existing_action_prefers_active_then_newest_terminal(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            base = {
+                "track_id": TRACK,
+                "prehost_candidate_id": CANDIDATE["candidate_id"],
+                "workflow_key": "prehost_stage",
+            }
+            write_yaml(
+                root / "research/cross_repo/actions/failed/old.yaml",
+                {**base, "action_id": "R1", "run_id": 100, "attempts": 1},
+            )
+            write_yaml(
+                root / "research/cross_repo/actions/failed/new.yaml",
+                {**base, "action_id": "R2", "run_id": 200, "attempts": 1},
+            )
+            state, action = mod.existing_action(root, TRACK, CANDIDATE["candidate_id"])
+            self.assertEqual(state, "FAILED")
+            self.assertEqual(action["action_id"], "R2")
+
+            write_yaml(
+                root / "research/cross_repo/actions/queued/next.yaml",
+                {**base, "action_id": "R3", "attempts": 0},
+            )
+            state, action = mod.existing_action(root, TRACK, CANDIDATE["candidate_id"])
+            self.assertEqual(state, "QUEUED")
+            self.assertEqual(action["action_id"], "R3")
+
+            write_yaml(
+                root / "research/cross_repo/actions/dispatched/live.yaml",
+                {**base, "action_id": "R4", "run_id": 300, "attempts": 1},
+            )
+            state, action = mod.existing_action(root, TRACK, CANDIDATE["candidate_id"])
+            self.assertEqual(state, "DISPATCHED")
+            self.assertEqual(action["action_id"], "R4")
+
     def test_rejects_weak_finalist(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

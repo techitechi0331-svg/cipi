@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VOCAL-DENOISE-LOSS-001
-enabled: false
-activation_state: BLOCKED_DATASET_AND_BASELINE
+enabled: true
+activation_state: ACTIVE_FOUNDATION
 root_research_id: VOCAL-DENOISE-LOSS-001
 research_question: >-
   Which bounded objective functions best preserve singing voice at matched NR once licensed training data and baseline metrics exist?
@@ -82,7 +82,7 @@ initial_experiment:
 efficiency_policy:
   policy_id: VOCAL-DENOISE-LOSS-001-EFFICIENCY-V1
   policy_version: "1.0"
-  state: BLOCKED_DEPENDENCY
+  state: ACTIVE
   max_memory_mb: 2048
   candidate_timeout_seconds: 10
   full_regression_required: false

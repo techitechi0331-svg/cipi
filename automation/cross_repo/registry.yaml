@@ -268,6 +268,15 @@ repositories:
         artifact_ingest: metadata_and_text
         allowed_inputs: []
         required_inputs: []
+      dataset_prepare:
+        file: vocal-denoise-dataset-prepare.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - force_refresh
+        required_inputs:
+          - force_refresh
       train:
         file: vocal-denoise-train.yml
         dispatch: true

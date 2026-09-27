@@ -39,3 +39,5 @@ previous_run_id: 36317176512
 dispatched_at: '2026-09-27T11:57:01.270823Z'
 repository: techitechi0331-svg/VocalPrepComp
 workflow_file: vl2a-prehost-stage.yml
+run_id: 36317368103
+run_url: https://github.com/techitechi0331-svg/VocalPrepComp/actions/runs/36317368103

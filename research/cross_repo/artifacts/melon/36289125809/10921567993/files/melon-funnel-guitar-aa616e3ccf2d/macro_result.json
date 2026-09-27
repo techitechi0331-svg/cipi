@@ -1,0 +1,81 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "5ef014957c7573f4b076a0e7eed7efeae15a2377b271d3af59feb2bda80968b0",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [],
+  "efficiency_metrics": {
+    "deep_validation_count": 1,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.025179,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.4994468523423138,
+    "measurements_executed_stage1": 12,
+    "new_semantic_candidate_rate": 1.0,
+    "stage2_measurement_runs": 4
+  },
+  "elapsed_seconds": 0.025179,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 12,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.025179,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "MELON-FUNNEL-GUITAR-4A1A26D865E3-ITERATE-1",
+  "hypothesis_id": "HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING",
+  "job_id": "VIRTUAL-GUITAR-PHYSICAL-001-R3-3927B98B",
+  "loop_depth": 3,
+  "measured_candidates": 12,
+  "novelty": 1.0,
+  "parent_job_id": "VIRTUAL-GUITAR-PHYSICAL-001-R2-9FA81D28",
+  "parent_run_id": "melon-funnel-guitar-4a1a26d865e3",
+  "precision_review": {
+    "checks": {
+      "automatic_promotion_disabled": true,
+      "bounded_candidate_count": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true,
+      "t60_parameterization_error_below_one_sample": true
+    },
+    "evidence_boundary": "MEASURED_SYNTHETIC_CANARY_NOT_PRODUCT_FIDELITY",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "one or more candidates passed MELON scientific/high-fidelity gates and require CIPI/human review",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VIRTUAL-GUITAR-PHYSICAL-001",
+  "research_question": "Can a persistent six-string state model with explicit natural decay and damping-based note termination provide a stable first physical-guitar substrate for the Virtual Guitarist architecture while remaining deterministic, measurable, realtime-safe, and free from hard Note-Off gain-zero behavior?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.4994468523423138,
+    "precision_review_passed": true,
+    "routes": {
+      "CANDIDATE_FOR_CIPI_REVIEW": 1
+    },
+    "stage1_pareto": 12,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VIRTUAL-GUITAR-PHYSICAL-001",
+  "route": "HUMAN_GATE",
+  "run_id": "melon-funnel-guitar-aa616e3ccf2d",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "6afccf65b81e51865edd64fe3deeb89e4cfbd568",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-27T02:39:24.355215+00:00",
+  "track_id": "VIRTUAL-GUITAR-PHYSICAL-001",
+  "unresolved_questions": []
+}

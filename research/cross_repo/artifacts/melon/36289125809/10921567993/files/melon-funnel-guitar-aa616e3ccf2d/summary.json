@@ -1,0 +1,55 @@
+{
+  "bridge_profile": {
+    "architecture": "VIRTUAL_GUITAR_LIVING_STRING_DAMPING_V1",
+    "benchmark_profiles": [
+      "guitar_damping_canary_v1",
+      "living_string_state_v1"
+    ],
+    "input_set": "SYNTHETIC_STRING_ENERGY_DECAY_V1",
+    "objective_set": [
+      "decay_time",
+      "numerical_stability",
+      "execution_cost",
+      "mute_transition"
+    ],
+    "reference_model": "EXPLICIT_T60_EXPONENTIAL_PARAMETERIZATION",
+    "relevant_constraints": [
+      "six_persistent_strings",
+      "note_off_not_hard_gain_zero",
+      "deterministic_seed",
+      "product_integration_off",
+      "automatic_promotion_off"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_STRING_DAMPING",
+    "sample_rate": 48000.0
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "guitar_damping_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 12,
+    "max_runtime_seconds": 90.0,
+    "population_size": 6,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_STRING_DAMPING",
+  "routes": {
+    "CANDIDATE_FOR_CIPI_REVIEW": 1
+  },
+  "run_id": "melon-funnel-guitar-aa616e3ccf2d",
+  "seed": 2026092704,
+  "stage1_pareto": 12,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-27T02:39:24.355215+00:00"
+}

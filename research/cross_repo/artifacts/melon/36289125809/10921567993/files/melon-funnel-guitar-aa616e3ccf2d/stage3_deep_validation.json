@@ -1,0 +1,15 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "GTR-DAMP-007",
+    "promotion_authority": false,
+    "reason": "Bounded synthetic damping study completed; human/CIPI review is required before product integration.",
+    "route": "CANDIDATE_FOR_CIPI_REVIEW",
+    "scientific": {
+      "all_finite": true,
+      "evidence_boundary": "MEASURED_SYNTHETIC_CANARY_NOT_PRODUCT_FIDELITY",
+      "parameter_spread_seconds": 0.7483405570269415
+    },
+    "species": "living_string_damping"
+  }
+]

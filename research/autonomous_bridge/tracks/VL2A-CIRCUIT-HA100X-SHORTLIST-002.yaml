@@ -1,0 +1,123 @@
+schema_version: "1.0"
+track_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+enabled: true
+root_research_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+
+research_question: >-
+  Among the five fixed Phase-1 HA-100X linear/load-aware survivors, which candidate
+  remains most numerically robust under bounded synthetic parameter stress and the
+  LA-2A source/load/T4 matrix, without treating the stress profile as hardware
+  tolerance truth and without modifying the VL2A product?
+
+hypothesis_id: HYP-VL2A-HA100X-SHORTLIST-ROBUSTNESS
+hypothesis: >-
+  A small subset of the five Phase-1 survivors will preserve UTC catalog-envelope
+  compatibility and bounded source/load behavior under deterministic local parameter
+  stress, allowing CIPI to identify a compiled-isolation finalist without unlocking
+  saturation or hysteresis.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - COMPILED_ISOLATION
+  - REAL_AUDIO_AB
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/vl2a/circuit-lab/ha100x-shortlist-phase2-baseline-2026-09-27.md
+  parent_track: VL2A-CIRCUIT-HA100X-001
+  do_not_reopen:
+    - HA100X_PHASE1_BROAD_LINEAR_SEARCH
+    - HA100X_PHASE1_LF_IDENTIFIABILITY
+    - HA100X_PHASE1_LOAD_INTERACTION
+    - HA100X_PHASE1_HF_IDENTIFIABILITY
+    - HA100X_PHASE1_REPLICATION
+  rejected_directions:
+    - HA100X_12HZ_HPF_AS_HARDWARE_FACT
+    - HA100X_25MS_STATE_AS_PROVEN_MAGNETIZATION
+    - HA100X_ARBITRARY_TANH_OR_HYSTERESIS
+    - SYNTHETIC_STRESS_AS_HARDWARE_TOLERANCE
+    - AUTO_PRODUCT_ADOPTION
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 15
+  max_runtime: 270
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+
+initial_experiment:
+  experiment_id: EXP-VL2A-HA100X-SHORTLIST-R1
+  experiment_type: FIXED_SHORTLIST_ROBUSTNESS
+  expected_information_gain: 0.85
+  scope:
+    - vl2a_circuit_lab
+    - ha100x_input_transformer
+    - fixed_phase1_shortlist
+    - synthetic_parameter_stress
+    - source_load_robustness
+  inputs:
+    seed: 2026092711
+    population: 5
+    generations: 1
+    max_candidates: 5
+    max_runtime_seconds: 90
+    stage2_limit: 3
+    stage2_archive_limit: 3
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      One or more fixed Phase-1 HA-100X survivors remains catalog-compatible and
+      source/load robust under explicitly synthetic local parameter stress.
+    architecture: HA100X_LINEAR_LTI_LOAD_AWARE_SHORTLIST
+    tested_parameters:
+      candidate_set: VL2A_HA100X_PHASE1_TOP5_FIXED
+      stress_profile: SYNTHETIC_PARAMETER_STRESS_NOT_HARDWARE_TOLERANCE
+    benchmark_profile:
+      - ha100x_phase1_survivors_v1
+      - ha100x_catalog_v1
+      - la2a_source_load_matrix_v1
+      - synthetic_parameter_stress_v1
+    sample_rate: null
+    input_set: VL2A_HA100X_PHASE1_TOP5_FIXED
+    reference_model: PHASE1_MEASURED_SURVIVORS_PLUS_SOURCE_CONSTRAINTS
+    objective_set:
+      - catalog_envelope
+      - soft_prior_distance
+      - source_load_matrix_robustness
+      - t4_load_interaction
+      - local_parameter_sensitivity
+    relevant_constraints:
+      - turns_ratio_nominal_10
+      - utc_30Hz_20kHz_plusminus1dB
+      - no_hysteresis_v2
+      - no_saturation_v2
+      - synthetic_parameter_stress_not_hardware_tolerance
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: FIXED_SHORTLIST_ROBUSTNESS
+    scope:
+      - vl2a_circuit_lab
+      - ha100x_input_transformer
+      - fixed_phase1_shortlist
+      - synthetic_parameter_stress

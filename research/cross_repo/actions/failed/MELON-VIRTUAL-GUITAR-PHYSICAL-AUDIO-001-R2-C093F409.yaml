@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
-state: DISPATCHED
+state: FAILED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -48,3 +48,14 @@ previous_run_id: 36292230386
 dispatched_at: '2026-09-27T03:45:40.000649Z'
 repository: techitechi0331-svg/melon
 workflow_file: melon-research.yml
+run_id: 36292342971
+run_url: https://github.com/techitechi0331-svg/melon/actions/runs/36292342971
+conclusion: failure
+completed_at: '2026-09-27T03:46:06Z'
+failure_classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Run staged MELON research from manual inputs

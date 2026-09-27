@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-DENOISE-ARCH-001-R1-44CF01E6
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -21,7 +21,7 @@ inputs:
     compact causal or bounded-lookahead architecture best trades preservation, denoising
     and runtime once the data gate is open?","track_id":"VOCAL-DENOISE-ARCH-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -39,3 +39,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36332651092
+dispatched_at: '2026-09-27T16:23:04.633540Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

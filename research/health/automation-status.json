@@ -124,12 +124,7 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MIC-E2E-CANARY-001",
-      "kind": "CROSS_REPO",
-      "priority": 90,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 18,
       "dispatched": 0,
@@ -157,9 +152,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MIC-E2E-CANARY-001",
-    "kind": "CROSS_REPO",
-    "priority": 90,
-    "reason": "ready_external_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

@@ -1,0 +1,27 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-001
+state: DISPATCHED
+repo_key: vocal_denoise
+workflow_key: train
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-001
+  dataset_registry_path: configs/datasets/registry.json
+  seed: '2026092801'
+  max_steps: '100'
+priority: 92
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-DATASET-PREPARE-002
+reason: Run the first bounded real-singing plus synthetic-noise TinyMaskNet training
+  pilot only after the approved VocalSet cache and singer-disjoint split manifest
+  are prepared. The result is research evidence only and carries no listening, product,
+  or release authority.
+previous_run_id: 0
+dispatched_at: '2026-09-27T20:05:05.554327Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-train.yml

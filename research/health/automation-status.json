@@ -94,8 +94,7 @@
     "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
     "no_improvement_count": 4,
     "queued_actions": [
-      "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
-      "MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449"
+      "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409"
     ],
     "rejected_continuations": 3,
     "result_missing": 0,
@@ -126,18 +125,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449",
-      "kind": "CROSS_REPO",
-      "priority": 70,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 16,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 1,
       "quarantined": 0,
-      "queued": 4
+      "queued": 3
     }
   },
   "human_gates": [],
@@ -151,9 +145,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449",
+    "action_id": null,
     "kind": "CROSS_REPO",
-    "priority": 70,
-    "reason": "ready_external_action"
+    "priority": 80,
+    "reason": "reconcile_dispatched_action"
   }
 }

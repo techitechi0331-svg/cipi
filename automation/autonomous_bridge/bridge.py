@@ -624,6 +624,15 @@ def _history_payload(result: dict[str, Any], artifact_hash: str, source_path: Pa
             "cheap_stage_survivors",
             "deep_stage_survivors",
             "runner_runtime_seconds",
+            "research_compute_seconds",
+            "runner_job_seconds",
+            "total_wall_seconds",
+            "information_gain_signal",
+            "cache_hit_rate",
+            "duplicate_rate",
+            "mean_front_turnover",
+            "ranking_stability",
+            "replication_consistency",
             "candidates_per_runner_minute",
             "build_time_seconds",
             "benchmark_time_seconds",
@@ -633,6 +642,19 @@ def _history_payload(result: dict[str, Any], artifact_hash: str, source_path: Pa
         )
         if key in efficiency
     }
+    source_time_metrics = efficiency.get("time_metrics") if isinstance(efficiency.get("time_metrics"), dict) else {}
+    time_metrics = {
+        "queue_wait_seconds": source_time_metrics.get("queue_wait_seconds"),
+        "runner_job_seconds": source_time_metrics.get("runner_job_seconds"),
+        "checkout_seconds": source_time_metrics.get("checkout_seconds"),
+        "environment_setup_seconds": source_time_metrics.get("environment_setup_seconds"),
+        "preflight_seconds": source_time_metrics.get("preflight_seconds"),
+        "research_compute_seconds": source_time_metrics.get("research_compute_seconds", (result.get("experiment_cost") or {}).get("runtime_seconds")),
+        "macro_export_seconds": source_time_metrics.get("macro_export_seconds"),
+        "artifact_upload_seconds": source_time_metrics.get("artifact_upload_seconds"),
+        "total_wall_seconds": source_time_metrics.get("total_wall_seconds"),
+    }
+    research_quality_metrics = efficiency.get("research_quality_metrics") if isinstance(efficiency.get("research_quality_metrics"), dict) else {}
     return {
         "schema_version": "1.0",
         "processed_run_id": str(result["run_id"]),
@@ -658,6 +680,8 @@ def _history_payload(result: dict[str, Any], artifact_hash: str, source_path: Pa
         "bundle_hash": str(result.get("bundle_hash") or ""),
         "efficiency_policy": dict(result.get("efficiency_policy") or {}) if isinstance(result.get("efficiency_policy"), dict) else {},
         "efficiency_summary": efficiency_summary,
+        "time_metrics": time_metrics,
+        "research_quality_metrics": dict(research_quality_metrics),
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,
         "immutable": True,
@@ -759,8 +783,177 @@ def _track_budget_status(track: dict[str, Any], records: list[dict[str, Any]]) -
     }
 
 
+def _latest_track_job(root: Path, track_id: str) -> dict[str, Any] | None:
+    folder = _job_dir(root, track_id)
+    if not folder.exists():
+        return None
+    jobs: list[dict[str, Any]] = []
+    for path in folder.glob("*.yaml"):
+        try:
+            jobs.append(load_yaml(path))
+        except Exception:
+            continue
+    if not jobs:
+        return None
+    jobs.sort(key=lambda item: (int(item.get("loop_depth", 0) or 0), str(item.get("job_id") or "")))
+    return jobs[-1]
+
+
+def _action_state_for_job(root: Path, job_id: str) -> tuple[str | None, dict[str, Any] | None]:
+    for state in ("dispatched", "queued", "failed", "quarantined", "completed"):
+        folder = root / "research" / "cross_repo" / "actions" / state
+        if not folder.exists():
+            continue
+        for path in folder.glob("*.yaml"):
+            try:
+                action = load_yaml(path)
+            except Exception:
+                continue
+            linked = str(action.get("bridge_job_id") or (action.get("inputs") or {}).get("job_id") or "")
+            if linked == job_id:
+                return state.upper(), action
+    return None, None
+
+
+def _track_lifecycle(
+    root: Path,
+    track_id: str,
+    track: dict[str, Any],
+    decisions: list[dict[str, Any]],
+) -> dict[str, Any]:
+    if track.get("enabled") is not True:
+        return {"state": "DISABLED", "reason": "TRACK_DISABLED", "scheduler_eligible": False}
+
+    last = decisions[-1] if decisions else {}
+    reason = str(last.get("stop_reason") or "")
+    direct = {"HUMAN_GATE", "BUDGET_EXHAUSTED", "CONVERGED", "FALSIFIED", "QUARANTINED"}
+    if reason in direct:
+        return {"state": reason, "reason": reason, "scheduler_eligible": False}
+    if reason in {"DUPLICATE_ONLY", "NO_VALID_CONTINUATION"}:
+        return {
+            "state": "CONVERGED",
+            "reason": reason,
+            "scheduler_eligible": False,
+            "scientific_convergence_claim": False,
+            "state_basis": "SCHEDULER_TERMINAL_ALIAS",
+        }
+    if reason in {"REGRESSION_BLOCK", "OSCILLATION_DETECTED", "RESULT_MISSING"}:
+        return {"state": "FAILED", "reason": reason, "scheduler_eligible": False}
+    if reason in {"EXTERNAL_BLOCK", "RUNNER_WAIT"}:
+        return {"state": "WAITING_EXTERNAL", "reason": reason, "scheduler_eligible": True}
+
+    latest_job = _latest_track_job(root, track_id)
+    if latest_job:
+        job_id = str(latest_job.get("job_id") or "")
+        action_state, action = _action_state_for_job(root, job_id)
+        if action_state == "FAILED":
+            return {"state": "FAILED", "reason": "LATEST_EXTERNAL_ACTION_FAILED", "scheduler_eligible": False, "job_id": job_id}
+        if action_state == "QUARANTINED":
+            return {"state": "QUARANTINED", "reason": "LATEST_EXTERNAL_ACTION_QUARANTINED", "scheduler_eligible": False, "job_id": job_id}
+        if action_state == "DISPATCHED":
+            return {"state": "WAITING_EXTERNAL", "reason": "EXTERNAL_ACTION_DISPATCHED", "scheduler_eligible": True, "job_id": job_id}
+        if action_state == "QUEUED":
+            deps = list((action or {}).get("depends_on_actions") or []) + list((action or {}).get("depends_on_jobs") or [])
+            state = "WAITING_DEPENDENCY" if deps else "READY"
+            return {"state": state, "reason": "EXTERNAL_ACTION_QUEUED", "scheduler_eligible": True, "job_id": job_id}
+
+    return {"state": "REGISTERED", "reason": reason or "NO_CURRENT_RUNNABLE_WORK", "scheduler_eligible": False}
+
+
+def _average(values: list[float]) -> float | None:
+    return sum(values) / len(values) if values else None
+
+
+def _observability_summary(
+    root: Path,
+    active_track_ids: list[str],
+    records_by_track: dict[str, list[dict[str, Any]]],
+    lifecycle: dict[str, dict[str, Any]],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    compute_total = 0.0
+    information_pairs: list[tuple[float, float]] = []
+    duplicate_rates: list[float] = []
+    cache_rates: list[float] = []
+    turnover: list[float] = []
+    ranking: list[float] = []
+    replication: list[float] = []
+
+    for track_id in active_track_ids:
+        for record in records_by_track.get(track_id, []):
+            tm = record.get("time_metrics") if isinstance(record.get("time_metrics"), dict) else {}
+            compute = tm.get("research_compute_seconds")
+            if not isinstance(compute, (int, float)):
+                compute = (record.get("experiment_cost") or {}).get("runtime_seconds")
+            if isinstance(compute, (int, float)) and not isinstance(compute, bool):
+                compute_total += max(0.0, float(compute))
+            quality = record.get("research_quality_metrics") if isinstance(record.get("research_quality_metrics"), dict) else {}
+            eff = record.get("efficiency_summary") if isinstance(record.get("efficiency_summary"), dict) else {}
+            info = quality.get("new_information_per_run", eff.get("information_gain_signal"))
+            if isinstance(info, (int, float)) and isinstance(compute, (int, float)) and float(compute) > 0:
+                information_pairs.append((float(info), float(compute)))
+            for target, key in ((duplicate_rates, "duplicate_rate"), (cache_rates, "cache_hit_rate"), (turnover, "mean_front_turnover"), (ranking, "ranking_stability"), (replication, "replication_consistency")):
+                value = eff.get(key)
+                if isinstance(value, (int, float)) and not isinstance(value, bool):
+                    target.append(float(value))
+
+    queue_wait: list[float] = []
+    runner_wall: list[float] = []
+    total_wall: list[float] = []
+    for state in ("completed", "failed", "quarantined"):
+        folder = root / "research" / "cross_repo" / "actions" / state
+        if not folder.exists():
+            continue
+        for path in folder.glob("*.yaml"):
+            try:
+                action = load_yaml(path)
+            except Exception:
+                continue
+            if str(action.get("track_id") or "") not in active_track_ids:
+                continue
+            tm = action.get("time_metrics") if isinstance(action.get("time_metrics"), dict) else {}
+            for target, key in ((queue_wait, "queue_wait_seconds"), (runner_wall, "runner_job_seconds"), (total_wall, "total_wall_seconds")):
+                value = tm.get(key)
+                if isinstance(value, (int, float)) and not isinstance(value, bool):
+                    target.append(max(0.0, float(value)))
+
+    runner_sum = sum(runner_wall)
+    information_sum = sum(v for v, _ in information_pairs)
+    information_compute = sum(c for _, c in information_pairs)
+    registered_count = max(1, len(active_track_ids))
+    state_count = lambda name: sum(1 for item in lifecycle.values() if item.get("state") == name)
+    time_metrics = {
+        "research_compute_seconds": compute_total,
+        "queue_wait_seconds": sum(queue_wait) if queue_wait else None,
+        "runner_job_seconds": runner_sum if runner_wall else None,
+        "total_wall_seconds": sum(total_wall) if total_wall else None,
+        "checkout_seconds": None,
+        "environment_setup_seconds": None,
+        "preflight_seconds": None,
+        "macro_export_seconds": None,
+        "artifact_upload_seconds": None,
+        "known_runner_samples": len(runner_wall),
+    }
+    quality_metrics = {
+        "new_information_per_run": _average([v for v, _ in information_pairs]),
+        "new_information_per_compute_second": (information_sum / information_compute) if information_compute > 0 else None,
+        "duplicate_research_rate": _average(duplicate_rates),
+        "cache_hit_rate": _average(cache_rates),
+        "semantic_duplicate_rate": _average(duplicate_rates),
+        "pareto_front_turnover": _average(turnover),
+        "ranking_stability": _average(ranking),
+        "replication_consistency": _average(replication),
+        "falsification_rate": state_count("FALSIFIED") / registered_count,
+        "early_convergence_rate": None,
+        "human_gate_rate": state_count("HUMAN_GATE") / registered_count,
+        "budget_exhaustion_rate": state_count("BUDGET_EXHAUSTED") / registered_count,
+        "research_compute_to_runner_wall_ratio": (compute_total / runner_sum) if runner_sum > 0 else None,
+    }
+    return time_metrics, quality_metrics
+
+
 def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[str, int]) -> dict[str, Any]:
-    active = [tid for tid, t in tracks.items() if t.get("enabled") is True]
+    enabled = [tid for tid, t in tracks.items() if t.get("enabled") is True]
+    registered = sorted(tracks)
     depths: dict[str, int] = {}
     budgets: dict[str, Any] = {}
     human_gates = 0
@@ -772,8 +965,11 @@ def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[s
     continuation_candidates = 0
     stop_reasons: dict[str, str] = {}
 
-    for track_id in active:
+    records_by_track: dict[str, list[dict[str, Any]]] = {}
+    lifecycle: dict[str, dict[str, Any]] = {}
+    for track_id in enabled:
         records = history_records(root, track_id)
+        records_by_track[track_id] = records
         decisions = decision_records(root, track_id)
         melon_runs += len(records)
         depths[track_id] = max([int(r.get("loop_depth", 0)) for r in records], default=0)
@@ -789,6 +985,15 @@ def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[s
             last = decisions[-1]
             if last.get("stop_reason"):
                 stop_reasons[track_id] = str(last["stop_reason"])
+        lifecycle[track_id] = _track_lifecycle(root, track_id, tracks[track_id], decisions)
+
+    for track_id in registered:
+        if track_id not in lifecycle:
+            lifecycle[track_id] = _track_lifecycle(root, track_id, tracks[track_id], decision_records(root, track_id))
+    active_tracks = sorted(tid for tid, state in lifecycle.items() if state.get("state") in {"READY", "RUNNING", "WAITING_EXTERNAL", "WAITING_DEPENDENCY"})
+    terminal_tracks = sorted(tid for tid, state in lifecycle.items() if state.get("state") in {"CONVERGED", "BUDGET_EXHAUSTED", "FALSIFIED", "FAILED", "QUARANTINED", "DISABLED"})
+    human_gate_tracks = sorted(tid for tid, state in lifecycle.items() if state.get("state") == "HUMAN_GATE")
+    time_metrics, research_quality_metrics = _observability_summary(root, enabled, records_by_track, lifecycle)
 
     queued = _queued_bridge_actions(root)
     runner_wait = _runner_wait_count(root)
@@ -796,7 +1001,16 @@ def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[s
     return {
         "schema_version": "1.0",
         "bridge_version": BRIDGE_VERSION,
-        "active_research_tracks": active,
+        "active_research_tracks": enabled,
+        "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
+        "registered_tracks": registered,
+        "enabled_tracks": sorted(enabled),
+        "active_tracks": active_tracks,
+        "terminal_tracks": terminal_tracks,
+        "human_gate_tracks": human_gate_tracks,
+        "track_lifecycle": lifecycle,
+        "time_metrics": time_metrics,
+        "research_quality_metrics": research_quality_metrics,
         "current_loop_depth": depths,
         "melon_runs": melon_runs,
         "continuation_candidates": continuation_candidates,

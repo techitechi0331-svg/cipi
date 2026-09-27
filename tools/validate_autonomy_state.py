@@ -68,6 +68,15 @@ def main() -> int:
             errors.append(f"{bridge_health}: bridge health may not promote knowledge")
         if not isinstance(data.get("active_research_tracks"), list):
             errors.append(f"{bridge_health}: active_research_tracks must be a list")
+        for key in ("registered_tracks", "active_tracks", "terminal_tracks", "human_gate_tracks"):
+            if key in data and not isinstance(data.get(key), list):
+                errors.append(f"{bridge_health}: {key} must be a list")
+        if "track_lifecycle" in data and not isinstance(data.get("track_lifecycle"), dict):
+            errors.append(f"{bridge_health}: track_lifecycle must be a mapping")
+        if "time_metrics" in data and not isinstance(data.get("time_metrics"), dict):
+            errors.append(f"{bridge_health}: time_metrics must be a mapping")
+        if "research_quality_metrics" in data and not isinstance(data.get("research_quality_metrics"), dict):
+            errors.append(f"{bridge_health}: research_quality_metrics must be a mapping")
 
     bridge_root = ROOT / "research/autonomous_bridge"
     if bridge_root.exists():

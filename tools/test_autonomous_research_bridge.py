@@ -240,6 +240,32 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             health = build_health(root, {}, {})
             self.assertEqual(health["next_scheduler_action"], "NO_READY_WORK")
 
+    def test_lifecycle_separates_enabled_from_active(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); install_track(root, track())
+            install_result(root, macro_result(route="HUMAN_GATE", continuation_candidates=[]))
+            out = reconcile(root)
+            self.assertIn("TRACK-1", out["health"]["active_research_tracks"])
+            self.assertNotIn("TRACK-1", out["health"]["active_tracks"])
+            self.assertIn("TRACK-1", out["health"]["human_gate_tracks"])
+            self.assertEqual(out["health"]["track_lifecycle"]["TRACK-1"]["state"], "HUMAN_GATE")
+
+    def test_observability_aggregates_known_signals_only(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td); install_track(root, track())
+            efficiency = {
+                "information_gain_signal": 0.5,
+                "duplicate_rate": 0.1,
+                "cache_hit_rate": 0.25,
+                "time_metrics": {"research_compute_seconds": 4.0, "runner_job_seconds": None},
+                "research_quality_metrics": {"new_information_per_run": 0.5},
+            }
+            install_result(root, macro_result(efficiency_metrics=efficiency))
+            out = reconcile(root)
+            self.assertEqual(out["health"]["time_metrics"]["research_compute_seconds"], 4.0)
+            self.assertEqual(out["health"]["research_quality_metrics"]["new_information_per_run"], 0.5)
+            self.assertIsNone(out["health"]["research_quality_metrics"]["research_compute_to_runner_wall_ratio"])
+
     def test_runner_wait_work_stealing(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

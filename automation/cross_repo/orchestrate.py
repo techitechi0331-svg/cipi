@@ -38,6 +38,36 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def _workflow_time_metrics(run: dict[str, Any]) -> dict[str, Any]:
+    def parse(value: Any) -> datetime | None:
+        if not isinstance(value, str) or not value:
+            return None
+        try:
+            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+
+    created = parse(run.get("created_at"))
+    started = parse(run.get("run_started_at"))
+    updated = parse(run.get("updated_at"))
+    def seconds(a: datetime | None, b: datetime | None) -> float | None:
+        return max(0.0, (b - a).total_seconds()) if a is not None and b is not None else None
+
+    return {
+        "schema_version": "1.0",
+        "queue_wait_seconds": seconds(created, started),
+        "runner_job_seconds": seconds(started, updated),
+        "checkout_seconds": None,
+        "environment_setup_seconds": None,
+        "preflight_seconds": None,
+        "research_compute_seconds": None,
+        "macro_export_seconds": None,
+        "artifact_upload_seconds": None,
+        "total_wall_seconds": seconds(created, updated),
+        "source": "GITHUB_WORKFLOW_RUN_TIMESTAMPS",
+    }
+
+
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
@@ -427,6 +457,7 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
         action["state"] = "COMPLETED" if conclusion == "success" else "FAILED"
         action["conclusion"] = conclusion
         action["completed_at"] = run.get("updated_at") or now_iso()
+        action["time_metrics"] = _workflow_time_metrics(run)
         action["failure_classification"] = classification if conclusion != "success" else None
         dst = action_terminal_dir(root, conclusion) / path.name
         write_yaml(dst, action)
@@ -515,6 +546,7 @@ def reconcile_retried_failed_actions(root: Path, registry: dict, gh: GitHubClien
         action["state"] = "COMPLETED"
         action["conclusion"] = "success"
         action["completed_at"] = run.get("updated_at") or now_iso()
+        action["time_metrics"] = _workflow_time_metrics(run)
         action["run_attempt"] = current_attempt
         action["recovered_from_failed_attempt"] = max(recorded_attempts)
         action["recovered_at"] = now_iso()

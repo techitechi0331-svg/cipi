@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: QUEUED
+run_id: 36321785313
+run_status: queued
+run_conclusion: null
+since: '2026-09-27T13:15:48Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

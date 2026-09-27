@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "sample_rate": 48000,
+  "samples": 96000,
+  "input_noise_rms": 0.017720189667456764,
+  "output_error_rms_vs_clean": 0.01689731528678822,
+  "removed_rms": 0.003012208103508608,
+  "effective_error_reduction_db": 0.4130131677278884,
+  "removed_clean_correlation": 0.001055769634387944,
+  "output_clean_correlation": 0.9946595134830456,
+  "comparison_rule": "MATCHED_NR_REQUIRED_FOR_MODEL_TO_MODEL_CLAIMS",
+  "evidence_boundary": "MEASURED_SYNTHETIC_FIXTURE_ONLY_NOT_REAL_VOCAL_QUALITY",
+  "automatic_final_decision": false,
+  "listening_authority": false
+}

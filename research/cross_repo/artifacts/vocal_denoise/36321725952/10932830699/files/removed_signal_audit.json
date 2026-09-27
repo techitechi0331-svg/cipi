@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "sample_rate": 48000,
+  "samples": 96000,
+  "input_rms": 0.16380605157412875,
+  "output_rms": 0.16371591634317678,
+  "removed_rms": 0.003012208103508608,
+  "removed_to_input_rms_ratio": 0.018388869486579768,
+  "clean_reference_available": true,
+  "evidence_boundary": "MEASURED_SIGNAL_ENERGY_ONLY_NOT_PERCEPTUAL_QUALITY",
+  "automatic_final_decision": false,
+  "input_error_rms_vs_clean": 0.017720189667456764,
+  "output_error_rms_vs_clean": 0.01689731528678822,
+  "clean_minus_output_rms": 0.01689731528678822,
+  "warning": "These scalar energies do not determine audibility; level-matched listening remains a Human Gate."
+}

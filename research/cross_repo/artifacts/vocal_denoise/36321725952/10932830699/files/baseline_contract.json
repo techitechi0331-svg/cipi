@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "comparison_rule": "MATCHED_NOISE_REDUCTION",
+  "primary_quality_rule": "VOCAL_PRESERVATION_OVER_MAXIMUM_NR",
+  "baselines": [
+    {
+      "id": "IDENTITY_NOOP",
+      "kind": "CONTROL",
+      "purpose": "Prove metric and artifact plumbing without altering audio.",
+      "claims_allowed": [
+        "pipeline_integrity"
+      ],
+      "claims_forbidden": [
+        "denoising_quality",
+        "vocal_preservation_superiority"
+      ]
+    },
+    {
+      "id": "SPECTRAL_GATE_CLASSICAL",
+      "kind": "REFERENCE_IMPLEMENTATION_PENDING",
+      "purpose": "Classical non-ML baseline for later matched-NR comparison.",
+      "claims_allowed": [
+        "baseline_contract_only"
+      ],
+      "claims_forbidden": [
+        "measured_quality_until_audio_suite_exists"
+      ]
+    },
+    {
+      "id": "TINY_MASK_MODEL",
+      "kind": "ML_PILOT_BLOCKED_DATASET_GATE",
+      "purpose": "Small bounded ML baseline after licensed data approval.",
+      "claims_allowed": [],
+      "claims_forbidden": [
+        "training_before_dataset_gate",
+        "production_readiness"
+      ]
+    }
+  ],
+  "automatic_final_decision": false,
+  "product_release_authority": false
+}

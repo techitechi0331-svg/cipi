@@ -1,0 +1,33 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/Vocal_Denoise
+repo_key: vocal_denoise
+run_id: 36321725952
+run_attempt: 1
+artifact_id: 10932830699
+artifact_name: vocal-denoise-preflight-evidence
+expired: false
+size_in_bytes: 521207
+created_at: '2026-09-27T13:15:21Z'
+expires_at: '2026-12-26T13:14:50Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: baseline_contract.json
+  status: ingested
+  size: 1235
+  sha256: 57395f0790fe2ada0c268573f23b705e8684d8a7727a700216fa5516f6c96f72
+- path: removed_signal_audit.json
+  status: ingested
+  size: 673
+  sha256: 83efc1aab8880926ba42be9f5ed052bd98938b171fcae8f0c8bffc493d0a5249
+- path: runner_capability.json
+  status: ingested
+  size: 575
+  sha256: d2307e96f5969672f25235f3d34bd77c504319638d5895d9f023f4812dde0d61
+- path: synthetic_baseline_metrics.json
+  status: ingested
+  size: 600
+  sha256: b4bf1284707f57cc6d20dc90d625bc65c991fff26bb915330ec260bb19aefb80
+archive_sha256: 2386dd8eab15cc783d452efb9345f53fa987e9be2c70c377cdf08c2d088d21a6
+ingest_status: text_evidence_ingested

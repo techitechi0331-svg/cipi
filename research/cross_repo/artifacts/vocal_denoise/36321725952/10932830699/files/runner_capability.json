@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "cpu_count": 20,
+  "cwd_drive_free_gb": 108.445,
+  "github_actions": true,
+  "runner_os": "Windows",
+  "runner_arch": "X64",
+  "cuda_visible_devices_set": false,
+  "nvidia_smi": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB, 576.88",
+  "cmake": null,
+  "git": null,
+  "secrets_dumped": false
+}

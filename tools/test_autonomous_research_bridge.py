@@ -310,6 +310,7 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             context = json.loads(action["inputs"]["cipi_context_json"])
             self.assertEqual(context["loop_depth"], 1)
             self.assertEqual(context["track_id"], "TRACK-1")
+            self.assertEqual(context["experiment_type"], "INITIAL_RESEARCH")
             self.assertFalse(action["automatic_product_decision"])
             registry = load_registry(ROOT / "automation/cross_repo/registry.yaml")
             self.assertEqual(validate_action(action, registry), [])

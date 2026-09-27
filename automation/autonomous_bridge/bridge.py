@@ -519,6 +519,7 @@ def generate_job_and_action(
         "loop_depth": next_depth,
         "hypothesis_id": hypothesis_id,
         "experiment_id": experiment_id,
+        "experiment_type": str(accepted.get("experiment_type") or "EXPERIMENT"),
         "research_question": str(track.get("research_question") or "bounded MELON research"),
     }
     if efficiency_policy:

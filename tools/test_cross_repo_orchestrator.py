@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "automation" / "cross_repo"))
 
 from core import match_dispatched_run, select_queued_action, should_resume_external_job, validate_action  # noqa: E402
-from orchestrate import backfill_completed_artifacts, reconcile_retried_failed_actions  # noqa: E402
+from orchestrate import _workflow_time_metrics, backfill_completed_artifacts, reconcile_retried_failed_actions  # noqa: E402
 from failure import classify_failure  # noqa: E402
 
 
@@ -49,6 +49,18 @@ def action(action_id: str, workflow: str, priority: int) -> dict:
         "attempts": 0,
         "max_attempts": 2,
     }
+
+
+def test_workflow_time_metrics_split_queue_and_runner_wall():
+    metrics = _workflow_time_metrics({
+        "created_at": "2026-09-26T00:00:00Z",
+        "run_started_at": "2026-09-26T00:01:00Z",
+        "updated_at": "2026-09-26T00:06:00Z",
+    })
+    assert metrics["queue_wait_seconds"] == 60.0
+    assert metrics["runner_job_seconds"] == 300.0
+    assert metrics["total_wall_seconds"] == 360.0
+    assert metrics["research_compute_seconds"] is None
 
 
 class FakeArtifactClient:

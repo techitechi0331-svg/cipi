@@ -1,0 +1,112 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+enabled: true
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+
+research_question: >-
+  Can a deterministic plucked-string delay-loop candidate provide a numerically stable,
+  measurable and sufficiently pitch-consistent first waveform-generation substrate for
+  the Virtual Guitar research prototype while keeping audible realism and product
+  adoption behind Human/CIPI gates?
+
+hypothesis_id: HYP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-V01
+hypothesis: >-
+  A bounded preallocated plucked-string delay loop with explicit loop gain, pick position,
+  and delay-length compensation can generate deterministic guitar-range waveform audio
+  with finite output and low pitch-proxy error, suitable for research-prototype AB work.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - REAL_AUDIO_AB
+  - HUMAN_LISTENING
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/virtual-guitar/inventory-physical-audio-2026-09-27.md
+  do_not_reopen: []
+  rejected_directions:
+    - FIRST_DELAY_LOOP_EQUALS_FINAL_REALISM
+    - SYNTHETIC_METRICS_EQUAL_LISTENING_PROOF
+    - RANDOM_ONLY_HUMANIZE
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 36
+  max_runtime: 450
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+
+initial_experiment:
+  experiment_id: EXP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-R1
+  experiment_type: INITIAL_DELAY_LOOP_IDENTIFIABILITY
+  expected_information_gain: 0.95
+  scope:
+    - virtual_guitar
+    - physical_audio
+    - delay_loop
+    - pitch_proxy
+    - decay_proxy
+  inputs:
+    seed: 2026092704
+    population: 6
+    generations: 2
+    max_candidates: 12
+    max_runtime_seconds: 90
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A bounded preallocated plucked-string delay loop with explicit loop gain, pick position,
+      and delay-length compensation can generate deterministic guitar-range waveform audio
+      with finite output and low pitch-proxy error, suitable for research-prototype AB work.
+    architecture: DETERMINISTIC_PLUCKED_STRING_DELAY_LOOP_V01
+    tested_parameters:
+      delay_compensation_samples: bounded_broad_then_narrow
+      loop_gain: bounded_broad_then_narrow
+      pick_position: bounded_broad_then_narrow
+    benchmark_profile:
+      - guitar_delay_pitch_grid_v1
+      - guitar_delay_stability_v1
+    sample_rate: 48000
+    input_set: STANDARD_GUITAR_RANGE_MIDI_GRID_V1
+    reference_model: IDEAL_EQUAL_TEMPERED_FREQUENCY_PLUS_HALF_SAMPLE_FILTER_DELAY_HYPOTHESIS
+    objective_set:
+      - pitch_error
+      - decay_proxy
+      - numerical_stability
+      - execution_cost
+    relevant_constraints:
+      - deterministic_excitation
+      - process_path_no_allocation
+      - loop_gain_below_one
+      - product_integration_off
+      - automatic_promotion_off
+      - human_listening_not_claimed
+    experiment_type: INITIAL_DELAY_LOOP_IDENTIFIABILITY
+    scope:
+      - virtual_guitar
+      - physical_audio
+      - delay_loop
+      - pitch_proxy
+      - decay_proxy

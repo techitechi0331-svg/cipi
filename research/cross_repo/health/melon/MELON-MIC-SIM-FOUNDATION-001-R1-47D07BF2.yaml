@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-MIC-SIM-FOUNDATION-001-R1-47D07BF2
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: QUEUED
+run_id: 36297235100
+run_status: queued
+run_conclusion: null
+since: '2026-09-27T05:27:04Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

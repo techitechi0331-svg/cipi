@@ -1,0 +1,53 @@
+schema_version: "1.0"
+evidence_id: VG-EPOCH-002-INTEGRATION-20260927
+project: virtual-guitar
+evidence_class: MEASURED
+source_repository: techitechi0331-svg/virtual-guitar
+source_commit: 5e1a62892f3951a1b42e7af5a33baa46dca0d61b
+workflow:
+  name: guitar-core-validation
+  run_id: 36290092227
+  conclusion: success
+  runner: virtual-guitar
+  runner_labels:
+    - self-hosted
+    - Windows
+    - X64
+measurements:
+  configure: PASS
+  build: PASS
+  regression:
+    total_tests: 3
+    passed: 3
+    failed: 0
+    tests:
+      - vg_midi_decision_smoke
+      - vg_gesture_smoke
+      - vg_epoch2_smoke
+  decision_microbenchmark:
+    events_processed: 80000
+    elapsed_ms: 92.9362
+    ns_per_event: 1161.7
+    checksum: 20779808
+    realtime_claim: false
+artifact:
+  artifact_id: 10922046759
+  name: guitar-research-epoch-36290092227
+  sha256: 9bbc997f3f7dc805f5451c15c7ae091e13fea45de4f1d5257e85bb82b24f9c9a
+establishes:
+  - Articulation State Machine v0.1 builds and passes regression
+  - Living String state exposes pitch/fret/energy/vibration/damping/mute/ring/pick-history fields
+  - Gesture-to-String Bridge excites multiple persistent physical strings deterministically
+  - previous MIDI and Gesture regressions remain green
+  - bounded decision-path cost remains measurable after integration
+does_not_establish:
+  - audible physical-guitar fidelity
+  - final string synthesis architecture
+  - final mute/ring damping constants
+  - DAW realtime safety
+  - Cubase compatibility
+  - production readiness
+authority: CIPI_INTEGRATION_EPOCH_EVIDENCE
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+immutable: true

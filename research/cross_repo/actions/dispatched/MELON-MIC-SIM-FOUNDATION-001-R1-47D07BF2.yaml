@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-MIC-SIM-FOUNDATION-001-R1-47D07BF2
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -22,7 +22,7 @@ inputs:
     and efficiently reusable capture-model evidence through CIPI and MELON before
     any real-microphone fidelity or product-integration claim is allowed?","track_id":"MIC-SIM-FOUNDATION-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -40,3 +40,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36297071632
+dispatched_at: '2026-09-27T05:27:04.688029Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

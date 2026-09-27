@@ -59,8 +59,12 @@ jobs:
         id: bridge
         run: python automation/autonomous_bridge/bridge.py --github-output "$GITHUB_OUTPUT"
 
+      - name: Evaluate virtual-guitar canary evidence
+        id: guitar
+        run: python automation/virtual_guitar/evaluate_canary.py --root . --github-output "$GITHUB_OUTPUT"
+
       - name: Validate bridge-generated state
-        if: steps.bridge.outputs.changed == 'true'
+        if: steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true'
         run: |
           python tools/validate_cross_repo.py
           python tools/validate_autonomy_state.py
@@ -77,15 +81,15 @@ jobs:
             --github-output "$GITHUB_OUTPUT"
 
       - name: Validate generated health dashboard
-        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true'
+        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true'
         run: python tools/validate_autonomy_state.py
 
       - name: Commit bridge state and health dashboard when changed
-        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true'
+        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true'
         run: |
           git config user.name "cipi-health-bot"
           git config user.email "cipi-health-bot@users.noreply.github.com"
-          git add -A -- research/autonomous_bridge research/health/autonomous-bridge.json research/health/automation-status.json research/health/automation-status.md
+          git add -A -- research/autonomous_bridge research/health/autonomous-bridge.json research/health/automation-status.json research/health/automation-status.md research/plugins/virtual-guitar/canary
           if [ -d research/cross_repo/actions/queued ]; then
             git add -A -- research/cross_repo/actions/queued
           fi

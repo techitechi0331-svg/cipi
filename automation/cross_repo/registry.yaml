@@ -188,3 +188,22 @@ repositories:
           - stage3_limit
           - workers
           - preflight_mode
+
+
+  virtual_guitar:
+    repository: techitechi0331-svg/virtual-guitar
+    default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
+    workflows:
+      canary:
+        file: guitar-canary.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - job_id
+          - track_id
+        required_inputs:
+          - job_id
+          - track_id

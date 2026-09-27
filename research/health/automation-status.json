@@ -428,13 +428,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "VL2A-PREHOST-705C24531C398EEB-R5",
+      "kind": "CROSS_REPO",
+      "priority": 95,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 42,
       "dispatched": 1,
       "failed": 8,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -463,9 +468,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
+    "action_id": "VL2A-PREHOST-705C24531C398EEB-R5",
     "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "priority": 95,
+    "reason": "ready_external_action"
   }
 }

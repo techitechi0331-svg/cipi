@@ -1,0 +1,57 @@
+{
+  "bridge_profile": {
+    "architecture": "RICHER_STRING_MECHANISM_PROXY_V02",
+    "benchmark_profiles": [
+      "guitar_spectral_evolution_proxy_v1",
+      "guitar_dispersion_proxy_v1",
+      "guitar_excitation_proxy_v1",
+      "guitar_bridge_body_coupling_proxy_v1"
+    ],
+    "input_set": "STANDARD_GUITAR_RANGE_MIDI_GRID_V1",
+    "objective_set": [
+      "mechanism_coverage_penalty",
+      "numerical_stability",
+      "cpu_cost",
+      "memory_cost"
+    ],
+    "reference_model": "V01_DELAY_LOOP_PLUS_HUMAN_REJECTION_EVIDENCE",
+    "relevant_constraints": [
+      "human_listening_says_v01_single_note_is_synthetic",
+      "strum_direction_preserve",
+      "no_real_guitar_fidelity_claim",
+      "product_integration_off",
+      "automatic_promotion_off"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_PHYSICAL_REALISM",
+    "sample_rate": 48000.0
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "guitar_realism_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 16,
+    "max_runtime_seconds": 120.0,
+    "population_size": 8,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_PHYSICAL_REALISM",
+  "routes": {
+    "ITERATE": 1
+  },
+  "run_id": "melon-funnel-guitar-realism-f15e0e2fe0c7",
+  "seed": 2026092707,
+  "stage1_pareto": 16,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-27T16:00:45.171741+00:00"
+}

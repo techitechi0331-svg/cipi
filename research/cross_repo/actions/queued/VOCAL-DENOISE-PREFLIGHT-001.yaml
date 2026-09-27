@@ -1,0 +1,15 @@
+schema_version: "1.0"
+action_id: VOCAL-DENOISE-PREFLIGHT-001
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: preflight
+ref: main
+inputs: {}
+priority: 90
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: "Verify the Vocal_Denoise Windows self-hosted runner, dataset-registry validator, unit tests and baseline contract after product bootstrap."

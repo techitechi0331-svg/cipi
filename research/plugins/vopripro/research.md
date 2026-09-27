@@ -312,3 +312,24 @@ Key measurements:
 Interpretation:
 
 The event-only front end is objectively compatible with VoPriPro Natural50 on the deterministic source-derived matrix. This supports moving to actual VST3 cross-product measurement and level-matched real-vocal listening. It does **not** establish audible superiority, a recommended default chain, or Cubase readiness. The all-modules 50% v2 rejection remains valid negative evidence that Macro Level must be treated as a separate slow gain-movement stage rather than silently bundled into this compatibility claim.
+
+
+## 2026-09-27 AMOUNT static mapping audit v1
+
+Evidence:
+- `research/plugins/vopripro/amount_static_audit_v1.md`
+
+The protected `VocalPrepComp@cc796d30` AMOUNT map was evaluated directly from its source equations without product mutation.
+
+Key derived findings:
+- Natural50 remains internally exact at the static reference: Ratio **2.7:1**, Calibration GR **3.0 dB**, Max GR **6.0 dB**.
+- Its solved threshold is about **4.694 dB below Active Level**.
+- Its 12 dB knee begins affecting the static curve about **10.694 dB below Active Level**.
+- Its static Max GR is reached at about **+4.836 dB** above Active Level.
+- The map is continuous and monotonic but deliberately multi-dimensional: ratio, calibration GR and Max GR move together.
+- At the high end, 90% -> 100% adds only **0.3 dB** Calibration GR while still increasing ratio and Max GR, so perceptual control-travel uniformity remains an open listening/generalisation question rather than a mathematical defect.
+
+Decision:
+- **KEEP protected baseline.**
+- No AMOUNT anchor is changed.
+- A future same-corpus real-vocal AMOUNT sweep should measure GR distribution, ceiling occupancy, dynamic-range reduction, ripple and phrase-tail recovery before any alternative mapping is designed.

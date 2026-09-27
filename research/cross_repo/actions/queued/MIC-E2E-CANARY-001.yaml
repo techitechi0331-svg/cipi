@@ -1,0 +1,23 @@
+schema_version: "1.0"
+action_id: MIC-E2E-CANARY-001
+state: QUEUED
+repo_key: mic_simulator
+workflow_key: canary
+ref: main
+inputs:
+  job_id: MIC-E2E-CANARY-001
+  track_id: MIC-SIM-SETUP-001
+priority: 90
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: >-
+  Lightweight Mic Simulator end-to-end canary. Validate CIPI Cross-Repo dispatch,
+  dedicated mic-simulator self-hosted runner execution, Result Bundle return,
+  and metadata/text artifact intake before any autonomous microphone research is enabled.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

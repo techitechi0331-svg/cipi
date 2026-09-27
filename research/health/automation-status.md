@@ -5,12 +5,12 @@
 - Next scheduler action: **IDLE**
 - Local READY job: **-**
 - Claimed evidence branches: **0**
-- Local blocked / dependency-blocked: **0 / 1**
+- Local blocked / dependency-blocked: **0 / 2**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
 - Cross-Repo queued / dispatched / failed / quarantined: **1 / 0 / 2 / 0**
 - Runner/dispatch alerts: **0**
-- Declared human-gate jobs: **1**
+- Declared human-gate jobs: **2**
 
 ## Autonomous Research Bridge
 
@@ -29,4 +29,5 @@
 
 ## Human gates
 
+- `VIRTUAL-GUITAR-MIC-INTEGRATION-001` — REAL_AUDIO_AB; FINAL_MIC_INTEGRATION_ADOPTION
 - `VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001` — FINAL_SUBJECTIVE_PICKUP_TONE; COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED

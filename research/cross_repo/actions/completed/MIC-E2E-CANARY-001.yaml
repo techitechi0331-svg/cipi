@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MIC-E2E-CANARY-001
-state: DISPATCHED
+state: COMPLETED
 repo_key: mic_simulator
 workflow_key: canary
 ref: main
@@ -24,3 +24,8 @@ previous_run_id: 36294196472
 dispatched_at: '2026-09-27T04:44:47.972254Z'
 repository: techitechi0331-svg/mic_simulator
 workflow_file: mic-canary.yml
+run_id: 36295197579
+run_url: https://github.com/techitechi0331-svg/mic_simulator/actions/runs/36295197579
+conclusion: success
+completed_at: '2026-09-27T04:45:10Z'
+failure_classification: null

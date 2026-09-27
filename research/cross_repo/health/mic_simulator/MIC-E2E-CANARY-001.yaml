@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MIC-E2E-CANARY-001
+repo_key: mic_simulator
+workflow_key: canary
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36295197579
+run_status: completed
+run_conclusion: success
+since: '2026-09-27T04:44:47Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

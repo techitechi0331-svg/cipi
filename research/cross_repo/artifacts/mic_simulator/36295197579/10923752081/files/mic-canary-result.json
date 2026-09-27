@@ -1,0 +1,13 @@
+﻿{
+    "schema_version":  "1.0",
+    "result_type":  "MIC_SIMULATOR_CANARY",
+    "status":  "PASS",
+    "job_id":  "MIC-E2E-CANARY-001",
+    "track_id":  "MIC-SIM-SETUP-001",
+    "repository":  "techitechi0331-svg/mic_simulator",
+    "commit_sha":  "61acf12fcf847b47145d699de8b0366d90b8e7e9",
+    "run_id":  "36295197579",
+    "runner_name":  "mic-simulator",
+    "runner_os":  "Windows",
+    "generated_at":  "2026-09-27T04:45:01.2060657Z"
+}

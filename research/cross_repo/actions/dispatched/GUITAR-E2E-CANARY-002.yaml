@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: GUITAR-E2E-CANARY-002
-state: QUEUED
+state: DISPATCHED
 repo_key: virtual_guitar
 workflow_key: canary
 ref: main
@@ -8,7 +8,7 @@ inputs:
   job_id: GUITAR-E2E-CANARY-002
   track_id: VIRTUAL-GUITAR-PHYSICAL-001
 priority: 79
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -21,3 +21,7 @@ reason: E2E canary successor to CANARY-001. It depends on the repaired MELON gui
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 36289877965
+dispatched_at: '2026-09-27T04:45:34.373396Z'
+repository: techitechi0331-svg/virtual-guitar
+workflow_file: guitar-canary.yml

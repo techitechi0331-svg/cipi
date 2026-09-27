@@ -1,0 +1,56 @@
+schema_version: "1.0"
+event_id: VG-EFF-V2.3-PHYSICAL-AUDIO-APPLIED-20260927T034200Z
+policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+policy_version: "2.3"
+event: TRACK_POLICY_APPLIED
+track_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+state: APPLIED
+safe_handoff:
+  completed_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+  result_bundle_run_id: MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0
+  evidence_intake: COMPLETE
+  evaluation: COMPLETE
+  continuation_decision: CONTINUE
+  next_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
+  next_job_state_before_application: QUEUED
+non_interruption:
+  prior_research_job_cancelled: false
+  prior_melon_run_cancelled: false
+  prior_virtual_guitar_runner_job_cancelled_by_application: false
+  project_idle_waited: false
+validation:
+  virtual_guitar_full_regression:
+    run_id: 36292052180
+    result: PASS
+    tests: 7
+    memory_benchmark: PASS
+    realtime_safety_proxy: PASS
+    result_bundle_schema_validation: PASS
+  virtual_guitar_selective_validation:
+    run_id: 36292052199
+    result: PASS
+  melon_v2_3_validation:
+    run_id: 36291895556
+    result: PASS
+    generic_cache_reuse: PASS
+    semantic_dedup_reuse: PASS
+    pareto_reuse: PASS
+  cipi_dispatch_gate_validation:
+    run_id: 36292034645
+    result: PASS
+implementation:
+  guitar_specific_constraints: ACTIVE
+  guitar_specific_objectives: ACTIVE
+  candidate_batch_execution: ACTIVE
+  candidate_failure_isolation: ACTIVE
+  persistent_measurement_cache_reuse: ACTIVE
+  semantic_duplicate_reuse: ACTIVE
+  quality_cost_pareto_reuse: ACTIVE
+  selective_test_mapping: ACTIVE
+  stable_runner_performance_benchmark: ACTIVE
+  epoch_full_regression: ACTIVE
+  max_guitar_runner_jobs: 1
+authority: CIPI_POLICY_APPLICATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

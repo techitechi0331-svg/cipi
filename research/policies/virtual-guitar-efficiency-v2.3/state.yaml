@@ -1,7 +1,8 @@
 schema_version: "1.0"
 policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
 registration_state: PENDING_POLICY
-rollout_state: PER_TRACK_SAFE_HANDOFF
+current_policy_state: ACTIVE
+rollout_state: ACTIVE_ALL_CURRENT_TRACKS
 project_idle_required: false
 all_tracks_complete_required: false
 tracks:
@@ -19,11 +20,11 @@ tracks:
     current_job_interrupted: false
 
   VIRTUAL-GUITAR-PHYSICAL-AUDIO-001:
-    state: PENDING_REGRESSION
+    state: APPLIED
     reason: >-
       R1 completed through Result Bundle, CIPI Evidence Intake, Evaluation and Continuation
-      Decision. R2 exists as QUEUED and is policy-gated before dispatch while v2.3
-      implementation/regression is applied.
+      Decision. v2.3 implementation and regression passed at this Safe Handoff while R2
+      remained QUEUED; R2 may now dispatch under v2.3 without interrupting any prior Job.
     safe_handoff:
       completed_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
       decision_run_id: MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0
@@ -35,20 +36,32 @@ tracks:
     policy_regression_gate: VIRTUAL-GUITAR-V2.3-POLICY-REGRESSION-AUDIO-001
     rollout_validation:
       virtual_guitar_full_regression:
-        run_id: 36291282047
+        run_id: 36292052180
         state: PASS
-        tests_passed: 6
+        tests_passed: 7
         tests_failed: 0
+        memory_benchmark: PASS
+        realtime_safety_proxy: PASS
+        result_bundle_schema_validation: PASS
+        artifact_id: 10922233528
+        artifact_sha256: 78ed91a067efbeef380d91780a163c99c5090a337f9d00b3f97df6b15a6c6f93
       virtual_guitar_selective_test_mapping:
-        run_id: 36291497287
+        run_id: 36292052199
         state: PASS
       cipi_bridge_regression:
         run_id: 36291361478
         state: PASS
+      cipi_policy_dispatch_gate:
+        run_id: 36292034645
+        state: PASS
       melon_efficiency_adapter_regression:
-        run_id: 36291323030
-        state: IN_PROGRESS
-    next_dispatch_policy: HOLD_UNTIL_V2_3_REGRESSION_PASS
+        run_id: 36291895556
+        state: PASS
+        cache_reuse: PASS
+        semantic_dedup_reuse: PASS
+        pareto_reuse: PASS
+        candidate_failure_isolation: PASS
+    next_dispatch_policy: V2_3_ACTIVE
     current_job_interrupted: false
 
 state_legend:

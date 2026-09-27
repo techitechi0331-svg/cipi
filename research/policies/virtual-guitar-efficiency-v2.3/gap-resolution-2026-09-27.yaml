@@ -1,0 +1,45 @@
+schema_version: "1.0"
+resolution_id: VG-EFF-V2.3-GAP-RESOLUTION-20260927
+policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+state: RESOLVED_FOR_CURRENT_GUITAR_AUDIO_ADAPTER
+resolved:
+  cache:
+    implementation: MELON DomainExperimentCache in melon/cache.py
+    persistent_root: existing MELON_CACHE_ROOT outside checkout
+    key_material:
+      - candidate semantic identity
+      - benchmark profile version
+      - test MIDI hash
+      - sample rate
+      - engine version
+      - git SHA
+      - important runtime configuration
+  dedup:
+    implementation: MELON semantic_payload_fingerprint
+    behavior: same-batch semantic duplicate reuse without remeasurement
+  pareto:
+    implementation: MELON funnel pareto_indices using existing dominance semantics
+    objectives:
+      - pitch error
+      - estimated CPU operations per sample
+      - estimated delay-memory bytes
+  candidate_failure_isolation:
+    statuses:
+      - success
+      - duplicate_reuse
+      - rejected
+      - numerical_failure
+      - timeout
+      - invalid
+      - measurement_failure
+  evidence:
+    validation_run: 36291895556
+    result: PASS
+not_claimed:
+  - subjective guitar realism
+  - Human Listening result
+  - Cubase compatibility
+  - final physical model architecture
+authority: CIPI_EFFICIENCY_GAP_RESOLUTION
+automatic_product_decision: false
+automatic_knowledge_promotion: false

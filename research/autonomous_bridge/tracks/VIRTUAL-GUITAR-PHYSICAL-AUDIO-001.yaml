@@ -114,7 +114,7 @@ initial_experiment:
 efficiency_policy:
   policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
   policy_version: "2.3"
-  state: PENDING_REGRESSION
+  state: APPLIED
   safe_handoff_job: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
   safe_handoff_run: MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0
   gated_next_job: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
@@ -125,3 +125,12 @@ efficiency_policy:
   full_regression_at_epoch_end: true
   selective_test_mapping: true
   current_main_recheck_required: true
+
+  rollout_validation:
+    safe_handoff_job: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+    safe_handoff_run: MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0
+    virtual_guitar_full_regression_run: 36292052180
+    virtual_guitar_targeted_run: 36292052199
+    melon_validation_run: 36291895556
+    cipi_policy_gate_validation_run: 36292034645
+    result: PASS

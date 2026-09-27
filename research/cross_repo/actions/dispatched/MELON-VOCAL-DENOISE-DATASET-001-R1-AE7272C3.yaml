@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-DENOISE-DATASET-001-R1-AE7272C3
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -21,7 +21,7 @@ inputs:
     dataset provenance, licensing, singer/noise split policy and fail-closed training
     eligibility be made deterministic and machine-auditable before any training?","track_id":"VOCAL-DENOISE-DATASET-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -39,3 +39,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36322166817
+dispatched_at: '2026-09-27T13:26:46.225821Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

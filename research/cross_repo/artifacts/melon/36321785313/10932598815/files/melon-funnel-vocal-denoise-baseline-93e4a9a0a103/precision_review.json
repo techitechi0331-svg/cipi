@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "all_numeric_metrics_finite": true,
+    "audio_quality_not_claimed": true,
+    "automatic_promotion_disabled": true,
+    "bounded_candidates": true,
+    "product_release_disabled": true,
+    "proprietary_reverse_engineering_not_claimed": true,
+    "real_training_not_claimed": true,
+    "strict_contract_candidate_exists": true
+  },
+  "evidence_boundary": "MEASURED_DETERMINISTIC_RESEARCH_CONTRACT_NOT_AUDIO_QUALITY",
+  "passed": true
+}

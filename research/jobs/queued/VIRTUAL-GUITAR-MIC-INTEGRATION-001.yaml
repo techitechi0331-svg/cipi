@@ -1,0 +1,114 @@
+schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-MIC-INTEGRATION-001
+state: QUEUED
+priority: 35
+
+track:
+  id: VIRTUAL_GUITAR_MIC_INTEGRATION
+  path: research/plugins/virtual-guitar/integration-policies
+
+research_question: >-
+  After the Cabinet/Speaker output boundary and the independent Mic Simulator contract,
+  validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate
+  the external Mic Engine through a versioned optional boundary without coupling to its
+  internals or regressing existing guitar behavior?
+
+hypothesis: >-
+  A versioned adapter boundary between Cabinet/Speaker output and the independent
+  mic_simulator engine can keep Virtual Guitar operational without Mic Simulator,
+  preserve DI/Amp-Cab bypass paths, and permit bounded Mic integration without importing
+  Mic Engine internals into the virtual-guitar repository.
+
+counter_hypotheses:
+  - Mic integration requires direct dependency on Mic Simulator internal classes.
+  - Cabinet and Mic behavior cannot remain independently testable.
+  - Virtual Guitar cannot preserve DI or Amp/Cab fallback when Mic Simulator is absent.
+  - Mic integration changes existing Virtual Guitar sound or behavior without explicit versioning.
+
+baseline:
+  - virtual_guitar_without_external_mic_simulator
+  - DI_OUT_AVAILABLE
+  - AMP_CAB_OUT_OPTIONALLY_AVAILABLE_WITHOUT_MIC
+
+variants:
+  - CIPI_EVALUATED_MINIMUM_MIC_INTEGRATION_CANDIDATE
+
+metrics:
+  - contract_compatibility
+  - version_traceability
+  - fallback_path_pass
+  - virtual_guitar_regression_count
+  - cabinet_mic_layer_separation
+  - mono_source_policy_compliance
+  - cpu_cost_delta
+  - memory_cost_delta
+
+acceptance:
+  - all integration-start dependency gates are COMPLETED
+  - Mic Simulator internals are not directly referenced from Virtual Guitar
+  - integration uses a versioned I/O contract
+  - Mic Simulator can be absent without breaking Virtual Guitar
+  - DI OUT remains independently obtainable
+  - Amp/Cab OUT can remain obtainable without Mic Simulator where applicable
+  - single Amp + single Cab + single Close Mic remains mono by default
+  - existing Virtual Guitar regressions pass
+  - measurement and real-audio AB evidence are produced before adoption
+  - required Human Gate is completed before final adoption
+
+rejection:
+  - any integration-start gate is unresolved
+  - integration requires an unversioned latest-main dependency
+  - Mic and Cabinet become a single opaque response
+  - build success is used as sole adoption evidence
+  - existing Virtual Guitar behavior regresses
+  - Mic Simulator becomes a hard dependency
+
+depends_on_jobs:
+  - VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001
+  - MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001
+  - MIC-SIMULATOR-MINIMUM-VALIDATION-GATE-001
+  - MIC-SIMULATOR-CIPI-INTEGRATION-CANDIDATE-GATE-001
+
+activation_contract:
+  policy_ref: VIRTUAL-GUITAR-EXTERNAL-MIC-INTEGRATION-V1.1
+  current_state_semantics: >-
+    This job is registered in the DAG now but remains dependency-blocked while the four
+    explicit convergence/candidate gates are unresolved. It must not preempt current
+    Physical Guitar, Physical Audio, Living String, Virtual Guitarist, Gesture, Fingering,
+    Articulation, Realtime, CPU or Regression work.
+  current_work_interrupted: false
+
+max_runs: 3
+timeout_minutes: 30
+
+allowed_operations:
+  - inspect_cipi_evaluated_mic_integration_candidate
+  - design_versioned_external_adapter_boundary
+  - add_integration_tests
+  - test_di_fallback
+  - test_amp_cab_bypass
+  - measure_cpu_memory_regression
+  - produce_real_audio_ab_evidence
+  - write_research_evidence
+
+prohibited_operations:
+  - reimplement_mic_engine_inside_virtual_guitar
+  - directly_reference_mic_simulator_internal_classes
+  - auto_follow_mic_simulator_main
+  - bypass_cipi_evidence_intake
+  - auto_promote_mic_research
+  - auto_release
+  - use_fake_stereo_width_as_default_close_mic_behavior
+
+review_policy:
+  required_human_gates:
+    - REAL_AUDIO_AB
+    - FINAL_MIC_INTEGRATION_ADOPTION
+
+knowledge_candidate:
+  claim: >-
+    Virtual Guitar Mic capture is owned by an independent mic_simulator repository and is
+    integrated only through a versioned optional boundary after CIPI-evaluated readiness.
+  evidence_type: SOURCE_CANDIDATE
+  scope: Integration policy only; not evidence that Mic Simulation is implemented or validated.
+  promotion_requested: HYPOTHESIS

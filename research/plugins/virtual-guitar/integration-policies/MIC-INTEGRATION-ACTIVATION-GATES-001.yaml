@@ -1,0 +1,58 @@
+schema_version: "1.0"
+contract_id: MIC-INTEGRATION-ACTIVATION-GATES-001
+project: virtual-guitar
+future_job_id: VIRTUAL-GUITAR-MIC-INTEGRATION-001
+
+gates:
+  VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001:
+    subject: STABLE_CABINET_SPEAKER_OUTPUT_BOUNDARY
+    current_state: NOT_SATISFIED
+    completion_authority: CIPI
+    do_not_infer_from:
+      - DI_OUTPUT_ALONE
+      - AMP_ONLY_OUTPUT
+      - SINGLE_OFFLINE_RENDER
+      - BUILD_SUCCESS_ONLY
+
+  MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001:
+    subject: VERSIONED_MIC_INTEGRATION_CONTRACT
+    current_state: NOT_SATISFIED
+    completion_authority: CIPI
+    required_traceability:
+      - mic_engine_version
+      - contract_version
+      - git_sha
+      - benchmark_profile_version
+
+  MIC-SIMULATOR-MINIMUM-VALIDATION-GATE-001:
+    subject: MINIMUM_MIC_SIMULATOR_VALIDATION
+    current_state: NOT_SATISFIED
+    completion_authority: CIPI
+    warning: CANARY_SUCCESS_ALONE_DOES_NOT_SATISFY_THIS_GATE
+
+  MIC-SIMULATOR-CIPI-INTEGRATION-CANDIDATE-GATE-001:
+    subject: CIPI_EVALUATED_MIC_INTEGRATION_CANDIDATE
+    current_state: NOT_SATISFIED
+    completion_authority: CIPI
+    requires:
+      - MIC_RESEARCH_RESULT_BUNDLE
+      - CIPI_EVIDENCE_INTAKE
+      - CIPI_EVALUATION
+
+transition:
+  before_all_complete: BLOCKED_DEPENDENCY
+  after_all_complete: READY_FOR_BOUNDED_INTEGRATION
+  project_idle_required: false
+  virtual_guitar_research_pause_required: false
+  automatic_dispatch_before_all_complete: false
+
+post_activation_mandatory_checks:
+  - VIRTUAL_GUITAR_EXISTING_PROCESSING_REGRESSION
+  - MEASUREMENT
+  - REAL_AUDIO_AB
+  - REQUIRED_HUMAN_GATE
+  - CIPI_ADOPTION_DECISION
+
+authority: CIPI_DAG_ACTIVATION_CONTRACT
+automatic_product_decision: false
+automatic_knowledge_promotion: false

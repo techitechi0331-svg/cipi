@@ -1,0 +1,175 @@
+schema_version: "1.0"
+policy_id: VIRTUAL-GUITAR-EXTERNAL-MIC-INTEGRATION-V1.1
+project: virtual-guitar
+policy_type: SUPPLEMENTARY_INTEGRATION_POLICY
+status: ACTIVE_FUTURE_DEPENDENCY
+source: USER_SUPPLIED_POLICY
+source_version: "1.1"
+recorded_at: "2026-09-27"
+
+preserves:
+  - VIRTUAL_GUITAR_BASE_DEVELOPMENT_POLICY
+  - CIPI_MELON_AUTHORITY_BOUNDARY
+  - DYNAMIC_LANE_SCHEDULING
+  - NO_WAIT_WORK_STEALING
+  - VIRTUAL_GUITAR_EFFICIENCY_V2.3
+  - CURRENT_PHYSICAL_GUITAR_RESEARCH
+  - CURRENT_PHYSICAL_AUDIO_RESEARCH
+  - CURRENT_VIRTUAL_GUITARIST_GESTURE_FINGERING_VALIDATION
+
+non_interruption:
+  reapply_v2_3: false
+  rollback_existing_research: false
+  interrupt_current_research_jobs: false
+  interrupt_current_runner_jobs: false
+  divert_all_virtual_guitar_lanes_to_mic: false
+
+ownership:
+  virtual_guitar:
+    owns:
+      - virtual_guitarist
+      - gesture
+      - fingering
+      - articulation
+      - living_strings
+      - physical_guitar
+      - pickup_electronics_product_integration
+      - di
+      - amp
+      - speaker_cabinet
+      - product_integration
+    must_not_own:
+      - mic_simulator_internal_algorithm
+  mic_simulator:
+    repository: techitechi0331-svg/mic_simulator
+    owns:
+      - mic_character
+      - capsule_transducer_character
+      - dynamic_ribbon_condenser_differences
+      - polar_pattern
+      - proximity_effect
+      - on_axis_off_axis
+      - position
+      - center_edge
+      - distance
+      - angle
+      - transient_response
+      - mic_electronics
+      - multi_mic_phase
+      - inter_mic_delay
+      - mic_blend
+      - room_capture
+      - early_reflection
+      - room_mic
+      - source_dependent_capture_behavior
+    reusable_scope:
+      - guitar_cabinet_capture
+      - future_vocal_mic_simulation
+      - other_instrument_capture_simulation
+
+signal_architecture:
+  ordered_layers:
+    - MIDI_NOTE_EXPRESSION
+    - VIRTUAL_GUITARIST
+    - GESTURE_ENGINE
+    - SIX_LIVING_STRINGS
+    - PHYSICAL_GUITAR
+    - PICKUP_ELECTRONICS
+    - DI
+    - AMP
+    - SPEAKER_CABINET
+    - EXTERNAL_MIC_SIMULATOR
+    - MIC_MIXER
+    - MAIN_OUTPUT
+  fallback_paths:
+    - DI_OUT_WITHOUT_MIC_SIMULATOR
+    - AMP_CAB_OUT_WITHOUT_MIC_SIMULATOR
+  mic_is_hard_dependency: false
+
+layer_separation:
+  amp: PREAMP_POWER_AMP_AND_AMP_CIRCUIT_BEHAVIOR
+  speaker_cabinet: SPEAKER_AND_CABINET_RADIATION_BEHAVIOR
+  mic_simulator: CAPTURE_BEHAVIOR_OF_THE_CABINET_SOUND
+  forbidden_black_box:
+    - MERGED_CABINET_MIC_RESPONSE_WITHOUT_LAYER_BOUNDARY
+    - CABINET_RESPONSE_AS_MIC_CHARACTER
+    - MIC_POSITION_AS_CABINET_PARAMETER
+
+stereo_policy:
+  single_amp_single_cab_single_close_mic: MONO_SOURCE
+  default_fake_width: false
+  stereo_sources:
+    - DUAL_MIC
+    - ROOM_OR_STEREO_ROOM
+    - INDEPENDENT_DOUBLE_TRACKING
+  double_tracking_copy_delay: false
+  double_tracking_performance_states: INDEPENDENT_A_B
+
+integration_boundary:
+  state: DESIGN_ONLY
+  concrete_api_names_frozen: false
+  constraints:
+    - MIC_SIMULATOR_INTERNAL_CLASSES_NOT_REFERENCED_DIRECTLY
+    - VERSIONED_IO_CONTRACT
+    - MIC_SIMULATOR_UPDATE_MUST_NOT_REQUIRE_VIRTUAL_GUITAR_CORE_REWRITE
+    - VIRTUAL_GUITAR_MUST_RUN_WITH_MIC_SIMULATOR_ABSENT
+    - DO_NOT_ASSUME_FINAL_STEREO_BUFFER_ONLY
+  future_input_capabilities_to_evaluate:
+    - cabinet_output_signal
+    - sample_rate
+    - source_channel_layout
+    - cabinet_speaker_metadata
+    - capture_position
+    - capture_distance
+    - capture_angle
+    - room_state
+  note: >-
+    These are future contract capabilities to evaluate, not settled product parameter semantics.
+
+versioning:
+  follow_latest_main_automatically: false
+  integration_candidate_authority: CIPI
+  required_traceability:
+    - mic_engine_version
+    - contract_version
+    - git_sha
+    - benchmark_profile_version
+  existing_virtual_guitar_sound_must_not_change_silently: true
+
+authority_flow:
+  - MIC_RESEARCH
+  - RESULT_BUNDLE
+  - CIPI_EVIDENCE_INTAKE
+  - CIPI_EVALUATION
+  - INTEGRATION_CANDIDATE
+  - VIRTUAL_GUITAR_INTEGRATION_TEST
+  - MEASUREMENT
+  - REAL_AUDIO_AB
+  - REQUIRED_HUMAN_GATE
+  - ADOPTION_DECISION
+
+forbidden:
+  - MIC_RESEARCH_AUTO_PROMOTION
+  - CLAIM_REAL_HARDWARE_EQUIVALENCE_WITHOUT_REAL_AUDIO_VALIDATION
+  - PRODUCT_ADOPTION_FROM_BUILD_SUCCESS_ONLY
+  - AUTO_FOLLOW_MIC_SIMULATOR_MAIN
+  - UNREVIEWED_VIRTUAL_GUITAR_AUTO_INTEGRATION
+  - AUTO_RELEASE
+
+current_priority:
+  mic_integration: FUTURE_DEPENDENCY_INTEGRATION_PREPARATION
+  continue_ready_work:
+    - PHYSICAL_GUITAR
+    - PHYSICAL_AUDIO
+    - LIVING_STRINGS
+    - VIRTUAL_GUITARIST
+    - GESTURE
+    - FINGERING
+    - ARTICULATION
+    - REALTIME
+    - CPU
+    - REGRESSION
+
+authority: CIPI_INTEGRATION_POLICY
+automatic_product_decision: false
+automatic_knowledge_promotion: false

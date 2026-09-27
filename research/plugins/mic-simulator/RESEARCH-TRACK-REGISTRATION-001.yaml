@@ -1,0 +1,66 @@
+schema_version: "1.0"
+track_registration_id: MIC-SIMULATOR-RESEARCH-TRACK-001
+track_name: EXTERNAL_MIC_CAPTURE_ENGINE
+repository: techitechi0331-svg/mic_simulator
+status: REGISTERED_INDEPENDENT
+activation_state: SEPARATE_TRACK_NOT_FORCED_BY_VIRTUAL_GUITAR
+
+purpose:
+  - independent_reusable_mic_capture_engine
+  - guitar_cabinet_capture
+  - future_vocal_mic_simulation
+  - other_instrument_capture_simulation
+
+research_scope:
+  - mic_character
+  - capsule_transducer_character
+  - dynamic_ribbon_condenser_behavior
+  - polar_pattern
+  - proximity_effect
+  - on_axis_off_axis
+  - center_edge_position
+  - distance
+  - angle
+  - transient_response
+  - mic_electronics
+  - multi_mic_phase
+  - inter_mic_delay
+  - mic_blend
+  - room_capture
+  - early_reflection
+  - room_mic
+  - source_dependent_capture_behavior
+
+reference_targets_planned:
+  - SM57_FAMILY
+  - MD421_FAMILY
+  - R121_FAMILY
+  - U87_FAMILY
+  - C414_XLS_FAMILY
+  - C414_XLII_FAMILY
+
+research_warning: >-
+  A simple copied EQ curve is not sufficient Mic Simulation evidence. Position, angle,
+  distance, off-axis, proximity, transient and phase behavior remain research dimensions.
+
+cross_repo_status:
+  registry_key: mic_simulator
+  repository_registered: true
+  canary_workflow: mic-canary.yml
+  canary_evidence_only: true
+  canary_success_is_not_product_adoption: true
+
+relationship_to_virtual_guitar:
+  internal_algorithm_ownership: MIC_SIMULATOR_ONLY
+  virtual_guitar_dependency: SOFT_OPTIONAL_FUTURE
+  automatic_integration: false
+  virtual_guitar_wait_required: false
+
+authority:
+  cipi: EVIDENCE_AUTHORITY_DAG_EVALUATION
+  melon: EXPLORATION_MEASUREMENT_FALSIFICATION_CANDIDATE_GENERATION
+  mic_simulator: MIC_CAPTURE_ENGINE_RESEARCH_IMPLEMENTATION
+  virtual_guitar: GUITAR_PERFORMANCE_PHYSICAL_GUITAR_PRODUCT_INTEGRATION
+
+automatic_product_decision: false
+automatic_knowledge_promotion: false

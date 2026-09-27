@@ -1,0 +1,17 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "HA100X-R4-012-591362e2",
+    "promotion_authority": false,
+    "reason": "Fixed-shortlist leader remained catalog-compatible under bounded synthetic parameter stress and source/load-matrix checks. Product adoption still requires compiled isolation, real-audio AB and human review.",
+    "route": "CANDIDATE_FOR_CIPI_REVIEW",
+    "scientific": {
+      "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+      "robustness_score_research_only": 0.07522461980351919,
+      "stress_catalog_dev_p90_db": 0.02901524226483742,
+      "stress_catalog_pass_fraction": 1.0,
+      "stress_matrix_dev_p90_db": 0.05146136543894394
+    },
+    "species": "ha100x_shortlist_finalist"
+  }
+]

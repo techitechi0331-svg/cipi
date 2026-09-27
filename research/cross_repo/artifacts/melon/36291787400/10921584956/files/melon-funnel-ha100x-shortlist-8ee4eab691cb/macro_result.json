@@ -1,0 +1,84 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "7afd56398e007167f2f64fcfb3c2bbaa1da8ff5986ae984ffd47a50ac7315d4b",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [],
+  "efficiency_metrics": {
+    "deep_validation_count": 1,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.084005,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.45999999999999996,
+    "measurements_executed_stage1": 5,
+    "new_semantic_candidate_rate": 0.1,
+    "stage2_measurement_runs": 120
+  },
+  "elapsed_seconds": 0.084005,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 5,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.084005,
+    "stage2_measurement_runs": 120
+  },
+  "experiment_id": "MELON-FUNNEL-HA100X-SHORTLIST-2982AB18D783-ITERATE-1",
+  "hypothesis_id": "HYP-VL2A-HA100X-SHORTLIST-ROBUSTNESS",
+  "job_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002-R3-67807F7F",
+  "loop_depth": 3,
+  "measured_candidates": 5,
+  "novelty": 0.1,
+  "parent_job_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449",
+  "parent_run_id": "melon-funnel-ha100x-shortlist-2982ab18d783",
+  "precision_review": {
+    "checks": {
+      "all_candidates_finite": true,
+      "catalog_compatible_candidate_exists": true,
+      "fixed_shortlist_count_five": true,
+      "hysteresis_locked": true,
+      "nonlinearity_locked": true,
+      "product_integration_disabled": true,
+      "synthetic_stress_labelled_not_hardware_tolerance": true,
+      "turns_ratio_fixed_ten": true
+    },
+    "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "one or more candidates passed MELON scientific/high-fidelity gates and require CIPI/human review",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+  "research_question": "Among the five fixed Phase-1 HA-100X linear/load-aware survivors, which candidate remains most numerically robust under bounded synthetic parameter stress and the LA-2A source/load/T4 matrix, without treating the stress profile as hardware tolerance truth and without modifying the VL2A product?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.45999999999999996,
+    "precision_review_passed": true,
+    "routes": {
+      "CANDIDATE_FOR_CIPI_REVIEW": 1
+    },
+    "stage1_pareto": 5,
+    "stage2_archive": 3,
+    "stage2_pareto": 3
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+  "route": "HUMAN_GATE",
+  "run_id": "melon-funnel-ha100x-shortlist-8ee4eab691cb",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "6f67c55a0a9f9470e1492b0a77ad7886e6cc5b19",
+  "stop_reason": "FIXED_SHORTLIST_EVALUATED",
+  "timestamp": "2026-09-27T03:34:30.489730+00:00",
+  "track_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+  "unresolved_questions": []
+}

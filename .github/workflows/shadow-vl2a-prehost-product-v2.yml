@@ -1,0 +1,28 @@
+name: Shadow VL2A Pre-Host Product Validation v2
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "validation/vl2a_prehost_product_shadow_v2/**"
+      - ".github/workflows/shadow-vl2a-prehost-product-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile exact product automation copies
+        run: |
+          python -m py_compile validation/vl2a_prehost_product_shadow_v2/automation/vl2a_prehost/apply_candidate.py
+          python -m py_compile validation/vl2a_prehost_product_shadow_v2/automation/vl2a_prehost/run_checks.py
+          python -m py_compile validation/vl2a_prehost_product_shadow_v2/automation/vl2a_prehost/persist_staging.py
+      - name: Run exact product contract copy
+        run: python validation/vl2a_prehost_product_shadow_v2/tests/test_vl2a_prehost_contract.py -v

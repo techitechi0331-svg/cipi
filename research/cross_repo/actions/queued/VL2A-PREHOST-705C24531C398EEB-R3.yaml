@@ -1,0 +1,38 @@
+schema_version: '1.0'
+action_id: VL2A-PREHOST-705C24531C398EEB-R3
+state: QUEUED
+repo_key: vl2a
+workflow_key: prehost_stage
+ref: main
+inputs:
+  source_ref: integration/vl2a-v060-rc2
+  track_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+  candidate_id: HA100X-R4-012-591362e2
+  candidate_json: '{"candidate_id":"HA100X-R4-012-591362e2","core_loss_ohm":266576.9148779566,"leakage_h":0.00016910013055046575,"magnetizing_h":23.787562773717497,"primary_dcr_ohm":64.42056271688182,"secondary_cap_f":1.8971658271371616e-11,"secondary_dcr_ohm":3031.5360890531933,"turns_ratio":10.0}'
+  evidence_hash: 047fb05774aa7f8954148ba9dbd6d6bfba1c035abf52c15e885017d075fd7ca6
+priority: 95
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VL2A-CIRCUIT-HA100X-SHORTLIST-002
+prehost_candidate_id: HA100X-R4-012-591362e2
+authority: PREHOST_EXPERIMENT_SELECTION_ONLY
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+automatic_release_decision: false
+product_branch_write: false
+research_staging_write_only: true
+retry_of: VL2A-PREHOST-705C24531C398EEB-R2
+remediation_reason: WINDOWS_NATIVE_JSON_ARGUMENT_MANGLING_REMOVED
+remediation_product_repo_commit: fb9231639a6fadbc43395ca7188e6ceac95726b3
+previous_failed_run_id: 36317176512
+reason: >-
+  Bounded operational remediation retry after R2 proved portable CPython and dispatch
+  authority are healthy but Windows native argument parsing stripped JSON quotes before
+  apply_candidate.py. Candidate JSON is now written from the validated environment value
+  to a UTF-8 no-BOM temporary file and consumed through --candidate-json-file. Candidate
+  identity and evidence hash are unchanged. Product adoption, knowledge promotion,
+  release, and stable product-branch writes remain human-gated/off.

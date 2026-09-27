@@ -2,13 +2,13 @@
 
 > Operational status only. This is not a sound-quality score or release decision.
 
-- Next scheduler action: **CROSS_REPO**
+- Next scheduler action: **IDLE**
 - Local READY job: **-**
 - Claimed evidence branches: **0**
 - Local blocked / dependency-blocked: **0 / 2**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
-- Cross-Repo queued / dispatched / failed / quarantined: **2 / 1 / 5 / 0**
+- Cross-Repo queued / dispatched / failed / quarantined: **2 / 0 / 6 / 0**
 - Runner/dispatch alerts: **0**
 - Declared human-gate jobs: **2**
 

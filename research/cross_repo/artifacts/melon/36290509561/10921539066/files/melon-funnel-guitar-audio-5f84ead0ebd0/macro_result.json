@@ -1,0 +1,172 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "f6be98a60ed24909c65882d7aad5f9fa1ee3d197fbb91c3cca5ac5c85dc08521",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "EXP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-R1"
+      ],
+      "estimated_cost": {
+        "candidates": 12,
+        "runtime_seconds": 90
+      },
+      "expected_information_gain": 0.8,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "DETERMINISTIC_PLUCKED_STRING_DELAY_LOOP_V01",
+        "benchmark_profile": [
+          "guitar_delay_pitch_grid_v1",
+          "guitar_delay_stability_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for GTR-AUDIO-001: Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption.",
+        "input_set": "STANDARD_GUITAR_RANGE_MIDI_GRID_V1",
+        "objective_set": [
+          "pitch_error",
+          "decay_proxy",
+          "numerical_stability",
+          "execution_cost"
+        ],
+        "reference_model": "IDEAL_EQUAL_TEMPERED_FREQUENCY_PLUS_HALF_SAMPLE_FILTER_DELAY_HYPOTHESIS",
+        "relevant_constraints": [
+          "deterministic_excitation",
+          "process_path_no_allocation",
+          "loop_gain_below_one",
+          "product_integration_off",
+          "automatic_promotion_off",
+          "human_listening_not_claimed"
+        ],
+        "research_domain": "VIRTUAL_GUITAR_PHYSICAL_AUDIO",
+        "sample_rate": 48000.0,
+        "scope": [
+          "GTR-AUDIO-001",
+          "physical_string_delay_loop",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for GTR-AUDIO-001: Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption.",
+      "id": "melon-funnel-guitar-audio-5f84ead0ebd0-iterate-1",
+      "novelty": 1.0,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "seed": 2026092705,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "GTR-AUDIO-001",
+          "physical_string_delay_loop"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption."
+    }
+  ],
+  "efficiency_metrics": {
+    "deep_validation_count": 1,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.001,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 1.0,
+    "measurements_executed_stage1": 12,
+    "new_semantic_candidate_rate": 1.0,
+    "stage2_measurement_runs": 4
+  },
+  "elapsed_seconds": 0.001,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 12,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.001,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "EXP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-R1",
+  "hypothesis_id": "HYP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-V01",
+  "job_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3",
+  "loop_depth": 1,
+  "measured_candidates": 12,
+  "novelty": 1.0,
+  "parent_job_id": null,
+  "parent_run_id": null,
+  "precision_review": {
+    "checks": {
+      "automatic_promotion_disabled": true,
+      "best_pitch_error_below_15_cents": true,
+      "bounded_candidate_count": true,
+      "loop_gain_stable": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true
+    },
+    "evidence_boundary": "MEASURED_SYNTHETIC_DELAY_MODEL_NOT_AUDIO_FIDELITY",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+  "research_question": "Can a deterministic plucked-string delay-loop candidate provide a numerically stable, measurable and sufficiently pitch-consistent first waveform-generation substrate for the Virtual Guitar research prototype while keeping audible realism and product adoption behind Human/CIPI gates?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 1.0,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 12,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-guitar-audio-5f84ead0ebd0",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "ae799fd53d40514bf628603a603e030edb9a1cb7",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-27T03:13:59.850110+00:00",
+  "track_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+  "unresolved_questions": [
+    {
+      "id": "GTR-AUDIO-001",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption."
+    }
+  ]
+}

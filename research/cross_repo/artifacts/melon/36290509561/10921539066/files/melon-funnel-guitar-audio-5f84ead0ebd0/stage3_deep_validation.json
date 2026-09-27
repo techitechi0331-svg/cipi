@@ -1,0 +1,17 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "GTR-AUDIO-001",
+    "promotion_authority": false,
+    "reason": "Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption.",
+    "route": "ITERATE",
+    "scientific": {
+      "all_finite": true,
+      "estimated_e3_t60_seconds": 5.710626945218872,
+      "evidence_boundary": "MEASURED_SYNTHETIC_DELAY_MODEL_NOT_AUDIO_FIDELITY",
+      "max_abs_pitch_error_cents": 7.3735782123791935,
+      "median_abs_pitch_error_cents": 1.5580016102954106
+    },
+    "species": "physical_string_delay_loop"
+  }
+]

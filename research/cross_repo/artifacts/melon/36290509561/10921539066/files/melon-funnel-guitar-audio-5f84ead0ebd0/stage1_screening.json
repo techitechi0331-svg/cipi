@@ -1,0 +1,1058 @@
+[
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-001",
+      "delay_compensation_samples": 0.54871843298777,
+      "loop_gain": 0.9926809234497556,
+      "pick_position": 0.5741307371466979
+    },
+    "estimated_e3_t60_seconds": 5.710626945218872,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 7.3735782123791935,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-002",
+      "delay_compensation_samples": 0.5248847738387259,
+      "loop_gain": 0.9940149570333047,
+      "pick_position": 0.4658843270072829
+    },
+    "estimated_e3_t60_seconds": 6.988180344654276,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 7.3735782123791935,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-003",
+      "delay_compensation_samples": 0.6709430252860864,
+      "loop_gain": 0.997245564432426,
+      "pick_position": 0.3417791908286029
+    },
+    "estimated_e3_t60_seconds": 15.20907640927752,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 9.403007296925212,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 108.5,
+        "integer_delay_samples": 108,
+        "midi_note": 69,
+        "pitch_error_cents": 9.403007296925212,
+        "realized_hz": 442.3963133640553,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-004",
+      "delay_compensation_samples": 0.6170928220917752,
+      "loop_gain": 0.9925747814956765,
+      "pick_position": 0.4125863060103586
+    },
+    "estimated_e3_t60_seconds": 5.6286941450848245,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 9.403007296925212,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 108.5,
+        "integer_delay_samples": 108,
+        "midi_note": 69,
+        "pitch_error_cents": 9.403007296925212,
+        "realized_hz": 442.3963133640553,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-005",
+      "delay_compensation_samples": 0.582800716601246,
+      "loop_gain": 0.9957995845301338,
+      "pick_position": 0.24323965485988225
+    },
+    "estimated_e3_t60_seconds": 9.966170364175513,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 7.3735782123791935,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-006",
+      "delay_compensation_samples": 0.5781541452359411,
+      "loop_gain": 0.994969024717165,
+      "pick_position": 0.32365412036293156
+    },
+    "estimated_e3_t60_seconds": 8.317394906422761,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 7.3735782123791935,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-007",
+      "delay_compensation_samples": 0.02951348293346623,
+      "loop_gain": 0.9936467020216487,
+      "pick_position": 0.7166017944447074
+    },
+    "estimated_e3_t60_seconds": 6.581907478074806,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 30.034553389826765,
+    "median_abs_pitch_error_cents": 4.524984425720416,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 146.5,
+        "integer_delay_samples": 146,
+        "midi_note": 64,
+        "pitch_error_cents": -10.443739076397081,
+        "realized_hz": 327.64505119453923,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 73.5,
+        "integer_delay_samples": 73,
+        "midi_note": 76,
+        "pitch_error_cents": -16.342327573336906,
+        "realized_hz": 653.0612244897959,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 55.5,
+        "integer_delay_samples": 55,
+        "midi_note": 81,
+        "pitch_error_cents": -30.034553389826765,
+        "realized_hz": 864.8648648648649,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-008",
+      "delay_compensation_samples": 0.34939425070300745,
+      "loop_gain": 0.9944436350480071,
+      "pick_position": 0.3790632256924139
+    },
+    "estimated_e3_t60_seconds": 7.528945438851538,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 7.3735782123791935,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-009",
+      "delay_compensation_samples": 0.899503144967259,
+      "loop_gain": 0.9932795807485851,
+      "pick_position": 0.7594538291617023
+    },
+    "estimated_e3_t60_seconds": 6.199862418183591,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 9.403007296925212,
+    "median_abs_pitch_error_cents": 4.391262144865734,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 435.5,
+        "integer_delay_samples": 435,
+        "midi_note": 45,
+        "pitch_error_cents": 3.429795911662714,
+        "realized_hz": 110.21814006888634,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 290.5,
+        "integer_delay_samples": 290,
+        "midi_note": 52,
+        "pitch_error_cents": 4.391262144865734,
+        "realized_hz": 165.23235800344233,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 217.5,
+        "integer_delay_samples": 217,
+        "midi_note": 57,
+        "pitch_error_cents": 5.418577346991401,
+        "realized_hz": 220.68965517241378,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 108.5,
+        "integer_delay_samples": 108,
+        "midi_note": 69,
+        "pitch_error_cents": 9.403007296925212,
+        "realized_hz": 442.3963133640553,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-010",
+      "delay_compensation_samples": 0.3082333659665679,
+      "loop_gain": 0.9963506856876589,
+      "pick_position": 0.20558052804628157
+    },
+    "estimated_e3_t60_seconds": 11.474383175812434,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 16.342327573336906,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 73.5,
+        "integer_delay_samples": 73,
+        "midi_note": 76,
+        "pitch_error_cents": -16.342327573336906,
+        "realized_hz": 653.0612244897959,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-011",
+      "delay_compensation_samples": 0.8991501068716683,
+      "loop_gain": 0.9925486534571243,
+      "pick_position": 0.5478714576800626
+    },
+    "estimated_e3_t60_seconds": 5.589642025661525,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 9.403007296925212,
+    "median_abs_pitch_error_cents": 4.391262144865734,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 435.5,
+        "integer_delay_samples": 435,
+        "midi_note": 45,
+        "pitch_error_cents": 3.429795911662714,
+        "realized_hz": 110.21814006888634,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 290.5,
+        "integer_delay_samples": 290,
+        "midi_note": 52,
+        "pitch_error_cents": 4.391262144865734,
+        "realized_hz": 165.23235800344233,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 217.5,
+        "integer_delay_samples": 217,
+        "midi_note": 57,
+        "pitch_error_cents": 5.418577346991401,
+        "realized_hz": 220.68965517241378,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 108.5,
+        "integer_delay_samples": 108,
+        "midi_note": 69,
+        "pitch_error_cents": 9.403007296925212,
+        "realized_hz": 442.3963133640553,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  },
+  {
+    "candidate": {
+      "candidate_id": "GTR-AUDIO-012",
+      "delay_compensation_samples": 0.33434516535588665,
+      "loop_gain": 0.9988709411813114,
+      "pick_position": 0.5420867471571424
+    },
+    "estimated_e3_t60_seconds": 37.13405792145013,
+    "estimated_ops_per_sample": 4,
+    "filter_phase_delay_samples_hypothesis": 0.5,
+    "finite": true,
+    "max_abs_pitch_error_cents": 7.3735782123791935,
+    "median_abs_pitch_error_cents": 1.5580016102954106,
+    "note_measurements": [
+      {
+        "effective_delay_samples": 582.5,
+        "integer_delay_samples": 582,
+        "midi_note": 40,
+        "pitch_error_cents": -0.07260121967099273,
+        "realized_hz": 82.40343347639485,
+        "target_hz": 82.4068892282175
+      },
+      {
+        "effective_delay_samples": 436.5,
+        "integer_delay_samples": 436,
+        "midi_note": 45,
+        "pitch_error_cents": -0.5409261250278266,
+        "realized_hz": 109.96563573883161,
+        "target_hz": 110.0
+      },
+      {
+        "effective_delay_samples": 291.5,
+        "integer_delay_samples": 291,
+        "midi_note": 52,
+        "pitch_error_cents": -1.5580016102954106,
+        "realized_hz": 164.6655231560892,
+        "target_hz": 164.81377845643496
+      },
+      {
+        "effective_delay_samples": 218.5,
+        "integer_delay_samples": 218,
+        "midi_note": 57,
+        "pitch_error_cents": -2.5228771704175985,
+        "realized_hz": 219.6796338672769,
+        "target_hz": 220.0
+      },
+      {
+        "effective_delay_samples": 145.5,
+        "integer_delay_samples": 145,
+        "midi_note": 64,
+        "pitch_error_cents": 1.4140747403597609,
+        "realized_hz": 329.89690721649487,
+        "target_hz": 329.6275569128699
+      },
+      {
+        "effective_delay_samples": 109.5,
+        "integer_delay_samples": 109,
+        "midi_note": 69,
+        "pitch_error_cents": -6.479985291107774,
+        "realized_hz": 438.35616438356163,
+        "target_hz": 440.0
+      },
+      {
+        "effective_delay_samples": 72.5,
+        "integer_delay_samples": 72,
+        "midi_note": 76,
+        "pitch_error_cents": 7.3735782123791935,
+        "realized_hz": 662.0689655172414,
+        "target_hz": 659.2551138257398
+      },
+      {
+        "effective_delay_samples": 54.5,
+        "integer_delay_samples": 54,
+        "midi_note": 81,
+        "pitch_error_cents": 1.4432964979886715,
+        "realized_hz": 880.7339449541284,
+        "target_hz": 880.0
+      },
+      {
+        "effective_delay_samples": 36.5,
+        "integer_delay_samples": 36,
+        "midi_note": 88,
+        "pitch_error_cents": -4.524984425720416,
+        "realized_hz": 1315.0684931506848,
+        "target_hz": 1318.5102276514797
+      }
+    ]
+  }
+]

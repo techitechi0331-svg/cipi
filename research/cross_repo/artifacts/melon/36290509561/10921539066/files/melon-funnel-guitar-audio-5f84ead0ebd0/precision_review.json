@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "automatic_promotion_disabled": true,
+    "best_pitch_error_below_15_cents": true,
+    "bounded_candidate_count": true,
+    "loop_gain_stable": true,
+    "numerical_stability": true,
+    "product_integration_disabled": true
+  },
+  "evidence_boundary": "MEASURED_SYNTHETIC_DELAY_MODEL_NOT_AUDIO_FIDELITY",
+  "passed": true
+}

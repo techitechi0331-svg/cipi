@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R2-8A814449
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     source/load/T4 matrix, without treating the stress profile as hardware tolerance
     truth and without modifying the VL2A product?","track_id":"VL2A-CIRCUIT-HA100X-SHORTLIST-002"}'
 priority: 70
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -35,3 +35,7 @@ continuation_fingerprint: 8a814449353a1c471c25430ed6ece38b667d82408c34914d8d299e
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 36291330236
+dispatched_at: '2026-09-27T03:30:22.412364Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

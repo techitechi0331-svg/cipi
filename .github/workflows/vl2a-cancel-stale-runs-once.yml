@@ -1,0 +1,49 @@
+name: VL2A Cancel Stale Runner Runs Once
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - ".github/workflows/vl2a-cancel-stale-runs-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+      TARGET_REPO: techitechi0331-svg/VocalPrepComp
+    steps:
+      - name: Verify cross-repo token
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN"
+
+      - name: Cancel stale Build and Contract runs only
+        shell: bash
+        run: |
+          set -euo pipefail
+          ids="$(
+            for status in in_progress queued; do
+              gh api "repos/${TARGET_REPO}/actions/runs?status=${status}&per_page=100"                 --jq '.workflow_runs[]
+                  | select(.name == "Build Windows VST3" or .name == "VL2A Pre-Host Contract")
+                  | .id'
+            done | sort -nu
+          )"
+
+          if [ -z "$ids" ]; then
+            echo "No stale build/contract runs are active."
+            exit 0
+          fi
+
+          while IFS= read -r id; do
+            [ -n "$id" ] || continue
+            echo "Cancelling ${TARGET_REPO} run ${id}"
+            gh api --method POST "repos/${TARGET_REPO}/actions/runs/${id}/cancel" >/dev/null || true
+          done <<< "$ids"
+
+          echo "Pre-host promotion runs were intentionally excluded."

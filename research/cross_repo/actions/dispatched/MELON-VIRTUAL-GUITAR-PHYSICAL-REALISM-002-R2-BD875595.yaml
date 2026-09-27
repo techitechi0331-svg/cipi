@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-002-R2-BD875595
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -21,7 +21,7 @@ inputs:
     the Virtual Guitar physical-audio substrate reduce the clearly perceived synthetic
     character of single notes while preserving the directionally positive strum behavior?","track_id":"VIRTUAL-GUITAR-PHYSICAL-REALISM-002"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -39,3 +39,7 @@ policy_gate:
   state: APPLIED
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36331605790
+dispatched_at: '2026-09-27T16:02:01.127590Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

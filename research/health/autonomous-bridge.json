@@ -16,7 +16,6 @@
   ],
   "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
   "active_tracks": [
-    "VOCAL-DENOISE-ARCH-001",
     "VOCAL-DENOISE-LOSS-001"
   ],
   "authority": "OPERATIONAL_SCHEDULING_ONLY",
@@ -105,11 +104,11 @@
       "runtime_seconds": 0.174399
     },
     "VOCAL-DENOISE-ARCH-001": {
-      "candidates": 8,
+      "candidates": 16,
       "candidates_limit": 24,
-      "loop_depth": 1,
+      "loop_depth": 2,
       "loop_depth_limit": 3,
-      "runs": 1,
+      "runs": 2,
       "runs_limit": 3,
       "runtime_limit_seconds": 300.0,
       "runtime_seconds": 0.0
@@ -155,7 +154,7 @@
       "runtime_seconds": 0.031000000002677552
     }
   },
-  "continuation_candidates": 28,
+  "continuation_candidates": 29,
   "current_loop_depth": {
     "MELON-BRIDGE-CLEAN-PROOF-002": 3,
     "MELON-BRIDGE-PILOT-001": 3,
@@ -165,13 +164,13 @@
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
     "VL2A-CIRCUIT-HA100X-001": 5,
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
-    "VOCAL-DENOISE-ARCH-001": 1,
+    "VOCAL-DENOISE-ARCH-001": 2,
     "VOCAL-DENOISE-BASELINE-001": 2,
     "VOCAL-DENOISE-DATASET-001": 2,
     "VOCAL-DENOISE-LOSS-001": 1,
     "VOCAL-DENOISE-PRESERVATION-001": 2
   },
-  "duplicate_suppressions": 5,
+  "duplicate_suppressions": 6,
   "enabled_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
@@ -195,12 +194,10 @@
   ],
   "human_gates": 3,
   "invalid_results": 0,
-  "melon_runs": 32,
-  "next_scheduler_action": "MELON-VOCAL-DENOISE-LOSS-001-R2-0AB88115",
+  "melon_runs": 33,
+  "next_scheduler_action": "NO_READY_WORK",
   "no_improvement_count": 4,
-  "queued_actions": [
-    "MELON-VOCAL-DENOISE-LOSS-001-R2-0AB88115"
-  ],
+  "queued_actions": [],
   "registered_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
@@ -220,7 +217,7 @@
     "VOCAL-DENOISE-RUNTIME-001",
     "VOCAL-DENOISE-VST3-001"
   ],
-  "rejected_continuations": 8,
+  "rejected_continuations": 9,
   "research_quality_metrics": {
     "budget_exhaustion_rate": 0.23076923076923078,
     "cache_hit_rate": 0.0,
@@ -233,7 +230,7 @@
     "pareto_front_turnover": null,
     "ranking_stability": null,
     "replication_consistency": null,
-    "research_compute_to_runner_wall_ratio": 0.03904243933708633,
+    "research_compute_to_runner_wall_ratio": 0.03861977141973464,
     "semantic_duplicate_rate": 0.0
   },
   "result_missing": 0,
@@ -246,6 +243,7 @@
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
     "VL2A-CIRCUIT-HA100X-001",
+    "VOCAL-DENOISE-ARCH-001",
     "VOCAL-DENOISE-BASELINE-001",
     "VOCAL-DENOISE-DATASET-001",
     "VOCAL-DENOISE-PRESERVATION-001",
@@ -257,13 +255,13 @@
     "artifact_upload_seconds": null,
     "checkout_seconds": null,
     "environment_setup_seconds": null,
-    "known_runner_samples": 16,
+    "known_runner_samples": 17,
     "macro_export_seconds": null,
     "preflight_seconds": null,
     "queue_wait_seconds": 0.0,
     "research_compute_seconds": 124.85772100000209,
-    "runner_job_seconds": 3198.0,
-    "total_wall_seconds": 3198.0
+    "runner_job_seconds": 3233.0,
+    "total_wall_seconds": 3233.0
   },
   "track_lifecycle": {
     "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -316,10 +314,11 @@
       "state": "HUMAN_GATE"
     },
     "VOCAL-DENOISE-ARCH-001": {
-      "job_id": "VOCAL-DENOISE-ARCH-001-R2-7669446E",
-      "reason": "EXTERNAL_ACTION_DISPATCHED",
-      "scheduler_eligible": true,
-      "state": "WAITING_EXTERNAL"
+      "reason": "DUPLICATE_ONLY",
+      "scheduler_eligible": false,
+      "scientific_convergence_claim": false,
+      "state": "CONVERGED",
+      "state_basis": "SCHEDULER_TERMINAL_ALIAS"
     },
     "VOCAL-DENOISE-BASELINE-001": {
       "reason": "DUPLICATE_ONLY",
@@ -337,9 +336,9 @@
     },
     "VOCAL-DENOISE-LOSS-001": {
       "job_id": "VOCAL-DENOISE-LOSS-001-R2-0AB88115",
-      "reason": "EXTERNAL_ACTION_QUEUED",
+      "reason": "EXTERNAL_ACTION_DISPATCHED",
       "scheduler_eligible": true,
-      "state": "READY"
+      "state": "WAITING_EXTERNAL"
     },
     "VOCAL-DENOISE-PRESERVATION-001": {
       "reason": "DUPLICATE_ONLY",
@@ -373,6 +372,7 @@
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": "DUPLICATE_ONLY",
     "VL2A-CIRCUIT-HA100X-001": "BUDGET_EXHAUSTED",
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002": "HUMAN_GATE",
+    "VOCAL-DENOISE-ARCH-001": "DUPLICATE_ONLY",
     "VOCAL-DENOISE-BASELINE-001": "DUPLICATE_ONLY",
     "VOCAL-DENOISE-DATASET-001": "DUPLICATE_ONLY",
     "VOCAL-DENOISE-PRESERVATION-001": "DUPLICATE_ONLY"

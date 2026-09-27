@@ -1,0 +1,45 @@
+schema_version: '1.0'
+decision_id: VOCAL-DENOISE-ARCH-001:melon-funnel-vocal-denoise-arch-46e32616e693:continuation
+track_id: VOCAL-DENOISE-ARCH-001
+run_id: melon-funnel-vocal-denoise-arch-46e32616e693
+job_id: VOCAL-DENOISE-ARCH-001-R2-7669446E
+loop_depth: 2
+decision: STOP
+stop_reason: DUPLICATE_ONLY
+continuation_fingerprint: null
+accepted_candidate_id: null
+selected_architecture: null
+rejections:
+- candidate_id: melon-funnel-vocal-denoise-arch-46e32616e693-iterate-1
+  reason: DUPLICATE_RESEARCH
+  fingerprint: 7669446e6dc8e8dc6e93714686839af0f58687594ad5d917584df6c16c836950
+proposal_count: 1
+duplicate_suppressions: 1
+human_gate_proposals: 0
+processed_artifact_hash: 1c41861b2d357beb716b6feb77eb1aba37e5c00cca6ea133c063d947d2b5a0a2
+efficiency_policy:
+  policy_id: VOCAL-DENOISE-ARCH-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false
+efficiency_summary:
+  candidate_count: 8
+  measured_count: 8
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 4
+  deep_stage_survivors: 0
+  runner_runtime_seconds: 0.0
+  candidates_per_runner_minute: 480000000000.0
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.0
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_FOUNDATION_CONTRACT
+authority: CIPI_CONTINUATION_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

@@ -1,0 +1,15 @@
+gate_mode=FAIL
+baseline_worst_single_core_realtime_pct=31.967
+candidate_worst_single_core_realtime_pct=35.218
+worst_candidate_to_baseline_ns_ratio=2.4915215042320855
+channels=1,block=64,baseline_pct=4.137930,candidate_pct=4.645975,baseline_ns=862.069,candidate_ns=967.912,ratio=1.122778
+channels=1,block=128,baseline_pct=4.155080,candidate_pct=4.662370,baseline_ns=865.642,candidate_ns=971.325,ratio=1.122086
+channels=1,block=256,baseline_pct=4.169505,candidate_pct=4.661990,baseline_ns=868.647,candidate_ns=971.246,ratio=1.118115
+channels=1,block=512,baseline_pct=4.142970,candidate_pct=4.654995,baseline_ns=863.119,candidate_ns=969.789,ratio=1.123587
+channels=1,block=1024,baseline_pct=4.173220,candidate_pct=4.867955,baseline_ns=869.420,candidate_ns=1014.158,ratio=1.166475
+channels=2,block=64,baseline_pct=11.727535,candidate_pct=29.219450,baseline_ns=2443.240,candidate_ns=6087.385,ratio=2.491522
+channels=2,block=128,baseline_pct=31.967000,candidate_pct=35.147950,baseline_ns=6659.790,candidate_ns=7322.485,ratio=1.099507
+channels=2,block=256,baseline_pct=31.553550,candidate_pct=34.886750,baseline_ns=6573.655,candidate_ns=7268.075,ratio=1.105637
+channels=2,block=512,baseline_pct=31.965250,candidate_pct=33.390850,baseline_ns=6659.430,candidate_ns=6956.435,ratio=1.044599
+channels=2,block=1024,baseline_pct=31.963900,candidate_pct=35.218000,baseline_ns=6659.145,candidate_ns=7337.085,ratio=1.101806
+RESULT=FAIL

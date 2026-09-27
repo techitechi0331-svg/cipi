@@ -1,0 +1,8 @@
+max_automation_delta_db=0.008853912
+max_state_delta_db=0.000000000
+max_normalized_roundtrip_delta=0.000000060
+legacy_default_45_db=0.704097748
+from01_0=-18.000000000
+from01_1=18.000000000
+
+RESULT=PASS

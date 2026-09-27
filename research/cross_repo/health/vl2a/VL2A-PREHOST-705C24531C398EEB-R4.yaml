@@ -3,10 +3,10 @@ action_id: VL2A-PREHOST-705C24531C398EEB-R4
 repo_key: vl2a
 workflow_key: prehost_stage
 runner_class: self-hosted
-state: RUNNING
+state: COMPLETED
 run_id: 36341252254
-run_status: in_progress
-run_conclusion: null
+run_status: completed
+run_conclusion: failure
 since: '2026-09-27T18:36:06Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

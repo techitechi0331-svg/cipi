@@ -1,0 +1,105 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/VocalPrepComp
+repo_key: vl2a
+run_id: 36341252254
+run_attempt: 1
+artifact_id: 10939841916
+artifact_name: VL2A-PreHost-Validation-Evidence-HA100X-R4-012-591362e2
+expired: false
+size_in_bytes: 7864971
+created_at: '2026-09-27T19:09:04Z'
+expires_at: '2026-12-26T18:36:07Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: prehost-results/control/CONTROL_GATE.txt
+  status: ingested
+  size: 142
+  sha256: ea7c8b869f95d52fd34c0307d387423a55b715a7ba54745813cce2e8be00a0c7
+- path: prehost-results/control/matched_release.csv
+  status: ingested
+  size: 179
+  sha256: 47a1535544079ec3174f39ec445f3ce9225a2f632e5800686e07f4b77f356ea3
+- path: prehost-results/control/operating_range.csv
+  status: ingested
+  size: 7878
+  sha256: ac7f2242bddf0ddfe75d8546b1889f2db6a048f69781eed06278a89d2c2001e7
+- path: prehost-results/control/reference_contexts.csv
+  status: ingested
+  size: 791
+  sha256: bd49bf5e283ed3f2e21af38894252eb6b8329e0484ada110500e5ff874d618bf
+- path: prehost-results/control/sample_rate.csv
+  status: ingested
+  size: 233
+  sha256: c97dc3ecc3005f87f34271a452b320037dcbfc3ecb02720e45cddae5b9649716
+- path: prehost-results/control/stress.csv
+  status: ingested
+  size: 553
+  sha256: 23410bbd34030db4391d73b0cec9d980e37fc341559880ff6b5fe9bc807a0e37
+- path: prehost-results/control/summary.txt
+  status: ingested
+  size: 181
+  sha256: 4dccbb5ba86541750105db29feb36444a6b30650642011d1f6d0f822cc0ba9bc
+- path: prehost-results/isolation/candidate.csv
+  status: ingested
+  size: 1190
+  sha256: c05e73608b7d01194ff62b9b9ee9f965857e0592379e9affe25ea3e33dff7371
+- path: prehost-results/isolation/baseline.csv
+  status: ingested
+  size: 1148
+  sha256: 1dc36df5c261d7f4f829c1387b976cf9cb78b768f4c6f6978a54040ca2c43a1e
+- path: prehost-results/isolation/ISOLATION_GATE.txt
+  status: ingested
+  size: 317
+  sha256: 44639b8b0957717eea8ed09d3075b48c544c4e1ef42456ac59f909004ea9c48a
+- path: prehost-results/perf/cpu-baseline-1.txt
+  status: ingested
+  size: 1432
+  sha256: 0be2b8155d77e0b921b4c756e6c1f87a2e8571584bd0d339df098663f2bac63c
+- path: prehost-results/perf/cpu-baseline-2.txt
+  status: ingested
+  size: 1431
+  sha256: e47c203b66fb1e8a6f0c9c6369b99773d20ef9e9cafa61b3caf7196e8f641117
+- path: prehost-results/perf/cpu-candidate-1.txt
+  status: ingested
+  size: 1429
+  sha256: 6499ec0884dd8b828c1e15ae8c2ced0cb8af0d7e51c70fe600908bef14d27c8b
+- path: prehost-results/perf/cpu-candidate-2.txt
+  status: ingested
+  size: 1432
+  sha256: 16a4aaf739f2345c3917a8e9014721ac84b1631e8d0ed054fbcd193f4b1085a4
+- path: prehost-results/perf/cpu-baseline.txt
+  status: ingested
+  size: 1431
+  sha256: e47c203b66fb1e8a6f0c9c6369b99773d20ef9e9cafa61b3caf7196e8f641117
+- path: prehost-results/perf/cpu.txt
+  status: ingested
+  size: 1432
+  sha256: 16a4aaf739f2345c3917a8e9014721ac84b1631e8d0ed054fbcd193f4b1085a4
+- path: prehost-results/perf/CPU_GATE.txt
+  status: ingested
+  size: 1434
+  sha256: 8d4faec3e621229f0e17241a0fcd9710e4d5e8df3057a8388c82ca9102068160
+- path: prehost-results/perf/latency.txt
+  status: ingested
+  size: 686
+  sha256: b8998aa6b021ab6becec40e5efd64e1c9cd0e1ffa24655b9a1159929e8a44e64
+- path: prehost-results/state/equivalence.txt
+  status: ingested
+  size: 209
+  sha256: a8f5cc5d246ba269adc55f5a474ac5d4771d5249a79c426c8c6120282fb5b258
+- path: prehost-results/VOCAL_GATE.txt
+  status: ingested
+  size: 38
+  sha256: dc14a5c56dc51a54ef2ab43b92a5d597d3c9c856d466966193e70dd0feff5329
+- path: prehost-results/vocal_metrics.csv
+  status: ingested
+  size: 342
+  sha256: 3b3633800699a2971a19979df62671443164864bc1c65dc6721c6519673a1f67
+- path: Research/17_PreHostHA100X/candidate_manifest.json
+  status: ingested
+  size: 1162
+  sha256: a1cad3e99dab0a3a43151a8fc7c5b50a7ba693e550e272656b2673de6313af5f
+archive_sha256: 1ffe3ff41ca29c4c2b71c0fee08ed710fa74411ddaa26a2bcdc191dabd8faf0d
+ingest_status: text_evidence_ingested

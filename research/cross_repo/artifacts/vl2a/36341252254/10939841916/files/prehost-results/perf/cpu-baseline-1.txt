@@ -1,0 +1,10 @@
+channels=1,block=64,audio_seconds=12,elapsed_seconds=0.500046,single_core_realtime_pct=4.16705,ns_per_host_sample=868.135,final_gr_db=8.2085
+channels=1,block=128,audio_seconds=12,elapsed_seconds=0.502533,single_core_realtime_pct=4.18778,ns_per_host_sample=872.454,final_gr_db=8.26454
+channels=1,block=256,audio_seconds=12,elapsed_seconds=0.50474,single_core_realtime_pct=4.20617,ns_per_host_sample=876.285,final_gr_db=8.21056
+channels=1,block=512,audio_seconds=12,elapsed_seconds=0.502029,single_core_realtime_pct=4.18357,ns_per_host_sample=871.577,final_gr_db=8.26846
+channels=1,block=1024,audio_seconds=12,elapsed_seconds=0.504221,single_core_realtime_pct=4.20184,ns_per_host_sample=875.383,final_gr_db=8.21585
+channels=2,block=64,audio_seconds=12,elapsed_seconds=1.63277,single_core_realtime_pct=13.6064,ns_per_host_sample=2834.67,final_gr_db=7.66292
+channels=2,block=128,audio_seconds=12,elapsed_seconds=3.76861,single_core_realtime_pct=31.4051,ns_per_host_sample=6542.73,final_gr_db=7.54043
+channels=2,block=256,audio_seconds=12,elapsed_seconds=3.80808,single_core_realtime_pct=31.734,ns_per_host_sample=6611.25,final_gr_db=6.96084
+channels=2,block=512,audio_seconds=12,elapsed_seconds=3.81281,single_core_realtime_pct=31.7734,ns_per_host_sample=6619.46,final_gr_db=7.49344
+channels=2,block=1024,audio_seconds=12,elapsed_seconds=3.81413,single_core_realtime_pct=31.7844,ns_per_host_sample=6621.75,final_gr_db=6.72622

@@ -1,0 +1,14 @@
+channels=1,block=32,factor=4,latency_samples=6
+channels=1,block=64,factor=4,latency_samples=6
+channels=1,block=128,factor=4,latency_samples=6
+channels=1,block=256,factor=4,latency_samples=6
+channels=1,block=512,factor=4,latency_samples=6
+channels=1,block=1024,factor=4,latency_samples=6
+channels=1,block=2048,factor=4,latency_samples=6
+channels=2,block=32,factor=4,latency_samples=6
+channels=2,block=64,factor=4,latency_samples=6
+channels=2,block=128,factor=4,latency_samples=6
+channels=2,block=256,factor=4,latency_samples=6
+channels=2,block=512,factor=4,latency_samples=6
+channels=2,block=1024,factor=4,latency_samples=6
+channels=2,block=2048,factor=4,latency_samples=6

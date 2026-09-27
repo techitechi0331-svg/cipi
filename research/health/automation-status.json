@@ -67,11 +67,9 @@
     "human_gates": 0,
     "invalid_results": 0,
     "melon_runs": 11,
-    "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47",
+    "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 4,
-    "queued_actions": [
-      "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47"
-    ],
+    "queued_actions": [],
     "rejected_continuations": 3,
     "result_missing": 0,
     "runner_wait": 0,
@@ -87,15 +85,10 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47",
-      "kind": "CROSS_REPO",
-      "priority": 80,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 11,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 0,
       "quarantined": 0,
       "queued": 1
@@ -112,9 +105,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47",
+    "action_id": null,
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "ready_external_action"
+    "reason": "reconcile_dispatched_action"
   }
 }

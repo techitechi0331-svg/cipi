@@ -90,8 +90,7 @@
   "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
   "no_improvement_count": 4,
   "queued_actions": [
-    "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
-    "MELON-VL2A-CIRCUIT-HA100X-SHORTLIST-002-R3-67807F7F"
+    "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409"
   ],
   "rejected_continuations": 3,
   "result_missing": 0,

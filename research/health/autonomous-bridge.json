@@ -58,14 +58,14 @@
       "runtime_seconds": 0.08185899999999999
     },
     "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {
-      "candidates": 12,
+      "candidates": 24,
       "candidates_limit": 36,
-      "loop_depth": 1,
+      "loop_depth": 2,
       "loop_depth_limit": 3,
-      "runs": 1,
+      "runs": 2,
       "runs_limit": 3,
       "runtime_limit_seconds": 450.0,
-      "runtime_seconds": 0.001
+      "runtime_seconds": 0.056633
     },
     "VL2A-CIRCUIT-HA100X-001": {
       "candidates": 60,
@@ -88,13 +88,13 @@
       "runtime_seconds": 0.174399
     }
   },
-  "continuation_candidates": 17,
+  "continuation_candidates": 18,
   "current_loop_depth": {
     "MELON-BRIDGE-CLEAN-PROOF-002": 3,
     "MELON-BRIDGE-PILOT-001": 3,
     "MIC-SIM-FOUNDATION-001": 2,
     "VIRTUAL-GUITAR-PHYSICAL-001": 3,
-    "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 1,
+    "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 2,
     "VL2A-CIRCUIT-HA100X-001": 5,
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3
   },
@@ -108,17 +108,19 @@
     "VL2A-CIRCUIT-HA100X-001",
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
   ],
-  "generated_jobs": 21,
+  "generated_jobs": 22,
   "human_gate_tracks": [
     "VIRTUAL-GUITAR-PHYSICAL-001",
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
   ],
   "human_gates": 2,
   "invalid_results": 0,
-  "melon_runs": 20,
-  "next_scheduler_action": "NO_READY_WORK",
+  "melon_runs": 21,
+  "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R3-B624C0DA",
   "no_improvement_count": 4,
-  "queued_actions": [],
+  "queued_actions": [
+    "MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R3-B624C0DA"
+  ],
   "registered_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
@@ -131,18 +133,18 @@
   "rejected_continuations": 4,
   "research_quality_metrics": {
     "budget_exhaustion_rate": 0.42857142857142855,
-    "cache_hit_rate": null,
-    "duplicate_research_rate": null,
+    "cache_hit_rate": 0.0,
+    "duplicate_research_rate": 0.0,
     "early_convergence_rate": null,
     "falsification_rate": 0.0,
     "human_gate_rate": 0.2857142857142857,
-    "new_information_per_compute_second": null,
-    "new_information_per_run": null,
+    "new_information_per_compute_second": 10.81432228032899,
+    "new_information_per_run": 0.6016331914215427,
     "pareto_front_turnover": null,
     "ranking_stability": null,
     "replication_consistency": null,
-    "research_compute_to_runner_wall_ratio": null,
-    "semantic_duplicate_rate": null
+    "research_compute_to_runner_wall_ratio": 4.153732799999981,
+    "semantic_duplicate_rate": 0.0
   },
   "result_missing": 0,
   "runner_wait": 0,
@@ -157,13 +159,13 @@
     "artifact_upload_seconds": null,
     "checkout_seconds": null,
     "environment_setup_seconds": null,
-    "known_runner_samples": 0,
+    "known_runner_samples": 1,
     "macro_export_seconds": null,
     "preflight_seconds": null,
-    "queue_wait_seconds": null,
-    "research_compute_seconds": 124.55635099999942,
-    "runner_job_seconds": null,
-    "total_wall_seconds": null
+    "queue_wait_seconds": 0.0,
+    "research_compute_seconds": 124.61198399999942,
+    "runner_job_seconds": 30.0,
+    "total_wall_seconds": 30.0
   },
   "track_lifecycle": {
     "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -189,10 +191,10 @@
       "state": "HUMAN_GATE"
     },
     "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {
-      "job_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
-      "reason": "EXTERNAL_ACTION_DISPATCHED",
+      "job_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R3-B624C0DA",
+      "reason": "EXTERNAL_ACTION_QUEUED",
       "scheduler_eligible": true,
-      "state": "WAITING_EXTERNAL"
+      "state": "READY"
     },
     "VL2A-CIRCUIT-HA100X-001": {
       "reason": "BUDGET_EXHAUSTED",

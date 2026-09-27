@@ -346,17 +346,17 @@
     "enabled": true,
     "health_alerts": [],
     "ready_action": {
-      "action_id": "VOCAL-DENOISE-PREFLIGHT-001",
+      "action_id": "MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
       "kind": "CROSS_REPO",
-      "priority": 90,
+      "priority": 80,
       "reason": "ready_external_action"
     },
     "states": {
       "completed": 25,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 5,
       "quarantined": 0,
-      "queued": 5
+      "queued": 4
     }
   },
   "human_gates": [
@@ -385,9 +385,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "VOCAL-DENOISE-PREFLIGHT-001",
+    "action_id": "MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
     "kind": "CROSS_REPO",
-    "priority": 90,
+    "priority": 80,
     "reason": "ready_external_action"
   }
 }

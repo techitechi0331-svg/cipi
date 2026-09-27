@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47
+repo_key: melon
+workflow_key: research
+run_id: 36288020499
+run_attempt: 1
+head_sha: 467576117062c3c86288f0fb9f0e36a94dd27bb2
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Run staged MELON research from manual inputs
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

@@ -47,3 +47,5 @@ jobs:
           done <<< "$ids"
 
           echo "Pre-host promotion runs were intentionally excluded."
+
+# invocation: portable-python-bootstrap

@@ -11,6 +11,7 @@ TRACK_PREFIX = "VL2A-CIRCUIT-HA100X-SHORTLIST-"
 SOURCE_REF = "integration/vl2a-v060-rc2"
 REPO_KEY = "vl2a"
 WORKFLOW_KEY = "prehost_stage"
+PREHOST_PROTOCOL_REVISION = "1.1"
 
 def load_yaml(path: Path) -> dict[str, Any]:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -46,6 +47,7 @@ def existing_action(root: Path, track_id: str, candidate_id: str) -> tuple[str, 
                 str(data.get("track_id") or "") == track_id
                 and str(data.get("prehost_candidate_id") or "") == candidate_id
                 and str(data.get("workflow_key") or "") == WORKFLOW_KEY
+                and str(data.get("prehost_protocol_revision") or "") == PREHOST_PROTOCOL_REVISION
             ):
                 return folder.name.upper(), data
     return None
@@ -124,7 +126,9 @@ def choose_candidate(validation: dict[str, Any]) -> dict[str, Any]:
 def make_action(track_id: str, candidate: dict[str, Any], evidence_hash: str) -> dict[str, Any]:
     candidate_id = str(candidate["candidate_id"])
     canonical = json.dumps(candidate, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
-    digest = hashlib.sha256(f"{track_id}|{candidate_id}|{evidence_hash}|{canonical}".encode("utf-8")).hexdigest()
+    digest = hashlib.sha256(
+        f"{PREHOST_PROTOCOL_REVISION}|{track_id}|{candidate_id}|{evidence_hash}|{canonical}".encode("utf-8")
+    ).hexdigest()
     action_id = f"VL2A-PREHOST-{digest[:16].upper()}"
     return {
         "schema_version": "1.0",
@@ -149,6 +153,7 @@ def make_action(track_id: str, candidate: dict[str, Any], evidence_hash: str) ->
         "depends_on_actions": [],
         "track_id": track_id,
         "prehost_candidate_id": candidate_id,
+        "prehost_protocol_revision": PREHOST_PROTOCOL_REVISION,
         "authority": "PREHOST_EXPERIMENT_SELECTION_ONLY",
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,
@@ -166,6 +171,7 @@ def reconcile(root: Path) -> dict[str, Any]:
         "candidate_id": None,
         "action_id": None,
         "source_ref": SOURCE_REF,
+        "prehost_protocol_revision": PREHOST_PROTOCOL_REVISION,
         "automatic_product_decision": False,
         "automatic_release_decision": False,
         "authority": "PREHOST_OPERATIONAL_SCHEDULING_ONLY",
@@ -218,6 +224,7 @@ def reconcile(root: Path) -> dict[str, Any]:
                 "run_id": action.get("run_id"),
                 "run_url": action.get("run_url"),
                 "conclusion": action.get("conclusion"),
+                "prehost_protocol_revision": action.get("prehost_protocol_revision"),
             })
             break
 

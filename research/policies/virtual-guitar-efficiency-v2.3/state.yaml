@@ -64,6 +64,27 @@ tracks:
     next_dispatch_policy: V2_3_ACTIVE
     current_job_interrupted: false
 
+
+  VIRTUAL-GUITAR-PHYSICAL-REALISM-002:
+    state: APPLIED
+    reason: >-
+      This track was created after v2.3 was already ACTIVE. Its dedicated MELON realism
+      adapter was validated before the track was enabled, so the first dispatch is born
+      inside the v2.3 policy boundary rather than requiring interruption or migration.
+    safe_handoff:
+      created_after_policy_activation: true
+      prior_job_to_interrupt: false
+      human_trigger_evidence: VG-HUMAN-LISTENING-20260927-001
+    rollout_validation:
+      melon_realism_adapter:
+        commit: e46a9b19298bdb32feee307a0fccdc9f22d1c7a8
+        run_id: 36330853874
+        state: PASS
+        full_melon_tests: PASS
+        guitar_realism_regression: PASS
+    next_dispatch_policy: V2_3_ACTIVE
+    current_job_interrupted: false
+
 state_legend:
   APPLIED: v2.3 is active for the track at a completed Safe Handoff Point
   PENDING_REGRESSION: Safe Handoff reached; next dispatch is held only for v2.3 rollout regression

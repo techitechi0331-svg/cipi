@@ -1,0 +1,64 @@
+schema_version: "1.0"
+requirement_id: PR-VG-STRAT-PICKUPS-001
+project: virtual-guitar
+requirement_type: PRODUCT_REQUIREMENT
+evidence_class: SOURCE_FACT
+source: USER_PRODUCT_REQUIREMENT
+status: REGISTERED_FUTURE
+recorded_at: "2026-09-27"
+
+product_scope:
+  first_guitar_model:
+    family: STRAT_STYLE
+    required: true
+  pickup_configuration:
+    selectable:
+      - SSS
+      - HSS
+    required: true
+  hss_bridge:
+    base_mode: HUMBUCKER
+    future_extensibility:
+      coil_split:
+        required_architecture_support: true
+        required_in_first_pickup_implementation: false
+        design_constraint: >-
+          The HSS bridge pickup/electronics boundary must permit a later Coil Split mode
+          without requiring replacement of the basic Physical Guitar model or DI substrate.
+
+non_interruption:
+  current_v2_3_application: DO_NOT_INTERRUPT
+  current_research_jobs: DO_NOT_INTERRUPT
+  current_runner_jobs: DO_NOT_INTERRUPT
+  current_physical_guitar_research: NO_SCOPE_CHANGE
+  current_physical_audio_research: NO_SCOPE_CHANGE
+
+activation_policy:
+  pickup_electronics_implementation_now: false
+  future_job_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001
+  becomes_ready_only_after:
+    - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+    - VIRTUAL-GUITAR-DI-OUTPUT-CONVERGENCE-GATE-001
+  convergence_rule: >-
+    A gate is satisfied only by an explicit CIPI COMPLETED gate record backed by the
+    corresponding convergence evidence. A single successful benchmark, research candidate,
+    or Runner pass must not implicitly satisfy the gate.
+  scheduler_behavior: >-
+    Keep the future Pickup / Electronics job dependency-blocked until both gate job IDs
+    appear as COMPLETED CIPI jobs. Do not infer readiness from current Physical Audio work.
+
+research_boundary:
+  do_not_decide_yet:
+    - pickup transfer-function calibration
+    - pickup loading/component values
+    - coil-split electrical topology
+    - final pickup-position voicing
+    - final subjective tone
+  preserve_for_later:
+    - SSS_HSS_SWITCHABLE_ARCHITECTURE
+    - HSS_BRIDGE_COIL_SPLIT_EXTENSION_POINT
+
+authority: CIPI_PRODUCT_REQUIREMENT
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable_user_requirement: true

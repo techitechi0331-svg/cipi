@@ -1,0 +1,103 @@
+schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001
+state: QUEUED
+priority: 45
+
+track:
+  id: VIRTUAL_GUITAR_PICKUP_ELECTRONICS
+  path: research/plugins/virtual-guitar/product-requirements
+
+research_question: >-
+  After the basic Physical Guitar model and DI output are explicitly converged by CIPI,
+  can the first Strat-style pickup/electronics layer provide switchable SSS and HSS
+  configurations while preserving an HSS bridge extension point for a later Coil Split mode?
+
+hypothesis: >-
+  A pickup/electronics boundary layered after the converged Physical Guitar and DI substrate
+  can support SSS and HSS selection without changing the underlying string/gesture/physical
+  model, while the HSS bridge abstraction can expose a future Coil Split capability without
+  implementing or calibrating Coil Split in this first job.
+
+counter_hypotheses:
+  - Pickup configuration requirements force changes to the basic Physical Guitar model or DI substrate.
+  - SSS and HSS cannot share a stable pickup/electronics interface without premature tone calibration.
+  - Reserving Coil Split extensibility requires committing to an unverified electrical topology now.
+
+baseline:
+  - converged Physical Guitar model with DI output and no pickup/electronics product layer
+
+variants:
+  - STRAT_STYLE_SSS
+  - STRAT_STYLE_HSS_BRIDGE_HUMBUCKER
+
+metrics:
+  - configuration_selection_correctness
+  - pickup_electronics_boundary_integrity
+  - physical_model_regression_count
+  - di_output_regression_count
+  - cpu_cost_delta
+  - memory_cost_delta
+  - deterministic_configuration_state
+  - hss_bridge_coil_split_extension_point_present
+
+acceptance:
+  - both convergence dependency jobs are COMPLETED before execution begins
+  - SSS and HSS are explicit selectable configurations
+  - HSS uses a bridge humbucker in the initial implementation
+  - HSS bridge interface preserves a later Coil Split extension point
+  - no change is required to the converged basic Physical Guitar state model solely to switch SSS/HSS
+  - DI baseline remains regression-testable
+  - subjective final tone and Coil Split calibration remain outside automatic acceptance
+
+rejection:
+  - either convergence dependency is unresolved
+  - implementation would require bypassing or rewriting unconverged Physical Guitar or DI foundations
+  - SSS/HSS switching cannot be represented without violating current product boundaries
+  - Coil Split is prematurely hard-coded as a final electrical model without evidence
+
+depends_on_jobs:
+  - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+  - VIRTUAL-GUITAR-DI-OUTPUT-CONVERGENCE-GATE-001
+
+activation_contract:
+  product_requirement_ref: PR-VG-STRAT-PICKUPS-001
+  current_state_semantics: >-
+    This file is present in the DAG now, but unresolved depends_on_jobs keep it
+    dependency-blocked. It becomes executable READY work automatically only after both
+    explicit convergence gate job IDs exist in research/jobs/completed with state COMPLETED.
+  must_not_preempt:
+    - VIRTUAL-GUITAR-PHYSICAL-001
+    - VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+
+max_runs: 3
+timeout_minutes: 20
+
+allowed_operations:
+  - inspect_converged_physical_guitar_evidence
+  - inspect_converged_di_evidence
+  - design_pickup_electronics_boundary
+  - implement_sss_hss_configuration_switch
+  - add_regression_tests
+  - preserve_future_coil_split_extension_point
+  - write_research_evidence
+
+prohibited_operations:
+  - interrupt_active_research_job
+  - interrupt_active_runner_job
+  - alter_current_physical_audio_hypothesis_to_satisfy_pickup_requirement
+  - auto_promote_subjective_tone_claim
+  - auto_release
+  - implement_final_coil_split_calibration_without_new_evidence
+
+review_policy:
+  required_human_gates:
+    - FINAL_SUBJECTIVE_PICKUP_TONE
+    - COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED
+
+knowledge_candidate:
+  claim: >-
+    The first virtual-guitar product model is Strat-style with switchable SSS/HSS pickup
+    configuration, and the HSS bridge must preserve a future Coil Split extension point.
+  evidence_type: SOURCE_CANDIDATE
+  scope: Product requirement only; not evidence that any pickup/electronics model is implemented or validated.
+  promotion_requested: HYPOTHESIS

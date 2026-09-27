@@ -1,0 +1,40 @@
+schema_version: "1.0"
+contract_id: PICKUP-ELECTRONICS-ACTIVATION-GATES-001
+project: virtual-guitar
+future_job_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001
+
+gates:
+  VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001:
+    subject: BASIC_PHYSICAL_GUITAR_MODEL
+    current_state: NOT_SATISFIED
+    completion_authority: CIPI
+    rule: >-
+      Create/complete this gate only after CIPI explicitly concludes that the basic
+      Physical Guitar model is sufficiently converged for downstream pickup/electronics work.
+    do_not_infer_from:
+      - a single MELON candidate
+      - a single Runner benchmark
+      - current Physical Audio continuation alone
+
+  VIRTUAL-GUITAR-DI-OUTPUT-CONVERGENCE-GATE-001:
+    subject: DI_OUTPUT
+    current_state: NOT_SATISFIED
+    completion_authority: CIPI
+    rule: >-
+      Create/complete this gate only after CIPI explicitly concludes that the DI output
+      substrate is sufficiently converged and regression-testable for downstream
+      pickup/electronics work.
+    do_not_infer_from:
+      - offline audio existence alone
+      - a single render
+      - pickup-specific assumptions
+
+transition:
+  before_both_complete: BLOCKED_DEPENDENCY
+  after_both_complete: READY
+  automatic_dispatch_before_both_complete: false
+  preempt_current_physical_research: false
+
+authority: CIPI_DAG_ACTIVATION_CONTRACT
+automatic_product_decision: false
+automatic_knowledge_promotion: false

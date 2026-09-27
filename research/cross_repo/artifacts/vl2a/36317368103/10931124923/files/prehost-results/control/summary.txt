@@ -1,0 +1,4 @@
+VL2A Peak Reduction calibration v2
+==================================
+Hard implementation/safety gate: PASS
+No commercial-parity or product promotion is implied by this result.

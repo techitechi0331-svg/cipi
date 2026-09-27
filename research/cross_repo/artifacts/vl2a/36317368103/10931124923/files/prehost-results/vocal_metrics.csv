@@ -1,0 +1,4 @@
+clip,candidate_max_gr_db,match_db,correlation,residual_db,derivative_delta_db,centroid_shift_pct,max_abs_band_shift_db
+breathy,4.95372,0.328221,0.999838,-34.9011,0.00483326,-0.00273864,0.861507
+straight,5.1843,0.338441,0.999815,-34.3283,-0.0040538,-0.0257409,0.992113
+forte,5.99072,0.305989,0.99984,-34.9366,0.00440371,0.00643798,0.705504

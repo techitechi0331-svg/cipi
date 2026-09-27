@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VL2A-PREHOST-705C24531C398EEB-R3
+repo_key: vl2a
+workflow_key: prehost_stage
+run_id: 36317368103
+run_attempt: 1
+head_sha: fb9231639a6fadbc43395ca7188e6ceac95726b3
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Run Cubase pre-host validation chain
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

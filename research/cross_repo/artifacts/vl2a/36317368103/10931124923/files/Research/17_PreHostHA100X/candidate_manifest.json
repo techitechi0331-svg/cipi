@@ -1,0 +1,32 @@
+{
+  "authority": {
+    "automatic_product_decision": false,
+    "automatic_release_decision": false,
+    "product_branch_write": false,
+    "research_staging_only": true
+  },
+  "candidate": {
+    "candidate_id": "HA100X-R4-012-591362e2",
+    "core_loss_ohm": 266576.9148779566,
+    "leakage_h": 0.00016910013055046575,
+    "magnetizing_h": 23.787562773717497,
+    "primary_dcr_ohm": 64.42056271688182,
+    "secondary_cap_f": 1.8971658271371616e-11,
+    "secondary_dcr_ohm": 3031.5360890531933,
+    "turns_ratio": 10.0
+  },
+  "classification": "EXPERIMENTAL_PREHOST_CANDIDATE_NOT_PRODUCT_ADOPTION",
+  "model": {
+    "bright_secondary_load_ohm": 34900.0,
+    "dark_secondary_load_ohm": 48590.0,
+    "family": "HA100X_LINEAR_LTI_LOAD_AWARE_PREHOST",
+    "hysteresis": "LOCKED_OFF",
+    "load_interpolation": "log_T4_resistance_crossfade_between_two_stable_LTI_filters",
+    "midband_normalization": "dark_load_1k_analog_reference",
+    "nonlinearity": "LOCKED_OFF",
+    "source_ohm_design_choice": 150.0
+  },
+  "schema_version": "1.0",
+  "source_ref": "integration/vl2a-v060-rc2",
+  "track_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
+}

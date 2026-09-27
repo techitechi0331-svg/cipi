@@ -1,0 +1,4 @@
+matched_release_start_gr_db=5.70824623
+matched_release_retained_60ms=0.50850701
+sample_rate_gr_spread_db=0.013002399999999525
+RESULT=PASS

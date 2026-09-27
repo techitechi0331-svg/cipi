@@ -330,7 +330,12 @@ def _result_driven_signals(
     signals["regression_status"] = str(result.get("regression_status") or "UNKNOWN")
     signals["experiment_type"] = str(result.get("experiment_type") or "").upper()
 
-    prior = records[-1] if records else {}
+    current_run_id = str(result.get("run_id") or "")
+    prior_records = [
+        item for item in records
+        if str(item.get("processed_run_id") or "") != current_run_id
+    ]
+    prior = prior_records[-1] if prior_records else {}
     prior_signals = prior.get("decision_signals") if isinstance(prior.get("decision_signals"), dict) else {}
     tolerance = float((track.get("decision_policy") or {}).get("replication_error_tolerance", track.get("minimum_improvement", 0.01)) or 0.01)
     tolerance = max(tolerance, 1.0e-12)
@@ -1251,6 +1256,7 @@ def reconcile(root: Path) -> dict[str, Any]:
             "proposal_count": len(data.get("continuation_candidates") or []),
             "duplicate_suppressions": int(evaluation.get("duplicate_suppressions", 0) or 0),
             "human_gate_proposals": int(evaluation.get("human_gate_proposals", 0) or 0),
+            "decision_signals": dict(evaluation.get("decision_signals") or {}) if isinstance(evaluation.get("decision_signals"), dict) else {},
             "processed_artifact_hash": artifact_hash,
             "efficiency_policy": _track_efficiency_policy(root, track),
             "efficiency_summary": {

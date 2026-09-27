@@ -346,8 +346,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 25,
-      "dispatched": 2,
+      "completed": 26,
+      "dispatched": 1,
       "failed": 5,
       "quarantined": 0,
       "queued": 3

@@ -1,0 +1,74 @@
+schema_version: "1.0"
+decision_id: VG-EPOCH-002-DECISION
+project: virtual-guitar
+decision: CONTINUE_PROTOTYPE
+source_evidence:
+  - VG-EPOCH-002-GESTURE-20260927
+  - GUITAR-E2E-PUSH-CANARY-36289877965
+facts:
+  prototype_v01_core_build: PASS
+  midi_decision_regression: PASS
+  gesture_regression: PASS
+  bounded_microbenchmark: PASS
+  dedicated_canary: PASS
+  synthetic_damping_track: HUMAN_GATE
+  virtual_guitar_cross_repo_token_access: BLOCKED_EXTERNAL
+lane_review:
+  - previous_lane: A
+    topic: Living String v0.1
+    decision: COMPLETE_FOR_NOW
+    reason: basic persistent state, decay, damping termination and string replacement substrate exist
+    re_entry: gesture/articulation or physical-model evidence may reopen it
+  - previous_lane: B
+    topic: Virtual Guitarist State v0.1
+    decision: COMPLETE_FOR_NOW
+    reason: persistent left/right-hand state and decision observability are implemented
+    re_entry: new gesture or articulation dependencies may expose missing state
+  - previous_lane: C
+    topic: MIDI Decision Harness v0.1
+    decision: KEEP
+    reason: the harness is the regression backbone for every subsequent integration epoch
+  - previous_lane: D
+    topic: Fingering v0.1
+    decision: COMPLETE_FOR_NOW
+    reason: deterministic playable string/fret assignment and explicit cost are testable
+next_epoch:
+  epoch_id: GUITAR-EPOCH-002
+  max_logical_lanes: 4
+  max_guitar_runner_jobs: 1
+  lanes:
+    - lane: A
+      job: ARTICULATION-STATE-MACHINE-V01
+      priority_basis:
+        information_gain: high
+        dependency_criticality: high
+        prototype_blocking_impact: high
+    - lane: B
+      job: LIVING-STRING-OBSERVABILITY-V02
+      priority_basis:
+        information_gain: high
+        regression_risk: medium
+        measurement_readiness: high
+    - lane: C
+      job: MIDI-DECISION-HARNESS-V02
+      priority_basis:
+        measurement_readiness: high
+        regression_risk: high
+        dependency_criticality: high
+    - lane: D
+      job: GESTURE-TO-STRING-BRIDGE-V01
+      priority_basis:
+        information_gain: high
+        dependency_criticality: high
+        prototype_blocking_impact: high
+human_gate_policy:
+  do_not_bypass:
+    - HUMAN_LISTENING
+    - REAL_AUDIO_AB
+    - CUBASE_HOST_CONFIRMATION
+    - PRODUCT_ADOPTION_DECISION
+    - RELEASE_DECISION
+authority: CIPI_INTEGRATION_EPOCH_EVALUATION
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+production_integration: false

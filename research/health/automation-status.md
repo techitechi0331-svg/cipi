@@ -14,7 +14,11 @@
 
 ## Autonomous Research Bridge
 
-- Active Research Tracks: **7**
+- Legacy enabled-track count: **7**
+- Registered / Active / Terminal / Human Gate: **7 / 0 / 5 / 2**
+- Track Lifecycle: **{"MELON-BRIDGE-CLEAN-PROOF-002": {"reason": "BUDGET_EXHAUSTED", "scheduler_eligible": false, "state": "BUDGET_EXHAUSTED"}, "MELON-BRIDGE-PILOT-001": {"reason": "BUDGET_EXHAUSTED", "scheduler_eligible": false, "state": "BUDGET_EXHAUSTED"}, "MIC-SIM-FOUNDATION-001": {"reason": "DUPLICATE_ONLY", "scheduler_eligible": false, "scientific_convergence_claim": false, "state": "CONVERGED", "state_basis": "SCHEDULER_TERMINAL_ALIAS"}, "VIRTUAL-GUITAR-PHYSICAL-001": {"reason": "HUMAN_GATE", "scheduler_eligible": false, "state": "HUMAN_GATE"}, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {"job_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409", "reason": "LATEST_EXTERNAL_ACTION_FAILED", "scheduler_eligible": false, "state": "FAILED"}, "VL2A-CIRCUIT-HA100X-001": {"reason": "BUDGET_EXHAUSTED", "scheduler_eligible": false, "state": "BUDGET_EXHAUSTED"}, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": {"reason": "HUMAN_GATE", "scheduler_eligible": false, "state": "HUMAN_GATE"}}**
+- Time Metrics: **{"artifact_upload_seconds": null, "checkout_seconds": null, "environment_setup_seconds": null, "known_runner_samples": 0, "macro_export_seconds": null, "preflight_seconds": null, "queue_wait_seconds": null, "research_compute_seconds": 124.55635099999942, "runner_job_seconds": null, "total_wall_seconds": null}**
+- Research Quality Metrics: **{"budget_exhaustion_rate": 0.42857142857142855, "cache_hit_rate": null, "duplicate_research_rate": null, "early_convergence_rate": null, "falsification_rate": 0.0, "human_gate_rate": 0.2857142857142857, "new_information_per_compute_second": null, "new_information_per_run": null, "pareto_front_turnover": null, "ranking_stability": null, "replication_consistency": null, "research_compute_to_runner_wall_ratio": null, "semantic_duplicate_rate": null}**
 - Current Loop Depth: **{"MELON-BRIDGE-CLEAN-PROOF-002": 3, "MELON-BRIDGE-PILOT-001": 3, "MIC-SIM-FOUNDATION-001": 2, "VIRTUAL-GUITAR-PHYSICAL-001": 3, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 1, "VL2A-CIRCUIT-HA100X-001": 5, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3}**
 - MELON Runs: **20**
 - Continuation Candidates: **17**

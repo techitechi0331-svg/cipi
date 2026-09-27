@@ -1,0 +1,46 @@
+schema_version: "1.0"
+policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+registration_state: PENDING_POLICY
+rollout_state: PER_TRACK_SAFE_HANDOFF
+project_idle_required: false
+all_tracks_complete_required: false
+tracks:
+  VIRTUAL-GUITAR-PHYSICAL-001:
+    state: APPLIED
+    reason: >-
+      No Research Job is currently running for this track and the latest v2.2 Result Bundle,
+      Evidence Intake, Evaluation and Continuation Decision already completed at HUMAN_GATE.
+    safe_handoff:
+      decision_run_id: MELON-FUNNEL-GUITAR-AA616E3CCF2D
+      continuation_decision: STOP
+      stop_reason: HUMAN_GATE
+      reached_before_policy_registration: true
+    next_dispatch_policy: V2_3_REQUIRED
+    current_job_interrupted: false
+
+  VIRTUAL-GUITAR-PHYSICAL-AUDIO-001:
+    state: PENDING_REGRESSION
+    reason: >-
+      R1 completed through Result Bundle, CIPI Evidence Intake, Evaluation and Continuation
+      Decision. R2 exists as QUEUED and is policy-gated before dispatch while v2.3
+      implementation/regression is applied.
+    safe_handoff:
+      completed_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+      decision_run_id: MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0
+      continuation_decision: CONTINUE
+      generated_next_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
+      generated_next_action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409
+      next_action_state_at_policy_registration: QUEUED
+      reached_before_policy_registration: true
+    policy_regression_gate: VIRTUAL-GUITAR-V2.3-POLICY-REGRESSION-AUDIO-001
+    next_dispatch_policy: HOLD_UNTIL_V2_3_REGRESSION_PASS
+    current_job_interrupted: false
+
+state_legend:
+  APPLIED: v2.3 is active for the track at a completed Safe Handoff Point
+  PENDING_REGRESSION: Safe Handoff reached; next dispatch is held only for v2.3 rollout regression
+  PENDING_CURRENT_JOB: current job remains untouched and policy activates after its Safe Handoff
+  DEFERRED_ALREADY_DISPATCHED: already-dispatched next job remains untouched; apply at following boundary
+authority: CIPI_POLICY_ROLLOUT_STATE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

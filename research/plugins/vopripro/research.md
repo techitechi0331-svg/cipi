@@ -333,3 +333,19 @@ Decision:
 - **KEEP protected baseline.**
 - No AMOUNT anchor is changed.
 - A future same-corpus real-vocal AMOUNT sweep should measure GR distribution, ceiling occupancy, dynamic-range reduction, ripple and phrase-tail recovery before any alternative mapping is designed.
+
+
+## 2026-09-27 AMOUNT real-vocal sweep v1 protocol locked
+
+Protocol:
+- `research/plugins/vopripro/amount_realvocal_sweep_v1_protocol.md`
+
+The next independent VoPriPro study is now fixed before execution.
+
+It reuses the existing four-recording HUST_Solfege snapshot and sweeps Natural Character at AMOUNT 0/10/25/40/50/60/75/90/100 with Input/Output at 0 dB.
+
+Hard gates are limited to:
+- existing finite/sample-peak safety;
+- per-file monotonic ordering of GR p50 / p95 / max with 0.05 dB reversal tolerance.
+
+Adjacent step size and high-end 90% -> 100% behavior are diagnostic only in v1. No perceptual-uniformity threshold is invented before listening evidence, and no alternative AMOUNT map may be tuned from this result.

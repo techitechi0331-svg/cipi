@@ -67,3 +67,10 @@ Failure retry is limited to `INFRA_TRANSIENT` classifications. Build, DSP test, 
 Self-hosted runs that remain queued past their configured threshold become `RUNNER_WAIT`. This blocks only that dependent action.
 
 The Global DAG Orchestrator runs the operational scheduler and writes the current health view to `research/health/automation-status.md`.
+
+
+## Fresh-code retry after a product-side fix
+
+When an external workflow failed because of a product-repository code defect, preserve the failed action as evidence and queue a **new** Cross-Repo action after the fix is merged. Do not rely on GitHub's "re-run failed jobs" for that case: a rerun is tied to the original workflow run/head revision and may reproduce the already-fixed defect instead of testing current `main`.
+
+The replacement action should keep the same upstream evidence dependency, use a new `action_id` / experiment identifier, and state the product-side fix prerequisite in `reason`.

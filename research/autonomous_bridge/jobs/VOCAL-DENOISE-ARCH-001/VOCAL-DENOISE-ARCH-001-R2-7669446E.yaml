@@ -1,0 +1,45 @@
+schema_version: '1.0'
+job_id: VOCAL-DENOISE-ARCH-001-R2-7669446E
+track_id: VOCAL-DENOISE-ARCH-001
+root_research_id: VOCAL-DENOISE-ARCH-001
+parent_job_id: VOCAL-DENOISE-ARCH-001-R1-44CF01E6
+parent_run_id: melon-funnel-vocal-denoise-arch-f3636bbc3fe9
+hypothesis_id: HYP-VOCAL-DENOISE-ARCH-001
+experiment_id: MELON-FUNNEL-VOCAL-DENOISE-ARCH-F3636BBC3FE9-ITERATE-1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs:
+- VOCAL-DENOISE-ARCH-001-R1-44CF01E6
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VOCAL-DENOISE-ARCH-001-R2-7669446E
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: Replicate the bounded contract with an independent seed before
+  CIPI review; no audio-quality claim is implied.
+expected_information_gain: 0.8400000000000001
+fingerprint: 7669446e6dc8e8dc6e93714686839af0f58687594ad5d917584df6c16c836950
+loop_depth: 2
+experiment_type: UNCERTAINTY_REDUCTION
+selected_architecture: VOCAL_DENOISE_ARCH_FOUNDATION_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true
+efficiency_policy:
+  policy_id: VOCAL-DENOISE-ARCH-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

@@ -1,0 +1,123 @@
+schema_version: "1.0"
+track_id: MIC-SIM-FOUNDATION-001
+enabled: true
+root_research_id: MIC-SIM-FOUNDATION-001
+
+research_question: >-
+  Can the independent Mic Simulator research stack produce deterministic, finite,
+  machine-readable and efficiently reusable capture-model evidence through CIPI and
+  MELON before any real-microphone fidelity or product-integration claim is allowed?
+
+hypothesis_id: HYP-MIC-FOUNDATION-DETERMINISTIC
+hypothesis: >-
+  A bounded baseline ladder (flat, spectral, spectral+phase, spectral+synthetic-geometry)
+  plus deterministic measurement, semantic dedup, persistent cache and Pareto screening
+  can validate the Mic Simulator research plumbing and identify parameterized capture
+  behavior without claiming hardware microphone fidelity.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - REAL_AUDIO_AB
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/mic-simulator/foundation-inventory-2026-09-27.md
+  do_not_reopen:
+    - MIC_E2E_CANARY_RUNNER_CONNECTIVITY
+    - INDEPENDENT_MIC_SIMULATOR_REPO_OWNERSHIP
+    - VERSIONED_OPTIONAL_VIRTUAL_GUITAR_INTEGRATION_POLICY
+  rejected_directions:
+    - EQ_CURVE_ONLY_MIC_SIMULATION
+    - CANARY_SUCCESS_AS_HARDWARE_FIDELITY
+    - BUILD_SUCCESS_AS_PRODUCT_ADOPTION
+    - AUTO_PROMOTION_OR_AUTO_RELEASE
+    - CABINET_AND_MIC_OPAQUE_BLACK_BOX
+    - VIRTUAL_GUITAR_DIRECT_MIC_INTERNAL_DEPENDENCY
+    - DEFAULT_FAKE_STEREO_SINGLE_CLOSE_MIC
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 240
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+
+initial_experiment:
+  experiment_id: EXP-MIC-FOUNDATION-R1
+  experiment_type: INITIAL_FOUNDATION_IDENTIFIABILITY
+  expected_information_gain: 0.90
+  scope:
+    - mic_simulator
+    - foundation
+    - deterministic_harness
+    - baseline_ladder
+  inputs:
+    seed: 2026092701
+    population: 4
+    generations: 2
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A deterministic baseline ladder and bounded synthetic identifiability benchmark can
+      validate Mic Simulator research plumbing without implying real microphone fidelity.
+    architecture: MIC_CAPTURE_BASELINE_LADDER_V1
+    tested_parameters:
+      spectral_mix: bounded_0_to_0_25
+      phase_delay_samples: [0, 1, 2]
+      geometry_weight: bounded_0_to_1
+    benchmark_profile:
+      - mic_foundation_identifiability_v1
+      - mic_foundation_determinism_v1
+    sample_rate: 48000
+    input_set: SYNTHETIC_MIC_FOUNDATION_TARGET_V1
+    reference_model: SYNTHETIC_IDENTIFIABILITY_TARGET_NOT_REAL_MICROPHONE
+    objective_set:
+      - synthetic_identifiability_error
+      - cost_proxy
+      - determinism
+      - numerical_stability
+    relevant_constraints:
+      - no_hardware_fidelity_claim
+      - deterministic_seed
+      - bounded_runtime
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: INITIAL_FOUNDATION_IDENTIFIABILITY
+    scope:
+      - mic_simulator
+      - foundation
+      - deterministic_harness
+      - baseline_ladder
+
+efficiency_policy:
+  policy_id: MIC-SIM-FOUNDATION-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 5
+  full_regression_required: false

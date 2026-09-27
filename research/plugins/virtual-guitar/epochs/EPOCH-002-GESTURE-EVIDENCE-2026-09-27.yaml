@@ -1,0 +1,52 @@
+schema_version: "1.0"
+evidence_id: VG-EPOCH-002-GESTURE-20260927
+project: virtual-guitar
+evidence_class: MEASURED
+source_repository: techitechi0331-svg/virtual-guitar
+source_commit: 4eb1e55576e61731de7c0dd5a5b53fe9d8b019d3
+workflow:
+  name: guitar-core-validation
+  run_id: 36289859645
+  conclusion: success
+  runner: virtual-guitar
+  runner_labels:
+    - self-hosted
+    - Windows
+    - X64
+measurements:
+  configure: PASS
+  build: PASS
+  regression:
+    total_tests: 2
+    passed: 2
+    failed: 0
+    tests:
+      - vg_midi_decision_smoke
+      - vg_gesture_smoke
+  decision_microbenchmark:
+    events_processed: 80000
+    elapsed_ms: 87.2813
+    ns_per_event: 1091.02
+    checksum: 20779808
+    realtime_claim: false
+artifact:
+  artifact_id: 10921447920
+  name: guitar-research-epoch-36289859645
+  sha256: fb9b5905b7d26f5ca84e1fc718fa61b78b7bbb90cf4980a66cf08373dd552481
+establishes:
+  - deterministic Gesture Engine v0.1 representation builds on the dedicated runner
+  - down/up stroke ordering and per-string timing are regression-tested
+  - left-hand shift gesture exposes causal movement/noise/damping control descriptors
+  - Virtual Guitarist decision path still passes regression after Gesture module addition
+  - a bounded decision-path microbenchmark is measurable
+does_not_establish:
+  - audible realism
+  - final gesture constants
+  - DAW realtime safety
+  - Cubase compatibility
+  - final articulation behavior
+  - production readiness
+authority: CIPI_INTEGRATION_EPOCH_EVIDENCE
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+immutable: true

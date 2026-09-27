@@ -1,0 +1,37 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026092704
+  population: 6
+  generations: 2
+  max_candidates: 12
+  max_runtime_seconds: 90
+  stage2_limit: 4
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"experiment_id":"EXP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-R1","hypothesis_id":"HYP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-V01","job_id":"VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VIRTUAL-GUITAR-PHYSICAL-AUDIO-001","research_question":"Can
+    a deterministic plucked-string delay-loop candidate provide a numerically stable,
+    measurable and sufficiently pitch-consistent first waveform-generation substrate
+    for the Virtual Guitar research prototype while keeping audible realism and product
+    adoption behind Human/CIPI gates?","track_id":"VIRTUAL-GUITAR-PHYSICAL-AUDIO-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001
+bridge_job_id: VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3
+continuation_fingerprint: a74ef8b3eb5354318450328a9c143e3141f5ecf6c036a36469fc8339d94f8375
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

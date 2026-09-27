@@ -138,6 +138,31 @@ def validate_macro_result(data: dict[str, Any]) -> list[str]:
     return errors
 
 
+def _efficiency_policy_state(root: Path) -> dict[str, Any]:
+    path = root / "research" / "policies" / "virtual-guitar-efficiency-v2.3" / "state.yaml"
+    if not path.exists():
+        return {}
+    try:
+        return load_yaml(path)
+    except Exception:
+        return {}
+
+
+def _track_efficiency_policy(root: Path, track: dict[str, Any]) -> dict[str, Any]:
+    track_id = str(track.get("track_id") or "")
+    policy = dict(track.get("efficiency_policy") or {})
+    if not track_id.startswith("VIRTUAL-GUITAR-"):
+        return policy
+    state = _efficiency_policy_state(root)
+    track_state = ((state.get("tracks") or {}).get(track_id) or {}) if isinstance(state, dict) else {}
+    if isinstance(track_state, dict):
+        if "state" in track_state:
+            policy.setdefault("state", track_state["state"])
+        policy.setdefault("policy_id", state.get("policy_id", "VIRTUAL-GUITAR-EFFICIENCY-V2.3"))
+    policy.setdefault("policy_version", "2.3")
+    return policy
+
+
 def load_tracks(root: Path) -> dict[str, dict[str, Any]]:
     tracks: dict[str, dict[str, Any]] = {}
     folder = root / "research" / "autonomous_bridge" / "tracks"
@@ -484,6 +509,7 @@ def generate_job_and_action(
     for key, value in inputs.items():
         if isinstance(value, (str, int, float, bool)):
             scalar_inputs[str(key)] = value
+    efficiency_policy = _track_efficiency_policy(root, track)
     cipi_context = {
         "track_id": track_id,
         "research_id": research_id,
@@ -495,6 +521,9 @@ def generate_job_and_action(
         "experiment_id": experiment_id,
         "research_question": str(track.get("research_question") or "bounded MELON research"),
     }
+    if efficiency_policy:
+        cipi_context["efficiency_policy"] = efficiency_policy
+        job["efficiency_policy"] = efficiency_policy
     scalar_inputs["cipi_context_json"] = json.dumps(
         cipi_context, sort_keys=True, separators=(",", ":"), ensure_ascii=False
     )
@@ -520,6 +549,14 @@ def generate_job_and_action(
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,
     }
+    if efficiency_policy:
+        action["policy_gate"] = {
+            "policy_id": str(efficiency_policy.get("policy_id") or "VIRTUAL-GUITAR-EFFICIENCY-V2.3"),
+            "policy_version": str(efficiency_policy.get("policy_version") or "2.3"),
+            "state": str(efficiency_policy.get("state") or "UNSPECIFIED"),
+            "safe_handoff_enforced": True,
+            "interrupt_current_jobs": False,
+        }
 
     created = write_yaml_if_absent(_job_dir(root, track_id) / f"{job_id}.yaml", job)
     if not _action_exists(root, action_id):
@@ -755,6 +792,16 @@ def build_health(root: Path, tracks: dict[str, dict[str, Any]], counters: dict[s
         "authority": "OPERATIONAL_SCHEDULING_ONLY",
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,
+        "virtual_guitar_efficiency_policy": {
+            "policy_id": str(_efficiency_policy_state(root).get("policy_id") or "VIRTUAL-GUITAR-EFFICIENCY-V2.3"),
+            "registration_state": str(_efficiency_policy_state(root).get("registration_state") or "UNREGISTERED"),
+            "rollout_state": str(_efficiency_policy_state(root).get("rollout_state") or "UNREGISTERED"),
+            "tracks": {
+                key: {"state": value.get("state")}
+                for key, value in (_efficiency_policy_state(root).get("tracks") or {}).items()
+                if str(key).startswith("VIRTUAL-GUITAR-") and isinstance(value, dict)
+            },
+        },
     }
 
 

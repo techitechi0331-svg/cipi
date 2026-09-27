@@ -234,6 +234,98 @@ class AutonomousResearchBridgeTests(unittest.TestCase):
             ev = evaluate_continuation(Path(td), track(), macro_result(route="HUMAN_GATE", continuation_candidates=[]), [], [], set())
             self.assertEqual(ev["stop_reason"], "HUMAN_GATE")
 
+    def test_result_driven_canary_converges_after_consistent_replication(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            t = track(decision_policy={"mode": "RESULT_DRIVEN_CANARY_V1"})
+            records = [{
+                "loop_depth": 1,
+                "hypothesis_id": "HYP-1",
+                "experiment_type": "INITIAL_FOUNDATION_IDENTIFIABILITY",
+                "experiment_cost": {"candidates": 8, "runtime_seconds": 1},
+                "improvement_signal": 0.20,
+                "decision_signals": {
+                    "leader_architecture": "bounded_parametric_capture",
+                    "best_search_error": 0.040,
+                    "search_width": 0.20,
+                    "pareto_architectures": ["bounded_parametric_capture"],
+                },
+            }]
+            result = macro_result(
+                depth=2,
+                experiment_type="REPLICATION",
+                decision_signals={
+                    "calibration_control_passed": True,
+                    "leader_architecture": "bounded_parametric_capture",
+                    "best_search_error": 0.045,
+                    "search_width": 0.05,
+                    "pareto_architectures": ["bounded_parametric_capture"],
+                    "falsification_status": "NOT_FALSIFIED",
+                },
+                continuation_candidates=[proposal(kind="UNCERTAINTY_REDUCTION")],
+            )
+            ev = evaluate_continuation(root, t, result, records, [], set())
+            self.assertEqual(ev["decision"], "STOP")
+            self.assertEqual(ev["stop_reason"], "CONVERGED")
+            self.assertEqual(ev["decision_signals"]["replication_consistency"], 1.0)
+            self.assertEqual(ev["decision_signals"]["ranking_stability"], 1.0)
+
+    def test_result_driven_canary_continues_when_replication_disagrees(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            t = track(decision_policy={"mode": "RESULT_DRIVEN_CANARY_V1"})
+            records = [{
+                "loop_depth": 1,
+                "hypothesis_id": "HYP-1",
+                "experiment_type": "INITIAL_FOUNDATION_IDENTIFIABILITY",
+                "experiment_cost": {"candidates": 8, "runtime_seconds": 1},
+                "improvement_signal": 0.20,
+                "decision_signals": {
+                    "leader_architecture": "bounded_parametric_capture",
+                    "best_search_error": 0.010,
+                    "search_width": 0.20,
+                    "pareto_architectures": ["bounded_parametric_capture"],
+                },
+            }]
+            result = macro_result(
+                depth=2,
+                experiment_type="REPLICATION",
+                decision_signals={
+                    "calibration_control_passed": True,
+                    "leader_architecture": "bounded_parametric_capture",
+                    "best_search_error": 0.080,
+                    "search_width": 0.05,
+                    "pareto_architectures": ["bounded_parametric_capture"],
+                    "falsification_status": "NOT_FALSIFIED",
+                },
+                continuation_candidates=[proposal(kind="UNCERTAINTY_REDUCTION")],
+            )
+            ev = evaluate_continuation(root, t, result, records, [], set())
+            self.assertEqual(ev["decision"], "CONTINUE")
+
+    def test_result_driven_canary_prioritizes_falsification_over_uncertainty(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            t = track(decision_policy={"mode": "RESULT_DRIVEN_CANARY_V1"})
+            falsification = proposal(name="FALSIFY", kind="FALSIFICATION", novelty=0.2)
+            falsification["expected_information_gain"] = 0.2
+            uncertainty = proposal(name="UNCERTAIN", kind="UNCERTAINTY_REDUCTION", novelty=0.9)
+            uncertainty["expected_information_gain"] = 0.9
+            result = macro_result(proposals=[uncertainty, falsification])
+            ev = evaluate_continuation(root, t, result, [], [], set())
+            self.assertEqual(ev["accepted"]["id"], "FALSIFY")
+
+    def test_result_driven_canary_rejects_calibration_as_continuation(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            t = track(decision_policy={"mode": "RESULT_DRIVEN_CANARY_V1"})
+            calibration = proposal(name="CAL", kind="CALIBRATION_CONTROL", novelty=1.0)
+            result = macro_result(proposals=[calibration])
+            ev = evaluate_continuation(root, t, result, [], [], set())
+            self.assertEqual(ev["decision"], "STOP")
+            self.assertTrue(any(r.get("reason") == "CALIBRATION_CONTROL_NOT_CONTINUATION" for r in ev["rejections"]))
+
+
     def test_no_ready_work(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

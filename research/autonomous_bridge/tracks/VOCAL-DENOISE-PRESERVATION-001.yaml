@@ -1,0 +1,86 @@
+schema_version: "1.0"
+track_id: VOCAL-DENOISE-PRESERVATION-001
+enabled: true
+activation_state: ACTIVE_FOUNDATION
+root_research_id: VOCAL-DENOISE-PRESERVATION-001
+research_question: >-
+  Can vocal preservation and removed-signal evidence be represented without claiming perceptual superiority before human listening?
+hypothesis_id: HYP-VOCAL-DENOISE-PRESERVATION-001
+hypothesis: >-
+  Removed-signal and clean-reference error metrics can expose over-removal risk while remaining explicitly non-perceptual evidence.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: false
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+initial_experiment:
+  experiment_id: EXP-VOCAL-DENOISE-PRESERVATION-001-R1
+  experiment_type: PRESERVATION_FOUNDATION
+  expected_information_gain: 0.85
+  scope:
+    - vocal_denoise
+    - vocal_preservation
+    - removed_signal
+    - safety
+  inputs:
+    seed: 2026092703
+    population: 4
+    generations: 2
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: PRESERVATION_FOUNDATION_CONTRACT_V1
+    architecture: VOCAL_DENOISE_PRESERVATION_FOUNDATION_V1
+    tested_parameters:
+      authority_bounded: true
+      matched_nr_required: true
+      product_integration: false
+    benchmark_profile:
+      - vocal_denoise_preservation_foundation_v1
+    sample_rate: 48000
+    input_set: SYNTHETIC_OR_METADATA_ONLY_UNTIL_DATA_GATE
+    reference_model: NO_PROPRIETARY_REVERSE_ENGINEERING
+    objective_set:
+      - vocal_preservation
+      - matched_noise_reduction
+      - reproducibility
+      - bounded_cost
+    relevant_constraints:
+      - no_private_audio_commit
+      - no_unlicensed_training
+      - no_auto_promotion
+      - no_auto_release
+    experiment_type: PRESERVATION_FOUNDATION
+    scope:
+      - vocal_denoise
+      - vocal_preservation
+      - removed_signal
+      - safety
+efficiency_policy:
+  policy_id: VOCAL-DENOISE-PRESERVATION-001-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

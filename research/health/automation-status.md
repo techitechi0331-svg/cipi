@@ -8,7 +8,7 @@
 - Local blocked / dependency-blocked: **0 / 2**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
-- Cross-Repo queued / dispatched / failed / quarantined: **1 / 1 / 2 / 0**
+- Cross-Repo queued / dispatched / failed / quarantined: **2 / 0 / 3 / 0**
 - Runner/dispatch alerts: **0**
 - Declared human-gate jobs: **2**
 
@@ -17,8 +17,8 @@
 - Legacy enabled-track count: **7**
 - Registered / Active / Terminal / Human Gate: **7 / 0 / 4 / 3**
 - Track Lifecycle: **{"MELON-BRIDGE-CLEAN-PROOF-002": {"reason": "BUDGET_EXHAUSTED", "scheduler_eligible": false, "state": "BUDGET_EXHAUSTED"}, "MELON-BRIDGE-PILOT-001": {"reason": "BUDGET_EXHAUSTED", "scheduler_eligible": false, "state": "BUDGET_EXHAUSTED"}, "MIC-SIM-FOUNDATION-001": {"reason": "DUPLICATE_ONLY", "scheduler_eligible": false, "scientific_convergence_claim": false, "state": "CONVERGED", "state_basis": "SCHEDULER_TERMINAL_ALIAS"}, "VIRTUAL-GUITAR-PHYSICAL-001": {"reason": "HUMAN_GATE", "scheduler_eligible": false, "state": "HUMAN_GATE"}, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {"reason": "HUMAN_GATE", "scheduler_eligible": false, "state": "HUMAN_GATE"}, "VL2A-CIRCUIT-HA100X-001": {"reason": "BUDGET_EXHAUSTED", "scheduler_eligible": false, "state": "BUDGET_EXHAUSTED"}, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": {"reason": "HUMAN_GATE", "scheduler_eligible": false, "state": "HUMAN_GATE"}}**
-- Time Metrics: **{"artifact_upload_seconds": null, "checkout_seconds": null, "environment_setup_seconds": null, "known_runner_samples": 3, "macro_export_seconds": null, "preflight_seconds": null, "queue_wait_seconds": 0.0, "research_compute_seconds": 124.64774999999942, "runner_job_seconds": 264.0, "total_wall_seconds": 264.0}**
-- Research Quality Metrics: **{"budget_exhaustion_rate": 0.42857142857142855, "cache_hit_rate": 0.0, "duplicate_research_rate": 0.0, "early_convergence_rate": null, "falsification_rate": 0.0, "human_gate_rate": 0.42857142857142855, "new_information_per_compute_second": 12.150038371447804, "new_information_per_run": 0.555250678555979, "pareto_front_turnover": null, "ranking_stability": null, "replication_consistency": null, "research_compute_to_runner_wall_ratio": 0.472150568181816, "semantic_duplicate_rate": 0.0}**
+- Time Metrics: **{"artifact_upload_seconds": null, "checkout_seconds": null, "environment_setup_seconds": null, "known_runner_samples": 4, "macro_export_seconds": null, "preflight_seconds": null, "queue_wait_seconds": 0.0, "research_compute_seconds": 124.64774999999942, "runner_job_seconds": 630.0, "total_wall_seconds": 630.0}**
+- Research Quality Metrics: **{"budget_exhaustion_rate": 0.42857142857142855, "cache_hit_rate": 0.0, "duplicate_research_rate": 0.0, "early_convergence_rate": null, "falsification_rate": 0.0, "human_gate_rate": 0.42857142857142855, "new_information_per_compute_second": 12.150038371447804, "new_information_per_run": 0.555250678555979, "pareto_front_turnover": null, "ranking_stability": null, "replication_consistency": null, "research_compute_to_runner_wall_ratio": 0.19785357142857052, "semantic_duplicate_rate": 0.0}**
 - Current Loop Depth: **{"MELON-BRIDGE-CLEAN-PROOF-002": 3, "MELON-BRIDGE-PILOT-001": 3, "MIC-SIM-FOUNDATION-001": 2, "VIRTUAL-GUITAR-PHYSICAL-001": 3, "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3, "VL2A-CIRCUIT-HA100X-001": 5, "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3}**
 - MELON Runs: **22**
 - Continuation Candidates: **18**

@@ -144,7 +144,7 @@
       "pareto_front_turnover": null,
       "ranking_stability": null,
       "replication_consistency": null,
-      "research_compute_to_runner_wall_ratio": 0.472150568181816,
+      "research_compute_to_runner_wall_ratio": 0.19785357142857052,
       "semantic_duplicate_rate": 0.0
     },
     "result_missing": 0,
@@ -160,13 +160,13 @@
       "artifact_upload_seconds": null,
       "checkout_seconds": null,
       "environment_setup_seconds": null,
-      "known_runner_samples": 3,
+      "known_runner_samples": 4,
       "macro_export_seconds": null,
       "preflight_seconds": null,
       "queue_wait_seconds": 0.0,
       "research_compute_seconds": 124.64774999999942,
-      "runner_job_seconds": 264.0,
-      "total_wall_seconds": 264.0
+      "runner_job_seconds": 630.0,
+      "total_wall_seconds": 630.0
     },
     "track_lifecycle": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -235,13 +235,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "VL2A-PREHOST-705C24531C398EEB-R2",
+      "kind": "CROSS_REPO",
+      "priority": 95,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 25,
-      "dispatched": 1,
-      "failed": 2,
+      "dispatched": 0,
+      "failed": 3,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -270,9 +275,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
+    "action_id": "VL2A-PREHOST-705C24531C398EEB-R2",
     "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "priority": 95,
+    "reason": "ready_external_action"
   }
 }

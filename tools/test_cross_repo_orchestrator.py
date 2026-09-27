@@ -102,6 +102,25 @@ def main() -> int:
         selected = select_queued_action(root, REGISTRY)
         assert selected is not None and selected[1]["action_id"] == "TEST-HIGH-001"
 
+        # Pending per-track policy gates must never dispatch before the Safe Handoff rollout
+        # is marked APPLIED. A lower-priority APPLIED action remains eligible.
+        for existing in queued.glob("*.yaml"):
+            existing.unlink()
+        pending_policy = action("TEST-POLICY-PENDING-001", "build", 100)
+        pending_policy["policy_gate"] = {
+            "policy_id": "VIRTUAL-GUITAR-EFFICIENCY-V2.3",
+            "state": "PENDING_REGRESSION",
+        }
+        applied_policy = action("TEST-POLICY-APPLIED-001", "build", 10)
+        applied_policy["policy_gate"] = {
+            "policy_id": "VIRTUAL-GUITAR-EFFICIENCY-V2.3",
+            "state": "APPLIED",
+        }
+        write(queued / "pending-policy.yaml", pending_policy)
+        write(queued / "applied-policy.yaml", applied_policy)
+        selected = select_queued_action(root, REGISTRY)
+        assert selected is not None and selected[1]["action_id"] == "TEST-POLICY-APPLIED-001"
+
         active = action("TEST-ACTIVE-001", "build", 0)
         active["state"] = "DISPATCHED"
         active["dispatched_at"] = "2026-09-26T00:00:00Z"

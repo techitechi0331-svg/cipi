@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -21,7 +21,7 @@ inputs:
     the baseline measurement contract enforce matched Noise Reduction and preserve
     evidence boundaries before real-audio benchmarking?","track_id":"VOCAL-DENOISE-BASELINE-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -39,3 +39,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36321659298
+dispatched_at: '2026-09-27T13:15:48.232667Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

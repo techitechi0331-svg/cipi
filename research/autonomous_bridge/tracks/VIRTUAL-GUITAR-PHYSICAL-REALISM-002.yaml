@@ -1,7 +1,11 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-002
-enabled: true
+enabled: false
 root_research_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-002
+activation_state: PENDING_MELON_REALISM_ADAPTER
+activation_reason: >-
+  Human listening evidence is registered, but dispatch is held until MELON has a dedicated
+  realism adapter matching this research question. Do not route this track through the generic guitar adapter.
 
 research_question: >-
   Can the Virtual Guitar physical-audio substrate reduce the clearly perceived synthetic

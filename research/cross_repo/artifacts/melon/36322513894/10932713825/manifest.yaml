@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36322513894
+run_attempt: 1
+artifact_id: 10932713825
+artifact_name: melon-research-36322513894
+expired: false
+size_in_bytes: 10422
+created_at: '2026-09-27T13:28:59Z'
+expires_at: '2026-10-27T13:28:56Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/efficiency_metrics.json
+  status: ingested
+  size: 3495
+  sha256: 4eb18a3a7b00f08e23253dcc8ae4b5e0c2a802765da2499cce0d424cb1eec247
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/macro_result.json
+  status: ingested
+  size: 11884
+  sha256: 5b5f6bdcc96c9f9ed3ad1981cadd0baa940ecf2359b8e0932c794f20414f4eec
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/precision_review.json
+  status: ingested
+  size: 471
+  sha256: 2638d43e5b4c86e844683bd3f4b86c7fe8dc11149840b65327c96bfc3de1c3d0
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/manifest.json
+  status: ingested
+  size: 364
+  sha256: 70da06ae78bceda623b3ef40c5fbe2f4f7ff95a9d466f298d61375faa609eb1a
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/stage1_screening.json
+  status: ingested
+  size: 9987
+  sha256: 10904bcf33ac3ce87564fd5e0e82e86d21df8e659cd8f80cb3e5759bcba7d8ba
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/summary.json
+  status: ingested
+  size: 1638
+  sha256: 778e303f77f4d58e7c1da5f3bd3431001d028d12ad75801beccbab18f199c86c
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/stage3_deep_validation.json
+  status: ingested
+  size: 573
+  sha256: 1e3ae3bf4698ad0c28eb97578fa58014b34f4570d6ef0353f6e85f0352e4eb99
+- path: melon-funnel-vocal-denoise-baseline-4a8a6874c18c/vocal_denoise_foundation_measurements.json
+  status: ingested
+  size: 11404
+  sha256: 2a69f9e7be38889934316ddd1ccaf26c7292fcf6a8506efb89cfcc8d4f06397f
+archive_sha256: 828aa6fbde4135a2b4d79ac896b9fee29bf2d0894ca22e621aff2bb1d2ab6473
+ingest_status: text_evidence_ingested

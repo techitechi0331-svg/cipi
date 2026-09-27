@@ -1,0 +1,319 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "dbc7e5da7739547eb607a1e2ca6e7dc6564d5d77b7ab5ee8fb9697432b124d2d",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "MELON-FUNNEL-VOCAL-DENOISE-BASELINE-93E4A9A0A103-ITERATE-1"
+      ],
+      "estimated_cost": {
+        "candidates": 8,
+        "runtime_seconds": 60
+      },
+      "expected_information_gain": 0.89,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "VOCAL_DENOISE_BASELINE_FOUNDATION_V1",
+        "benchmark_profile": [
+          "authority_boundary_v1",
+          "vocal_denoise_baseline_foundation_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for VD-BASELINE-001: Replicate the bounded contract with an independent seed before CIPI review; no audio-quality claim is implied.",
+        "input_set": "SYNTHETIC_OR_METADATA_ONLY_UNTIL_DATASET_GATE",
+        "objective_set": [
+          "vocal_preservation",
+          "matched_noise_reduction",
+          "reproducibility",
+          "bounded_cost"
+        ],
+        "reference_model": "NO_PROPRIETARY_REVERSE_ENGINEERING",
+        "relevant_constraints": [
+          "dataset_license_gate",
+          "identity_disjoint_holdout",
+          "no_private_audio_commit",
+          "no_auto_promotion",
+          "no_auto_release"
+        ],
+        "research_domain": "VOCAL_DENOISE_BASELINE",
+        "sample_rate": 48000,
+        "scope": [
+          "VD-BASELINE-001",
+          "uncertainty_reduction",
+          "vocal_denoise_baseline_foundation"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 8,
+          "max_runtime_seconds": 60,
+          "population": 4,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for VD-BASELINE-001: Replicate the bounded contract with an independent seed before CIPI review; no audio-quality claim is implied.",
+      "id": "melon-funnel-vocal-denoise-baseline-4a8a6874c18c-iterate-1",
+      "novelty": 1.0,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 8,
+          "max_runtime_seconds": 60,
+          "population": 4,
+          "preflight_mode": "fast",
+          "seed": 2026092704,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "VD-BASELINE-001",
+          "vocal_denoise_baseline_foundation"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Replicate the bounded contract with an independent seed before CIPI review; no audio-quality claim is implied."
+    }
+  ],
+  "efficiency_metrics": {
+    "artifact_upload_seconds": null,
+    "benchmark_time_seconds": 0.0,
+    "build_time_seconds": 0.0,
+    "cache_hit_rate": 0.0,
+    "cache_hits": 0,
+    "cache_reuse_state": "NOT_REQUIRED_SMALL_FOUNDATION_CONTRACT",
+    "candidate_count": 8,
+    "candidate_timeout_seconds": 10.0,
+    "candidates_per_runner_minute": 480000000000.0,
+    "cheap_stage_survivors": 4,
+    "checkout_seconds": null,
+    "dedup_reuse_state": "MELON_SEMANTIC_PAYLOAD_FINGERPRINT_V1",
+    "deep_stage_survivors": 0,
+    "deep_validation_count": 1,
+    "duplicate_hits": 0,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.0,
+    "environment_setup_seconds": null,
+    "full_regression_required": false,
+    "full_regression_result": "NOT_REQUIRED_FOR_FOUNDATION_CONTRACT",
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.55,
+    "legacy_metric_semantics": {
+      "runner_runtime_seconds": "LEGACY_RESEARCH_PROCESS_ELAPSED_SECONDS; do not interpret as GitHub runner job wall time"
+    },
+    "macro_export_seconds": null,
+    "max_memory_mb": 2048.0,
+    "measured_count": 8,
+    "measurements_executed_stage1": 8,
+    "new_semantic_candidate_rate": 1.0,
+    "observability_metric_sources": {
+      "cache_hit_rate": "cache_hit_rate or stage2_cache_hit_rate",
+      "duplicate_research_rate": "duplicate_rate",
+      "new_information_per_run": "information_gain_signal",
+      "pareto_front_turnover": "mean_front_turnover",
+      "research_compute_seconds": "domain research function elapsed time",
+      "runner_job_seconds": "unknown inside MELON process; supplied by orchestrator when available",
+      "semantic_duplicate_rate": "duplicate_rate (semantic candidate identity)"
+    },
+    "observability_schema_version": "1.0",
+    "peak_python_memory_mb": null,
+    "preflight_seconds": null,
+    "quality_cost_objectives": [
+      "contract_violation_count",
+      "preservation_policy_distance",
+      "estimated_cost_units"
+    ],
+    "quality_cost_pareto_ids": [
+      "VD-BASELINE-001",
+      "VD-BASELINE-005",
+      "VD-BASELINE-008",
+      "VD-BASELINE-006"
+    ],
+    "queue_wait_seconds": null,
+    "rejected_before_measurement": 0,
+    "research_compute_seconds": 0.0,
+    "research_quality_metrics": {
+      "budget_exhaustion_rate": null,
+      "cache_hit_rate": 0.0,
+      "duplicate_research_rate": 0.0,
+      "early_convergence_rate": null,
+      "falsification_rate": null,
+      "human_gate_rate": null,
+      "new_information_per_compute_second": null,
+      "new_information_per_run": 0.55,
+      "pareto_front_turnover": null,
+      "ranking_stability": null,
+      "replication_consistency": null,
+      "research_compute_to_runner_wall_ratio": null,
+      "semantic_duplicate_rate": 0.0
+    },
+    "runner_job_seconds": null,
+    "runner_runtime_seconds": 0.0,
+    "stage2_measurement_runs": 0,
+    "time_metrics": {
+      "artifact_upload_seconds": null,
+      "checkout_seconds": null,
+      "environment_setup_seconds": null,
+      "macro_export_seconds": null,
+      "preflight_seconds": null,
+      "queue_wait_seconds": null,
+      "research_compute_seconds": 0.0,
+      "runner_job_seconds": null,
+      "total_wall_seconds": null
+    },
+    "total_wall_seconds": null,
+    "unavailable_observability_metrics": [
+      "new_information_per_compute_second",
+      "pareto_front_turnover",
+      "ranking_stability",
+      "replication_consistency",
+      "falsification_rate",
+      "early_convergence_rate",
+      "human_gate_rate",
+      "budget_exhaustion_rate",
+      "research_compute_to_runner_wall_ratio"
+    ]
+  },
+  "efficiency_policy": {
+    "candidate_timeout_seconds": 10,
+    "full_regression_required": false,
+    "max_memory_mb": 2048,
+    "policy_id": "VOCAL-DENOISE-BASELINE-001-EFFICIENCY-V1",
+    "policy_version": "1.0",
+    "state": "ACTIVE"
+  },
+  "efficiency_summary": {
+    "benchmark_time_seconds": 0.0,
+    "build_time_seconds": 0.0,
+    "cache_hits": 0,
+    "candidate_count": 8,
+    "candidates_per_runner_minute": 480000000000.0,
+    "cheap_stage_survivors": 4,
+    "deep_stage_survivors": 0,
+    "duplicate_hits": 0,
+    "full_regression_required": false,
+    "full_regression_result": "NOT_REQUIRED_FOR_FOUNDATION_CONTRACT",
+    "legacy_metric_semantics": {
+      "runner_runtime_seconds": "LEGACY_RESEARCH_PROCESS_ELAPSED_SECONDS; do not interpret as GitHub runner job wall time"
+    },
+    "measured_count": 8,
+    "observability_schema_version": "1.0",
+    "queue_wait_seconds": null,
+    "rejected_before_measurement": 0,
+    "research_compute_seconds": 0.0,
+    "research_quality_metrics": {
+      "budget_exhaustion_rate": null,
+      "cache_hit_rate": 0.0,
+      "duplicate_research_rate": 0.0,
+      "early_convergence_rate": null,
+      "falsification_rate": null,
+      "human_gate_rate": null,
+      "new_information_per_compute_second": null,
+      "new_information_per_run": 0.55,
+      "pareto_front_turnover": null,
+      "ranking_stability": null,
+      "replication_consistency": null,
+      "research_compute_to_runner_wall_ratio": null,
+      "semantic_duplicate_rate": 0.0
+    },
+    "runner_job_seconds": null,
+    "runner_runtime_seconds": 0.0,
+    "time_metrics": {
+      "artifact_upload_seconds": null,
+      "checkout_seconds": null,
+      "environment_setup_seconds": null,
+      "macro_export_seconds": null,
+      "preflight_seconds": null,
+      "queue_wait_seconds": null,
+      "research_compute_seconds": 0.0,
+      "runner_job_seconds": null,
+      "total_wall_seconds": null
+    },
+    "total_wall_seconds": null
+  },
+  "elapsed_seconds": 0.0,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 8,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.0,
+    "stage2_measurement_runs": 0
+  },
+  "experiment_id": "MELON-FUNNEL-VOCAL-DENOISE-BASELINE-93E4A9A0A103-ITERATE-1",
+  "hypothesis_id": "HYP-VOCAL-DENOISE-BASELINE-001",
+  "job_id": "VOCAL-DENOISE-BASELINE-001-R2-EAEE91D3",
+  "loop_depth": 2,
+  "measured_candidates": 8,
+  "novelty": 1.0,
+  "parent_job_id": "VOCAL-DENOISE-BASELINE-001-R1-3A274FBF",
+  "parent_run_id": "melon-funnel-vocal-denoise-baseline-93e4a9a0a103",
+  "precision_review": {
+    "checks": {
+      "all_numeric_metrics_finite": true,
+      "audio_quality_not_claimed": true,
+      "automatic_promotion_disabled": true,
+      "bounded_candidates": true,
+      "product_release_disabled": true,
+      "proprietary_reverse_engineering_not_claimed": true,
+      "real_training_not_claimed": true,
+      "strict_contract_candidate_exists": true
+    },
+    "evidence_boundary": "MEASURED_DETERMINISTIC_RESEARCH_CONTRACT_NOT_AUDIO_QUALITY",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VOCAL-DENOISE-BASELINE-001",
+  "research_question": "Can the baseline measurement contract enforce matched Noise Reduction and preserve evidence boundaries before real-audio benchmarking?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.55,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 4,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VOCAL-DENOISE-BASELINE-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-vocal-denoise-baseline-4a8a6874c18c",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "00ae42a7bdbebb51207c16f0c69aa8ddb04317e1",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-27T13:28:55.088830+00:00",
+  "track_id": "VOCAL-DENOISE-BASELINE-001",
+  "unresolved_questions": [
+    {
+      "id": "VD-BASELINE-001",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Replicate the bounded contract with an independent seed before CIPI review; no audio-quality claim is implied."
+    }
+  ]
+}

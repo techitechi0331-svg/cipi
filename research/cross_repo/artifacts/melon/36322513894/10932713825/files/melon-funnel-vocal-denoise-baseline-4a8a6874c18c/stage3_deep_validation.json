@@ -1,0 +1,16 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "VD-BASELINE-001",
+    "promotion_authority": false,
+    "reason": "Replicate the bounded contract with an independent seed before CIPI review; no audio-quality claim is implied.",
+    "route": "ITERATE",
+    "scientific": {
+      "audio_quality_measured": false,
+      "contract_violation_count": 0,
+      "evidence_boundary": "MEASURED_DETERMINISTIC_RESEARCH_CONTRACT_NOT_AUDIO_QUALITY",
+      "real_training_executed": false
+    },
+    "species": "vocal_denoise_baseline_foundation"
+  }
+]

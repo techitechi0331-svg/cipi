@@ -1,0 +1,52 @@
+schema_version: '1.0'
+job_id: GUITAR-EPOCH1-LANES-001
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+state: READY_PROPOSAL
+scheduling_mode: DYNAMIC
+max_logical_lanes: 4
+max_guitar_runner_jobs: 1
+max_integration_epochs_in_flight: 1
+source_canary_hash: 91e20d34603132cd1f8990e6f03af3e5cb82f7f0a51c5b04bc0412e135fc61f5
+integration_epoch: 1
+lanes:
+- lane: A
+  initial_job: Living String v0.1 refinement
+  touched_modules:
+  - Source/PhysicalModel/Strings/
+  exit_condition: persistent state, natural decay, and damping termination are regression-tested
+- lane: B
+  initial_job: Virtual Guitarist State v0.1
+  touched_modules:
+  - Source/Performance/VirtualGuitarist/
+  exit_condition: left/right hand state transitions and Decision Log fields are observable
+- lane: C
+  initial_job: MIDI Decision Harness v0.1
+  touched_modules:
+  - Tests/MidiDecision/
+  exit_condition: deterministic phrase decisions execute and regression expectations
+    are recorded
+- lane: D
+  initial_job: Fingering v0.1
+  touched_modules:
+  - Source/Performance/Fingering/
+  exit_condition: playability and movement-cost decisions are testable before phrase
+    lookahead expansion
+epoch_gate:
+- build
+- unit_tests
+- midi_decision_tests
+- performance_tests
+- cpu_measurement
+- evidence_review
+- blocker_review
+- lane_priority_review
+post_epoch_decisions:
+- KEEP
+- ROTATE
+- BLOCK
+- RE-ENTER
+- COMPLETE_FOR_NOW
+authority: CIPI_NEXT_JOB_PROPOSAL
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+automatic_release: false

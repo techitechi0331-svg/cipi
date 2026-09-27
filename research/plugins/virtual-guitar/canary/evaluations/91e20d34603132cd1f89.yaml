@@ -1,0 +1,25 @@
+schema_version: '1.0'
+evaluation_id: GUITAR-CANARY-EVAL-91E20D346031
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/virtual_guitar/36295238015/10923921359/files/result_bundle.json
+source_sha256: 91e20d34603132cd1f8990e6f03af3e5cb82f7f0a51c5b04bc0412e135fc61f5
+job_id: GUITAR-E2E-CANARY-002
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+evidence_class: MEASURED
+decision: CONTINUE
+stop_reason: COMPLETE_FOR_NOW
+reasons:
+- dedicated runner returned a machine-readable Result Bundle
+- three or more damping candidates were measured
+- all reported canary outputs were finite
+- authority boundaries remained proposal-only with production integration disabled
+scope: E2E_RESEARCH_BRIDGE_AND_DETERMINISTIC_DAMPING_CANARY_ONLY
+does_not_establish:
+- production guitar realism
+- listening preference
+- Cubase host compatibility
+- final damping constants
+- release readiness
+authority: CIPI_EVIDENCE_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

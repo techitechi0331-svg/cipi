@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-DENOISE-LOSS-001-R2-0AB88115
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -21,7 +21,7 @@ inputs:
     bounded objective functions best preserve singing voice at matched NR once licensed
     training data and baseline metrics exist?","track_id":"VOCAL-DENOISE-LOSS-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -39,3 +39,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36333185236
+dispatched_at: '2026-09-27T16:26:47.508091Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

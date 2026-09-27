@@ -3,10 +3,10 @@ action_id: MELON-VOCAL-DENOISE-ARCH-001-R2-7669446E
 repo_key: melon
 workflow_key: research
 runner_class: self-hosted
-state: RUNNING
+state: COMPLETED
 run_id: 36333185236
-run_status: in_progress
-run_conclusion: null
+run_status: completed
+run_conclusion: success
 since: '2026-09-27T16:25:25Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

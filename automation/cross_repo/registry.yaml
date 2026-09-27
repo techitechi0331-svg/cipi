@@ -254,3 +254,59 @@ repositories:
           - job_id
           - track_id
 
+
+  vocal_denoise:
+    repository: techitechi0331-svg/Vocal_Denoise
+    default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
+    workflows:
+      preflight:
+        file: vocal-denoise-preflight.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs: []
+        required_inputs: []
+      train:
+        file: vocal-denoise-train.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - experiment_id
+          - dataset_registry_path
+          - seed
+          - max_steps
+        required_inputs:
+          - experiment_id
+          - dataset_registry_path
+          - seed
+          - max_steps
+      evaluate:
+        file: vocal-denoise-evaluate.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - experiment_id
+        required_inputs:
+          - experiment_id
+      export:
+        file: vocal-denoise-export.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - model_id
+        required_inputs:
+          - model_id
+      vst3:
+        file: vocal-denoise-vst3.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - model_id
+        required_inputs:
+          - model_id

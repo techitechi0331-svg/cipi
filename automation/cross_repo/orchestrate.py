@@ -628,10 +628,48 @@ def resume_jobs(root: Path) -> int:
     return count
 
 
-def dispatch_one(root: Path, registry: dict, gh: GitHubClient) -> str | None:
+
+def reconcile_blocked_queued_access(root: Path, registry: dict, gh: GitHubClient) -> int:
+    queued = root / "research" / "cross_repo" / "actions" / "queued"
+    if not queued.exists():
+        return 0
+    unblocked = 0
+    for path in sorted(queued.glob("*.yaml")):
+        action = load_yaml(path)
+        if action.get("blocked_external") is not True:
+            continue
+        try:
+            repo, workflow_file, _ = workflow_spec(registry, action)
+            gh.list_workflow_runs(repo, workflow_file, per_page=1)
+        except RuntimeError:
+            continue
+        action.pop("blocked_external", None)
+        action.pop("blocked_reason", None)
+        action.pop("blocked_at", None)
+        action.pop("last_dispatch_error", None)
+        action["access_restored_at"] = now_iso()
+        write_yaml(path, action)
+        unblocked += 1
+    return unblocked
+
+
+def _mark_dispatch_blocked(path: Path, action: dict, exc: RuntimeError) -> None:
+    detail = str(exc)
+    reason = "REPOSITORY_OR_WORKFLOW_ACCESS_UNAVAILABLE"
+    if not any(code in detail for code in (" 401 ", " 403 ", " 404 ")):
+        reason = "DISPATCH_API_UNAVAILABLE"
+    action["blocked_external"] = True
+    action["blocked_reason"] = reason
+    action["blocked_at"] = now_iso()
+    action["last_dispatch_error"] = detail[:1200]
+    write_yaml(path, action)
+    print(f"cross-repo dispatch blocked: {action.get('action_id')}: {reason}: {detail}")
+
+
+def dispatch_one(root: Path, registry: dict, gh: GitHubClient) -> tuple[str | None, int]:
     selected = select_queued_action(root, registry)
     if selected is None:
-        return None
+        return None, 0
     path, action = selected
     repo, workflow_file, ref = workflow_spec(registry, action)
     attempts = int(action.get("attempts", 0))
@@ -642,13 +680,22 @@ def dispatch_one(root: Path, registry: dict, gh: GitHubClient) -> str | None:
         dst = root / "research" / "cross_repo" / "actions" / "quarantined" / path.name
         write_yaml(dst, action)
         path.unlink()
-        return None
+        return None, 0
 
-    prior_runs = gh.list_workflow_runs(repo, workflow_file, per_page=5)
-    prior_ids = [r.get("id") for r in prior_runs if isinstance(r.get("id"), int)]
-    action["previous_run_id"] = max(prior_ids) if prior_ids else 0
-    action.setdefault("retry_count", 0)
-    gh.dispatch_workflow(repo, workflow_file, ref, action.get("inputs", {}))
+    try:
+        prior_runs = gh.list_workflow_runs(repo, workflow_file, per_page=5)
+        prior_ids = [r.get("id") for r in prior_runs if isinstance(r.get("id"), int)]
+        action["previous_run_id"] = max(prior_ids) if prior_ids else 0
+        action.setdefault("retry_count", 0)
+        gh.dispatch_workflow(repo, workflow_file, ref, action.get("inputs", {}))
+    except RuntimeError as exc:
+        _mark_dispatch_blocked(path, action, exc)
+        return None, 1
+
+    action.pop("blocked_external", None)
+    action.pop("blocked_reason", None)
+    action.pop("blocked_at", None)
+    action.pop("last_dispatch_error", None)
     action["state"] = "DISPATCHED"
     action["attempts"] = attempts + 1
     action["dispatched_at"] = now_iso()
@@ -658,7 +705,7 @@ def dispatch_one(root: Path, registry: dict, gh: GitHubClient) -> str | None:
     dst = root / "research" / "cross_repo" / "actions" / "dispatched" / path.name
     write_yaml(dst, action)
     path.unlink()
-    return str(action["action_id"])
+    return str(action["action_id"]), 0
 
 
 def write_outputs(path: str | None, values: dict[str, object]) -> None:
@@ -691,13 +738,16 @@ def main() -> int:
     backfilled = backfill_completed_artifacts(root, registry, gh)
     observed = observe_latest(root, registry, gh)
     resumed = resume_jobs(root)
-    dispatched = dispatch_one(root, registry, gh)
+    access_restored = reconcile_blocked_queued_access(root, registry, gh)
+    dispatched, newly_blocked = dispatch_one(root, registry, gh)
     changed = (
         any(reconciliation.values())
         or any(recovery.values())
         or backfilled > 0
         or observed > 0
         or resumed > 0
+        or access_restored > 0
+        or newly_blocked > 0
         or dispatched is not None
     )
 
@@ -708,6 +758,8 @@ def main() -> int:
         f"backfilled_artifacts={backfilled}",
         f"observed={observed}",
         f"resumed={resumed}",
+        f"access_restored={access_restored}",
+        f"blocked_external={newly_blocked}",
         f"dispatched={dispatched or '-'}",
     )
     write_outputs(
@@ -718,6 +770,8 @@ def main() -> int:
             "completed_actions": reconciliation["completed"] + recovery["recovered"],
             "failed_actions": reconciliation["failed"],
             "recovered_actions": recovery["recovered"],
+            "access_restored": access_restored,
+            "blocked_external": newly_blocked,
             "retried_actions": reconciliation["retried"],
             "artifact_records": reconciliation["artifacts"] + recovery["artifacts"] + backfilled,
             "runner_health_changes": reconciliation["health_changes"] + recovery["health_changes"],

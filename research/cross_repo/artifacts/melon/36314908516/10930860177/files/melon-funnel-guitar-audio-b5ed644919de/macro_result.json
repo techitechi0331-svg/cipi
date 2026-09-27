@@ -1,0 +1,341 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "3df8234ecdaec8b0b7caec12d21a297c0f04d306b6c746afac667c81d67185a6",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0-ITERATE-1"
+      ],
+      "estimated_cost": {
+        "candidates": 12,
+        "runtime_seconds": 90
+      },
+      "expected_information_gain": 0.8796733617156915,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "DETERMINISTIC_PLUCKED_STRING_DELAY_LOOP_V01",
+        "benchmark_profile": [
+          "guitar_delay_pitch_grid_v1",
+          "guitar_delay_stability_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for GTR-AUDIO-001: Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption.",
+        "input_set": "STANDARD_GUITAR_RANGE_MIDI_GRID_V1",
+        "objective_set": [
+          "pitch_error",
+          "decay_proxy",
+          "numerical_stability",
+          "cpu_cost",
+          "memory_cost"
+        ],
+        "reference_model": "IDEAL_EQUAL_TEMPERED_FREQUENCY_PLUS_HALF_SAMPLE_FILTER_DELAY_HYPOTHESIS",
+        "relevant_constraints": [
+          "deterministic_excitation",
+          "process_path_no_allocation",
+          "loop_gain_below_one",
+          "product_integration_off",
+          "automatic_promotion_off",
+          "human_listening_not_claimed"
+        ],
+        "research_domain": "VIRTUAL_GUITAR_PHYSICAL_AUDIO",
+        "sample_rate": 48000.0,
+        "scope": [
+          "GTR-AUDIO-001",
+          "physical_string_delay_loop",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for GTR-AUDIO-001: Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption.",
+      "id": "melon-funnel-guitar-audio-b5ed644919de-iterate-1",
+      "novelty": 1.0,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 2,
+          "max_candidates": 12,
+          "max_runtime_seconds": 90,
+          "population": 6,
+          "preflight_mode": "fast",
+          "seed": 2026092706,
+          "stage2_archive_limit": 4,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 4,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "GTR-AUDIO-001",
+          "physical_string_delay_loop"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption."
+    }
+  ],
+  "efficiency_metrics": {
+    "artifact_upload_seconds": null,
+    "batch_class": "CHEAP",
+    "benchmark_time_seconds": 0.062000000005355105,
+    "build_time_seconds": 0.0,
+    "cache_hit_rate": 0.0,
+    "cache_hits": 0,
+    "cache_reuse_state": "MELON_DOMAIN_EXPERIMENT_CACHE_V1",
+    "candidate_count": 12,
+    "candidate_status_counts": {
+      "duplicate_reuse": 0,
+      "invalid": 0,
+      "measurement_failure": 0,
+      "numerical_failure": 0,
+      "rejected": 0,
+      "success": 12,
+      "timeout": 0
+    },
+    "candidate_timeout_seconds": 5.0,
+    "candidates_per_runner_minute": 12941.958909280462,
+    "cheap_stage_survivors": 11,
+    "checkout_seconds": null,
+    "dedup_reuse_state": "MELON_SEMANTIC_PAYLOAD_FINGERPRINT_V1",
+    "deep_stage_survivors": 0,
+    "deep_validation_count": 1,
+    "duplicate_hits": 0,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.055633,
+    "environment_setup_seconds": null,
+    "full_regression_required": false,
+    "full_regression_result": "NOT_REQUIRED_FOR_CHEAP_SYNTHETIC_BATCH",
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.6016331914215427,
+    "legacy_metric_semantics": {
+      "runner_runtime_seconds": "LEGACY_RESEARCH_PROCESS_ELAPSED_SECONDS; do not interpret as GitHub runner job wall time"
+    },
+    "macro_export_seconds": null,
+    "max_candidates": 12,
+    "max_memory_mb": 1024.0,
+    "max_runtime_seconds": 90.0,
+    "measured_count": 12,
+    "measurements_executed_stage1": 12,
+    "new_semantic_candidate_rate": 1.0,
+    "observability_metric_sources": {
+      "cache_hit_rate": "cache_hit_rate or stage2_cache_hit_rate",
+      "duplicate_research_rate": "duplicate_rate",
+      "new_information_per_run": "information_gain_signal",
+      "pareto_front_turnover": "mean_front_turnover",
+      "research_compute_seconds": "domain research function elapsed time",
+      "runner_job_seconds": "unknown inside MELON process; supplied by orchestrator when available",
+      "semantic_duplicate_rate": "duplicate_rate (semantic candidate identity)"
+    },
+    "observability_schema_version": "1.0",
+    "peak_python_memory_mb": 0.09667301177978516,
+    "preflight_seconds": null,
+    "quality_cost_objectives": [
+      "max_abs_pitch_error_cents",
+      "estimated_ops_per_sample",
+      "estimated_delay_memory_bytes"
+    ],
+    "quality_cost_pareto_ids": [
+      "GTR-AUDIO-001",
+      "GTR-AUDIO-002",
+      "GTR-AUDIO-003",
+      "GTR-AUDIO-004",
+      "GTR-AUDIO-005",
+      "GTR-AUDIO-007",
+      "GTR-AUDIO-008",
+      "GTR-AUDIO-009",
+      "GTR-AUDIO-010",
+      "GTR-AUDIO-011",
+      "GTR-AUDIO-012"
+    ],
+    "queue_wait_seconds": null,
+    "rejected_before_measurement": 0,
+    "research_compute_seconds": 0.055633,
+    "research_quality_metrics": {
+      "budget_exhaustion_rate": null,
+      "cache_hit_rate": 0.0,
+      "duplicate_research_rate": 0.0,
+      "early_convergence_rate": null,
+      "falsification_rate": null,
+      "human_gate_rate": null,
+      "new_information_per_compute_second": 10.81432228032899,
+      "new_information_per_run": 0.6016331914215427,
+      "pareto_front_turnover": null,
+      "ranking_stability": null,
+      "replication_consistency": null,
+      "research_compute_to_runner_wall_ratio": null,
+      "semantic_duplicate_rate": 0.0
+    },
+    "runner_job_seconds": null,
+    "runner_runtime_seconds": 0.055633,
+    "stage2_measurement_runs": 4,
+    "time_metrics": {
+      "artifact_upload_seconds": null,
+      "checkout_seconds": null,
+      "environment_setup_seconds": null,
+      "macro_export_seconds": null,
+      "preflight_seconds": null,
+      "queue_wait_seconds": null,
+      "research_compute_seconds": 0.055633,
+      "runner_job_seconds": null,
+      "total_wall_seconds": null
+    },
+    "total_wall_seconds": null,
+    "unavailable_observability_metrics": [
+      "pareto_front_turnover",
+      "ranking_stability",
+      "replication_consistency",
+      "falsification_rate",
+      "early_convergence_rate",
+      "human_gate_rate",
+      "budget_exhaustion_rate",
+      "research_compute_to_runner_wall_ratio"
+    ]
+  },
+  "efficiency_policy": {
+    "batch_class": "CHEAP",
+    "candidate_timeout_seconds": 5,
+    "full_regression_required": false,
+    "full_regression_result": "PASS_AT_SAFE_HANDOFF_36292052180",
+    "max_memory_mb": 1024,
+    "policy_id": "VIRTUAL-GUITAR-EFFICIENCY-V2.3",
+    "policy_version": "2.3",
+    "state": "APPLIED"
+  },
+  "efficiency_summary": {
+    "benchmark_time_seconds": 0.062000000005355105,
+    "build_time_seconds": 0.0,
+    "cache_hits": 0,
+    "candidate_count": 12,
+    "candidates_per_runner_minute": 12941.958909280462,
+    "cheap_stage_survivors": 11,
+    "deep_stage_survivors": 0,
+    "duplicate_hits": 0,
+    "full_regression_required": false,
+    "full_regression_result": "NOT_REQUIRED_FOR_CHEAP_SYNTHETIC_BATCH",
+    "legacy_metric_semantics": {
+      "runner_runtime_seconds": "LEGACY_RESEARCH_PROCESS_ELAPSED_SECONDS; do not interpret as GitHub runner job wall time"
+    },
+    "measured_count": 12,
+    "observability_schema_version": "1.0",
+    "queue_wait_seconds": null,
+    "rejected_before_measurement": 0,
+    "research_compute_seconds": 0.055633,
+    "research_quality_metrics": {
+      "budget_exhaustion_rate": null,
+      "cache_hit_rate": 0.0,
+      "duplicate_research_rate": 0.0,
+      "early_convergence_rate": null,
+      "falsification_rate": null,
+      "human_gate_rate": null,
+      "new_information_per_compute_second": 10.81432228032899,
+      "new_information_per_run": 0.6016331914215427,
+      "pareto_front_turnover": null,
+      "ranking_stability": null,
+      "replication_consistency": null,
+      "research_compute_to_runner_wall_ratio": null,
+      "semantic_duplicate_rate": 0.0
+    },
+    "runner_job_seconds": null,
+    "runner_runtime_seconds": 0.055633,
+    "time_metrics": {
+      "artifact_upload_seconds": null,
+      "checkout_seconds": null,
+      "environment_setup_seconds": null,
+      "macro_export_seconds": null,
+      "preflight_seconds": null,
+      "queue_wait_seconds": null,
+      "research_compute_seconds": 0.055633,
+      "runner_job_seconds": null,
+      "total_wall_seconds": null
+    },
+    "total_wall_seconds": null
+  },
+  "elapsed_seconds": 0.055633,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 12,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.055633,
+    "stage2_measurement_runs": 4
+  },
+  "experiment_id": "MELON-FUNNEL-GUITAR-AUDIO-5F84EAD0EBD0-ITERATE-1",
+  "hypothesis_id": "HYP-VIRTUAL-GUITAR-PHYSICAL-AUDIO-V01",
+  "job_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R2-C093F409",
+  "loop_depth": 2,
+  "measured_candidates": 12,
+  "novelty": 1.0,
+  "parent_job_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001-R1-A74EF8B3",
+  "parent_run_id": "melon-funnel-guitar-audio-5f84ead0ebd0",
+  "precision_review": {
+    "checks": {
+      "automatic_promotion_disabled": true,
+      "best_pitch_error_below_15_cents": true,
+      "bounded_candidate_count": true,
+      "candidate_timeout_respected": true,
+      "loop_gain_stable": true,
+      "memory_hard_ceiling_respected": true,
+      "numerical_stability": true,
+      "product_integration_disabled": true
+    },
+    "evidence_boundary": "MEASURED_SYNTHETIC_DELAY_MODEL_NOT_AUDIO_FIDELITY",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+  "research_question": "Can a deterministic plucked-string delay-loop candidate provide a numerically stable, measurable and sufficiently pitch-consistent first waveform-generation substrate for the Virtual Guitar research prototype while keeping audible realism and product adoption behind Human/CIPI gates?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.6016331914215427,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 11,
+    "stage2_archive": 4,
+    "stage2_pareto": 4
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-guitar-audio-b5ed644919de",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "7cc0b6055d649a962e803becf2b120af478debee",
+  "stop_reason": "MAX_CANDIDATES",
+  "timestamp": "2026-09-27T11:11:24.414030+00:00",
+  "track_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+  "unresolved_questions": [
+    {
+      "id": "GTR-AUDIO-001",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Narrow delay-compensation and loop-gain ranges, then replicate before any audio/product adoption."
+    }
+  ]
+}

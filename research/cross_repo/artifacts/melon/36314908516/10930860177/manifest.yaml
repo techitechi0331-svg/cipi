@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36314908516
+run_attempt: 1
+artifact_id: 10930860177
+artifact_name: melon-research-36314908516
+expired: false
+size_in_bytes: 15583
+created_at: '2026-09-27T11:11:29Z'
+expires_at: '2026-10-27T11:11:26Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-guitar-audio-b5ed644919de/efficiency_metrics.json
+  status: ingested
+  size: 3985
+  sha256: fbd1d33e01d5cff5cd27bfdbc3954a6850bc149c92998442a60f37df414561a9
+- path: melon-funnel-guitar-audio-b5ed644919de/guitar_audio_measurements.json
+  status: ingested
+  size: 44296
+  sha256: bffa851c16ae7395a6c6d64020c71437e699fbc5985d7bea73ebd429a0113c6b
+- path: melon-funnel-guitar-audio-b5ed644919de/macro_result.json
+  status: ingested
+  size: 12745
+  sha256: d3f3610b8e462b7c26f022f27bea0ed745635f625709e986da3408a2731d3bd0
+- path: melon-funnel-guitar-audio-b5ed644919de/manifest.json
+  status: ingested
+  size: 373
+  sha256: 2084dcf2db04dc7b23ca8d33063b7ea31a3d0c02263fa087a50d7cf16a65ad52
+- path: melon-funnel-guitar-audio-b5ed644919de/precision_review.json
+  status: ingested
+  size: 442
+  sha256: fc371901702afacfdc1f29c3d4e3326edd0371afdcad4b161f38d4ea5f800918
+- path: melon-funnel-guitar-audio-b5ed644919de/stage1_screening.json
+  status: ingested
+  size: 40135
+  sha256: 6a7dd6116d4f1c0c78612e2bee084f6510a1d6cfb9b9dfbbf327304afd185eb3
+- path: melon-funnel-guitar-audio-b5ed644919de/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-guitar-audio-b5ed644919de/stage3_deep_validation.json
+  status: ingested
+  size: 621
+  sha256: c61f3d757aaaca44b9d482fc62de5aeb38738393a713892cb1ea6bb4a4bd33a8
+- path: melon-funnel-guitar-audio-b5ed644919de/summary.json
+  status: ingested
+  size: 1717
+  sha256: 18c4c970e99fe2682f157411ba1cfa340bee7e6ea417cce3a0b04058a8085b86
+archive_sha256: 42e94a03eee6175d4730b1698a10f0b20566a5e113379750694c62557abebb40
+ingest_status: text_evidence_ingested

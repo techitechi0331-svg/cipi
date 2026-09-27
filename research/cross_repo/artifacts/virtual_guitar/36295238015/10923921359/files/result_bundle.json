@@ -1,0 +1,75 @@
+﻿{
+    "job_id":  "GUITAR-E2E-CANARY-002",
+    "track_id":  "VIRTUAL-GUITAR-PHYSICAL-001",
+    "candidate_id":  "DAMPING-CANDIDATE-COMPARISON",
+    "git_sha":  "f351a25d2ce955f93b7ad20931c07d912c99e06f",
+    "workflow_run_id":  "36295238015",
+    "runner":  "virtual-guitar",
+    "test_profile":  "basic_string_damping_canary_v1",
+    "inputs":  {
+                   "sample_rate":  48000,
+                   "candidates":  [
+                                      {
+                                          "id":  "DAMP-A",
+                                          "t60":  1.2
+                                      },
+                                      {
+                                          "id":  "DAMP-B",
+                                          "t60":  1.8
+                                      },
+                                      {
+                                          "id":  "DAMP-C",
+                                          "t60":  2.4
+                                      }
+                                  ]
+               },
+    "outputs":  {
+                    "candidates":  [
+                                       {
+                                           "candidate_id":  "DAMP-A",
+                                           "requested_t60_seconds":  1.2,
+                                           "damping_per_sample":  0.99988008088394531,
+                                           "final_energy":  0.00050112713169717,
+                                           "runtime_ms":  75.2706,
+                                           "finite":  true
+                                       },
+                                       {
+                                           "candidate_id":  "DAMP-B",
+                                           "requested_t60_seconds":  1.8,
+                                           "damping_per_sample":  0.99992005232470127,
+                                           "final_energy":  0.00050114716487544638,
+                                           "runtime_ms":  98.9517,
+                                           "finite":  true
+                                       },
+                                       {
+                                           "candidate_id":  "DAMP-C",
+                                           "requested_t60_seconds":  2.4,
+                                           "damping_per_sample":  0.9999400386442906,
+                                           "final_energy":  0.00050115718176314947,
+                                           "runtime_ms":  117.6722,
+                                           "finite":  true
+                                       }
+                                   ]
+                },
+    "metrics":  {
+                    "candidate_count":  3,
+                    "all_finite":  true,
+                    "total_runtime_ms":  291.8945
+                },
+    "failures":  [
+
+                 ],
+    "warnings":  [
+                     "Canary validates bridge/runner/result-contract plumbing only; it does not establish a production damping model."
+                 ],
+    "evidence_class":  "MEASURED",
+    "artifact_hashes":  {
+                            "summary_sha256":  "b75cbedc391571bdf315ed00180f1950ceae07ed696c254bcf99ae6ea27ecced"
+                        },
+    "continuation_proposal":  {
+                                  "authority":  "PROPOSAL_ONLY",
+                                  "automatic_product_integration":  false,
+                                  "automatic_knowledge_promotion":  false,
+                                  "next":  "CIPI_EVALUATION"
+                              }
+}

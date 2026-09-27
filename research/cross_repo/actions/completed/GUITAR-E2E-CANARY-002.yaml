@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: GUITAR-E2E-CANARY-002
-state: DISPATCHED
+state: COMPLETED
 repo_key: virtual_guitar
 workflow_key: canary
 ref: main
@@ -25,3 +25,8 @@ previous_run_id: 36289877965
 dispatched_at: '2026-09-27T04:45:34.373396Z'
 repository: techitechi0331-svg/virtual-guitar
 workflow_file: guitar-canary.yml
+run_id: 36295238015
+run_url: https://github.com/techitechi0331-svg/virtual-guitar/actions/runs/36295238015
+conclusion: success
+completed_at: '2026-09-27T04:46:00Z'
+failure_classification: null

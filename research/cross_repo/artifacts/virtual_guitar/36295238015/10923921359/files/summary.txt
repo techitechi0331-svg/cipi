@@ -1,0 +1,26 @@
+﻿[
+    {
+        "candidate_id":  "DAMP-A",
+        "requested_t60_seconds":  1.2,
+        "damping_per_sample":  0.99988008088394531,
+        "final_energy":  0.00050112713169717,
+        "runtime_ms":  75.2706,
+        "finite":  true
+    },
+    {
+        "candidate_id":  "DAMP-B",
+        "requested_t60_seconds":  1.8,
+        "damping_per_sample":  0.99992005232470127,
+        "final_energy":  0.00050114716487544638,
+        "runtime_ms":  98.9517,
+        "finite":  true
+    },
+    {
+        "candidate_id":  "DAMP-C",
+        "requested_t60_seconds":  2.4,
+        "damping_per_sample":  0.9999400386442906,
+        "final_energy":  0.00050115718176314947,
+        "runtime_ms":  117.6722,
+        "finite":  true
+    }
+]

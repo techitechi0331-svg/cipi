@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: GUITAR-E2E-CANARY-002
+repo_key: virtual_guitar
+workflow_key: canary
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36295238015
+run_status: completed
+run_conclusion: success
+since: '2026-09-27T04:45:34Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

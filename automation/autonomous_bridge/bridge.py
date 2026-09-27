@@ -612,6 +612,27 @@ def bootstrap_track(root: Path, track: dict[str, Any], known_fingerprints: set[s
 
 def _history_payload(result: dict[str, Any], artifact_hash: str, source_path: Path) -> dict[str, Any]:
     improvement = float((result.get("result") or {}).get("improvement_signal", 0.0) or 0.0)
+    efficiency = result.get("efficiency_metrics") if isinstance(result.get("efficiency_metrics"), dict) else {}
+    efficiency_summary = {
+        key: efficiency.get(key)
+        for key in (
+            "candidate_count",
+            "measured_count",
+            "rejected_before_measurement",
+            "cache_hits",
+            "duplicate_hits",
+            "cheap_stage_survivors",
+            "deep_stage_survivors",
+            "runner_runtime_seconds",
+            "candidates_per_runner_minute",
+            "build_time_seconds",
+            "benchmark_time_seconds",
+            "queue_wait_seconds",
+            "full_regression_required",
+            "full_regression_result",
+        )
+        if key in efficiency
+    }
     return {
         "schema_version": "1.0",
         "processed_run_id": str(result["run_id"]),
@@ -635,6 +656,8 @@ def _history_payload(result: dict[str, Any], artifact_hash: str, source_path: Pa
         "measured_candidates": int(result.get("measured_candidates", 0) or 0),
         "stop_reason": str(result.get("stop_reason") or "UNKNOWN"),
         "bundle_hash": str(result.get("bundle_hash") or ""),
+        "efficiency_policy": dict(result.get("efficiency_policy") or {}) if isinstance(result.get("efficiency_policy"), dict) else {},
+        "efficiency_summary": efficiency_summary,
         "automatic_product_decision": False,
         "automatic_knowledge_promotion": False,
         "immutable": True,
@@ -876,6 +899,27 @@ def reconcile(root: Path) -> dict[str, Any]:
             "duplicate_suppressions": int(evaluation.get("duplicate_suppressions", 0) or 0),
             "human_gate_proposals": int(evaluation.get("human_gate_proposals", 0) or 0),
             "processed_artifact_hash": artifact_hash,
+            "efficiency_policy": _track_efficiency_policy(root, track),
+            "efficiency_summary": {
+                key: (data.get("efficiency_metrics") or {}).get(key)
+                for key in (
+                    "candidate_count",
+                    "measured_count",
+                    "rejected_before_measurement",
+                    "cache_hits",
+                    "duplicate_hits",
+                    "cheap_stage_survivors",
+                    "deep_stage_survivors",
+                    "runner_runtime_seconds",
+                    "candidates_per_runner_minute",
+                    "build_time_seconds",
+                    "benchmark_time_seconds",
+                    "queue_wait_seconds",
+                    "full_regression_required",
+                    "full_regression_result",
+                )
+                if isinstance(data.get("efficiency_metrics"), dict) and key in data.get("efficiency_metrics")
+            },
             "authority": "CIPI_CONTINUATION_EVALUATION",
             "automatic_product_decision": False,
             "automatic_knowledge_promotion": False,

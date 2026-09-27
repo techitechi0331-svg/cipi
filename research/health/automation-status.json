@@ -9,6 +9,7 @@
       "MIC-SIM-FOUNDATION-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
       "VOCAL-DENOISE-BASELINE-001",
@@ -72,6 +73,16 @@
         "runtime_limit_seconds": 450.0,
         "runtime_seconds": 0.09239900000000001
       },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": {
+        "candidates": 0,
+        "candidates_limit": 48,
+        "loop_depth": 0,
+        "loop_depth_limit": 4,
+        "runs": 0,
+        "runs_limit": 4,
+        "runtime_limit_seconds": 600.0,
+        "runtime_seconds": 0.0
+      },
       "VL2A-CIRCUIT-HA100X-001": {
         "candidates": 60,
         "candidates_limit": 60,
@@ -130,6 +141,7 @@
       "MIC-SIM-FOUNDATION-001": 2,
       "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 0,
       "VL2A-CIRCUIT-HA100X-001": 5,
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
       "VOCAL-DENOISE-BASELINE-001": 2,
@@ -143,13 +155,14 @@
       "MIC-SIM-FOUNDATION-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
       "VOCAL-DENOISE-BASELINE-001",
       "VOCAL-DENOISE-DATASET-001",
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
-    "generated_jobs": 28,
+    "generated_jobs": 29,
     "human_gate_tracks": [
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
@@ -181,12 +194,12 @@
     ],
     "rejected_continuations": 7,
     "research_quality_metrics": {
-      "budget_exhaustion_rate": 0.3,
+      "budget_exhaustion_rate": 0.2727272727272727,
       "cache_hit_rate": 0.0,
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.3,
+      "human_gate_rate": 0.2727272727272727,
       "new_information_per_compute_second": 20.102299504555862,
       "new_information_per_run": 0.6151253392779895,
       "pareto_front_turnover": null,
@@ -202,7 +215,6 @@
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
       "MIC-SIM-FOUNDATION-001",
-      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VOCAL-DENOISE-ARCH-001",
       "VOCAL-DENOISE-BASELINE-001",
@@ -254,9 +266,9 @@
         "state": "HUMAN_GATE"
       },
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": {
-        "reason": "TRACK_DISABLED",
+        "reason": "NO_CURRENT_RUNNABLE_WORK",
         "scheduler_eligible": false,
-        "state": "DISABLED"
+        "state": "REGISTERED"
       },
       "VL2A-CIRCUIT-HA100X-001": {
         "reason": "BUDGET_EXHAUSTED",
@@ -336,6 +348,9 @@
           "state": "APPLIED"
         },
         "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {
+          "state": "APPLIED"
+        },
+        "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": {
           "state": "APPLIED"
         }
       }

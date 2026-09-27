@@ -299,6 +299,127 @@ def _priority(candidate: dict[str, Any]) -> int:
     return 50
 
 
+
+_RESULT_DRIVEN_CANARY_RANK = {
+    "FALSIFICATION": 0,
+    "REPLICATION": 1,
+    "UNCERTAINTY_REDUCTION": 2,
+    "PARAMETERIZATION": 3,
+    "CALIBRATION_CONTROL": 4,
+}
+
+
+def _result_driven_canary(track: dict[str, Any]) -> bool:
+    policy = track.get("decision_policy")
+    return isinstance(policy, dict) and str(policy.get("mode") or "") == "RESULT_DRIVEN_CANARY_V1"
+
+
+def _canary_priority(candidate: dict[str, Any]) -> int:
+    return _RESULT_DRIVEN_CANARY_RANK.get(str(candidate.get("experiment_type") or "").upper(), 50)
+
+
+def _result_driven_signals(
+    track: dict[str, Any],
+    result: dict[str, Any],
+    records: list[dict[str, Any]],
+) -> dict[str, Any]:
+    raw = result.get("decision_signals") if isinstance(result.get("decision_signals"), dict) else {}
+    signals = dict(raw)
+    signals["novelty"] = float(result.get("novelty", 0.0) or 0.0)
+    signals["raw_improvement_signal"] = float((result.get("result") or {}).get("improvement_signal", 0.0) or 0.0)
+    signals["regression_status"] = str(result.get("regression_status") or "UNKNOWN")
+    signals["experiment_type"] = str(result.get("experiment_type") or "").upper()
+
+    prior = records[-1] if records else {}
+    prior_signals = prior.get("decision_signals") if isinstance(prior.get("decision_signals"), dict) else {}
+    tolerance = float((track.get("decision_policy") or {}).get("replication_error_tolerance", track.get("minimum_improvement", 0.01)) or 0.01)
+    tolerance = max(tolerance, 1.0e-12)
+
+    current_error = signals.get("best_search_error")
+    prior_error = prior_signals.get("best_search_error")
+    error_delta = None
+    if isinstance(current_error, (int, float)) and isinstance(prior_error, (int, float)):
+        error_delta = abs(float(current_error) - float(prior_error))
+        signals["cross_run_error_delta"] = error_delta
+        signals["information_gain"] = min(1.0, error_delta / tolerance)
+        signals["improvement_signal"] = max(0.0, float(prior_error) - float(current_error))
+    else:
+        signals["information_gain"] = None
+        signals["improvement_signal"] = None
+
+    current_arch = str(signals.get("leader_architecture") or "")
+    prior_arch = str(prior_signals.get("leader_architecture") or "")
+    signals["cross_run_novelty"] = 0.0 if current_arch and current_arch == prior_arch else 1.0
+
+    current_front = {str(x) for x in (signals.get("pareto_architectures") or [])}
+    prior_front = {str(x) for x in (prior_signals.get("pareto_architectures") or [])}
+    if current_front and prior_front:
+        union = current_front | prior_front
+        front_change = 1.0 - (len(current_front & prior_front) / max(1, len(union)))
+        signals["pareto_front_change"] = front_change
+        signals["ranking_stability"] = 1.0 if current_arch == prior_arch and front_change == 0.0 else 0.0
+    else:
+        signals["pareto_front_change"] = None
+        signals["ranking_stability"] = None
+
+    current_width = signals.get("search_width")
+    prior_width = prior_signals.get("search_width")
+    if isinstance(current_width, (int, float)) and isinstance(prior_width, (int, float)) and float(prior_width) > 0.0:
+        reduction = max(0.0, min(1.0, 1.0 - float(current_width) / float(prior_width)))
+        signals["parameter_interval_reduction"] = reduction
+        signals["uncertainty_reduction"] = reduction
+
+    replication = (
+        signals["experiment_type"] == "REPLICATION"
+        and error_delta is not None
+        and error_delta <= tolerance
+        and signals.get("ranking_stability") == 1.0
+    )
+    signals["replication_consistency"] = 1.0 if replication else 0.0
+
+    unknowns = [str(x) for x in (signals.get("remaining_unknowns") or [])]
+    if replication:
+        unknowns = [x for x in unknowns if x not in {"INDEPENDENT_SEED_REPLICATION", "CIPI_REPLICATION_COMPARISON"}]
+    signals["remaining_unknowns"] = unknowns
+    return signals
+
+
+def _result_driven_early_decision(
+    track: dict[str, Any],
+    result: dict[str, Any],
+    records: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    if not _result_driven_canary(track):
+        return None
+    signals = _result_driven_signals(track, result, records)
+    if str(signals.get("falsification_status") or "") == "FALSIFIED":
+        return {"decision": "STOP", "stop_reason": "FALSIFIED", "accepted": None, "rejections": [], "decision_signals": signals}
+
+    policy = track.get("decision_policy") or {}
+    min_interval_reduction = float(policy.get("minimum_parameter_interval_reduction", 0.10) or 0.10)
+    max_front_change = float(policy.get("max_pareto_front_change_for_convergence", 0.0) or 0.0)
+    max_cross_novelty = float(policy.get("max_cross_run_novelty_for_convergence", 0.0) or 0.0)
+    max_improvement = float(track.get("minimum_improvement", 0.01) or 0.01)
+    converged = (
+        signals.get("experiment_type") == "REPLICATION"
+        and signals.get("calibration_control_passed") is True
+        and float(signals.get("replication_consistency", 0.0) or 0.0) >= 1.0
+        and float(signals.get("ranking_stability", 0.0) or 0.0) >= 1.0
+        and isinstance(signals.get("parameter_interval_reduction"), (int, float))
+        and float(signals["parameter_interval_reduction"]) >= min_interval_reduction
+        and isinstance(signals.get("pareto_front_change"), (int, float))
+        and float(signals["pareto_front_change"]) <= max_front_change
+        and float(signals.get("cross_run_novelty", 1.0) or 0.0) <= max_cross_novelty
+        and isinstance(signals.get("information_gain"), (int, float))
+        and float(signals["information_gain"]) <= 1.0
+        and isinstance(signals.get("improvement_signal"), (int, float))
+        and float(signals["improvement_signal"]) <= max_improvement
+        and not signals.get("remaining_unknowns")
+    )
+    if converged:
+        return {"decision": "STOP", "stop_reason": "CONVERGED", "accepted": None, "rejections": [], "decision_signals": signals}
+    return {"decision_signals": signals}
+
 def evaluate_continuation(
     root: Path,
     track: dict[str, Any],
@@ -317,6 +438,11 @@ def evaluate_continuation(
         return {"decision": "STOP", "stop_reason": "HUMAN_GATE", "accepted": None, "rejections": []}
     if str(result.get("regression_status")) == "REGRESSION_FOUND":
         return {"decision": "STOP", "stop_reason": "REGRESSION_BLOCK", "accepted": None, "rejections": []}
+
+    result_driven = _result_driven_early_decision(track, result, records)
+    if result_driven is not None and result_driven.get("decision") == "STOP":
+        return result_driven
+    canary_signals = (result_driven or {}).get("decision_signals") if isinstance(result_driven, dict) else None
 
     if loop_depth >= int(budget.get("max_loop_depth", 3)):
         return {"decision": "STOP", "stop_reason": "BUDGET_EXHAUSTED", "accepted": None, "rejections": [{"reason": "max_loop_depth"}]}
@@ -378,6 +504,9 @@ def evaluate_continuation(
         fingerprint = _semantic_fingerprint(candidate)
         experiment_type = str(candidate.get("experiment_type") or "").upper()
         replication = experiment_type == "REPLICATION"
+        if _result_driven_canary(track) and experiment_type == "CALIBRATION_CONTROL":
+            rejections.append({"candidate_id": candidate.get("id"), "reason": "CALIBRATION_CONTROL_NOT_CONTINUATION", "fingerprint": fingerprint})
+            continue
         if fingerprint in known_fingerprints and not replication:
             duplicate_count += 1
             rejections.append({"candidate_id": candidate.get("id"), "reason": "DUPLICATE_RESEARCH", "fingerprint": fingerprint})
@@ -427,7 +556,10 @@ def evaluate_continuation(
             "duplicate_suppressions": duplicate_count, "human_gate_proposals": human_gate_count,
         }
 
-    filtered.sort(key=lambda item: (-item[0], -float(item[2].get("expected_information_gain", 0.0)), str(item[2].get("id", ""))))
+    if _result_driven_canary(track):
+        filtered.sort(key=lambda item: (_canary_priority(item[2]), -item[0], -float(item[2].get("expected_information_gain", 0.0)), str(item[2].get("id", ""))))
+    else:
+        filtered.sort(key=lambda item: (-item[0], -float(item[2].get("expected_information_gain", 0.0)), str(item[2].get("id", ""))))
     _, fingerprint, accepted = filtered[0]
     return {
         "decision": "CONTINUE",

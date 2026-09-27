@@ -1,0 +1,37 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026092701
+  population: 6
+  generations: 2
+  max_candidates: 12
+  max_runtime_seconds: 90
+  stage2_limit: 4
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"experiment_id":"EXP-VIRTUAL-GUITAR-DAMPING-R1","hypothesis_id":"HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING","job_id":"VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VIRTUAL-GUITAR-PHYSICAL-001","research_question":"Can
+    a persistent six-string state model with explicit natural decay and damping-based
+    note termination provide a stable first physical-guitar substrate for the Virtual
+    Guitarist architecture while remaining deterministic, measurable, realtime-safe,
+    and free from hard Note-Off gain-zero behavior?","track_id":"VIRTUAL-GUITAR-PHYSICAL-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+bridge_job_id: VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47
+continuation_fingerprint: 229a6b4752deb5313bcc6754f8d08978a861d36a6096037282565f78e6054f66
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

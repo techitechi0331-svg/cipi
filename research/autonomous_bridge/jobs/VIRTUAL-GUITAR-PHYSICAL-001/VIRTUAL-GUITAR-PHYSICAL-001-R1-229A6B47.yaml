@@ -1,0 +1,36 @@
+schema_version: '1.0'
+job_id: VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47
+track_id: VIRTUAL-GUITAR-PHYSICAL-001
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-001
+parent_job_id: ''
+parent_run_id: ''
+hypothesis_id: HYP-VIRTUAL-GUITAR-LIVING-STRING-DAMPING
+experiment_id: EXP-VIRTUAL-GUITAR-DAMPING-R1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs: []
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 5
+  max_runs: 5
+  max_total_experiments: 5
+  max_candidates: 60
+  max_runtime: 600
+  max_same_hypothesis_retry: 5
+  max_same_architecture_retry: 5
+  max_no_improvement_runs: 5
+continuation_reason: initial registered research experiment
+expected_information_gain: 0.95
+fingerprint: 229a6b4752deb5313bcc6754f8d08978a861d36a6096037282565f78e6054f66
+loop_depth: 1
+experiment_type: INITIAL_STRING_DAMPING_IDENTIFIABILITY
+selected_architecture: VIRTUAL_GUITAR_LIVING_STRING_DAMPING_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

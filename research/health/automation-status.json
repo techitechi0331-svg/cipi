@@ -12,12 +12,17 @@
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+      "VOCAL-DENOISE-ARCH-001",
       "VOCAL-DENOISE-BASELINE-001",
       "VOCAL-DENOISE-DATASET-001",
+      "VOCAL-DENOISE-LOSS-001",
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
     "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-    "active_tracks": [],
+    "active_tracks": [
+      "VOCAL-DENOISE-ARCH-001",
+      "VOCAL-DENOISE-LOSS-001"
+    ],
     "authority": "OPERATIONAL_SCHEDULING_ONLY",
     "automatic_knowledge_promotion": false,
     "automatic_product_decision": false,
@@ -103,6 +108,16 @@
         "runtime_limit_seconds": 270.0,
         "runtime_seconds": 0.174399
       },
+      "VOCAL-DENOISE-ARCH-001": {
+        "candidates": 0,
+        "candidates_limit": 24,
+        "loop_depth": 0,
+        "loop_depth_limit": 3,
+        "runs": 0,
+        "runs_limit": 3,
+        "runtime_limit_seconds": 300.0,
+        "runtime_seconds": 0.0
+      },
       "VOCAL-DENOISE-BASELINE-001": {
         "candidates": 16,
         "candidates_limit": 24,
@@ -119,6 +134,16 @@
         "loop_depth": 2,
         "loop_depth_limit": 3,
         "runs": 2,
+        "runs_limit": 3,
+        "runtime_limit_seconds": 300.0,
+        "runtime_seconds": 0.0
+      },
+      "VOCAL-DENOISE-LOSS-001": {
+        "candidates": 0,
+        "candidates_limit": 24,
+        "loop_depth": 0,
+        "loop_depth_limit": 3,
+        "runs": 0,
         "runs_limit": 3,
         "runtime_limit_seconds": 300.0,
         "runtime_seconds": 0.0
@@ -144,8 +169,10 @@
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
       "VL2A-CIRCUIT-HA100X-001": 5,
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
+      "VOCAL-DENOISE-ARCH-001": 0,
       "VOCAL-DENOISE-BASELINE-001": 2,
       "VOCAL-DENOISE-DATASET-001": 2,
+      "VOCAL-DENOISE-LOSS-001": 0,
       "VOCAL-DENOISE-PRESERVATION-001": 2
     },
     "duplicate_suppressions": 5,
@@ -158,11 +185,13 @@
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+      "VOCAL-DENOISE-ARCH-001",
       "VOCAL-DENOISE-BASELINE-001",
       "VOCAL-DENOISE-DATASET-001",
+      "VOCAL-DENOISE-LOSS-001",
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
-    "generated_jobs": 30,
+    "generated_jobs": 32,
     "human_gate_tracks": [
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
@@ -171,9 +200,12 @@
     "human_gates": 3,
     "invalid_results": 0,
     "melon_runs": 30,
-    "next_scheduler_action": "NO_READY_WORK",
+    "next_scheduler_action": "MELON-VOCAL-DENOISE-ARCH-001-R1-44CF01E6",
     "no_improvement_count": 4,
-    "queued_actions": [],
+    "queued_actions": [
+      "MELON-VOCAL-DENOISE-ARCH-001-R1-44CF01E6",
+      "MELON-VOCAL-DENOISE-LOSS-001-R1-42E1C279"
+    ],
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
@@ -195,12 +227,12 @@
     ],
     "rejected_continuations": 8,
     "research_quality_metrics": {
-      "budget_exhaustion_rate": 0.2727272727272727,
+      "budget_exhaustion_rate": 0.23076923076923078,
       "cache_hit_rate": 0.0,
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.2727272727272727,
+      "human_gate_rate": 0.23076923076923078,
       "new_information_per_compute_second": 14.800747775400103,
       "new_information_per_run": 0.7434168928519931,
       "pareto_front_turnover": null,
@@ -219,10 +251,8 @@
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
       "VL2A-CIRCUIT-HA100X-001",
-      "VOCAL-DENOISE-ARCH-001",
       "VOCAL-DENOISE-BASELINE-001",
       "VOCAL-DENOISE-DATASET-001",
-      "VOCAL-DENOISE-LOSS-001",
       "VOCAL-DENOISE-PRESERVATION-001",
       "VOCAL-DENOISE-ROBUSTNESS-001",
       "VOCAL-DENOISE-RUNTIME-001",
@@ -291,9 +321,10 @@
         "state": "HUMAN_GATE"
       },
       "VOCAL-DENOISE-ARCH-001": {
-        "reason": "TRACK_DISABLED",
-        "scheduler_eligible": false,
-        "state": "DISABLED"
+        "job_id": "VOCAL-DENOISE-ARCH-001-R1-44CF01E6",
+        "reason": "EXTERNAL_ACTION_QUEUED",
+        "scheduler_eligible": true,
+        "state": "READY"
       },
       "VOCAL-DENOISE-BASELINE-001": {
         "reason": "DUPLICATE_ONLY",
@@ -310,9 +341,10 @@
         "state_basis": "SCHEDULER_TERMINAL_ALIAS"
       },
       "VOCAL-DENOISE-LOSS-001": {
-        "reason": "TRACK_DISABLED",
-        "scheduler_eligible": false,
-        "state": "DISABLED"
+        "job_id": "VOCAL-DENOISE-LOSS-001-R1-42E1C279",
+        "reason": "EXTERNAL_ACTION_QUEUED",
+        "scheduler_eligible": true,
+        "state": "READY"
       },
       "VOCAL-DENOISE-PRESERVATION-001": {
         "reason": "DUPLICATE_ONLY",
@@ -372,13 +404,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "VOCAL-DENOISE-DATASET-PREPARE-001",
+      "kind": "CROSS_REPO",
+      "priority": 95,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 34,
       "dispatched": 0,
       "failed": 5,
       "quarantined": 0,
-      "queued": 1
+      "queued": 4
     }
   },
   "human_gates": [
@@ -407,7 +444,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "kind": "IDLE",
-    "priority": -999
+    "action_id": "VOCAL-DENOISE-DATASET-PREPARE-001",
+    "kind": "CROSS_REPO",
+    "priority": 95,
+    "reason": "ready_external_action"
   }
 }

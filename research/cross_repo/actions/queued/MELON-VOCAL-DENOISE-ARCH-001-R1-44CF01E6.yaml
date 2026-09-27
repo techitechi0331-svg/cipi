@@ -1,0 +1,41 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-ARCH-001-R1-44CF01E6
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026092705
+  population: 4
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  stage2_limit: 4
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-DENOISE-ARCH-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"EXP-VOCAL-DENOISE-ARCH-001-R1","hypothesis_id":"HYP-VOCAL-DENOISE-ARCH-001","job_id":"VOCAL-DENOISE-ARCH-001-R1-44CF01E6","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VOCAL-DENOISE-ARCH-001","research_question":"Which
+    compact causal or bounded-lookahead architecture best trades preservation, denoising
+    and runtime once the data gate is open?","track_id":"VOCAL-DENOISE-ARCH-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-DENOISE-ARCH-001
+bridge_job_id: VOCAL-DENOISE-ARCH-001-R1-44CF01E6
+continuation_fingerprint: 44cf01e63f44ca8b1d26b939aad05bd0f677260e03b66f31cc545cb3f1cd8912
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-DENOISE-ARCH-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

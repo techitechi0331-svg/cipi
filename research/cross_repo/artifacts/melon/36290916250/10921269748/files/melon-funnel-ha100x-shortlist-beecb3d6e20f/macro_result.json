@@ -1,0 +1,177 @@
+{
+  "automatic_final_decision": false,
+  "bridge_version": "melon-macro-bridge/1.0",
+  "bundle_hash": "623d2b7ed475b54581d316d6c231a894c147ad016f3bebc9e1ddca8038a788fb",
+  "cipi_promotion_authority": false,
+  "confidence": 0.8999999999999999,
+  "continuation_candidates": [
+    {
+      "depends_on": [
+        "EXP-VL2A-HA100X-SHORTLIST-R1"
+      ],
+      "estimated_cost": {
+        "candidates": 5,
+        "runtime_seconds": 90
+      },
+      "expected_information_gain": 0.685,
+      "experiment_type": "UNCERTAINTY_REDUCTION",
+      "fingerprint_material": {
+        "architecture": "HA100X_LINEAR_LTI_LOAD_AWARE_SHORTLIST",
+        "benchmark_profile": [
+          "ha100x_catalog_v1",
+          "ha100x_phase1_survivors_v1",
+          "la2a_source_load_matrix_v1",
+          "synthetic_parameter_stress_v1"
+        ],
+        "experiment_type": "UNCERTAINTY_REDUCTION",
+        "hypothesis": "Resolve remaining uncertainty for HA100X-R4-012-591362e2: Shortlist validation round 1: current leader HA100X-R4-012-591362e2 has synthetic stress catalog pass fraction 1.000; repeat with a denser deterministic stress sample before human review.",
+        "input_set": "VL2A_HA100X_PHASE1_TOP5_FIXED",
+        "objective_set": [
+          "catalog_envelope",
+          "soft_prior_distance",
+          "source_load_matrix_robustness",
+          "t4_load_interaction",
+          "local_parameter_sensitivity"
+        ],
+        "reference_model": "PHASE1_MEASURED_SURVIVORS_PLUS_SOURCE_CONSTRAINTS",
+        "relevant_constraints": [
+          "turns_ratio_nominal_10",
+          "utc_30Hz_20kHz_plusminus1dB",
+          "no_hysteresis_v2",
+          "no_saturation_v2",
+          "synthetic_parameter_stress_not_hardware_tolerance",
+          "product_integration_off"
+        ],
+        "research_domain": "VL2A_HA100X_INPUT_TRANSFORMER_SHORTLIST",
+        "sample_rate": null,
+        "scope": [
+          "HA100X-R4-012-591362e2",
+          "ha100x_shortlist_robustness_r1",
+          "uncertainty_reduction"
+        ],
+        "tested_parameters": {
+          "generations": 1,
+          "max_candidates": 5,
+          "max_runtime_seconds": 90,
+          "population": 5,
+          "preflight_mode": "fast",
+          "stage2_archive_limit": 3,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 3,
+          "stage3_limit": 1,
+          "workers": 1
+        }
+      },
+      "human_gate_required": false,
+      "hypothesis": "Resolve remaining uncertainty for HA100X-R4-012-591362e2: Shortlist validation round 1: current leader HA100X-R4-012-591362e2 has synthetic stress catalog pass fraction 1.000; repeat with a denser deterministic stress sample before human review.",
+      "id": "melon-funnel-ha100x-shortlist-beecb3d6e20f-iterate-1",
+      "novelty": 0.5,
+      "proposed_experiment": {
+        "inputs": {
+          "generations": 1,
+          "max_candidates": 5,
+          "max_runtime_seconds": 90,
+          "population": 5,
+          "preflight_mode": "fast",
+          "seed": 2026092712,
+          "stage2_archive_limit": 3,
+          "stage2_epsilon_range_fraction": 0.03,
+          "stage2_epsilon_spread_multiplier": 0.5,
+          "stage2_limit": 3,
+          "stage3_limit": 1,
+          "workers": 1
+        },
+        "scope": [
+          "uncertainty_reduction",
+          "HA100X-R4-012-591362e2",
+          "ha100x_shortlist_robustness_r1"
+        ],
+        "type": "MELON_RESEARCH_FUNNEL"
+      },
+      "reason": "Shortlist validation round 1: current leader HA100X-R4-012-591362e2 has synthetic stress catalog pass fraction 1.000; repeat with a denser deterministic stress sample before human review."
+    }
+  ],
+  "efficiency_metrics": {
+    "deep_validation_count": 1,
+    "duplicate_rate": 0.0,
+    "elapsed_seconds": 0.030499,
+    "hypervolume_gain": 0.0,
+    "hypervolume_improvement_rate": 0.0,
+    "information_gain_signal": 0.7,
+    "measurements_executed_stage1": 5,
+    "new_semantic_candidate_rate": 0.5,
+    "stage2_measurement_runs": 40
+  },
+  "elapsed_seconds": 0.030499,
+  "evidence_class": "MEASURED",
+  "experiment_cost": {
+    "candidates": 5,
+    "deep_validation_count": 1,
+    "runtime_seconds": 0.030499,
+    "stage2_measurement_runs": 40
+  },
+  "experiment_id": "EXP-VL2A-HA100X-SHORTLIST-R1",
+  "hypothesis_id": "HYP-VL2A-HA100X-SHORTLIST-ROBUSTNESS",
+  "job_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002-R1-151E6B71",
+  "loop_depth": 1,
+  "measured_candidates": 5,
+  "novelty": 0.5,
+  "parent_job_id": null,
+  "parent_run_id": null,
+  "precision_review": {
+    "checks": {
+      "all_candidates_finite": true,
+      "catalog_compatible_candidate_exists": true,
+      "fixed_shortlist_count_five": true,
+      "hysteresis_locked": true,
+      "nonlinearity_locked": true,
+      "product_integration_disabled": true,
+      "synthetic_stress_labelled_not_hardware_tolerance": true,
+      "turns_ratio_fixed_ten": true
+    },
+    "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+    "passed": true
+  },
+  "product_release_authority": false,
+  "reason": "MELON found bounded unresolved questions and proposes another macro experiment",
+  "regression_status": "NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES",
+  "research_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+  "research_question": "Among the five fixed Phase-1 HA-100X linear/load-aware survivors, which candidate remains most numerically robust under bounded synthetic parameter stress and the LA-2A source/load/T4 matrix, without treating the stress profile as hardware tolerance truth and without modifying the VL2A product?",
+  "result": {
+    "deep_validation_count": 1,
+    "improvement_signal": 0.7,
+    "precision_review_passed": true,
+    "routes": {
+      "ITERATE": 1
+    },
+    "stage1_pareto": 5,
+    "stage2_archive": 3,
+    "stage2_pareto": 3
+  },
+  "result_type": "MELON_MACRO_RESEARCH_RESULT",
+  "root_research_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+  "route": "CONTINUE",
+  "run_id": "melon-funnel-ha100x-shortlist-beecb3d6e20f",
+  "schema_version": "1.0",
+  "source_artifacts": {
+    "efficiency": "efficiency_metrics.json",
+    "manifest": "manifest.json",
+    "precision_review": "precision_review.json",
+    "stage1": "stage1_screening.json",
+    "stage2": "stage2_multiseed.json",
+    "stage3": "stage3_deep_validation.json",
+    "summary": "summary.json"
+  },
+  "source_commit": "950ba750cd5a9ec0705e24b9352cacfc19f389c7",
+  "stop_reason": "FIXED_SHORTLIST_EVALUATED",
+  "timestamp": "2026-09-27T03:23:12.300247+00:00",
+  "track_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
+  "unresolved_questions": [
+    {
+      "id": "HA100X-R4-012-591362e2",
+      "kind": "ITERATE_CANDIDATE",
+      "reason": "Shortlist validation round 1: current leader HA100X-R4-012-591362e2 has synthetic stress catalog pass fraction 1.000; repeat with a denser deterministic stress sample before human review."
+    }
+  ]
+}

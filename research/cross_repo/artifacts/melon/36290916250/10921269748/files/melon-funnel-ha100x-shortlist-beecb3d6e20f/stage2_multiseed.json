@@ -1,0 +1,104 @@
+[
+  {
+    "candidate_id": "HA100X-R4-012-591362e2",
+    "robustness_score_research_only": 0.0755989337797788,
+    "stress_summary": {
+      "catalog_dev_db": {
+        "max": 0.03282885653849508,
+        "median": 0.02793569590334925,
+        "p90": 0.031114004837782885
+      },
+      "catalog_pass_fraction": 1.0,
+      "classification": "SYNTHETIC_PARAMETER_STRESS_NOT_HARDWARE_TOLERANCE",
+      "rel20k_db": {
+        "median": -0.02053145211836805,
+        "p10": -0.03111400483778289,
+        "p90": -0.013531919638121767
+      },
+      "rel30_db": {
+        "median": -0.02583839856472594,
+        "p10": -0.029023436637924213,
+        "p90": -0.018111869268375692
+      },
+      "source_load_matrix_worst_dev_db": {
+        "max": 0.060109822819094036,
+        "median": 0.04957922504334468,
+        "p90": 0.05662168969954327
+      },
+      "stress_draws": 8,
+      "t4_load_delta_abs_db": {
+        "max": 1.0769443495548894,
+        "median": 1.0707513146890975,
+        "p90": 1.074278664163494
+      }
+    }
+  },
+  {
+    "candidate_id": "HA100X-R5-001-17927f57",
+    "robustness_score_research_only": 0.08806187911276887,
+    "stress_summary": {
+      "catalog_dev_db": {
+        "max": 0.026618767822678118,
+        "median": 0.016617185623132063,
+        "p90": 0.024131543295469886
+      },
+      "catalog_pass_fraction": 1.0,
+      "classification": "SYNTHETIC_PARAMETER_STRESS_NOT_HARDWARE_TOLERANCE",
+      "rel20k_db": {
+        "median": -0.016617185623132063,
+        "p10": -0.024131543295469886,
+        "p90": -0.008654216137277744
+      },
+      "rel30_db": {
+        "median": -0.013061833604405017,
+        "p10": -0.013754397771547158,
+        "p90": -0.012372473849182403
+      },
+      "source_load_matrix_worst_dev_db": {
+        "max": 0.21764427323188726,
+        "median": 0.15007569019697847,
+        "p90": 0.1972142726940299
+      },
+      "stress_draws": 8,
+      "t4_load_delta_abs_db": {
+        "max": 1.1063805434648435,
+        "median": 1.0958697086465552,
+        "p90": 1.1060411224057787
+      }
+    }
+  },
+  {
+    "candidate_id": "HA100X-R5-007-8542669a",
+    "robustness_score_research_only": 0.10806403547134535,
+    "stress_summary": {
+      "catalog_dev_db": {
+        "max": 0.06961690790459066,
+        "median": 0.05620126570532061,
+        "p90": 0.06843986355686812
+      },
+      "catalog_pass_fraction": 1.0,
+      "classification": "SYNTHETIC_PARAMETER_STRESS_NOT_HARDWARE_TOLERANCE",
+      "rel20k_db": {
+        "median": -0.05367224735026538,
+        "p10": -0.06843986355686812,
+        "p90": -0.022597421933796585
+      },
+      "rel30_db": {
+        "median": -0.04629255248974109,
+        "p10": -0.05501502498102295,
+        "p90": -0.04083671756387844
+      },
+      "source_load_matrix_worst_dev_db": {
+        "max": 0.12505684849581758,
+        "median": 0.10003240539005964,
+        "p90": 0.12152378584244626
+      },
+      "stress_draws": 8,
+      "t4_load_delta_abs_db": {
+        "max": 1.0959201349935639,
+        "median": 1.0895407991401487,
+        "p90": 1.0920868687019252
+      }
+    }
+  }
+]

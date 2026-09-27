@@ -1,0 +1,17 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "HA100X-R4-012-591362e2",
+    "promotion_authority": false,
+    "reason": "Shortlist validation round 1: current leader HA100X-R4-012-591362e2 has synthetic stress catalog pass fraction 1.000; repeat with a denser deterministic stress sample before human review.",
+    "route": "ITERATE",
+    "scientific": {
+      "evidence_boundary": "MEASURED_SIMULATION_NOT_HARDWARE_TRUTH",
+      "robustness_score_research_only": 0.0755989337797788,
+      "stress_catalog_dev_p90_db": 0.031114004837782885,
+      "stress_catalog_pass_fraction": 1.0,
+      "stress_matrix_dev_p90_db": 0.05662168969954327
+    },
+    "species": "ha100x_shortlist_robustness_r1"
+  }
+]

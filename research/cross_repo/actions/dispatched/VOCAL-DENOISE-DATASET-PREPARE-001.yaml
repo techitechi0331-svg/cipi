@@ -31,4 +31,3 @@ last_failure_classification:
   failing_steps:
   - Prepare persistent VocalSet cache
 last_retry_at: '2026-09-27T16:27:28.428630Z'
-retry_waiting_for_attempt: 2

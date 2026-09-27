@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MIC-E2E-CANARY-001
-state: QUEUED
+state: DISPATCHED
 repo_key: mic_simulator
 workflow_key: canary
 ref: main
@@ -8,7 +8,7 @@ inputs:
   job_id: MIC-E2E-CANARY-001
   track_id: MIC-SIM-SETUP-001
 priority: 90
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -20,3 +20,7 @@ reason: Lightweight Mic Simulator end-to-end canary. Validate CIPI Cross-Repo di
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 36294196472
+dispatched_at: '2026-09-27T04:44:47.972254Z'
+repository: techitechi0331-svg/mic_simulator
+workflow_file: mic-canary.yml

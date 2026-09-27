@@ -272,6 +272,11 @@ def select_queued_action(root: Path, registry: dict[str, Any]) -> tuple[Path, di
             raise ValueError(f"{path}: " + "; ".join(errors))
         if action.get("blocked_external") is True:
             continue
+        policy_gate = action.get("policy_gate")
+        if isinstance(policy_gate, dict):
+            policy_state = str(policy_gate.get("state") or "").upper()
+            if policy_state and policy_state not in {"APPLIED", "ACTIVE"}:
+                continue
         if not action_dependencies_ready(root, action):
             continue
         key = (str(action["repo_key"]), str(action["workflow_key"]))

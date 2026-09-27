@@ -37,9 +37,18 @@ def action_dirs(root: Path) -> list[Path]:
     return [base / x for x in ("queued", "dispatched", "completed", "failed", "quarantined")]
 
 def existing_action(root: Path, track_id: str, candidate_id: str) -> tuple[str, dict[str, Any]] | None:
+    matches: list[tuple[tuple[int, int, int, str], str, dict[str, Any]]] = []
+    state_priority = {
+        "DISPATCHED": 5,
+        "QUEUED": 4,
+        "COMPLETED": 3,
+        "FAILED": 2,
+        "QUARANTINED": 1,
+    }
     for folder in action_dirs(root):
         if not folder.exists():
             continue
+        state = folder.name.upper()
         for path in folder.glob("*.yaml"):
             data = load_yaml(path)
             if (
@@ -47,8 +56,25 @@ def existing_action(root: Path, track_id: str, candidate_id: str) -> tuple[str, 
                 and str(data.get("prehost_candidate_id") or "") == candidate_id
                 and str(data.get("workflow_key") or "") == WORKFLOW_KEY
             ):
-                return folder.name.upper(), data
-    return None
+                try:
+                    run_id = int(data.get("run_id") or -1)
+                except (TypeError, ValueError):
+                    run_id = -1
+                try:
+                    attempts = int(data.get("attempts") or 0)
+                except (TypeError, ValueError):
+                    attempts = 0
+                key = (
+                    state_priority.get(state, 0),
+                    run_id,
+                    attempts,
+                    str(data.get("action_id") or path.name),
+                )
+                matches.append((key, state, data))
+    if not matches:
+        return None
+    _, state, data = max(matches, key=lambda item: item[0])
+    return state, data
 
 def find_cubase_ready(root: Path, track_id: str, candidate_id: str) -> dict[str, Any] | None:
     base = root / "research" / "cross_repo" / "artifacts" / REPO_KEY

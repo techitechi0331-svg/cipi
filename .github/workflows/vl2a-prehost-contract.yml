@@ -1,0 +1,31 @@
+name: VL2A Pre-Host Contract
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "automation/vl2a_prehost/**"
+      - "automation/cross_repo/registry.yaml"
+      - "tools/test_vl2a_prehost.py"
+      - ".github/workflows/vl2a-prehost-*.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+      - name: Compile promoter
+        run: python -m py_compile automation/vl2a_prehost/promote.py
+      - name: Run promoter tests
+        run: python tools/test_vl2a_prehost.py
+      - name: Validate cross-repo registry
+        run: python tools/validate_cross_repo.py

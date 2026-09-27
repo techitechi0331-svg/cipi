@@ -1,0 +1,90 @@
+name: VL2A Pre-Host Orchestrator
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "automation/vl2a_prehost/**"
+      - "automation/cross_repo/registry.yaml"
+      - "tools/test_vl2a_prehost.py"
+      - "research/autonomous_bridge/decisions/VL2A-CIRCUIT-HA100X-SHORTLIST-*/**"
+      - "research/cross_repo/artifacts/melon/**"
+      - "research/cross_repo/artifacts/vl2a/**"
+      - "research/cross_repo/actions/completed/**"
+      - "research/cross_repo/actions/failed/**"
+      - ".github/workflows/vl2a-prehost-orchestrator.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: cipi-vl2a-prehost-orchestrator
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Validate pre-host contracts
+        run: |
+          python -m py_compile automation/vl2a_prehost/promote.py
+          python tools/test_vl2a_prehost.py
+          python tools/validate_cross_repo.py
+
+      - name: Reconcile VL2A pre-host state
+        id: prehost
+        run: python automation/vl2a_prehost/promote.py --root . --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate generated Cross-Repo state
+        if: steps.prehost.outputs.changed == 'true'
+        run: |
+          python tools/test_vl2a_prehost.py
+          python tools/validate_cross_repo.py
+          python tools/validate_autonomy_state.py
+
+      - name: Commit pre-host state
+        if: steps.prehost.outputs.changed == 'true'
+        run: |
+          git config user.name "cipi-vl2a-prehost-bot"
+          git config user.email "cipi-vl2a-prehost-bot@users.noreply.github.com"
+          git add -A -- research/health/vl2a-prehost.json research/cross_repo/actions/queued
+          if git diff --cached --quiet; then
+            echo "No pre-host state changes."
+          else
+            git commit -m "update VL2A pre-host promotion state"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Dispatch Cross-Repo orchestrator
+        if: steps.prehost.outputs.action_created == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ACTIVE="$(gh run list --workflow cross-repo-orchestrator.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress")] | length')"
+          if [ "$ACTIVE" = "0" ]; then
+            gh workflow run cross-repo-orchestrator.yml --ref main
+          else
+            echo "Cross-Repo Orchestrator already active."
+          fi
+
+      - name: Report final human gate
+        if: steps.prehost.outputs.state == 'CUBASE_READY_HUMAN_GATE'
+        run: echo "VL2A automated pre-host chain passed. Cubase/listening/product/release gates remain human-only."

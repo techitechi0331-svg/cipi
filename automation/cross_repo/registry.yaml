@@ -51,6 +51,23 @@ repositories:
         file: real-vocal-validation.yml
         dispatch: true
         monitor: true
+      prehost_stage:
+        file: vl2a-prehost-stage.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - source_ref
+          - track_id
+          - candidate_id
+          - candidate_json
+          - evidence_hash
+        required_inputs:
+          - source_ref
+          - track_id
+          - candidate_id
+          - candidate_json
+          - evidence_hash
 
   pre610:
     repository: techitechi0331-svg/610

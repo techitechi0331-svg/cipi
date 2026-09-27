@@ -1,0 +1,23 @@
+schema_version: "1.0"
+action_id: GUITAR-E2E-CANARY-001
+state: QUEUED
+repo_key: virtual_guitar
+workflow_key: canary
+ref: main
+inputs:
+  job_id: GUITAR-E2E-CANARY-001
+  track_id: VIRTUAL-GUITAR-PHYSICAL-001
+priority: 79
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+  - MELON-VIRTUAL-GUITAR-PHYSICAL-001-R1-229A6B47
+reason: >-
+  Lightweight E2E canary. Run only after the first MELON Guitar Adapter action completes;
+  validate dedicated virtual-guitar runner execution and Result Bundle artifact return.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

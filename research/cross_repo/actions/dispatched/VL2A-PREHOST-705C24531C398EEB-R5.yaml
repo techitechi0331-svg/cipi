@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: VL2A-PREHOST-705C24531C398EEB-R5
-state: QUEUED
+state: DISPATCHED
 repo_key: vl2a
 workflow_key: prehost_stage
 ref: main
@@ -11,7 +11,7 @@ inputs:
   candidate_json: '{"candidate_id":"HA100X-R4-012-591362e2","core_loss_ohm":266576.9148779566,"leakage_h":0.00016910013055046575,"magnetizing_h":23.787562773717497,"primary_dcr_ohm":64.42056271688182,"secondary_cap_f":1.8971658271371616e-11,"secondary_dcr_ohm":3031.5360890531933,"turns_ratio":10.0}'
   evidence_hash: 047fb05774aa7f8954148ba9dbd6d6bfba1c035abf52c15e885017d075fd7ca6
 priority: 95
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -29,11 +29,14 @@ retry_of: VL2A-PREHOST-705C24531C398EEB-R4
 remediation_reason: WINDOWS_PROCESS_CPU_TIME_BENCHMARK
 remediation_product_repo_commit: 5dece07644f0aa4534256496a0f14b619a13eb5e
 previous_failed_run_id: 36341252254
-reason: >-
-  Bounded remediation retry after R4 passed the audio/control/state/latency gates but the
-  CPU decision was still derived from wall-clock time on a shared self-hosted machine.
-  VocalPrepComp main now measures actual Windows process CPU time with GetProcessTimes,
-  runs baseline and candidate three times each, and evaluates the median per case while
-  retaining both the 12 percent absolute CPU ceiling and the 1.35x relative ceiling.
-  Candidate identity and evidence hash are unchanged. Product adoption, knowledge
+reason: Bounded remediation retry after R4 passed the audio/control/state/latency
+  gates but the CPU decision was still derived from wall-clock time on a shared self-hosted
+  machine. VocalPrepComp main now measures actual Windows process CPU time with GetProcessTimes,
+  runs baseline and candidate three times each, and evaluates the median per case
+  while retaining both the 12 percent absolute CPU ceiling and the 1.35x relative
+  ceiling. Candidate identity and evidence hash are unchanged. Product adoption, knowledge
   promotion, release, and stable product-branch writes remain human-gated/off.
+previous_run_id: 36341252254
+dispatched_at: '2026-09-27T20:50:35.723881Z'
+repository: techitechi0331-svg/VocalPrepComp
+workflow_file: vl2a-prehost-stage.yml

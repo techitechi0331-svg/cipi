@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36322708541
+run_attempt: 1
+artifact_id: 10932514836
+artifact_name: melon-research-36322708541
+expired: false
+size_in_bytes: 10536
+created_at: '2026-09-27T13:32:14Z'
+expires_at: '2026-10-27T13:32:12Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/efficiency_metrics.json
+  status: ingested
+  size: 3563
+  sha256: 5d3d836252146d027dbc5a1a33a214e4fe4c1c80bc316852f42b0100f9ee208a
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/manifest.json
+  status: ingested
+  size: 376
+  sha256: 548857a30f8cf587e4d3aea68639ed3ca60200abe9a22abdd85c1b271ff9c231
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/macro_result.json
+  status: ingested
+  size: 12018
+  sha256: 17a776a6b06fcefe9f540e0789ed8e8c5c306cceb0c9d2b4c6cc2399caa3d3fd
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/precision_review.json
+  status: ingested
+  size: 471
+  sha256: 2638d43e5b4c86e844683bd3f4b86c7fe8dc11149840b65327c96bfc3de1c3d0
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/stage1_screening.json
+  status: ingested
+  size: 10083
+  sha256: cee191074a24cb9c3c3bb8fc6551d40661782967bffc39edda3f98e8aff99239
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/stage3_deep_validation.json
+  status: ingested
+  size: 581
+  sha256: 4b7880d766eebe2f1654b4e40a2d2e6afadf92137b8cfd85129c0ddc3e71051f
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/summary.json
+  status: ingested
+  size: 1658
+  sha256: 975496f0023dc6a0744bad030bb9a059777d4d7340514ebd6abb646781a3efdc
+- path: melon-funnel-vocal-denoise-preservation-2fce76ac5667/vocal_denoise_foundation_measurements.json
+  status: ingested
+  size: 11510
+  sha256: d36b5e77fc8c67011273f37cf3bda7e9bf4356b4db3e3644d568b7e1530b940e
+archive_sha256: bf12161758dcee632b550fd9541446518a301d39d855466ea210baf11d387e8a
+ingest_status: text_evidence_ingested

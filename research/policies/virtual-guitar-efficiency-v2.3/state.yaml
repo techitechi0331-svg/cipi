@@ -33,6 +33,21 @@ tracks:
       next_action_state_at_policy_registration: QUEUED
       reached_before_policy_registration: true
     policy_regression_gate: VIRTUAL-GUITAR-V2.3-POLICY-REGRESSION-AUDIO-001
+    rollout_validation:
+      virtual_guitar_full_regression:
+        run_id: 36291282047
+        state: PASS
+        tests_passed: 6
+        tests_failed: 0
+      virtual_guitar_selective_test_mapping:
+        run_id: 36291497287
+        state: PASS
+      cipi_bridge_regression:
+        run_id: 36291361478
+        state: PASS
+      melon_efficiency_adapter_regression:
+        run_id: 36291323030
+        state: IN_PROGRESS
     next_dispatch_policy: HOLD_UNTIL_V2_3_REGRESSION_PASS
     current_job_interrupted: false
 

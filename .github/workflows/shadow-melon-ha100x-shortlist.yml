@@ -1,0 +1,42 @@
+name: Shadow MELON HA100X Shortlist Validation
+
+on:
+  push:
+    branches:
+      - validation/melon-ha100x-shortlist-shadow-v2
+    paths:
+      - "validation/melon_ha100x_shortlist_shadow/**"
+      - ".github/workflows/shadow-melon-ha100x-shortlist.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: validation/melon_ha100x_shortlist_shadow
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile exact shadow files
+        run: python -m compileall -q melon integration tests
+
+      - name: Run shortlist regression tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Verify CIPI routing precedence
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("integration/cipi/research_driver.py").read_text(encoding="utf-8")
+          shortlist = text.index('track_id.startswith("VL2A-CIRCUIT-HA100X-SHORTLIST-")')
+          generic = text.index('track_id.startswith("VL2A-CIRCUIT-HA100X-")')
+          assert shortlist < generic
+          assert "run_ha100x_shortlist_research" in text
+          print("shortlist routing precedence: PASS")
+          PY

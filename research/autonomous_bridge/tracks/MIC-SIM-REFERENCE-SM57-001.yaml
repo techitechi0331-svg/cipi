@@ -1,0 +1,131 @@
+schema_version: "1.0"
+track_id: MIC-SIM-REFERENCE-SM57-001
+enabled: false
+activation_state: WAITING_FOR_MELON_SM57_REFERENCE_ADAPTER_MAIN
+root_research_id: MIC-SIM-REFERENCE-SM57-001
+
+research_question: >-
+  Can a Shure SM57 reference track convert manufacturer-supported source facts into
+  a falsifiable microphone-model research plan while preserving unresolved phase,
+  transient, off-axis, proximity/distance and level-dependent behavior instead of
+  fabricating hardware-fidelity evidence?
+
+hypothesis_id: HYP-MIC-SM57-REFERENCE-EVIDENCE
+hypothesis: >-
+  A bounded SM57 reference-evidence inventory can establish the known static and
+  published directional/frequency facts, explicitly identify missing transfer-function
+  dimensions, and route the research to controlled reference acquisition before any
+  hardware-parity or product-adoption claim.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - CONTROLLED_REFERENCE_ACQUISITION
+  - REAL_AUDIO_AB
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/mic-simulator/sm57-reference-inventory-2026-09-28.md
+  do_not_reopen:
+    - MIC_E2E_CANARY_RUNNER_CONNECTIVITY
+    - MIC_SIM_FOUNDATION_DETERMINISTIC_HARNESS
+    - INDEPENDENT_MIC_SIMULATOR_REPO_OWNERSHIP
+    - VERSIONED_OPTIONAL_VIRTUAL_GUITAR_INTEGRATION_POLICY
+  rejected_directions:
+    - FREQUENCY_RESPONSE_ONLY_MIC_PARITY
+    - FABRICATED_PHASE_FROM_MAGNITUDE_ONLY
+    - FABRICATED_TRANSIENT_RESPONSE
+    - MARKETING_LANGUAGE_AS_QUANTIFIED_NONLINEAR_EVIDENCE
+    - SOURCE_FACTS_AS_PRODUCT_ADOPTION
+    - AUTO_PROMOTION_OR_AUTO_RELEASE
+    - VIRTUAL_GUITAR_DIRECT_MIC_INTERNAL_DEPENDENCY
+
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 16
+  max_runtime: 180
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-MIC-SM57-REFERENCE-R1
+  experiment_type: REFERENCE_EVIDENCE_GAP_ANALYSIS
+  expected_information_gain: 0.85
+  scope:
+    - mic_simulator
+    - sm57
+    - reference_evidence
+    - gap_analysis
+  inputs:
+    seed: 2026092801
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      Manufacturer-supported SM57 facts can define a bounded and falsifiable reference
+      model while unknown phase, transient, dense off-axis, proximity/distance and
+      level-dependent behavior remain explicitly unresolved until controlled measurement.
+    architecture: SM57_REFERENCE_EVIDENCE_MODEL_V1
+    tested_parameters:
+      frequency_response: source_fact
+      polar_off_axis: source_fact_partial
+      proximity_distance: source_fact_partial
+      phase_group_delay: unresolved
+      transient_response: unresolved
+      level_dependency: unresolved_or_qualitative
+    benchmark_profile:
+      - sm57_reference_evidence_v1
+      - mic_reference_gap_analysis_v1
+    sample_rate: 48000
+    input_set: SHURE_OFFICIAL_SM57_SOURCE_FACT_INVENTORY_V1
+    reference_model: SHURE_SM57_SOURCE_FACTS_NOT_MEASURED_UNIT_TRANSFER_FUNCTION
+    objective_set:
+      - evidence_coverage
+      - uncertainty_priority
+      - falsifiability
+      - measurement_readiness
+    relevant_constraints:
+      - no_frequency_response_only_parity_claim
+      - no_hardware_fidelity_claim_without_controlled_measurement
+      - do_not_invent_phase_or_transient_data
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: REFERENCE_EVIDENCE_GAP_ANALYSIS
+    scope:
+      - mic_simulator
+      - sm57
+      - reference_evidence
+      - gap_analysis
+
+efficiency_policy:
+  policy_id: MIC-SIM-SM57-REFERENCE-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 5
+  full_regression_required: false

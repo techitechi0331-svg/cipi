@@ -42,7 +42,8 @@ measured:
   - Sibilance Guard threshold-only R2 selected 0.60 as the highest synthetic candidate passing S/SH/CH/T recall, declared-negative occupancy, duration, sample-rate and input-scale gates; 0.58 also passed but was intentionally not selected.
   - Phone-aligned real-vocal R3 protocol and derived-metrics-only harness are merged to CIPI main; product thresholds remain frozen at Plosive 0.75 and Sibilance 0.65.
   - Actual Vo.Prep VST3 -> VoPriPro VST3 binary-chain protocol, JUCE 9.0.2 headless host and CI workflow are merged to CIPI main.
-  - Actual VST3 chain workflow run 36238279417 correctly returned the safe BLOCKED_EXTERNAL path because CIPI_CROSS_REPO_TOKEN is not configured; no binary compatibility claim was made.
+  - Actual VST3 chain workflow run 36238279417 correctly returned the safe BLOCKED_EXTERNAL path because CIPI_CROSS_REPO_TOKEN was not configured; no binary compatibility claim was made.
+  - Actual VST3 chain retry run 36317807820 verified that CIPI_CROSS_REPO_TOKEN is now configured but receives HTTP 403 when reading techitechi0331-svg/Vo.Prep; the workflow records this as BLOCKED_EXTERNAL and does not claim binary compatibility.
 
 unresolved:
   - Integrated level-matched listening is still required before final Macro/Phrase product lock.
@@ -70,7 +71,7 @@ why_next: "Synthetic event-threshold R2 is complete and both next gates are now 
 next_confirmation: "Whether Plosive 0.70 and Sibilance 0.60 remain selective on real singing, and whether the actual built Vo.Prep VST3 preserves the reviewed event-only compatibility envelope when feeding the actual VoPriPro VST3."
 
 blockers:
-  - CIPI_CROSS_REPO_TOKEN is currently not configured in CIPI Actions; actual cross-product VST3 execution therefore remains BLOCKED_EXTERNAL.
+  - CIPI_CROSS_REPO_TOKEN is configured in CIPI Actions but currently cannot read techitechi0331-svg/Vo.Prep (HTTP 403 in run 36317807820); actual cross-product VST3 execution therefore remains BLOCKED_EXTERNAL until repository read access is granted.
   - Phone-aligned real-singing R3 requires a corpus/access route whose use terms are clearly acceptable for this product-development research context.
   - Human level-matched listening is required for final naturalness sign-off.
   - Cubase Pro 14 target-host validation ultimately requires the user-side Windows host.

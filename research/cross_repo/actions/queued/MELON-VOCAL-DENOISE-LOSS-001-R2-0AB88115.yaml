@@ -1,0 +1,41 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-LOSS-001-R2-0AB88115
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  population: 4
+  preflight_mode: fast
+  seed: 2026092705
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 4
+  stage3_limit: 1
+  workers: 1
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-DENOISE-LOSS-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"MELON-FUNNEL-VOCAL-DENOISE-LOSS-F933DEF66792-ITERATE-1","hypothesis_id":"HYP-VOCAL-DENOISE-LOSS-001","job_id":"VOCAL-DENOISE-LOSS-001-R2-0AB88115","loop_depth":2,"parent_job_id":"VOCAL-DENOISE-LOSS-001-R1-42E1C279","parent_run_id":"melon-funnel-vocal-denoise-loss-f933def66792","research_id":"VOCAL-DENOISE-LOSS-001","research_question":"Which
+    bounded objective functions best preserve singing voice at matched NR once licensed
+    training data and baseline metrics exist?","track_id":"VOCAL-DENOISE-LOSS-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-DENOISE-LOSS-001
+bridge_job_id: VOCAL-DENOISE-LOSS-001-R2-0AB88115
+continuation_fingerprint: 0ab88115d2f6ff2fc5dec6faee54401152fd048300de80ab3bb663214f969a73
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-DENOISE-LOSS-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

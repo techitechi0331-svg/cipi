@@ -16,7 +16,7 @@ retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions:
-  - VOCAL-DENOISE-DATASET-PREPARE-001
+  - VOCAL-DENOISE-DATASET-PREPARE-002
 reason: >-
   Run the first bounded real-singing plus synthetic-noise TinyMaskNet training pilot only after the approved
   VocalSet cache and singer-disjoint split manifest are prepared. The result is research evidence only and

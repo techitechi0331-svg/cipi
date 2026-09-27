@@ -1,0 +1,43 @@
+schema_version: '1.0'
+job_id: VOCAL-DENOISE-BASELINE-001-R1-3A274FBF
+track_id: VOCAL-DENOISE-BASELINE-001
+root_research_id: VOCAL-DENOISE-BASELINE-001
+parent_job_id: ''
+parent_run_id: ''
+hypothesis_id: HYP-VOCAL-DENOISE-BASELINE-001
+experiment_id: EXP-VOCAL-DENOISE-BASELINE-001-R1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs: []
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VOCAL-DENOISE-BASELINE-001-R1-3A274FBF
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: initial registered research experiment
+expected_information_gain: 0.85
+fingerprint: 3a274fbff42f6ea2ebf98103265bf62191bd7e72ae3cc4af2bd017832a27e26a
+loop_depth: 1
+experiment_type: BASELINE_FOUNDATION
+selected_architecture: VOCAL_DENOISE_BASELINE_FOUNDATION_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true
+efficiency_policy:
+  policy_id: VOCAL-DENOISE-BASELINE-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

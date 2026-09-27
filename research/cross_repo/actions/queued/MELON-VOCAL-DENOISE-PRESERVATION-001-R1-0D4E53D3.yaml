@@ -1,0 +1,41 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-PRESERVATION-001-R1-0D4E53D3
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026092703
+  population: 4
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  stage2_limit: 4
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-DENOISE-PRESERVATION-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"EXP-VOCAL-DENOISE-PRESERVATION-001-R1","hypothesis_id":"HYP-VOCAL-DENOISE-PRESERVATION-001","job_id":"VOCAL-DENOISE-PRESERVATION-001-R1-0D4E53D3","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VOCAL-DENOISE-PRESERVATION-001","research_question":"Can
+    vocal preservation and removed-signal evidence be represented without claiming
+    perceptual superiority before human listening?","track_id":"VOCAL-DENOISE-PRESERVATION-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-DENOISE-PRESERVATION-001
+bridge_job_id: VOCAL-DENOISE-PRESERVATION-001-R1-0D4E53D3
+continuation_fingerprint: 0d4e53d3ac5df06312f34f1ccfd18f5dfb54e76c95597426602d2b54dbe09f84
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-DENOISE-PRESERVATION-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

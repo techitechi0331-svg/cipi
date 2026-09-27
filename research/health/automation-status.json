@@ -20,9 +20,7 @@
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
     "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-    "active_tracks": [
-      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003"
-    ],
+    "active_tracks": [],
     "authority": "OPERATIONAL_SCHEDULING_ONLY",
     "automatic_knowledge_promotion": false,
     "automatic_product_decision": false,
@@ -89,14 +87,14 @@
         "runtime_seconds": 0.178971
       },
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": {
-        "candidates": 32,
+        "candidates": 48,
         "candidates_limit": 48,
-        "loop_depth": 2,
+        "loop_depth": 3,
         "loop_depth_limit": 3,
-        "runs": 2,
+        "runs": 3,
         "runs_limit": 3,
         "runtime_limit_seconds": 600.0,
-        "runtime_seconds": 0.182065
+        "runtime_seconds": 0.279603
       },
       "VL2A-CIRCUIT-HA100X-001": {
         "candidates": 60,
@@ -177,7 +175,7 @@
       "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
-      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": 2,
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": 3,
       "VL2A-CIRCUIT-HA100X-001": 5,
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
       "VOCAL-DENOISE-ARCH-001": 2,
@@ -207,11 +205,12 @@
     "human_gate_tracks": [
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
     ],
-    "human_gates": 3,
+    "human_gates": 4,
     "invalid_results": 0,
-    "melon_runs": 36,
+    "melon_runs": 37,
     "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 4,
     "queued_actions": [],
@@ -241,13 +240,13 @@
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.21428571428571427,
-      "new_information_per_compute_second": 13.363743537551432,
-      "new_information_per_run": 0.8075626696389948,
+      "human_gate_rate": 0.2857142857142857,
+      "new_information_per_compute_second": 12.841390834130975,
+      "new_information_per_run": 0.828944595234662,
       "pareto_front_turnover": null,
       "ranking_stability": null,
       "replication_consistency": null,
-      "research_compute_to_runner_wall_ratio": 0.03732530925373197,
+      "research_compute_to_runner_wall_ratio": 0.03695727229769701,
       "semantic_duplicate_rate": 0.0
     },
     "result_missing": 0,
@@ -272,13 +271,13 @@
       "artifact_upload_seconds": null,
       "checkout_seconds": null,
       "environment_setup_seconds": null,
-      "known_runner_samples": 20,
+      "known_runner_samples": 21,
       "macro_export_seconds": null,
       "preflight_seconds": null,
       "queue_wait_seconds": 0.0,
-      "research_compute_seconds": 125.03978600000208,
-      "runner_job_seconds": 3350.0,
-      "total_wall_seconds": 3350.0
+      "research_compute_seconds": 125.13732400000208,
+      "runner_job_seconds": 3386.0,
+      "total_wall_seconds": 3386.0
     },
     "track_lifecycle": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -316,10 +315,9 @@
         "state_basis": "SCHEDULER_TERMINAL_ALIAS"
       },
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": {
-        "job_id": "VIRTUAL-GUITAR-PHYSICAL-REALISM-003-R3-1142CB56",
-        "reason": "EXTERNAL_ACTION_DISPATCHED",
-        "scheduler_eligible": true,
-        "state": "WAITING_EXTERNAL"
+        "reason": "HUMAN_GATE",
+        "scheduler_eligible": false,
+        "state": "HUMAN_GATE"
       },
       "VL2A-CIRCUIT-HA100X-001": {
         "reason": "BUDGET_EXHAUSTED",
@@ -389,6 +387,7 @@
       "VIRTUAL-GUITAR-PHYSICAL-001": "HUMAN_GATE",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": "HUMAN_GATE",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": "DUPLICATE_ONLY",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": "HUMAN_GATE",
       "VL2A-CIRCUIT-HA100X-001": "BUDGET_EXHAUSTED",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": "HUMAN_GATE",
       "VOCAL-DENOISE-ARCH-001": "DUPLICATE_ONLY",
@@ -424,8 +423,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 40,
-      "dispatched": 2,
+      "completed": 41,
+      "dispatched": 1,
       "failed": 5,
       "quarantined": 0,
       "queued": 2

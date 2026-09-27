@@ -1,0 +1,96 @@
+{
+  "bridge_profile": {
+    "architecture": "RICHER_STRING_MECHANISM_PROXY_V02_PHASED_V11",
+    "benchmark_profiles": [
+      "guitar_spectral_evolution_proxy_v1",
+      "guitar_dispersion_proxy_v1",
+      "guitar_excitation_proxy_v1",
+      "guitar_bridge_body_coupling_proxy_v1",
+      "guitar_realism_search_phase_refined_v1"
+    ],
+    "input_set": "STANDARD_GUITAR_RANGE_MIDI_GRID_V1",
+    "objective_set": [
+      "mechanism_coverage_penalty",
+      "numerical_stability",
+      "cpu_cost",
+      "memory_cost"
+    ],
+    "reference_model": "V01_DELAY_LOOP_PLUS_HUMAN_REJECTION_EVIDENCE",
+    "relevant_constraints": [
+      "human_listening_says_v01_single_note_is_synthetic",
+      "strum_direction_preserve",
+      "no_real_guitar_fidelity_claim",
+      "product_integration_off",
+      "automatic_promotion_off",
+      "realism_search_phase:refined",
+      "realism_search_bounds_sha256:33dc98ee951b1732"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_PHYSICAL_REALISM",
+    "sample_rate": 48000.0
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "guitar_realism_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 16,
+    "max_runtime_seconds": 120.0,
+    "population_size": 8,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_PHYSICAL_REALISM",
+  "routes": {
+    "CANDIDATE_FOR_CIPI_REVIEW": 1
+  },
+  "run_id": "melon-funnel-guitar-realism-d7a7395dd5f2",
+  "search_bounds_sha256": "33dc98ee951b1732",
+  "search_parameter_ranges": {
+    "body_mix": [
+      0.035,
+      0.15
+    ],
+    "body_resonance_hz": [
+      105.0,
+      195.0
+    ],
+    "bridge_coupling": [
+      0.05,
+      0.18
+    ],
+    "dispersion_b": [
+      6e-06,
+      5.5e-05
+    ],
+    "hf_damping": [
+      0.16,
+      0.42
+    ],
+    "pick_brightness": [
+      0.28,
+      0.76
+    ],
+    "pick_position": [
+      0.2,
+      0.68
+    ],
+    "pick_transient_mix": [
+      0.025,
+      0.12
+    ]
+  },
+  "search_phase": "refined",
+  "seed": 2026092712,
+  "stage1_pareto": 16,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-27T17:07:45.591502+00:00"
+}

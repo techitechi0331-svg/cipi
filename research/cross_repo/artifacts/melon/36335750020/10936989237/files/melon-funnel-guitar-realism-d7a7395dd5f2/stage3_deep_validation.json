@@ -1,0 +1,20 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "GTR-REALISM-001",
+    "promotion_authority": false,
+    "reason": "Synthetic mechanism study reached its bounded limit; render implementation candidates and require human listening/real-audio A/B before adoption.",
+    "route": "CANDIDATE_FOR_CIPI_REVIEW",
+    "scientific": {
+      "all_finite": true,
+      "body_coloration_db": 0.6125389655927862,
+      "evidence_boundary": "MEASURED_SYNTHETIC_MECHANISM_IDENTIFIABILITY_NOT_REAL_GUITAR_FIDELITY",
+      "inharmonicity_p95_cents": 24.76197484402261,
+      "mechanism_activation_count": 6,
+      "mechanism_coverage_penalty": 0.0,
+      "pick_transient_index": 0.050708960140668634,
+      "spectral_evolution_db": 7.7045261016010675
+    },
+    "species": "richer_physical_string_mechanism_proxy"
+  }
+]

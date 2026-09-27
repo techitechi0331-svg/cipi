@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36335750020
+run_attempt: 1
+artifact_id: 10936989237
+artifact_name: melon-research-36335750020
+expired: false
+size_in_bytes: 27168
+created_at: '2026-09-27T17:07:50Z'
+expires_at: '2026-10-27T17:07:47Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/guitar_realism_measurements.json
+  status: ingested
+  size: 55719
+  sha256: e21fdd3eb4d672899a87bd119e34ae271bec9227ddc9e98452f5782b9ab00922
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/manifest.json
+  status: ingested
+  size: 381
+  sha256: 2253db03040caa86022898f4b94841f0a57335d2f3ae78c6826c54586a4a8416
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/macro_result.json
+  status: ingested
+  size: 9604
+  sha256: 7026a781f72ad85ca9a4b96947bc39a2fe66247931d681e509e73e86100a8c0d
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/efficiency_metrics.json
+  status: ingested
+  size: 3896
+  sha256: 0945d053f735c7728f383661dee130f471563d471075c738aa8a6c489b425631
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/precision_review.json
+  status: ingested
+  size: 464
+  sha256: cc2216f29f4e4585f33472bdfec8101c0648c458e7ce24e7d7b1cc246b43a6ed
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/stage1_screening.json
+  status: ingested
+  size: 51064
+  sha256: b97d8afe46780477b3dd0b222bc5b5f7409938d1d49dc0df8be6f1e6704f17ed
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/stage3_deep_validation.json
+  status: ingested
+  size: 840
+  sha256: efe388dd2472f248f54cf78c8b169c12c12c234434ca09dcb71d57c7d27f952a
+- path: melon-funnel-guitar-realism-d7a7395dd5f2/summary.json
+  status: ingested
+  size: 2524
+  sha256: 777bbad75f325acd5dd0536538bfed1363f8f2c9cffdbed2662a3051b2b34809
+archive_sha256: 27c3a0767de53c4f661b1a90328efb3abbb9de39a4550c8ccb7d03b65680c593
+ingest_status: text_evidence_ingested

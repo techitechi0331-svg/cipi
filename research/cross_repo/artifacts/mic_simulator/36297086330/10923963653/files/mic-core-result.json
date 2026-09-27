@@ -1,0 +1,295 @@
+{
+  "artifact_hashes": {},
+  "automatic_final_decision": false,
+  "benchmark_profile_version": "mic_foundation_v1",
+  "bundle_hash": "ebbde78110e5350a4dc63fd4ff4dea4e0d96edf52dd6a1be63cf64b0bc04f5f3",
+  "candidate_id": "foundation-baselines-v1",
+  "cipi_promotion_authority": false,
+  "cpu": {
+    "authority": "BENCHMARK_OBSERVATION_ONLY",
+    "elapsed_seconds_observed": 0.09879940000246279
+  },
+  "deterministic_status": "PASS",
+  "engine_version": "mic-simulator-foundation/0.1",
+  "errors": [],
+  "git_sha": "c244b8c1e77bfc25e694616c4c323f78a018e3aa",
+  "hard_constraint_results": {
+    "all_candidates_finite": true,
+    "automatic_promotion_disabled": true,
+    "no_reference_fidelity_claim": true,
+    "product_integration_disabled": true
+  },
+  "input_hash": "9b8b5329437750892f9ec33ca41c2f295efb7e9673718c5e3d7d58fa4b1387d5",
+  "job_id": "MIC-CORE-FOUNDATION-VALIDATION-001",
+  "latency": {
+    "max_samples": 1
+  },
+  "memory": {
+    "measured": false,
+    "reason": "foundation stdlib harness does not claim process memory precision"
+  },
+  "metrics": {
+    "candidate_count": 12,
+    "candidate_measurements": [
+      {
+        "candidate_id": "flat_gain",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "8502daf37cab77bd51442022972ea365a9f588337b73ce3b7f245918ed6c04cc",
+        "latency_samples": 0,
+        "metrics": {
+          "energy_centroid_samples": 606.2911133419451,
+          "estimated_ops_per_sample": 1,
+          "gain_db": 0.0,
+          "peak": 0.75,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "8502daf37cab77bd51442022972ea365a9f588337b73ce3b7f245918ed6c04cc",
+        "sample_rate": 44100
+      },
+      {
+        "candidate_id": "static_spectral",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "8502daf37cab77bd51442022972ea365a9f588337b73ce3b7f245918ed6c04cc",
+        "latency_samples": 0,
+        "metrics": {
+          "energy_centroid_samples": 607.4850388655536,
+          "estimated_ops_per_sample": 5,
+          "gain_db": -0.010417800863458282,
+          "peak": 0.7405017945389154,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "4da0353a89f69866f34ce3de57ca743fc4a9f539c785e1fe6c1da53771f37b02",
+        "sample_rate": 44100
+      },
+      {
+        "candidate_id": "spectral_phase",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "8502daf37cab77bd51442022972ea365a9f588337b73ce3b7f245918ed6c04cc",
+        "latency_samples": 1,
+        "metrics": {
+          "energy_centroid_samples": 608.4771133121835,
+          "estimated_ops_per_sample": 6,
+          "gain_db": -0.01042767041304185,
+          "peak": 0.7405017945389154,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "bc1fbb50d687a86e0122a8799b967f0891b9b1aa98d2bd3a29844f4c2e532647",
+        "sample_rate": 44100
+      },
+      {
+        "candidate_id": "spectral_geometry",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "8502daf37cab77bd51442022972ea365a9f588337b73ce3b7f245918ed6c04cc",
+        "latency_samples": 1,
+        "metrics": {
+          "energy_centroid_samples": 608.4771133121835,
+          "estimated_ops_per_sample": 10,
+          "gain_db": -1.2598150364960423,
+          "peak": 0.6412933656186657,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "b99bcadd72d89f9fcb10fcc30f60983b7411d1c6e03dfed1e40ccf97c741d6af",
+        "sample_rate": 44100
+      },
+      {
+        "candidate_id": "flat_gain",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "a9f2b3e9791424e3a5632de9313fc1ddff8030fdabe87e80598af85142172539",
+        "latency_samples": 0,
+        "metrics": {
+          "energy_centroid_samples": 605.2685943663008,
+          "estimated_ops_per_sample": 1,
+          "gain_db": 0.0,
+          "peak": 0.75,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "a9f2b3e9791424e3a5632de9313fc1ddff8030fdabe87e80598af85142172539",
+        "sample_rate": 48000
+      },
+      {
+        "candidate_id": "static_spectral",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "a9f2b3e9791424e3a5632de9313fc1ddff8030fdabe87e80598af85142172539",
+        "latency_samples": 0,
+        "metrics": {
+          "energy_centroid_samples": 606.640190335177,
+          "estimated_ops_per_sample": 5,
+          "gain_db": -0.011807887577583536,
+          "peak": 0.739086322241585,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "7f0dbf721546345ef3be9ca6af0550fdac12d87719a6d47e7b880cca608e5bc9",
+        "sample_rate": 48000
+      },
+      {
+        "candidate_id": "spectral_phase",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "a9f2b3e9791424e3a5632de9313fc1ddff8030fdabe87e80598af85142172539",
+        "latency_samples": 1,
+        "metrics": {
+          "energy_centroid_samples": 607.6342555565344,
+          "estimated_ops_per_sample": 6,
+          "gain_db": -0.01181527626328018,
+          "peak": 0.739086322241585,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "5a11080c5aa900888be32f55b320c68a7845442e4aa4210c2b85c728f1b88157",
+        "sample_rate": 48000
+      },
+      {
+        "candidate_id": "spectral_geometry",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "a9f2b3e9791424e3a5632de9313fc1ddff8030fdabe87e80598af85142172539",
+        "latency_samples": 1,
+        "metrics": {
+          "energy_centroid_samples": 607.6342555565345,
+          "estimated_ops_per_sample": 10,
+          "gain_db": -1.2612026423462788,
+          "peak": 0.6400675306508244,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "e65e8facfd562d25b8addf00f17be2d8efa6a372757a52a3cb4d1292ae4de766",
+        "sample_rate": 48000
+      },
+      {
+        "candidate_id": "flat_gain",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "56225dec50f8524b70e8d5631bff1e233e11667906cbb483697fee8600f92205",
+        "latency_samples": 0,
+        "metrics": {
+          "energy_centroid_samples": 580.6983619003813,
+          "estimated_ops_per_sample": 1,
+          "gain_db": 0.0,
+          "peak": 0.75,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "56225dec50f8524b70e8d5631bff1e233e11667906cbb483697fee8600f92205",
+        "sample_rate": 96000
+      },
+      {
+        "candidate_id": "static_spectral",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "56225dec50f8524b70e8d5631bff1e233e11667906cbb483697fee8600f92205",
+        "latency_samples": 0,
+        "metrics": {
+          "energy_centroid_samples": 583.5590900353354,
+          "estimated_ops_per_sample": 5,
+          "gain_db": -0.02392189827585985,
+          "peak": 0.7260632482922852,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "20a292736b5491c2af94e7c094211f26ad00f176c59115c3ac6c0312bf1452e3",
+        "sample_rate": 96000
+      },
+      {
+        "candidate_id": "spectral_phase",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "56225dec50f8524b70e8d5631bff1e233e11667906cbb483697fee8600f92205",
+        "latency_samples": 1,
+        "metrics": {
+          "energy_centroid_samples": 584.5563636459092,
+          "estimated_ops_per_sample": 6,
+          "gain_db": -0.023925270268879507,
+          "peak": 0.7260632482922852,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "1d657256edcc6cf25ed9f629d1566454bdf9c8df502e5bcb36112fd4f2a755b7",
+        "sample_rate": 96000
+      },
+      {
+        "candidate_id": "spectral_geometry",
+        "hard_constraint_results": {
+          "deterministic_repeatability": true,
+          "finite_output": true,
+          "stable_cost_proxy": true,
+          "stable_latency": true
+        },
+        "input_hash": "56225dec50f8524b70e8d5631bff1e233e11667906cbb483697fee8600f92205",
+        "latency_samples": 1,
+        "metrics": {
+          "energy_centroid_samples": 584.5563636459092,
+          "estimated_ops_per_sample": 10,
+          "gain_db": -1.2733126363518785,
+          "peak": 0.6287892177753674,
+          "repeatability_max_error": 0.0
+        },
+        "output_hash": "efee36a9a5a46ee5e12621aaf99e9ceec4e911b006f75f3e07f22447b1d5c2d8",
+        "sample_rate": 96000
+      }
+    ],
+    "evidence_boundary": "MEASURED_SYNTHETIC_FOUNDATION_NOT_HARDWARE_FIDELITY"
+  },
+  "mic_profile": "FOUNDATION_NOT_REFERENCE_MIC",
+  "product_integration_authority": false,
+  "product_release_authority": false,
+  "result_type": "MIC_SIMULATOR_FOUNDATION_VALIDATION",
+  "sample_rate": [
+    44100,
+    48000,
+    96000
+  ],
+  "schema_version": "1.0",
+  "seed": 2026092701,
+  "source_profile": "GuitarCabSyntheticFoundation",
+  "status": "PASS",
+  "timestamp": "GENERATED_BY_RUNNER",
+  "track_id": "MIC-SIM-FOUNDATION-001",
+  "warnings": [
+    "Synthetic foundation benchmark only; no real microphone parity is claimed."
+  ]
+}

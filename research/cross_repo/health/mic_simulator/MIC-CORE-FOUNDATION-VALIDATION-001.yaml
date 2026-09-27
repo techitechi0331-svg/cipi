@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MIC-CORE-FOUNDATION-VALIDATION-001
+repo_key: mic_simulator
+workflow_key: core_validation
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36297086330
+run_status: completed
+run_conclusion: success
+since: '2026-09-27T05:23:57Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

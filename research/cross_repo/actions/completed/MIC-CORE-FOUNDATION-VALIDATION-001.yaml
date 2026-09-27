@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MIC-CORE-FOUNDATION-VALIDATION-001
-state: DISPATCHED
+state: COMPLETED
 repo_key: mic_simulator
 workflow_key: core_validation
 ref: main
@@ -24,3 +24,8 @@ previous_run_id: 36296871724
 dispatched_at: '2026-09-27T05:23:57.947912Z'
 repository: techitechi0331-svg/mic_simulator
 workflow_file: mic-core-validation.yml
+run_id: 36297086330
+run_url: https://github.com/techitechi0331-svg/mic_simulator/actions/runs/36297086330
+conclusion: success
+completed_at: '2026-09-27T05:24:25Z'
+failure_classification: null

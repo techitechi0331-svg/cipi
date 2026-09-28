@@ -1,0 +1,653 @@
+schema_version: "1.0"
+audit_id: VG-REDTEAM-AUDIT-20260929-002
+project: virtual-guitar
+status: AUDIT_COMPLETE_FOR_CURRENT_REPOSITORY_STATE
+audit_type: FULL_ARCHITECTURE_PHYSICAL_REALISM_RESEARCH_METHOD_RED_TEAM
+recorded_at: "2026-09-29"
+supersedes_as_summary:
+  - VG-REDTEAM-AUDIT-20260929-001
+
+scope:
+  target: "STRAT_STYLE virtual electric guitar from performance intent through Pickup/Electronics -> DI"
+  repositories:
+    virtual_guitar: techitechi0331-svg/virtual-guitar
+    cipi: techitechi0331-svg/cipi
+    melon: techitechi0331-svg/melon
+  excluded_downstream_product_domains:
+    - AMP_CAB
+    - MIC_SIMULATOR
+
+observed_state:
+  virtual_guitar_main: bd26a0556fb501228b4551f61f6a8e760a14455b
+  melon_main: cef5668308ad27274ec00b46fdad81577af8d0e2
+  cipi_latest_track_state:
+    track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+    enabled: true
+    activation_state: ACTIVE_MELON_REALISM_V2_VALIDATED
+    product_integration: false
+    product_repository_write: false
+    human_gate_required: true
+  human_gate_v11:
+    result: FAR_BELOW_TARGET
+    product_adoption: false
+  real_audio_ab_completed: false
+  cubase_host_confirmation_completed: false
+  release_authorized: false
+
+authority:
+  cipi_evidence_authority: true
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  automatic_product_decision: false
+  product_repository_write: false
+  product_repo_modified_by_this_audit: false
+  track_mutation_from_this_audit: false
+
+overall_verdict:
+  current_real_guitar_fidelity_claim: NOT_ESTABLISHED
+  current_product_readiness: NOT_ESTABLISHED
+  current_architecture_readiness: FAIL
+  current_research_method_readiness_for_realism_selection: FAIL
+  current_infrastructure_readiness: PARTIAL_PASS
+  summary: >-
+    The project has strong research governance, deterministic test infrastructure, explicit
+    Human Gate handling and a substantially improved CIPI architecture blueprint. However,
+    the current sounding implementation is fragmented across disconnected state/audio paths,
+    and the active MELON Realism-004 adapter does not execute candidate physical/audio solvers.
+    It therefore cannot scientifically select a realism architecture or determine which
+    mechanisms survive. The central next step is to repair the research experiment and unify
+    the physical state boundary before further product implementation.
+
+severity_summary:
+  S5_ARCHITECTURE_BLOCKER:
+    - STATE_FRAGMENTATION_MULTIPLE_GUITAR_TRUTHS
+    - R3_CANDIDATE_NOT_AUTHORITATIVE_PRODUCT_AUDIO_PATH
+    - MELON_V2_NOT_EXECUTABLE_AUDIO_OR_PHYSICAL_SIMULATION
+    - REALISM004_ARCHITECTURE_COMPETITION_STRUCTURALLY_BIASED
+    - REALISM004_MECHANISMS_WRONGLY_TREATED_AS_MUTUALLY_EXCLUSIVE_SPECIES
+    - OBJECTIVE_FUNCTION_NOT_REALISM
+    - PERFORMANCE_TO_AUDIO_INFORMATION_LOSS
+    - ARTICULATION_NOT_COUPLED_TO_R3_ACOUSTIC_STATE
+  S4_CRITICAL:
+    - SIX_STRINGS_NOT_PHYSICALLY_COUPLED
+    - BRIDGE_BODY_ARE_APPROXIMATE_COLORATION_NOT_BOUNDARY_PHYSICS
+    - NO_PER_STRING_PHYSICAL_IDENTITY
+    - REALISM_TESTS_ARE_FUNCTIONAL_SMOKES
+    - REALTIME_TEST_BENCHMARKS_OLD_AUDIO_PATH
+    - RAW_PHYSICS_GROUND_TRUTH_NOT_IDENTIFIABLE_FROM_DI_ALONE
+    - INFORMATION_GAIN_SIGNAL_IS_HAND_AUTHORED_PROXY
+  S3_MAJOR:
+    - R3_SAMPLE_RATE_COVERAGE_INCOMPLETE
+    - OUTPUT_CLAMP_WITHOUT_CLAMP_HIT_ENERGY_TELEMETRY
+    - PERFORMANCE_MODEL_IS_LOCAL_HEURISTIC_NOT_PHRASE_LEVEL_GUITARIST
+
+claim_evidence_matrix:
+  - claim: "Virtual Guitar currently simulates one continuous virtual guitarist playing one continuous physical guitar."
+    verdict: FAIL
+    evidence_class: MEASURED
+    basis:
+      - Source/Performance/VirtualGuitarist/VirtualGuitaristEngine.cpp
+      - Source/PhysicalModel/Strings/SixStringBank.cpp
+      - Source/Performance/Gesture/GestureAudioBridge.cpp
+      - Source/PhysicalModel/Audio/SixStringAudioBank.cpp
+      - Source/PhysicalModel/Audio/PhysicalRealismSixStringBank.cpp
+    reason: "Semantic string state, old audio state and R3 candidate audio state are separate."
+
+  - claim: "R3 PhysicalRealismString is the authoritative audio state used by VirtualGuitaristEngine."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "R3 is a separate candidate/render path and is not owned by the main performance engine."
+
+  - claim: "LivingString is the acoustic physical state."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "It stores scalar semantic energy/damping/ring/mute state and does not synthesize R3 waveform state."
+
+  - claim: "bridgeCoupling implements physical bridge coupling."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "It is a static modal gain factor, not a bidirectional/scattering mechanical boundary."
+
+  - claim: "bodyMix implements a physical solid-body/neck structural system."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "It is simplified post/modal coloration using low-order filter state."
+
+  - claim: "Six strings interact as a physical guitar."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "Six independent voices are summed/averaged; no bridge-mediated cross-string energy network exists."
+
+  - claim: "Current right/left hand performance descriptors causally drive the latest physical audio model."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "Several descriptors are discarded or reduced before audio; R3 lacks shared continuous contact state."
+
+  - claim: "MELON Realism-004 compares executable guitar architectures."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "The adapter evaluates algebraic parameter proxies and architecture labels, not implemented solver outputs."
+
+  - claim: "Validation run 36451579434 validates guitar realism."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "It validates code/regression execution only."
+
+  - claim: "Research workflow 36452485122 completed Realism-004 research."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "Research/export/upload steps were skipped."
+
+  - claim: "Current Realism-004 output may automatically select a product architecture."
+    verdict: FAIL
+    evidence_class: MEASURED
+    reason: "CIPI explicitly forbids product writes/adoption and the experiment is not realism-identifying."
+
+validated_strengths:
+  - id: GOVERNANCE_BOUNDARIES
+    verdict: PASS
+    statement: "CIPI explicitly separates synthetic evidence from fidelity, keeps product writes off and requires human/real-audio/host gates."
+  - id: HUMAN_GATE_PRESERVATION
+    verdict: PASS
+    statement: "FAR_BELOW_TARGET was preserved instead of being overwritten by successful CI."
+  - id: DETERMINISTIC_RESEARCH_INFRASTRUCTURE
+    verdict: PASS
+    statement: "Bounded seeds, fingerprints, cache/dedup, deterministic smoke tests and workflow regression infrastructure are useful."
+  - id: CONTINUOUS_STATE_BLUEPRINT
+    verdict: PASS_AS_HYPOTHESIS
+    statement: "CIPI's latest continuous physical-state blueprint correctly identifies the duplicate physical truth problem."
+  - id: REALTIME_AWARENESS
+    verdict: PARTIAL
+    statement: "Realtime/memory testing exists, but currently covers the legacy delay-loop audio bank rather than R3/future Physical Core."
+
+physical_gap_matrix:
+  - mechanism: DISTRIBUTED_STRING_STATE
+    current: "24 independent modal oscillators in R3"
+    verdict: PARTIAL
+    severity: S4
+  - mechanism: TWO_POLARIZATION
+    current: "not in product candidate"
+    verdict: FAIL
+    severity: S4
+  - mechanism: DYNAMIC_PLECTRUM_CONTACT_RELEASE
+    current: "short deterministic noise + event excitation"
+    verdict: FAIL
+    severity: S5
+  - mechanism: NONLINEAR_FINGER_FRET_CONTACT
+    current: "semantic contact boolean/damping descriptors"
+    verdict: FAIL
+    severity: S5
+  - mechanism: AMPLITUDE_DEPENDENT_TENSION_DYNAMIC_DETUNE
+    current: "not in product candidate"
+    verdict: FAIL
+    severity: S4
+  - mechanism: STRUCTURAL_BOUNDARY_ADMITTANCE
+    current: "static bridge/body coloration proxies"
+    verdict: FAIL
+    severity: S4
+  - mechanism: SIX_STRING_BRIDGE_SCATTERING
+    current: "independent strings summed"
+    verdict: FAIL
+    severity: S4
+  - mechanism: SYMPATHETIC_RESONANCE
+    current: "not in product candidate"
+    verdict: FAIL
+    severity: S4
+  - mechanism: PER_STRING_GAUGE_TENSION_MATERIAL
+    current: "generic MIDI-note model"
+    verdict: FAIL
+    severity: S4
+  - mechanism: OPEN_VS_FRETTED_BOUNDARY
+    current: "pitch selection only"
+    verdict: FAIL
+    severity: S4
+  - mechanism: PICKUP_POSITION_OBSERVATION
+    current: "not implemented as physical observation of distributed state"
+    verdict: FAIL
+    severity: S4
+  - mechanism: PICKUP_ELECTRONICS
+    current: "planned/downstream"
+    verdict: NOT_IMPLEMENTED_EXPECTED
+    severity: S2
+
+performance_gap_matrix:
+  - area: FINGERING
+    current: "single-note local movement cost with previous-note context"
+    missing:
+      - phrase_level_position_strategy
+      - chord_fingering
+      - explicit_finger_assignment
+      - hand_anatomy
+      - articulation_feasibility
+      - future_note_lookahead
+      - timbre_aware_string_choice
+    verdict: PARTIAL
+    severity: S3
+  - area: PICKING
+    current: "forced/auto-alternate direction plus heuristic force"
+    missing:
+      - economy/sweep context
+      - phrase/accent planning
+      - dynamic pick trajectory
+      - pick depth/stiffness/compliance
+      - contact/release state
+    verdict: PARTIAL
+    severity: S4
+  - area: GESTURE
+    current: "bounded timing/force/angle descriptors"
+    missing:
+      - continuous right_hand_trajectory
+      - continuous left_hand_contact_trajectory
+      - causal pressure/release state
+      - palm contact geometry
+    verdict: PARTIAL
+    severity: S4
+  - area: ARTICULATION
+    current: "semantic state machine"
+    missing:
+      - same-state acoustic hammer_on
+      - pull_off
+      - slide
+      - bend
+      - vibrato
+      - physical mute/choke/release
+    verdict: FAIL_FOR_ACOUSTIC_CAUSALITY
+    severity: S5
+
+state_coupling_audit:
+  authoritative_physical_state_count: "greater than one"
+  verdict: FAIL
+  detected_state_domains:
+    - "VirtualGuitaristEngine / SixStringBank / LivingString semantic lifecycle"
+    - "GestureAudioBridge / SixStringAudioBank / PluckedStringDelayLoop legacy audio"
+    - "PhysicalRealismSixStringBank / PhysicalRealismString R3 audio candidate"
+  required_invariant: >-
+    One authoritative PhysicalStringState per string; performance modules set trajectories,
+    contacts and constraints, while all acoustic output and lifecycle emerge from or observe
+    that same state.
+
+melon_objective_audit:
+  verdict: FAIL
+  current_architecture_labels:
+    - DUAL_POLARIZATION_WAVEGUIDE
+    - PASSIVE_PLUCK_BRIDGE
+    - NONLINEAR_CONTACT_FULL
+  problem_1: >-
+    These are not clean mutually exclusive architectures. Two-polarization propagation,
+    player-string contact, nonlinear fret contact, bridge scattering and sympathetic coupling
+    are potentially complementary mechanisms in one hybrid solver.
+  problem_2: >-
+    _measure() computes feature proxies algebraically from candidate parameters rather than
+    measuring executable solver state/audio.
+  problem_3: >-
+    Search phases prune candidates by construction until R3 contains only NONLINEAR_CONTACT_FULL.
+  problem_4: >-
+    Best-candidate ordering explicitly rewards greater architecture_level.
+  problem_5: >-
+    estimated_ops_per_sample and state-memory values are fixed architecture lookup estimates,
+    not measured implementation cost.
+  problem_6: >-
+    information_gain_signal is a hand-authored function of architecture-label count rather than
+    uncertainty reduction, reference discrimination or measured information gain.
+  consequence: >-
+    Keep v2 adapter as an orchestration/proxy canary if useful, but do not use its ranking to
+    reject mechanisms or select the production physical architecture.
+
+correct_research_design:
+  design: MECHANISM_ABLATION_AND_INTERACTION_ON_EXECUTABLE_CORE
+  rule: >-
+    Research modules in parallel, but evaluate tightly coupled physical mechanisms inside the
+    same executable Physical Core. Promotion/convergence remains stage-gated.
+  proposed_factor_axes:
+    - TWO_POLARIZATION
+    - DYNAMIC_PLECTRUM_CONTACT_RELEASE
+    - NONLINEAR_FRET_FINGER_CONTACT
+    - AMPLITUDE_DEPENDENT_TENSION
+    - STRUCTURAL_BOUNDARY_ADMITTANCE
+    - SIX_STRING_BRIDGE_SCATTERING
+    - SYMPATHETIC_COUPLING
+  minimum_experimental_structure:
+    - BASE_EXECUTABLE_DISTRIBUTED_CORE
+    - SINGLE_FACTOR_ABLATIONS
+    - SELECTED_PAIRWISE_INTERACTIONS
+    - STABILITY_AND_ENERGY_TESTS
+    - CPU_MEMORY_MEASUREMENT
+    - WAVEFORM_STATE_FEATURE_MEASUREMENT
+    - LAYER_APPROPRIATE_REFERENCE_ERROR
+    - HUMAN_LISTENING_FOR_SURVIVORS
+  forbidden_interpretation:
+    - "more mechanisms = automatically more realistic"
+    - "higher architecture_level = scientifically superior"
+
+reference_identifiability_matrix:
+  - reference: EGFxSet_clean
+    best_use:
+      - Strat_specific_string_fret_DI_comparison
+      - five_pickup_configuration_end_to_end_validation
+      - same_pitch_different_string_fret_analysis
+    strengths:
+      - "22-fret Stratocaster"
+      - "string/fret annotation"
+      - "five pickup configurations"
+      - "clean instrument-input recordings"
+    limitations:
+      - "contains pickup/electronics/interface observation, so not raw displacement ground truth"
+      - "normalized audio weakens absolute-level calibration"
+      - "dataset fade processing must be excluded from natural tail-decay fitting"
+      - "single instrument/player/pick setup limits population generalization"
+    verdict: STRONG_FOR_DI_NOT_RAW_PHYSICS
+
+  - reference: Guitar_TECHS_DI
+    best_use:
+      - technique_and_performance_behavior
+      - per_string_MIDI_alignment
+      - multi_player_generalization
+      - general_electric_guitar_DI_features
+    strengths:
+      - DI
+      - synchronized_per_string_MIDI
+      - multiple_players_gear_rooms
+    limitations:
+      - not_a_Strat_specific_tonal_ground_truth
+      - gear_variability_requires_metadata_stratification
+    verdict: STRONG_COMPLEMENTARY_REFERENCE
+
+  - reference: INTERNAL_SYNTHETIC_PROXIES
+    best_use:
+      - mechanism_activation
+      - numerical_sanity
+      - cheap_pre_screening
+    limitations:
+      - cannot_establish_real_guitar_fidelity
+    verdict: PRE_SCREEN_ONLY
+
+test_gap_matrix:
+  - test: physical_realism_smoke
+    current: "finite + nonzero + decays"
+    classification: FUNCTIONAL_SMOKE
+    realism_validation: false
+  - test: six_string_audio_smoke
+    current: "independent legacy strings output finite audio"
+    classification: FUNCTIONAL_SMOKE
+    coupled_guitar_validation: false
+  - test: gesture_audio_bridge_smoke
+    current: "event timing/order + finite legacy audio"
+    classification: INTEGRATION_SMOKE
+    physical_contact_validation: false
+  - test: realtime_memory_smoke
+    current: "legacy SixStringAudioBank only at 48k"
+    classification: PERFORMANCE_PROXY
+    R3_realtime_validation: false
+  - missing:
+      - energy_balance_or_passivity
+      - clamp_hit_telemetry
+      - 44k1_48k_96k_R3_and_future_core
+      - pitch_trajectory
+      - position_dependent_excitation_observation
+      - open_vs_fretted_decay
+      - per_string_identity
+      - contact_release_counterfactual
+      - bridge_cross_string_transfer
+      - sympathetic_decay
+      - reference_feature_error
+      - blind_level_matched_human_AB
+      - full_phrase_performance_validation
+
+authority_audit:
+  current_track_authority: PASS
+  prior_incident: OPEN_RECONCILIATION_REQUIRED
+  incident: VG-PRODUCT-WRITE-AUTHORITY-AUDIT-20260929-001
+  finding: >-
+    Current governance correctly blocks more product writes. The existing bd26a055 R3 candidate
+    remains prototype evidence and must not be reclassified as authorized product adoption.
+
+coupled_cluster_map:
+  - cluster: PERFORMANCE_INTELLIGENCE
+    coupling: LOOSE_TO_MEDIUM
+    research_parallel_safe: true
+    members:
+      - phrase_planning
+      - fingering
+      - picking_strategy
+      - articulation_intent
+    output_contract: PLAYER_ACTION_TRAJECTORIES_AND_CONSTRAINTS
+
+  - cluster: PHYSICAL_CORE
+    coupling: STRONG
+    research_parallel_safe: true
+    integration_must_be_joint: true
+    members:
+      - plectrum_or_finger_contact
+      - distributed_string_state
+      - fret_finger_contact
+      - dynamic_tension
+      - structural_boundaries
+      - bridge_scattering
+      - six_string_coupling
+    convergence_gate: PHYSICAL_CORE_CONVERGENCE
+
+  - cluster: PICKUP_ELECTRONICS
+    coupling: MEDIUM
+    research_parallel_safe: true
+    product_integration_dependency: PHYSICAL_CORE_CONVERGENCE
+    members:
+      - pickup_observation
+      - magnetic_transduction
+      - SSS_HSS
+      - volume_tone_cable_loading
+
+dependency_graph:
+  parallel_research:
+    - PERFORMANCE_INTELLIGENCE
+    - PHYSICAL_CORE_MECHANISM_RESEARCH
+    - PICKUP_ELECTRONICS_SOURCE_FACTS
+    - REFERENCE_ADAPTER_PREPARATION
+  blocking_sequence:
+    - RESEARCH_METHOD_REPAIR
+    - EXECUTABLE_PHYSICAL_CORE_BASELINE
+    - MECHANISM_ABLATION
+    - PHYSICAL_CORE_CONVERGENCE
+    - PICKUP_OBSERVATION_INTEGRATION
+    - PICKUP_ELECTRONICS_INTEGRATION
+    - MATCHED_DI_VALIDATION
+    - FULL_PERFORMANCE_INTEGRATION
+    - HUMAN_GATE
+    - AUTHORIZED_PRODUCT_INTEGRATION
+    - VST3_HOST_GATE
+  important_note: >-
+    Performance research should not wait for the Physical Core, but acoustic promotion of
+    gesture/articulation behavior must wait until it drives the authoritative physical state.
+
+critical_path:
+  rank_1:
+    issue: RESEARCH_METHOD_REPAIR
+    rationale: >-
+      Current MELON Realism-004 cannot experimentally answer its research question. More runner
+      cycles on the same adapter increase data volume without increasing real physical/audio evidence.
+  rank_2:
+    issue: SINGLE_AUTHORITATIVE_PHYSICAL_STATE
+    rationale: >-
+      Without this, even correct performance and contact research cannot causally produce one guitar.
+  rank_3:
+    issue: EXECUTABLE_COUPLED_PHYSICAL_CORE
+    rationale: >-
+      Required before mechanism contribution can be measured instead of assigned by formula.
+  rank_4:
+    issue: LAYER_IDENTIFIABLE_REFERENCE_VALIDATION
+    rationale: >-
+      Raw mechanism validation and end-to-end DI validation need different evidence.
+  rank_5:
+    issue: PERFORMANCE_PHYSICS_INTEGRATION
+    rationale: >-
+      Necessary for phrase-level realism after core causality exists.
+  rank_6:
+    issue: PICKUP_DI
+    rationale: >-
+      Required for the current Guitar Lab finish line, but must not hide Physical Core failure.
+
+unknown_inventory:
+  - exact_target_Strat_specimen
+  - exact_string_set_and_age
+  - exact_per_string_material_core_winding_parameters
+  - measured_target_neck_bridge_admittance
+  - pickup_geometry_height_and_electrical_parameters
+  - target_pick_material_stiffness_and_depth_distribution
+  - human_perceptual_weighting_of_each_missing_mechanism
+  - actual_CPU_cost_of_future_executable_coupled_core
+  - whether_two_polarization_is_required_at_full_band_for_product_or_can_be_reduced_order
+  - optimal_state_representation_waveguide_FDTD_modal_hybrid
+  - amount_of_structural_body_neck_detail_needed_for_JPOP_mix_context
+  - quantitative_thresholds_for_PHYSICAL_CORE_CONVERGENCE
+  - quantitative_thresholds_for_DI_CONVERGENCE
+
+rejected_shortcuts:
+  - MORE_R3_PARAMETER_TUNING_AS_PRIMARY_FIX
+  - MORE_MODAL_OSCILLATORS_AS_PRIMARY_FIX
+  - SYNTHETIC_PICK_NOISE_AS_CONTACT_MODEL
+  - STATIC_BODY_EQ_AS_STRUCTURAL_COUPLING
+  - SIX_INDEPENDENT_STRINGS_PLUS_SUM_AS_SYMPATHETIC_GUITAR
+  - MELON_PROXY_SCORE_AS_ARCHITECTURE_WINNER
+  - ARCHITECTURE_LEVEL_AS_REALISM
+  - DI_REFERENCE_AS_DIRECT_RAW_STRING_GROUND_TRUTH
+  - PICKUP_AMP_CAB_MIC_AS_MASKING_LAYER
+  - CI_SUCCESS_AS_FIDELITY
+  - RANDOMNESS_AS_HUMANNESS
+  - PRODUCT_WRITE_BEFORE_AUTHORITY
+
+proposed_next_research_tracks:
+  - id: PROPOSAL-VG-RESEARCH-METHOD-005
+    priority: P0
+    goal: >-
+      Replace Realism-004 scientific selection logic with an executable mechanism-ablation
+      research adapter. Preserve v2 as orchestration/proxy evidence only.
+    product_write: false
+    required_outputs:
+      - executable_solver_contract
+      - actual_render_or_state_measurements
+      - actual_CPU_memory_measurements
+      - energy_or_stability_measurements
+      - ablation_matrix
+      - no_architecture_winner_without_reference_or_human_gate
+
+  - id: PROPOSAL-VG-PHYSICAL-CORE-005
+    priority: P1
+    goal: >-
+      Establish one authoritative PhysicalStringState and a minimum executable distributed
+      single-string core with position-dependent excitation/observation.
+    product_write: false
+
+  - id: PROPOSAL-VG-CONTACT-006
+    priority: P1
+    goal: >-
+      Evaluate dynamic plectrum release and finger/fret contact as factors on the same core,
+      with energy/stability and counterfactual tests.
+    product_write: false
+
+  - id: PROPOSAL-VG-BRIDGE-STRUCTURE-007
+    priority: P1
+    goal: >-
+      Evaluate structural boundary admittance, bridge scattering and cross-string transfer on
+      the same core rather than as coloration terms.
+    product_write: false
+
+  - id: PROPOSAL-VG-REFERENCE-008
+    priority: P0_PARALLEL
+    goal: >-
+      Build layer-aware reference adapters: EGFxSet for Strat DI/string-fret/pickup comparisons;
+      Guitar-TECHS for technique/per-string-MIDI/generalization; prevent DI from being labeled
+      raw-displacement truth.
+    product_write: false
+
+counterfactual_and_ablation_plan:
+  baseline: EXECUTABLE_DISTRIBUTED_SINGLE_STRING_CORE
+  comparisons:
+    - baseline_vs_plus_two_polarization
+    - baseline_vs_plus_dynamic_plectrum_contact
+    - baseline_vs_plus_nonlinear_fret_contact
+    - baseline_vs_plus_dynamic_tension
+    - baseline_vs_plus_structural_boundary
+    - coupled_core_with_vs_without_bridge_scattering
+    - coupled_core_with_vs_without_sympathetic_transfer
+  for_each:
+    measure:
+      - stability_energy
+      - pitch_error_and_pitch_trajectory
+      - attack_spectrum
+      - partial_decay
+      - inharmonicity
+      - time_varying_spectral_centroid
+      - contact_event_behavior
+      - CPU
+      - memory
+    human_gate: ONLY_FOR_SURVIVORS
+  interaction_tests:
+    - TWO_POLARIZATION_x_FRET_CONTACT
+    - PLECTRUM_CONTACT_x_DYNAMIC_TENSION
+    - STRUCTURAL_BOUNDARY_x_STRING_DECAY
+    - BRIDGE_SCATTERING_x_SYMPATHETIC_COUPLING
+
+adversarial_self_refutation:
+  hypothesis_attacked: "Physical Core is the dominant bottleneck."
+  alternative_1: "Performance intelligence is actually the dominant perceptual problem."
+  assessment: >-
+    Plausible for phrase realism, but the user Human Gate rejected isolated/sounding realism and
+    the current R3 lacks causal contact/string/body mechanisms even before phrase intelligence.
+    Therefore Performance should proceed in parallel, but it is not sufficient to remove the
+    Physical Core blocker.
+  alternative_2: "Current R3 could become adequate through parameter tuning and better pickup modeling."
+  assessment: >-
+    Not ruled out for some mixed-context use cases, but current architecture cannot express several
+    target behaviors at all and pickup would risk compensating for missing raw physics. Parameter
+    tuning remains useful only as a baseline/control.
+  alternative_3: "The proposed advanced physics may add complexity without audible benefit."
+  assessment: >-
+    Valid risk. This is why the recommendation is not to implement everything, but to run executable
+    mechanism ablations and reject mechanisms that do not improve reference/perceptual evidence.
+  alternative_4: "DI datasets can directly select the raw-string solver."
+  assessment: >-
+    Not cleanly. DI includes pickup/electronics observation. DI is strong end-to-end evidence but
+    raw mechanism identification requires mechanistic/state tests and carefully controlled modeling
+    of the observation layer.
+  result: >-
+    The main conclusions survive self-refutation: repair experiment validity, unify physical state,
+    test mechanisms by executable ablation, and keep performance/reference work parallel.
+
+answers_to_required_questions:
+  Q1_current_method: "Hybrid research prototype with separate semantic performance state, legacy delay-loop audio, and a separate 24-mode R3 candidate; not yet one integrated physical guitar."
+  Q2_physical_vs_approximation: "Physical inspiration exists, but current R3 bridge/body/pick behavior is mostly perceptual/parametric approximation rather than a coupled mechanical system."
+  Q3_largest_gap: "Lack of one continuous causal Physical Core linking player contact, string, fret, boundaries and six-string coupling."
+  Q4_parameter_or_architecture: "Architecture change is required; parameter tuning alone cannot create missing state variables/interactions."
+  Q5_guitarist_or_MIDI_humanization: "Currently a deterministic heuristic performance planner with useful state, not yet a production-depth guitarist model."
+  Q6_shared_continuous_state: "NO."
+  Q7_bridge_body_physical_boundary: "NO; currently simplified gain/coloration proxies."
+  Q8_six_string_interaction: "NO; outputs are independent before summation/average."
+  Q9_human_gate_sufficient: "Useful but incomplete; needs layer-separated, level-matched/blind practical comparisons and real references."
+  Q10_melon_objective_reduces_real_guitar_distance: "NOT ESTABLISHED; current v2 objective does not measure real-guitar distance."
+  Q11_realism004_species_sufficient: "NO as architecture competition; mechanisms are incomplete and partly complementary."
+  Q12_track_structure_handles_physical_coupling: "PARTIAL in CIPI blueprint, FAIL in current executable MELON experiment."
+  Q13_next_100h_highest_information_gain: "Research-method repair + executable core/ablation + layer-aware reference adapter, while performance intelligence continues in parallel."
+  Q14_implementation_or_ground_truth_first: "Do both in bounded parallel: implement only research-grade executable solver kernels, not product integration; simultaneously prepare reference evidence."
+  Q15_evidence_for_near_real_claim: "NO."
+
+completion_check:
+  latest_main_checked: true
+  cipi_checked: true
+  melon_checked: true
+  track_checked: true
+  human_evidence_checked: true
+  code_paths_checked: true
+  physical_architecture_decomposed: true
+  performance_architecture_decomposed: true
+  state_coupling_audited: true
+  real_reference_identifiability_audited: true
+  objective_metric_audited: true
+  test_quality_audited: true
+  authority_audited: true
+  unknowns_recorded: true
+  contradiction_audited: true
+  critical_path_defined: true
+  coupled_clusters_defined: true
+  dependency_map_defined: true
+  next_track_proposals_defined: true
+  adversarial_self_refutation_done: true
+  product_repo_modified: false

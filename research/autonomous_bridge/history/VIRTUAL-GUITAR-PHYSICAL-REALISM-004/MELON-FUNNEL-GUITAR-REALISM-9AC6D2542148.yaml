@@ -1,0 +1,88 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-guitar-realism-9ac6d2542148
+processed_artifact_hash: 8f77eb5e411df57c2eb0664c7404f08462cf056c9ea37952e9f4a1724f91c199
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36458033884/10986322221/files/melon-funnel-guitar-realism-9ac6d2542148/macro_result.json
+track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+job_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R2-73389BF2
+parent_job_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773
+parent_run_id: melon-funnel-guitar-realism-45e45b759704
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+hypothesis_id: HYP-VIRTUAL-GUITAR-PHYSICAL-REALISM-V04
+experiment_id: MELON-FUNNEL-GUITAR-REALISM-45E45B759704-UNCERTAINTY_REDUCTION-1
+loop_depth: 2
+route: CONTINUE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 1.0
+improvement_signal: 0.59
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 13
+  deep_validation_count: 0
+  runtime_seconds: 0.064024
+  stage2_measurement_runs: 0
+measured_candidates: 13
+stop_reason: MAX_CANDIDATES
+bundle_hash: 52afb9d017da8365bd8e5f72f2f19718a12880a864c5edc93e9649c3ad3f94cd
+efficiency_policy:
+  batch_class: CHEAP
+  candidate_timeout_seconds: 5
+  current_main_recheck_required: true
+  full_regression_at_epoch_end: true
+  max_guitar_runner_jobs: 1
+  max_memory_mb: 1024
+  pending_adapter_commit: cef5668308ad27274ec00b46fdad81577af8d0e2
+  pending_validation_run: 36451579434
+  policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+  policy_version: '2.3'
+  selective_test_mapping: true
+  state: APPLIED
+  validation_result: PASS
+efficiency_summary:
+  candidate_count: 18
+  measured_count: 18
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 13
+  deep_stage_survivors: 0
+  runner_runtime_seconds: 0.064024
+  research_compute_seconds: 0.064024
+  runner_job_seconds: null
+  total_wall_seconds: null
+  information_gain_signal: 0.59
+  cache_hit_rate: 0.0
+  duplicate_rate: 0.0
+  candidates_per_runner_minute: 16868.674247157316
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.062000000005355105
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_CHEAP_SYNTHETIC_BATCH
+time_metrics:
+  queue_wait_seconds: null
+  runner_job_seconds: null
+  checkout_seconds: null
+  environment_setup_seconds: null
+  preflight_seconds: null
+  research_compute_seconds: 0.064024
+  macro_export_seconds: null
+  artifact_upload_seconds: null
+  total_wall_seconds: null
+research_quality_metrics:
+  budget_exhaustion_rate: null
+  cache_hit_rate: 0.0
+  duplicate_research_rate: 0.0
+  early_convergence_rate: null
+  falsification_rate: null
+  human_gate_rate: null
+  new_information_per_compute_second: 9.215294264650757
+  new_information_per_run: 0.59
+  pareto_front_turnover: null
+  ranking_stability: null
+  replication_consistency: null
+  research_compute_to_runner_wall_ratio: null
+  semantic_duplicate_rate: 0.0
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

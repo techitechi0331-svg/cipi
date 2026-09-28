@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `ec2e9cfd2fe7a10c5a0dfe118b461bcd00254ef0`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `4b8c765b09cbf28ed28cd61442cfd87a5a8ad35b`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -230,6 +230,50 @@ Exploratory diagnostic from the same rendered matrix:
 - because this comparison uses already-observed holdout data, it is HYPOTHESIS-generating only and cannot be used as independent acceptance evidence for a retuned Amount 50.
 
 Any Amount 50 strength revision must be evaluated on a fresh, previously unused validation set.
+
+
+## HYPOTHESIS — Amount 50 strength candidate v0.3
+
+The first prospective holdout suggests that the architecture is directionally correct but that the 50% standard setting is slightly conservative.
+
+Predeclared candidate before fresh validation:
+- keep Amount 0 at depth 0.00;
+- keep Amount 25 at depth 0.50;
+- increase Amount 50 depth from 1.00 to **1.10**;
+- keep Amount 100 depth at 1.25;
+- therefore Amount 50 nominal macro range changes from approximately ±4.0 dB to **±4.4 dB**;
+- no detector, activity, Auto Target, event-protection, lookahead or Headroom Guard constants change in this candidate.
+
+Reason:
+- old Amount 75 used depth 1.125 and met the first holdout correction-depth criterion;
+- depth 1.10 is intentionally below that old Amount-75 strength and is the smallest round candidate likely to close the observed ~0.035 dB median correction-depth gap;
+- the candidate is HYPOTHESIS only until it passes fresh evidence.
+
+Fresh file-level validation set, frozen before candidate execution:
+- man2_butterfly.wav
+- man2_schoolbell.wav
+- man2_twinkle.wav
+- man4_butterfly.wav
+- man4_schoolbell.wav
+- man6_butterfly.wav
+- man6_schoolbell.wav
+- man6_twinkle.wav
+- man6_1_butterfly.wav
+- man6_1_schoolbell.wav
+- man6_1_twinkle.wav
+- woman2_twinkle.wav
+
+None of these 12 files were used in the first prospective holdout acceptance count.
+
+Fresh-validation acceptance for Amount 50:
+- positive local residual-std reduction on at least 9 / 12 files;
+- median shrink rate >= 0.65;
+- median mean absolute residual reduction >= 0.50 dB;
+- maximum sign-flip rate <= 0.15;
+- finite output, exact Amount 0 delay-only identity, and no >0 dBFS sample;
+- existing compiled section/event-protection gates must continue to pass.
+
+If this candidate fails, it is rejected rather than weakening the predeclared thresholds.
 
 ### VST3 latency observation
 

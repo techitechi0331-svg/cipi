@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002-R1-9D1C1A8D
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     pickup electrical model classes, and cable/load interaction without selecting
     a hardware model winner from synthetic data?","track_id":"VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -41,3 +41,7 @@ policy_gate:
   state: APPLIED
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36469320050
+dispatched_at: '2026-09-28T19:33:13.239889Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

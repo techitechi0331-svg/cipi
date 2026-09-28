@@ -1,0 +1,67 @@
+schema_version: "1.0"
+matrix_id: VG-MECHANISM-ABLATION-MATRIX-005
+track_id: VIRTUAL-GUITAR-RESEARCH-METHOD-005
+recorded_at: "2026-09-29"
+
+baseline:
+  id: BASELINE
+  description: >-
+    Executable bounded distributed single-string research core with deterministic
+    triangular displacement and fixed boundary. This is a control, not a fidelity target.
+
+factors:
+  - id: TWO_POLARIZATION
+    case: PLUS_TWO_POLARIZATION
+    hypothesis: "A second transverse state produces measurable coupled motion and waveform-feature changes."
+    falsification:
+      - no_measurable_state_or_waveform_effect
+      - numerical_instability_under_bounded_conditions
+    fidelity_claim_if_passed: false
+
+  - id: DYNAMIC_PLECTRUM_CONTACT
+    case: PLUS_DYNAMIC_PLECTRUM_CONTACT
+    hypothesis: "Time-evolving contact/release produces measurable excitation behavior distinct from initial-displacement pluck."
+    falsification:
+      - zero_contact_samples
+      - no_release
+      - unbounded_post_release_energy
+    fidelity_claim_if_passed: false
+
+  - id: NONLINEAR_FRET_CONTACT
+    case: PLUS_NONLINEAR_FRET_CONTACT
+    hypothesis: "One-sided nonlinear collision changes state/waveform under a controlled contact stress test."
+    falsification:
+      - no_contact_under_stress_condition
+      - unstable_collision_energy
+    fidelity_claim_if_passed: false
+
+  - id: DYNAMIC_TENSION
+    case: PLUS_DYNAMIC_TENSION
+    hypothesis: "State-dependent tension perturbation changes pitch trajectory or waveform features under controlled excitation."
+    falsification:
+      - no_measurable_effect_at_stress_condition
+      - unstable_wave_speed
+    fidelity_claim_if_passed: false
+
+  - id: STRUCTURAL_BOUNDARY
+    case: PLUS_STRUCTURAL_BOUNDARY
+    hypothesis: "A dynamic support state permits measurable boundary motion/energy exchange unlike a fixed endpoint."
+    falsification:
+      - zero_boundary_motion_under_controlled_condition
+      - unstable_boundary_state
+    fidelity_claim_if_passed: false
+
+selected_interactions:
+  - id: TWO_POLARIZATION_X_FRET_CONTACT
+    case: INTERACTION_POLARIZATION_FRET
+    purpose: "Detect whether collision response depends on the extra polarization state."
+  - id: PLECTRUM_CONTACT_X_DYNAMIC_TENSION
+    case: INTERACTION_PLECTRUM_TENSION
+    purpose: "Detect whether state-dependent tension changes contact-driven attack/pitch behavior."
+
+decision_rules:
+  - "No factor is accepted merely because it changes the waveform."
+  - "No factor is rejected merely because the first simplified implementation sounds worse."
+  - "Implementation failure and mechanism invalidity must be distinguished."
+  - "Mechanism survival beyond 005 requires later calibrated/reference or Human evidence."
+  - "No winner is produced by this matrix."

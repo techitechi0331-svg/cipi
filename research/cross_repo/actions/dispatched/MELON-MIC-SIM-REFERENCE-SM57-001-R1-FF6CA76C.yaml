@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     transient, off-axis, proximity/distance and level-dependent behavior instead of
     fabricating hardware-fidelity evidence?","track_id":"MIC-SIM-REFERENCE-SM57-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -41,3 +41,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36401047346
+dispatched_at: '2026-09-28T09:48:52.397686Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

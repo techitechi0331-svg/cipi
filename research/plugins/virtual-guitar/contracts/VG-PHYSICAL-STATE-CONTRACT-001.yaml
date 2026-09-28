@@ -1,0 +1,114 @@
+schema_version: "1.0"
+contract_id: VG-PHYSICAL-STATE-CONTRACT-001
+project: virtual-guitar
+status: PROPOSED_REQUIRED_BEFORE_PRODUCT_IMPLEMENTATION
+recorded_at: "2026-09-29"
+
+invariant: >-
+  Exactly one authoritative acoustic/physical state may exist for each physical string.
+  Performance/UI/lifecycle objects may cache semantic intent and metadata, but must not
+  maintain a competing acoustic energy, damping, displacement or vibration truth.
+
+authoritative_root: PhysicalGuitarModel
+
+per_string_state:
+  name: PhysicalStringState
+  required_domains:
+    identity:
+      - string_index
+      - open_pitch
+      - scale_length_m
+      - speaking_length_m
+      - gauge_m
+      - material_class
+      - linear_density_kg_per_m
+      - tension_n
+    distributed_motion:
+      - transverse_state_primary
+      - transverse_state_secondary_when_enabled
+      - velocity_state
+      - propagation_loss_state
+    contacts:
+      - plectrum_or_finger_contact_state
+      - stopping_finger_state
+      - fret_contact_state
+      - palm_contact_state
+    boundaries:
+      - nut_or_fret_boundary
+      - bridge_boundary
+      - structural_admittance_state
+    observability:
+      - excitation_position
+      - observation_position
+      - energy_telemetry
+      - excitation_history
+
+ownership_rules:
+  VirtualGuitaristEngine:
+    owns:
+      - musical_decision
+      - fingering_intent
+      - picking_intent
+      - articulation_intent
+    forbidden:
+      - independent_acoustic_energy_truth
+      - independent_audio_string_state
+
+  LivingString:
+    target_role: SEMANTIC_LIFECYCLE_VIEW
+    may_own:
+      - note_identity
+      - ring_intent
+      - mute_intent
+      - semantic_stop_reason
+      - event_history_metadata
+    forbidden_after_migration:
+      - independent_energy_decay_truth
+      - independent_damping_truth
+
+  PhysicalSolver:
+    owns:
+      - time_evolving_acoustic_state
+      - physical_contact_consequence
+      - boundary_interaction
+      - raw_string_observation
+
+  PickupObservation:
+    reads:
+      - PhysicalStringState
+    must_not:
+      - repair_missing_string_physics
+      - become_hidden_body_eq
+
+player_action_contract:
+  right_hand:
+    - trajectory
+    - attack_velocity
+    - pick_position
+    - pick_depth
+    - pick_angle
+    - pick_stiffness_or_compliance
+    - pick_or_finger_mode
+    - palm_contact_state
+  left_hand:
+    - target_string
+    - fret_or_contact_position
+    - finger_pressure_or_compliance
+    - contact_trajectory
+    - release_trajectory
+    - slide_path
+    - bend_displacement
+    - vibrato_trajectory
+    - mute_contact
+
+migration_rule: >-
+  Existing LivingString, legacy delay-loop audio and R3 modal candidate remain available
+  as controls/regression baselines until a validated PhysicalStringState path replaces them.
+  Do not delete history or silently alias multiple states together.
+
+product_gate:
+  required_before_product_write:
+    - CONTRACT_ACCEPTED_BY_CIPI
+    - EXECUTABLE_RESEARCH_CORE_VALIDATED
+    - STATE_SPLIT_REMEDIATION_EVIDENCE
+    - explicit_product_repository_write_authority

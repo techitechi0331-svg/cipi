@@ -12,6 +12,7 @@
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
       "VOCAL-DENOISE-ARCH-001",
@@ -21,7 +22,9 @@
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
     "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-    "active_tracks": [],
+    "active_tracks": [
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004"
+    ],
     "authority": "OPERATIONAL_SCHEDULING_ONLY",
     "automatic_knowledge_promotion": false,
     "automatic_product_decision": false,
@@ -107,6 +110,16 @@
         "runtime_limit_seconds": 600.0,
         "runtime_seconds": 0.279603
       },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004": {
+        "candidates": 0,
+        "candidates_limit": 54,
+        "loop_depth": 0,
+        "loop_depth_limit": 3,
+        "runs": 0,
+        "runs_limit": 3,
+        "runtime_limit_seconds": 600.0,
+        "runtime_seconds": 0.0
+      },
       "VL2A-CIRCUIT-HA100X-001": {
         "candidates": 60,
         "candidates_limit": 60,
@@ -188,6 +201,7 @@
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": 3,
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004": 0,
       "VL2A-CIRCUIT-HA100X-001": 5,
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
       "VOCAL-DENOISE-ARCH-001": 2,
@@ -206,6 +220,7 @@
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
       "VL2A-CIRCUIT-HA100X-001",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
       "VOCAL-DENOISE-ARCH-001",
@@ -214,7 +229,7 @@
       "VOCAL-DENOISE-LOSS-001",
       "VOCAL-DENOISE-PRESERVATION-001"
     ],
-    "generated_jobs": 38,
+    "generated_jobs": 39,
     "human_gate_tracks": [
       "MIC-SIM-REFERENCE-SM57-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
@@ -225,9 +240,11 @@
     "human_gates": 5,
     "invalid_results": 0,
     "melon_runs": 38,
-    "next_scheduler_action": "NO_READY_WORK",
+    "next_scheduler_action": "MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773",
     "no_improvement_count": 4,
-    "queued_actions": [],
+    "queued_actions": [
+      "MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773"
+    ],
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
@@ -253,12 +270,12 @@
     ],
     "rejected_continuations": 10,
     "research_quality_metrics": {
-      "budget_exhaustion_rate": 0.2,
+      "budget_exhaustion_rate": 0.1875,
       "cache_hit_rate": 0.0,
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.3333333333333333,
+      "human_gate_rate": 0.3125,
       "new_information_per_compute_second": 12.841390834130975,
       "new_information_per_run": 0.828944595234662,
       "pareto_front_turnover": null,
@@ -277,7 +294,6 @@
       "MIC-SIM-FOUNDATION-001",
       "MIC-SIM-MEASURED-SM57-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
-      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
       "VL2A-CIRCUIT-HA100X-001",
       "VOCAL-DENOISE-ARCH-001",
       "VOCAL-DENOISE-BASELINE-001",
@@ -356,9 +372,10 @@
         "state": "HUMAN_GATE"
       },
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-004": {
-        "reason": "TRACK_DISABLED",
-        "scheduler_eligible": false,
-        "state": "DISABLED"
+        "job_id": "VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773",
+        "reason": "EXTERNAL_ACTION_QUEUED",
+        "scheduler_eligible": true,
+        "state": "READY"
       },
       "VL2A-CIRCUIT-HA100X-001": {
         "reason": "BUDGET_EXHAUSTED",
@@ -463,13 +480,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773",
+      "kind": "CROSS_REPO",
+      "priority": 80,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 46,
       "dispatched": 0,
       "failed": 12,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -498,7 +520,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "kind": "IDLE",
-    "priority": -999
+    "action_id": "MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773",
+    "kind": "CROSS_REPO",
+    "priority": 80,
+    "reason": "ready_external_action"
   }
 }

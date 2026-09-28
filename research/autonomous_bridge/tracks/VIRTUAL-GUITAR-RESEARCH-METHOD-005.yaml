@@ -1,0 +1,114 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-RESEARCH-METHOD-005
+enabled: false
+activation_state: PENDING_MELON_EXECUTABLE_ABLATION_VALIDATION
+root_research_id: VIRTUAL-GUITAR-RESEARCH-METHOD-005
+supersedes_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+
+research_question: >-
+  Can an executable, bounded physical-string research kernel with mechanism ablation
+  replace architecture-label proxy ranking and produce valid measured evidence about
+  mechanism behavior, stability, cost and observable waveform effects without claiming
+  real-guitar fidelity?
+
+hypothesis_id: HYP-VG-RESEARCH-METHOD-005
+hypothesis: >-
+  A no-winner executable ablation design will provide materially stronger scientific
+  evidence than Realism-004's algebraic proxy ranking because candidate mechanisms
+  actually change a time-evolving physical state and measured waveform.
+
+trigger_evidence:
+  - research/plugins/virtual-guitar/research-notes/VG-REDTEAM-AUDIT-20260929-002.yaml
+  - research/plugins/virtual-guitar/research-notes/VG-CONTINUOUS-PHYSICAL-STATE-BLUEPRINT-20260929-001.yaml
+
+authority_boundaries:
+  cipi_evidence_authority: true
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  automatic_product_decision: false
+  product_repository_write: false
+  product_integration: false
+  architecture_winner_claim: false
+  real_guitar_fidelity_claim: false
+  human_gate_required_for_product_adoption: true
+
+experiment:
+  experiment_id: EXP-VG-RESEARCH-METHOD-005-R1
+  experiment_type: EXECUTABLE_MECHANISM_ABLATION
+  selection_mode: MECHANISM_ABLATION_NO_WINNER
+  sample_rates:
+    - 44100
+    - 48000
+    - 96000
+  baseline:
+    - EXECUTABLE_DISTRIBUTED_STRING_CORE
+  single_factor_ablation:
+    - TWO_POLARIZATION
+    - DYNAMIC_PLECTRUM_CONTACT
+    - NONLINEAR_FRET_CONTACT
+    - DYNAMIC_TENSION
+    - STRUCTURAL_BOUNDARY
+  selected_interactions:
+    - TWO_POLARIZATION_X_FRET_CONTACT
+    - PLECTRUM_CONTACT_X_DYNAMIC_TENSION
+  explicitly_deferred:
+    - SIX_STRING_BRIDGE_SCATTERING
+    - SYMPATHETIC_COUPLING
+    - PICKUP_ELECTRONICS
+  defer_reason: >-
+    Do not falsely claim multi-string or pickup physics before the single-string
+    executable method and measurement contract pass validation.
+
+required_measurements:
+  - actual_waveform
+  - internal_state_telemetry
+  - finite_state
+  - post_external_input_energy_boundedness
+  - clamp_hit_count
+  - pitch_trajectory_proxy
+  - harmonic_feature_measurement
+  - decay_measurement
+  - actual_runtime
+  - actual_peak_python_memory
+
+forbidden_selection_features:
+  - ARCHITECTURE_LEVEL_REWARD
+  - FORCED_PHASE_ELIMINATION
+  - LABEL_COUNT_INFORMATION_GAIN
+  - COMPLEXITY_EQUALS_REALISM
+  - PROXY_SCORE_EQUALS_FIDELITY
+
+validation_gate:
+  melon_branch: virtual-guitar-research-method-005
+  melon_pull_request: 11
+  required:
+    - full_melon_tests_pass
+    - guitar_research_method_v5_regression_pass
+    - old_realism_v2_proxy_regression_pass
+    - sample_rate_44k1_48k_96k_pass
+    - no_architecture_winner_output
+    - scientific_selector_false
+    - product_integration_false
+  activation_action: >-
+    Enable this track only after the MELON implementation is merged/validated and
+    CIPI records the validation evidence.
+
+next_after_pass:
+  - VIRTUAL-GUITAR-PHYSICAL-CORE-006
+  - VIRTUAL-GUITAR-REFERENCE-LAYER-008
+
+budget:
+  max_loop_depth: 2
+  max_runs: 3
+  max_runtime: 600
+  max_same_hypothesis_retry: 2
+
+completion_condition:
+  - EXECUTABLE_BASELINE_EXISTS
+  - MECHANISM_ON_OFF_MEASURED
+  - ACTUAL_RUNTIME_MEASURED
+  - ACTUAL_MEMORY_MEASURED
+  - ENERGY_STABILITY_TELEMETRY_EXISTS
+  - NO_FORCED_WINNER
+  - OLD_V2_DEMOTED_TO_PROXY_CANARY
+  - PRODUCT_WRITE_REMAINS_FALSE

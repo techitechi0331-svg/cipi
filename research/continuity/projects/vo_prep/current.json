@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "78a600fcc442cc62d1b4d4f3f9d16209ac28658d",
+    "commit_sha": "099dfaea3f1083bdc87bfd09e527f406256be6cf",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T05:20:08+09:00",
-  "generation_id": "c5e959710583edb1e9d23e0a",
+  "generated_at": "2026-09-29T07:00:20+09:00",
+  "generation_id": "230bf2e0c6c91c52a2903907",
   "human_gates": [],
   "latest_decision_refs": [
     {
@@ -763,13 +763,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "bb037c801dd5db6ba9c2115bf86d66794f9944999dc60bdd13a7aca40af931d2",
+      "sha256": "5d8d05fb5104f199e3b58f589ed05b70155dee4932c08e4c0be8aed97be52394",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "8406674bf8655aa1fe7689b3cd27e6a1a27944cce2fd362d37e8dc351dcb214f",
+      "sha256": "273a2ea024bb7942a68e6891ed5ea8b058d034e1cea68090844a68019a959f09",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -1064,7 +1064,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "59e1e4c07c4aa20d67dff24dbaa5df1d76517bf42e5727c8aa9be1f0cf651e74",
+  "source_state_digest": "52661b7e9359b0872c26d8f28e2d5583460a1946a7f27c4bc53782d5fb8cba27",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

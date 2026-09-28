@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 78a600fcc442cc62d1b4d4f3f9d16209ac28658d
-- Source-state digest: 0a5f182b459c55da3cfe8054576172aaae30ffe4dae4c1f85b96efa70f9d7827
+- CIPI source commit: 099dfaea3f1083bdc87bfd09e527f406256be6cf
+- Source-state digest: 62d4905f4d7c7bb3d36eaaabecad939e38b232ceb54524564413ba24d74c80bd
 - Product: techitechi0331-svg/76blackCompressor@main
 - Product commit: 2c3728657375580be5d2c2af12c66067d37bf4ad
 

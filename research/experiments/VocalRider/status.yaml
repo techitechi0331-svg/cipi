@@ -1,11 +1,11 @@
 source_repo: techitechi0331-svg/vocal_rider
-source_head: 864653e57eadbad544b88ef877947d5cdabd59e6
+source_head: ec2e9cfd2fe7a10c5a0dfe118b461bcd00254ef0
 id: VOCAL_RIDER_01
 title: CIPI Vocal Rider 0.1
 
 status: measurement
 knowledge_status: HYPOTHESIS
-confidence: 0.70
+confidence: 0.76
 
 stages:
   research: complete
@@ -31,7 +31,7 @@ unresolved:
   - Auto-target history and section adaptation require intentional section-dynamics and real-song validation.
   - Lookahead choice needs real-vocal comparison.
   - Amount upper-half mapping is provisional.
-  - Self-hosted Windows runner is active. Main deterministic/core/processor/measurement/VST3 gates pass; service-safe pluginval + Steinberg validation is rerunning.
+  - Self-hosted Windows runner is active. Main deterministic/core/processor/measurement/VST3 gates pass.
   - Post-prepare 50 ms latency/state processor gate passed at 44.1/48/88.2/96/192 kHz and buffer sizes 32–1024.
   - Headroom Guard was corrected to boost-only behavior after review found that the previous -24 dB emergency floor could attenuate Amount 0% / neutral ride.
   - A regression test now requires neutral and already-negative ride to remain unchanged by the Headroom Guard.
@@ -39,13 +39,14 @@ unresolved:
   - HUST Solfege real-vocal objective gate passed 16/16 integrity cases with zero >0 dBFS cases and exact Amount0 delay-only identity.
   - Prospective 12-file local-leveling holdout: 12/12 positive residual-std reduction, median shrink rate 0.6933, median mean absolute shrink 0.4653 dB, max sign-flip 0.0984; predeclared gate FAIL only on the >=0.50 dB correction-depth criterion.
   - Female HUST cases exercised approximately 600 dB/s Headroom Guard reduction; transparency requires targeted measurement/listening.
-  - pluginval strictness-5 reached the GUI Editor phase but crashed on the Windows service runner; service CI now uses official --skip-gui-tests while interactive GUI validation stays separate.
-  - Steinberg validator is pending behind the new service-safe pluginval rerun.
+  - pluginval 1.0.4 strictness-5 passes in official --skip-gui-tests service-safe mode.
+  - Pinned Steinberg VST3 SDK 3.8.1 validator passes 47/47 tests.
+  - Interactive GUI Editor validation remains a separate final host check.
   - Cubase Pro 14 host verification is pending.
 
 next_stage: measurement
-why_next: "Core, processor, measurement and VST3 gates pass. The next evidence must complete non-GUI VST3 validation and then test any Amount 50 strength revision on fresh unused real vocals without reusing the observed holdout."
-next_confirmation: "pluginval non-GUI + Steinberg validator status, then whether a fresh validation corpus supports a modest Amount 50 strength increase without excess sign-flips or musical flattening."
+why_next: "Core, processor, measurement, VST3, pluginval non-GUI and Steinberg validator gates pass. The next evidence must test any Amount 50 strength revision on fresh unused real vocals without reusing the observed holdout."
+next_confirmation: "Whether a fresh unused validation corpus supports a modest Amount 50 strength increase without excess sign-flips or musical flattening, followed by level-matched listening and Cubase GUI/host validation."
 
 blockers:
   - "Human level-matched listening remains required before sound-quality promotion."

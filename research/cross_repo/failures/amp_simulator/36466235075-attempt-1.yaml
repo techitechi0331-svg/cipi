@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: AMP-SIM-FOUNDATION-CANARY-001
+repo_key: amp_simulator
+workflow_key: canary
+run_id: 36466235075
+run_attempt: 1
+head_sha: 4b2669d2fdc81b708c41d7c4b8b1be334d32f95a
+classification:
+  category: PRODUCT_OR_TEST_FAILURE
+  retry_safe: false
+  reason: a build/test/measurement/validation stage failed
+  conclusion: failure
+  failing_steps:
+  - Run deterministic foundation tests
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

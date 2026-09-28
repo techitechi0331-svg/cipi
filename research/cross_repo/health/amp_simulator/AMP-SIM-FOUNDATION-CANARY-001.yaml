@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: AMP-SIM-FOUNDATION-CANARY-001
+repo_key: amp_simulator
+workflow_key: canary
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36466235075
+run_status: completed
+run_conclusion: failure
+since: '2026-09-28T18:35:14Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

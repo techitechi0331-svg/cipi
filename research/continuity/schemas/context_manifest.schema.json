@@ -1,0 +1,28 @@
+{
+  "$id": "https://cipi.local/schemas/context_manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_type",
+    "repository",
+    "path",
+    "sha256"
+  ],
+  "title": "CIPI Continuity Source Manifest Entry",
+  "type": "object"
+}

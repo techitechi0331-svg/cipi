@@ -1,0 +1,128 @@
+{
+  "$id": "https://cipi.local/schemas/project_snapshot.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "authority": {
+      "const": "CONTEXT_RECONSTRUCTION_ONLY"
+    },
+    "blocked": {
+      "type": "array"
+    },
+    "cipi_ref": {
+      "required": [
+        "branch",
+        "commit_sha",
+        "freshness_basis"
+      ],
+      "type": "object"
+    },
+    "conflicts": {
+      "type": "array"
+    },
+    "freshness": {
+      "enum": [
+        "FRESH",
+        "STALE",
+        "CONFLICT",
+        "INVALID"
+      ]
+    },
+    "generated_at": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "generation_id": {
+      "minLength": 8,
+      "type": "string"
+    },
+    "human_gates": {
+      "type": "array"
+    },
+    "latest_decision_refs": {
+      "type": "array"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "product_ref": {
+      "required": [
+        "repository",
+        "ref",
+        "commit_sha",
+        "verification"
+      ],
+      "type": "object"
+    },
+    "project_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "ready": {
+      "type": "array"
+    },
+    "rejected_refs": {
+      "type": "array"
+    },
+    "research": {
+      "type": "object"
+    },
+    "resume_contract": {
+      "required": [
+        "can_resume",
+        "can_autonomously_resume",
+        "resume_mode",
+        "recommended_action",
+        "blocked_dependencies",
+        "human_gates",
+        "required_context",
+        "must_not_repeat"
+      ],
+      "type": "object"
+    },
+    "review_refs": {
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "source_manifest": {
+      "type": "array"
+    },
+    "source_state_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "unresolved_questions": {
+      "type": "array"
+    },
+    "work": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "authority",
+    "project_id",
+    "generated_at",
+    "generation_id",
+    "freshness",
+    "cipi_ref",
+    "product_ref",
+    "phase",
+    "research",
+    "work",
+    "human_gates",
+    "blocked",
+    "ready",
+    "unresolved_questions",
+    "latest_decision_refs",
+    "rejected_refs",
+    "review_refs",
+    "resume_contract",
+    "source_manifest",
+    "source_state_digest"
+  ],
+  "title": "CIPI Continuity Project Snapshot",
+  "type": "object"
+}

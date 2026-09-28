@@ -515,18 +515,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "VOCAL-DENOISE-TINY-ML-EVALUATE-004",
-      "kind": "CROSS_REPO",
-      "priority": 99,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 53,
-      "dispatched": 1,
+      "dispatched": 2,
       "failed": 15,
       "quarantined": 0,
-      "queued": 4
+      "queued": 3
     }
   },
   "human_gates": [
@@ -556,9 +551,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "VOCAL-DENOISE-TINY-ML-EVALUATE-004",
+    "action_id": null,
     "kind": "CROSS_REPO",
-    "priority": 99,
-    "reason": "ready_external_action"
+    "priority": 80,
+    "reason": "reconcile_dispatched_action"
   }
 }

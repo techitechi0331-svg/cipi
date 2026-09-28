@@ -1,0 +1,35 @@
+{
+  "$id": "https://cipi.local/schemas/continuity_snapshot.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "authority": {
+      "const": "CONTEXT_RECONSTRUCTION_ONLY"
+    },
+    "freshness_counts": {
+      "type": "object"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "project_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "projects": {
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "authority",
+    "generated_at",
+    "project_count",
+    "freshness_counts",
+    "projects"
+  ],
+  "title": "CIPI Continuity Global Snapshot",
+  "type": "object"
+}

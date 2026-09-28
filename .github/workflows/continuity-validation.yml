@@ -1,0 +1,120 @@
+name: Continuity Layer Validation
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "automation/continuity/**"
+      - "tools/build_continuity.py"
+      - "tools/validate_continuity.py"
+      - "tests/test_continuity_layer.py"
+      - "RULES/CONTINUITY_LAYER.md"
+      - "research/continuity/schemas/**"
+      - "automation/cross_repo/registry.yaml"
+      - "research/health/**"
+      - "research/jobs/**"
+      - "research/decisions/**"
+      - "research/reviews/**"
+      - "research/autonomous_bridge/**"
+  push:
+    branches: [ main ]
+    paths:
+      - "automation/continuity/**"
+      - "tools/build_continuity.py"
+      - "tools/validate_continuity.py"
+      - "tests/test_continuity_layer.py"
+      - "RULES/CONTINUITY_LAYER.md"
+      - "research/continuity/schemas/**"
+      - "automation/cross_repo/registry.yaml"
+      - "research/health/**"
+      - "research/jobs/**"
+      - "research/decisions/**"
+      - "research/reviews/**"
+      - "research/autonomous_bridge/**"
+      - "research/cross_repo/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cipi-continuity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CIPI_CROSS_REPO_TOKEN: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Unit and recovery tests
+        run: python -m unittest discover -s tests -p "test_continuity_layer.py" -v
+
+      - name: Deterministic offline build check
+        run: python tools/build_continuity.py --offline --check-only
+
+      - name: Deterministic rebuild test
+        run: |
+          python tools/build_continuity.py --offline
+          python tools/validate_continuity.py
+          cp -R research/continuity/projects "$RUNNER_TEMP/projects-first"
+          cp research/continuity/index.json "$RUNNER_TEMP/index-first.json"
+          rm -rf research/continuity/projects research/continuity/global research/continuity/index.json
+          python tools/build_continuity.py --offline
+          python tools/validate_continuity.py
+          diff -ru "$RUNNER_TEMP/projects-first" research/continuity/projects
+          diff -u "$RUNNER_TEMP/index-first.json" research/continuity/index.json
+
+      - name: Build live product-ref projection
+        run: |
+          rm -rf research/continuity/projects research/continuity/global research/continuity/index.json
+          python tools/build_continuity.py
+          python tools/validate_continuity.py
+
+      - name: Chatless recovery smoke
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("research/continuity/projects/virtual_guitar/current.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["authority"] == "CONTEXT_RECONSTRUCTION_ONLY"
+          assert data["project_id"] == "virtual_guitar"
+          assert data["source_state_digest"]
+          assert data["resume_contract"]["recommended_action"]
+          assert "ready" in data and "blocked" in data and "human_gates" in data
+          print("CHATLESS_RECOVERY=PASS")
+          print("freshness=" + data["freshness"])
+          print("phase=" + data["phase"])
+          print("recommended_action=" + str(data["resume_contract"]["recommended_action"]))
+          print("ready=" + ",".join(x.get("job_id","") for x in data["ready"]))
+          print("blocked=" + ",".join(x.get("job_id","") for x in data["blocked"]))
+          print("human_gates=" + ",".join(str(x.get("job_id") or x.get("track_id") or "") for x in data["human_gates"]))
+          PY
+
+      - name: Commit generated continuity on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name "cipi-continuity-bot"
+          git config user.email "cipi-continuity-bot@users.noreply.github.com"
+          git add -A -- research/continuity/projects research/continuity/global research/continuity/index.json
+          if git diff --cached --quiet; then
+            echo "Continuity projection unchanged."
+            exit 0
+          fi
+          git commit -m "update continuity projection"
+          git push origin HEAD:main

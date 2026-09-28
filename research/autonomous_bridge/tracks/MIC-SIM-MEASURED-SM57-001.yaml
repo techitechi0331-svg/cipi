@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: MIC-SIM-MEASURED-SM57-001
 enabled: false
-activation_state: BLOCKED_CONTROLLED_DATASET
+activation_state: BLOCKED_CONTROLLED_DATASET_VALIDATION
 root_research_id: MIC-SIM-MEASURED-SM57-001
 
 research_question: >-
@@ -40,11 +40,17 @@ depends_on_tracks:
   - MIC-SIM-REFERENCE-SM57-001
 
 activation_requirements:
+  direct_validation_target:
+    repo_key: mic_simulator
+    workflow_key: core_validation
+    validation_mode: acquisition
   mic_simulator_validator: Research/harness/reference_acquisition.py
   required_validator_status: PASS
   required_reference_model: SHURE_SM57
   required_evidence_class: MEASURED
   research_use_permission: true
+  do_not_enable_before_direct_validation: true
+  execution_adapter_required_before_enable: true
   preferred_first_dimensions:
     - phase_group_delay
     - impulse_transient

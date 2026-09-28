@@ -1,0 +1,343 @@
+schema_version: "1.0"
+audit_id: VG-REDTEAM-AUDIT-20260929-001
+project: virtual-guitar
+status: AUDIT_IN_PROGRESS
+audit_type: ARCHITECTURE_PHYSICAL_REALISM_RESEARCH_METHOD_RED_TEAM
+recorded_at: "2026-09-29"
+
+scope:
+  repositories:
+    virtual_guitar: techitechi0331-svg/virtual-guitar
+    cipi: techitechi0331-svg/cipi
+    melon: techitechi0331-svg/melon
+  target: "STRAT_STYLE guitar from performance intent through Pickup/Electronics -> DI"
+  excluded_from_product_scope:
+    - AMP_CAB
+    - MIC_SIMULATOR
+
+observed_heads:
+  virtual_guitar: bd26a0556fb501228b4551f61f6a8e760a14455b
+  melon: cef5668308ad27274ec00b46fdad81577af8d0e2
+  cipi_track_004:
+    enabled: true
+    activation_state: ACTIVE_MELON_REALISM_V2_VALIDATED
+    product_integration: false
+    product_repository_write: false
+    human_gate_required: true
+
+authority:
+  cipi_evidence_authority: true
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  automatic_product_decision: false
+  product_repository_write: false
+  audit_may_change_product_repo: false
+  track_change_from_this_note: PROPOSAL_ONLY
+
+confirmed_findings:
+  - id: VG-AUDIT-S5-STATE-FRAGMENTATION
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      The repository currently contains multiple disconnected notions of the guitar/string:
+      VirtualGuitaristEngine drives semantic LivingString/SixStringBank state; GestureAudioBridge
+      renders through the older SixStringAudioBank/PluckedStringDelayLoop path; the latest
+      PhysicalRealismString/PhysicalRealismSixStringBank candidate is a separate rendering path.
+      There is no single authoritative continuous physical state shared by performance,
+      articulation and the latest sounding model.
+    evidence:
+      - Source/Performance/VirtualGuitarist/VirtualGuitaristEngine.cpp
+      - Source/PhysicalModel/Strings/LivingString.cpp
+      - Source/Performance/Gesture/GestureAudioBridge.cpp
+      - Source/PhysicalModel/Audio/SixStringAudioBank.cpp
+      - Source/PhysicalModel/Audio/PhysicalRealismString.cpp
+      - Source/PhysicalModel/Audio/PhysicalRealismSixStringBank.cpp
+    consequence: >-
+      Muting, note termination, fretting, slides, vibrato, pick release and other performance
+      state cannot causally alter the same acoustic state that produces the R3 waveform.
+
+  - id: VG-AUDIT-S5-R3-NOT-PRODUCT-AUDIO-TRUTH
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      PhysicalRealismString is compiled and rendered as a candidate/test path, but it is not the
+      single integrated audio engine owned by VirtualGuitaristEngine. Product/performance state
+      and candidate audio remain architecturally split.
+    evidence:
+      - CMakeLists.txt
+      - Tests/Audio/physical_realism_render.cpp
+      - Tests/Audio/physical_realism_strum_render.cpp
+      - Source/Performance/VirtualGuitarist/VirtualGuitaristEngine.h
+
+  - id: VG-AUDIT-S5-MELON-V2-NOT-AUDIO-SIMULATION
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      MELON guitar_realism_v2_research does not instantiate or simulate a guitar audio/physical
+      solver. Candidate measurements are algebraic proxy formulas computed directly from sampled
+      parameters and architecture labels. Therefore the current Realism-004 adapter can test
+      bounded proxy identifiability and orchestration behavior, but cannot determine which
+      physical architecture sounds or behaves more like a real guitar.
+    evidence:
+      - melon commit cef5668308ad27274ec00b46fdad81577af8d0e2
+      - melon/guitar_realism_v2_research.py
+    important_detail: >-
+      Metrics such as inharmonicity, onset duration, bridge transfer, sympathetic energy,
+      dynamic detune and contact event proxy are calculated from candidate parameters rather
+      than measured from rendered candidate waveforms or a physical simulation.
+
+  - id: VG-AUDIT-S5-ARCHITECTURE-COMPETITION-BIASED
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      The Realism-v2 phase schedule progressively removes architectures by construction:
+      R1 includes three species, R2 keeps PASSIVE_PLUCK_BRIDGE and NONLINEAR_CONTACT_FULL,
+      and R3 permits only NONLINEAR_CONTACT_FULL. The best-candidate tie-breaking also rewards
+      greater architecture_level. Consequently a final NONLINEAR_CONTACT_FULL result cannot
+      be interpreted as an experimentally demonstrated architecture winner.
+    evidence:
+      - melon/guitar_realism_v2_research.py::_phase
+      - melon/guitar_realism_v2_research.py::ARCHITECTURES
+      - melon/guitar_realism_v2_research.py best-candidate selection
+
+  - id: VG-AUDIT-S5-OBJECTIVE-NOT-REALISM
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      Realism-004 objective_set currently optimizes mechanism_coverage_penalty,
+      architecture_level, estimated CPU cost and estimated memory cost. It contains no
+      rendered-audio distance to a real reference and no perceptual objective. The adapter
+      correctly declares this evidence synthetic, but its output must not drive architecture
+      adoption or mechanism survival decisions as if it were realism evidence.
+    evidence:
+      - research/autonomous_bridge/tracks/VIRTUAL-GUITAR-PHYSICAL-REALISM-004.yaml
+      - melon/guitar_realism_v2_research.py
+
+  - id: VG-AUDIT-S4-INFORMATION-GAIN-SYNTHETIC
+    severity: S4_CRITICAL
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      MELON information_gain_signal is a hand-authored function of the count of architecture
+      labels observed, not a measured reduction in uncertainty or reference error. It must be
+      renamed/reclassified before being used for research-priority decisions.
+    evidence:
+      - melon/guitar_realism_v2_research.py
+
+  - id: VG-AUDIT-S5-PERFORMANCE-TO-AUDIO-INFORMATION-LOSS
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      Gesture/Picking exposes force, angle, depth and other player descriptors, but the current
+      audio handoff collapses much of this information. PickExcitation produces energy and
+      brightness, while GestureAudioBridge forwards excitation energy and pick position;
+      brightness is discarded, angle is not used to shape the acoustic excitation, and
+      pick depth is not part of the R3 sounding model.
+    evidence:
+      - Source/Performance/VirtualGuitarist/VirtualGuitaristState.h
+      - Source/Performance/Picking/PickingEngine.cpp
+      - Source/Performance/Picking/PickExcitation.h
+      - Source/Performance/Gesture/GestureAudioBridge.cpp
+
+  - id: VG-AUDIT-S5-ARTICULATION-NOT-R3-ACOUSTIC
+    severity: S5_ARCHITECTURE_BLOCKER
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      Articulation and note-off logic modify LivingString semantic damping/state, but
+      PhysicalRealismString exposes pluck/process/clear and is not driven by the same lifecycle.
+      Therefore left-hand mute, right-hand mute, palm stop, choke, natural release and string
+      replacement are not yet causal acoustic interactions in the R3 candidate.
+    evidence:
+      - Source/Performance/Articulation/ArticulationStateMachine.cpp
+      - Source/PhysicalModel/Strings/LivingString.cpp
+      - Source/PhysicalModel/Audio/PhysicalRealismString.h
+
+  - id: VG-AUDIT-S4-SIX-STRING-NOT-COUPLED
+    severity: S4_CRITICAL
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      PhysicalRealismSixStringBank owns six independent PhysicalRealismString instances and
+      averages their outputs. There is no common bridge network, inter-string energy transfer
+      or sympathetic coupling in the product candidate.
+    evidence:
+      - Source/PhysicalModel/Audio/PhysicalRealismSixStringBank.cpp
+
+  - id: VG-AUDIT-S4-BRIDGE-BODY-NAMES-EXCEED-PHYSICS
+    severity: S4_CRITICAL
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      Current bridgeCoupling is a static modal gain term. Current body behavior is simplified
+      coloration using two one-pole states. Neither is evidence of a bidirectional mechanical
+      boundary/admittance model.
+    evidence:
+      - Source/PhysicalModel/Audio/PhysicalRealismString.cpp
+
+  - id: VG-AUDIT-S4-GENERIC-MIDI-NOTE-STRING
+    severity: S4_CRITICAL
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      PhysicalRealismString is parameterized by MIDI note and shared realism parameters, without
+      authoritative per-string gauge, tension, material, winding, scale/speaking length, open-vs-
+      fretted boundary or string identity. The same pitch is not inherently tied to a physical
+      string/fret configuration.
+    evidence:
+      - Source/PhysicalModel/Audio/PhysicalRealismString.h
+      - Source/PhysicalModel/Audio/PhysicalRealismString.cpp
+
+  - id: VG-AUDIT-S4-REALISM-TESTS-ARE-FUNCTIONAL-SMOKES
+    severity: S4_CRITICAL
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      physical_realism_smoke currently verifies finite output, non-zero signal and that late RMS
+      is lower than early RMS. It does not test real-guitar realism, pitch trajectory, spectral
+      evolution, string identity, position response, contact mechanics or matched-reference error.
+    evidence:
+      - Tests/Audio/physical_realism_smoke.cpp
+
+  - id: VG-AUDIT-S4-REALTIME-BENCHMARK-WRONG-AUDIO-PATH
+    severity: S4_CRITICAL
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      realtime_memory_smoke benchmarks SixStringAudioBank/PluckedStringDelayLoop, not the latest
+      PhysicalRealismString R3 candidate and not a future coupled Physical Core. Therefore its
+      realtime PASS does not establish realtime feasibility of the current realism candidate.
+    evidence:
+      - Tests/Performance/realtime_memory_smoke.cpp
+      - Source/PhysicalModel/Audio/SixStringAudioBank.h
+
+  - id: VG-AUDIT-S3-R3-SAMPLE-RATE-COVERAGE
+    severity: S3_MAJOR
+    evidence_class: MEASURED
+    verdict: FAIL
+    statement: >-
+      Current R3 realism smoke/render evidence is centered on 48 kHz. Dedicated 44.1/96 kHz
+      realism/stability/performance coverage is not established for the R3 path.
+    evidence:
+      - Tests/Audio/physical_realism_smoke.cpp
+      - Tests/Audio/physical_realism_render.cpp
+
+  - id: VG-AUDIT-S3-OUTPUT-CLAMP-CAN-HIDE-FAILURE
+    severity: S3_MAJOR
+    evidence_class: INFERRED
+    verdict: PARTIAL
+    statement: >-
+      PhysicalRealismString clamps final output to [-2,2]. A safety clamp is not inherently
+      wrong, but without an energy/state invariant and explicit clamp-hit telemetry it can hide
+      unstable or over-energized candidate behavior from downstream tests.
+    evidence:
+      - Source/PhysicalModel/Audio/PhysicalRealismString.cpp
+
+  - id: VG-AUDIT-S4-RAW-GROUND-TRUTH-CONFOUNDER
+    severity: S4_CRITICAL
+    evidence_class: INFERRED
+    verdict: PARTIAL
+    statement: >-
+      EGFxSet/Guitar-TECHS DI are valuable references for Pickup/Electronics->DI and total
+      guitar behavior, but DI inherently includes pickup/electronics observation. They cannot
+      by themselves uniquely identify raw-string displacement/contact physics. The validation
+      plan must separate mechanism tests from DI end-to-end tests rather than optimizing the
+      raw string directly to a confounded DI target.
+    basis:
+      - VG-CONTINUOUS-PHYSICAL-STATE-BLUEPRINT-20260929-001
+      - VG-PHYSICAL-REALISM-EVIDENCE-REFINEMENT-20260929-002
+
+validated_positive_findings:
+  - id: VG-AUDIT-POS-CIPI-BOUNDARY
+    evidence_class: MEASURED
+    statement: >-
+      CIPI correctly keeps automatic product adoption, automatic promotion and product writes
+      disabled for Realism-004 and explicitly requires Human Listening, real-audio A/B and
+      later host confirmation.
+
+  - id: VG-AUDIT-POS-HUMAN-REJECTION-PRESERVED
+    evidence_class: MEASURED
+    statement: >-
+      The FAR_BELOW_TARGET Human Gate result for Realism-v1.1 is preserved and was not overwritten
+      by CI success or by the newer architecture research.
+
+  - id: VG-AUDIT-POS-CONTINUOUS-STATE-BLUEPRINT
+    evidence_class: INFERRED
+    statement: >-
+      The new CIPI continuous physical-state blueprint identifies the central duplicate-physical-
+      truth problem and proposes an evidence-aligned migration toward one authoritative per-string
+      physical state.
+
+  - id: VG-AUDIT-POS-MELON-EVIDENCE-LABEL
+    evidence_class: MEASURED
+    statement: >-
+      MELON explicitly labels v2 outputs as synthetic architecture-identifiability evidence and
+      disables fidelity/listening/product authority. The principal defect is not false labeling;
+      it is that the current proxy experiment is too weak and structurally biased to determine
+      mechanism survival or architecture superiority.
+
+workflow_evidence:
+  validation_run_36451579434:
+    conclusion: SUCCESS
+    interpretation: >-
+      Regression/adapter readiness only. The run proves MELON code/tests execute; it does not
+      validate guitar realism.
+  research_run_36452485122:
+    conclusion: SUCCESS
+    research_steps: SKIPPED
+    interpretation: >-
+      No Realism-004 R1 scientific research result can be inferred from this workflow.
+
+provisional_root_causes:
+  - "Research prototype grew in layers without collapsing semantic string state and acoustic string state into one authority."
+  - "MELON architecture research currently models properties of architecture labels instead of executing candidate architecture implementations."
+  - "Functional/regression success is much stronger than realism-validation coverage."
+  - "Reference planning is ahead of reference adapter implementation and layer-specific identifiability design."
+
+provisional_critical_path:
+  - priority: 1
+    item: "Repair the research method before using Realism-004 rankings for mechanism or architecture selection."
+  - priority: 2
+    item: "Define one authoritative continuous PhysicalStringState / PhysicalGuitarModel boundary."
+  - priority: 3
+    item: "Design executable candidate solvers or mechanism ablations whose outputs can actually be measured."
+  - priority: 4
+    item: "Split raw-physics mechanism validation from end-to-end DI/reference validation."
+  - priority: 5
+    item: "Only after evidence quality is repaired, run bounded architecture/mechanism research."
+  - priority: 6
+    item: "Product implementation remains blocked by product_repository_write=false."
+
+provisional_track_recommendation:
+  status: PROPOSAL_ONLY
+  recommendation: >-
+    Do not use the current Realism-004 MELON adapter to eliminate architectures or declare a
+    winner. It may remain as an orchestration/proxy canary, but scientific mechanism survival
+    should require executable physical/audio candidate evidence, ablation, and later real-reference
+    and Human Gates.
+
+audit_completion:
+  state: INCOMPLETE
+  completed:
+    - latest_main_and_authority_check
+    - current_audio_architecture_audit
+    - performance_state_audit
+    - state_split_audit
+    - MELON_objective_and_proxy_audit
+    - functional_vs_realism_test_audit
+    - workflow_validation_vs_research_audit
+  remaining:
+    - full_dependency_and_coupled_cluster_matrix
+    - complete_unknown_inventory
+    - detailed_performance_model_gap_matrix
+    - full_reference_identifiability_matrix
+    - numerical_and_energy-test design audit
+    - counterfactual_and_ablation plan
+    - final critical-path and next-track specification
+    - adversarial self-refutation pass

@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "automatic_promotion_disabled": true,
+    "cable_capacitance_changes_higher_order_loaded_resonance": true,
+    "cable_capacitance_changes_low_order_loaded_resonance": true,
+    "hardware_fidelity_not_claimed": true,
+    "low_vs_higher_order_electrical_models_are_distinguishable": true,
+    "pickup_positions_produce_distinct_harmonic_signatures": true,
+    "point_vs_finite_aperture_is_measurably_distinguishable": true,
+    "product_integration_disabled": true,
+    "synthetic_fixture_not_promoted_to_product_values": true
+  },
+  "evidence_boundary": "MEASURED_SYNTHETIC_MODEL_DISCRIMINABILITY_NOT_PICKUP_HARDWARE_FIDELITY",
+  "passed": true
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "candidate_id": "OBS-POINT",
+    "candidate_role": "MODEL_CLASS",
+    "model_class": "POINT_OBSERVATION",
+    "status": "measured_synthetic"
+  },
+  {
+    "candidate_id": "OBS-APERTURE",
+    "candidate_role": "MODEL_CLASS",
+    "model_class": "FINITE_APERTURE_OBSERVATION",
+    "status": "measured_synthetic"
+  },
+  {
+    "candidate_id": "ELEC-LOW",
+    "candidate_role": "MODEL_CLASS",
+    "model_class": "LOW_ORDER_LUMPED_EQUIVALENT",
+    "status": "measured_synthetic"
+  },
+  {
+    "candidate_id": "ELEC-HIGHER",
+    "candidate_role": "MODEL_CLASS",
+    "model_class": "HIGHER_ORDER_SPLIT_CAPACITANCE_PROXY",
+    "status": "measured_synthetic"
+  }
+]

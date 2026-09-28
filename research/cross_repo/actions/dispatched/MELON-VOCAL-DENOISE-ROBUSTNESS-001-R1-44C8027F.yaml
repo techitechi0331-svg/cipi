@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-DENOISE-ROBUSTNESS-001-R1-44C8027F
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -21,7 +21,7 @@ inputs:
     a selected model candidate remain stable across singers, noise families, levels
     and edge cases?","track_id":"VOCAL-DENOISE-ROBUSTNESS-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -39,3 +39,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36474122378
+dispatched_at: '2026-09-28T19:44:23.575509Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

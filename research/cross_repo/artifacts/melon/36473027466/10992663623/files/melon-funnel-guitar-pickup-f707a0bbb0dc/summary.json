@@ -1,0 +1,54 @@
+{
+  "bridge_profile": {
+    "architecture": "PICKUP_OBSERVATION_ELECTRICAL_MODEL_DISCRIMINATION_V1",
+    "benchmark_profiles": [
+      "synthetic_pickup_position_aperture_discrimination_v1",
+      "synthetic_low_vs_higher_order_pickup_network_discrimination_v1",
+      "synthetic_cable_load_sensitivity_v1"
+    ],
+    "input_set": "SYNTHETIC_METHOD_IDENTIFIABILITY_FIXTURES_V1",
+    "objective_set": [
+      "measurement_discriminability",
+      "causal_boundary_coverage",
+      "numerical_stability"
+    ],
+    "reference_model": "COMPETING_MODEL_CLASSES_NO_HARDWARE_TRUTH",
+    "relevant_constraints": [
+      "no_real_pickup_fidelity_claim",
+      "no_product_component_values",
+      "no_model_winner_without_real_evidence",
+      "reference_di_downstream",
+      "product_integration_off",
+      "automatic_promotion_off"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_PICKUP_MODEL_DISCRIMINATION",
+    "sample_rate": 48000
+  },
+  "budget_recommendation": {
+    "action": "STOP_SYNTHETIC_LOOP_REQUIRE_EXTERNAL_EVIDENCE"
+  },
+  "deep_validation_count": 0,
+  "domain_evidence_artifact": "pickup_model_discrimination.json",
+  "effective_config": {
+    "generations": 1,
+    "max_candidates": 8,
+    "max_runtime_seconds": 60.0,
+    "population_size": 4,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 0,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_PICKUP_MODEL_DISCRIMINATION",
+  "routes": {},
+  "run_id": "melon-funnel-guitar-pickup-f707a0bbb0dc",
+  "seed": 0,
+  "stage1_pareto": 0,
+  "stage1_stop_reason": "SYNTHETIC_MEASUREMENT_DESIGN_VALIDATED_EXTERNAL_EVIDENCE_REQUIRED",
+  "stage2_archive": 0,
+  "stage2_pareto": 0,
+  "timestamp": "2026-09-28T19:43:02.785462+00:00"
+}

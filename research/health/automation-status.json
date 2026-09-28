@@ -477,13 +477,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "VOCAL-DENOISE-TINY-ML-TRAIN-005",
+      "kind": "CROSS_REPO",
+      "priority": 97,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 49,
       "dispatched": 0,
       "failed": 13,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -526,9 +531,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/auto-d3d00845590b",
-    "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
-    "kind": "LOCAL_RESEARCH",
-    "priority": 55
+    "action_id": "VOCAL-DENOISE-TINY-ML-TRAIN-005",
+    "kind": "CROSS_REPO",
+    "priority": 97,
+    "reason": "ready_external_action"
   }
 }

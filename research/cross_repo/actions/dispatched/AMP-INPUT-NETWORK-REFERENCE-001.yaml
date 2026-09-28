@@ -1,0 +1,29 @@
+schema_version: '1.0'
+action_id: AMP-INPUT-NETWORK-REFERENCE-001
+state: DISPATCHED
+repo_key: amp_simulator
+workflow_key: input_reference
+ref: main
+inputs:
+  job_id: AMP-INPUT-NETWORK-REFERENCE-001
+  track_id: AMP-INPUT-NETWORK-001
+priority: 64
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: Execute the bounded synthetic Amp Input / Guitar-Cable electrical reference
+  on the dedicated amp_simulator runner. This action validates reference mathematics,
+  contract lineage, numerical stability and cable/load sensitivity only. It does not
+  select hardware values, a branded amplifier, a pickup model, product DSP, or a fidelity
+  claim.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+evidence_boundary: MEASURED_SYNTHETIC_LINEAR_LUMPED_REFERENCE_NOT_HARDWARE_FIDELITY
+previous_run_id: 36467900021
+dispatched_at: '2026-09-28T18:51:22.897871Z'
+repository: techitechi0331-svg/amp_simulator
+workflow_file: amp-research-gate.yml

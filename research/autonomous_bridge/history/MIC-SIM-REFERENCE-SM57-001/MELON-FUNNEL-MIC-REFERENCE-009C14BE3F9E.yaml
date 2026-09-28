@@ -1,0 +1,80 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-mic-reference-009c14be3f9e
+processed_artifact_hash: 886d2825e36db56992a809b367e6e73d7d380a53727e53dff81fd4f653102783
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36405866785/10962556281/files/melon-funnel-mic-reference-009c14be3f9e/macro_result.json
+track_id: MIC-SIM-REFERENCE-SM57-001
+job_id: MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C
+parent_job_id: null
+parent_run_id: null
+root_research_id: MIC-SIM-REFERENCE-SM57-001
+hypothesis_id: HYP-MIC-SM57-REFERENCE-EVIDENCE
+experiment_id: EXP-MIC-SM57-REFERENCE-R1
+loop_depth: 1
+route: HUMAN_GATE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 1.0
+improvement_signal: 0.85
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 7
+  deep_validation_count: 1
+  runtime_seconds: 0.0
+  stage2_measurement_runs: 0
+measured_candidates: 7
+stop_reason: REFERENCE_SOURCE_FACT_INVENTORY_COMPLETE
+bundle_hash: 92b224df54b38dd653b0651485d8394937979f1748b9b554ade615d2162f1d81
+efficiency_policy:
+  candidate_timeout_seconds: 5
+  full_regression_required: false
+  max_memory_mb: 1024
+  policy_id: MIC-SIM-SM57-REFERENCE-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+efficiency_summary:
+  candidate_count: 7
+  measured_count: 7
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 5
+  deep_stage_survivors: 1
+  runner_runtime_seconds: 0.0
+  research_compute_seconds: 0.0
+  runner_job_seconds: null
+  total_wall_seconds: null
+  information_gain_signal: 0.85
+  duplicate_rate: 0.0
+  candidates_per_runner_minute: 420000000000.0
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.0
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_REFERENCE_EVIDENCE_INVENTORY
+time_metrics:
+  queue_wait_seconds: null
+  runner_job_seconds: null
+  checkout_seconds: null
+  environment_setup_seconds: null
+  preflight_seconds: null
+  research_compute_seconds: 0.0
+  macro_export_seconds: null
+  artifact_upload_seconds: null
+  total_wall_seconds: null
+research_quality_metrics:
+  budget_exhaustion_rate: null
+  cache_hit_rate: null
+  duplicate_research_rate: 0.0
+  early_convergence_rate: null
+  falsification_rate: null
+  human_gate_rate: null
+  new_information_per_compute_second: null
+  new_information_per_run: 0.85
+  pareto_front_turnover: null
+  ranking_stability: null
+  replication_consistency: null
+  research_compute_to_runner_wall_ratio: null
+  semantic_duplicate_rate: 0.0
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

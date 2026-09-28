@@ -1,0 +1,42 @@
+schema_version: '1.0'
+decision_id: MIC-SIM-REFERENCE-SM57-001:melon-funnel-mic-reference-009c14be3f9e:continuation
+track_id: MIC-SIM-REFERENCE-SM57-001
+run_id: melon-funnel-mic-reference-009c14be3f9e
+job_id: MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C
+loop_depth: 1
+decision: STOP
+stop_reason: HUMAN_GATE
+continuation_fingerprint: null
+accepted_candidate_id: null
+selected_architecture: null
+rejections: []
+proposal_count: 0
+duplicate_suppressions: 0
+human_gate_proposals: 0
+processed_artifact_hash: 886d2825e36db56992a809b367e6e73d7d380a53727e53dff81fd4f653102783
+efficiency_policy:
+  policy_id: MIC-SIM-SM57-REFERENCE-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 5
+  full_regression_required: false
+efficiency_summary:
+  candidate_count: 7
+  measured_count: 7
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 5
+  deep_stage_survivors: 1
+  runner_runtime_seconds: 0.0
+  candidates_per_runner_minute: 420000000000.0
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 0.0
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_REQUIRED_FOR_REFERENCE_EVIDENCE_INVENTORY
+authority: CIPI_CONTINUATION_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

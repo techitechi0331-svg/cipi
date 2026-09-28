@@ -29,6 +29,7 @@ completed:
   - measurement
 
 unresolved:
+  - Candidate-A harmonic-protection CPU cost, pitch-confidence thresholds and 55% protection cap are not yet compiled/measured and remain provisional.
   - Legitimate harmonics/formants can still be mistaken for unwanted spectral prominence.
   - Harmonic/formant-safe spectral protection is not numerically locked.
   - Representative real-vocal level-matched AB/ABX is incomplete.
@@ -41,5 +42,6 @@ why_next: "Implementation, deterministic measurement, pluginval strictness 10 an
 next_confirmation: "Whether harmonic/formant-safe discrimination improves Smooth without dulling legitimate vocal structure, whether 50% remains the correct nominal default, and whether Cubase Pro 14 PDC is correct."
 
 blockers:
+  - GitHub-hosted Windows runner assignment is currently unavailable for harmonic-safety R1; observed runs fail before any workflow step with runner_id=0.
   - Representative dry-vocal material is required for the perceptual gate.
   - Cubase Pro 14 real-host validation is required for PDC confirmation.

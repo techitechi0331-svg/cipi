@@ -404,3 +404,45 @@ Human gates remain for:
 - commercial naming/release
 
 This file is a handoff snapshot, not a claim that full SM57 fidelity has been achieved.
+
+
+---
+
+## 10. Continuation update — rights-gated preflight
+
+A continuation audit on 2026-09-29 rechecked the current primary-source state.
+
+### Rights state
+- Zenodo 4633508 still exposes the archive, published MD5 and attribution note.
+- The rendered `Rights -> License` field still does not expose a concrete dataset license value in the available primary-source evidence.
+- The University of Surrey publication record marks the **paper author's accepted manuscript** as CC BY 4.0; that license is not silently transferred to the dataset bytes.
+- A secondary Hugging Face mirror labels the Zenodo-derived source CC BY 4.0, but CIPI does not accept that secondary claim as the sole authority for commercial/product-linked model fitting.
+- Formal audit: `research/plugins/mic-simulator/sm57-zenodo-rights-audit-2026-09-29.md`.
+
+Decision remains:
+`BLOCKED_AUTHORITATIVE_DATASET_LICENSE_UNVERIFIED`.
+
+### Mic Simulator no-wait preparation now merged
+Mic Simulator main:
+- `1c499b13b5e78a91dd3f1f40af4f9c5969ec3804`
+- PR #6 CI passed before merge.
+
+Added:
+- rights-gated Zenodo archive workflow;
+- published MD5 verification;
+- actual ZIP-member SM57 discovery without guessed paths;
+- per-member SHA-256 provenance support;
+- extraction refusal while rights are unverified;
+- raw-IR-derived magnitude / phase / group-delay analysis with explicit processing provenance;
+- synthetic positive and negative tests;
+- Surrey/Zenodo registered as CANDIDATE only.
+
+The archive is still **not acquired** and no measured-track activation occurred.
+
+### Activation safety tightened
+`MIC-SIM-MEASURED-SM57-001` now explicitly requires:
+- authoritative dataset rights before enable;
+- a measured model-fit execution path before enable;
+- preflight adapter alone is insufficient.
+
+Product integration, automatic promotion and automatic release remain OFF.

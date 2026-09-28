@@ -90,20 +90,33 @@ jobs:
       - name: Record stale-safe Human Gate decision
         id: decision
         shell: bash
+        env:
+          HG_PROJECT_ID: ${{ inputs.project_id }}
+          HG_TARGET_TYPE: ${{ inputs.target_type }}
+          HG_TARGET_ID: ${{ inputs.target_id }}
+          HG_GATE: ${{ inputs.gate }}
+          HG_OUTCOME: ${{ inputs.outcome }}
+          HG_EVIDENCE_REF: ${{ inputs.evidence_ref }}
+          HG_RATIONALE: ${{ inputs.rationale }}
+          HG_ACTOR: ${{ inputs.actor }}
+          HG_SOURCE: ${{ inputs.source }}
+          HG_GENERATION_ID: ${{ inputs.source_generation_id }}
+          HG_STATE_DIGEST: ${{ inputs.source_state_digest }}
+          HG_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           python automation/human_gate/apply.py \
-            --project-id '${{ inputs.project_id }}' \
-            --target-type '${{ inputs.target_type }}' \
-            --target-id '${{ inputs.target_id }}' \
-            --gate '${{ inputs.gate }}' \
-            --outcome '${{ inputs.outcome }}' \
-            --evidence-ref '${{ inputs.evidence_ref }}' \
-            --rationale '${{ inputs.rationale }}' \
-            --actor '${{ inputs.actor }}' \
-            --source '${{ inputs.source }}' \
-            --source-generation-id '${{ inputs.source_generation_id }}' \
-            --source-state-digest '${{ inputs.source_state_digest }}' \
-            --run-id '${{ github.run_id }}-${{ github.run_attempt }}' \
+            --project-id "$HG_PROJECT_ID" \
+            --target-type "$HG_TARGET_TYPE" \
+            --target-id "$HG_TARGET_ID" \
+            --gate "$HG_GATE" \
+            --outcome "$HG_OUTCOME" \
+            --evidence-ref "$HG_EVIDENCE_REF" \
+            --rationale "$HG_RATIONALE" \
+            --actor "$HG_ACTOR" \
+            --source "$HG_SOURCE" \
+            --source-generation-id "$HG_GENERATION_ID" \
+            --source-state-digest "$HG_STATE_DIGEST" \
+            --run-id "$HG_RUN_ID" \
             --github-output "$GITHUB_OUTPUT"
 
       - name: Validate Human Gate records

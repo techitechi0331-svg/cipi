@@ -1,0 +1,39 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-CABLE-LOAD-INTERACTION-001
+project: virtual-guitar
+status: RESEARCH_READY
+recorded_at: "2026-09-29"
+ownership_boundary: CIPI_CROSS_REPO_INTEGRATION_RESEARCH
+
+research_question: >-
+  Which cable and load parameters materially alter the passive guitar electrical response,
+  and what is the simplest validated representation that preserves those interactions when
+  connected to an amp input network?
+
+research_dimensions:
+  - cable_length_where_applicable
+  - capacitance
+  - resistance
+  - inductance
+  - lumped_vs_distributed_model
+  - amp_input_impedance
+  - amp_input_capacitance
+  - source_impedance_vs_frequency
+  - resonance_shift
+  - resonance_q_change
+
+required_comparisons:
+  - high_accuracy_reference
+  - reduced_candidate
+  - sensitivity_sweep
+  - deterministic_reproduction
+
+forbidden:
+  - CABLE_AS_STATIC_EQ_ONLY_WITHOUT_EQUIVALENCE_PROOF
+  - UNKNOWN_PARAMETER_INVENTION
+  - FINISHED_WAV_ONLY_CONTRACT
+
+authority:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

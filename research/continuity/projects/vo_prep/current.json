@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "099dfaea3f1083bdc87bfd09e527f406256be6cf",
+    "commit_sha": "11959a7b00467ae8415f5453ca47aa0bbf7f4f09",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T07:00:20+09:00",
-  "generation_id": "230bf2e0c6c91c52a2903907",
+  "generated_at": "2026-09-29T07:30:42+09:00",
+  "generation_id": "4373e3bc863bb2ebb41a7a1c",
   "human_gates": [],
   "latest_decision_refs": [
     {
@@ -763,7 +763,7 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "5d8d05fb5104f199e3b58f589ed05b70155dee4932c08e4c0be8aed97be52394",
+      "sha256": "3cddedba20393841162ad66c3120d370090fb1873d190f9caca881c5a028f919",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -1064,7 +1064,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "52661b7e9359b0872c26d8f28e2d5583460a1946a7f27c4bc53782d5fb8cba27",
+  "source_state_digest": "513c0daf0f5d652023f5ed5a20546c22b11761a654a93a99c64e4eb555c63272",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

@@ -1,0 +1,26 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-006
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: train
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-006
+  dataset_registry_path: configs/datasets/registry.json
+  seed: '2026092905'
+  max_steps: '300'
+priority: 98
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-003
+reason: >-
+  Train the v0.3 singer-balanced candidate after correcting the sampling protocol.
+  Keep the v0.2 HF-protect architecture, loss weights, seed, dataset, and 300-step
+  budget fixed so the main changed variable is balanced exposure across train singer
+  identities rather than path-ordered file sampling. This is a bounded generalization
+  experiment only and carries no listening, product-adoption, or release authority.
+previous_run_id: 36466102524

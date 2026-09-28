@@ -286,6 +286,19 @@ repositories:
         required_inputs:
           - job_id
           - track_id
+      zenodo_ingest:
+        file: sm57-zenodo-ingest.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - rights_status
+          - archive_url
+          - expected_md5
+        required_inputs:
+          - rights_status
+          - archive_url
+          - expected_md5
 
 
   vocal_denoise:

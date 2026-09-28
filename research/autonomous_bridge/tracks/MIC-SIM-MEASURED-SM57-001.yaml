@@ -51,6 +51,10 @@ activation_requirements:
   research_use_permission: true
   do_not_enable_before_direct_validation: true
   execution_adapter_required_before_enable: true
+  authoritative_dataset_rights_required_before_enable: true
+  measured_model_fit_execution_required_before_enable: true
+  preflight_adapter_alone_is_insufficient: true
+  rights_audit_file: research/plugins/mic-simulator/sm57-zenodo-rights-audit-2026-09-29.md
   preferred_first_dimensions:
     - phase_group_delay
     - impulse_transient

@@ -1,9 +1,13 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
-enabled: true
+enabled: false
 root_research_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
-activation_state: ACTIVE_MELON_REALISM_V2_VALIDATED
+activation_state: SUPERSEDED_RESEARCH_METHOD_INVALID_FOR_SELECTION
 supersedes_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-003
+superseded_by_track: VIRTUAL-GUITAR-RESEARCH-METHOD-005
+research_role: PROXY_CANARY_ONLY
+scientific_selector: false
+selection_authority: false
 supersession_reason: >-
   Realism-003 completed its bounded v1.1 mechanism search and produced an implementation render,
   but Human Gate judged the result far below the target. Preserve all v1.1 measurements and

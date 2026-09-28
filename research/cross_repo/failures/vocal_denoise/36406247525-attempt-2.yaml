@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-DATASET-PREPARE-003
+repo_key: vocal_denoise
+workflow_key: dataset_prepare
+run_id: 36406247525
+run_attempt: 2
+head_sha: db29eed2aeed94ab33de92b306020cd9552688f0
+classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Prepare persistent VocalSet cache
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

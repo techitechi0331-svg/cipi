@@ -1,0 +1,67 @@
+schema_version: "1.0"
+contract_id: PICKUP-ELECTRONICS-ACTIVATION-GATES-002
+project: virtual-guitar
+status: ACTIVE
+recorded_at: "2026-09-29"
+supersedes: PICKUP-ELECTRONICS-ACTIVATION-GATES-001
+supersession_reason: >-
+  Version 001 required DI output convergence before Pickup/Electronics, while the current
+  causal architecture defines Reference DI downstream of Pickup/Electronics and the
+  Guitar Electrical Port. This version separates research readiness from product integration
+  readiness and removes the semantic dependency cycle without deleting historical evidence.
+
+definitions:
+  RAW_PHYSICAL_STRING: PICKUP_INDEPENDENT_PHYSICAL_STATE_OR_OBSERVATION
+  GUITAR_ELECTRICAL_PORT: POST_PICKUP_POST_GUITAR_ELECTRONICS_OUTPUT_JACK_BOUNDARY
+  REFERENCE_DI: GUITAR_ELECTRICAL_PORT_CONNECTED_TO_EXPLICIT_REFERENCE_LOAD_OR_HIZ_DI
+
+research_ready:
+  state: READY_WITH_NON_PREEMPTION
+  dependencies:
+    - CURRENT_MAIN_RECHECK
+    - OWNERSHIP_POLICY_V2_ACTIVE
+  does_not_require:
+    - REFERENCE_DI_CONVERGENCE
+    - FINAL_PHYSICAL_GUITAR_PRODUCT_ADOPTION
+  allowed:
+    - pickup_literature_research
+    - pickup_observation_contract_design
+    - magnetic_transduction_candidate_research
+    - pickup_electrical_network_candidate_research
+    - sss_hss_topology_research
+    - volume_tone_selector_network_research
+    - test_harness_design
+    - offline_reference_model
+  prohibited:
+    - product_repository_write_without_authority
+    - final_subjective_tone_adoption
+    - claim_reference_di_before_guitar_electrical_port_exists
+    - preempt_realism_004_human_gate
+
+product_integration_ready:
+  state: BLOCKED_DEPENDENCY
+  required_gates:
+    - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+    - VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+    - VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+    - VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+  downstream_not_prerequisite:
+    - VIRTUAL-GUITAR-REFERENCE-DI-VALIDATION-GATE-001
+  completion_authority: CIPI
+
+reference_di:
+  causal_order:
+    - PHYSICAL_GUITAR
+    - PICKUP_OBSERVATION
+    - MAGNETIC_TRANSDUCTION
+    - PICKUP_ELECTRICAL_NETWORK
+    - SELECTOR_VOLUME_TONE
+    - GUITAR_ELECTRICAL_PORT
+    - EXPLICIT_REFERENCE_CABLE_AND_LOAD
+    - REFERENCE_DI
+  unknown_load_conditions_must_remain_unknown: true
+
+authority:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

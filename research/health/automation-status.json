@@ -431,8 +431,8 @@
     "ready_action": null,
     "states": {
       "completed": 42,
-      "dispatched": 1,
-      "failed": 10,
+      "dispatched": 0,
+      "failed": 11,
       "quarantined": 0,
       "queued": 1
     }
@@ -463,9 +463,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

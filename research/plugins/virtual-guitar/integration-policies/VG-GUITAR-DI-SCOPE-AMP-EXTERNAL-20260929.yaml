@@ -1,0 +1,49 @@
+schema_version: "1.0"
+policy_id: VG-GUITAR-DI-SCOPE-AMP-EXTERNAL-20260929
+project: virtual-guitar
+policy_type: PRODUCT_RESEARCH_SCOPE
+status: ACTIVE
+recorded_at: "2026-09-29"
+source: USER_SCOPE_DECISION
+
+decision:
+  guitar_lab_target: "STRAT_STYLE raw guitar through Pickup/Electronics -> DI"
+  intended_use: "J-POP / anime-song production"
+  current_goal_ja: "本物のギターを原音の状態で再現することに尽力する"
+  amp_research:
+    ownership: EXTERNAL_SEPARATE_RESEARCH
+    create_now: false
+    integrate_later: true
+  cabinet_research:
+    ownership: EXTERNAL_SEPARATE_RESEARCH
+    integrate_later: true
+  mic_research:
+    ownership: EXTERNAL_MIC_SIMULATOR_REPOSITORY
+    repository: "techitechi0331-svg/mic_simulator"
+
+supersedes_for_current_scope:
+  - "Any earlier assumption that Amp/Cab research must be developed as part of the current virtual-guitar realism loop."
+
+preserves:
+  - "Signal boundary: Physical Guitar -> Pickup/Electronics -> DI -> external Amp/Cab -> external Mic."
+  - "Future versioned integration is allowed."
+  - "Raw physical-string reference remains mandatory for Human Listening."
+  - "Existing Mic Simulator separation policy remains active."
+
+forbidden_current_scope:
+  - IMPLEMENT_AMP_TO_HIDE_STRING_REALISM_GAPS
+  - IMPLEMENT_CAB_TO_HIDE_STRING_REALISM_GAPS
+  - MIX_MIC_BEHAVIOR_INTO_STRING_OR_PICKUP_MODEL
+  - CALL_AMP_PROCESSED_AUDIO_A_RAW_GUITAR_REFERENCE
+
+guitar_lab_success_condition:
+  - "Raw physical-string behavior is physically credible."
+  - "Physical Guitar/bridge/body/string interactions are credible."
+  - "Strat-style Pickup/Electronics produce a credible DI signal."
+  - "Human Listening and matched real-DI A/B support adoption."
+  - "Amp/Cab/Mic are not required to make the raw/DI guitar believable."
+
+authority:
+  user_scope_decision: true
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false

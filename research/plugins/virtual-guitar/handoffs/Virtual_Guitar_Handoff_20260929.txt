@@ -1,0 +1,526 @@
+Virtual Guitar / Strat DI Realism
+引き継ぎ書 2026-09-29
+============================================================
+
+0. このファイルの使い方
+------------------------------------------------------------
+新しいチャットの最初にこの .txt を渡し、
+
+「CIPI / MELON / virtual-guitar の最新mainを確認して、この引き継ぎ書と
+CIPIの保存情報を照合したうえで続きから進めて。推測で進めず、現在の
+Authority / Track lifecycle / active workflowを先に確認してね。」
+
+と指示すればよい。
+
+この引き継ぎ書は「2026-09-29時点のスナップショット」。
+GitHubの最新main / CIPI automation-statusを必ず再確認してから作業すること。
+
+
+1. 今回の最終ターゲット
+------------------------------------------------------------
+第一ギターモデル:
+- STRAT_STYLE
+- J-POP / アニソン制作向け
+- 最終的な「ギター研究」の完成地点は Pickup / Electronics -> DI まで
+
+ユーザー最新方針:
+- アンプ研究は別で作る
+- 今は「本物のギターを原音の状態で再現する」ことに集中
+- マイク研究は既存の別Repo techitechi0331-svg/mic_simulator
+- Amp / Cab / Micで弦の不自然さを隠さない
+- 元の弦音が分からないと判断しにくいので、Human GateではRaw Stringを必ず残す
+
+信号境界:
+Virtual Guitarist
+-> Gesture / Fingering / Articulation
+-> 6 Living Strings
+-> Physical Guitar
+-> Pickup / Electronics
+-> DI OUT
+========== Guitar Labの現在の完成境界 ==========
+-> [将来別研究] Amp / Cab
+-> [別Repo] Mic Simulator
+
+
+2. 現在確認したRepo
+------------------------------------------------------------
+virtual-guitar:
+  techitechi0331-svg/virtual-guitar
+  observed main: bd26a0556fb501228b4551f61f6a8e760a14455b
+
+MELON:
+  techitechi0331-svg/melon
+  observed main: cef5668308ad27274ec00b46fdad81577af8d0e2
+
+CIPI:
+  techitechi0331-svg/cipi
+  handoff作成前に観測したmain: 23ae7efd1a27839ba3b5cba7623e2dbc22f10e7f
+  ※この引き継ぎ保存コミットでmainはさらに進む。
+
+Mic Simulator:
+  techitechi0331-svg/mic_simulator
+  observed main: 189c29035277104412fa58c97843ebde05a83e68
+
+
+3. Realism-v1.1の現在地
+------------------------------------------------------------
+virtual-guitar commit:
+bd26a0556fb501228b4551f61f6a8e760a14455b
+message:
+Implement Physical Realism R3 candidate for human listening
+
+CI:
+- guitar-core-validation 36348525120: SUCCESS
+- guitar-targeted-validation 36348525109: SUCCESS
+
+実装されている主なモデル:
+- PhysicalRealismString
+- PhysicalRealismSixStringBank
+- 24 mode modal oscillator
+- frequency-dependent damping
+- static dispersion / inharmonicity
+- pick-position harmonic comb
+- deterministic short pick-noise transient
+- simple bridge modal gain
+- simplified body coloration
+
+生成済みのHuman Review音源:
+- physical_realism_r3_candidate001_e3.wav
+- physical_realism_r3_candidate001_strum.wav
+
+ユーザーHuman Gate:
+「全然まだほど遠い」
+
+CIPI evidence:
+research/plugins/virtual-guitar/human-evidence/VG-HUMAN-LISTENING-20260929-002.yaml
+
+結論:
+- Realism-v1.1を製品採用しない
+- 同じ8パラメータの微調整だけを繰り返さない
+- architecture-level研究へ進む
+
+
+4. 重要: bd26a055のAuthority問題
+------------------------------------------------------------
+Realism-003 trackには以下が明記されている:
+- product_integration: false
+- product_repository_write: false
+
+しかしbd26a055ではproduct Repoへprototype実装が入った。
+
+扱い:
+- CIを通った「prototype / Human Review evidence」としては保存
+- authorized product integrationとは呼ばない
+- 採用済みとは呼ばない
+- 勝手に履歴削除/リバートしない
+- 次のproduct repo書き込み前にCIPI Authorityを必ず整合させる
+
+CIPI incident:
+research/plugins/virtual-guitar/incidents/
+VG-PRODUCT-WRITE-AUTHORITY-AUDIT-20260929-001.yaml
+
+
+5. 現コードを調査して分かった「本物との差」
+------------------------------------------------------------
+A. PhysicalRealismString
+現在:
+- 24個のモードで合成
+- nごとの減衰
+- dispersion
+- pick position
+- 短いnoise transient
+- staticなbridge/body係数
+
+不足:
+- traveling-wave / distributed string propagation
+- 2偏波
+- pickと弦の連続接触/解放
+- fret/finger collision
+- dynamic detune
+- bridgeでの複数弦energy scattering
+- sympathetic resonance
+- guitar構造/neck/bodyのimpedance
+- string gauge / tension / scale length / winding/material
+- open stringとfretted stringのboundary差
+- pickup位置での実際の観測
+
+B. LivingString
+現在:
+- persistent state
+- ring/mute
+- excitation history
+- scalar energy/damping
+
+不足:
+- distributed physical state
+- audio solverと完全に一体化した物理状態
+- contact/bridge/body/pickupまで連続したenergy transfer
+
+C. GestureEngine
+現在:
+- stroke timing
+- pick force
+- pick angle
+- left-hand shift descriptor
+- squeak/fret-noise amount等のcontrol descriptor
+
+不足:
+- pick stiffness/depth/friction/contact/releaseの物理
+- left/right hand gestureが同じphysical solverを継続的に駆動する構造
+
+D. FingeringSolver
+現在:
+- standard tuning
+- 24 fret
+- fret/string/hand-positionの単純movement cost
+
+不足:
+- guitarist intent
+- phrase-level position strategy
+- chord-specific fingering
+- string-choiceによるtimbre
+- hand anatomy
+- articulationと物理音の連携
+
+
+6. 文献からCIPIへ保存済みの重要メカニズム
+------------------------------------------------------------
+保存先:
+research/plugins/virtual-guitar/research-notes/
+VG-PHYSICAL-REALISM-ARCHITECTURE-LITERATURE-20260929.yaml
+
+重要方向:
+1. two-polarization string motion
+2. nonlinear string/fret/finger contact
+3. passive / physically motivated player-string pluck interaction
+4. bridge scattering
+5. sympathetic string coupling
+6. dynamic pitch detuning / glide
+7. pickup nonlinearityは後段のPickup研究で扱う
+
+注意:
+文献メカニズムが正しいことと「現在候補が本物っぽい」は別。
+Human Listening / Real Audio A/B必須。
+
+
+7. Realism-004 / MELON v2
+------------------------------------------------------------
+MELON commit:
+cef5668308ad27274ec00b46fdad81577af8d0e2
+
+追加:
+- guitar_realism_v2_research.py
+- architecture-level search
+- DUAL_POLARIZATION_WAVEGUIDE
+- PASSIVE_PLUCK_BRIDGE
+- NONLINEAR_CONTACT_FULL
+
+MELON validation:
+run 36451579434 = SUCCESS
+
+成功ステップ:
+- full MELON tests
+- guitar audio regression
+- old guitar realism regression
+- new guitar physical realism v2 regression
+- deterministic smoke
+- bounded discovery smoke
+
+注意:
+次の melon-research 36452485122 はworkflow自体SUCCESSだが、
+明示triggerが無かったためresearch stepはSKIPPED。
+Realism-004が研究完了したわけではない。
+
+CIPI track:
+VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+
+2026-09-29観測時:
+- enabled: false
+- activation_state: PENDING_MELON_REALISM_V2_VALIDATION
+- automation-status: TRACK_DISABLED
+- Realism-004のR1/R2/R3 job/decisionはまだ無い
+
+次のちぴは:
+「MELON v2 validationが既にPASSした」という事実と
+CIPIのAuthority/activation contractを照合し、
+勝手な推測ではなく正式に004をactivateできる状態か精査すること。
+
+
+8. Real Audio A/B
+------------------------------------------------------------
+CIPI:
+VG-REAL-AUDIO-REFERENCE-PLAN-20260929.yaml
+
+第一候補:
+Guitar-TECHS
+- electric guitar dataset
+- DIあり
+- per-string MIDI annotationあり
+- CC BY 4.0
+- isolated single noteを第一referenceにする
+
+第一比較:
+実ギターDI vs Virtual Guitar DI
+
+まず見る候補:
+- attack spectrum
+- harmonic decay vs frequency
+- inharmonicity
+- onset duration
+- short-term pitch glide / dynamic detune
+- time-varying spectral centroid
+
+重要:
+自動metric = realismの最終判定ではない。
+候補絞り込みに使用し、最終はHuman Listening。
+
+IDMT-SMT-Guitar:
+- NC条件があるため、commercial product optimizationへ無断使用しない。
+
+
+9. Strat研究で今後さらに調べる必要があるもの
+------------------------------------------------------------
+まだ確定していないので「事実」として勝手に数値を入れないこと。
+
+要研究:
+- 実際のStrat scale length
+- 第一production modelに採用するstring gauge
+- material / core / winding
+- 各弦tension
+- fret geometry
+- neck/body/bridge physical impedance
+- tremolo bridgeの影響を初期モデルに入れるか
+- pickup exact sensing positions
+- pickup height
+- SSS / HSS transfer behavior
+- coil geometry / inductance / resistance / magnetic aperture
+- Volume / Tone / cable loading
+- pickup nonlinearity
+- bridge/middle/neck位置でのstring vibration sampling difference
+
+すべて:
+SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS
+を分けてCIPIに保存する。
+
+
+10. Pickup / DI
+------------------------------------------------------------
+既存Product Requirement:
+PR-VG-STRAT-PICKUPS-001
+
+確定済み:
+- first guitar family = STRAT_STYLE
+- SSS / HSS selectable
+- HSS bridge = Humbucker
+- future coil split extensionを壊さないarchitecture
+
+ただし現在:
+Pickup/Electronics実装は dependency-blocked。
+
+必要Gate:
+- VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+- VIRTUAL-GUITAR-DI-OUTPUT-CONVERGENCE-GATE-001
+
+Gate未完了を、単一benchmark成功やoffline renderだけで満たしたことにしない。
+
+
+11. Amp / Cab / Micの最新境界
+------------------------------------------------------------
+ユーザー最新決定:
+「アンプ研究は別で作る」
+
+よって現在のGuitar LabではAmp/Cabを研究しない。
+
+CIPI保存:
+VG-GUITAR-DI-SCOPE-AMP-EXTERNAL-20260929
+
+現在のGuitar Lab:
+Physical String -> Physical Guitar -> Pickup/Electronics -> DI
+
+Amp:
+別研究として後で作成。
+現在は新Repoを勝手に作らない。
+
+Mic:
+既存 techitechi0331-svg/mic_simulator
+ギターRepo内にmicアルゴリズムを重複実装しない。
+
+
+12. Human Listeningの出し方
+------------------------------------------------------------
+ユーザー:
+「元の弦の音がわかんないと判断しにくい」
+
+CIPI:
+VG-HUMAN-LISTENING-LAYER-COMPARISON-001.yaml
+
+今後必須:
+A. Raw Physical String
+B. Pickup / DI（本当に実装された後）
+C. Amp / Cab（将来の外部Amp Lab統合後）
+
+同じ:
+- note / phrase
+- gesture
+- velocity / excitation
+- render duration
+
+を使う。
+
+禁止:
+- fake EQをPickup/DIと呼ぶ
+- generic filterをAmp/Cabと呼ぶ
+- Ampで改善した音だけ聴かせて弦が改善したように扱う
+
+Raw Stringを必ず残す。
+
+
+13. 本物に近づくための優先研究順
+------------------------------------------------------------
+P1:
+Realism-004 activation authorityを整合
+-> architecture-level MELON researchを正式に開始
+
+P2:
+dual polarization
++ dynamic pluck contact/release
++ nonlinear fret/finger contact
++ bridge scattering
++ sympathetic coupling
++ dynamic detune
+をbounded比較
+
+P3:
+Guitar-TECHS DI reference adapter
+-> matched real-DI measurement
+
+P4:
+Strat固有の物理量をSource Factとして収集
+-> scale / strings / tension / geometry / pickup positions
+
+P5:
+Gesture / Fingering / LivingString / Audio physical modelを
+「別々のdescriptor」ではなく同一のcontinuous physical stateへ統合
+
+P6:
+Hammer / Pull / Slide / Bend / Vibrato / Palm Mute /
+Left-Hand Mute / Note Terminationを物理相互作用として研究
+
+P7:
+6 strings + bridge/body coupling + sympathetic resonance
+
+P8:
+Physical Guitar / DI convergenceがCIPIで明示成立した後だけ
+Pickup/Electronics Strat researchをactivate
+
+P9:
+Raw String + DIをHuman Gate
+-> 本物のStrat DIとmatched A/B
+
+P10:
+その後、外部Amp Labと統合。
+Micはmic_simulatorと統合。
+
+
+14. 今やってはいけないこと
+------------------------------------------------------------
+- v1.1の8 parameterだけを延々微調整
+- internal proxyを「本物度」と呼ぶ
+- Amp/Cabで誤魔化す
+- MicをPhysical Guitarへ混ぜる
+- Product write=falseのtrackから勝手にproduct Repoを書き換える
+- Guitar-TECHS等の音源assetをRepoへvendorする
+- NC datasetをcommercial optimizationへ勝手に使用する
+- Human Gate無しでadopt
+- VST3/Cubase未確認なのに確認済みと扱う
+- Runner結果待ちだけで作業停止
+- current active jobを中断
+
+
+15. 現時点の厳密な状態
+------------------------------------------------------------
+Realism-v1.1:
+- prototype implementation: あり
+- CI: PASS
+- Human Gate: FAR_BELOW_TARGET
+- Product adoption: NO
+
+Realism-v2 MELON adapter:
+- implementation: あり
+- validation: PASS
+
+Realism-004:
+- registered: YES
+- enabled: NO
+- actual R1/R2/R3 research: NOT STARTED
+- current lifecycle: DISABLED / pending activation reconciliation
+
+Real Audio A/B:
+- plan: あり
+- actual matched A/B: 未完了
+
+Pickup/DI:
+- future requirement: あり
+- actual production implementation: 未完了 / gate待ち
+
+Amp:
+- current Guitar Lab scope外
+- separate researchを後で作る
+
+Mic:
+- separate repoで研究中
+
+VST3 / Cubase:
+- current guitar realism candidateのhost confirmation: 未完了
+
+
+16. 次のチャットで最初にやること
+------------------------------------------------------------
+1. CIPI latest mainを確認
+2. MELON latest mainを確認
+3. virtual-guitar latest mainを確認
+4. automation-status確認
+5. running/queued workflow確認（中断禁止）
+6. Realism-004 trackのenabled / lifecycle / authorityを確認
+7. MELON v2 validation 36451579434のPASSを確認
+8. この引き継ぎ保存後に自動変更が入っていないか確認
+9. product_repository_write authorityを確認
+10. Realism-004の正式activate可否を決定
+11. 独立して進められるResearch / Reference準備をNo-Waitで進める
+
+
+17. CIPIの重要ファイル
+------------------------------------------------------------
+research/autonomous_bridge/tracks/
+  VIRTUAL-GUITAR-PHYSICAL-REALISM-003.yaml
+  VIRTUAL-GUITAR-PHYSICAL-REALISM-004.yaml
+
+research/plugins/virtual-guitar/human-evidence/
+  VG-HUMAN-LISTENING-20260927-001.yaml
+  VG-HUMAN-LISTENING-20260929-002.yaml
+  VG-HUMAN-LISTENING-LAYER-COMPARISON-001.yaml
+
+research/plugins/virtual-guitar/research-notes/
+  VG-PHYSICAL-REALISM-ARCHITECTURE-LITERATURE-20260929.yaml
+  VG-REAL-AUDIO-REFERENCE-PLAN-20260929.yaml
+  VG-STRAT-DI-REALISM-GAP-AUDIT-20260929.yaml
+
+research/plugins/virtual-guitar/product-requirements/
+  PR-VG-STRAT-PICKUPS-001.yaml
+  PICKUP-ELECTRONICS-ACTIVATION-GATES-001.yaml
+
+research/plugins/virtual-guitar/integration-policies/
+  EXTERNAL-MIC-SIMULATOR-INTEGRATION-V1.1.yaml
+  VG-GUITAR-DI-SCOPE-AMP-EXTERNAL-20260929.yaml
+
+research/plugins/virtual-guitar/incidents/
+  VG-REALISM-CONTINUATION-IDENTITY-20260928-001.yaml
+  VG-PRODUCT-WRITE-AUTHORITY-AUDIT-20260929-001.yaml
+
+
+18. 一文で次のちぴへ
+------------------------------------------------------------
+「アニソン/J-POP用のStrat-style guitarを、Amp/Micに頼らずRaw String〜DIの段階で
+本物に聞こえるところまで持っていく。v1.1はHuman Gateで不足判定。次はRealism-004の
+architecture-level研究、real DI reference、連続したplayer-string-contact physicsへ進む。
+ただし004は現時点でdisabledなので、最新main/Authorityを確認して正式に再開すること。」

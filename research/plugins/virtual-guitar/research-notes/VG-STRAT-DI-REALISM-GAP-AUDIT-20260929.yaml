@@ -1,0 +1,225 @@
+schema_version: "1.0"
+research_note_id: VG-STRAT-DI-REALISM-GAP-AUDIT-20260929
+project: virtual-guitar
+subject: "Strat-style raw/DI realism gap audit and next-research map"
+created_at: "2026-09-29"
+
+scope:
+  primary_target: "STRAT_STYLE electric guitar"
+  production_use: "J-POP / anime-song production"
+  current_finish_line: "realistic guitar source through Pickup/Electronics -> DI"
+  excluded_from_current_guitar_realism_scope:
+    - AMP_RESEARCH
+    - CABINET_RESEARCH
+    - MIC_RESEARCH
+  user_direction_ja: >-
+    アンプ研究は別で作る。いまは本物のギターを原音の状態で再現することに尽力する。
+
+current_repositories:
+  virtual_guitar:
+    repository: "techitechi0331-svg/virtual-guitar"
+    observed_main: "bd26a0556fb501228b4551f61f6a8e760a14455b"
+  melon:
+    repository: "techitechi0331-svg/melon"
+    observed_main: "cef5668308ad27274ec00b46fdad81577af8d0e2"
+  mic_simulator:
+    repository: "techitechi0331-svg/mic_simulator"
+    observed_main: "189c29035277104412fa58c97843ebde05a83e68"
+
+measured_or_observed:
+  - id: OBS-VG-REALISM-V11-CODE
+    evidence_class: MEASURED
+    statement: >-
+      Current product-repo candidate PhysicalRealismString is a 24-mode modal oscillator model with
+      frequency-dependent modal decay, static dispersion, a pluck-position comb, a deterministic
+      short noise transient, simple bridge gain, and simplified two-state body coloration.
+    files:
+      - Source/PhysicalModel/Audio/PhysicalRealismString.h
+      - Source/PhysicalModel/Audio/PhysicalRealismString.cpp
+
+  - id: OBS-VG-LIVING-STRING-CODE
+    evidence_class: MEASURED
+    statement: >-
+      LivingString currently stores persistent state, ring/mute state, excitation history and scalar
+      damping/energy, but its physical state is still much simpler than a full distributed vibrating
+      string and is not yet a complete coupled guitar-body/string/contact simulation.
+    files:
+      - Source/PhysicalModel/Strings/LivingString.h
+      - Source/PhysicalModel/Strings/LivingString.cpp
+
+  - id: OBS-VG-GESTURE-CODE
+    evidence_class: MEASURED
+    statement: >-
+      GestureEngine currently uses bounded deterministic timing/force/angle envelopes for strokes and
+      control descriptors for left-hand shifts. These are useful causal controls but are not yet a
+      physically solved player-string contact model.
+    files:
+      - Source/Performance/Gesture/GestureEngine.h
+      - Source/Performance/Gesture/GestureEngine.cpp
+
+  - id: OBS-VG-FINGERING-CODE
+    evidence_class: MEASURED
+    statement: >-
+      FingeringSolver currently selects standard-tuning string/fret positions using a simple movement
+      cost and 24-fret bound. It does not yet model hand anatomy, chord-specific fretboard strategy,
+      string choice timbre, position preference, or phrase-level guitarist intent at production depth.
+    files:
+      - Source/Performance/Fingering/FingeringSolver.h
+      - Source/Performance/Fingering/FingeringSolver.cpp
+
+  - id: OBS-VG-HUMAN-REALISM-V11
+    evidence_class: HUMAN_LISTENING
+    statement: "The latest rendered Realism-v1.1 candidate was judged far below the final target."
+    source: research/plugins/virtual-guitar/human-evidence/VG-HUMAN-LISTENING-20260929-002.yaml
+
+  - id: OBS-MELON-REALISM-V2-VALIDATION
+    evidence_class: MEASURED
+    statement: >-
+      MELON commit cef5668308ad27274ec00b46fdad81577af8d0e2 passed self-hosted validation run
+      36451579434, including the new guitar physical realism v2 regression test.
+    caveat: >-
+      The subsequent melon-research workflow 36452485122 completed successfully but its research
+      steps were skipped because no explicit staged/manual trigger was present; this does not mean
+      Realism-004 research has executed.
+
+  - id: OBS-CIPI-REALISM-004-LIFECYCLE
+    evidence_class: MEASURED
+    statement: >-
+      VIRTUAL-GUITAR-PHYSICAL-REALISM-004 is registered but currently disabled with activation_state
+      PENDING_MELON_REALISM_V2_VALIDATION. automation-status reports TRACK_DISABLED and no generated
+      R1/R2/R3 jobs or decisions exist yet for track 004.
+
+source_facts_already_registered:
+  - source: research/plugins/virtual-guitar/research-notes/VG-PHYSICAL-REALISM-ARCHITECTURE-LITERATURE-20260929.yaml
+    mechanisms:
+      - TWO_POLARIZATION_STRING_BEHAVIOR
+      - NONLINEAR_STRING_FRET_FINGER_CONTACT
+      - PASSIVE_PLAYER_STRING_PLUCK_INTERACTION
+      - BRIDGE_SCATTERING
+      - SYMPATHETIC_STRING_COUPLING
+      - DYNAMIC_DETUNING
+      - PICKUP_NONLINEARITY_AS_LATER_DOWNSTREAM_RESEARCH
+
+  - source: research/plugins/virtual-guitar/research-notes/VG-REAL-AUDIO-REFERENCE-PLAN-20260929.yaml
+    facts:
+      - GUITAR_TECHS_DI_REFERENCE_AVAILABLE_CC_BY_4_0
+      - MATCHED_DI_SINGLE_NOTES_ARE_PREFERRED_BEFORE_AMP_OR_MIC
+      - IDMT_NC_DATA_MUST_NOT_BE_USED_FOR_COMMERCIAL_OPTIMIZATION_WITHOUT_SEPARATE_LICENSE_DECISION
+
+gap_analysis:
+  high_priority_missing_physics:
+    - id: GAP-001
+      mechanism: "distributed string propagation / traveling-wave behavior"
+      why: >-
+        A fixed bank of modal oscillators can express resonances but does not by itself reproduce all
+        causal spatial behavior of a picked/fretted string, reflection timing, or position-dependent
+        observation/excitation.
+    - id: GAP-002
+      mechanism: "two-polarization string motion and coupling"
+      why: "Real string motion is not adequately represented as one scalar vibration axis."
+    - id: GAP-003
+      mechanism: "dynamic pick-string contact and release"
+      why: >-
+        Current short synthetic transient is not a solved interaction among pick stiffness, depth,
+        angle, velocity, compliance, friction/contact and release.
+    - id: GAP-004
+      mechanism: "fret/finger/neck collision and stopping physics"
+      why: >-
+        Missing contact mechanics prevent realistic buzz/rattle, stopping-finger effects, nonlinear
+        pitch glide, damping changes and articulation-dependent transients.
+    - id: GAP-005
+      mechanism: "bridge scattering and six-string sympathetic coupling"
+      why: >-
+        Current bridgeCoupling is a static modal gain term; it is not a time-domain multi-string
+        energy-transfer network.
+    - id: GAP-006
+      mechanism: "guitar structure/body/neck impedance"
+      why: >-
+        Current body coloration is simplified filtering, not a measured/modelled structural impedance
+        and energy-return system.
+    - id: GAP-007
+      mechanism: "per-string physical identity"
+      why: >-
+        Gauge, tension, scale length, core/winding construction, damping and open-vs-fretted boundary
+        conditions need explicit research instead of treating notes as generic modal presets.
+    - id: GAP-008
+      mechanism: "Strat pickup transduction and electronics"
+      why: >-
+        A Strat-style DI target requires position-dependent magnetic pickup sensing, SSS/HSS architecture,
+        pickup height/position, coil/electrical loading and tone/volume/cable behavior. This is downstream
+        of basic physical-string convergence but still inside the final Guitar-Lab DI scope.
+    - id: GAP-009
+      mechanism: "performance-state-to-physics coupling"
+      why: >-
+        Gesture, LivingString, fingering and audio realism currently exist as partly separate abstractions;
+        production realism requires the player's left/right-hand state to continuously drive the same
+        physical string state.
+    - id: GAP-010
+      mechanism: "real-audio-constrained validation"
+      why: >-
+        Internal proxies can verify mechanism activation but cannot establish audible guitar fidelity.
+        Matched real DI measurements and Human Listening remain mandatory.
+
+next_research_order:
+  - priority: 1
+    action: >-
+      Reconcile and activate Realism-004 only after verifying the validated MELON v2 adapter and CIPI
+      authority state. Do not infer activation from CI success alone.
+  - priority: 2
+    action: >-
+      Run bounded architecture discrimination across dual-polarization, passive pluck/bridge and
+      nonlinear-contact-full species. Keep product integration OFF.
+  - priority: 3
+    action: >-
+      Add real-audio reference adapter using Guitar-TECHS DI isolated notes in runner cache only.
+      Measure attack spectrum, harmonic decay by frequency, inharmonicity, onset duration, short-term
+      pitch glide/dynamic detune and time-varying spectral centroid. Metrics narrow candidates but do
+      not replace listening.
+  - priority: 4
+    action: >-
+      Research actual Strat-style physical constants and geometry before committing product constants:
+      scale length, representative string sets/gauges/material, tensions, pickup sensing positions,
+      pickup height/loading and SSS/HSS topology. Classify every value as SOURCE_FACT / MEASURED /
+      INFERRED / HYPOTHESIS.
+  - priority: 5
+    action: >-
+      Integrate left/right-hand gestures into the physical solver: pick contact/release, muting,
+      hammer/pull/slide, bend/vibrato, fret collision and continuous note termination.
+  - priority: 6
+    action: >-
+      Build multi-string bridge/body coupling and sympathetic resonance, then repeat real-DI and
+      Human Gate tests.
+  - priority: 7
+    action: >-
+      Only after basic physical guitar and DI convergence gates are explicitly completed, activate
+      Strat Pickup/Electronics research (SSS/HSS, future coil split extension point).
+  - priority: 8
+    action: >-
+      Keep Amp/Cab and Mic outside the current Guitar-Lab realism loop. Integrate them later only
+      through versioned boundaries and matched stage-by-stage listening.
+
+human_listening_protocol:
+  source: research/plugins/virtual-guitar/human-evidence/VG-HUMAN-LISTENING-LAYER-COMPARISON-001.yaml
+  current_guitar_lab_stages:
+    - RAW_PHYSICAL_STRING
+    - PICKUP_DI_WHEN_AVAILABLE
+  downstream_external_stage:
+    - AMP_CAB_WHEN_EXTERNAL_AMP_LAB_EXISTS
+  rule: >-
+    Always preserve a raw physical-string reference so improvement cannot be attributed only to
+    downstream coloration. Never label fake EQ/filtering as Pickup/DI or Amp/Cab.
+
+not_yet_established:
+  - "Exact Strat hardware constants and target instrument specimen."
+  - "Exact string gauge/material/tension set for the first production model."
+  - "Measured pickup transfer functions/positions/loading for SSS/HSS target."
+  - "A completed Guitar-TECHS reference adapter and quantitative real-DI benchmark."
+  - "Cubase/VST3 host confirmation for the current guitar candidate."
+  - "Product adoption of Realism-v1.1 or Realism-v2."
+
+authority:
+  cipi_evidence_authority: true
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  real_audio_fidelity_claim: false

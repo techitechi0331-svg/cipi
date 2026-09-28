@@ -1,0 +1,33 @@
+schema_version: "1.0"
+incident_id: VG-PRODUCT-WRITE-AUTHORITY-AUDIT-20260929-001
+project: virtual-guitar
+incident_type: GOVERNANCE_AUTHORITY_MISMATCH
+recorded_at: "2026-09-29"
+status: OPEN_RECONCILIATION_REQUIRED
+
+facts:
+  - >-
+    Virtual Guitar product repository commit bd26a0556fb501228b4551f61f6a8e760a14455b
+    added the Realism-v1.1 implementation candidate and passed core/targeted CI.
+  - >-
+    VIRTUAL-GUITAR-PHYSICAL-REALISM-003 declares product_integration:false and
+    authority_boundaries.product_repository_write:false.
+  - >-
+    Therefore the commit may be used as bounded prototype/Human-Review evidence, but must not be
+    retroactively described as an authorized product adoption or as evidence that the authority
+    boundary allowed the write.
+  - >-
+    Human Listening subsequently judged the rendered candidate far below the final target.
+
+required_handling:
+  - DO_NOT_REWRITE_HISTORY_BLINDLY
+  - DO_NOT_DELETE_OR_REVERT_WITHOUT_CURRENT_MAIN_AND_DEPENDENCY_REVIEW
+  - TREAT_BD26A055_AS_PROTOTYPE_EVIDENCE_NOT_ADOPTED_PRODUCT
+  - NO_FURTHER_PRODUCT_REPOSITORY_WRITES_UNDER_A_TRACK_WITH_PRODUCT_REPOSITORY_WRITE_FALSE
+  - RECONCILE_CIPI_AUTHORITY_BEFORE_ANY_NEXT_PRODUCT_IMPLEMENTATION
+  - KEEP_PRODUCT_INTEGRATION_FALSE_UNTIL_EXPLICIT_HUMAN_GATE_AND_CIPI_DECISION
+
+current_product_adoption: false
+release_authorized: false
+automatic_knowledge_promotion: false
+automatic_product_decision: false

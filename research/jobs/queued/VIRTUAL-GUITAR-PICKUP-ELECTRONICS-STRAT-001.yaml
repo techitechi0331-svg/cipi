@@ -7,59 +7,68 @@ track:
   id: VIRTUAL_GUITAR_PICKUP_ELECTRONICS_RESEARCH
   path: research/plugins/virtual-guitar/research-tracks
 
-research_phase: RESEARCH_ONLY
+research_phase: RESEARCH_EVIDENCE_FOUNDATION
 activation_contract_ref: PICKUP-ELECTRONICS-ACTIVATION-GATES-002
+experiment_adapter: virtual_guitar_pickup_electrical_foundation_v1
 
 research_question: >-
-  Without waiting for Reference DI convergence, what pickup observation, magnetic transduction,
-  pickup electrical-network, SSS/HSS switching and volume/tone/selector model classes are
-  physically/electrically justified for the first STRAT_STYLE family?
+  Without waiting for Reference DI convergence, is there sufficient source-backed evidence
+  to define competing Pickup Observation, magnetic-transduction, pickup-electrical,
+  SSS/HSS and cable/load model classes and a falsifiable measurement plan without
+  prematurely adopting any one model?
 
 hypothesis: >-
-  Pickup/Electronics research can progress independently from final Physical Guitar product
-  convergence when it is kept at research/reference-model level. Product integration remains
-  separately gated by stable upstream observation and electrical-port contracts.
+  Manufacturer topology documents plus peer-reviewed pickup/cable research are sufficient
+  to establish a bounded research foundation while explicitly retaining both low-order
+  equivalent-circuit and higher-order counter-hypotheses for later measurement.
 
 counter_hypotheses:
-  - Pickup observation requires a different authoritative string state than the current architecture can expose.
-  - Simple RLC pickup models are insufficient across the required operating domain.
-  - SSS and HSS require materially different boundaries that cannot share a versioned interface.
-  - Cable/load interaction materially changes conclusions enough that isolated pickup ranking is misleading.
+  - Available sources are too specimen-specific or secondary to support a bounded research foundation.
+  - A low-order lumped pickup model is already proven sufficient and no higher-order counter-hypothesis is needed.
+  - A distributed pickup model is already proven necessary and simpler candidates can be discarded without testing.
+  - Cable/load interaction is negligible enough to omit from the Guitar Electrical Port contract.
+  - Reference DI must exist before Pickup/Electronics research can begin.
 
 baseline:
   - existing Physical Realism evidence retained without modification
   - no adopted Pickup/Electronics product layer
+  - no adopted pickup circuit model
+  - no adopted cable constants
   - Reference DI explicitly treated as downstream of Guitar Electrical Port
 
 variants:
-  - STRAT_STYLE_SSS
-  - STRAT_STYLE_HSS_BRIDGE_HUMBUCKER
-  - LINEAR_MAGNETIC_TRANSDUCTION_CANDIDATE
-  - SPATIAL_APERTURE_CANDIDATE
-  - PASSIVE_NETWORK_MODEL_CANDIDATES
+  - POINT_VS_FINITE_APERTURE_OBSERVATION
+  - LINEAR_VS_DISTANCE_DEPENDENT_MAGNETIC_TRANSDUCTION
+  - LOW_ORDER_VS_HIGHER_ORDER_PICKUP_NETWORK
+  - SSS_VS_HSS_TOPOLOGY
+  - CAPACITANCE_DOMINANT_VS_FULL_RLC_CABLE_SENSITIVITY
 
 metrics:
-  - pickup_observation_position_dependence
-  - harmonic_structure_change_by_pickup_position
-  - source_impedance_vs_frequency
-  - resonance_frequency
-  - resonance_q
-  - volume_tone_selector_load_sensitivity
-  - sss_hss_boundary_compatibility
-  - deterministic_reference_output
-  - evidence_provenance_completeness
+  - source_hierarchy_coverage
+  - manufacturer_topology_coverage
+  - peer_reviewed_pickup_model_coverage
+  - peer_reviewed_cable_loading_coverage
+  - higher_order_counter_hypothesis_coverage
+  - evidence_classification_coverage
+  - candidate_model_class_coverage
+  - rejected_shortcut_coverage
+  - authority_boundary_integrity
 
 acceptance:
-  - research evidence is classified SOURCE_FACT/MEASURED/INFERRED/HYPOTHESIS/REJECTED
-  - pickup observation is not implemented as a post-EQ preset
-  - pickup electrical model complexity is selected by measurement/falsification rather than assumption
-  - SSS and HSS remain explicit research configurations
-  - HSS bridge preserves a future Coil Split extension point without fixing final topology
+  - at least two manufacturer topology sources cover SSS and HSS
+  - peer-reviewed evidence covers pickup observation/transduction/electrical behavior
+  - peer-reviewed evidence covers passive guitar cable/load interaction
+  - credible counter-evidence prevents low-order RLC from being declared final by assumption
+  - competing candidate model classes remain explicit
   - Reference DI is not used as an upstream prerequisite
-  - no product repository write occurs under this job
+  - no specimen-specific Fender value is universalized
+  - no product repository write or tone/fidelity adoption occurs
 
 rejection:
+  - source hierarchy is insufficient for a bounded measurement plan
   - generic EQ is presented as magnetic pickup physics
+  - cable is reduced to post-EQ without network-equivalence evidence
+  - low-order or distributed pickup architecture is preselected without falsification
   - unknown electrical values are invented
   - Reference DI is treated as pre-pickup truth
   - downstream Amp/Cab/Mic coloration is used to validate pickup realism
@@ -69,8 +78,9 @@ depends_on_jobs: []
 
 activation_contract:
   current_state_semantics: >-
-    Research is READY under PICKUP-ELECTRONICS-ACTIVATION-GATES-002. This job is research-only
-    and must not write product DSP. Product integration is a separate dependency-gated job.
+    Research is READY under PICKUP-ELECTRONICS-ACTIVATION-GATES-002. This first run validates
+    the evidence foundation and competing model classes only. It must not write product DSP.
+    Measurement/model-discrimination work follows as a separate bounded continuation.
   must_not_preempt:
     - VIRTUAL-GUITAR-PHYSICAL-REALISM-004
 
@@ -79,18 +89,20 @@ timeout_minutes: 20
 
 allowed_operations:
   - inspect_current_physical_guitar_evidence
-  - research_pickup_observation_models
-  - research_magnetic_transduction_models
-  - research_pickup_electrical_network_models
-  - research_sss_hss_topologies
-  - research_volume_tone_selector_loading
-  - design_electrical_test_harness
-  - design_reference_models
+  - inspect_committed_manufacturer_and_peer_reviewed_source_records
+  - classify_pickup_observation_models
+  - classify_magnetic_transduction_models
+  - classify_pickup_electrical_network_models
+  - classify_sss_hss_topologies
+  - classify_cable_load_interaction_models
+  - design_falsifiable_measurement_requirements
   - write_cipi_research_evidence
 
 prohibited_operations:
   - product_repository_write
   - interrupt_realism_004
+  - adopt_final_pickup_model
+  - freeze_unsourced_component_values
   - auto_promote_subjective_tone_claim
   - auto_release
   - implement_final_coil_split_calibration_without_new_evidence
@@ -109,8 +121,8 @@ authority_boundaries:
 
 knowledge_candidate:
   claim: >-
-    Pickup/Electronics research is causally upstream of Reference DI and may proceed before
-    product integration while remaining authority-bounded.
+    Pickup/Electronics research is causally upstream of Reference DI and can begin from a
+    source-backed multi-model evidence foundation while product integration remains gated.
   evidence_type: INFERRED
-  scope: "Research-order and dependency semantics only; not a tone/fidelity claim."
+  scope: "Research-order, candidate-model and measurement-planning semantics only; not a tone/fidelity claim."
   promotion_requested: HYPOTHESIS

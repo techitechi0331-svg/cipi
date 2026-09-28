@@ -553,6 +553,8 @@
     "claimed_count": 0,
     "claimed_jobs": [],
     "dependency_blocked_count": 2,
+    "human_gate_blocked_count": 0,
+    "human_gate_jobs": [],
     "ready_job": null
   },
   "schema_version": "1.0",

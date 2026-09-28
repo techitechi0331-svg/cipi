@@ -1,0 +1,6 @@
+source_id,tier,type,title,url
+FENDER-SSS-PREWIRED-2019,1,MANUFACTURER_WIRING_DIAGRAM,Pickguard Assembly Stratocaster Wiring Diagram — SSS,https://www.fmicassets.com/Damroot/Original/10001/WD_0992340500_Prewired_Pickguard_SSS.pdf
+FENDER-MODERN-PLAYER-HSS,1,MANUFACTURER_SERVICE_WIRING_DIAGRAM,Fender Modern Player Stratocaster HSS Wiring,https://www.fmicassets.com/Damroot/Original/10001/024-1000A_SISD.pdf
+PAIVA-PAKARINEN-VALIMAKI-2012,2,PEER_REVIEWED_JAES_ARTICLE,Acoustics and Modeling of Pickups,https://aaltodoc.aalto.fi/bitstreams/92759095-3b64-4a0f-bf29-8a3617b9d92c/download
+PAIVA-PENTTINEN-2011,2,PEER_REVIEWED_AES_CONVENTION_PAPER,Cable Matters: Instrument Cables Affect the Frequency Response of Electric Guitars,https://aaltodoc.aalto.fi/bitstreams/fa70464c-0d32-403f-8db9-9c5124b88fe0/download
+KOTIUGA-2015,2,PEER_REVIEWED_IEEE_ARTICLE,Interwinding Distributed Capacitance and Guitar Pickup Transient Response,https://doi.org/10.1109/TMAG.2014.2364041

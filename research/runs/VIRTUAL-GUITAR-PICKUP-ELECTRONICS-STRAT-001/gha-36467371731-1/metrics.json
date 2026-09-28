@@ -1,0 +1,41 @@
+{
+  "candidate_model_counts": {
+    "amp_input": 3,
+    "cable": 3,
+    "magnetic_transduction": 2,
+    "pickup_electrical": 3,
+    "pickup_observation": 2
+  },
+  "classification_counts": {
+    "HYPOTHESIS": 3,
+    "INFERRED": 3,
+    "MEASURED": 1,
+    "REJECTED": 7,
+    "SOURCE_FACT": 4
+  },
+  "evidence_gates": {
+    "all_model_boundaries_present": true,
+    "automatic_knowledge_promotion_off": true,
+    "automatic_product_decision_off": true,
+    "higher_order_counter_hypothesis_present": true,
+    "higher_order_model_not_predeclared_required": true,
+    "low_order_model_not_predeclared_final": true,
+    "manufacturer_hss_source_present": true,
+    "manufacturer_sss_source_present": true,
+    "minimum_tier1_sources": true,
+    "minimum_tier2_sources": true,
+    "peer_reviewed_cable_loading_source_present": true,
+    "peer_reviewed_pickup_model_source_present": true,
+    "product_repository_write_off": true,
+    "reference_di_is_rejected_as_upstream_prerequisite": true,
+    "shortcut_rejections_complete": true
+  },
+  "foundation_ready_for_measurement_design": true,
+  "model_adopted": false,
+  "pickup_fidelity_claim": false,
+  "product_repository_write": false,
+  "reference_di_converged": false,
+  "source_count": 5,
+  "tier1_source_count": 2,
+  "tier2_source_count": 3
+}

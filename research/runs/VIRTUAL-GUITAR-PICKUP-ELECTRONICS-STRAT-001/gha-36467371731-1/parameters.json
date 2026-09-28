@@ -1,0 +1,29 @@
+{
+  "baseline": [
+    "existing Physical Realism evidence retained without modification",
+    "no adopted Pickup/Electronics product layer",
+    "no adopted pickup circuit model",
+    "no adopted cable constants",
+    "Reference DI explicitly treated as downstream of Guitar Electrical Port"
+  ],
+  "experiment_adapter": "virtual_guitar_pickup_electrical_foundation_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001.yaml",
+  "metrics": [
+    "source_hierarchy_coverage",
+    "manufacturer_topology_coverage",
+    "peer_reviewed_pickup_model_coverage",
+    "peer_reviewed_cable_loading_coverage",
+    "higher_order_counter_hypothesis_coverage",
+    "evidence_classification_coverage",
+    "candidate_model_class_coverage",
+    "rejected_shortcut_coverage",
+    "authority_boundary_integrity"
+  ],
+  "variants": [
+    "POINT_VS_FINITE_APERTURE_OBSERVATION",
+    "LINEAR_VS_DISTANCE_DEPENDENT_MAGNETIC_TRANSDUCTION",
+    "LOW_ORDER_VS_HIGHER_ORDER_PICKUP_NETWORK",
+    "SSS_VS_HSS_TOPOLOGY",
+    "CAPACITANCE_DOMINANT_VS_FULL_RLC_CABLE_SENSITIVITY"
+  ]
+}

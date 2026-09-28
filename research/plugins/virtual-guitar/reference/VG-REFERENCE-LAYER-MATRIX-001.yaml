@@ -1,0 +1,69 @@
+schema_version: "1.0"
+matrix_id: VG-REFERENCE-LAYER-MATRIX-001
+project: virtual-guitar
+status: PROPOSED
+recorded_at: "2026-09-29"
+
+layers:
+  RAW_MECHANICAL:
+    target:
+      - string_motion
+      - contact_release
+      - boundary_behavior
+      - cross_string_transfer
+    valid_evidence:
+      - mechanistic_invariants
+      - controlled_state_measurement
+      - physical_measurement_when_available
+      - executable_solver_ablation
+    invalid_shortcuts:
+      - DI_EQUALS_RAW_STRING
+      - AMP_MIC_AUDIO_AS_RAW_REFERENCE
+    claim_limit: >-
+      Raw mechanical fidelity is not established by matching a pickup DI waveform alone.
+
+  PICKUP_DI:
+    target:
+      - physical_guitar_plus_pickup_observation
+      - pickup_electronics
+      - cable_loading
+    primary_candidate_reference:
+      - EGFxSet_clean
+    complementary_reference:
+      - Guitar_TECHS_DI
+    required_stratification:
+      - note
+      - string_fret_when_available
+      - pickup_configuration
+      - player_gear_identity_when_available
+
+  PERFORMANCE:
+    target:
+      - fingering
+      - picking_strategy
+      - articulation_timing
+      - technique
+    evidence:
+      - Guitar_TECHS_per_string_MIDI
+      - controlled_guitarist_recordings
+      - phrase_level_human_review
+
+  HUMAN:
+    target:
+      - perceptual_realism
+      - musical_behavior
+    requirements:
+      - practical_level_match
+      - practical_blind_randomization
+      - same_musical_condition
+      - layer_identity_preserved
+
+  AMP_CAB_MIC:
+    current_status: OUTSIDE_GUITAR_CORE_SELECTION
+    rule: >-
+      Do not use downstream coloration to improve a Physical Core or Pickup/DI realism score.
+
+cross_layer_rules:
+  - "A stronger downstream match cannot erase an upstream FAIL."
+  - "Every dataset or render must declare its layer."
+  - "Reference mismatch and unknown capture conditions remain explicit limitations."

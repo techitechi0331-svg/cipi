@@ -1,0 +1,110 @@
+{
+  "architecture_species": [
+    "NONLINEAR_CONTACT_FULL"
+  ],
+  "bridge_profile": {
+    "architecture": "ARCHITECTURE_DISCRIMINATION_V20",
+    "architecture_species": [
+      "NONLINEAR_CONTACT_FULL"
+    ],
+    "benchmark_profiles": [
+      "guitar_dual_polarization_proxy_v1",
+      "guitar_passive_pluck_proxy_v1",
+      "guitar_bridge_scattering_proxy_v1",
+      "guitar_sympathetic_coupling_proxy_v1",
+      "guitar_string_fret_contact_proxy_v1",
+      "guitar_realism_v2_phase_architecture_refined"
+    ],
+    "input_set": "STANDARD_GUITAR_RANGE_MIDI_GRID_V1",
+    "objective_set": [
+      "mechanism_coverage_penalty",
+      "architecture_level",
+      "cpu_cost",
+      "memory_cost"
+    ],
+    "reference_model": "REALISM_V11_PLUS_HUMAN_REJECTION_EVIDENCE",
+    "relevant_constraints": [
+      "human_listening_says_realism_v11_far_below_target",
+      "no_real_guitar_fidelity_claim",
+      "real_audio_ab_still_required",
+      "product_integration_off",
+      "automatic_promotion_off",
+      "search_phase:architecture_refined",
+      "search_bounds_sha256:0a33764a4bafdadc"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_PHYSICAL_REALISM",
+    "sample_rate": 48000.0
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "guitar_realism_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 18,
+    "max_runtime_seconds": 120.0,
+    "population_size": 9,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_PHYSICAL_REALISM",
+  "routes": {
+    "CANDIDATE_FOR_CIPI_REVIEW": 1
+  },
+  "run_id": "melon-funnel-guitar-realism-b47d7d173bbd",
+  "search_bounds_sha256": "0a33764a4bafdadc",
+  "search_parameter_ranges": {
+    "bridge_scatter": [
+      0.08,
+      0.22
+    ],
+    "contact_damping": [
+      0.1,
+      0.62
+    ],
+    "contact_stiffness": [
+      0.15,
+      0.78
+    ],
+    "dispersion_b": [
+      6e-06,
+      5.5e-05
+    ],
+    "dynamic_detune_cents": [
+      1.2,
+      7.5
+    ],
+    "hf_loss": [
+      0.18,
+      0.44
+    ],
+    "pluck_compliance": [
+      0.18,
+      0.65
+    ],
+    "pluck_release_ms": [
+      0.5,
+      4.0
+    ],
+    "polarization_coupling": [
+      0.04,
+      0.15
+    ],
+    "polarization_split_cents": [
+      0.8,
+      4.5
+    ],
+    "sympathetic_coupling": [
+      0.015,
+      0.09
+    ]
+  },
+  "search_phase": "architecture_refined",
+  "seed": 2026092903,
+  "stage1_pareto": 18,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 6,
+  "stage2_pareto": 8,
+  "timestamp": "2026-09-28T17:28:49.658805+00:00"
+}

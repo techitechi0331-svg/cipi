@@ -1,0 +1,16 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/Vocal_Denoise
+repo_key: vocal_denoise
+run_id: 36473953922
+run_attempt: 1
+artifact_id: 10992738371
+artifact_name: vocal-denoise-tiny-evaluation-VOCAL-DENOISE-TINY-ML-005
+expired: false
+size_in_bytes: 1931
+created_at: '2026-09-28T19:42:10Z'
+expires_at: '2026-10-28T19:42:08Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files: []
+ingest_status: metadata_only

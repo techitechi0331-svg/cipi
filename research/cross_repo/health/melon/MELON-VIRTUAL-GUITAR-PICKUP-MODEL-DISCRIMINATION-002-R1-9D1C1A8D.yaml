@@ -3,9 +3,9 @@ action_id: MELON-VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002-R1-9D1C1A8D
 repo_key: melon
 workflow_key: research
 runner_class: self-hosted
-state: QUEUED
+state: RUNNING
 run_id: 36473027466
-run_status: queued
+run_status: in_progress
 run_conclusion: null
 since: '2026-09-28T19:33:12Z'
 wait_threshold_minutes: 20

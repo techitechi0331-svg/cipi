@@ -25,10 +25,11 @@ def health_gate_map(health):
 
 
 def human_gate_decisions(root:Path,spec:ProjectSpec,c:SourceCollector):
-    base=root/"research/human_gates/decisions"
+    rel=f"research/human_gates/decisions/{spec.project_id}"
+    base=root/rel
     latest={}
     if not base.exists():return latest
-    c.record_directory_index("research/human_gates/decisions")
+    c.record_directory_index(rel)
     for p in yaml_files(base):
         x=safe_yaml(p)
         if str(x.get("project_id") or "")!=spec.project_id:continue

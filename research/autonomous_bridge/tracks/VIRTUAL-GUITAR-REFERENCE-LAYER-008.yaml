@@ -1,0 +1,68 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-REFERENCE-LAYER-008
+enabled: false
+activation_state: STAGED_REFERENCE_ADAPTER_NOT_IMPLEMENTED
+root_research_id: VIRTUAL-GUITAR-REFERENCE-LAYER-008
+
+research_question: >-
+  Can layer-aware real-reference adapters constrain Virtual Guitar without treating
+  Pickup/DI recordings as direct raw-string mechanical ground truth?
+
+authority_boundaries:
+  cipi_evidence_authority: true
+  product_repository_write: false
+  product_integration: false
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  redistribution_of_reference_audio: false
+
+contracts:
+  - VG-REFERENCE-LAYER-MATRIX-001
+  - VG-TEST-TAXONOMY-001
+
+reference_lanes:
+  STRAT_DI:
+    first_candidate: EGFxSet_clean
+    layer: PICKUP_DI
+    intended_use:
+      - note_string_fret_comparison
+      - pickup_configuration_comparison
+      - end_to_end_DI_feature_error
+    forbidden_use:
+      - RAW_STRING_GROUND_TRUTH
+  GENERAL_ELECTRIC_GUITAR_DI:
+    first_candidate: Guitar_TECHS_DI
+    layer: PICKUP_DI
+    intended_use:
+      - per_string_MIDI
+      - technique
+      - multi_player_generalization
+    requirements:
+      - explicit_temporal_alignment_for_short_time_metrics
+      - player_gear_metadata_preserved
+  RAW_MECHANICAL:
+    layer: RAW_MECHANICAL
+    intended_use:
+      - mechanism_invariants
+      - controlled_physical_measurements_when_available
+      - executable_counterfactuals
+    forbidden_use:
+      - silently_substitute_DI
+
+adapter_requirements:
+  - runner_cache_only_for_external_audio
+  - attribution_manifest
+  - license_manifest
+  - immutable_reference_hash
+  - sample_rate_metadata
+  - alignment_metadata
+  - level_policy
+  - signal_layer
+  - source_instrument_metadata
+  - no_audio_redistribution_in_cipi_or_product_repo
+
+activation_gate:
+  - REFERENCE_ADAPTER_IMPLEMENTED
+  - LICENSE_AND_ATTRIBUTION_VALIDATED
+  - SIGNAL_LAYER_TAGGING_VALIDATED
+  - TEMPORAL_ALIGNMENT_VALIDATED_WHERE_REQUIRED

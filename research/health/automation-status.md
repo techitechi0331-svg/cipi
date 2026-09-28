@@ -2,15 +2,15 @@
 
 > Operational status only. This is not a sound-quality score or release decision.
 
-- Next scheduler action: **IDLE**
-- Local READY job: **-**
+- Next scheduler action: **LOCAL_RESEARCH**
+- Local READY job: **VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001**
 - Claimed evidence branches: **0**
-- Local blocked / dependency-blocked: **0 / 2**
+- Local blocked / dependency-blocked: **0 / 0**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
 - Cross-Repo queued / dispatched / failed / quarantined: **1 / 0 / 13 / 0**
 - Runner/dispatch alerts: **0**
-- Declared human-gate jobs: **2**
+- Declared human-gate jobs: **3**
 
 ## Autonomous Research Bridge
 
@@ -34,4 +34,5 @@
 ## Human gates
 
 - `VIRTUAL-GUITAR-MIC-INTEGRATION-001` — REAL_AUDIO_AB; FINAL_MIC_INTEGRATION_ADOPTION
-- `VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001` — FINAL_SUBJECTIVE_PICKUP_TONE; COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED
+- `VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001` — FINAL_SUBJECTIVE_PICKUP_TONE; REAL_DI_AB; PRODUCT_ADOPTION_DECISION
+- `VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001` — FINAL_SUBJECTIVE_PICKUP_TONE; REAL_DI_AB_BEFORE_PRODUCT_ADOPTION; COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED

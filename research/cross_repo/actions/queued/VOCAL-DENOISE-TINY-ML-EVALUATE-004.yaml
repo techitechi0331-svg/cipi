@@ -1,0 +1,25 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-004
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-005
+  model_run_id: '36466102524'
+  seed: '2026092906'
+  max_files: '18'
+priority: 99
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-002
+reason: >-
+  Retry the exact v0.2 singer-balanced baseline evaluation after fixing the evaluator
+  symbol wiring. Keep the model artifact, seed family, dataset and file budget fixed so
+  this run changes no research variable beyond the code fix. No listening, product,
+  promotion or release authority.
+previous_run_id: 36473441559

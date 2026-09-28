@@ -24,7 +24,7 @@ This audit does not claim that a pickup model, cable model, amp input, or STRAT_
 - Kotiuga distributed-capacitance transient counter-hypothesis.
 
 ## Real DI decision
-Guitar-TECHS is the preferred first public real-DI corpus candidate because it contains direct input, amp-mic audio, synchronized MIDI, multiple players/guitars and is declared CC BY 4.0.
+Guitar-TECHS is the preferred first public real-DI corpus candidate because it contains direct input, amp-mic audio, synchronized MIDI and multiple players/guitars. The authors project page explicitly declares all data CC BY 4.0. The current rendered Zenodo Rights section does not expose a concrete license value in the captured page, so audio ingest remains gated until an authoritative license statement plus attribution manifest is captured.
 It remains confounded by guitar, pickup selection, splitter, interface and player, so it is not isolated pickup transfer truth.
 The project warns of up to about 100 ms cross-signal alignment error; alignment-sensitive comparisons must correct or explicitly tolerate that.
 

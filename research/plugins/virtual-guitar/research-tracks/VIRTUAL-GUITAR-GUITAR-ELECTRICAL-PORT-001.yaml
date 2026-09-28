@@ -1,0 +1,35 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-001
+project: virtual-guitar
+status: RESEARCH_READY
+recorded_at: "2026-09-29"
+
+research_question: >-
+  How should the post-pickup, post-selector/volume/tone guitar output-jack state be represented
+  so downstream cable/load research can reproduce source/load interaction and Reference DI
+  conditions without collapsing the boundary to a rendered WAV?
+
+required_capabilities:
+  - source_voltage_or_equivalent_representation
+  - source_impedance_or_network_representation
+  - selector_state
+  - volume_state
+  - tone_state
+  - pickup_configuration
+  - sample_rate
+  - model_sha
+  - parameter_set_version
+
+downstream:
+  - REFERENCE_DI
+  - GUITAR_AMP_ELECTRICAL_LINK
+
+constraints:
+  - REFERENCE_DI_IS_DOWNSTREAM_NOT_PREREQUISITE
+  - VALUES_REQUIRE_EVIDENCE
+  - NO_PRODUCT_WRITE_WITHOUT_AUTHORITY
+
+authority:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

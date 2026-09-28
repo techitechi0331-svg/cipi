@@ -1,0 +1,22 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-DATASET-PREPARE-004
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: dataset_prepare
+ref: main
+inputs:
+  force_refresh: 'false'
+priority: 98
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-PREFLIGHT-001
+reason: >-
+  Retry the sanitized VocalSet v2 manifest after fixing literal backslash-n tokens
+  in the embedded PowerShell. Reuse the verified archive/extracted cache, rebuild
+  the RIFF/WAVE-filtered singer-disjoint manifest, create the .prepared-v2 marker,
+  and upload only bounded metadata evidence.
+previous_run_id: 36406247525

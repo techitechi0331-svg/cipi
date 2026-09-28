@@ -1,0 +1,44 @@
+schema_version: "1.0"
+track_id: AMP-INPUT-NETWORK-001
+project: amp-simulator
+repository: techitechi0331-svg/amp_simulator
+status: RESEARCH_READY
+recorded_at: "2026-09-29"
+
+research_question: >-
+  What minimum input-network model is required to reproduce the electrically loaded response
+  of a passive guitar source plus cable across the intended operating domain without selecting
+  a final branded amplifier target prematurely?
+
+research_ready: true
+integration_ready: false
+
+candidate_model_classes:
+  - LINEAR_INPUT_LOAD_NETWORK
+  - FREQUENCY_DEPENDENT_INPUT_NETWORK
+  - NONLINEAR_INPUT_BEHAVIOR_WHERE_EVIDENCE_REQUIRES
+
+required_measurements:
+  - frequency_response
+  - phase_response
+  - resonant_frequency
+  - resonance_q
+  - source_impedance_vs_frequency
+  - load_sensitivity
+  - cable_parameter_sensitivity
+  - level_dependency_where_relevant
+  - sample_rate_consistency
+  - numerical_stability
+  - cpu
+  - memory
+
+forbidden_shortcuts:
+  - GENERIC_FILTER_LABELLED_AS_AMP_INPUT
+  - FIX_INPUT_IMPEDANCE_WITHOUT_PROVENANCE
+  - CLAIM_BRANDED_AMP_FIDELITY
+  - USE_DOWNSTREAM_DISTORTION_TO_HIDE_GUITAR_DEFECTS
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

@@ -1,0 +1,50 @@
+schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001
+state: QUEUED
+priority: 35
+
+track:
+  id: VIRTUAL_GUITAR_PICKUP_ELECTRONICS_INTEGRATION
+  path: research/plugins/virtual-guitar/product-requirements
+
+research_phase: PRODUCT_INTEGRATION_CANDIDATE
+activation_contract_ref: PICKUP-ELECTRONICS-ACTIVATION-GATES-002
+
+research_question: >-
+  Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port
+  gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated
+  without regressing the established physical-string baseline?
+
+depends_on_jobs:
+  - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+  - VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+  - VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+  - VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+
+acceptance:
+  - all integration dependency gates are COMPLETED
+  - feature-gated candidate path preserves prior baseline when disabled
+  - SSS and HSS are selectable
+  - HSS bridge uses a humbucker candidate with future Coil Split extension point
+  - Guitar Electrical Port remains versioned and regression-testable
+  - Reference DI validation is performed downstream after the electrical port exists
+  - Human Listening and matched real-DI A/B remain required for adoption
+
+prohibited_operations:
+  - bypass_dependency_gate
+  - treat_build_success_as_tone_adoption
+  - auto_release
+  - auto_promote_subjective_tone
+  - use_amp_cab_mic_to_hide_pickup_or_string_defects
+
+review_policy:
+  required_human_gates:
+    - FINAL_SUBJECTIVE_PICKUP_TONE
+    - REAL_DI_AB
+    - PRODUCT_ADOPTION_DECISION
+
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  write_authority_must_be_granted_by_separate_cipi_decision: true

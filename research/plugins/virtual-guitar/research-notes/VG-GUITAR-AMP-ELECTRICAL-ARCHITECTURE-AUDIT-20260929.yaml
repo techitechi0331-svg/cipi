@@ -1,0 +1,57 @@
+schema_version: "1.0"
+audit_id: VG-GUITAR-AMP-ELECTRICAL-ARCHITECTURE-AUDIT-20260929
+project: virtual-guitar
+recorded_at: "2026-09-29"
+status: AUDIT_COMPLETE_FOUNDATION_DESIGN_READY
+
+current_main_snapshot:
+  cipi: 02a39204eac2368a7cfc8e8ebbc6885db77073c0
+  melon: cef5668308ad27274ec00b46fdad81577af8d0e2
+  virtual_guitar: bd26a0556fb501228b4551f61f6a8e760a14455b
+  amp_simulator_at_audit_start: EMPTY_REPOSITORY
+  mic_simulator: 189c29035277104412fa58c97843ebde05a83e68
+
+SOURCE_FACT:
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-004 is enabled and its current lifecycle is HUMAN_GATE.
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-004 declares product_repository_write:false.
+  - The existing Pickup/Electronics queued job required both Physical Guitar convergence and DI output convergence.
+  - VG-GUITAR-DI-SCOPE-AMP-EXTERNAL-20260929 places Pickup/Electronics before DI and moves Amp/Cab to external research.
+  - VIRTUAL-GUITAR-EXTERNAL-MIC-INTEGRATION-V1.1 contains older ownership assertions assigning Amp/Cab to virtual-guitar.
+  - techitechi0331-svg/amp_simulator was empty at audit start.
+  - techitechi0331-svg/mic_simulator independently owns microphone research.
+
+MEASURED:
+  - GitHub Actions inspection found no running or queued workflow among the latest inspected runs for the five-repository baseline.
+  - Latest virtual-guitar core and targeted validation on bd26a0556fb501228b4551f61f6a8e760a14455b completed successfully.
+  - Latest inspected mic_simulator core validation on 189c29035277104412fa58c97843ebde05a83e68 completed successfully.
+
+INFERRED:
+  - Requiring Reference DI convergence before Pickup/Electronics is semantically cyclic under the current signal architecture.
+  - Amp/Cab ownership needs an explicit supersession record rather than deleting the older mic-integration policy.
+  - Pickup research can proceed independently while product integration remains dependency-gated.
+
+HYPOTHESIS:
+  - A versioned GuitarElectricalPort + CableDescriptor + AmpInputLoad contract can represent the relevant source/load interaction without runtime cross-repository IPC.
+  - A reduced realtime link model may be acceptable if it is validated against a higher-accuracy electrical reference across the declared operating domain.
+
+REJECTED:
+  - DI_COMPLETION_BEFORE_PICKUP_ELECTRONICS
+  - VIRTUAL_GUITAR_OWNS_AMP_AND_CAB_UNDER_CURRENT_SCOPE
+  - FINISHED_WAV_ONLY_PROVES_PICKUP_CABLE_AMP_LOADING
+  - GENERIC_EQ_IS_PHYSICAL_PICKUP_OR_AMP_INPUT
+  - AMP_OR_CAB_MAY_HIDE_UPSTREAM_STRING_DEFECTS
+
+non_destructive_rules:
+  preserve_realism_004: true
+  preserve_prior_policy_files: true
+  preserve_rejected_and_historical_evidence: true
+  virtual_guitar_product_write_authorized: false
+  amp_product_dsp_adoption_authorized: false
+
+next_ready_work:
+  - AMP_SIMULATOR_FOUNDATION
+  - AMP_INPUT_NETWORK_RESEARCH
+  - PICKUP_OBSERVATION_RESEARCH
+  - PICKUP_ELECTRICAL_NETWORK_RESEARCH
+  - CABLE_LOAD_INTERACTION_RESEARCH
+  - ELECTRICAL_TEST_HARNESS_DESIGN

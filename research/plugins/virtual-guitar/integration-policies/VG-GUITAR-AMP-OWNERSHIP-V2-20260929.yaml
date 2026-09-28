@@ -1,0 +1,105 @@
+schema_version: "1.0"
+policy_id: VG-GUITAR-AMP-OWNERSHIP-V2-20260929
+project: virtual-guitar
+policy_type: CROSS_REPO_OWNERSHIP_SUPERSESSION
+status: ACTIVE
+recorded_at: "2026-09-29"
+source: USER_SUPPLIED_PHYSICAL_ELECTRICAL_INTEGRATION_DIRECTIVE
+
+supersedes_for_current_ownership:
+  - policy_id: VIRTUAL-GUITAR-EXTERNAL-MIC-INTEGRATION-V1.1
+    only_assertions:
+      - virtual_guitar.owns.amp
+      - virtual_guitar.owns.speaker_cabinet
+    preserve_other_assertions: true
+  - policy_id: VG-GUITAR-DI-SCOPE-AMP-EXTERNAL-20260929
+    relationship: REFINES_WITH_EXPLICIT_REPOSITORY_OWNERSHIP
+
+effective_ownership:
+  virtual_guitar:
+    repository: techitechi0331-svg/virtual-guitar
+    owns:
+      - VIRTUAL_GUITARIST
+      - GESTURE
+      - FINGERING
+      - ARTICULATION
+      - PHYSICAL_STRINGS
+      - PHYSICAL_GUITAR
+      - PICKUP_OBSERVATION
+      - MAGNETIC_PICKUP_TRANSDUCTION
+      - PICKUP_ELECTRICAL_NETWORK
+      - SELECTOR_VOLUME_TONE
+      - GUITAR_OUTPUT_JACK
+      - GUITAR_ELECTRICAL_PORT
+    must_not_own:
+      - AMP_CIRCUIT_INTERNALS
+      - SPEAKER_CABINET_INTERNALS
+      - MIC_SIMULATOR_INTERNALS
+
+  amp_simulator:
+    repository: techitechi0331-svg/amp_simulator
+    owns:
+      - AMP_INPUT_NETWORK
+      - AMP_INPUT_LOAD
+      - PREAMP
+      - GAIN_STAGES
+      - TONE_NETWORK
+      - PHASE_INVERTER_WHEN_REQUIRED
+      - POWER_AMP
+      - OUTPUT_TRANSFORMER_WHEN_REQUIRED
+      - SPEAKER
+      - CABINET
+      - AMP_CAB_OUTPUT_BOUNDARY
+    current_state: FOUNDATION_ONLY_NO_FIDELITY_CLAIM
+
+  mic_simulator:
+    repository: techitechi0331-svg/mic_simulator
+    owns:
+      - MICROPHONE_TRANSDUCTION
+      - MIC_CHARACTER
+      - POSITION_DISTANCE_ANGLE
+      - POLAR_BEHAVIOR
+      - OFF_AXIS
+      - PROXIMITY
+      - MIC_ELECTRONICS
+      - MULTI_MIC_BEHAVIOR
+      - ROOM_CAPTURE
+
+  cipi:
+    repository: techitechi0331-svg/cipi
+    owns:
+      - EVIDENCE_AUTHORITY
+      - CROSS_REPO_DAG
+      - VERSIONED_INTEGRATION_CONTRACTS
+      - ADOPTION_DECISION_RECORDS
+      - EVIDENCE_LINEAGE
+      - PARAMETER_PROVENANCE
+      - CONFLICT_RECORDS
+
+signal_semantics:
+  RAW_PHYSICAL_STRING: >-
+    Pickup-independent physical string state or observation. It is not a DI signal.
+  GUITAR_ELECTRICAL_PORT: >-
+    Electrical source representation after pickup transduction and guitar electronics,
+    at the guitar output-jack boundary.
+  REFERENCE_DI: >-
+    The result of connecting GUITAR_ELECTRICAL_PORT to an explicitly documented
+    reference cable/load/Hi-Z DI condition. REFERENCE_DI is downstream of pickup/electronics
+    and must not be a prerequisite for pickup research.
+
+cross_repo_link:
+  name: GuitarAmpElectricalLink
+  components:
+    - GuitarElectricalPort
+    - CableDescriptor
+    - AmpInputLoad
+  ownership: CIPI_VERSIONED_INTEGRATION_CONTRACT
+  runtime_ipc_required: false
+  equivalent_reduced_model_allowed: true
+  completed_wav_only_contract_forbidden: true
+
+authority:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  human_gate_preserved: true

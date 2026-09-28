@@ -1,0 +1,38 @@
+schema_version: "1.0"
+track_id: AMP-SIM-FOUNDATION-001
+project: amp-simulator
+repository: techitechi0331-svg/amp_simulator
+status: RESEARCH_READY
+recorded_at: "2026-09-29"
+
+research_question: >-
+  Can the empty amp_simulator repository be established as a deterministic, authority-bounded
+  research platform with a versioned Result Bundle and explicit Amp Input / future Amp Core /
+  Speaker-Cab boundaries before any amplifier-fidelity DSP is adopted?
+
+scope:
+  - REPOSITORY_FOUNDATION
+  - RESULT_BUNDLE
+  - DETERMINISTIC_CANARY
+  - AMP_INPUT_RESEARCH_BOUNDARY
+  - FUTURE_AMP_CORE_BOUNDARY
+  - FUTURE_SPEAKER_CAB_BOUNDARY
+
+acceptance:
+  - deterministic foundation test exists
+  - machine-readable Result Bundle exists
+  - no branded amp target is silently selected
+  - no amp fidelity claim is made
+  - no speculative distortion DSP is adopted
+  - mic ownership remains external
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  product_dsp_adoption: false
+
+integration:
+  cross_repo_registry_key: amp_simulator
+  canary_workflow: amp-canary.yml
+  dispatch_after_registry_validation: true

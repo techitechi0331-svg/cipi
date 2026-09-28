@@ -225,6 +225,25 @@ repositories:
           - job_id
           - track_id
 
+
+  amp_simulator:
+    repository: techitechi0331-svg/amp_simulator
+    default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
+    workflows:
+      canary:
+        file: amp-canary.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - job_id
+          - track_id
+        required_inputs:
+          - job_id
+          - track_id
+
   mic_simulator:
     repository: techitechi0331-svg/mic_simulator
     default_ref: main

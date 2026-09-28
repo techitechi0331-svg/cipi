@@ -1,0 +1,84 @@
+schema_version: "1.0"
+protocol_id: VG-HUMAN-LISTENING-LAYER-COMPARISON-001
+project: virtual-guitar
+protocol_type: HUMAN_GATE_LISTENING_PROTOCOL
+status: ACTIVE
+recorded_at: "2026-09-29"
+source: USER_HUMAN_GATE_REQUIREMENT
+
+user_requirement:
+  summary_ja: "元の弦の音がわかんないと判断しにくいので、段階ごとの音を比較して判断する"
+  intent:
+    - PRESERVE_RAW_STRING_REFERENCE
+    - COMPARE_SIGNAL_CHAIN_LAYERS
+    - DO_NOT_JUDGE_FINAL_TONE_FROM_PROCESSED_ONLY
+
+required_future_listening_set:
+  matched_source: true
+  same_note_or_gesture: true
+  same_velocity_or_excitation: true
+  same_render_duration: true
+  stages:
+    - stage_id: RAW_PHYSICAL_STRING
+      signal_path:
+        - PHYSICAL_STRING_MODEL
+      required_now: true
+      label_ja: "弦モデル直出し"
+      purpose: "弦モデルそのもののリアリティ判断"
+
+    - stage_id: PICKUP_DI
+      signal_path:
+        - PHYSICAL_STRING_MODEL
+        - PHYSICAL_GUITAR
+        - PICKUP_ELECTRONICS
+        - DI
+      required_when_available: true
+      currently_blocked_by:
+        - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+        - VIRTUAL-GUITAR-DI-OUTPUT-CONVERGENCE-GATE-001
+      label_ja: "Pickup / DI"
+      purpose: "ピックアップ・電気系を通した段階の判断"
+
+    - stage_id: AMP_CAB
+      signal_path:
+        - PHYSICAL_STRING_MODEL
+        - PHYSICAL_GUITAR
+        - PICKUP_ELECTRONICS
+        - DI
+        - AMP
+        - SPEAKER_CABINET
+      required_when_available: true
+      label_ja: "Amp / Cab"
+      purpose: "完成に近いエレキギター音としての判断"
+
+comparison_rules:
+  - RAW_PHYSICAL_STRING_MUST_ALWAYS_BE_INCLUDED
+  - NEVER_PRESENT_PICKUP_DI_IF_PICKUP_ELECTRONICS_IS_NOT_ACTUALLY_IMPLEMENTED
+  - NEVER_PRESENT_AMP_CAB_IF_AMP_OR_CAB_IS_NOT_ACTUALLY_IMPLEMENTED
+  - DO_NOT_SIMULATE_MISSING_LAYERS_WITH_FAKE_EQ_OR_GENERIC_FILTERING_AND_LABEL_AS_REAL_LAYER
+  - USE_MATCHED_MIDI_NOTE_GESTURE_AND_EXCITATION_WHEN_COMPARING_LAYERS
+  - RECORD_GIT_SHA_AND_RENDER_CONFIGURATION_PER_STAGE
+  - LEVEL_MATCH_FOR_SUBJECTIVE_COMPARISON_WHEN_PRACTICAL
+  - KEEP_UNMATCHED_RAW_LEVEL_FILES_FOR_DIAGNOSTIC_REFERENCE
+  - HUMAN_LISTENING_IS_EVIDENCE_NOT_AUTOMATIC_PRODUCT_ADOPTION
+
+current_state:
+  raw_physical_string: AVAILABLE
+  pickup_di: BLOCKED_DEPENDENCY
+  amp_cab: NOT_IMPLEMENTED
+  mic_capture: OUT_OF_SCOPE_FOR_THIS_THREE_STAGE_COMPARISON
+  note: >-
+    Current Realism render artifacts are closest to a debug/audition output of the physical-string
+    model with simplified internal coupling. They must not be relabeled as Pickup/DI or Amp/Cab.
+
+activation_dependencies:
+  pickup_di:
+    contract: research/plugins/virtual-guitar/product-requirements/PICKUP-ELECTRONICS-ACTIVATION-GATES-001.yaml
+  amp_cab:
+    prerequisite: PICKUP_DI_AVAILABLE_AND_VALIDATED
+
+authority:
+  human_gate_requirement: true
+  cipi_evidence_authority: true
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false

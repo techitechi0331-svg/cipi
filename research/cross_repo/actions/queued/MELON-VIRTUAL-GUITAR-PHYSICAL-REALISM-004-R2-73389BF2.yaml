@@ -1,0 +1,43 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R2-73389BF2
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  generations: 2
+  max_candidates: 18
+  max_runtime_seconds: 120
+  population: 9
+  preflight_mode: fast
+  seed: 2026092902
+  stage2_archive_limit: 6
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage2_limit: 8
+  stage3_limit: 2
+  workers: 1
+  cipi_context_json: '{"efficiency_policy":{"batch_class":"CHEAP","candidate_timeout_seconds":5,"current_main_recheck_required":true,"full_regression_at_epoch_end":true,"max_guitar_runner_jobs":1,"max_memory_mb":1024,"pending_adapter_commit":"cef5668308ad27274ec00b46fdad81577af8d0e2","pending_validation_run":36451579434,"policy_id":"VIRTUAL-GUITAR-EFFICIENCY-V2.3","policy_version":"2.3","selective_test_mapping":true,"state":"APPLIED","validation_result":"PASS"},"experiment_id":"MELON-FUNNEL-GUITAR-REALISM-45E45B759704-UNCERTAINTY_REDUCTION-1","experiment_type":"UNCERTAINTY_REDUCTION","hypothesis_id":"HYP-VIRTUAL-GUITAR-PHYSICAL-REALISM-V04","job_id":"VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R2-73389BF2","loop_depth":2,"parent_job_id":"VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R1-28A37773","parent_run_id":"melon-funnel-guitar-realism-45e45b759704","research_id":"VIRTUAL-GUITAR-PHYSICAL-REALISM-004","research_question":"Can
+    architecture-level guitar mechanisms—two-polarization propagation, physically
+    motivated pluck interaction, bridge scattering/sympathetic coupling, and nonlinear
+    string-fret/contact dynamic detuning—produce a materially stronger implementation
+    candidate than Realism v1.1?","track_id":"VIRTUAL-GUITAR-PHYSICAL-REALISM-004"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+bridge_job_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R2-73389BF2
+continuation_fingerprint: 73389bf29d1cb414af18cd359c71425c345396e22441e1c22b6ef1855eb6319d
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VIRTUAL-GUITAR-EFFICIENCY-V2.3
+  policy_version: '2.3'
+  state: APPLIED
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

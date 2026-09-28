@@ -15,6 +15,32 @@ research_question: >-
   gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated
   without regressing the established physical-string baseline?
 
+hypothesis: >-
+  A feature-gated Pickup/Electronics candidate can be integrated after all upstream electrical
+  contracts are explicitly validated while preserving the previous product baseline when disabled.
+
+counter_hypotheses:
+  - Integration changes the authoritative physical-string behavior.
+  - SSS/HSS switching cannot preserve a stable Guitar Electrical Port contract.
+  - The candidate requires undocumented constants or downstream Amp/Cab coloration to sound plausible.
+
+baseline:
+  - current virtual-guitar product main remains the regression baseline
+  - approved upstream Pickup Observation and electrical-network evidence
+  - approved Guitar Electrical Port contract
+
+variants:
+  - STRAT_STYLE_SSS_INTEGRATION_CANDIDATE
+  - STRAT_STYLE_HSS_BRIDGE_HUMBUCKER_INTEGRATION_CANDIDATE
+
+metrics:
+  - baseline_off_path_regression
+  - sss_hss_configuration_correctness
+  - guitar_electrical_port_contract_compatibility
+  - deterministic_output
+  - cpu_cost_delta
+  - memory_cost_delta
+
 depends_on_jobs:
   - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
   - VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
@@ -30,8 +56,26 @@ acceptance:
   - Reference DI validation is performed downstream after the electrical port exists
   - Human Listening and matched real-DI A/B remain required for adoption
 
+rejection:
+  - any integration dependency remains unresolved
+  - baseline-off path changes beyond declared tolerance
+  - candidate bypasses Guitar Electrical Port contract
+  - undocumented electrical constants are introduced
+  - downstream Amp/Cab/Mic coloration is required to hide pickup/string defects
+
+max_runs: 3
+timeout_minutes: 20
+
+allowed_operations:
+  - inspect_approved_upstream_evidence
+  - implement_feature_gated_integration_candidate_after_write_authority
+  - add_regression_tests
+  - validate_guitar_electrical_port_contract
+  - prepare_reference_di_validation
+
 prohibited_operations:
   - bypass_dependency_gate
+  - product_repository_write_without_separate_cipi_authority
   - treat_build_success_as_tone_adoption
   - auto_release
   - auto_promote_subjective_tone
@@ -48,3 +92,10 @@ authority_boundaries:
   automatic_knowledge_promotion: false
   product_repository_write: false
   write_authority_must_be_granted_by_separate_cipi_decision: true
+
+knowledge_candidate:
+  claim: >-
+    Pickup/Electronics product integration must remain separately dependency-gated from research.
+  evidence_type: INFERRED
+  scope: "Integration governance only; no product-fidelity or tone adoption claim."
+  promotion_requested: HYPOTHESIS

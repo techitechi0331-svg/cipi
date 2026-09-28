@@ -3,6 +3,7 @@
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
     "MIC-SIM-FOUNDATION-001",
+    "MIC-SIM-REFERENCE-SM57-001",
     "VIRTUAL-GUITAR-PHYSICAL-001",
     "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
@@ -16,7 +17,9 @@
     "VOCAL-DENOISE-PRESERVATION-001"
   ],
   "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-  "active_tracks": [],
+  "active_tracks": [
+    "MIC-SIM-REFERENCE-SM57-001"
+  ],
   "authority": "OPERATIONAL_SCHEDULING_ONLY",
   "automatic_knowledge_promotion": false,
   "automatic_product_decision": false,
@@ -51,6 +54,16 @@
       "runs_limit": 3,
       "runtime_limit_seconds": 240.0,
       "runtime_seconds": 0.113748
+    },
+    "MIC-SIM-REFERENCE-SM57-001": {
+      "candidates": 0,
+      "candidates_limit": 16,
+      "loop_depth": 0,
+      "loop_depth_limit": 2,
+      "runs": 0,
+      "runs_limit": 2,
+      "runtime_limit_seconds": 180.0,
+      "runtime_seconds": 0.0
     },
     "VIRTUAL-GUITAR-PHYSICAL-001": {
       "candidates": 36,
@@ -168,6 +181,7 @@
     "MELON-BRIDGE-CLEAN-PROOF-002": 3,
     "MELON-BRIDGE-PILOT-001": 3,
     "MIC-SIM-FOUNDATION-001": 2,
+    "MIC-SIM-REFERENCE-SM57-001": 0,
     "VIRTUAL-GUITAR-PHYSICAL-001": 3,
     "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
@@ -185,6 +199,7 @@
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
     "MIC-SIM-FOUNDATION-001",
+    "MIC-SIM-REFERENCE-SM57-001",
     "VIRTUAL-GUITAR-PHYSICAL-001",
     "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
@@ -197,7 +212,7 @@
     "VOCAL-DENOISE-LOSS-001",
     "VOCAL-DENOISE-PRESERVATION-001"
   ],
-  "generated_jobs": 37,
+  "generated_jobs": 38,
   "human_gate_tracks": [
     "VIRTUAL-GUITAR-PHYSICAL-001",
     "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
@@ -207,9 +222,11 @@
   "human_gates": 4,
   "invalid_results": 0,
   "melon_runs": 37,
-  "next_scheduler_action": "NO_READY_WORK",
+  "next_scheduler_action": "MELON-MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C",
   "no_improvement_count": 4,
-  "queued_actions": [],
+  "queued_actions": [
+    "MELON-MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C"
+  ],
   "registered_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
@@ -232,12 +249,12 @@
   ],
   "rejected_continuations": 10,
   "research_quality_metrics": {
-    "budget_exhaustion_rate": 0.21428571428571427,
+    "budget_exhaustion_rate": 0.2,
     "cache_hit_rate": 0.0,
     "duplicate_research_rate": 0.0,
     "early_convergence_rate": null,
     "falsification_rate": 0.0,
-    "human_gate_rate": 0.2857142857142857,
+    "human_gate_rate": 0.26666666666666666,
     "new_information_per_compute_second": 12.841390834130975,
     "new_information_per_run": 0.828944595234662,
     "pareto_front_turnover": null,
@@ -253,7 +270,6 @@
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
     "MIC-SIM-FOUNDATION-001",
-    "MIC-SIM-REFERENCE-SM57-001",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
     "VL2A-CIRCUIT-HA100X-001",
     "VOCAL-DENOISE-ARCH-001",
@@ -296,9 +312,10 @@
       "state_basis": "SCHEDULER_TERMINAL_ALIAS"
     },
     "MIC-SIM-REFERENCE-SM57-001": {
-      "reason": "TRACK_DISABLED",
-      "scheduler_eligible": false,
-      "state": "DISABLED"
+      "job_id": "MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C",
+      "reason": "EXTERNAL_ACTION_QUEUED",
+      "scheduler_eligible": true,
+      "state": "READY"
     },
     "VIRTUAL-GUITAR-PHYSICAL-001": {
       "reason": "HUMAN_GATE",

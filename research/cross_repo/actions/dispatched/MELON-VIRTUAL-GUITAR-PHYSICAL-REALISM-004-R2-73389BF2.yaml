@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R2-73389BF2
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     string-fret/contact dynamic detuning—produce a materially stronger implementation
     candidate than Realism v1.1?","track_id":"VIRTUAL-GUITAR-PHYSICAL-REALISM-004"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -41,3 +41,7 @@ policy_gate:
   state: APPLIED
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36457684537
+dispatched_at: '2026-09-28T17:25:37.973137Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

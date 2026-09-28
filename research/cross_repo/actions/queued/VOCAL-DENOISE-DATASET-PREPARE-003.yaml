@@ -1,0 +1,21 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-DATASET-PREPARE-003
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: dataset_prepare
+ref: main
+inputs:
+  force_refresh: 'false'
+priority: 97
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-PREFLIGHT-001
+reason: Rebuild the persistent VocalSet split manifest using the sanitized RIFF/WAVE gate
+  introduced by Vocal_Denoise PR 9. Reuse the verified archive and extracted cache,
+  exclude archive metadata sidecars, fail on unexplained non-RIFF .wav candidates,
+  and create the .prepared-v2 marker before any further Tiny ML training.
+previous_run_id: 36346598207

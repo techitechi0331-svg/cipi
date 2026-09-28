@@ -16,7 +16,7 @@ retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions:
-- VOCAL-DENOISE-TINY-ML-EVALUATE-003
+- VOCAL-DENOISE-TINY-ML-EVALUATE-004
 reason: >-
   Train the v0.3 singer-balanced candidate after correcting the sampling protocol.
   Keep the v0.2 HF-protect architecture, loss weights, seed, dataset, and 300-step

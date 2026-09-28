@@ -501,33 +501,19 @@
         "PRODUCT_ADOPTION_DECISION"
       ],
       "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001"
-    },
-    {
-      "gates": [
-        "FINAL_SUBJECTIVE_PICKUP_TONE",
-        "REAL_DI_AB_BEFORE_PRODUCT_ADOPTION",
-        "COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED"
-      ],
-      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001"
     }
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [
-      "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/auto-a89e8b8c759a"
-    ],
-    "claimed_count": 1,
-    "claimed_jobs": [
-      "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001"
-    ],
+    "claimed_branches": [],
+    "claimed_count": 0,
+    "claimed_jobs": [],
     "dependency_blocked_count": 2,
     "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/auto-a89e8b8c759a",
-    "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
-    "kind": "EVIDENCE_INTAKE",
-    "priority": 90
+    "kind": "IDLE",
+    "priority": -999
   }
 }

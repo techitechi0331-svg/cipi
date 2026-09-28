@@ -1,0 +1,45 @@
+schema_version: "1.0"
+gate_id: GUITAR-AMP-ELECTRICAL-INTEGRATION-GATE-001
+project: virtual-guitar
+status: BLOCKED_DEPENDENCY
+recorded_at: "2026-09-29"
+
+purpose: >-
+  Prevent cross-repository product integration until both sides expose compatible,
+  evidence-backed electrical contracts while allowing independent research to proceed now.
+
+research_parallelism:
+  guitar_pickup_observation: READY
+  guitar_pickup_electrical_network: READY
+  guitar_electrical_port: READY
+  cable_load_interaction: READY
+  amp_foundation: READY
+  amp_input_network: READY
+
+integration_dependencies:
+  - VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+  - VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+  - VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+  - AMP-SIM-INPUT-NETWORK-VALIDATION-GATE-001
+  - GUITAR-AMP-ELECTRICAL-CONTRACT-COMPATIBILITY-GATE-001
+
+required_validation:
+  - contract_version_supported
+  - incompatible_version_rejected
+  - missing_field_handling_explicit
+  - invalid_parameter_handling_explicit
+  - sample_rate_mismatch_handling_explicit
+  - deterministic_state
+  - reference_di_remains_independent_when_amp_absent
+  - loaded_response_reference_vs_candidate_comparison
+
+must_not_require:
+  - runtime_cross_repo_ipc
+  - final_branded_amp_target
+  - mic_simulator_for_electrical_validation
+
+authority:
+  completion_authority: CIPI
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

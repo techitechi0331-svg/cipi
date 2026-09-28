@@ -15,6 +15,14 @@ SAFE_RE = re.compile(r"[^A-Za-z0-9._-]+")
 OUTCOMES = {"COMPLETE", "REJECT", "DEFER"}
 TARGET_TYPES = {"RESEARCH_JOB", "AUTONOMOUS_TRACK"}
 SOURCES = {"DISCORD", "GITHUB_UI", "CLI"}
+SENSITIVE_PATTERNS = (
+    re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"),
+    re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"),
+    re.compile(r"\bsk-[A-Za-z0-9]{20,}\b"),
+    re.compile(r"\bAIza[0-9A-Za-z_-]{30,}\b"),
+    re.compile(r"-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----"),
+    re.compile(r"(?i)\b(?:api[_-]?key|access[_-]?token|auth[_-]?token|password|secret)\s*[:=]"),
+)
 
 
 def safe_id(value: str) -> str:
@@ -22,6 +30,12 @@ def safe_id(value: str) -> str:
     if not cleaned:
         raise ValueError("identifier becomes empty after sanitization")
     return cleaned[:120]
+
+
+def ensure_public_safe(label: str, value: str) -> None:
+    text = value.strip()
+    if any(pattern.search(text) for pattern in SENSITIVE_PATTERNS):
+        raise ValueError(f"{label} contains secret-like material; public CIPI records must be redacted")
 
 
 def load_snapshot(project_id: str) -> dict[str, Any]:
@@ -153,6 +167,9 @@ def apply(args: argparse.Namespace) -> Path:
         raise ValueError("rationale must be at least 10 characters")
     if len(args.evidence_ref.strip()) < 3:
         raise ValueError("evidence_ref must be at least 3 characters")
+    ensure_public_safe("evidence_ref", args.evidence_ref)
+    ensure_public_safe("rationale", args.rationale)
+    ensure_public_safe("actor", args.actor)
 
     snapshot = load_snapshot(project_id)
     if snapshot.get("freshness") != "FRESH":

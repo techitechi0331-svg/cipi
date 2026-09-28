@@ -1,0 +1,331 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "blocked": [
+    {
+      "classification": "BLOCKED_DEPENDENCY",
+      "current_human_gates": [
+        "FINAL_MIC_INTEGRATION_ADOPTION",
+        "REAL_AUDIO_AB"
+      ],
+      "declared_human_gates": [
+        "FINAL_MIC_INTEGRATION_ADOPTION",
+        "REAL_AUDIO_AB"
+      ],
+      "depends_on_jobs": [
+        "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001",
+        "MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001",
+        "MIC-SIMULATOR-MINIMUM-VALIDATION-GATE-001",
+        "MIC-SIMULATOR-CIPI-INTEGRATION-CANDIDATE-GATE-001"
+      ],
+      "job_id": "VIRTUAL-GUITAR-MIC-INTEGRATION-001",
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-MIC-INTEGRATION-001.yaml",
+      "priority": 35,
+      "research_question": "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
+      "state": "QUEUED",
+      "unresolved_dependencies": [
+        "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001",
+        "MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001",
+        "MIC-SIMULATOR-MINIMUM-VALIDATION-GATE-001",
+        "MIC-SIMULATOR-CIPI-INTEGRATION-CANDIDATE-GATE-001"
+      ]
+    },
+    {
+      "classification": "BLOCKED_DEPENDENCY",
+      "current_human_gates": [
+        "FINAL_SUBJECTIVE_PICKUP_TONE",
+        "PRODUCT_ADOPTION_DECISION",
+        "REAL_DI_AB"
+      ],
+      "declared_human_gates": [
+        "FINAL_SUBJECTIVE_PICKUP_TONE",
+        "PRODUCT_ADOPTION_DECISION",
+        "REAL_DI_AB"
+      ],
+      "depends_on_jobs": [
+        "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+        "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+        "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+        "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
+      ],
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001",
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001.yaml",
+      "priority": 35,
+      "research_question": "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?",
+      "state": "QUEUED",
+      "unresolved_dependencies": [
+        "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+        "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+        "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+        "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
+      ]
+    }
+  ],
+  "cipi_ref": {
+    "branch": "main",
+    "commit_sha": "78a600fcc442cc62d1b4d4f3f9d16209ac28658d",
+    "freshness_basis": "source_state_digest"
+  },
+  "conflicts": [],
+  "freshness": "FRESH",
+  "generated_at": "2026-09-29T05:20:08+09:00",
+  "generation_id": "7caf7e403fc743fd54a40843",
+  "human_gates": [
+    {
+      "blocking": false,
+      "gates": [
+        "FINAL_MIC_INTEGRATION_ADOPTION",
+        "REAL_AUDIO_AB"
+      ],
+      "job_id": "VIRTUAL-GUITAR-MIC-INTEGRATION-001",
+      "source": "RESEARCH_JOB"
+    },
+    {
+      "blocking": true,
+      "gates": [
+        "HUMAN_GATE"
+      ],
+      "source": "AUTONOMOUS_TRACK",
+      "track_id": "VIRTUAL-GUITAR-PHYSICAL-001"
+    },
+    {
+      "blocking": true,
+      "gates": [
+        "HUMAN_GATE"
+      ],
+      "source": "AUTONOMOUS_TRACK",
+      "track_id": "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001"
+    },
+    {
+      "blocking": true,
+      "gates": [
+        "HUMAN_GATE"
+      ],
+      "source": "AUTONOMOUS_TRACK",
+      "track_id": "VIRTUAL-GUITAR-PHYSICAL-REALISM-003"
+    },
+    {
+      "blocking": true,
+      "gates": [
+        "HUMAN_GATE"
+      ],
+      "source": "AUTONOMOUS_TRACK",
+      "track_id": "VIRTUAL-GUITAR-PHYSICAL-REALISM-004"
+    },
+    {
+      "blocking": false,
+      "gates": [
+        "FINAL_SUBJECTIVE_PICKUP_TONE",
+        "PRODUCT_ADOPTION_DECISION",
+        "REAL_DI_AB"
+      ],
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001",
+      "source": "RESEARCH_JOB"
+    }
+  ],
+  "latest_decision_refs": [
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-28T18:45:08.992110Z",
+      "decision": "ITERATE",
+      "decision_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001:gha-36467371731-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
+      "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
+      "review_status": "PENDING"
+    }
+  ],
+  "phase": "HUMAN_GATE",
+  "product_ref": {
+    "commit_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+    "ref": "main",
+    "repository": "techitechi0331-svg/virtual-guitar",
+    "verification": "VERIFIED"
+  },
+  "project_id": "virtual_guitar",
+  "ready": [],
+  "rejected_refs": [],
+  "research": {
+    "decision_ref_count": 1,
+    "review_ref_count": 2,
+    "track_lifecycle": {
+      "VIRTUAL-GUITAR-PHYSICAL-001": {
+        "reason": "HUMAN_GATE",
+        "scheduler_eligible": false,
+        "state": "HUMAN_GATE"
+      },
+      "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": {
+        "reason": "HUMAN_GATE",
+        "scheduler_eligible": false,
+        "state": "HUMAN_GATE"
+      },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": {
+        "reason": "DUPLICATE_ONLY",
+        "scheduler_eligible": false,
+        "scientific_convergence_claim": false,
+        "state": "CONVERGED",
+        "state_basis": "SCHEDULER_TERMINAL_ALIAS"
+      },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": {
+        "reason": "HUMAN_GATE",
+        "scheduler_eligible": false,
+        "state": "HUMAN_GATE"
+      },
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004": {
+        "reason": "HUMAN_GATE",
+        "scheduler_eligible": false,
+        "state": "HUMAN_GATE"
+      },
+      "VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002": {
+        "reason": "BUDGET_EXHAUSTED",
+        "scheduler_eligible": false,
+        "state": "BUDGET_EXHAUSTED"
+      }
+    }
+  },
+  "resume_contract": {
+    "blocked_dependencies": [
+      "MIC-SIMULATOR-CIPI-INTEGRATION-CANDIDATE-GATE-001",
+      "MIC-SIMULATOR-MINIMUM-VALIDATION-GATE-001",
+      "MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001",
+      "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001",
+      "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
+      "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+      "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001"
+    ],
+    "can_autonomously_resume": false,
+    "can_resume": true,
+    "human_gates": [
+      "VIRTUAL-GUITAR-PHYSICAL-001",
+      "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
+      "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
+      "VIRTUAL-GUITAR-MIC-INTEGRATION-001",
+      "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001"
+    ],
+    "must_not_repeat": [
+      "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001"
+    ],
+    "recommended_action": "HUMAN_GATE",
+    "required_context": [
+      "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml"
+    ],
+    "resume_mode": "HUMAN_GATE"
+  },
+  "review_refs": [
+    {
+      "created_at": "2026-09-28T18:45:08.992110Z",
+      "final_decision_made": false,
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001:gha-36467371731-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001:gha-36467371731-1:triage-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_manifest": [
+    {
+      "path": "automation/cross_repo/registry.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "16dcf5716c87275af30d35893ca50597ae6598ed29bef533dafc3e9f1a4cb6c4",
+      "source_type": "CROSS_REPO_REGISTRY"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/decisions",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c66ca453e5be3cbe4942fd2ffb73c9398d2c518acc95f32f83810a842e444a6d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "08e559c1d6a1542f863d347abebe5509d1a6c204eb084d6158214d1fe81f97d3",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/health/automation-status.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bb037c801dd5db6ba9c2115bf86d66794f9944999dc60bdd13a7aca40af931d2",
+      "source_type": "AUTOMATION_HEALTH"
+    },
+    {
+      "path": "research/health/autonomous-bridge.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8406674bf8655aa1fe7689b3cd27e6a1a27944cce2fd362d37e8dc351dcb214f",
+      "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/completed",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ee970ab35df5491d37cd99a62c5e4ba72ffb4d5221fb35c9b5bc24d9ce0b098d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7f5dd31d4179e72f5a693b1938866d508ca27c465a76b4752a5e0410ecda5dee",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/queued",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-MIC-INTEGRATION-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8c1ec216ae9dd387221f4b0dc1547e2195cff9cdaf63647bcac0a16fab7437f5",
+      "source_type": "RESEARCH_JOB"
+    },
+    {
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "6343b7fc68641c364ac3b8abffa96674b95508eab0dd70fe1a970b907f721b2c",
+      "source_type": "RESEARCH_JOB"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/reviews",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4457638e9e833af714c8dedaf1a3abb8d5044d2c790371a62fc3ba3cc51bd1ea",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "367043e430036a015631822b1d09c2ff2c79fc908ac70046a3677df10945aee2",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1244cfe70cc7a67c8ae913810b288cc55ff06b3308838d7b41f6c3ffa2d45dea",
+      "source_type": "REVIEW"
+    }
+  ],
+  "source_state_digest": "6c0b89a5dcd00abac3a39107a1da389f1d36461c5bb921ed5e91d6937f5f21d6",
+  "unresolved_questions": [
+    "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
+    "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"
+  ],
+  "work": {
+    "blocked_count": 2,
+    "human_gate_count": 6,
+    "queued_job_count": 2,
+    "ready_count": 0
+  }
+}

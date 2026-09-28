@@ -1,0 +1,370 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "blocked": [],
+  "cipi_ref": {
+    "branch": "main",
+    "commit_sha": "78a600fcc442cc62d1b4d4f3f9d16209ac28658d",
+    "freshness_basis": "source_state_digest"
+  },
+  "conflicts": [],
+  "freshness": "FRESH",
+  "generated_at": "2026-09-29T05:20:08+09:00",
+  "generation_id": "8dda5f7d1b2a336230f050ca",
+  "human_gates": [],
+  "latest_decision_refs": [
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T14:12:35.663015Z",
+      "decision": "REJECT",
+      "decision_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001",
+      "path": "research/decisions/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T13:57:25.117857Z",
+      "decision": "ITERATE",
+      "decision_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002",
+      "path": "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T08:13:45.868959Z",
+      "decision": "REJECT",
+      "decision_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001",
+      "path": "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T07:59:46.023451Z",
+      "decision": "REJECT",
+      "decision_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+      "path": "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25",
+      "decision": "ITERATE",
+      "decision_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:assistant-review-20260925",
+      "event_type": "REVIEW",
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001",
+      "path": "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/assistant-review-20260925.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25",
+      "decision": "REJECT",
+      "decision_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:assistant-review-20260925",
+      "event_type": "REVIEW",
+      "job_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+      "path": "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/assistant-review-20260925.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
+  "phase": "IDLE",
+  "product_ref": {
+    "commit_sha": "2c3728657375580be5d2c2af12c66067d37bf4ad",
+    "ref": "main",
+    "repository": "techitechi0331-svg/76blackCompressor",
+    "verification": "VERIFIED"
+  },
+  "project_id": "black76",
+  "ready": [],
+  "rejected_refs": [
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25",
+      "decision": "REJECT",
+      "decision_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:assistant-review-20260925",
+      "event_type": "REVIEW",
+      "job_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+      "path": "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/assistant-review-20260925.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
+  "research": {
+    "decision_ref_count": 6,
+    "review_ref_count": 8,
+    "track_lifecycle": {}
+  },
+  "resume_contract": {
+    "blocked_dependencies": [],
+    "can_autonomously_resume": false,
+    "can_resume": true,
+    "human_gates": [],
+    "must_not_repeat": [
+      "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001",
+      "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+      "BLACK76-RATIO-P2A-SUFFICIENCY-001",
+      "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001",
+      "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002"
+    ],
+    "recommended_action": "NO_READY_WORK",
+    "required_context": [
+      "research/decisions/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-auto.yaml",
+      "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-auto.yaml",
+      "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-auto.yaml",
+      "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-auto.yaml",
+      "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/assistant-review-20260925.yaml",
+      "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/assistant-review-20260925.yaml",
+      "research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-triage.yaml",
+      "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-triage.yaml",
+      "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-triage.yaml",
+      "research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-triage.yaml",
+      "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-review-brief.yaml",
+      "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-review-brief.yaml",
+      "research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-review-brief.yaml",
+      "research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-review-brief.yaml"
+    ],
+    "resume_mode": "IDLE"
+  },
+  "review_refs": [
+    {
+      "created_at": "2026-09-25T14:12:35.663015Z",
+      "final_decision_made": false,
+      "job_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001",
+      "path": "research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T13:57:25.117857Z",
+      "final_decision_made": false,
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002",
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T08:13:45.868959Z",
+      "final_decision_made": false,
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001",
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T07:59:46.023451Z",
+      "final_decision_made": false,
+      "job_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+      "path": "research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002",
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002:gha-36143173077-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001",
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001:gha-36111769039-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001",
+      "path": "research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001:gha-36110496702-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001",
+      "path": "research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001:gha-36145683580-1:triage-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_manifest": [
+    {
+      "path": "automation/cross_repo/registry.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "16dcf5716c87275af30d35893ca50597ae6598ed29bef533dafc3e9f1a4cb6c4",
+      "source_type": "CROSS_REPO_REGISTRY"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/decisions",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c66ca453e5be3cbe4942fd2ffb73c9398d2c518acc95f32f83810a842e444a6d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "95f31377213253590905af4cf17ea79269f32d854b5fe335fb6af9b4a4ce8fce",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/assistant-review-20260925.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1bd7edbc4d9a25442feb8b248f31104b4c8e009378969ab22b58f44d4d6791d8",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d69bc1f802f1a8787118b09a31c16e3ae99cbc1f16a8f808f75a055c52b6ec20",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/assistant-review-20260925.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b28a3177c6091eed39c6935a51a69a9b64c5d0c3f6e3249d07cb58e0bcad60fa",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "fad6af5f4ffb8654a9bf6edb5d6d64f3ff021a0d921072725d1b2045cde18b71",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "76b49f2cfe8272de8f5a5f809a429f3c1c589bf5e6c160f404aa4727d360c8d5",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/health/automation-status.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bb037c801dd5db6ba9c2115bf86d66794f9944999dc60bdd13a7aca40af931d2",
+      "source_type": "AUTOMATION_HEALTH"
+    },
+    {
+      "path": "research/health/autonomous-bridge.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8406674bf8655aa1fe7689b3cd27e6a1a27944cce2fd362d37e8dc351dcb214f",
+      "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/completed",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ee970ab35df5491d37cd99a62c5e4ba72ffb4d5221fb35c9b5bc24d9ce0b098d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "63dd38c96e64256dc2147969e6e6dfd70cc388f2f0d105c41362f883fe25003e",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8b7487d74e884e9a9402c723862c05c88e07275cce495875804f53649387ff6f",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/BLACK76-RATIO-P2A-SUFFICIENCY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1c0e9e256e86db1af66a3e70aeff30c38bc91a1f8070537201149fa54593426b",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "08e80b3465acfdb6b6e2d99fbdc8e8c54e9bbbd3ff8e08b7b87aebe816cb7419",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1099b02344c278e1fbf01b642c6f5a5d930c9222d301c2f69fcda875ae03a987",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/queued",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/reviews",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4457638e9e833af714c8dedaf1a3abb8d5044d2c790371a62fc3ba3cc51bd1ea",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1cb0f7248c7286d474c54616fdab5f22d2742e53fa7bda0d7bd5bdc9243bddd7",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-DETECTOR-CURVATURE-SUFFICIENCY-001/gha-36145683580-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "74463c58b32b8bdd17543cc909a070eb4b2593d56c66fde33fbf97d8f7df869f",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f645b2435eff37adeb0f21d0dff7bb079deb3d1b8fc196a88916460aa7594463",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-LINEAR-DETECTOR-SUFFICIENCY-001/gha-36110496702-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2d2f85b127206d0e85940fa0eb20427efc7de753c98b73777306bec882049e3d",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "fc4d989aea8212cdb7382332aa067953558ac369c7c188bc1bde98e27b844061",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-001/gha-36111769039-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bb3e95a35b5bd996cda851e27ce500dfd5edd8a7890bdcdb9ec0b011e960a6a3",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2fcae54369e6183dcc24367fb213ad922e0dc1b7071cf16ed1a201087a2a230b",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/BLACK76-REAL-VOCAL-VST3-SNAPSHOT-002/gha-36143173077-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e177d671d73a7272c1ab1aa74140fb1d1908fa9f2a83b11ae7dad73d0aecf1be",
+      "source_type": "REVIEW"
+    }
+  ],
+  "source_state_digest": "0a5f182b459c55da3cfe8054576172aaae30ffe4dae4c1f85b96efa70f9d7827",
+  "unresolved_questions": [],
+  "work": {
+    "blocked_count": 0,
+    "human_gate_count": 0,
+    "queued_job_count": 0,
+    "ready_count": 0
+  }
+}

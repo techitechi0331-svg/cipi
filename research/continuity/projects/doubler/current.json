@@ -1,0 +1,409 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "blocked": [],
+  "cipi_ref": {
+    "branch": "main",
+    "commit_sha": "78a600fcc442cc62d1b4d4f3f9d16209ac28658d",
+    "freshness_basis": "source_state_digest"
+  },
+  "conflicts": [],
+  "freshness": "FRESH",
+  "generated_at": "2026-09-29T05:20:08+09:00",
+  "generation_id": "a4ec2456771e5ac10d861548",
+  "human_gates": [],
+  "latest_decision_refs": [
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26T03:10:00+09:00",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001",
+      "path": "research/decisions/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T18:22:21.855581Z",
+      "decision": "REJECT",
+      "decision_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001",
+      "path": "research/decisions/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T15:36:22.032115Z",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001",
+      "path": "research/decisions/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25T12:25:00+09:00",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001",
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25T12:05:00+09:00",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "MICRODOUBLE-SIBILANCE-REUSE-001",
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25T08:20:00+09:00",
+      "decision": "PROMOTE",
+      "decision_id": "MICRODOUBLE-V03-PRODUCT-GATE-001:gha-36071901483-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "MICRODOUBLE-V03-PRODUCT-GATE-001",
+      "path": "research/decisions/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T03:18:47.744628Z",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001",
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T03:00:42.694278Z",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "MICRODOUBLE-SIBILANCE-REUSE-001",
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-24T23:16:47.355462Z",
+      "decision": "ITERATE",
+      "decision_id": "MICRODOUBLE-V03-PRODUCT-GATE-001:gha-36071901483-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "MICRODOUBLE-V03-PRODUCT-GATE-001",
+      "path": "research/decisions/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1-auto.yaml",
+      "review_status": "PENDING"
+    }
+  ],
+  "phase": "IDLE",
+  "product_ref": {
+    "commit_sha": "af01f303d7a212035ec5ced10e8f6988dc1de7c0",
+    "ref": "main",
+    "repository": "techitechi0331-svg/Vocal-One-Knob-Doubler",
+    "verification": "VERIFIED"
+  },
+  "project_id": "doubler",
+  "ready": [],
+  "rejected_refs": [],
+  "research": {
+    "decision_ref_count": 9,
+    "review_ref_count": 8,
+    "track_lifecycle": {}
+  },
+  "resume_contract": {
+    "blocked_dependencies": [],
+    "can_autonomously_resume": false,
+    "can_resume": true,
+    "human_gates": [],
+    "must_not_repeat": [
+      "MICRODOUBLE-SIBILANCE-R3-GATE-001",
+      "MICRODOUBLE-SIBILANCE-REUSE-001",
+      "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001",
+      "MICRODOUBLE-TRANSIENT-NECESSITY-001",
+      "MICRODOUBLE-V03-PRODUCT-GATE-001"
+    ],
+    "recommended_action": "NO_READY_WORK",
+    "required_context": [
+      "research/decisions/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-review.yaml",
+      "research/decisions/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-auto.yaml",
+      "research/decisions/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-auto.yaml",
+      "research/decisions/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-review.yaml",
+      "research/decisions/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-review.yaml",
+      "research/decisions/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1-review.yaml",
+      "research/decisions/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-auto.yaml",
+      "research/decisions/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-auto.yaml",
+      "research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-triage.yaml",
+      "research/reviews/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-triage.yaml",
+      "research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-triage.yaml",
+      "research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-triage.yaml",
+      "research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-review-brief.yaml",
+      "research/reviews/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-review-brief.yaml",
+      "research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-review-brief.yaml",
+      "research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-review-brief.yaml"
+    ],
+    "resume_mode": "IDLE"
+  },
+  "review_refs": [
+    {
+      "created_at": "2026-09-25T18:22:21.855581Z",
+      "final_decision_made": false,
+      "job_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001",
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T15:36:22.032115Z",
+      "final_decision_made": false,
+      "job_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001",
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T03:18:47.744628Z",
+      "final_decision_made": false,
+      "job_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001",
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T03:00:42.694278Z",
+      "final_decision_made": false,
+      "job_id": "MICRODOUBLE-SIBILANCE-REUSE-001",
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001",
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "MICRODOUBLE-TRANSIENT-NECESSITY-001:gha-36172074567-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001",
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001:gha-36155283203-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "MICRODOUBLE-SIBILANCE-REUSE-001",
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "MICRODOUBLE-SIBILANCE-REUSE-001:gha-36088584811-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001",
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "MICRODOUBLE-SIBILANCE-R3-GATE-001:gha-36089834243-1:triage-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_manifest": [
+    {
+      "path": "automation/cross_repo/registry.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "16dcf5716c87275af30d35893ca50597ae6598ed29bef533dafc3e9f1a4cb6c4",
+      "source_type": "CROSS_REPO_REGISTRY"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/decisions",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c66ca453e5be3cbe4942fd2ffb73c9398d2c518acc95f32f83810a842e444a6d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "5ad68438d44849183e6cb758ad6fa2d2e4d107898ab1ad6ae7143a27caa60918",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "25860088d198b0ab11403b00c9cf7e8c5d6bb7b3bd860ccb5f9c5353d8d4c7b2",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f62847edf8ef82f2482f0103c7ee4ef8c0a7b4a73dac096e01907ed625c462b2",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "088a536a01b477bd68a36e2fe9374b672862139512cc66fee1d380216db52794",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "faee76e43aa15ef00bb5aeba19fe922a3a5148ee26b14d5673327448ddba3d24",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4c57e8a7878039bac8140e595c582ac87274f7f1b437e23ac2be71872831a3dc",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "98a40f2efc7335d80b922c10a7318aa704ef9af20b203036496fcb14c6265153",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c958ca27b00a98d2e01901b0618d4b9b75b63239514a21e5a9d7029892e8013b",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/MICRODOUBLE-V03-PRODUCT-GATE-001/gha-36071901483-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "621530d400ee11e7fe07b79f492fbfc6c96590bb255916acdba5c80986eec0fb",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/health/automation-status.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bb037c801dd5db6ba9c2115bf86d66794f9944999dc60bdd13a7aca40af931d2",
+      "source_type": "AUTOMATION_HEALTH"
+    },
+    {
+      "path": "research/health/autonomous-bridge.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8406674bf8655aa1fe7689b3cd27e6a1a27944cce2fd362d37e8dc351dcb214f",
+      "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/completed",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ee970ab35df5491d37cd99a62c5e4ba72ffb4d5221fb35c9b5bc24d9ce0b098d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/000-MICRODOUBLE-SIBILANCE-R3-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7133c6286bcd4b4dd76762cc357ef029b65a8f2627d18ab8b6a23891045efb88",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-MICRODOUBLE-SIBILANCE-REUSE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "69f039411a6ed83d62fc66d4cc2a909bcf0cdc6cc2563c964cef7506a1e6cffd",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a17b3fce2be739f5ca8c9ff1cfee9a20d39fae3c94763f1e2aa70fc5a1196a38",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-MICRODOUBLE-TRANSIENT-NECESSITY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c05182e7f6c01ae2670bac486eccfb2d785f62c5883522a2916c0ad5142fb520",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/MICRODOUBLE-V03-PRODUCT-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "64b0f3d9d465192c991e9370b2e694c653680d4933e96a822190d443dd2ca8b2",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/queued",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/reviews",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4457638e9e833af714c8dedaf1a3abb8d5044d2c790371a62fc3ba3cc51bd1ea",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "98919e9738da47a0fefa3eb15c1273fa25a0d12b9119ccf642ac4e218d43d086",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-R3-GATE-001/gha-36089834243-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f1a15789b024884a073f17887be6bd4204ea473dfec685e70d5ae2f399b76a48",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2f4f91dec522854a02e7c90bcb8f6496edae5e0432afdd6d84c44fa2e1642c12",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-SIBILANCE-REUSE-001/gha-36088584811-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "117b021f21c2d6ce14e07359e8d8e014571074b07c564d92fc813cf63a977c75",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f9f050fe221d29a6a2ec4a336730259613bb2f4abbf46df1abf05f45bdfe4b11",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-CONTEXT-REUSE-001/gha-36155283203-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f8fb578acb3a19174ba08994067f70b034ef43a67a3abce42a2200e9995c265c",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "78f97a43e4d667ba9e511baa56414c46f29c75fff4f16f58ecbc2cc8b2b893e9",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/MICRODOUBLE-TRANSIENT-NECESSITY-001/gha-36172074567-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "0f49e70fba340cd0c0b0d17e4e56616b647261821a8cd7941281dcb09f40d835",
+      "source_type": "REVIEW"
+    }
+  ],
+  "source_state_digest": "95c5e411b74a4294f3ecf13083f8eac56fbd89d26e2bfa7ecbea9c3c5931aab8",
+  "unresolved_questions": [],
+  "work": {
+    "blocked_count": 0,
+    "human_gate_count": 0,
+    "queued_job_count": 0,
+    "ready_count": 0
+  }
+}

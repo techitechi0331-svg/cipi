@@ -1,0 +1,43 @@
+# virtual_guitar Continuity
+
+- Authority: **CONTEXT_RECONSTRUCTION_ONLY**
+- Freshness: **FRESH**
+- CIPI source commit: 78a600fcc442cc62d1b4d4f3f9d16209ac28658d
+- Source-state digest: 6c0b89a5dcd00abac3a39107a1da389f1d36461c5bb921ed5e91d6937f5f21d6
+- Product: techitechi0331-svg/virtual-guitar@main
+- Product commit: bd26a0556fb501228b4551f61f6a8e760a14455b
+
+## Current position
+- Phase: **HUMAN_GATE**
+- Resume mode: **HUMAN_GATE**
+- Can autonomously resume: **false**
+- Recommended action: HUMAN_GATE
+
+## READY
+- none
+
+## BLOCKED
+- VIRTUAL-GUITAR-MIC-INTEGRATION-001 — BLOCKED_DEPENDENCY
+- VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001 — BLOCKED_DEPENDENCY
+
+## Human gates
+- VIRTUAL-GUITAR-MIC-INTEGRATION-001: FINAL_MIC_INTEGRATION_ADOPTION, REAL_AUDIO_AB
+- VIRTUAL-GUITAR-PHYSICAL-001: HUMAN_GATE
+- VIRTUAL-GUITAR-PHYSICAL-AUDIO-001: HUMAN_GATE
+- VIRTUAL-GUITAR-PHYSICAL-REALISM-003: HUMAN_GATE
+- VIRTUAL-GUITAR-PHYSICAL-REALISM-004: HUMAN_GATE
+- VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001: FINAL_SUBJECTIVE_PICKUP_TONE, PRODUCT_ADOPTION_DECISION, REAL_DI_AB
+
+## Must not repeat
+- VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001
+
+## Important decision refs
+- research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml
+
+## Unresolved questions
+- After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?
+- Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?
+
+## Re-entry rule
+Validate schema, source-state digest, product ref, Human Gates, and READY/BLOCKED state before acting.
+Do not infer PROMOTE, REJECT, product adoption, listening results, or release approval from this projection.

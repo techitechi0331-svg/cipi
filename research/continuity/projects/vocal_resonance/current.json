@@ -1,0 +1,648 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "blocked": [],
+  "cipi_ref": {
+    "branch": "main",
+    "commit_sha": "78a600fcc442cc62d1b4d4f3f9d16209ac28658d",
+    "freshness_basis": "source_state_digest"
+  },
+  "conflicts": [],
+  "freshness": "FRESH",
+  "generated_at": "2026-09-29T05:20:08+09:00",
+  "generation_id": "19d0e104cb3e5f771df49214",
+  "human_gates": [],
+  "latest_decision_refs": [
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T23:26:03.311194Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001:gha-36200636072-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T19:31:17.987568Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001:gha-36179619006-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T19:08:47.142693Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001:gha-36177223221-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T18:21:59.225711Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001:gha-36172028692-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T15:55:27.591080Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T14:12:16.781767Z",
+      "decision": "ITERATE",
+      "decision_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001:gha-36145023810-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T13:57:06.716397Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R6-RUN-VETO-001:gha-36142911813-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R6-RUN-VETO-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T01:10:48.750671Z",
+      "decision": "REJECT",
+      "decision_id": "VOCAL-RESONANCE-R5B-MORPH-STABILITY-001:gha-36080499046-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R5B-MORPH-STABILITY-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T00:38:46.253037Z",
+      "decision": "ITERATE",
+      "decision_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001:gha-36078101620-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25",
+      "decision": "ITERATE",
+      "decision_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001:assistant-review-20260925",
+      "event_type": "REVIEW",
+      "job_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/assistant-review-20260925.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-25",
+      "decision": "ITERATE",
+      "decision_id": "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:assistant-review-20260925",
+      "event_type": "REVIEW",
+      "job_id": "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/assistant-review-20260925.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-24T23:43:29.255625Z",
+      "decision": "ITERATE",
+      "decision_id": "VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002:gha-36072656461-2:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002",
+      "path": "research/decisions/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-24T23:06:00.964460Z",
+      "decision": "ITERATE",
+      "decision_id": "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001:gha-36070450907-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001",
+      "path": "research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1-auto.yaml",
+      "review_status": "PENDING"
+    }
+  ],
+  "phase": "IDLE",
+  "product_ref": {
+    "commit_sha": "3dd511529d47846fdb04f251e472c04e33a0302f",
+    "ref": "main",
+    "repository": "techitechi0331-svg/Vocal_resonance",
+    "verification": "VERIFIED"
+  },
+  "project_id": "vocal_resonance",
+  "ready": [],
+  "rejected_refs": [],
+  "research": {
+    "decision_ref_count": 13,
+    "review_ref_count": 17,
+    "track_lifecycle": {}
+  },
+  "resume_contract": {
+    "blocked_dependencies": [],
+    "can_autonomously_resume": false,
+    "can_resume": true,
+    "human_gates": [],
+    "must_not_repeat": [
+      "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001",
+      "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001",
+      "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+      "VOCAL-RESONANCE-R3-MOTION-001",
+      "VOCAL-RESONANCE-R4-CLEAN-AUDIT-001",
+      "VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002",
+      "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001",
+      "VOCAL-RESONANCE-R5B-MORPH-STABILITY-001",
+      "VOCAL-RESONANCE-R6-RUN-VETO-001",
+      "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001",
+      "VOCAL-RESONANCE-R8-LOCAL-PATCH-001",
+      "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001"
+    ],
+    "recommended_action": "NO_READY_WORK",
+    "required_context": [
+      "research/decisions/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-auto.yaml",
+      "research/decisions/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-auto.yaml",
+      "research/reviews/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-triage.yaml",
+      "research/reviews/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-triage.yaml"
+    ],
+    "resume_mode": "IDLE"
+  },
+  "review_refs": [
+    {
+      "created_at": "2026-09-25T23:26:03.311194Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001:gha-36200636072-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T19:31:17.987568Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001:gha-36179619006-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T19:08:47.142693Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001:gha-36177223221-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T18:21:59.225711Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001:gha-36172028692-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T15:55:27.591080Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T14:12:16.781767Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-triage.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001:gha-36145023810-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T13:57:06.716397Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R6-RUN-VETO-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R6-RUN-VETO-001:gha-36142911813-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T01:10:48.750671Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R5B-MORPH-STABILITY-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R5B-MORPH-STABILITY-001:gha-36080499046-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T00:38:46.253037Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1-triage.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001:gha-36078101620-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-24T23:43:29.255625Z",
+      "final_decision_made": false,
+      "job_id": "VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002",
+      "path": "research/reviews/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2-triage.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002:gha-36072656461-2:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001:gha-36172028692-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R8-LOCAL-PATCH-001:gha-36155951333-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-review-brief.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VOCAL-RESONANCE-R7-IDENTIFIABILITY-001:gha-36145023810-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R6-RUN-VETO-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R6-RUN-VETO-001:gha-36142911813-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R12-RAW-PATCH-001:gha-36200636072-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001:gha-36179619006-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001",
+      "path": "research/reviews/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOCAL-RESONANCE-R10-CLEAN-PRIOR-001:gha-36177223221-1:triage-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_manifest": [
+    {
+      "path": "automation/cross_repo/registry.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "16dcf5716c87275af30d35893ca50597ae6598ed29bef533dafc3e9f1a4cb6c4",
+      "source_type": "CROSS_REPO_REGISTRY"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/decisions",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c66ca453e5be3cbe4942fd2ffb73c9398d2c518acc95f32f83810a842e444a6d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f954aef78125410731c7efdc693c20db18c04756c6f7faa522638ccbcff1c3e3",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8cbd76e49f232080edd409546ab080ee449bb38d97b25ced338a0e7309eb2f4d",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "77c612c29dd6b5258f3929f6eac0a0c50f75c7b09dea30f87d9c792d21944bf2",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/assistant-review-20260925.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1b89528b69e2e17eed7ad06ff46956ca47078cfcb6deb4360128492246b37201",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001/gha-36070450907-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d9c75a8249d6e5bffd5e746169502b2289e21e2be7419f649f7e4dc3a27ff9c9",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "403c3f66d4394b8a155b553c98ef3be09ae0c63e8142ff355d6f4ee8a27959ea",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/assistant-review-20260925.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9b018b7fb644e7df82a7d0a8d93543b083d941d5d247e6d0fb200c7ab0e9ba83",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "43e4e62241766c1a539bf8cf827b27e31736f169e42bbffb56c604c67dfd94fa",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7e3cc446786eb4c7a076dc2cad88fd4acdf8b1dc0487046d8ce4e913542ac69e",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1a2dc005e5f00849571a63de20ec28bd8f581af87b48d9e5da917a2a673421e6",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e7849e3a7e4d9ff8a205288b0dd77b6bd8dd5e8889fa607d926e4d78d64df5d2",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1d3a747279e5bffea16603279c6563911d1d391ab16f138ad04f8ba447c384b7",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f79a71149c443973b803bbba6e4afab132eaa2767e3f2175aed591537c394fd5",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/health/automation-status.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bb037c801dd5db6ba9c2115bf86d66794f9944999dc60bdd13a7aca40af931d2",
+      "source_type": "AUTOMATION_HEALTH"
+    },
+    {
+      "path": "research/health/autonomous-bridge.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8406674bf8655aa1fe7689b3cd27e6a1a27944cce2fd362d37e8dc351dcb214f",
+      "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/completed",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ee970ab35df5491d37cd99a62c5e4ba72ffb4d5221fb35c9b5bc24d9ce0b098d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R10-CLEAN-PRIOR-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2215c2a4fa9d8f69ec16ea220fb5a82123ed537442d640276d92a92b23cbf924",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "25e41bf10985d5ff35bc3603144672f297506443efb3598e689304499cad9e9d",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R12-RAW-PATCH-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ad084823f166ebfc3254529b91ac9895253f36927d8523570c8442d00af1f8a0",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ddf9e337b38ef3fc80bf00d7f712b578c0a22ed60d4bd7e0de73d3d88899b1fd",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a362aaabf3eed63b0bf22026d15095338d5a360d6db9c3e17583e60887113ab5",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R5B-MORPH-STABILITY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "5b4cfc080aa8478424c4716be04a8735d2cdf02e7e8f349a26f22dcb92305b63",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R6-RUN-VETO-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d91331bf0c9a62e2cb79bcb0d9041e86a7a34df061943baddeae3dc62b3cde7a",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R7-IDENTIFIABILITY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "3c9378901d8d414524fb97bf32f9b0ed0547af243d9f6cb7708b5253118cfe9c",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R8-LOCAL-PATCH-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "aa258192ebc7f5d34473c48871394745a21813dfcb3eab8cfe2a0de9223b72bf",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/000-VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a7ddd83492ac7bb382505f529cd42083ec9ed74225e94b97216ee371ca46b3d5",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOCAL-RESONANCE-R3-MOTION-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f5f3f3be982e8ecad8f199fcda826ca37732988a4f1a1f8e96f0ecd1835c1e13",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOCAL-RESONANCE-R4-CLEAN-AUDIT-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ceb01cfc12063ce06a85157b6cfb289786a51751839479e40475db9540af6299",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/queued",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/reviews",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4457638e9e833af714c8dedaf1a3abb8d5044d2c790371a62fc3ba3cc51bd1ea",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "27b30dba545511608ff3c73ab77316323a52126d665222a4c4c483d45c1d5458",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "98d3a68dd50dbfbd373bf26b9cf6a23e1a1581858db76bd936eabe2739848561",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "68c6b6431f7e1fe255d8b953bcbb5143ee5a9692514ee05105ea68984119e3c0",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a03dcceada912f4b390ab4facce05b85d2f462dab2a5d87aca7b479328a5850d",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "739e94dcdacff3f4e49f8dbe6d86edc83a57287c239a9918c73f030ed3b4d0de",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ede32484e7062311e911d5a39c30fd650ae16752f499bb33f354f544bca7c1a2",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R4-CLEAN-REAUDIT-002/gha-36072656461-2-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bbd02a294ab512b1ad2c77cb079b8f066e1629daaa390ec58fced518941a6477",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R5-TEMPORAL-MORPH-001/gha-36078101620-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d14a499e641e62cb2458878fbe123a5d6babdc0d55fe283cf9600f62c98fa4dd",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2d50f6533e17d0d6f6e340a58e3c9c513ed01f2d4a335779b13a57d55e9a1c6c",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "75253173b486cccfd6907d3d151b9611f85deeb5636a0ee3af9bcaa445bfa260",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4cd0499eb468a4d3ad254599e3cd2ddbe1ebeaa8fa9daa15efcd89c7396daf6e",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a77f182f35503bfec54020162e2d34af86ed24980311df86658be3ecd91cd7cd",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "031184f5e00e07cc7784d41301b9e0ef53b3118354e040f9c7d0ac63ddf77869",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c9765a48b09172b0b7cf70e20b7feb7e5dce4945bb776c278a8b53730fc2c704",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "28cac034916e28832f32c3e2b942fcd7cbf6681d3daa231b5eb182cb54cc509b",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "99405546cc3af4433f44343a30c76493c9eaedf60151542f56cb5a6a886e8e13",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001/gha-36172028692-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "cff44fdfab37a59b99825aae9a8fa93992e7e4b64c64532431947ece9b7f5b61",
+      "source_type": "REVIEW"
+    }
+  ],
+  "source_state_digest": "b26084f9c767c3ca2975bc0e5125b3f8c1096d23526a2f3cfac5deacb96d818c",
+  "unresolved_questions": [],
+  "work": {
+    "blocked_count": 0,
+    "human_gate_count": 0,
+    "queued_job_count": 0,
+    "ready_count": 0
+  }
+}

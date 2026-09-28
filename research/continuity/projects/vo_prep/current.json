@@ -1,0 +1,1075 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "blocked": [],
+  "cipi_ref": {
+    "branch": "main",
+    "commit_sha": "78a600fcc442cc62d1b4d4f3f9d16209ac28658d",
+    "freshness_basis": "source_state_digest"
+  },
+  "conflicts": [],
+  "freshness": "FRESH",
+  "generated_at": "2026-09-29T05:20:08+09:00",
+  "generation_id": "c5e959710583edb1e9d23e0a",
+  "human_gates": [],
+  "latest_decision_refs": [
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:31:58.396836Z",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:24:10.224433Z",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:21:57.912149Z",
+      "decision": "ITERATE",
+      "decision_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
+      "path": "research/decisions/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:19:43.201335Z",
+      "decision": "ITERATE",
+      "decision_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+      "path": "research/decisions/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:16:57.077255Z",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T00:38:24.756573Z",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VO-PREP-SIBILANCE-ADVERSARIAL-001",
+      "path": "research/decisions/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T00:37:15.374264Z",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VO-PREP-PLOSIVE-ADVERSARIAL-001",
+      "path": "research/decisions/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T00:30:27.936755Z",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
+      "path": "research/decisions/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-review-01.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-SIBILANCE-ADVERSARIAL-001",
+      "path": "research/decisions/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ARCHIVE",
+      "decision_id": "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-SC-HPF-REAL-001",
+      "path": "research/decisions/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-SC-HPF-PILOT-001",
+      "path": "research/decisions/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "HUMAN_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-PRODUCT-BOUNDARY-001",
+      "path": "research/decisions/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+      "path": "research/decisions/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-review-01.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
+  "phase": "IDLE",
+  "product_ref": {
+    "commit_sha": "ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6",
+    "ref": "main",
+    "repository": "techitechi0331-svg/Vo.Prep",
+    "verification": "VERIFIED"
+  },
+  "project_id": "vo_prep",
+  "ready": [],
+  "rejected_refs": [
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "HUMAN_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-PRODUCT-BOUNDARY-001:manual-20260926:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-PRODUCT-BOUNDARY-001",
+      "path": "research/decisions/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-MACRO-BOUNDARY-001:manual-20260926:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-MACRO-BOUNDARY-001",
+      "path": "research/decisions/VO-PREP-MACRO-BOUNDARY-001/manual-20260926-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
+      "path": "research/decisions/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001",
+      "path": "research/decisions/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-AMOUNT-R3-VOCALSET-001:gha-36176939027-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-AMOUNT-R3-VOCALSET-001",
+      "path": "research/decisions/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-AMOUNT-R2-001",
+      "path": "research/decisions/VO-PREP-AMOUNT-R2-001/gha-36080984748-1-review.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
+  "research": {
+    "decision_ref_count": 20,
+    "review_ref_count": 20,
+    "track_lifecycle": {}
+  },
+  "resume_contract": {
+    "blocked_dependencies": [],
+    "can_autonomously_resume": false,
+    "can_resume": true,
+    "human_gates": [],
+    "must_not_repeat": [
+      "VO-PREP-AMOUNT-MAP-001",
+      "VO-PREP-AMOUNT-R2-001",
+      "VO-PREP-AMOUNT-R3-VOCALSET-001",
+      "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001",
+      "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
+      "VO-PREP-MACRO-BOUNDARY-001",
+      "VO-PREP-PLOSIVE-ADVERSARIAL-001",
+      "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+      "VO-PREP-PRODUCT-BOUNDARY-001",
+      "VO-PREP-SC-HPF-PILOT-001",
+      "VO-PREP-SC-HPF-REAL-001",
+      "VO-PREP-SIBILANCE-ADVERSARIAL-001",
+      "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
+      "VO-PREP-SNAPSHOT-GATE-001",
+      "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001"
+    ],
+    "recommended_action": "NO_READY_WORK",
+    "required_context": [
+      "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-auto.yaml",
+      "research/decisions/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-auto.yaml",
+      "research/decisions/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-auto.yaml",
+      "research/decisions/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-auto.yaml",
+      "research/decisions/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-auto.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml",
+      "research/reviews/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-triage.yaml",
+      "research/reviews/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-triage.yaml",
+      "research/reviews/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-triage.yaml",
+      "research/reviews/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-triage.yaml"
+    ],
+    "resume_mode": "IDLE"
+  },
+  "review_refs": [
+    {
+      "created_at": "2026-09-26T08:31:58.396836Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T08:24:10.224433Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T08:21:57.912149Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001",
+      "path": "research/reviews/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-triage.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VO-PREP-SIBILANCE-THRESHOLD-R2-001:gha-36229408985-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T08:19:43.201335Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001",
+      "path": "research/reviews/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-triage.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VO-PREP-PLOSIVE-THRESHOLD-R2-001:gha-36229385080-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T08:16:57.077255Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T00:38:24.756573Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-SIBILANCE-ADVERSARIAL-001",
+      "path": "research/reviews/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VO-PREP-SIBILANCE-ADVERSARIAL-001:gha-36205510626-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T00:37:15.374264Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-PLOSIVE-ADVERSARIAL-001",
+      "path": "research/reviews/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VO-PREP-PLOSIVE-ADVERSARIAL-001:gha-36205485361-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T00:30:27.936755Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T23:38:37.985551Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-SC-HPF-REAL-001",
+      "path": "research/reviews/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T23:31:56.606423Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001",
+      "path": "research/reviews/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VO-PREP-AMOUNT-R5-SOFT-RANGE-001:gha-36201243756-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T19:34:47.721321Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001",
+      "path": "research/reviews/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VO-PREP-AMOUNT-R4-LEARN-SOLVE-001:gha-36180371527-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T19:21:36.017427Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-SC-HPF-PILOT-001",
+      "path": "research/reviews/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VO-PREP-SC-HPF-PILOT-001:gha-36179118416-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T19:01:47.310630Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-AMOUNT-R3-VOCALSET-001",
+      "path": "research/reviews/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VO-PREP-AMOUNT-R3-VOCALSET-001:gha-36176939027-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T01:15:03.564460Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-AMOUNT-R2-001",
+      "path": "research/reviews/VO-PREP-AMOUNT-R2-001/gha-36080984748-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VO-PREP-AMOUNT-R2-001:gha-36080984748-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T00:46:37.132300Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-AMOUNT-MAP-001",
+      "path": "research/reviews/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VO-PREP-AMOUNT-MAP-001:gha-36079078221-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T00:30:19.035898Z",
+      "final_decision_made": false,
+      "job_id": "VO-PREP-SNAPSHOT-GATE-001",
+      "path": "research/reviews/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1-triage.yaml",
+      "route": "PROMOTION_REVIEW",
+      "triage_id": "VO-PREP-SNAPSHOT-GATE-001:gha-36077789786-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:triage-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_manifest": [
+    {
+      "path": "automation/cross_repo/registry.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "16dcf5716c87275af30d35893ca50597ae6598ed29bef533dafc3e9f1a4cb6c4",
+      "source_type": "CROSS_REPO_REGISTRY"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/decisions",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c66ca453e5be3cbe4942fd2ffb73c9398d2c518acc95f32f83810a842e444a6d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9a6def375647bf94baabf3b1861e7f64f4dfda8481cdd307794910d26eb108ff",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9de27456b45b3d2d5c7997f1e236e8d1815919243e9b052d4ca8c60213803dcf",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R2-001/gha-36080984748-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "473606cb563dc0c83832b69fb7a684a47ea29e7539b44c213c1b2670c6cee4b4",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R2-001/gha-36080984748-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "226b1f97894e7af2526eed4a72633b563c9bfb1b94e889ad8bd0392ca9029021",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "5e0ba8ade0a653e46669bdd321d25ba28f716dac0ff4e8f0ade9cf800b09cbd6",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a5bc5c47264989832626b23eedbda1a8c7499ad0174ccc7029599eb513a5fefc",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b4362474033fe5efafa0444c28d1a3342c02aec664f612c0af8185172de13290",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "08fc0eace6916669f038b2e0895365d3ea61343733c207e101510bf26e7dfc8d",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1de7ede23089ba91593ca8acd7b8ac87c0d103f4a56f69eef599eee339bd27a1",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "83f61909ebeff676b9fe19ccb78f47cb453ef39fb46885807b7e21e2573962fd",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-MACRO-BOUNDARY-001/manual-20260926-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e2322457529927a5c720fff6cece18a9368fbb66b0b71ac1897defa08a69b45c",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-MACRO-BOUNDARY-R2-001/manual-20260926-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "48d94853d5be90a12d6bfb1357355d37e33b30f3c84185a9ba220e5acf514e41",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "95bd995e2ce2512c5619f81d9466df36a50761c3001e52095dbd441b59e935ee",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "55ec5eaca4546fe2b0da72b221d96702eaa8c6bae34a21fbab77d076e4010440",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8f4c52b8bc1b2557c43024efbe6a53a7fe2c6eee5f06519a59a0f401ea192772",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-review-01.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b428cb96b70bad932cbb379f3ac446a2474fbd6658c9cad9cd7ad8b7345f2367",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-PRODUCT-BOUNDARY-001/manual-20260926-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8d52fdce90fb6bb607c731d4e6ef6d9db1fb4ad3170d865e1a9302e39283b211",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "41bf326ca30361d36305e1eb3f1038f95babc2c2fdcefb3618bb493f0f606fd2",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b544d9de83b036befe706729d1efcb85c785433eb31a30204c963cf1988e8aaf",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c93056007c1b8b3b8cfdc18da8b50b42fabeaf9f098459c1a05d3ea98724ed13",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9521bf8e68284820b0132100a093ef66fbe84fe03da252674ef781ab9f9db4b3",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7891ba21355c51e997fc9cefb29b53e7b87af0fca1d0d339d14feaee33cecfa4",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c0ac4a493d2876a6ce4b4c71111f7963284d9e954906fd5a1a361424730c0c50",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "cf3bf7a6250dc13cecdfa293ff2eb1d19bfe016381d55d9cbe330023a3c072e2",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-review-01.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4122b4513b9b22669b1b8b2653f8840875b72aa9ba9bed8843c3e1d6999d17e5",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d3dad122e50fd6208b35cb3417843ab4b87f681f147a52b86118b99da3486cff",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "099f6eff3c2116013258ad1c027b2a0815fa035649b092e708e8028df46c74df",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9901dc1dddaf3484168302c83fb5ad3691db11ccd0717f518528e355bac7e433",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e84e8a39c70ba3b990e28b83645a9259065f1becf1bdfefee5a7264598e65795",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "71c4207fa563da8f8ff7065fa02943fe8a76ef87633f1926273814532c3c853c",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9a7511e39833f6128796b15283557acd31aacb287579424ae942c979d227294b",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7418dab8862326fc44ac4181a6639ee0addc804941b999b1641ec35a7a34b620",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ae17ac5e01ac07dd35067bb4a3a5096a3e241ec6e7185f4075be4c8f15f4f901",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "6e4639b91e297fa1ad408bc7d5cb8d28cf4061009eb63b1a3d03f2995f6bb1fe",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9de0b35e0027f15b491289c07546ca1d52da3e337f1aa60ecc219cdb3760be60",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8d362579ff0a79160628692d1864e4460672a838fa96b7ed2fc13f8f9bc76d13",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/health/automation-status.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bb037c801dd5db6ba9c2115bf86d66794f9944999dc60bdd13a7aca40af931d2",
+      "source_type": "AUTOMATION_HEALTH"
+    },
+    {
+      "path": "research/health/autonomous-bridge.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8406674bf8655aa1fe7689b3cd27e6a1a27944cce2fd362d37e8dc351dcb214f",
+      "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/completed",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ee970ab35df5491d37cd99a62c5e4ba72ffb4d5221fb35c9b5bc24d9ce0b098d",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-AMOUNT-MAP-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "98023c7990159a9d1b2528b4a70f56ccc7b029a300cb3d6fea1b2db6d2d5c6c6",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-AMOUNT-R2-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "569191a3a46de697bb63a5d43188fdfaffdb79bfa22cd56256e03e129aabb475",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-AMOUNT-R3-VOCALSET-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c10b30277185a167329b0782803a017985bba0e36b80379be3a7de7b51fec611",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9e4137a4a6339134b536af1c91a6ded0e6ed0518cbde5a4426df2ce0442fbe6f",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-AMOUNT-R5-SOFT-RANGE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b4a2f6f36de3c8d95133213aaebf4552b7220a3df61f452edb28ebdda6ef5118",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-PLOSIVE-ADVERSARIAL-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ea7ee49a423dcd672b4f4533a3e34ed06f2d532cb50aa7690147366efbb21fe1",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-PLOSIVE-THRESHOLD-R2-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "62e5d75971d095795d83b3b923d0a1d447eddb0e33d45887eb5be09cb04c4c82",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-SC-HPF-PILOT-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "1c60938a3ea203cdd2af3bb6dc64a3577040c11ae732862b35bee4833a0ffcea",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-SC-HPF-REAL-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "40b66ee285307876642a0332e5e14f70a51930890c9775b746a5e68b527a9c45",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-SIBILANCE-ADVERSARIAL-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "cfde0a26d0d9cb9f24c45311f7f477d49cc6dd06025d7fe729ddfbd7e83e09b2",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-SIBILANCE-THRESHOLD-R2-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d22742345a564e2947e2d0da584e77396a03fece9fec89836ab14f962d4faa49",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VO-PREP-SNAPSHOT-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c7532978501e0ec2e45f892079790565b1fc82029edb27622635303c1076e1b8",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f907eba16e9d5ccfd66b7dc44cc4402563f983815497981b1c62fe76ff468365",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-INTEGRATION-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d89f3939064ee93a23cb5c306a197c131a375f4ce083c10c195f4e63872238d6",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-INTEGRATION-002.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "82baedef9ae021b8d8a6d9e26c72eff33473514fafd31122e603d4952a46fc2e",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "608a5a3b46a6f93bf7995260dd4aef099a7d419438a780c4c1e509f371ee31d2",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/queued",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/reviews",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4457638e9e833af714c8dedaf1a3abb8d5044d2c790371a62fc3ba3cc51bd1ea",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-MAP-001/gha-36079078221-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e3d47b7437f7e110f6fd8bda54dd2a62d7b5a52c76ed6d6bf5dfc887e0094bfd",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R2-001/gha-36080984748-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "21bb7f010867b6afd51326dbb3968ed0900187da64a08c918ea30c8bf83fc20a",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7d13b285f7a762bee4610b4a0c852737d0bbc06014a029425ca302de7c265c76",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R3-VOCALSET-001/gha-36176939027-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "00fc1290fad21e1b5023cc74e5b4aa16a32a7ebf85e6439f158aa7598b208007",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "77d64b2d85fbf8254619b8450a2518caba44186fc5d63b7c5683ee15f9250897",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R4-LEARN-SOLVE-001/gha-36180371527-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "fb730337792dab17d4650e8bc513ca95a9b375e1e64d821f5d0c398e7b11561d",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "aa7a9cf52156348a4c3135926d8aebb2ff73167d0c36320f227893435779ec29",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-AMOUNT-R5-SOFT-RANGE-001/gha-36201243756-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f3317db79143986bd07e5e2ba79f2dcd47c6149e8907953309d390c74548d479",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2fe3e382c3226b07e1a3062d0fb92031f9ca4a1fa600eff502039978e67e2ecc",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-PLOSIVE-ADVERSARIAL-001/gha-36205485361-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "eeb5313875925bc23dcb168a17bdeafe0d158926a1fe5648367aa3efa021b38f",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b9c185324f6b7f349132ad70c5b2a9e1e15a7deb808340597257c11da3a69193",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-PLOSIVE-THRESHOLD-R2-001/gha-36229385080-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "10d64914cff37ca13793c50e61545ed951771d4f7e7dd6a7cb0063def666fa27",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9c3abca46951fb85350d5f2ca83b9910f0ae374a31320bef89a642c23bdbbe77",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SC-HPF-PILOT-001/gha-36179118416-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c9c0e8ba09220f7a2a824472d53434b5a0ffb84a3e174a8cec3251d4dc52de07",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4f7e2fb0b91cdecbdb86b513f15b4af0f9f31e1bfdabb42282abd4b491c7a73a",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "3afe82a73eff1256935b5c28202edd68d0b4fca8ecedda836f3916c8a3baf9cb",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "aa2075f5505c6afc4be7daa3fd799850032c012971fa330d3c5ec6e15ad6acf9",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SIBILANCE-ADVERSARIAL-001/gha-36205510626-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c2631380b2ba39e5c4a260f51053ffe5a2f1095e0118faf7e32465d013e57620",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "55eb140d472173ca1b642ba9052ead4f5535b53ed3a949cc085fbab5d47ff76b",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SIBILANCE-THRESHOLD-R2-001/gha-36229408985-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "dd6c790cb77483ab97932a5e39497fe1b9301adfb92a52d50bd831c5121ac5b6",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VO-PREP-SNAPSHOT-GATE-001/gha-36077789786-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "911fe177eed59d727c7d6ee18ccca837fd873663fb5a45f3d48db9e5a0c84dc5",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a7086753ad820df3ad29d99096da5f050a37634ad7bcfd362365dfcc61ad6458",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d7ed7012a8fab0ba00159c2657d1b393a18ad0c0289c50224e4cde434127a19f",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "5f0c0d719e2bb1c83f3b004d9d994d851b255198f4d77db160a675d405ec0911",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "3a15c8cf65f64f78b25610cca934f870479d525c7c5181b7c12cffdf3bf5a472",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7f8f7d093da42125547da5640ddad5f3458b9ded29165a64435af8ff6a88c93f",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e85c614870ca2608cf9af7ddeeaa57afec40a5d5e8245da2e597284a9556917e",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "26c4177a6f19f8b1962cf0981635217be42abedb735d6407ab19e0352ba45630",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c8d8e831c7d2d97093b7bd59b401fdc9216fbff1f09b06526f96511162974803",
+      "source_type": "REVIEW"
+    }
+  ],
+  "source_state_digest": "59e1e4c07c4aa20d67dff24dbaa5df1d76517bf42e5727c8aa9be1f0cf651e74",
+  "unresolved_questions": [],
+  "work": {
+    "blocked_count": 0,
+    "human_gate_count": 0,
+    "queued_job_count": 0,
+    "ready_count": 0
+  }
+}

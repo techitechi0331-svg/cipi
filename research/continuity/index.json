@@ -1,0 +1,126 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "projects": [
+    {
+      "freshness": "FRESH",
+      "generation_id": "b9232be4d0fb421621866dc2",
+      "handoff": "projects/amp_simulator/HANDOFF.md",
+      "project_id": "amp_simulator",
+      "repository": "techitechi0331-svg/amp_simulator",
+      "snapshot": "projects/amp_simulator/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "8dda5f7d1b2a336230f050ca",
+      "handoff": "projects/black76/HANDOFF.md",
+      "project_id": "black76",
+      "repository": "techitechi0331-svg/76blackCompressor",
+      "snapshot": "projects/black76/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "b17af55cede85b2ae7a83e6d",
+      "handoff": "projects/control_comp/HANDOFF.md",
+      "project_id": "control_comp",
+      "repository": "techitechi0331-svg/VocalControlComp",
+      "snapshot": "projects/control_comp/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "a4ec2456771e5ac10d861548",
+      "handoff": "projects/doubler/HANDOFF.md",
+      "project_id": "doubler",
+      "repository": "techitechi0331-svg/Vocal-One-Knob-Doubler",
+      "snapshot": "projects/doubler/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "e5ba471b5c81ae7e6783236a",
+      "handoff": "projects/master_bus/HANDOFF.md",
+      "project_id": "master_bus",
+      "repository": "techitechi0331-svg/MasterBusComp",
+      "snapshot": "projects/master_bus/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "7b080ab8cfcd61ea0a0489ce",
+      "handoff": "projects/melon/HANDOFF.md",
+      "project_id": "melon",
+      "repository": "techitechi0331-svg/melon",
+      "snapshot": "projects/melon/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "45b6474b34b259239cc6d115",
+      "handoff": "projects/mic_simulator/HANDOFF.md",
+      "project_id": "mic_simulator",
+      "repository": "techitechi0331-svg/mic_simulator",
+      "snapshot": "projects/mic_simulator/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "bfae7c6838ede696b1b54179",
+      "handoff": "projects/pre610/HANDOFF.md",
+      "project_id": "pre610",
+      "repository": "techitechi0331-svg/610",
+      "snapshot": "projects/pre610/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "c44afab3d0d07d77711fc462",
+      "handoff": "projects/surface/HANDOFF.md",
+      "project_id": "surface",
+      "repository": "techitechi0331-svg/VocalSurfaceProcessor",
+      "snapshot": "projects/surface/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "7caf7e403fc743fd54a40843",
+      "handoff": "projects/virtual_guitar/HANDOFF.md",
+      "project_id": "virtual_guitar",
+      "repository": "techitechi0331-svg/virtual-guitar",
+      "snapshot": "projects/virtual_guitar/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "746394c22ded1712cdcd177f",
+      "handoff": "projects/vl2a/HANDOFF.md",
+      "project_id": "vl2a",
+      "repository": "techitechi0331-svg/VocalPrepComp",
+      "snapshot": "projects/vl2a/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "c5e959710583edb1e9d23e0a",
+      "handoff": "projects/vo_prep/HANDOFF.md",
+      "project_id": "vo_prep",
+      "repository": "techitechi0331-svg/Vo.Prep",
+      "snapshot": "projects/vo_prep/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "22486ca41c9d6467b3f61dcb",
+      "handoff": "projects/vocal_denoise/HANDOFF.md",
+      "project_id": "vocal_denoise",
+      "repository": "techitechi0331-svg/Vocal_Denoise",
+      "snapshot": "projects/vocal_denoise/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "19d0e104cb3e5f771df49214",
+      "handoff": "projects/vocal_resonance/HANDOFF.md",
+      "project_id": "vocal_resonance",
+      "repository": "techitechi0331-svg/Vocal_resonance",
+      "snapshot": "projects/vocal_resonance/current.json"
+    },
+    {
+      "freshness": "FRESH",
+      "generation_id": "f18edbac2fbfd106b56c9960",
+      "handoff": "projects/vocal_rider/HANDOFF.md",
+      "project_id": "vocal_rider",
+      "repository": "techitechi0331-svg/vocal_rider",
+      "snapshot": "projects/vocal_rider/current.json"
+    }
+  ],
+  "schema_version": "1.0"
+}

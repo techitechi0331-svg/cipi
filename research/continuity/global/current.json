@@ -1,0 +1,104 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "freshness_counts": {
+    "CONFLICT": 0,
+    "FRESH": 15,
+    "INVALID": 0,
+    "STALE": 0
+  },
+  "generated_at": "2026-09-29T05:20:08+09:00",
+  "project_count": 15,
+  "projects": [
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "amp_simulator",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "black76",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "control_comp",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "doubler",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "master_bus",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "melon",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "BLOCKED",
+      "project_id": "mic_simulator",
+      "recommended_action": "WAIT_OR_STEAL_OTHER_PROJECT"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "pre610",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "surface",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "HUMAN_GATE",
+      "project_id": "virtual_guitar",
+      "recommended_action": "HUMAN_GATE"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "HUMAN_GATE",
+      "project_id": "vl2a",
+      "recommended_action": "HUMAN_GATE"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "vo_prep",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "vocal_denoise",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "vocal_resonance",
+      "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "IDLE",
+      "project_id": "vocal_rider",
+      "recommended_action": "NO_READY_WORK"
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,158 @@
+schema_version: "1.0"
+registry_id: VG-PICKUP-EXTERNAL-EVIDENCE-CORPUS-20260929
+project: virtual-guitar
+status: AUDITED_SOURCE_MATRIX_NOT_MODEL_FIT
+recorded_at: "2026-09-29"
+authority: CIPI_EVIDENCE_REGISTRY
+automatic_measured_promotion: false
+automatic_product_integration: false
+automatic_knowledge_promotion: false
+automatic_release: false
+product_repository_write: false
+
+purpose: >-
+  Build a rights/provenance-aware external evidence corpus for STRAT_STYLE pickup,
+  cable, Reference DI and Amp Input research before any real-data model fitting.
+  This registry does not select a pickup model, product value, amplifier target,
+  or product DSP.
+
+evidence_roles:
+  A_MANUFACTURER_TOPOLOGY_AND_SPECS:
+    sources:
+      - source_id: FENDER_STRAT_SSS_PREWIRED_2019
+        publisher: Fender Musical Instruments Corporation
+        url: https://www.fmicassets.com/Damroot/Original/10001/WD_0992340500_Prewired_Pickguard_SSS.pdf
+        evidence_class: SOURCE_FACT
+        verified_facts: [THREE_SINGLE_COIL_PICKUPS, FIVE_WAY_SELECTOR, VOLUME_AND_TONE_CONTROLS, OUTPUT_JACK_BOUNDARY]
+        raw_document_redistribution: false
+        universalize_to_all_strats: false
+      - source_id: FENDER_GUITAR_SERVICE_MANUAL_INDEX_2026
+        publisher: Fender Musical Instruments Corporation
+        url: https://support.fender.com/hc/en-us/articles/43339315080859-Fender-Guitar-Service-Manuals
+        evidence_class: SOURCE_FACT
+        verified_facts: [OFFICIAL_SSS_SERVICE_MANUALS_EXIST, OFFICIAL_HSS_SERVICE_MANUALS_EXIST, MODERN_PLAYER_STRATOCASTER_HSS_MANUAL_LISTED, PLAYER_STRATOCASTER_HSS_MANUALS_LISTED]
+        exact_component_value_use_requires_specific_manual_capture: true
+        universalize_one_model_to_all_strats: false
+      - source_id: MOGAMI_W2524
+        publisher: Mogami Wire & Cable
+        url: https://mogamicable.com/category/products/W2524.php
+        evidence_class: SOURCE_FACT
+        verified_values: {inner_conductor_dc_resistance_ohm_per_m: 0.033, capacitance_pf_per_m_at_1khz_20c: 130, inductance_uh_per_m: 0.2}
+        parameter_role: REAL_PRODUCT_SENSITIVITY_ANCHOR
+        universal_cable_value: false
+      - source_id: MOGAMI_W3368
+        publisher: Mogami Wire & Cable
+        url: https://mogamicable.com/category/bulk/guitar/w3368.php
+        evidence_class: SOURCE_FACT
+        verified_values: {inner_conductor_dc_resistance_ohm_per_m: 0.033, capacitance_pf_per_m_at_1khz_20c: 70, inductance_uh_per_m: 0.4}
+        parameter_role: REAL_PRODUCT_SENSITIVITY_ANCHOR
+        universal_cable_value: false
+      - source_id: CANARE_GS6
+        publisher: Canare
+        url: https://www.canare.com/guitarinstrumentcable
+        evidence_class: SOURCE_FACT
+        verified_values: {conductor_dcr_ohm_per_100m: 1.8, shield_dcr_ohm_per_100m: 2.5, capacitance_pf_per_m: 160}
+        parameter_role: REAL_PRODUCT_SENSITIVITY_ANCHOR
+        universal_cable_value: false
+      - source_id: FOCUSRITE_SCARLETT_3G_INSTRUMENT_INPUT
+        publisher: Focusrite
+        url: https://userguides.focusrite.com/hc/en-gb/articles/23031286748306-18i20-3rd-Gen-specifications
+        evidence_class: SOURCE_FACT
+        verified_values: {instrument_input_impedance_ohm: 1500000}
+        role: REFERENCE_HIZ_LOAD_CANDIDATE
+        equals_guitar_amp_input: false
+      - source_id: SEYMOUR_DUNCAN_SSL1
+        publisher: Seymour Duncan
+        url: https://www.seymourduncan.com/blog/latest-updates/pickup-comparison-chart
+        evidence_class: SOURCE_FACT
+        verified_values: {dc_resistance_kohm: 6.5, published_resonant_peak_khz: 10, magnet: ALNICO_V_RODS}
+        role: PICKUP_SANITY_RANGE_ANCHOR
+        complete_impedance_curve: false
+        complete_transient_response: false
+        universal_strat_pickup_value: false
+
+  B_PEER_REVIEWED_MODEL_EVIDENCE:
+    sources:
+      - source_id: PAIVA_PAKARINEN_VALIMAKI_2012
+        title: Acoustics and Modeling of Pickups
+        url: https://aaltodoc.aalto.fi/bitstreams/92759095-3b64-4a0f-bf29-8a3617b9d92c/download
+        evidence_class: SOURCE_FACT
+        supports: [PICKUP_POSITION, FINITE_SENSITIVITY_WIDTH, PICKUP_RESONANT_FILTERING, MULTIPLE_PICKUP_MIXING, DISTANCE_DEPENDENT_MAGNETIC_FLUX_NONLINEARITY]
+        low_order_model_is_final: false
+      - source_id: PAIVA_PENTTINEN_2011
+        title: Cable Matters - Instrument Cables Affect the Frequency Response of Electric Guitars
+        url: https://aaltodoc.aalto.fi/bitstreams/fa70464c-0d32-403f-8db9-9c5124b88fe0/download
+        evidence_class: SOURCE_FACT
+        supports: [PASSIVE_PICKUP_CABLE_LOAD_INTERACTION, CABLE_CAPACITANCE_SENSITIVITY, RESONANT_RESPONSE_SHIFT]
+        studied_cable_results_are_universal: false
+      - source_id: KOTIUGA_2015
+        title: Interwinding Distributed Capacitance and Guitar Pickup Transient Response
+        doi: 10.1109/TMAG.2014.2364041
+        url: https://open.bu.edu/items/621143a1-5ed8-463b-8789-224a749d6ff2
+        evidence_class: SOURCE_FACT
+        supports: [LOW_ORDER_RLC_COUNTER_HYPOTHESIS, DISTRIBUTED_INTERWINDING_CAPACITANCE, TRANSIENT_RESPONSE_AS_MODEL_DISCRIMINATOR]
+        distributed_model_required_by_assumption: false
+
+  C_LICENSED_REAL_DI:
+    sources:
+      - source_id: GUITAR_TECHS_2025
+        dataset_url: https://zenodo.org/records/14963133
+        project_url: https://guitar-techs.github.io/
+        publication_doi: 10.1109/ICASSP49660.2025.10887996
+        evidence_class: SOURCE_FACT
+        license: CC_BY_4_0
+        license_status: AUTHOR_PROJECT_PAGE_CC_BY_4_0_CONFIRMED_ZENODO_RENDERED_LICENSE_VALUE_NOT_EXPOSED
+        contains: [DIRECT_INPUT_AUDIO, AMP_MIC_AUDIO, SYNCHRONIZED_MIDI, MULTIPLE_PLAYERS, MULTIPLE_GUITARS]
+        known_chain: {guitar_output_split_to_audio_interface_and_amplifier: true}
+        confounds: [GUITAR_MODEL, PICKUP_SELECTION, SIGNAL_SPLITTER, AUDIO_INTERFACE_INPUT, PLAYER, STRING_GAUGE]
+        quality_notes: [SIGNALS_MAY_HAVE_UP_TO_100MS_ALIGNMENT_ERROR]
+        eligible_for_real_di_ab_candidate: true
+        dataset_ingest_approved: false
+        dataset_ingest_condition: CAPTURE_AUTHORITATIVE_LICENSE_STATEMENT_AND_ATTRIBUTION_MANIFEST
+        commercial_model_fit_candidate_after_rights_preflight: true
+        attribution_required: true
+        isolated_pickup_transfer_truth: false
+
+  D_RESTRICTED_OR_NONCOMMERCIAL_DATASETS:
+    sources:
+      - source_id: FRAUNHOFER_IDMT_SMT_GUITAR
+        publisher: Fraunhofer IDMT
+        url: https://www.idmt.fraunhofer.de/en/publications/datasets/guitar.html
+        evidence_class: SOURCE_FACT
+        license: CC_BY_NC_ND_4_0
+        declared_purpose: EVALUATION
+        contains: [MULTIPLE_GUITARS, DIRECT_GUITAR_OUTPUT_TO_AUDIO_INTERFACE_RECORDINGS, MULTIPLE_PICKUP_SETTINGS, PLAYING_TECHNIQUES]
+        commercial_model_fit_approved: false
+        product_parameter_optimization_approved: false
+        optional_noncommercial_evaluation_only: true
+
+rights_policy:
+  manufacturer_documents: {allowed_role: SOURCE_FACT_AND_NUMERICAL_SPEC_ANCHOR, raw_document_redistribution: false}
+  peer_reviewed_publications: {allowed_role: MODEL_CLASS_AND_FALSIFICATION_EVIDENCE, raw_publication_redistribution: false}
+  cc_by_4_0_datasets:
+    allowed_role: [REAL_AUDIO_AB, ROBUSTNESS, MODEL_FALSIFICATION, MODEL_FIT_CANDIDATE_WITH_ATTRIBUTION_AND_PROVENANCE]
+    raw_file_ingest_requires_hash_manifest: true
+  nc_nd_datasets:
+    allowed_role: [OPTIONAL_NONCOMMERCIAL_EVALUATION, SOURCE_DISCOVERY]
+    prohibited_role: [PRODUCT_LINKED_MODEL_FIT, COMMERCIAL_PARAMETER_OPTIMIZATION, DERIVATIVE_DATASET_GENERATION]
+
+measurement_conditions_required_before_measured_promotion:
+  - SOURCE_URL
+  - SOURCE_VERSION_OR_ACCESS_DATE
+  - LICENSE_OR_USAGE_BOUNDARY
+  - TARGET_HARDWARE_OR_GUITAR
+  - PICKUP_SELECTION
+  - CABLE_OR_SPLITTER_CONDITION_IF_KNOWN
+  - LOAD_OR_INTERFACE_INPUT_IF_KNOWN
+  - SAMPLE_RATE
+  - NORMALIZATION_METHOD
+  - FILE_HASH_FOR_INGESTED_AUDIO
+  - KNOWN_CONFOUNDS
+  - UNKNOWN_CONDITIONS_REMAIN_EXPLICITLY_UNKNOWN
+
+current_decision:
+  external_evidence_stage_ready: true
+  real_audio_download_or_model_fit_started: false
+  product_model_selection_started: false
+  product_repository_write_started: false
+  next_gate: VG_PICKUP_EXTERNAL_EVIDENCE_PREFLIGHT_GATE_001

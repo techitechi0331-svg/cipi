@@ -1,0 +1,65 @@
+schema_version: "1.0"
+gate_id: VG_PICKUP_EXTERNAL_EVIDENCE_PREFLIGHT_GATE_001
+project: virtual-guitar
+status: READY_FOR_METADATA_PREFLIGHT
+recorded_at: "2026-09-29"
+purpose: >-
+  Gate all real/source-backed Pickup, Cable, Reference DI and Amp Input evidence
+  before MELON model fitting. Separate source discovery, rights/provenance validation,
+  audio/data ingestion and model discrimination.
+upstream:
+  - VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002
+  - VG-PICKUP-EXTERNAL-EVIDENCE-CORPUS-20260929
+research_ready:
+  metadata_and_source_fact_audit: true
+  manufacturer_spec_matrix: true
+  paper_model_class_matrix: true
+  license_tiering: true
+  dataset_download: false
+  real_data_model_fit: false
+  product_integration: false
+activation_requirements_before_data_ingest:
+  - SOURCE_IDENTITY_VERIFIED
+  - LICENSE_OR_USAGE_BOUNDARY_VERIFIED
+  - AUTHORITATIVE_LICENSE_STATEMENT_CAPTURED_FOR_ANY_DATASET_INGEST
+  - SOURCE_VERSION_OR_ACCESS_DATE_CAPTURED
+  - DATASET_OR_FILE_SCOPE_EXPLICIT
+  - KNOWN_CONFOUNDS_RECORDED
+  - COMMERCIAL_RESEARCH_ELIGIBILITY_EXPLICIT
+  - NO_NC_ND_DATA_IN_PRODUCT_LINKED_FIT
+  - NO_UNKNOWN_LOAD_VALUE_INVENTION
+activation_requirements_before_melon_model_fit:
+  - INGESTED_FILE_HASH_MANIFEST_PASS
+  - AUDIO_OR_MEASUREMENT_FORMAT_VALIDATED
+  - REFERENCE_CHAIN_CONDITIONS_CAPTURED_OR_MARKED_UNKNOWN
+  - LEVEL_NORMALIZATION_POLICY_DECLARED
+  - LOW_ORDER_AND_HIGHER_ORDER_CANDIDATES_REMAIN_AVAILABLE
+  - POINT_AND_FINITE_APERTURE_CANDIDATES_REMAIN_AVAILABLE
+  - CABLE_AND_LOAD_CONDITIONS_ARE_EXPLICIT
+  - REFERENCE_DI_IS_DOWNSTREAM_OF_GUITAR_ELECTRICAL_PORT
+  - PRODUCT_REPOSITORY_WRITE_REMAINS_FALSE
+source_role_rules:
+  MANUFACTURER_SPEC: {max_promotion: SOURCE_FACT, direct_model_winner_allowed: false}
+  PEER_REVIEWED_MODEL_EVIDENCE: {max_promotion: SOURCE_FACT_OR_INFERRED, direct_model_winner_allowed: false}
+  LICENSED_REAL_DI: {max_promotion_before_chain_validation: CANDIDATE_MEASURED, isolated_pickup_truth_allowed: false}
+  RESTRICTED_NONCOMMERCIAL_DATASET: {max_promotion: SOURCE_FACT, product_linked_fit_allowed: false}
+required_falsification_questions:
+  - CAN_LOW_ORDER_MODEL_EXPLAIN_REAL_FREQUENCY_PHASE_AND_TRANSIENT_DATA
+  - DOES_HIGHER_ORDER_MODEL_MATERIALLY_IMPROVE_OUT_OF_SAMPLE_ERROR
+  - DOES_FINITE_APERTURE_IMPROVE_POSITION_DEPENDENT_HARMONIC_PREDICTION
+  - ARE_CABLE_AND_LOAD_EFFECTS_EXPLAINED_WITH_SOURCE_NETWORK_INTERACTION
+  - DOES_ONE_MODEL_GENERALIZE_ACROSS_MULTIPLE_GUITARS_OR_PICKUP_STATES
+  - DOES_REAL_DI_MATCH_SURVIVE_LEVEL_MATCH_AND_UNSEEN_NOTES
+stop_conditions:
+  - RIGHTS_OR_PROVENANCE_INSUFFICIENT
+  - ONLY_CONFOUNDED_DATA_AVAILABLE_FOR_TARGET_CLAIM
+  - MODEL_DIFFERENCE_BELOW_PREDECLARED_ERROR_BUDGET
+  - REAL_DATA_DOES_NOT_SUPPORT_SYNTHETIC_ASSUMPTION
+  - HUMAN_GATE_REQUIRED_FOR_SUBJECTIVE_ADOPTION
+authority:
+  completion_authority: CIPI
+  automatic_measured_promotion: false
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  automatic_release: false

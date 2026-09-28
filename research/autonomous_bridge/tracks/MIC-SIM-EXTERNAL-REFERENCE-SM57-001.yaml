@@ -1,0 +1,120 @@
+schema_version: "1.0"
+track_id: MIC-SIM-EXTERNAL-REFERENCE-SM57-001
+enabled: false
+activation_state: STAGED_SOURCE_RIGHTS_AUDIT
+root_research_id: MIC-SIM-EXTERNAL-REFERENCE-SM57-001
+
+research_question: >-
+  Which external SM57 references can provide trustworthy, legally usable,
+  dimension-specific evidence or perceptual validation without contaminating
+  the strict controlled-measurement track?
+
+hypothesis_id: HYP-MIC-SM57-EXTERNAL-CORPUS-001
+hypothesis: >-
+  A tiered corpus separating controlled raw measurement, controlled-but-confounded
+  comparisons, standardized listening references, web/YouTube candidates and licensed
+  real-world recordings will increase usable research coverage while preventing
+  false MEASURED promotion and hardware-parity claims.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: false
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  automatic_measured_promotion: false
+  automatic_product_integration: false
+  automatic_release: false
+  cipi_evidence_authority: true
+
+depends_on_tracks:
+  - MIC-SIM-REFERENCE-SM57-001
+
+source_registry:
+  path: research/plugins/mic-simulator/sm57-external-reference-corpus-2026-09-29.yaml
+
+activation_requirements:
+  - SOURCE_RIGHTS_AUDIT_COMPLETE
+  - ORIGINAL_DATA_PROVENANCE_CAPTURED
+  - NO_ARBITRARY_YOUTUBE_DOWNLOAD_CORPUS
+  - STRICT_MEASURED_TRACK_REMAINS_SEPARATE
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-MIC-SM57-EXTERNAL-CORPUS-R1
+  experiment_type: EXTERNAL_REFERENCE_RIGHTS_AND_PROVENANCE_AUDIT
+  expected_information_gain: 0.95
+  scope:
+    - mic_simulator
+    - sm57
+    - external_reference
+    - rights
+    - provenance
+    - corpus_tiering
+  inputs:
+    seed: 2026092902
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: SM57_EXTERNAL_REFERENCE_CORPUS_TIERING_AND_RIGHTS_V1
+    architecture: SM57_EXTERNAL_REFERENCE_CORPUS_V1
+    tested_parameters:
+      tier_a_controlled_raw: true
+      tier_b_controlled_confounded: true
+      tier_c_standardized_listening: true
+      tier_d_youtube_web: true
+      tier_e_licensed_real_recordings: true
+      measured_promotion_requires_separate_gate: true
+    benchmark_profile:
+      - sm57_external_reference_audit_v1
+      - source_rights_provenance_v1
+    sample_rate: null
+    input_set: PUBLIC_METADATA_AND_LICENSE_RECORDS_ONLY_UNTIL_DATA_RIGHTS_PASS
+    reference_model: SHURE_SM57
+    objective_set:
+      - provenance_completeness
+      - rights_certainty
+      - evidence_dimension_coverage
+      - confound_explicitness
+      - duplicate_avoidance
+    relevant_constraints:
+      - no_unlicensed_raw_reuse
+      - no_youtube_as_measured_truth
+      - no_cab_ir_as_mic_only_truth
+      - no_auto_measured_promotion
+      - no_auto_product_integration
+      - no_auto_release
+    experiment_type: EXTERNAL_REFERENCE_RIGHTS_AND_PROVENANCE_AUDIT
+    scope:
+      - mic_simulator
+      - sm57
+      - external_reference
+
+efficiency_policy:
+  policy_id: MIC-SIM-EXTERNAL-REFERENCE-SM57-001-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: STAGED
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 10
+  full_regression_required: false

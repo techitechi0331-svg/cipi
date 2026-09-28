@@ -1,0 +1,153 @@
+schema_version: "1.0"
+registry_id: MIC-SIM-SM57-EXTERNAL-REFERENCE-CORPUS-20260929
+reference_model: SHURE_SM57
+status: AUDITED_NOT_FULLY_INGESTED
+authority: CIPI_EVIDENCE_REGISTRY
+automatic_measured_promotion: false
+automatic_product_integration: false
+automatic_release: false
+
+tiers:
+  A_CONTROLLED_RAW:
+    description: Controlled scientific/raw measurement suitable for dimension-specific MEASURED promotion only after provenance, integrity and rights validation.
+    sources:
+      - source_id: SURREY_ZENODO_MADIR_4633508
+        title: Multi-Angle Multi-Distance Microphone Impulse Response Dataset
+        url: https://zenodo.org/records/4633508
+        doi: 10.5281/zenodo.4633508
+        associated_paper_doi: 10.17743/jaes.2022.0027
+        evidence_state: SOURCE_FACT_DATASET_EXISTS_SM57_INCLUDED
+        model: SHURE_SM57
+        dimensions:
+          - impulse_transient
+          - phase_capable_transfer
+          - polar_off_axis
+          - distance_response
+          - frequency_response
+        measurement:
+          quasi_anechoic: true
+          sample_rate_hz: 48000
+          rendered_ir_bit_depths:
+            - 24
+            - 32
+          acquisition_bit_depth_reported_in_paper: 16
+          angle_start_deg: 0
+          angle_end_deg: 355
+          angle_step_deg: 5
+          distances_m:
+            - 0.5
+            - 1.25
+            - 5.0
+        archive:
+          filename: Microphone_Impulse_Responses.zip
+          size_gb_approx: 1.5
+          published_md5: c66c4f46be850aa25022145431b93caa
+        rights:
+          official_dataset_license_verified: false
+          secondary_mirror_claims_cc_by_4_0: true
+          commercial_model_fit_approved: false
+          action: VERIFY_AUTHORITATIVE_LICENSE_BEFORE_MODEL_FIT
+        eligible_for_measured_promotion: false
+        promotion_condition: ORIGINAL_SM57_FILES_INGESTED_HASHED_MANIFEST_PASS_RIGHTS_VERIFIED
+
+  B_CONTROLLED_CONFOUNDED:
+    description: Controlled relative comparisons containing non-microphone variables; useful for relative/perceptual evidence but not mic-only transfer truth.
+    sources:
+      - source_id: RECORDINGHACKS_GUITAR_CAB_CORRAL
+        url: https://recordinghacks.com/2014/12/12/shootout-at-guitar-cab-corral/
+        media_terms_url: https://recordinghacks.com/media-downloads/
+        model: SHURE_SM57
+        evidence_state: CANDIDATE_CONTROLLED_RELATIVE_AUDIO
+        format_claim: RAW_24BIT_48KHZ_WAV
+        controls:
+          identical_reamped_performance: true
+          documented_preamp: API_3124
+          documented_adc: APOGEE_AD16X
+          plugins: NONE_DOCUMENTED
+        confounds:
+          - guitar
+          - amplifier
+          - cabinet
+          - room
+          - mic_position
+          - preamp
+          - converter
+        rights:
+          individual_use_only_language_found: true
+          no_publish_or_repost_language_found: true
+          commercial_model_fit_approved: false
+        eligible_for_measured_promotion: false
+
+      - source_id: OVERDRIVEN_DYN57_CAB_IR
+        url: https://overdriven.fr/overdriven/index.php/m212-p50-g4-free-guitar-cab-impulse-responses-download/
+        evidence_state: CANDIDATE_57_STYLE_CAB_IR
+        exact_shure_sm57_identity_verified: false
+        description_claim: CLASSIC_57_TONE
+        confounds:
+          - loudspeaker
+          - cabinet
+          - microphone_or_57_style_capture
+          - mic_position
+          - preamp
+          - capture_chain
+        eligible_for_measured_promotion: false
+
+  C_STANDARDIZED_LISTENING:
+    description: Standardized real-mic listening references. Perceptual evidence only.
+    sources:
+      - source_id: AUDIO_TEST_KITCHEN_SM57
+        url: https://pdp.audiotestkitchen.com/products/Shure_SM57
+        platform_url: https://audiotestkitchen.com/
+        evidence_state: LISTENING_REFERENCE
+        model: SHURE_SM57
+        standardized_conditions: true
+        level_matched: true
+        browser_audio_format: MP3_320KBPS_DOCUMENTED
+        original_capture_resolution_claim: 32BIT_96KHZ
+        raw_original_available_for_ingestion: false
+        eligible_for_measured_promotion: false
+
+  D_YOUTUBE_WEB:
+    description: Candidate discovery and broad perceptual cross-check only.
+    evidence_state: CANDIDATE_LISTENING_REFERENCE
+    rules:
+      - DO_NOT_TREAT_AS_PHASE_TRUTH
+      - DO_NOT_TREAT_AS_IR_TRUTH
+      - DO_NOT_TREAT_AS_PRECISE_NONLINEAR_MEASUREMENT
+      - CHECK_LICENSE_PER_SOURCE
+      - DEFAULT_YOUTUBE_LICENSE_DOES_NOT_GRANT_INDEPENDENT_OFF_SERVICE_REUSE
+      - CC_BY_CONTENT_MAY_BE_REUSED_ONLY_UNDER_LICENSE_TERMS
+      - NO_ARBITRARY_MASS_DOWNLOAD_CORPUS
+    eligible_for_measured_promotion: false
+
+  E_LICENSED_REAL_RECORDINGS:
+    description: Explicitly reusable real-world SM57 recordings for robustness/regression/listening AB, not isolated microphone transfer truth.
+    accepted_license_examples:
+      - CC0
+      - CC_BY
+      - EXPLICIT_RESEARCH_AND_COMMERCIAL_PERMISSION
+    required_fields:
+      - source_url
+      - creator
+      - license
+      - attribution
+      - microphone_identity
+      - source_type
+      - known_signal_chain
+      - file_hash
+    eligible_for_measured_promotion: false
+
+supersedes:
+  statement: NO_SUITABLE_CONTROLLED_SM57_DATASET_FOUND
+  replacement: CONTROLLED_SM57_IR_DATASET_DISCOVERED_BUT_NOT_YET_RIGHTS_VERIFIED_OR_INGESTED
+  preserved_history_file: research/plugins/mic-simulator/sm57-controlled-acquisition-2026-09-29.md
+
+next_actions:
+  - VERIFY_ZENODO_4633508_AUTHORITATIVE_LICENSE
+  - INSPECT_ORIGINAL_ARCHIVE_SM57_PATHS
+  - VERIFY_ARCHIVE_MD5
+  - EXTRACT_SM57_ONLY
+  - BUILD_ACQUISITION_MANIFEST
+  - RUN_MIC_SIMULATOR_ACQUISITION_VALIDATOR
+  - IMPLEMENT_OR_CONFIRM_MEASURED_REFERENCE_EXECUTION_ADAPTER
+  - ACTIVATE_MEASURED_TRACK_ONLY_AFTER_GATES_PASS

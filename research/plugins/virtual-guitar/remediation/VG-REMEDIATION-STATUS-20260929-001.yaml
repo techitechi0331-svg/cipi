@@ -1,0 +1,86 @@
+schema_version: "1.0"
+status_id: VG-REMEDIATION-STATUS-20260929-001
+project: virtual-guitar
+recorded_at: "2026-09-29"
+
+current_phase: P0_RESEARCH_METHOD_REPAIR
+
+completed_on_branches:
+  MELON:
+    pull_request: 11
+    branch: virtual-guitar-research-method-005
+    changes:
+      - executable_physical_string_research_kernel
+      - mechanism_ablation_v5
+      - actual_waveform_feature_measurement
+      - actual_runtime_and_peak_memory_measurement
+      - physical_parameter_consistency_check
+      - post_release_energy_boundedness
+      - internal_stability_guard_telemetry
+      - 44k1_48k_96k_regression
+      - deterministic_run_identity
+      - runtime_memory_budgets
+      - old_v2_demoted_to_PROXY_CANARY_ONLY
+      - research_driver_005_route
+      - self_hosted_validation_step
+
+  CIPI:
+    pull_request: 338
+    branch: virtual-guitar-research-method-005
+    changes:
+      - Realism_004_demoted_and_disabled
+      - Research_Method_005_staged_disabled_pending_validation
+      - Physical_State_Contract_001
+      - Audit_Remediation_Matrix
+      - Research_Method_Spec_005
+      - Reference_Layer_Matrix_001
+      - Test_Taxonomy_001
+      - Energy_Stability_Criteria_005
+      - Mechanism_Ablation_Matrix_005
+      - Physical_Core_006_staged_blocked
+      - Reference_Layer_008_staged
+
+current_external_validation:
+  repository: techitechi0331-svg/melon
+  workflow_run: 36466764698
+  head_commit: 6db7bc8491b3b736f5cffc9b86193e4e1802fd62
+  state: IN_PROGRESS
+  authority: VALIDATION_ONLY
+  required_before_merge_or_activation:
+    - all_melon_tests_success
+    - guitar_realism_v2_proxy_regression_success
+    - guitar_research_method_v5_success
+    - legacy_regressions_success
+
+blocked:
+  - item: MERGE_MELON_PR_11
+    blocked_by: WORKFLOW_RUN_36466764698
+  - item: ACTIVATE_RESEARCH_METHOD_005
+    blocked_by:
+      - MELON_PR_11_MERGED
+      - VALIDATION_EVIDENCE_RECORDED
+  - item: ENERGY_STABILITY_REPORT
+    blocked_by: FIRST_VALIDATED_005_EXECUTION
+  - item: CPU_MEMORY_REPORT
+    blocked_by: FIRST_VALIDATED_005_EXECUTION
+  - item: PRODUCT_REPO_IMPLEMENTATION
+    blocked_by:
+      - product_repository_write_false
+      - Physical_Core_006_not_converged
+      - reference_gate_not_passed
+      - human_gate_not_passed
+
+explicitly_not_blocked_and_completed:
+  - research_method_specification
+  - authority_repair
+  - evidence_boundary_definition
+  - physical_state_contract
+  - ablation_design
+  - test_taxonomy
+  - reference_layer_design
+  - successor_track_staging
+
+product_repository:
+  repository: techitechi0331-svg/virtual-guitar
+  modified_by_remediation: false
+  observed_main: bd26a0556fb501228b4551f61f6a8e760a14455b

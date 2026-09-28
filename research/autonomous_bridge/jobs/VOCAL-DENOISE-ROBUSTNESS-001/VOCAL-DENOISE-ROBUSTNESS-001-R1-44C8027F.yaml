@@ -1,0 +1,43 @@
+schema_version: '1.0'
+job_id: VOCAL-DENOISE-ROBUSTNESS-001-R1-44C8027F
+track_id: VOCAL-DENOISE-ROBUSTNESS-001
+root_research_id: VOCAL-DENOISE-ROBUSTNESS-001
+parent_job_id: ''
+parent_run_id: ''
+hypothesis_id: HYP-VOCAL-DENOISE-ROBUSTNESS-001
+experiment_id: EXP-VOCAL-DENOISE-ROBUSTNESS-001-R1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs: []
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VOCAL-DENOISE-ROBUSTNESS-001-R1-44C8027F
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+continuation_reason: initial registered research experiment
+expected_information_gain: 0.85
+fingerprint: 44c8027f0b7e3b671c9a9e06d946338d23d3c633dba3d426ec451c4af71eb7a7
+loop_depth: 1
+experiment_type: ROBUSTNESS_FOUNDATION
+selected_architecture: VOCAL_DENOISE_ROBUSTNESS_FOUNDATION_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true
+efficiency_policy:
+  policy_id: VOCAL-DENOISE-ROBUSTNESS-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

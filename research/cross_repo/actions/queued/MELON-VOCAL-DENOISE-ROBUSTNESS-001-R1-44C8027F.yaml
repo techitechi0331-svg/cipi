@@ -1,0 +1,41 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-DENOISE-ROBUSTNESS-001-R1-44C8027F
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026092706
+  population: 4
+  generations: 2
+  max_candidates: 8
+  max_runtime_seconds: 60
+  stage2_limit: 4
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-DENOISE-ROBUSTNESS-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"EXP-VOCAL-DENOISE-ROBUSTNESS-001-R1","experiment_type":"ROBUSTNESS_FOUNDATION","hypothesis_id":"HYP-VOCAL-DENOISE-ROBUSTNESS-001","job_id":"VOCAL-DENOISE-ROBUSTNESS-001-R1-44C8027F","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VOCAL-DENOISE-ROBUSTNESS-001","research_question":"Does
+    a selected model candidate remain stable across singers, noise families, levels
+    and edge cases?","track_id":"VOCAL-DENOISE-ROBUSTNESS-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-DENOISE-ROBUSTNESS-001
+bridge_job_id: VOCAL-DENOISE-ROBUSTNESS-001-R1-44C8027F
+continuation_fingerprint: 44c8027f0b7e3b671c9a9e06d946338d23d3c633dba3d426ec451c4af71eb7a7
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-DENOISE-ROBUSTNESS-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

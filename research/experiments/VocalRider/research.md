@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `864653e57eadbad544b88ef877947d5cdabd59e6`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `ec2e9cfd2fe7a10c5a0dfe118b461bcd00254ef0`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -104,6 +104,30 @@ Dedicated-Repo main workflow run `36280483276` after the boost-only Headroom Gua
 - Steinberg validator was skipped only because the workflow was fail-fast after pluginval.
 
 The pluginval crash is currently classified as an environment-vs-editor issue, not a DSP failure. The runner is installed as a Windows service, so the next service-CI revision uses pluginval's supported `--skip-gui-tests` option while retaining GUI validation as a separate interactive/Cubase gate.
+
+
+## COMPILED MEASURED — dedicated Repo service-CI validation complete
+
+Dedicated-Repo workflow run `36347942644` completed successfully after separating GUI validation from the Windows-service runner.
+
+PASS:
+- configure and build;
+- deterministic core gate;
+- processor latency/state gate;
+- measurement renderer / matrix;
+- VST3 build and artifact collection;
+- pluginval 1.0.4 strictness 5 with official `--skip-gui-tests` service-safe mode;
+- pinned Steinberg VST3 SDK 3.8.1 validator;
+- Steinberg validator result: **47 tests passed, 0 failed**;
+- mono and stereo processing;
+- variable block sizes;
+- parameter flush / bypass persistence;
+- 32-bit processing across validator sample-rate stress cases.
+
+Classification:
+- non-GUI VST3 structural / processing validation is now MEASURED PASS in the dedicated product Repo;
+- GUI Editor validation remains intentionally separate because pluginval GUI testing crashed only under the non-interactive Windows service session;
+- Cubase Pro 14 interactive GUI / latency-compensation behaviour remains a final host gate.
 
 
 ## MEASURED — HUST Solfege real-vocal objective validation
@@ -424,7 +448,7 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 4. 50 ms lookahead must be compared against 0 / 20 / 100 ms on real vocals.
 5. Auto Target must be tested on first-phrase edge cases and songs with intentional section-level dynamics.
 6. A dedicated whisper condition is required so breath rejection does not reject legitimate airy singing.
-7. Real-vocal objective validation and the 12-file prospective holdout have completed; subjective level-matched listening, Steinberg validator and Cubase Pro 14 validation remain pending.
+7. Real-vocal objective validation and the 12-file prospective holdout have completed; pluginval non-GUI and Steinberg validator now pass; subjective level-matched listening and Cubase Pro 14 GUI/host validation remain pending.
 8. pluginval passed on the prior CIPI research branch, and the explicit post-prepare processor gate reports the intended 50 ms latency across 44.1/48/88.2/96/192 kHz and 32–1024 sample blocks; Cubase compensation is still unverified.
 9. Intentional macro-dynamics preservation remains an explicit measurement target and must be rerun in the dedicated Repo CI after the current Headroom Guard regression fix.
 10. The prospective 12-file local-leveling gate failed only the correction-depth criterion (0.4653 dB vs 0.50 dB target); any Amount 50 retune requires a fresh unused validation set.
@@ -432,15 +456,15 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 
 ## Current location
 
-Dedicated product Repo measurement/revision stage. The self-hosted runner is active. Main deterministic/core/processor/measurement/VST3 gates now pass. The prospective 12-file holdout shows consistent local leveling but narrowly misses the predeclared Amount 50 correction-depth target. pluginval reaches the GUI Editor phase and crashes on the Windows service runner, so service CI is being rerun with official non-GUI mode while interactive GUI/Cubase validation remains separate. Musical-effectiveness tuning and listening remain open.
+Dedicated product Repo measurement/revision stage. Main deterministic/core/processor/measurement/VST3 gates pass, pluginval strictness 5 non-GUI passes, and the pinned Steinberg validator passes 47/47 tests. The prospective 12-file holdout shows consistent local leveling but narrowly misses the predeclared Amount 50 correction-depth target. Musical-effectiveness tuning, interactive GUI validation, listening and Cubase host verification remain open.
 
 ## Next stage
 
-1. Complete pluginval strictness 5 non-GUI validation and the pinned Steinberg VST3 validator on the service runner.
-2. Preserve the 12-file holdout result as MEASURED and do not retune against it.
-3. Design a fresh unused real-vocal validation set for any Amount 50 strength revision.
-4. Rerun intentional section-dynamics and event-protection probes after any strength change.
-5. Keep level-matched human listening and Cubase Pro 14 scan/instantiate/playback/automation/save-reload as final human gates.
+1. Preserve the first 12-file holdout result as MEASURED and do not retune against it.
+2. Predeclare a fresh unused real-vocal validation set for a modest Amount 50 strength candidate.
+3. Rerun intentional section-dynamics and event-protection probes on that candidate.
+4. Promote a new Amount 50 mapping only if the fresh validation set passes without excess sign-flips / musical flattening.
+5. Keep level-matched human listening and Cubase Pro 14 scan/instantiate/GUI/playback/automation/save-reload as final human gates.
 
 ## Why next
 

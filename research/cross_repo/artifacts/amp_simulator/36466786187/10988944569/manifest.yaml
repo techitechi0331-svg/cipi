@@ -1,0 +1,21 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/amp_simulator
+repo_key: amp_simulator
+run_id: 36466786187
+run_attempt: 1
+artifact_id: 10988944569
+artifact_name: amp-simulator-result-36466786187
+expired: false
+size_in_bytes: 574
+created_at: '2026-09-28T18:40:14Z'
+expires_at: '2026-10-28T18:40:12Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: result_bundle.json
+  status: ingested
+  size: 713
+  sha256: 08b06e4105470d21e557c0a05168d1d160fe44c00796503c02e7216ea0b73b38
+archive_sha256: f645624d2650c0929887d63219fd4a006ea1c24c97328b852e558f2f6c01c80d
+ingest_status: text_evidence_ingested

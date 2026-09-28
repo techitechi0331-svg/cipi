@@ -1,0 +1,22 @@
+{
+  "artifacts": [
+    "README.md",
+    "docs/ARCHITECTURE.md",
+    "docs/EVIDENCE_BOUNDARY.md",
+    "docs/GUITAR_AMP_ELECTRICAL_LINK.md",
+    "Research/schemas/result_bundle.schema.json",
+    "Research/schemas/guitar_amp_electrical_interface.schema.json"
+  ],
+  "automatic_knowledge_promotion": false,
+  "automatic_product_decision": false,
+  "evidence_class": "MEASURED",
+  "job_id": "AMP-SIM-FOUNDATION-CANARY-002",
+  "measurements": {
+    "amp_fidelity_claim": false,
+    "foundation_digest": "80219c2826b42bc6697ce3d9ddfe435606e2e3f69fd5120fac8ab28f23232ea7",
+    "missing_required_files": []
+  },
+  "schema_version": "1.0",
+  "status": "PASS",
+  "track_id": "AMP-SIM-FOUNDATION-001"
+}

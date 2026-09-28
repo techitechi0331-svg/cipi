@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: AMP-SIM-FOUNDATION-CANARY-002
-state: DISPATCHED
+state: COMPLETED
 repo_key: amp_simulator
 workflow_key: canary
 ref: main
@@ -29,3 +29,20 @@ previous_run_id: 36466235075
 dispatched_at: '2026-09-28T18:39:53.450318Z'
 repository: techitechi0331-svg/amp_simulator
 workflow_file: amp-canary.yml
+run_id: 36466786187
+run_url: https://github.com/techitechi0331-svg/amp_simulator/actions/runs/36466786187
+conclusion: success
+completed_at: '2026-09-28T18:40:20Z'
+time_metrics:
+  schema_version: '1.0'
+  queue_wait_seconds: 0.0
+  runner_job_seconds: 27.0
+  checkout_seconds: null
+  environment_setup_seconds: null
+  preflight_seconds: null
+  research_compute_seconds: null
+  macro_export_seconds: null
+  artifact_upload_seconds: null
+  total_wall_seconds: 27.0
+  source: GITHUB_WORKFLOW_RUN_TIMESTAMPS
+failure_classification: null

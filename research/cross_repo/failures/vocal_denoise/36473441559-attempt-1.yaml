@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-003
+repo_key: vocal_denoise
+workflow_key: evaluate
+run_id: 36473441559
+run_attempt: 1
+head_sha: 13ef3ef3031fd3f621c233aa3965247de9df2182
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Evaluate model on identity-disjoint splits
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

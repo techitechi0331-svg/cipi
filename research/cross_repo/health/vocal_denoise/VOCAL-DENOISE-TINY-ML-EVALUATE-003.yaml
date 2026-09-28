@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-003
+repo_key: vocal_denoise
+workflow_key: evaluate
+runner_class: self-hosted
+state: COMPLETED
+run_id: 36473441559
+run_status: completed
+run_conclusion: failure
+since: '2026-09-28T19:36:48Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

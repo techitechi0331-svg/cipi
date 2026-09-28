@@ -88,6 +88,10 @@ class HumanGateDecisionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "not present"):
             hg.apply(self.args(gate="NOT_A_REAL_GATE"))
 
+    def test_secret_like_evidence_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "secret-like material"):
+            hg.apply(self.args(evidence_ref="github_pat_" + "A" * 30))
+
 
 if __name__ == "__main__":
     unittest.main()

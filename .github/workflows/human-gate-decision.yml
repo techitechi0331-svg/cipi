@@ -1,0 +1,148 @@
+name: Human Gate Decision
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_id:
+        description: CIPI project id
+        required: true
+        type: string
+      target_type:
+        description: Human Gate target type
+        required: true
+        type: choice
+        options:
+          - RESEARCH_JOB
+          - AUTONOMOUS_TRACK
+      target_id:
+        description: Job or autonomous track id
+        required: true
+        type: string
+      gate:
+        description: Exact Human Gate name
+        required: true
+        type: string
+      outcome:
+        description: Human decision
+        required: true
+        type: choice
+        options:
+          - COMPLETE
+          - REJECT
+          - DEFER
+      evidence_ref:
+        description: Evidence or verification reference
+        required: true
+        type: string
+      rationale:
+        description: Human rationale
+        required: true
+        type: string
+      actor:
+        description: Human reviewer identity
+        required: true
+        type: string
+      source:
+        description: Submission source
+        required: true
+        default: DISCORD
+        type: choice
+        options:
+          - DISCORD
+          - GITHUB_UI
+          - CLI
+      source_generation_id:
+        description: Continuity generation id seen by reviewer
+        required: true
+        type: string
+      source_state_digest:
+        description: Continuity source-state digest seen by reviewer
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: cipi-human-gate-${{ inputs.project_id }}-${{ inputs.target_id }}-${{ inputs.gate }}
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned dependency
+        run: python -m pip install PyYAML==6.0.2
+
+      - name: Record stale-safe Human Gate decision
+        id: decision
+        shell: bash
+        run: |
+          python automation/human_gate/apply.py \
+            --project-id '${{ inputs.project_id }}' \
+            --target-type '${{ inputs.target_type }}' \
+            --target-id '${{ inputs.target_id }}' \
+            --gate '${{ inputs.gate }}' \
+            --outcome '${{ inputs.outcome }}' \
+            --evidence-ref '${{ inputs.evidence_ref }}' \
+            --rationale '${{ inputs.rationale }}' \
+            --actor '${{ inputs.actor }}' \
+            --source '${{ inputs.source }}' \
+            --source-generation-id '${{ inputs.source_generation_id }}' \
+            --source-state-digest '${{ inputs.source_state_digest }}' \
+            --run-id '${{ github.run_id }}-${{ github.run_attempt }}' \
+            --github-output "$GITHUB_OUTPUT"
+
+      - name: Validate Human Gate records
+        run: python automation/human_gate/apply.py --validate-all
+
+      - name: Rebuild Continuity
+        env:
+          CIPI_CROSS_REPO_TOKEN: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+        run: |
+          python tools/build_continuity.py
+          python tools/validate_continuity.py
+
+      - name: Commit append-only decision and generated Continuity
+        run: |
+          git config user.name "cipi-human-gate-bot"
+          git config user.email "cipi-human-gate-bot@users.noreply.github.com"
+          git add -A -- research/human_gates research/continuity
+          if git diff --cached --quiet; then
+            echo "No Human Gate changes."
+            exit 0
+          fi
+          git commit -m "record human gate decision: ${{ inputs.target_id }} / ${{ inputs.gate }}"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Re-evaluate global DAG after a completed research-job gate
+        if: inputs.outcome == 'COMPLETE' && steps.decision.outputs.operational_effect == 'RESOLVE_RESEARCH_JOB_GATE'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ACTIVE="$(gh run list --workflow global-dag-orchestrator.yml --limit 20 --json status --jq '[.[] | select(.status==\"queued\" or .status==\"in_progress\")] | length')"
+          if [ "$ACTIVE" = "0" ]; then
+            gh workflow run global-dag-orchestrator.yml --ref main
+          else
+            echo "Global DAG already active; no duplicate dispatch."
+          fi
+
+      - name: Track-level completion is record-only
+        if: inputs.target_type == 'AUTONOMOUS_TRACK' && inputs.outcome == 'COMPLETE'
+        run: |
+          echo "The human decision was recorded, but autonomous-track replay remains intentionally disabled."
+          echo "A separate replay/continuation contract is required before CIPI can resume a stopped track."

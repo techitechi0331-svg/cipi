@@ -1,0 +1,97 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-PICKUP-EXTERNAL-EVIDENCE-003
+enabled: false
+root_research_id: VIRTUAL-GUITAR-PICKUP-EXTERNAL-EVIDENCE-003
+activation_state: STAGED_SOURCE_RIGHTS_AND_PROVENANCE_PREFLIGHT
+recorded_at: "2026-09-29"
+research_question: >-
+  Which public manufacturer specifications, peer-reviewed model evidence and legally
+  usable real DI references can constrain or falsify STRAT_STYLE pickup, cable,
+  Reference DI and Amp Input candidates without mistaking confounded audio for isolated
+  pickup truth or using restricted datasets for commercial fitting?
+hypothesis_id: HYP-VG-PICKUP-EXTERNAL-EVIDENCE-003
+hypothesis: >-
+  A rights/provenance-tiered corpus can provide enough real-world constraints to move
+  from synthetic measurement-design validation to real-data model falsification while
+  keeping final model selection, product values and product integration disabled.
+trigger_evidence:
+  - research/plugins/virtual-guitar/evidence/VG-PICKUP-EXTERNAL-EVIDENCE-CORPUS-20260929.yaml
+  - research/plugins/virtual-guitar/integration-policies/VG-PICKUP-EXTERNAL-EVIDENCE-PREFLIGHT-GATE-001.yaml
+  - research/autonomous_bridge/decisions/VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002/MELON-FUNNEL-GUITAR-PICKUP-F707A0BBB0DC.yaml
+minimum_novelty: 0.10
+minimum_improvement: 0.00
+product_integration: false
+human_gate_required: false
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  automatic_measured_promotion: false
+  product_repository_write: false
+  product_release_authority: false
+  final_pickup_model_adoption: false
+  final_tone_adoption: false
+  cipi_evidence_authority: true
+source_registry:
+  path: research/plugins/virtual-guitar/evidence/VG-PICKUP-EXTERNAL-EVIDENCE-CORPUS-20260929.yaml
+preflight_gate:
+  path: research/plugins/virtual-guitar/integration-policies/VG-PICKUP-EXTERNAL-EVIDENCE-PREFLIGHT-GATE-001.yaml
+activation_requirements:
+  - SOURCE_MATRIX_REVIEWED
+  - LICENSE_AND_USAGE_BOUNDARY_REVIEWED
+  - GUITAR_TECHS_CC_BY_4_0_PROVENANCE_CONFIRMED
+  - FRAUNHOFER_NC_ND_EXCLUDED_FROM_PRODUCT_LINKED_FIT
+  - MANUFACTURER_FACTS_NOT_UNIVERSALIZED
+  - NO_REAL_AUDIO_DOWNLOAD_REQUIRED_FOR_INITIAL_METADATA_PREFLIGHT
+  - NO_PRODUCT_REPO_WRITE
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 16
+  max_runtime: 180
+  max_same_hypothesis_retry: 1
+  max_same_architecture_retry: 1
+  max_no_improvement_runs: 1
+initial_experiment:
+  experiment_id: EXP-VG-PICKUP-EXTERNAL-EVIDENCE-R1
+  experiment_type: EXTERNAL_EVIDENCE_RIGHTS_PROVENANCE_PREFLIGHT
+  expected_information_gain: 0.90
+  scope: [virtual_guitar, pickup, cable, reference_di, amp_input, external_evidence, rights, provenance]
+  inputs:
+    seed: 2026092903
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 0
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: VG_PICKUP_EXTERNAL_EVIDENCE_RIGHTS_PROVENANCE_V1
+    architecture: EXTERNAL_EVIDENCE_PREFLIGHT_ONLY
+    tested_parameters:
+      manufacturer_topology_specs: true
+      peer_reviewed_model_evidence: true
+      cc_by_real_di: true
+      nc_nd_exclusion: true
+      confound_tiering: true
+      measured_promotion_requires_separate_gate: true
+    benchmark_profile: [vg_pickup_external_evidence_audit_v1, source_rights_provenance_v1]
+    sample_rate: null
+    input_set: PUBLIC_METADATA_LICENSE_AND_SOURCE_FACTS_ONLY
+    reference_model: STRAT_STYLE_SSS_HSS_MULTI_SOURCE_EVIDENCE
+    objective_set: [provenance_completeness, rights_certainty, model_discrimination_coverage, confound_explicitness, commercial_research_safety]
+    relevant_constraints: [no_unlicensed_or_restricted_product_fit, no_confounded_di_as_isolated_pickup_truth, no_auto_measured_promotion, no_auto_product_integration, no_auto_release]
+    experiment_type: EXTERNAL_EVIDENCE_RIGHTS_PROVENANCE_PREFLIGHT
+    scope: [virtual_guitar, pickup_external_evidence]
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-PICKUP-EXTERNAL-EVIDENCE-003-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: STAGED
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 10
+  full_regression_required: false

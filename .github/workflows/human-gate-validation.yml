@@ -1,0 +1,45 @@
+name: Human Gate Validation
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "automation/human_gate/**"
+      - "automation/continuity/**"
+      - "automation/schemas/human_gate_decision.schema.json"
+      - "research/human_gates/**"
+      - "tests/test_human_gate.py"
+      - ".github/workflows/human-gate-*.yml"
+      - "integrations/discord/**"
+  push:
+    branches: [ main ]
+    paths:
+      - "automation/human_gate/**"
+      - "automation/continuity/**"
+      - "automation/schemas/human_gate_decision.schema.json"
+      - "research/human_gates/**"
+      - "tests/test_human_gate.py"
+      - ".github/workflows/human-gate-*.yml"
+      - "integrations/discord/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install PyYAML==6.0.2
+      - name: Human Gate tests
+        run: python -m unittest tests.test_human_gate -v
+      - name: Discord bot syntax
+        run: python -m py_compile integrations/discord/bot.py
+      - name: Human Gate record validation
+        run: python automation/human_gate/apply.py --validate-all
+      - name: Continuity regression
+        run: python -m unittest discover -s tests -p "test_continuity_layer.py" -v

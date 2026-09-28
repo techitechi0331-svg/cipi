@@ -55,7 +55,7 @@ def build_project_snapshot(root:Path,spec:ProjectSpec,*,resolver:Callable|None=r
     c=SourceCollector(root)
     health=c.read_json("research/health/automation-status.json","AUTOMATION_HEALTH"); bridge=c.read_json("research/health/autonomous-bridge.json","AUTONOMOUS_BRIDGE_HEALTH"); c.read_yaml("automation/cross_repo/registry.yaml","CROSS_REPO_REGISTRY")
     for rel in ("research/jobs/queued","research/jobs/completed","research/decisions","research/reviews"):c.record_directory_index(rel)
-    completed=completed_index(root); jobs=queued_jobs(root,spec,c,completed,health_gate_map(health))
+    completed=completed_index(root); gate_decisions=human_gate_decisions(root,spec,c); jobs=queued_jobs(root,spec,c,completed,health_gate_map(health),gate_decisions)
     for jid,rel in completed.items():
         if matches_project(jid,spec.aliases):c.record_path(root/rel,"RESEARCH_JOB_COMPLETED")
     for job in jobs:
@@ -64,7 +64,7 @@ def build_project_snapshot(root:Path,spec:ProjectSpec,*,resolver:Callable|None=r
     drefs,rejected=decisions(root,spec,c); rrefs=reviews(root,spec,c); lifecycle,track_human,conflicts=track_state(bridge,spec)
     ready=[x for x in jobs if x["classification"]=="READY"]; blocked=[x for x in jobs if x["classification"] in {"BLOCKED_EXTERNAL","BLOCKED_DEPENDENCY"}]; human=list(track_human)
     for job in jobs:
-        gates=job["current_human_gates"] or job["declared_human_gates"]
+        gates=job.get("unresolved_human_gates",[])
         if gates:human.append({"source":"RESEARCH_JOB","job_id":job["job_id"],"gates":gates,"blocking":job["classification"]=="HUMAN_GATE"})
     product_sha=resolver(spec.repository,spec.default_ref,token) if resolver else None
     manifest=c.manifest(); digest=source_state_digest(manifest); freshness="CONFLICT" if conflicts else ("FRESH" if product_sha else "STALE")

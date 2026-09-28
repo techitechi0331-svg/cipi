@@ -71,6 +71,30 @@ review_policy:
         snap=build_project_snapshot(self.tmp,self.spec,resolver=self.resolver,cipi_sha="b"*40)
         self.assertEqual(snap["resume_contract"]["resume_mode"],"HUMAN_GATE");self.assertFalse(snap["resume_contract"]["can_autonomously_resume"]);self.assertFalse(snap["ready"])
 
+    def test_completed_research_job_human_gate_becomes_ready(self):
+        self._write("research/jobs/queued/VIRTUAL-GUITAR-LISTEN-002.yaml",'''schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-LISTEN-002
+state: QUEUED
+track: {id: VIRTUAL_GUITAR_LISTEN}
+depends_on_jobs: []
+review_policy:
+  required_human_gates: [REAL_AUDIO_AB]
+''')
+        self._write("research/human_gates/decisions/virtual_guitar/VIRTUAL-GUITAR-LISTEN-002/REAL_AUDIO_AB/1.yaml",'''schema_version: "1.0"
+project_id: virtual_guitar
+target_type: RESEARCH_JOB
+target_id: VIRTUAL-GUITAR-LISTEN-002
+gate: REAL_AUDIO_AB
+outcome: COMPLETE
+operational_effect: RESOLVE_RESEARCH_JOB_GATE
+created_at: "2026-09-29T00:00:00Z"
+''')
+        snap=build_project_snapshot(self.tmp,self.spec,resolver=self.resolver,cipi_sha="b"*40)
+        self.assertEqual(snap["phase"],"AUTO_READY")
+        self.assertTrue(snap["resume_contract"]["can_autonomously_resume"])
+        self.assertEqual(snap["ready"][0]["resolved_human_gates"],["REAL_AUDIO_AB"])
+        self.assertFalse(snap["human_gates"])
+
     def test_unverified_product_ref_is_stale(self):
         snap=build_project_snapshot(self.tmp,self.spec,resolver=lambda repo,ref,token:None,cipi_sha="b"*40)
         self.assertEqual(snap["freshness"],"STALE");self.assertEqual(snap["resume_contract"]["resume_mode"],"REFRESH_REQUIRED");self.assertFalse(snap["resume_contract"]["can_autonomously_resume"])

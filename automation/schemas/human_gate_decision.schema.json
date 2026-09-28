@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cipi.local/schemas/human_gate_decision.schema.json",
+  "title": "CIPI Human Gate Decision",
+  "type": "object",
+  "required": [
+    "schema_version","decision_id","project_id","target_type","target_id","gate","outcome",
+    "evidence_ref","rationale","actor","source","source_generation_id","source_state_digest",
+    "authority","operational_effect","automatic_product_decision",
+    "automatic_knowledge_promotion","automatic_release","created_at","immutable"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "decision_id": {"type": "string", "minLength": 8},
+    "project_id": {"type": "string", "minLength": 1},
+    "target_type": {"enum": ["RESEARCH_JOB", "AUTONOMOUS_TRACK"]},
+    "target_id": {"type": "string", "minLength": 3},
+    "gate": {"type": "string", "minLength": 3},
+    "outcome": {"enum": ["COMPLETE", "REJECT", "DEFER"]},
+    "evidence_ref": {"type": "string", "minLength": 3},
+    "rationale": {"type": "string", "minLength": 10},
+    "actor": {"type": "string", "minLength": 1},
+    "source": {"enum": ["DISCORD", "GITHUB_UI", "CLI"]},
+    "source_generation_id": {"type": "string", "minLength": 8},
+    "source_state_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "authority": {"const": "HUMAN_REVIEW"},
+    "operational_effect": {"enum": ["RESOLVE_RESEARCH_JOB_GATE", "RECORD_ONLY"]},
+    "automatic_product_decision": {"const": false},
+    "automatic_knowledge_promotion": {"const": false},
+    "automatic_release": {"const": false},
+    "created_at": {"type": "string", "minLength": 10},
+    "immutable": {"const": true},
+    "supersedes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

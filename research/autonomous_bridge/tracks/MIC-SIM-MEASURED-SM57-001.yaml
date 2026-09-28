@@ -1,0 +1,143 @@
+schema_version: "1.0"
+track_id: MIC-SIM-MEASURED-SM57-001
+enabled: false
+activation_state: BLOCKED_CONTROLLED_DATASET
+root_research_id: MIC-SIM-MEASURED-SM57-001
+
+research_question: >-
+  Can a provenance-verified controlled SM57 measurement dataset improve the reference
+  model beyond manufacturer source facts without fabricating missing phase, transient,
+  off-axis, distance/proximity or level-dependent behavior?
+
+hypothesis_id: HYP-MIC-SM57-MEASURED-001
+hypothesis: >-
+  A hash-verified controlled acquisition with explicit research-use permission and
+  documented geometry/electronics can provide MEASURED evidence suitable for bounded
+  phase/transient model fitting while preserving all unmeasured dimensions as unresolved.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: true
+human_gate_conditions:
+  - CONTROLLED_REFERENCE_ACQUISITION
+  - DATA_LICENSE_OR_RESEARCH_PERMISSION
+  - REAL_AUDIO_AB
+  - LISTENING_JUDGMENT
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+depends_on_tracks:
+  - MIC-SIM-REFERENCE-SM57-001
+
+activation_requirements:
+  mic_simulator_validator: Research/harness/reference_acquisition.py
+  required_validator_status: PASS
+  required_reference_model: SHURE_SM57
+  required_evidence_class: MEASURED
+  research_use_permission: true
+  preferred_first_dimensions:
+    - phase_group_delay
+    - impulse_transient
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/mic-simulator/sm57-controlled-acquisition-2026-09-29.md
+  do_not_reopen:
+    - SHURE_SM57_SOURCE_FACT_INVENTORY
+    - MIC_SIM_FOUNDATION_DETERMINISTIC_HARNESS
+    - FREQUENCY_RESPONSE_ONLY_PARITY_REJECTION
+  rejected_directions:
+    - WEB_GRAPH_DIGITIZATION_AS_UNQUALIFIED_MEASURED_DATA
+    - FABRICATED_PHASE_FROM_MAGNITUDE_ONLY
+    - FABRICATED_TRANSIENT_RESPONSE
+    - UNLICENSED_RAW_DATA_REUSE
+    - SOURCE_FACTS_AS_HARDWARE_PARITY
+    - AUTO_PROMOTION_OR_AUTO_RELEASE
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-MIC-SM57-MEASURED-R1
+  experiment_type: CONTROLLED_REFERENCE_MODEL_FIT
+  expected_information_gain: 0.95
+  scope:
+    - mic_simulator
+    - sm57
+    - measured_reference
+    - phase_transient
+  inputs:
+    seed: 2026092901
+    population: 4
+    generations: 2
+    max_candidates: 8
+    max_runtime_seconds: 90
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 2
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      Controlled provenance-verified SM57 measurements can support bounded model fitting
+      without promoting missing dimensions or product claims.
+    architecture: SM57_MEASURED_REFERENCE_MODEL_V1
+    tested_parameters:
+      phase_group_delay: measured_required
+      impulse_transient: measured_required
+      frequency_response: measured_or_source_fact
+      polar_off_axis: unresolved_until_measured
+      proximity_distance: unresolved_until_measured
+      level_dependency: unresolved_until_measured
+    benchmark_profile:
+      - sm57_controlled_reference_v1
+      - mic_measured_reference_fit_v1
+    sample_rate: 48000
+    input_set: CONTROLLED_ACQUISITION_MANIFEST_REQUIRED
+    reference_model: SHURE_SM57_CONTROLLED_MEASURED_DATASET
+    objective_set:
+      - phase_error
+      - group_delay_error
+      - impulse_error
+      - magnitude_error
+      - uncertainty_preservation
+      - reproducibility
+    relevant_constraints:
+      - acquisition_manifest_must_pass
+      - research_use_permission_required
+      - no_frequency_response_only_parity_claim
+      - no_missing_dimension_fabrication
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: CONTROLLED_REFERENCE_MODEL_FIT
+    scope:
+      - mic_simulator
+      - sm57
+      - measured_reference
+      - phase_transient
+
+efficiency_policy:
+  policy_id: MIC-SIM-MEASURED-SM57-001-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: BLOCKED_DATASET
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

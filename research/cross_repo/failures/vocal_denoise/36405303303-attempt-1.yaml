@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-003
+repo_key: vocal_denoise
+workflow_key: train
+run_id: 36405303303
+run_attempt: 1
+head_sha: 368db271a00e0e7bf74e8940958c345ba699db54
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Run bounded tiny ML pilot
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

@@ -44,8 +44,17 @@ tiers:
           published_md5: c66c4f46be850aa25022145431b93caa
         rights:
           official_dataset_license_verified: false
+          authoritative_audit_date: "2026-09-29"
+          zenodo_rendered_license_value: NOT_EXPOSED
+          zenodo_attribution_note_present: true
+          paper_manuscript_cc_by_4_0_verified: true
+          paper_license_scope: MANUSCRIPT_ONLY_NOT_DATASET_BYTES
           secondary_mirror_claims_cc_by_4_0: true
           commercial_model_fit_approved: false
+          redistribution_approved: false
+          derived_model_parameter_commercialization_approved: false
+          decision: BLOCKED_AUTHORITATIVE_DATASET_LICENSE_UNVERIFIED
+          audit_file: research/plugins/mic-simulator/sm57-zenodo-rights-audit-2026-09-29.md
           action: VERIFY_AUTHORITATIVE_LICENSE_BEFORE_MODEL_FIT
         eligible_for_measured_promotion: false
         promotion_condition: ORIGINAL_SM57_FILES_INGESTED_HASHED_MANIFEST_PASS_RIGHTS_VERIFIED
@@ -144,6 +153,7 @@ supersedes:
 
 next_actions:
   - VERIFY_ZENODO_4633508_AUTHORITATIVE_LICENSE
+  - DO_NOT_DISPATCH_ZENODO_INGEST_WHILE_RIGHTS_UNVERIFIED
   - INSPECT_ORIGINAL_ARCHIVE_SM57_PATHS
   - VERIFY_ARCHIVE_MD5
   - EXTRACT_SM57_ONLY

@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-PHYSICAL-REALISM-004-R2-73389BF2
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: RUNNING
+run_id: 36458033884
+run_status: in_progress
+run_conclusion: null
+since: '2026-09-28T17:25:37Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

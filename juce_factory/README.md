@@ -143,8 +143,8 @@ A separate Factory Build Authorization must bind the exact Contract Candidate an
 handoff receipt and set only `factory_build_authorized=true`. The authorization
 cannot carry product release, Cubase or listening authority.
 
-A future generic candidate-build workflow must consume both the Plugin Contract and
-its Build Authorization and reverify pinned source hashes before generation/build.
+The generic candidate-build workflow consumes both the Plugin Contract and its Build
+Authorization and reverifies pinned source hashes before generation/build.
 
 
 ## Generic authorized candidate build
@@ -174,3 +174,28 @@ quarantine Result Bundle and authorization/result binding.
 
 The workflow never grants final product decision, release authority, Cubase
 confirmation or listening approval.
+
+
+## Certified DSP Module Registry
+
+Factory 0.3 replaces the hard-coded DSP-template allowlist with a canonical certified
+DSP Module Registry.
+
+The Registry records, for each module:
+
+- module and implementation IDs;
+- Factory certification/build eligibility;
+- supported Plugin Contract versions;
+- exact required parameter IDs;
+- supported mono/stereo layouts;
+- validation profile;
+- immutable source-revision requirement;
+- `product_release_authority=false`.
+
+Plugin Contract validation reads this Registry directly. The generator performs a
+second implementation check, so adding a Registry entry alone cannot execute an
+unknown DSP implementation.
+
+The generated Factory manifest pins both the complete Registry SHA-256 and the
+selected module-spec SHA-256. Registry certification is manufacturing eligibility
+only; it is not a subjective audio-quality or release verdict.

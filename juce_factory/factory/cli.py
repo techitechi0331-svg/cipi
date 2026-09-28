@@ -8,6 +8,11 @@ from pathlib import Path
 from . import FACTORY_VERSION
 from .contract import ContractError, load_contract
 from .generator import generate_project
+from .dsp_modules.registry import (
+    list_module_ids,
+    get_module_spec,
+    registry_sha256,
+)
 from .result_bundle import (
     ResultBundleError,
     build_pass_bundle,
@@ -34,6 +39,7 @@ def main() -> int:
     generate.add_argument("--output", required=True)
 
     sub.add_parser("self-test", help="validate and generate the Golden Plugin in a temporary directory")
+    sub.add_parser("modules", help="list certified Factory DSP modules")
 
     validate_result = sub.add_parser("validate-result", help="validate a Factory Result Bundle")
     validate_result.add_argument("bundle")
@@ -63,6 +69,27 @@ def main() -> int:
             contract = load_contract(args.contract)
             out = generate_project(contract, args.output)
             print(json.dumps({"status": "GENERATED", "output": str(out)}))
+            return 0
+        if args.command == "modules":
+            modules = []
+            for module_id in list_module_ids():
+                spec = get_module_spec(module_id)
+                modules.append({
+                    "module_id": spec.module_id,
+                    "implementation_id": spec.implementation_id,
+                    "certification_status": spec.certification_status,
+                    "factory_build_eligible": spec.factory_build_eligible,
+                    "contract_versions": list(spec.contract_versions),
+                    "required_parameter_ids": list(spec.required_parameter_ids),
+                    "supported_layouts": list(spec.supported_layouts),
+                    "validation_profile": spec.validation_profile,
+                    "product_release_authority": spec.product_release_authority,
+                })
+            print(json.dumps({
+                "status": "DSP_MODULE_REGISTRY_VALID",
+                "registry_sha256": registry_sha256(),
+                "modules": modules,
+            }))
             return 0
         if args.command == "validate-result":
             bundle = json.loads(Path(args.bundle).read_text(encoding="utf-8-sig"))

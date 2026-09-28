@@ -6,10 +6,16 @@ import re
 from pathlib import Path
 from typing import Any
 
+from .dsp_modules.registry import (
+    DspModuleRegistryError,
+    list_module_ids,
+    require_build_eligible_module,
+)
+
 CONTRACT_VERSION = 1
 SUPPORTED_FORMATS = {"VST3"}
 SUPPORTED_LAYOUTS = {"mono", "stereo"}
-SUPPORTED_DSP_TEMPLATES = {"golden_gain_v1"}
+SUPPORTED_DSP_TEMPLATES = set(list_module_ids())
 
 _ID = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
 _CODE4 = re.compile(r"^[A-Za-z0-9]{4}$")
@@ -111,13 +117,31 @@ def validate_contract(data: dict[str, Any]) -> None:
             raise ContractError(f"parameter {pid}: default must be within min/max")
 
     dsp = _require_object(data, "dsp")
-    if dsp.get("template") not in SUPPORTED_DSP_TEMPLATES:
-        raise ContractError(f"unsupported dsp.template: {dsp.get('template')}")
-    if dsp["template"] == "golden_gain_v1":
-        if ids != {"gain_db"}:
-            raise ContractError("golden_gain_v1 requires exactly one parameter with id=gain_db")
+    template = dsp.get("template")
+    if not isinstance(template, str):
+        raise ContractError("dsp.template must be a string")
+    try:
+        module_spec = require_build_eligible_module(
+            template,
+            contract_version=data["contract_version"],
+        )
+    except DspModuleRegistryError as exc:
+        raise ContractError(f"unsupported dsp.template: {template}: {exc}") from exc
+
+    required_parameter_ids = set(module_spec.required_parameter_ids)
+    if ids != required_parameter_ids:
+        raise ContractError(
+            f"{template} requires exactly parameters {sorted(required_parameter_ids)}"
+        )
+    if not layouts.issubset(set(module_spec.supported_layouts)):
+        raise ContractError(
+            f"{template} does not support requested layouts {sorted(layouts)}"
+        )
+    if module_spec.source_revision_required:
         if not isinstance(dsp.get("source_revision"), str) or not dsp["source_revision"].strip():
-            raise ContractError("dsp.source_revision must be a non-empty immutable identifier")
+            raise ContractError(
+                f"{template}: dsp.source_revision must be a non-empty immutable identifier"
+            )
 
     ui = _require_object(data, "ui")
     for key in ("width", "height"):

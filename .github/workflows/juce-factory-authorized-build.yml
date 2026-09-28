@@ -9,8 +9,10 @@ on:
       - "juce_factory/factory/authorized_build.py"
       - "juce_factory/factory/contract.py"
       - "juce_factory/factory/generator.py"
+      - "juce_factory/factory/dsp_modules/**"
       - "juce_factory/factory/result_bundle.py"
       - "juce_factory/schemas/plugin_contract.schema.json"
+      - "juce_factory/schemas/dsp_module_registry.schema.json"
       - "juce_factory/schemas/authorized_build_result_binding.schema.json"
       - ".github/workflows/juce-factory-authorized-build.yml"
   workflow_dispatch:

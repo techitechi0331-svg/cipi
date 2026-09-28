@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "evidence_id": "VG-PICKUP-ELECTRICAL-EVIDENCE-FOUNDATION-20260929",
+  "project": "virtual-guitar",
+  "recorded_at": "2026-09-29",
+  "status": "SOURCE_EVIDENCE_FOUNDATION",
+  "scope": "Pickup Observation, magnetic transduction, passive pickup/electronics, cable/load interaction; no product-tone adoption.",
+  "source_priority_policy": [
+    "MANUFACTURER_SCHEMATIC_OR_SERVICE_DOCUMENT",
+    "PEER_REVIEWED_OR_AUTHORITATIVE_TECHNICAL_PUBLICATION",
+    "REPRODUCIBLE_MEASUREMENT",
+    "SECONDARY_TECHNICAL_SOURCE"
+  ],
+  "sources": [
+    {
+      "source_id": "FENDER-SSS-PREWIRED-2019",
+      "tier": 1,
+      "type": "MANUFACTURER_WIRING_DIAGRAM",
+      "title": "Pickguard Assembly Stratocaster Wiring Diagram — SSS",
+      "publisher": "Fender Musical Instruments Corporation",
+      "url": "https://www.fmicassets.com/Damroot/Original/10001/WD_0992340500_Prewired_Pickguard_SSS.pdf",
+      "specimen_scope": "Specific Fender SSS prewired pickguard assembly; topology evidence only unless a value is explicitly tied to this specimen.",
+      "facts": [
+        "Three single-coil pickups are wired through a selector/control network to an output jack.",
+        "The documented assembly includes a 5-way switch, volume/tone controls, output jack wiring and grounding."
+      ]
+    },
+    {
+      "source_id": "FENDER-MODERN-PLAYER-HSS",
+      "tier": 1,
+      "type": "MANUFACTURER_SERVICE_WIRING_DIAGRAM",
+      "title": "Fender Modern Player Stratocaster HSS Wiring",
+      "publisher": "Fender Musical Instruments Corporation",
+      "url": "https://www.fmicassets.com/Damroot/Original/10001/024-1000A_SISD.pdf",
+      "specimen_scope": "Specific Fender Modern Player Stratocaster HSS model; component values/topology must not be universalized to all Strat-style guitars.",
+      "facts": [
+        "The documented HSS instrument uses neck and middle pickups plus a two-coil bridge pickup.",
+        "The diagram includes a 5-way switch, volume/tone controls, output jack and a push/pull switching element."
+      ]
+    },
+    {
+      "source_id": "PAIVA-PAKARINEN-VALIMAKI-2012",
+      "tier": 2,
+      "type": "PEER_REVIEWED_JAES_ARTICLE",
+      "title": "Acoustics and Modeling of Pickups",
+      "authors": [
+        "Rafael C. D. Paiva",
+        "Jyri Pakarinen",
+        "Vesa Välimäki"
+      ],
+      "publication": "Journal of the Audio Engineering Society 60(10), 768-782 (2012)",
+      "url": "https://aaltodoc.aalto.fi/bitstreams/92759095-3b64-4a0f-bf29-8a3617b9d92c/download",
+      "facts": [
+        "Pickup position and finite sensitivity width are modeled as distinct contributors to pickup timbre.",
+        "The modeled causal chain includes sensed string position, magnetic-flux mapping, time differentiation to induced voltage, and resonant filtering by the pickup electrical circuit.",
+        "An equivalent pickup circuit with inductance, winding resistance, capacitance and magnetic/core-loss representation is a useful candidate model.",
+        "Series and parallel pickup combinations alter the equivalent electrical network as well as signal magnitude/phase."
+      ],
+      "boundaries": [
+        "The equivalent circuit is evidence for a candidate model class, not proof that a single low-order RLC representation is sufficient for every pickup and every transient."
+      ]
+    },
+    {
+      "source_id": "PAIVA-PENTTINEN-2011",
+      "tier": 2,
+      "type": "PEER_REVIEWED_AES_CONVENTION_PAPER",
+      "title": "Cable Matters: Instrument Cables Affect the Frequency Response of Electric Guitars",
+      "authors": [
+        "Rafael Cauduro Dias de Paiva",
+        "Henri Penttinen"
+      ],
+      "publication": "131st AES Convention, Paper 8466 (2011)",
+      "url": "https://aaltodoc.aalto.fi/bitstreams/fa70464c-0d32-403f-8db9-9c5124b88fe0/download",
+      "facts": [
+        "A passive magnetic-pickup guitar and its cable form an interacting resonant electrical system rather than a buffered source followed by an acoustically irrelevant cable.",
+        "Cable capacitance changed the measured/simulated frequency response in the studied systems.",
+        "In the measured cable set, inductance and series/parallel resistance effects were much smaller than capacitance effects.",
+        "The largest reported resonant-frequency shift among the measured cables was about 1.4 kHz."
+      ],
+      "boundaries": [
+        "The relative insignificance of cable R/L is specific to the studied cables and conditions; it must not be promoted to a universal rule without validation."
+      ]
+    },
+    {
+      "source_id": "KOTIUGA-2015",
+      "tier": 2,
+      "type": "PEER_REVIEWED_IEEE_ARTICLE",
+      "title": "Interwinding Distributed Capacitance and Guitar Pickup Transient Response",
+      "author": "Peter Robert Kotiuga",
+      "publication": "IEEE Transactions on Magnetics 51(3), 2015",
+      "doi": "10.1109/TMAG.2014.2364041",
+      "url": "https://doi.org/10.1109/TMAG.2014.2364041",
+      "facts": [
+        "Distributed interwinding capacitance motivates higher-order pickup models when transient behavior is part of the target.",
+        "A simple lumped RLC model may be insufficient for reproducing all audible transient features."
+      ],
+      "boundaries": [
+        "This is counter-evidence against prematurely declaring a low-order RLC model final; it does not prove that a distributed model is required for the project's eventual perceptual/realtime target."
+      ]
+    }
+  ],
+  "SOURCE_FACT": [
+    "Fender publishes distinct SSS and HSS Strat-style wiring topologies with selector, controls and output-jack boundaries.",
+    "Peer-reviewed pickup modeling literature treats pickup position/sensitivity width, magnetic transduction and the electrical resonant network as separable causal mechanisms.",
+    "Peer-reviewed cable research demonstrates that cable capacitance can materially shift the loaded response of passive magnetic-pickup guitar systems.",
+    "Peer-reviewed higher-order pickup research provides a credible counter-hypothesis to a universally sufficient low-order lumped RLC model."
+  ],
+  "MEASURED": [
+    "The 2011 AES cable study reported up to approximately 1.4 kHz resonant-frequency shift across its measured cable set."
+  ],
+  "INFERRED": [
+    "The project should preserve a position-dependent string observation boundary before magnetic transduction.",
+    "The Guitar Electrical Port must retain source-network information sufficient to reproduce cable/load interaction; a rendered WAV alone is not a sufficient electrical contract.",
+    "A low-order pickup equivalent circuit is an appropriate baseline candidate, but model order must be selected by falsification against frequency, phase and transient evidence."
+  ],
+  "HYPOTHESIS": [
+    "For the intended Strat-style SSS/HSS use cases, a low-order pickup network plus explicit cable/load interaction may be sufficient over a declared operating domain if transient and loaded-response error stay below predeclared thresholds.",
+    "Finite pickup aperture and observation position may explain bridge/middle/neck spectral differences without post-EQ presets.",
+    "A reduced GuitarAmpElectricalLink may match a higher-accuracy network solver closely enough for realtime use."
+  ],
+  "REJECTED": [
+    "PICKUP_EQUALS_STATIC_EQ",
+    "CABLE_EQUALS_POST_EQ_WITHOUT_NETWORK_EQUIVALENCE",
+    "REFERENCE_DI_BEFORE_PICKUP_ELECTRONICS",
+    "ONE_FENDER_SPECIMEN_VALUE_EQUALS_ALL_STRAT_VALUES",
+    "LOW_ORDER_RLC_IS_FINAL_BY_ASSUMPTION",
+    "DISTRIBUTED_PICKUP_MODEL_IS_REQUIRED_BY_ASSUMPTION",
+    "AMP_CAB_MIC_COLORATION_PROVES_UPSTREAM_REALISM"
+  ],
+  "candidate_model_classes": {
+    "pickup_observation": [
+      "POINT_OBSERVATION_BASELINE",
+      "FINITE_APERTURE_OBSERVATION"
+    ],
+    "magnetic_transduction": [
+      "LINEAR_FLUX_DERIVATIVE_BASELINE",
+      "DISTANCE_DEPENDENT_NONLINEAR_FLUX_CANDIDATE"
+    ],
+    "pickup_electrical": [
+      "LOW_ORDER_LUMPED_EQUIVALENT_BASELINE",
+      "FREQUENCY_DEPENDENT_LOSS_EXTENSION",
+      "DISTRIBUTED_CAPACITANCE_COUNTER_CANDIDATE"
+    ],
+    "cable": [
+      "CAPACITANCE_DOMINANT_LUMPED_BASELINE",
+      "FULL_RLC_SENSITIVITY_CANDIDATE",
+      "DISTRIBUTED_LINE_ONLY_IF_REQUIRED"
+    ],
+    "amp_input": [
+      "LINEAR_HIZ_LOAD_BASELINE",
+      "FREQUENCY_DEPENDENT_INPUT_NETWORK",
+      "NONLINEAR_INPUT_ONLY_IF_EVIDENCE_REQUIRES"
+    ]
+  },
+  "next_measurement_requirements": [
+    "pickup-position harmonic-structure comparison under identical excitation",
+    "pickup/network impedance or transfer response over frequency",
+    "loaded resonance frequency and Q",
+    "volume/tone/selector sweeps",
+    "cable-capacitance/load sensitivity sweeps",
+    "transient error comparison between low-order and higher-order pickup candidates",
+    "sample-rate and numerical-stability checks"
+  ],
+  "authority": {
+    "automatic_product_decision": false,
+    "automatic_knowledge_promotion": false,
+    "product_repository_write": false,
+    "final_tone_adoption": false
+  }
+}

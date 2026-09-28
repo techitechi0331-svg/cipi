@@ -101,13 +101,15 @@ evidence_roles:
         publication_doi: 10.1109/ICASSP49660.2025.10887996
         evidence_class: SOURCE_FACT
         license: CC_BY_4_0
-        license_status: VERIFIED_FROM_PROJECT_AND_ZENODO
+        license_status: AUTHOR_PROJECT_PAGE_CC_BY_4_0_CONFIRMED_ZENODO_RENDERED_LICENSE_VALUE_NOT_EXPOSED
         contains: [DIRECT_INPUT_AUDIO, AMP_MIC_AUDIO, SYNCHRONIZED_MIDI, MULTIPLE_PLAYERS, MULTIPLE_GUITARS]
         known_chain: {guitar_output_split_to_audio_interface_and_amplifier: true}
         confounds: [GUITAR_MODEL, PICKUP_SELECTION, SIGNAL_SPLITTER, AUDIO_INTERFACE_INPUT, PLAYER, STRING_GAUGE]
         quality_notes: [SIGNALS_MAY_HAVE_UP_TO_100MS_ALIGNMENT_ERROR]
         eligible_for_real_di_ab_candidate: true
-        eligible_for_commercial_research_under_declared_license: true
+        dataset_ingest_approved: false
+        dataset_ingest_condition: CAPTURE_AUTHORITATIVE_LICENSE_STATEMENT_AND_ATTRIBUTION_MANIFEST
+        commercial_model_fit_candidate_after_rights_preflight: true
         attribution_required: true
         isolated_pickup_transfer_truth: false
 

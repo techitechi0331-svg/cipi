@@ -16,7 +16,7 @@ retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions:
-- VOCAL-DENOISE-DATASET-PREPARE-003
+- VOCAL-DENOISE-DATASET-PREPARE-004
 reason: Retry bounded real-singing plus synthetic-noise TinyMaskNet training only after
   the sanitized VocalSet .prepared-v2 manifest succeeds. Previous run 003 passed
   Python, PyTorch, CUDA, dataset-license, cache, and repository-import gates but failed

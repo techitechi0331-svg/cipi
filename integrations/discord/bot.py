@@ -372,7 +372,7 @@ async def human_gate_command(interaction: discord.Interaction, project: app_comm
 @app_commands.describe(
     target_id="human-gate に表示されたジョブまたはトラックID",
     gate="human-gate に表示されたゲート名",
-    evidence_ref="AB結果・ログ・ファイルなどの確認根拠",
+    evidence_ref="公開してよいAB結果・ログ等の参照。秘密情報は禁止",
     rationale="判断理由。10文字以上",
 )
 async def gate_decision(
@@ -412,7 +412,7 @@ async def gate_decision(
             "outcome": outcome.value,
             "evidence_ref": evidence_ref.strip(),
             "rationale": rationale.strip(),
-            "actor": f"discord:{interaction.user.id}",
+            "actor": "discord-human-reviewer",
             "source": "DISCORD",
             "source_generation_id": data["generation_id"],
             "source_state_digest": data["source_state_digest"],

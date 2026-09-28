@@ -96,6 +96,7 @@ def build_snapshot(root: Path, registry: dict[str, Any], cross_repo_enabled: boo
     selected_job, stats = choose_job(
         root / "research" / "jobs" / "queued",
         root / "research" / "jobs" / "completed",
+        human_gate_root=root,
     )
     local_candidate = None
     if selected_job is not None:
@@ -169,6 +170,8 @@ def build_snapshot(root: Path, registry: dict[str, Any], cross_repo_enabled: boo
             "blocked_count": stats.get("skipped_blocked", 0),
             "dependency_blocked_count": stats.get("skipped_dependency", 0),
             "claimed_count": stats.get("skipped_claimed", 0),
+            "human_gate_blocked_count": stats.get("skipped_human_gate", 0),
+            "human_gate_jobs": stats.get("human_gate_jobs", []),
         },
         "cross_repo": {
             "enabled": cross_repo_enabled,
@@ -209,7 +212,7 @@ def write_dashboard(root: Path, snapshot: dict[str, Any]) -> bool:
         f"- Next scheduler action: **{selected['kind']}**",
         f"- Local READY job: **{(local.get('ready_job') or {}).get('job_id', '-')}**",
         f"- Claimed evidence branches: **{local['claimed_count']}**",
-        f"- Local blocked / dependency-blocked: **{local['blocked_count']} / {local['dependency_blocked_count']}**",
+        f"- Local blocked / dependency-blocked / human-gate-blocked: **{local['blocked_count']} / {local['dependency_blocked_count']} / {local.get('human_gate_blocked_count', 0)}**",
         f"- Cross-Repo enabled: **{'YES' if cross['enabled'] else 'NO'}**",
         f"- Cross-Repo blocked reason: **{cross.get('blocked_reason') or '-'}**",
         f"- Cross-Repo queued / dispatched / failed / quarantined: **{states['queued']} / {states['dispatched']} / {states['failed']} / {states['quarantined']}**",

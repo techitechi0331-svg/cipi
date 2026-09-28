@@ -112,4 +112,5 @@ knowledge_candidate:
     Pickup/Electronics research is causally upstream of Reference DI and may proceed before
     product integration while remaining authority-bounded.
   evidence_type: INFERRED
-  promotion_requested: NONE
+  scope: "Research-order and dependency semantics only; not a tone/fidelity claim."
+  promotion_requested: HYPOTHESIS

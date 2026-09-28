@@ -64,6 +64,7 @@ ADAPTERS = {
     "voprep_sibilance_adversarial_v1",
     "voprep_plosive_threshold_r2_v1",
     "voprep_sibilance_threshold_r2_v1",
+    "vopripro_sidechain_hpf_transfer_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -3936,6 +3937,49 @@ def _vopripro_voprep_eventonly_integration(
     }
 
 
+
+def _vopripro_sidechain_hpf_transfer(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    script = (
+        repo_root / "research" / "plugins" / "vopripro"
+        / "experiments" / "sidechain_hpf_transfer_v1.py"
+    )
+    with tempfile.TemporaryDirectory(prefix="cipi-vopripro-sc-hpf-transfer-") as td:
+        out = Path(td)
+        subprocess.run(
+            [sys.executable, str(script), "--out-dir", str(out)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "rows.csv": (out / "rows.csv").read_text(encoding="utf-8"),
+            "summary.json": (out / "summary.json").read_text(encoding="utf-8"),
+            "report.md": (out / "report.md").read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary.get("acceptance_met", False))
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/plugins/vopripro/experiments/sidechain_hpf_transfer_v1.py --out-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Deterministic VoPriPro sidechain-HPF transfer screen. Current 80 Hz "
+            "Natural50 detector is the protected baseline; 60/40 Hz candidates are "
+            "tested for equal-RMS low-vocal pitch-bias reduction while bounding "
+            "rumble/plosive sensitivity and preserving high-frequency transient behavior. "
+            "Passing authorizes only real-vocal comparison."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
@@ -4043,4 +4087,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vopripro_voprep_eventonly_integration(repo_root, timeout_seconds)
     if name == "vocal_resonance_raw_patch_sufficiency_v2":
         return _vocal_resonance_raw_patch_sufficiency_v2(repo_root, timeout_seconds)
+    if name == "vopripro_sidechain_hpf_transfer_v1":
+        return _vopripro_sidechain_hpf_transfer(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

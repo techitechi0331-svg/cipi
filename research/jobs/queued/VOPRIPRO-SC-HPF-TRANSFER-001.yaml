@@ -1,0 +1,78 @@
+schema_version: '1.0'
+job_id: VOPRIPRO-SC-HPF-TRANSFER-001
+state: QUEUED
+track:
+  id: VOPRIPRO_FORMAL
+  path: research/plugins/vopripro
+research_question: Can lowering VoPriPro Natural50's detector/calibration HPF from the current 80 Hz baseline to 60 or 40 Hz reduce equal-RMS low-vocal pitch bias without materially increasing rumble/plosive false drive or changing high-frequency transient behavior?
+hypothesis: At least one lower cutoff reduces equal-RMS vowel mean-GR pitch bias by at least 25 percent relative to 80 Hz while keeping average extra peak GR versus 80 Hz to no more than 0.20 dB for 30 Hz rumble, 0.25 dB for a 55 Hz plosive, and 0.10 dB absolute for HF transient and sibilant cases.
+counter_hypotheses:
+  - The current 80 Hz cutoff is already the best trade-off; lowering cutoff mainly reintroduces LF false drive.
+  - Lower cutoffs increase low-male GR but do not materially reduce pitch-dependent operating bias after equal reference calibration.
+  - 40 Hz overreacts to rumble/plosive even though prior Vo.Prep detector-only research was positive in a different compressor architecture.
+baseline:
+  - Current VoPriPro Natural50 with 80 Hz second-order detector/calibration HPF, 35/65 Peak/RMS, 25 ms RMS, 2.7:1 ratio, 12 dB knee, 3 dB calibration GR, 6 dB max GR, 20 ms attack and 110 ms release.
+variants:
+  - Same VoPriPro Natural50 architecture with 60 Hz HPF.
+  - Same VoPriPro Natural50 architecture with 40 Hz HPF.
+metrics:
+  - pitch_bias_reduction
+  - pitch_bias_baseline_db
+  - pitch_bias_candidate_db
+  - low80_mean_delta_db
+  - rumble_extra_peak_gr_db
+  - plosive_extra_peak_gr_db
+  - transient_abs_peak_delta_db
+  - sibilant_abs_peak_delta_db
+  - pitch_bias_sample_rate_spread_db
+acceptance:
+  - All trajectories are finite at 44.1, 48, 96 and 192 kHz.
+  - Candidate reduces equal-RMS 80/90/110/150/220 Hz vowel mean-GR pitch bias by at least 25 percent versus 80 Hz.
+  - Candidate average extra peak GR on the 30 Hz rumble case is no more than 0.20 dB versus 80 Hz.
+  - Candidate average extra peak GR on the 55 Hz plosive case is no more than 0.25 dB versus 80 Hz.
+  - Candidate absolute HF-transient peak-GR change is no more than 0.10 dB versus 80 Hz.
+  - Candidate absolute sibilant peak-GR change is no more than 0.10 dB versus 80 Hz.
+  - Candidate pitch-bias sample-rate spread is no more than 0.10 dB.
+  - Candidate does not reduce 80 Hz-vowel mean GR by more than 0.05 dB versus 80 Hz.
+  - Passing authorizes same-architecture real-vocal comparison only.
+rejection:
+  - No lower cutoff passes all declared gates.
+  - Any numeric trajectory is non-finite.
+  - Passing requires post-hoc relaxation of a gate.
+max_runs: 1
+timeout_minutes: 5
+random_seed: 20260926
+experiment_adapter: vopripro_sidechain_hpf_transfer_v1
+allowed_operations:
+  - execute_allowlisted_adapter
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - automatic_promotion
+  - product_dsp_mutation
+  - product_release
+knowledge_candidate:
+  claim: A lower fixed detector/calibration HPF can reduce VoPriPro low-vocal pitch bias without materially worsening LF false drive.
+  evidence_type: HYPOTHESIS
+  scope: Synthetic same-architecture VoPriPro Natural50 screen only; current 80 Hz baseline versus 60/40 Hz at 44.1/48/96/192 kHz.
+  promotion_requested: HYPOTHESIS
+review_policy:
+  required_human_gates:
+    - Same-corpus real-vocal validation before product integration.
+    - Level-matched listening before subjective superiority claims.
+continuation:
+  on_accept: []
+  on_reject: []
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOPRIPRO-DETECTOR-TRANSFER-001
+    - VOPRIPRO-BALLISTICS-TRANSFER-001
+    - VO-PREP-SC-HPF-REAL-001
+  related_decisions:
+    - VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926
+    - VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926
+    - VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:review-01

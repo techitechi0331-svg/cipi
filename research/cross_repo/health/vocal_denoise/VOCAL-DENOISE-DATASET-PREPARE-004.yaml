@@ -3,10 +3,10 @@ action_id: VOCAL-DENOISE-DATASET-PREPARE-004
 repo_key: vocal_denoise
 workflow_key: dataset_prepare
 runner_class: self-hosted
-state: RUNNING
+state: COMPLETED
 run_id: 36453903467
-run_status: in_progress
-run_conclusion: null
+run_status: completed
+run_conclusion: success
 since: '2026-09-28T16:50:19Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

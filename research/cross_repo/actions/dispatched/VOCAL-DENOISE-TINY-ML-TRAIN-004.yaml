@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: VOCAL-DENOISE-TINY-ML-TRAIN-004
-state: QUEUED
+state: DISPATCHED
 repo_key: vocal_denoise
 workflow_key: train
 ref: main
@@ -10,16 +10,19 @@ inputs:
   seed: '2026092804'
   max_steps: '100'
 priority: 95
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions:
 - VOCAL-DENOISE-DATASET-PREPARE-004
-reason: Retry bounded real-singing plus synthetic-noise TinyMaskNet training only after
-  the sanitized VocalSet .prepared-v2 manifest succeeds. Previous run 003 passed
+reason: Retry bounded real-singing plus synthetic-noise TinyMaskNet training only
+  after the sanitized VocalSet .prepared-v2 manifest succeeds. Previous run 003 passed
   Python, PyTorch, CUDA, dataset-license, cache, and repository-import gates but failed
   when a manifest .wav entry was not a RIFF/WAVE file. This result remains research
   evidence only and carries no listening, product, or release authority.
 previous_run_id: 36405303303
+dispatched_at: '2026-09-28T16:52:55.784756Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-train.yml

@@ -231,6 +231,7 @@
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
+      "MIC-SIM-EXTERNAL-REFERENCE-SM57-001",
       "MIC-SIM-FOUNDATION-001",
       "MIC-SIM-MEASURED-SM57-001",
       "MIC-SIM-REFERENCE-SM57-001",
@@ -272,6 +273,7 @@
     "terminal_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
+      "MIC-SIM-EXTERNAL-REFERENCE-SM57-001",
       "MIC-SIM-FOUNDATION-001",
       "MIC-SIM-MEASURED-SM57-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
@@ -308,6 +310,11 @@
         "reason": "BUDGET_EXHAUSTED",
         "scheduler_eligible": false,
         "state": "BUDGET_EXHAUSTED"
+      },
+      "MIC-SIM-EXTERNAL-REFERENCE-SM57-001": {
+        "reason": "TRACK_DISABLED",
+        "scheduler_eligible": false,
+        "state": "DISABLED"
       },
       "MIC-SIM-FOUNDATION-001": {
         "reason": "DUPLICATE_ONLY",
@@ -456,18 +463,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "VOCAL-DENOISE-TINY-ML-EVALUATE-001",
-      "kind": "CROSS_REPO",
-      "priority": 96,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 45,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 12,
       "quarantined": 0,
-      "queued": 2
+      "queued": 1
     }
   },
   "human_gates": [
@@ -496,9 +498,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "VOCAL-DENOISE-TINY-ML-EVALUATE-001",
+    "action_id": null,
     "kind": "CROSS_REPO",
-    "priority": 96,
-    "reason": "ready_external_action"
+    "priority": 80,
+    "reason": "reconcile_dispatched_action"
   }
 }

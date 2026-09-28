@@ -227,6 +227,7 @@
   "registered_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
+    "MIC-SIM-EXTERNAL-REFERENCE-SM57-001",
     "MIC-SIM-FOUNDATION-001",
     "MIC-SIM-MEASURED-SM57-001",
     "MIC-SIM-REFERENCE-SM57-001",
@@ -268,6 +269,7 @@
   "terminal_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
+    "MIC-SIM-EXTERNAL-REFERENCE-SM57-001",
     "MIC-SIM-FOUNDATION-001",
     "MIC-SIM-MEASURED-SM57-001",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
@@ -304,6 +306,11 @@
       "reason": "BUDGET_EXHAUSTED",
       "scheduler_eligible": false,
       "state": "BUDGET_EXHAUSTED"
+    },
+    "MIC-SIM-EXTERNAL-REFERENCE-SM57-001": {
+      "reason": "TRACK_DISABLED",
+      "scheduler_eligible": false,
+      "state": "DISABLED"
     },
     "MIC-SIM-FOUNDATION-001": {
       "reason": "DUPLICATE_ONLY",

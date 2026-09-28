@@ -1,0 +1,28 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-005
+state: DISPATCHED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-006
+  model_run_id: '36474180222'
+  seed: '2026092906'
+  max_files: '18'
+priority: 99
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-TRAIN-006
+reason: Independently evaluate the v0.3 singer-balanced candidate under the same three-seed
+  singer-balanced identity-disjoint protocol used for the repaired v0.2 baseline.
+  Compare Test/Validation SNR improvement, worst-case SNR, clean-vocal identity error,
+  removed-clean leakage and >8 kHz retention. This evaluation has no listening, product-adoption,
+  promotion or release authority.
+previous_run_id: 36473953922
+dispatched_at: '2026-09-28T21:41:09.447101Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-evaluate.yml

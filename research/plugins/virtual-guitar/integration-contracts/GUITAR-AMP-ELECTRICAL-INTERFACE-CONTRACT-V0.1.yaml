@@ -1,0 +1,79 @@
+schema_version: "1.0"
+contract_id: GUITAR-AMP-ELECTRICAL-INTERFACE-CONTRACT
+contract_version: "0.1"
+status: DESIGN_ONLY_RESEARCH_CONTRACT
+recorded_at: "2026-09-29"
+authority: CIPI_VERSIONED_INTEGRATION_CONTRACT
+
+purpose: >-
+  Define the minimum versioned state required to research and validate the loaded electrical
+  interaction between a virtual guitar output network, cable and amp input network without
+  prematurely fixing component values or reducing the interface to a finished WAV.
+
+guitar_side:
+  required_capabilities:
+    - source_model_version
+    - pickup_configuration
+    - pickup_selector_state
+    - volume_state
+    - tone_state
+    - output_signal_or_reference_voltage_representation
+    - source_impedance_or_source_network_representation
+    - sample_rate
+    - model_sha
+    - parameter_set_version_id
+  values_frozen: false
+
+cable:
+  required_capabilities:
+    - model_version
+    - topology_or_model_type
+    - length_if_applicable
+    - capacitance_if_applicable
+    - resistance_if_applicable
+    - inductance_if_applicable
+    - lumped_or_distributed_classification
+    - evidence_provenance
+  values_frozen: false
+
+amp_side:
+  required_capabilities:
+    - input_model_version
+    - input_impedance_or_load_network
+    - input_capacitance_if_applicable
+    - nonlinear_input_behavior_only_where_evidence_requires
+    - reference_level
+    - amp_model_sha
+    - contract_compatibility_version
+  values_frozen: false
+
+solution_contract:
+  causal_model: "GuitarElectricalPort + CableDescriptor + AmpInputLoad -> LoadedElectricalResponse"
+  allowed_solution_forms:
+    - SAME_NETWORK_SOLUTION
+    - VALIDATED_EQUIVALENT_REDUCED_MODEL
+  forbidden_solution_forms:
+    - FINISHED_WAV_ONLY_AS_PROOF_OF_LOADING
+    - GENERIC_EQ_LABELLED_AS_ELECTRICAL_INTERACTION
+    - UNDOCUMENTED_MAGIC_CONSTANTS
+
+compatibility:
+  incompatible_version_must_reject: true
+  missing_required_field_must_not_silently_default: true
+  sample_rate_mismatch_must_be_explicit: true
+  fallback_must_preserve_reference_di_independence: true
+
+evidence:
+  parameter_values: NOT_YET_DETERMINED
+  required_classes:
+    - SOURCE_FACT
+    - MEASURED
+    - INFERRED
+    - HYPOTHESIS
+    - REJECTED
+
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  human_gate_required_for_adoption: true

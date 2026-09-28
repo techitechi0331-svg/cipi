@@ -1,0 +1,308 @@
+schema_version: "1.0"
+research_note_id: VG-PHYSICAL-REALISM-EVIDENCE-REFINEMENT-20260929-002
+project: virtual-guitar
+subject: "Strat-style raw/DI realism: pre-activation evidence refinement"
+created_at: "2026-09-29"
+
+scope:
+  target: "STRAT_STYLE electric guitar through Pickup/Electronics -> DI"
+  current_lab_boundary:
+    - RAW_PHYSICAL_STRING
+    - PHYSICAL_GUITAR
+    - PICKUP_ELECTRONICS
+    - DI
+  excluded:
+    - AMP_CAB
+    - MIC_SIMULATOR
+  purpose: >-
+    Re-audit what must change to approach real-guitar perception before activating
+    VIRTUAL-GUITAR-PHYSICAL-REALISM-004. This note refines, rather than erases,
+    the 2026-09-29 handoff and earlier architecture literature note.
+
+evidence_classes:
+  SOURCE_FACT:
+    - id: SF-VG-DAFX24-NONLINEAR-REALTIME
+      source:
+        title: "Real-Time Guitar Synthesis"
+        authors: "Stefan Bilbao; Riccardo Russo; Craig J. Webb; Michele Ducceschi"
+        venue: "DAFx-2024"
+        url: "https://www.dafx.de/paper-archive/2024/papers/DAFx24_paper_50.pdf"
+      fact: >-
+        The paper models distributed string vibration with geometric nonlinearity plus
+        fretboard, fret and stopping-finger collisions, and reports IEQ/SAV-based
+        non-iterative formulations suitable for real-time use with provable numerical
+        stability properties.
+      important_limit: >-
+        The complete transverse string model presented in this paper is single-polarization.
+        It therefore strengthens nonlinear-contact/stability design but does not replace
+        separate evidence for two-polarization string motion.
+
+    - id: SF-VG-STRING-FRET-TWO-POLARIZATION
+      source:
+        title: "Physical Model of the String-Fret Interaction"
+        author: "Gianpaolo Evangelista"
+        venue: "DAFx-2011"
+        url: "https://www.dafx.de/paper-archive/details/V4Cf7-bGBHWqxAXcEo5eEQ"
+      fact: >-
+        In a two-polarization representation, vertical string motion and horizontal motion
+        interact differently with a fret; string elongation in the two modes can produce
+        audible dynamic detuning.
+
+    - id: SF-VG-PLECTRUM-DYNAMIC-RELEASE
+      source:
+        title: "Synthesis of guitar by digital waveguides: Modeling the plectrum in the physical interaction of the player with the instrument"
+        venue: "IEEE WASPAA 2009"
+        url: "https://ieeexplore.ieee.org/document/5346502/"
+      fact: >-
+        A physical plectrum model can compute pick shape/contact in real time from player
+        motion and dynamic force equilibrium, including an explicit string-release condition
+        that places the waveguide in the proper state at release.
+
+    - id: SF-VG-PLUCK-PASSIVE-SCATTERING
+      source:
+        title: "Structurally Passive Scattering Element for Modeling Guitar Pluck Action"
+        authors: "Gianpaolo Evangelista; Julius O. Smith III"
+        venue: "DAFx-2010"
+        url: "https://dafx10.iem.at/proceedings/papers/EvangelistaSmith_DAFx10_P21.pdf"
+      fact: >-
+        Structurally passive scattering junctions can model player/string plucking
+        interaction while guaranteeing stability independently of the excitation.
+
+    - id: SF-VG-BRIDGE-POLARIZATION-SYMPATHETIC
+      source:
+        title: "Simplified Guitar Bridge Model for the Displacement Wave Representation in Digital Waveguides"
+        authors: "Gianpaolo Evangelista; Martin Raspaud"
+        venue: "DAFx-2009"
+        url: "https://dafx.de/paper-archive/2009/papers/paper_97.pdf"
+      fact: >-
+        A low-cost passive bridge/scattering model can include horizontal/vertical string
+        polarization and sympathetic vibration of other strings for real-time synthesis.
+
+    - id: SF-VG-SOLIDBODY-NECK-DECAY
+      source:
+        title: "Predicting the decay time of solid body electric guitar tones"
+        authors: "Arthur Pate; Jean-Loic Le Carrou; Benoit Fabre"
+        venue: "Journal of the Acoustical Society of America 135(5), 2014"
+        url: "https://pubmed.ncbi.nlm.nih.gov/24815284/"
+      fact: >-
+        For the studied solid-body electric-guitar framework, tone decay is explained by
+        intrinsic string damping and mechanical coupling with the neck. The electromagnetic
+        pickup did not add string damping and was much more sensitive to out-of-plane
+        polarization. Decay prediction used isolated-string damping and out-of-plane
+        neck conductance.
+      scope_limit: >-
+        This is evidence for structural boundary/admittance modeling and decay calibration,
+        not proof that every guitar or every note is dominated by exactly the same mechanism.
+
+    - id: SF-VG-EGFXSET-STRAT-REFERENCE
+      source:
+        title: "EGFxSet: Electric guitar tones processed through real effects of distortion, modulation, delay and reverb"
+        urls:
+          - "https://zenodo.org/records/7044411"
+          - "https://archives.ismir.net/ismir2022/latebreaking/000006.pdf"
+        license: "CC BY 4.0"
+      fact: >-
+        EGFxSet recorded every note of a standard-tuned 22-fret 2004 Stratocaster:
+        138 notes repeated over five pickup configurations, yielding 690 clean tones.
+        The guitar volume and tone controls were set to maximum and the guitar was connected
+        to an Audient iD14 input; recordings were made at 48 kHz / 24 bit.
+      scope_limit: >-
+        The exact Strat variant, string gauge/material/tension, pickup dimensions/positions
+        and pickup-height setup are not fully established by this source.
+
+    - id: SF-VG-GUITAR-TECHS-GEAR-SCOPE
+      source:
+        title: "Guitar-TECHS"
+        urls:
+          - "https://guitar-techs.github.io/"
+          - "https://zenodo.org/records/14963133"
+        license: "CC BY 4.0"
+      fact: >-
+        Guitar-TECHS supplies DI, amplifier-mic and room/player-perspective recordings plus
+        synchronized per-string MIDI. Its documented guitars are Ibanez PF300, EVH Wolfgang
+        and Sire T7, with 0.011-0.050, 0.009-0.042 and 0.010-0.046 string sets respectively;
+        it is therefore valuable general electric-guitar evidence but is not a Strat-specific
+        tonal reference set.
+
+    - id: SF-VG-GUITAR-TECHS-ALIGNMENT-CAVEAT
+      source:
+        title: "Guitar-TECHS Zenodo record"
+        url: "https://zenodo.org/records/14963133"
+      fact: >-
+        The dataset documentation warns that signals may exhibit up to 100 ms temporal
+        misalignment and recommends correction for alignment-critical applications.
+
+    - id: SF-VG-REPRESENTATIVE-MODERN-STRAT-SPECS
+      source:
+        title: "Fender Standard Stratocaster and Player II Stratocaster official specifications"
+        urls:
+          - "https://www.fender.com/products/standard-stratocaster-1"
+          - "https://www.fender.com/products/player-ii-stratocaster"
+          - "https://www.fender.com/products/standard-stratocaster-hss"
+      fact: >-
+        Current representative Fender Stratocaster variants document 25.5 inch / 648 mm
+        scale length, nickel-plated-steel 0.009-0.042 strings and two-point tremolo bridges;
+        official models include both SSS and HSS variants. Fret count varies across models
+        (for example 21 versus 22), so one model's geometry must not be universalized to
+        the whole Strat family.
+
+    - id: SF-VG-REPRESENTATIVE-0942-TENSION-SET
+      source:
+        title: "D'Addario EXL120 09-42 XL Nickel Wound"
+        url: "https://www.daddario.com/en-ca/products/exl120-xl-nickel-wound-electric-guitar-strings-super-light-09-42"
+      fact: >-
+        As one documented 0.009-0.042 nickel-plated-steel reference set, EXL120 lists
+        E4/B3/G3/D3/A2/E2 tensions of 13.1/11.0/14.7/15.7/15.5/14.4 lb respectively,
+        with plain 0.009/0.011/0.016 and wound 0.024/0.032/0.042 strings.
+      scope_limit: >-
+        These values are not assumed to equal Fender USA 250L or the unidentified strings
+        used in EGFxSet. They are a candidate physical calibration set only if explicitly
+        chosen for the first production model.
+
+  MEASURED:
+    - id: MEAS-VG-REALISM-V11-HUMAN-REJECTION
+      source: research/plugins/virtual-guitar/human-evidence/VG-HUMAN-LISTENING-20260929-002.yaml
+      fact: "Realism-v1.1 reached Human Gate and was judged far below the target."
+
+    - id: MEAS-VG-MELON-V2-VALIDATION
+      fact: >-
+        MELON commit cef5668308ad27274ec00b46fdad81577af8d0e2 completed
+        self-hosted validation run 36451579434 successfully.
+      scope_limit: "Validation establishes adapter/regression readiness, not guitar realism."
+
+  INFERRED:
+    - id: INF-VG-REALISM-CONTINUOUS-STATE-CORE
+      inference: >-
+        The next credible core should be a continuous-state physical system rather than
+        independent gesture descriptors feeding a modal timbre generator: two-polarization
+        spatial/traveling-wave string state, dynamic pick contact/release, nonlinear
+        fret/finger/palm contacts, amplitude-dependent tension/detune, structural boundary
+        admittance and six-string bridge coupling should share the same evolving state.
+      basis:
+        - SF-VG-DAFX24-NONLINEAR-REALTIME
+        - SF-VG-STRING-FRET-TWO-POLARIZATION
+        - SF-VG-PLECTRUM-DYNAMIC-RELEASE
+        - SF-VG-PLUCK-PASSIVE-SCATTERING
+        - SF-VG-BRIDGE-POLARIZATION-SYMPATHETIC
+        - SF-VG-SOLIDBODY-NECK-DECAY
+        - MEAS-VG-REALISM-V11-HUMAN-REJECTION
+
+    - id: INF-VG-HYBRID-SOLVER-DIRECTION
+      inference: >-
+        A hybrid architecture is more evidence-aligned than choosing one mechanism family
+        as the final answer: use an efficient two-polarization distributed/waveguide core
+        for spatial propagation and excitation/observation position, coupled to passive or
+        energy-stable local nonlinear contacts; use measured/fitted structural admittance at
+        string boundaries and a six-string bridge scattering network.
+      caveat: >-
+        This is an architecture hypothesis derived from multiple sources. Realism-004 R1
+        should discriminate mechanism contribution first; later work may combine surviving
+        mechanisms rather than declaring an architecture winner from proxy metrics alone.
+
+    - id: INF-VG-NECK-ADMITTANCE-BEFORE-GENERIC-BODY-EQ
+      inference: >-
+        For the solid-body target, calibrating frequency-dependent string/support coupling
+        at the fretted neck/nut boundary is a higher-value realism task than further tuning
+        a static generic body-coloration filter, especially for note-dependent decay and
+        dead-spot-like behavior.
+      basis:
+        - SF-VG-SOLIDBODY-NECK-DECAY
+
+    - id: INF-VG-REFERENCE-TIERING
+      inference: >-
+        EGFxSet should become the primary Strat-specific isolated-note/pickup reference,
+        while Guitar-TECHS should remain a secondary reference for technique, per-string MIDI,
+        varied players/gear and general electric-guitar behavior. This refines the earlier
+        Guitar-TECHS-first plan rather than discarding it.
+
+    - id: INF-VG-ALIGNMENT-BEFORE-METRICS
+      inference: >-
+        Any onset, attack-spectrum or short-term pitch comparison involving Guitar-TECHS
+        must perform and record alignment correction before feature extraction; otherwise
+        the documented timing offset can dominate the metric.
+
+    - id: INF-VG-PER-STRING-PER-FRET-EVALUATION
+      inference: >-
+        Evaluation should be stratified by string, fret/note and pickup configuration rather
+        than collapsed into one global score. This is required to expose string-identity,
+        fretting-boundary, pickup-position and note-dependent structural-decay errors.
+
+  HYPOTHESIS:
+    - id: HYP-VG-HYBRID-CONTINUOUS-PHYSICS-V21
+      hypothesis: >-
+        A combined continuous-state solver with two-polarization propagation, dynamic
+        plectrum release, nonlinear contact/detune, structural boundary admittance and
+        six-string coupling will produce a materially closer matched-DI and Human-Listening
+        result than the rejected Realism-v1.1 modal candidate.
+      falsification: >-
+        Narrow or reject mechanisms whose bounded implementation fails stability/CPU gates
+        or whose aligned, level-matched real-DI and blind human comparisons show no useful
+        improvement.
+
+    - id: HYP-VG-FIRST-PRODUCTION-PHYSICAL-SET
+      hypothesis: >-
+        Use a 25.5-inch, standard-tuned, 0.009-0.042 nickel-plated-steel baseline for the
+        first Strat-style physical model, but do not lock manufacturer-specific tension,
+        winding/core properties, fret count or tremolo mechanics until a target specimen/set
+        is explicitly chosen and validated.
+
+  REJECTED:
+    - id: REJ-VG-MORE-MODES-AS-PRIMARY-FIX
+      direction: "Treat increasing modal count or retuning the same v1.1 parameters as the primary path to realism."
+      reason: >-
+        It does not address the missing contact, distributed spatial state, polarization,
+        structural-boundary or cross-string mechanisms implicated by the evidence.
+
+    - id: REJ-VG-SYNTHETIC-PICK-NOISE-AS-PLUCK-PHYSICS
+      direction: "Use a short synthetic pick-noise transient as a substitute for contact/release physics."
+      reason: "Plectrum/string interaction and release have state-dependent physical consequences."
+
+    - id: REJ-VG-STATIC-BODY-FILTER-AS-STRUCTURAL-COUPLING
+      direction: "Treat generic static body coloration as a sufficient solid-body guitar structural model."
+      reason: "Note-dependent mechanical coupling/decay requires frequency- and boundary-dependent behavior."
+
+    - id: REJ-VG-GUITARTECHS-AS-STRAT-TONAL-GROUND-TRUTH
+      direction: "Treat Guitar-TECHS as the primary Strat-specific tonal ground truth."
+      reason: "Its documented instruments are not Stratocasters."
+
+    - id: REJ-VG-UNALIGNED-REAL-AUDIO-METRICS
+      direction: "Extract attack/onset metrics from reference files without documented temporal alignment."
+      reason: "Known dataset timing offsets can corrupt short-time comparisons."
+
+refined_validation_plan:
+  stage_0_source_scope:
+    - "Freeze the signal boundary: Raw Physical String -> Physical Guitar -> Pickup/Electronics -> DI."
+    - "Do not use Amp/Cab/Mic to improve a string-realism score."
+  stage_1_mechanism_discrimination:
+    - "Run Realism-004 bounded architecture discrimination with product integration OFF."
+    - "Do not interpret proxy ranking as real-guitar fidelity."
+  stage_2_strat_static_reference:
+    - "Use EGFxSet Clean as the first Strat-specific isolated-note/pickup reference."
+    - "Match note/string/fret/pickup configuration where metadata permits."
+    - "Compare attack spectrum, partial decay, inharmonicity, pitch glide and spectral evolution."
+  stage_3_general_dynamic_reference:
+    - "Use Guitar-TECHS DI for technique/per-string-MIDI evidence after explicit time alignment."
+    - "Keep player/gear identity in the metadata; do not pool it as a Strat-only distribution."
+  stage_4_human_gate:
+    - "Render Raw String and DI separately under identical musical conditions."
+    - "Level-match and blind/randomize comparisons when practical."
+    - "Require human listening before product adoption."
+  stage_5_product_integration:
+    - "Remain blocked until CIPI product_repository_write authority is explicitly enabled."
+    - "VST3/Cubase host confirmation remains a later Human/Host Gate."
+
+priority_delta_from_previous_plan:
+  - "Promote EGFxSet Clean ahead of Guitar-TECHS for Strat-specific isolated-note reference."
+  - "Keep Guitar-TECHS as complementary dynamic/general-guitar evidence, not Strat tonal ground truth."
+  - "Promote neck/support admittance and note-dependent structural decay above static body-coloration tuning."
+  - "Make reference-signal temporal alignment a mandatory pre-metric gate."
+  - "Treat two-polarization and nonlinear contact as complementary; DAFx-2024 single-polarization contact work does not eliminate the two-polarization requirement."
+
+authority:
+  cipi_evidence_authority: true
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  automatic_product_decision: false
+  product_repository_write: false
+  product_integration: false
+  human_gate_required: true

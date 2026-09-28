@@ -1,0 +1,88 @@
+schema_version: "1.0"
+spec_id: VG-RESEARCH-METHOD-SPEC-005
+project: virtual-guitar
+status: PROPOSED
+recorded_at: "2026-09-29"
+
+research_model:
+  cluster_strategy: >-
+    Research loosely coupled domains in parallel. Evaluate strongly coupled physical mechanisms
+    inside a shared executable core. Convergence and promotion remain stage-gated.
+
+evidence_layers:
+  NUMERICAL:
+    examples:
+      - finite
+      - stability
+      - energy_boundedness
+      - runtime
+      - memory
+  MECHANISM:
+    examples:
+      - contact_release
+      - polarization_effect
+      - boundary_transfer
+      - dynamic_tension
+  REFERENCE:
+    examples:
+      - waveform_feature_error
+      - per_string_per_fret_DI
+      - pickup_configuration_difference
+  PERCEPTION:
+    examples:
+      - blind_level_matched_human_AB
+
+selection_policy:
+  single_global_realism_score: forbidden
+  architecture_winner_from_proxy: forbidden
+  pareto_dimensions:
+    - reference_evidence
+    - numerical_stability
+    - measured_runtime
+    - measured_memory
+    - complexity
+  complexity_rule: >-
+    When evidence is materially equivalent, prefer the simpler stable mechanism set.
+
+falsification_policy:
+  required_before_experiment: true
+  mechanism_rejected_if:
+    - unstable_under_bounded_valid_conditions
+    - infeasible_cost_without_material_benefit
+    - no_measurable_effect_when_effect_is_required
+    - reference_or_human_evidence_shows_no_useful_contribution
+  implementation_failure_is_not_mechanism_rejection: true
+
+reference_layer_rules:
+  RAW_MECHANICAL:
+    use:
+      - mechanistic_state_tests
+      - controlled_physical_measurements_when_available
+    forbidden:
+      - label_DI_as_raw_displacement_ground_truth
+  PICKUP_DI:
+    use:
+      - EGFxSet_clean
+      - Guitar_TECHS_DI
+  PERFORMANCE:
+    use:
+      - Guitar_TECHS_per_string_MIDI
+      - player_technique_metadata
+  AMP_MIC:
+    excluded_from_current_guitar_core_selection: true
+
+test_taxonomy:
+  - UNIT
+  - FUNCTIONAL
+  - INTEGRATION
+  - NUMERICAL
+  - REALTIME
+  - PHYSICAL
+  - REFERENCE
+  - HUMAN
+
+no_wait:
+  enabled: true
+  rule: >-
+    When runner/reference/human dependencies block one lane, continue executable independent
+    research, contract work, test design, evidence cleanup or another non-dependent lane.

@@ -97,6 +97,13 @@ next_after_pass:
   - VIRTUAL-GUITAR-PHYSICAL-CORE-006
   - VIRTUAL-GUITAR-REFERENCE-LAYER-008
 
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-RESEARCH-METHOD-005-BOUNDS
+  batch_class: RESEARCH_EXECUTABLE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 30
+  current_main_recheck_required: true
+
 budget:
   max_loop_depth: 2
   max_runs: 3

@@ -1,0 +1,77 @@
+schema_version: "1.0"
+taxonomy_id: VG-TEST-TAXONOMY-001
+project: virtual-guitar
+status: PROPOSED
+recorded_at: "2026-09-29"
+
+classes:
+  UNIT:
+    proves: "local deterministic code behavior"
+    does_not_prove: "physical realism"
+
+  FUNCTIONAL:
+    proves: "feature executes and returns bounded expected structure"
+    does_not_prove: "real-guitar fidelity"
+
+  INTEGRATION:
+    proves: "declared components exchange state/events correctly"
+    does_not_prove: "physical correctness"
+
+  NUMERICAL:
+    proves:
+      - finite_state
+      - stability_under_declared_bounds
+      - energy_or_passivity_behavior_when_defined
+    does_not_prove: "perceptual realism"
+
+  REALTIME:
+    proves:
+      - measured_runtime
+      - measured_memory
+      - no_forbidden_audio_thread_behavior_when_tested
+    does_not_prove: "sound quality"
+
+  PHYSICAL:
+    proves:
+      - mechanism_behavior_under_controlled_conditions
+      - state_causality
+      - expected_counterfactual_effect
+    does_not_prove: "full instrument realism"
+
+  REFERENCE:
+    proves:
+      - difference_to_declared_reference_layer
+    requires:
+      - reference_layer
+      - alignment_policy
+      - level_policy
+      - metadata_stratification
+    does_not_prove: "universal guitar realism"
+
+  HUMAN:
+    proves:
+      - human_judgment_under_declared_protocol
+    does_not_prove: "physical mechanism correctness by itself"
+
+naming_rules:
+  forbidden:
+    - "smoke test named realism validation"
+    - "CI success named fidelity pass"
+    - "proxy score named real-audio result"
+  required:
+    - evidence_class
+    - test_class
+    - signal_layer
+    - authority_limit
+
+minimum_future_core_suite:
+  - UNIT_state_lifecycle
+  - NUMERICAL_energy_boundedness
+  - PHYSICAL_position_response
+  - PHYSICAL_contact_release
+  - PHYSICAL_open_fretted_difference
+  - PHYSICAL_bridge_transfer
+  - PHYSICAL_sympathetic_transfer
+  - REALTIME_44k1_48k_96k
+  - REFERENCE_pickup_DI
+  - HUMAN_layered_AB

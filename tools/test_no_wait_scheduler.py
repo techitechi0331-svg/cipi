@@ -13,7 +13,7 @@ from select_job import choose_job  # noqa: E402
 from validate_research_job import validate as validate_research_job  # noqa: E402
 
 
-def write_job(root: Path, name: str, job_id: str, *, state: str = "QUEUED", priority: int = 0, deps: list[str] | None = None) -> None:
+def write_job(root: Path, name: str, job_id: str, *, state: str = "QUEUED", priority: int = 0, deps: list[str] | None = None, gates: list[str] | None = None) -> None:
     payload = {
         "schema_version": "1.0",
         "job_id": job_id,
@@ -33,6 +33,8 @@ def write_job(root: Path, name: str, job_id: str, *, state: str = "QUEUED", prio
     }
     if deps:
         payload["depends_on_jobs"] = deps
+    if gates:
+        payload["review_policy"] = {"required_human_gates": gates}
     if state == "BLOCKED_EXTERNAL":
         payload["external_wait"] = [{
             "kind": "GITHUB_ACTIONS",
@@ -106,6 +108,49 @@ def main() -> int:
         assert stats["claimed_jobs"] == ["HIGH-BLOCKED-001"]
         assert stats["claimed_branches"] == [claimed_branch]
         assert stats["work_steal"] is True
+
+        # Human Gate safety: a high-priority job with unresolved required gates
+        # must be skipped, while lower-priority READY work is stolen.
+        gated = base / "research" / "jobs" / "queued"
+        gated_completed = base / "research" / "jobs" / "completed"
+        gated.mkdir(parents=True)
+        gated_completed.mkdir(parents=True)
+        write_job(gated, "001-gated.yaml", "GATED-001", priority=100, gates=["REAL_AUDIO_AB"])
+        write_job(gated, "002-ready.yaml", "READY-002", priority=10)
+
+        selected, stats = choose_job(
+            gated,
+            gated_completed,
+            branch_exists=lambda _: False,
+            human_gate_root=base,
+        )
+        assert selected is not None and selected[1] == "READY-002"
+        assert stats["skipped_human_gate"] == 1
+        assert stats["human_gate_jobs"] == ["GATED-001<-REAL_AUDIO_AB"]
+        assert stats["work_steal"] is True
+
+        decision_dir = base / "research" / "human_gates" / "decisions" / "test" / "GATED-001" / "REAL_AUDIO_AB"
+        decision_dir.mkdir(parents=True)
+        (decision_dir / "001.yaml").write_text(yaml.safe_dump({
+            "schema_version": "1.0",
+            "decision_id": "test:GATED-001:REAL_AUDIO_AB:001",
+            "project_id": "test",
+            "target_type": "RESEARCH_JOB",
+            "target_id": "GATED-001",
+            "gate": "REAL_AUDIO_AB",
+            "outcome": "COMPLETE",
+            "operational_effect": "RESOLVE_RESEARCH_JOB_GATE",
+            "created_at": "2026-09-29T00:00:00Z",
+        }, sort_keys=False), encoding="utf-8")
+
+        selected, stats = choose_job(
+            gated,
+            gated_completed,
+            branch_exists=lambda _: False,
+            human_gate_root=base,
+        )
+        assert selected is not None and selected[1] == "GATED-001"
+        assert stats["skipped_human_gate"] == 0
 
     print("CIPI no-wait scheduler tests: PASS")
     return 0

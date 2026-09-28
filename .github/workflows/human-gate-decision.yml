@@ -65,7 +65,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: cipi-human-gate-${{ inputs.project_id }}-${{ inputs.target_id }}-${{ inputs.gate }}
+  group: cipi-human-gate-writes
   cancel-in-progress: false
 
 jobs:
@@ -122,18 +122,11 @@ jobs:
       - name: Validate Human Gate records
         run: python automation/human_gate/apply.py --validate-all
 
-      - name: Rebuild Continuity
-        env:
-          CIPI_CROSS_REPO_TOKEN: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
-        run: |
-          python tools/build_continuity.py
-          python tools/validate_continuity.py
-
-      - name: Commit append-only decision and generated Continuity
+      - name: Commit append-only Human Gate decision
         run: |
           git config user.name "cipi-human-gate-bot"
           git config user.email "cipi-human-gate-bot@users.noreply.github.com"
-          git add -A -- research/human_gates research/continuity
+          git add -A -- research/human_gates
           if git diff --cached --quiet; then
             echo "No Human Gate changes."
             exit 0

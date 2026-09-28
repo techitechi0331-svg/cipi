@@ -34,6 +34,73 @@ def completed_job_ids(completed_root: Path) -> set[str]:
     return ids
 
 
+def _decision_files(root: Path, target_id: str, gate: str) -> list[Path]:
+    base = root / "research" / "human_gates" / "decisions"
+    if not base.exists():
+        return []
+    files: list[Path] = []
+    for project_dir in base.iterdir():
+        if not project_dir.is_dir():
+            continue
+        folder = project_dir / target_id / gate
+        if folder.exists():
+            files.extend(sorted([*folder.glob("*.yaml"), *folder.glob("*.yml")]))
+    return files
+
+
+def _latest_gate_decision(root: Path | None, target_id: str, gate: str) -> dict | None:
+    if root is None:
+        return None
+    candidates: list[tuple[str, str, dict]] = []
+    for path in _decision_files(root, target_id, gate):
+        data = _load_yaml(path)
+        if data.get("target_type") != "RESEARCH_JOB":
+            continue
+        if str(data.get("target_id") or "") != target_id:
+            continue
+        if str(data.get("gate") or "") != gate:
+            continue
+        candidates.append((str(data.get("created_at") or ""), path.as_posix(), data))
+    if not candidates:
+        return None
+    candidates.sort()
+    return candidates[-1][2]
+
+
+def _required_human_gates(data: dict) -> list[str]:
+    policy = data.get("review_policy")
+    if not isinstance(policy, dict):
+        return []
+    values = policy.get("required_human_gates", [])
+    if not isinstance(values, list):
+        return []
+    return [str(value) for value in values if str(value)]
+
+
+def _unresolved_human_gates(root: Path | None, data: dict) -> list[str]:
+    job_id = str(data.get("job_id") or "")
+    unresolved: list[str] = []
+    for gate in _required_human_gates(data):
+        decision = _latest_gate_decision(root, job_id, gate)
+        if not (
+            isinstance(decision, dict)
+            and str(decision.get("outcome") or "").upper() == "COMPLETE"
+            and str(decision.get("operational_effect") or "") == "RESOLVE_RESEARCH_JOB_GATE"
+        ):
+            unresolved.append(gate)
+    return unresolved
+
+
+def _infer_human_gate_root(queued_root: Path) -> Path | None:
+    if (
+        queued_root.name == "queued"
+        and queued_root.parent.name == "jobs"
+        and queued_root.parent.parent.name == "research"
+    ):
+        return queued_root.parent.parent.parent
+    return None
+
+
 def _priority(data: dict) -> int:
     value = data.get("priority", 0)
     return value if isinstance(value, int) and not isinstance(value, bool) else 0
@@ -50,6 +117,7 @@ def choose_job(
     queued_root: Path,
     completed_root: Path,
     branch_exists: Callable[[str], bool] = remote_branch_exists,
+    human_gate_root: Path | None = None,
 ) -> tuple[
     tuple[Path, str, str, str] | None,
     dict[str, int | bool | list[str]],
@@ -63,12 +131,17 @@ def choose_job(
         "skipped_blocked": 0,
         "skipped_dependency": 0,
         "skipped_claimed": 0,
+        "skipped_human_gate": 0,
         "blocked_jobs": [],
         "dependency_jobs": [],
+        "human_gate_jobs": [],
         "claimed_jobs": [],
         "claimed_branches": [],
         "work_steal": False,
     }
+
+    if human_gate_root is None:
+        human_gate_root = _infer_human_gate_root(queued_root)
 
     skipped_before_selection = False
     for path, data in parsed:
@@ -93,6 +166,15 @@ def choose_job(
             dependency_jobs = stats["dependency_jobs"]
             assert isinstance(dependency_jobs, list)
             dependency_jobs.append(f"{job_id}<-{','.join(unresolved)}")
+            skipped_before_selection = True
+            continue
+
+        unresolved_gates = _unresolved_human_gates(human_gate_root, data)
+        if unresolved_gates:
+            stats["skipped_human_gate"] = int(stats["skipped_human_gate"]) + 1
+            human_gate_jobs = stats["human_gate_jobs"]
+            assert isinstance(human_gate_jobs, list)
+            human_gate_jobs.append(f"{job_id}<-{','.join(unresolved_gates)}")
             skipped_before_selection = True
             continue
 
@@ -137,8 +219,10 @@ def main() -> int:
         h.write(f"skipped_blocked={stats['skipped_blocked']}\n")
         h.write(f"skipped_dependency={stats['skipped_dependency']}\n")
         h.write(f"skipped_claimed={stats['skipped_claimed']}\n")
+        h.write(f"skipped_human_gate={stats['skipped_human_gate']}\n")
         h.write(f"blocked_jobs={_csv(stats['blocked_jobs'])}\n")
         h.write(f"dependency_jobs={_csv(stats['dependency_jobs'])}\n")
+        h.write(f"human_gate_jobs={_csv(stats['human_gate_jobs'])}\n")
         h.write(f"claimed_jobs={_csv(stats['claimed_jobs'])}\n")
         h.write(f"claimed_branches={_csv(stats['claimed_branches'])}\n")
         claimed_jobs = stats["claimed_jobs"]

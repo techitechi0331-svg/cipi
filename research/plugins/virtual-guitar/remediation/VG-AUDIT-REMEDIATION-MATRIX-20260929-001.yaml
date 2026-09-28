@@ -1,0 +1,112 @@
+schema_version: "1.0"
+matrix_id: VG-AUDIT-REMEDIATION-MATRIX-20260929-001
+project: virtual-guitar
+source_audit: VG-REDTEAM-AUDIT-20260929-002
+recorded_at: "2026-09-29"
+
+issues:
+  - id: STATE_FRAGMENTATION_MULTIPLE_GUITAR_TRUTHS
+    severity: S5
+    status: IN_PROGRESS
+    remediation:
+      - VG-PHYSICAL-STATE-CONTRACT-001
+      - VIRTUAL-GUITAR-PHYSICAL-CORE-006
+    fixed_when:
+      - one_authoritative_physical_state
+      - performance_and_audio_share_same_state
+      - articulation_changes_same_sounding_state
+
+  - id: R3_CANDIDATE_NOT_AUTHORITATIVE_PRODUCT_AUDIO_PATH
+    severity: S5
+    status: BLOCKED_BY_PRODUCT_AUTHORITY
+    remediation:
+      - preserve_R3_as_legacy_baseline
+      - do_not_integrate_until_physical_core_gate
+
+  - id: MELON_V2_NOT_EXECUTABLE_AUDIO_OR_PHYSICAL_SIMULATION
+    severity: S5
+    status: IN_PROGRESS
+    remediation:
+      - VIRTUAL-GUITAR-RESEARCH-METHOD-005
+      - MELON_PR_11
+    fixed_when:
+      - executable_kernel_runs
+      - waveform_and_state_are_measured
+      - v2_is_proxy_canary_only
+
+  - id: REALISM004_ARCHITECTURE_COMPETITION_STRUCTURALLY_BIASED
+    severity: S5
+    status: IN_PROGRESS
+    remediation:
+      - no_winner_ablation
+      - remove_architecture_level_selection_authority
+      - remove_forced_phase_elimination
+
+  - id: REALISM004_MECHANISMS_WRONGLY_MUTUALLY_EXCLUSIVE
+    severity: S5
+    status: IN_PROGRESS
+    remediation:
+      - single_factor_ablation
+      - selected_pairwise_interaction_tests
+
+  - id: OBJECTIVE_FUNCTION_NOT_REALISM
+    severity: S5
+    status: IN_PROGRESS
+    remediation:
+      - split_numerical_mechanism_reference_perception_layers
+      - no_single_realism_score
+
+  - id: PERFORMANCE_TO_AUDIO_INFORMATION_LOSS
+    severity: S5
+    status: OPEN
+    remediation:
+      - player_action_contract
+      - PhysicalStringState integration
+
+  - id: ARTICULATION_NOT_COUPLED_TO_R3_ACOUSTIC_STATE
+    severity: S5
+    status: OPEN
+    remediation:
+      - PhysicalStringState integration
+      - contact_and_release_solver
+
+  - id: SIX_STRINGS_NOT_PHYSICALLY_COUPLED
+    severity: S4
+    status: DEFERRED_AFTER_005
+    next_track: VIRTUAL-GUITAR-PHYSICAL-CORE-006
+
+  - id: BRIDGE_BODY_ARE_APPROXIMATE_COLORATION_NOT_BOUNDARY_PHYSICS
+    severity: S4
+    status: IN_PROGRESS_RESEARCH_KERNEL
+    remediation:
+      - structural_boundary_ablation
+      - later_measured_or_fitted_admittance
+
+  - id: NO_PER_STRING_PHYSICAL_IDENTITY
+    severity: S4
+    status: IN_PROGRESS
+    remediation:
+      - StringPhysicalSpec_with_units
+      - later_six_string_calibration
+
+  - id: REALISM_TESTS_ARE_FUNCTIONAL_SMOKES
+    severity: S4
+    status: IN_PROGRESS
+    remediation:
+      - executable_ablation_measurements
+      - test_taxonomy
+
+  - id: REALTIME_TEST_BENCHMARKS_OLD_AUDIO_PATH
+    severity: S4
+    status: IN_PROGRESS
+    remediation:
+      - actual_runtime_measurement_in_005
+      - dedicated_future_core_realtime_test
+
+  - id: RAW_PHYSICS_GROUND_TRUTH_NOT_IDENTIFIABLE_FROM_DI_ALONE
+    severity: S4
+    status: OPEN
+    remediation:
+      - VG-REFERENCE-LAYER-MATRIX-001
+      - mechanism_tests_for_raw_core
+      - DI_only_for_end_to_end_layer

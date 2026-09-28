@@ -479,7 +479,7 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 49,
+      "completed": 50,
       "dispatched": 1,
       "failed": 14,
       "quarantined": 0,

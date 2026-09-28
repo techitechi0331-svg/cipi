@@ -243,6 +243,17 @@ repositories:
         required_inputs:
           - job_id
           - track_id
+      input_reference:
+        file: amp-research-gate.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - job_id
+          - track_id
+        required_inputs:
+          - job_id
+          - track_id
 
   mic_simulator:
     repository: techitechi0331-svg/mic_simulator

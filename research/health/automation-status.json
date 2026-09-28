@@ -479,8 +479,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 51,
-      "dispatched": 1,
+      "completed": 52,
+      "dispatched": 0,
       "failed": 14,
       "quarantined": 0,
       "queued": 1
@@ -526,9 +526,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/auto-3fc3ccde5a96",
+    "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
+    "kind": "LOCAL_RESEARCH",
+    "priority": 55
   }
 }

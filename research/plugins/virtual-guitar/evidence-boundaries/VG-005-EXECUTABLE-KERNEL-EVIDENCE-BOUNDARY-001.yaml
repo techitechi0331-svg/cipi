@@ -1,0 +1,71 @@
+schema_version: "1.0"
+evidence_boundary_id: VG-005-EXECUTABLE-KERNEL-EVIDENCE-BOUNDARY-001
+project: virtual-guitar
+track_id: VIRTUAL-GUITAR-RESEARCH-METHOD-005
+recorded_at: "2026-09-29"
+
+what_005_can_establish:
+  - "A real time-evolving solver is executed rather than algebraic architecture-label proxies."
+  - "Mechanism ON/OFF changes can be measured from generated waveform/state."
+  - "Finite-state, boundedness, runtime and memory can be measured."
+  - "44.1/48/96 kHz execution can be regression-tested."
+  - "A no-winner ablation research contract can replace forced architecture ranking."
+
+what_005_cannot_establish:
+  - REAL_GUITAR_FIDELITY
+  - STRAT_FIDELITY
+  - FINAL_SOLVER_ARCHITECTURE
+  - FINAL_STRING_PARAMETERS
+  - FINAL_PLECTRUM_CONTACT_LAW
+  - FINAL_FRET_CONTACT_LAW
+  - FINAL_STRUCTURAL_ADMITTANCE
+  - SIX_STRING_SYMPATHETIC_FIDELITY
+  - PICKUP_ELECTRONICS_FIDELITY
+  - PRODUCT_ADOPTION
+  - RELEASE_READINESS
+
+current_kernel_parameter_status:
+  string_target:
+    label: "research_D3_open_024w"
+    evidence_class: HYPOTHESIS_RESEARCH_BASELINE
+  scale_length:
+    value_m: 0.6477
+    evidence_class: SOURCE_ALIGNED_REPRESENTATIVE_BASELINE
+  fundamental:
+    value_hz: 146.832383959
+    evidence_class: SOURCE_FACT_STANDARD_TUNING_D3
+  tension:
+    value_n: 69.8
+    evidence_class: HYPOTHESIS_CALIBRATION_BASELINE
+  linear_density:
+    value_kg_per_m: 0.00192931853745
+    evidence_class: INFERRED_FROM_TENSION_LENGTH_AND_FUNDAMENTAL
+  contact_coefficients:
+    evidence_class: HYPOTHESIS_NUMERICAL_RESEARCH_PARAMETERS
+  structural_boundary_coefficients:
+    evidence_class: HYPOTHESIS_NUMERICAL_RESEARCH_PARAMETERS
+
+mechanism_limits:
+  TWO_POLARIZATION:
+    status: EXECUTABLE_SIMPLIFIED_FACTOR
+    limit: "Not a validated full guitar two-polarization model."
+  DYNAMIC_PLECTRUM_CONTACT:
+    status: EXECUTABLE_SIMPLIFIED_FACTOR
+    limit: "Contact/release is state-evolving but not calibrated to a measured pick/material/player."
+  NONLINEAR_FRET_CONTACT:
+    status: EXECUTABLE_SIMPLIFIED_FACTOR
+    limit: "Collision stress-test factor, not yet a full fretted-neck geometry."
+  DYNAMIC_TENSION:
+    status: EXECUTABLE_SIMPLIFIED_FACTOR
+    limit: "State-dependent wave-speed perturbation, not yet a complete geometrically nonlinear string."
+  STRUCTURAL_BOUNDARY:
+    status: EXECUTABLE_SIMPLIFIED_FACTOR
+    limit: "Dynamic boundary state, not measured Strat neck/bridge admittance."
+  SIX_STRING_BRIDGE_SCATTERING:
+    status: NOT_IN_005
+  SYMPATHETIC_COUPLING:
+    status: NOT_IN_005
+
+promotion_rule: >-
+  Passing 005 validates the research-method remediation only. Physical mechanisms must
+  survive later calibrated/reference/human evidence before product integration.

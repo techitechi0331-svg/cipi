@@ -1,0 +1,275 @@
+schema_version: "1.0"
+research_note_id: VG-CONTINUOUS-PHYSICAL-STATE-BLUEPRINT-20260929-001
+project: virtual-guitar
+subject: "Continuous physical-state architecture blueprint before product integration"
+created_at: "2026-09-29"
+
+authority:
+  cipi_evidence_authority: true
+  product_repository_write: false
+  product_integration: false
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  note_type: "INFERRED_ARCHITECTURE_BLUEPRINT"
+
+current_code_facts:
+  - id: CODE-VG-PHYSICAL-REALISM-STRING
+    evidence_class: MEASURED
+    files:
+      - Source/PhysicalModel/Audio/PhysicalRealismString.h
+      - Source/PhysicalModel/Audio/PhysicalRealismString.cpp
+    statement: >-
+      Current sounding model is a 24-mode oscillator bank. A pluck initializes the modal
+      amplitudes/frequencies/decays; the audio loop then evolves those independent modes,
+      adds a deterministic short noise transient, and applies simple two-state body coloration.
+      The sounding state has no distributed string coordinate or explicit contact state.
+
+  - id: CODE-VG-LIVING-STRING
+    evidence_class: MEASURED
+    files:
+      - Source/PhysicalModel/Strings/LivingString.h
+      - Source/PhysicalModel/Strings/LivingString.cpp
+    statement: >-
+      LivingString independently stores scalar energy, damping, mute/ring state and pick history.
+      Its advance step multiplies scalar energy by damping. This is not the same state that
+      PhysicalRealismString uses to synthesize the waveform.
+
+  - id: CODE-VG-GESTURE
+    evidence_class: MEASURED
+    files:
+      - Source/Performance/Gesture/GestureEngine.h
+      - Source/Performance/Gesture/GestureEngine.cpp
+    statement: >-
+      Right-hand and left-hand behavior is currently represented as bounded descriptors
+      (timing, force, angle, pressure, travel, damping/noise amounts), not continuously solved
+      contact trajectories acting on the audio string state.
+
+  - id: CODE-VG-FINGERING
+    evidence_class: MEASURED
+    files:
+      - Source/Performance/Fingering/FingeringSolver.h
+      - Source/Performance/Fingering/FingeringSolver.cpp
+    statement: >-
+      Fingering selects a playable string/fret with a local movement cost; it does not yet
+      provide a full physical hand/contact state or phrase-level guitarist strategy.
+
+inferred_problem:
+  id: INF-VG-DUPLICATE-PHYSICAL-TRUTH
+  evidence_class: INFERRED
+  statement: >-
+    The architecture currently has two different notions of string state: scalar
+    LivingString energy/damping and independent oscillator state in PhysicalRealismString.
+    This separation prevents muting, fretting, slides, vibrato, dynamic detune, pick release
+    and sympathetic transfer from emerging causally from one evolving physical system.
+  consequence: >-
+    Parameter tuning inside the present oscillator model cannot fully repair this mismatch.
+    The next architecture should define one authoritative per-string physical state and make
+    all performance modules drive or observe that same state.
+
+target_architecture:
+  root: PhysicalGuitarModel
+  invariant: >-
+    Exactly one authoritative continuous physical state exists for each string. UI/performance
+    objects may cache descriptors but must not maintain a competing acoustic energy truth.
+
+  components:
+    - name: PhysicalStringState
+      responsibility:
+        - two_polarization_distributed_state
+        - tension_and_effective_length
+        - per_string_material_geometry
+        - contact_constraints
+        - propagation_loss_dispersion
+        - excitation_history
+      rule: "Primary acoustic truth; replaces independent scalar-energy ownership."
+
+    - name: TwoPolarizationStringSolver
+      responsibility:
+        - spatial_traveling_wave_or_equivalent_distributed_propagation
+        - horizontal_vertical_polarization
+        - position_dependent_excitation
+        - position_dependent_observation
+        - frequency_dependent_loss
+        - stiffness_dispersion
+      research_status: "Realism-004 mechanism class under evaluation."
+
+    - name: PlectrumContact
+      responsibility:
+        - pick_position
+        - pick_depth
+        - pick_stiffness
+        - attack_velocity
+        - angle
+        - friction_or_contact_law
+        - dynamic_release_condition
+      rule: >-
+        A short synthetic noise burst may remain as secondary surface/noise detail only;
+        it must not substitute for the state-changing contact/release event.
+
+    - name: FingerFretContact
+      responsibility:
+        - stopping_finger_position
+        - finger_pressure_or_compliance
+        - fret_collision
+        - fretboard_collision
+        - left_hand_mute
+        - slide_contact
+        - hammer_on_pull_off
+        - bend_and_vibrato_constraint
+      numerical_requirement:
+        - bounded_energy_or_passivity
+        - stable_realtime_formulation
+
+    - name: StructuralBoundaryAdmittance
+      responsibility:
+        - nut_open_string_boundary
+        - fretted_neck_boundary
+        - bridge_boundary
+        - frequency_dependent_energy_transfer
+        - note_dependent_decay
+      research_priority: >-
+        For a solid-body target, measured/fitted support admittance and decay behavior take
+        priority over additional generic static body-EQ tuning.
+
+    - name: SixStringBridgeNetwork
+      responsibility:
+        - bridge_scattering
+        - inter_string_energy_transfer
+        - sympathetic_resonance
+        - polarization_dependent_coupling
+      rule: "Six strings are coupled through a physical network, not six isolated voices plus a global FX filter."
+
+    - name: PickupObservation
+      responsibility:
+        - string_state_sampling_at_pickup_position
+        - per_pickup_position_observation
+      boundary: >-
+        Observation point belongs to physical-string-to-pickup handoff. Magnetic pickup
+        nonlinearity, coil/electrical loading, SSS/HSS and tone/volume/cable behavior remain
+        downstream Pickup/Electronics research and must not be used to conceal string-model errors.
+
+performance_integration:
+  GestureEngine:
+    migrate_from:
+      - attackScale
+      - dampingScale
+      - abstract_squeak_amount
+      - abstract_fret_noise_amount
+    migrate_to:
+      - right_hand_trajectory
+      - pick_contact_parameters
+      - left_hand_contact_trajectory
+      - pressure_and_release_trajectory
+      - palm_contact_state
+    rule: "Gesture describes player motion; physics computes the acoustic consequence."
+
+  FingeringSolver:
+    keep:
+      - playable_string_fret_selection
+    extend_later:
+      - phrase_level_hand_position
+      - chord_fingering
+      - string_choice_timbre_cost
+      - hand_anatomy_constraints
+      - articulation_aware_choice
+    physical_output:
+      - string_index
+      - fret_contact_position
+      - contact_transition
+    rule: "Fingering chooses constraints/contacts; it does not synthesize timbre directly."
+
+  LivingString:
+    target_role: "thin lifecycle/control view over PhysicalStringState"
+    remove_as_acoustic_authority:
+      - independent_energy_decay_truth
+      - independent_damping_truth
+    retain_if_useful:
+      - note_identity
+      - ring_policy
+      - semantic_stop_reason
+      - excitation_history_metadata
+
+migration_slices:
+  - slice: S0
+    goal: "Introduce state/API boundaries without replacing current sound."
+    product_write_gate: "REQUIRED_BEFORE_IMPLEMENTATION"
+    tests:
+      - deterministic_state_lifecycle
+      - no_audio_change_when_new_solver_disabled
+
+  - slice: S1
+    goal: "Two-polarization distributed single-string core with pluck/release."
+    tests:
+      - energy_boundedness
+      - pitch_accuracy
+      - position_response
+      - decay_stability
+      - realtime_budget
+
+  - slice: S2
+    goal: "Finger/fret nonlinear contact and dynamic detune."
+    tests:
+      - no_nan_inf
+      - bounded_collision_energy
+      - amplitude_dependent_pitch_glide
+      - mute_release_repeatability
+
+  - slice: S3
+    goal: "Structural boundary admittance and open-versus-fretted decay."
+    tests:
+      - per_note_decay_profile
+      - boundary_response
+      - no_static_eq_substitution
+
+  - slice: S4
+    goal: "Six-string bridge scattering and sympathetic coupling."
+    tests:
+      - controlled_cross_string_transfer
+      - stability_with_all_strings_active
+      - sympathetic_resonance_decay
+
+  - slice: S5
+    goal: "Pickup-position observation then downstream Pickup/Electronics handoff."
+    tests:
+      - pickup_position_spectral_difference
+      - raw_string_preservation
+      - di_stage_separation
+
+validation_gates:
+  mechanism_gate:
+    - proxy_metrics_only_for_discrimination
+    - cpu_memory_realtime_bounds
+    - numerical_stability
+  real_audio_gate:
+    primary_strat_reference: "EGFxSet Clean"
+    complementary_reference: "Guitar-TECHS DI"
+    requirements:
+      - temporal_alignment_before_short_time_metrics
+      - per_string_per_fret_per_note_stratification_when_metadata_allows
+      - pickup_configuration_separation
+      - level_normalization_documented
+  human_gate:
+    requirements:
+      - raw_physical_string_render
+      - di_render_when_pickup_stage_is_real
+      - matched_musical_conditions
+      - practical_level_match
+      - practical_blind_randomization
+  host_gate:
+    requirements:
+      - VST3_build_only_after_authorized_product_integration
+      - Cubase_Pro_14_confirmation_not_inferred_from_CI
+
+rejected_shortcuts:
+  - "Increase modeCount and call it physical realism."
+  - "Use pick noise in place of pick-string contact/release."
+  - "Use body EQ in place of structural boundary coupling."
+  - "Use pickup/amp/cab/mic coloration to hide raw-string artifacts."
+  - "Keep LivingString scalar energy as a second acoustic truth."
+  - "Adopt a candidate from synthetic proxy score without real-audio and human gates."
+
+next_actions:
+  - "Let Realism-004 R1 compare the registered architecture classes without interrupting the active job."
+  - "Use its output to determine which mechanisms survive bounded testing."
+  - "Do not write the virtual-guitar product repo until product_repository_write authority changes."
+  - "Prepare EGFxSet/Guitar-TECHS reference adapters as independent research work."

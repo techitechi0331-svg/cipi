@@ -1,0 +1,100 @@
+schema_version: "1.0"
+research_note_id: VG-PHYSICAL-REALISM-ARCHITECTURE-LITERATURE-20260929
+subject: virtual-guitar physical realism architecture escalation
+created_at: "2026-09-29"
+evidence_classes:
+  SOURCE_FACT:
+    - id: SF-VG-REALISM-2024-NONLINEAR-CONTACT
+      source:
+        title: "Real-Time Guitar Synthesis"
+        venue: "DAFx-2024"
+        authors: "Stefan Bilbao; Riccardo Russo; Craig Webb; Michele Ducceschi"
+        url: "https://www.dafx.de/paper-archive/details/CLHrwUJ6XuzCMawUFZATaw"
+      fact: >-
+        Real guitar-string dynamics under playing conditions include nonlinearities from the
+        string itself and collisions with the fretboard, frets, and stopping finger; these
+        mechanisms can produce perceptually important pitch glides, fret rattling, and harmonics.
+      scope_limit: "Literature fact; does not prove any current Virtual Guitar candidate sounds realistic."
+
+    - id: SF-VG-REALISM-2011-STRING-FRET
+      source:
+        title: "Physical Model of the String-Fret Interaction"
+        venue: "DAFx-2011"
+        author: "Gianpaolo Evangelista"
+        url: "https://www.dafx.de/paper-archive/details/V4Cf7-bGBHWqxAXcEo5eEQ"
+      fact: >-
+        A two-polarization string representation models vertical clamping/contact differently
+        from horizontal friction, and the resulting elongation can create audible dynamic detuning.
+      scope_limit: "Mechanism evidence only."
+
+    - id: SF-VG-REALISM-2010-PASSIVE-PLUCK
+      source:
+        title: "Structurally Passive Scattering Element for Modelling Guitar Pluck Action"
+        venue: "DAFx-2010"
+        authors: "Gianpaolo Evangelista; Julius O. Smith III"
+        url: "https://www.dafx.de/paper-archive/search?p=3&q=f&years%5B%5D=2010"
+      fact: >-
+        Structurally passive scattering models can represent player/string plucking interaction
+        while guaranteeing stability independently of the plucking excitation.
+      scope_limit: "Does not prescribe one final implementation."
+
+    - id: SF-VG-REALISM-2009-BRIDGE-COUPLING
+      source:
+        title: "Simplified Guitar Bridge Model for the Displacement Wave Representation in Digital Waveguides"
+        venue: "DAFx-2009"
+        authors: "Gianpaolo Evangelista; Martin Raspaud"
+        url: "https://www.dafx.de/paper-archive/details.php?id=paper_97"
+      fact: >-
+        Low-cost real-time bridge models can include horizontal/vertical polarization and
+        sympathetic vibration of other strings through scattering/coupling structures.
+      scope_limit: "Mechanism and implementation-direction evidence only."
+
+    - id: SF-VG-REALISM-2018-PICKUP-NONLINEARITY
+      source:
+        title: "Experimental Study of Guitar Pickup Nonlinearity"
+        venue: "DAFx-2018"
+        authors: "Antonin Novak; Bertrand Lihoreau; Pierrick Lotton; Emmanuel Brasseur; Laurent Simon"
+        url: "https://dafx.de/paper-archive/2018/papers/DAFx2018_paper_39.pdf"
+      fact: >-
+        Experimental work reports nonlinear behavior in magnetic guitar pickups and compares
+        different pickup types, supporting later dedicated pickup/electronics research.
+      scope_limit: "Pickup research remains a separate downstream concern; do not fold it into Mic Simulator."
+
+  MEASURED:
+    - id: MEAS-VG-REALISM-V11-HUMAN-GATE
+      source: research/plugins/virtual-guitar/human-evidence/VG-HUMAN-LISTENING-20260929-002.yaml
+      fact: "The implemented Realism-v1.1 candidate reached Human Gate but was judged far below the final target."
+
+  INFERRED:
+    - id: INF-VG-REALISM-ARCHITECTURE-ESCALATION
+      inference: >-
+        Another sweep over the same eight v1.1 parameters is unlikely to address the missing
+        player/string/contact/coupling behavior highlighted by both the human rejection and literature.
+        The next bounded track should discriminate architecture families rather than only retune v1.1.
+      basis:
+        - SF-VG-REALISM-2024-NONLINEAR-CONTACT
+        - SF-VG-REALISM-2011-STRING-FRET
+        - SF-VG-REALISM-2010-PASSIVE-PLUCK
+        - SF-VG-REALISM-2009-BRIDGE-COUPLING
+        - MEAS-VG-REALISM-V11-HUMAN-GATE
+
+  HYPOTHESIS:
+    - id: HYP-VG-REALISM-ARCH-V20
+      hypothesis: >-
+        A bounded architecture that combines two-polarization propagation, physically motivated
+        pluck interaction, bridge scattering/sympathetic coupling, and nonlinear contact/dynamic
+        detuning can provide a materially stronger implementation candidate than Realism v1.1.
+      falsification: >-
+        Reject or narrow the architecture if bounded mechanism tests fail, CPU/memory cost becomes
+        disproportionate, or later human listening/real-audio A/B does not improve.
+
+  REJECTED:
+    - id: REJ-VG-REALISM-PARAMETER-ONLY-V11-REPEAT
+      direction: "Repeat the same v1.1 parameter-only search and treat proxy improvement as audible realism."
+      reason: "Human Gate rejected readiness and the evidence boundary does not support a fidelity claim."
+
+authority:
+  cipi_evidence_authority: true
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  real_audio_fidelity_claim: false

@@ -1,0 +1,32 @@
+schema_version: "1.0"
+evidence_id: VG-HUMAN-LISTENING-20260929-002
+track_id: VIRTUAL-GUITAR-PHYSICAL-REALISM-003
+source: USER_HUMAN_LISTENING
+evidence_class: HUMAN_LISTENING
+created_at: "2026-09-29"
+artifacts_reviewed:
+  - physical_realism_r3_candidate001_e3.wav
+  - physical_realism_r3_candidate001_strum.wav
+user_observations:
+  overall:
+    verdict: FAR_BELOW_TARGET
+    summary_ja: "全然まだほど遠い"
+interpretation:
+  current_realism_v11_candidate_product_adoption: REJECT_FOR_NOW
+  continuation_research_required: true
+  real_audio_ab_completed: false
+  cubase_host_confirmation_completed: false
+  release_decision: NOT_AUTHORIZED
+  rationale:
+    - The current rendered candidate remains far below the intended final realism target according to human listening.
+    - This is a rejection of readiness/adoption, not a claim that every measured mechanism is invalid.
+    - The feedback is human listening evidence, not a matched real-guitar A/B reference test.
+technical_followup_hypotheses:
+  - Move from parameter-only tuning toward architecture-level research.
+  - Test two-polarization string behavior and dynamic beating.
+  - Test physically motivated player-string/pluck interaction rather than only a short transient-noise proxy.
+  - Test bridge scattering and sympathetic string coupling.
+  - Test string-fret/neck contact and dynamic detuning before another product-adoption decision.
+authority: USER_HUMAN_GATE_EVIDENCE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

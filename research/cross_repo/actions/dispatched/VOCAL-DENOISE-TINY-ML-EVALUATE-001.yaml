@@ -1,0 +1,28 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-001
+state: DISPATCHED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-004
+  model_run_id: '36454204370'
+  seed: '2026092901'
+  max_files: '6'
+priority: 96
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-TRAIN-004
+reason: Evaluate the first successfully trained real-singing TinyMaskNet candidate
+  across identity-disjoint validation/test material using multiple deterministic seeds.
+  Training evidence improved substantially versus the untrained network but still
+  reported negative validation SNR improvement, so this action is for measurement
+  and falsification only. It carries no listening, product-adoption, or release authority.
+previous_run_id: 0
+dispatched_at: '2026-09-28T17:13:04.869958Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-evaluate.yml

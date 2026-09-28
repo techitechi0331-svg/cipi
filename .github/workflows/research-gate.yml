@@ -3,6 +3,8 @@ name: Research Gate
 on:
   push:
     paths:
+      - "integrations/discord/**"
+      - "tests/test_discord_bot.py"
       - "RULES/**"
       - "research/**"
       - "tools/validate_research.py"
@@ -16,6 +18,8 @@ on:
       - ".github/workflows/research-gate.yml"
   pull_request:
     paths:
+      - "integrations/discord/**"
+      - "tests/test_discord_bot.py"
       - "RULES/**"
       - "research/**"
       - "tools/validate_research.py"

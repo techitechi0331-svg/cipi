@@ -123,6 +123,9 @@ jobs:
         run: python automation/human_gate/apply.py --validate-all
 
       - name: Commit append-only Human Gate decision
+        env:
+          HG_TARGET_ID: ${{ inputs.target_id }}
+          HG_GATE: ${{ inputs.gate }}
         run: |
           git config user.name "cipi-human-gate-bot"
           git config user.email "cipi-human-gate-bot@users.noreply.github.com"
@@ -131,7 +134,7 @@ jobs:
             echo "No Human Gate changes."
             exit 0
           fi
-          git commit -m "record human gate decision: ${{ inputs.target_id }} / ${{ inputs.gate }}"
+          git commit -m "record human gate decision: $HG_TARGET_ID / $HG_GATE"
           git pull --rebase origin main
           git push origin HEAD:main
 

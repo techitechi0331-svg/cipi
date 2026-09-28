@@ -23,7 +23,31 @@ def completed_index(root:Path):
 def health_gate_map(health):
     return {str(x["job_id"]):[str(g) for g in x.get("gates",[])] for x in health.get("human_gates",[]) or [] if isinstance(x,dict) and x.get("job_id")}
 
-def queued_jobs(root:Path,spec:ProjectSpec,c:SourceCollector,completed,gate_map):
+
+def human_gate_decisions(root:Path,spec:ProjectSpec,c:SourceCollector):
+    base=root/"research/human_gates/decisions"
+    c.record_directory_index("research/human_gates/decisions")
+    latest={}
+    if not base.exists():return latest
+    for p in yaml_files(base):
+        x=safe_yaml(p)
+        if str(x.get("project_id") or "")!=spec.project_id:continue
+        target_type=str(x.get("target_type") or "")
+        target_id=str(x.get("target_id") or "")
+        gate=str(x.get("gate") or "")
+        if not target_type or not target_id or not gate:continue
+        c.record_path(p,"HUMAN_GATE_DECISION")
+        key=(target_type,target_id,gate)
+        rank=(str(x.get("created_at") or ""),p.as_posix())
+        if key not in latest or rank>latest[key][0]:
+            latest[key]=(rank,x)
+    return {k:v[1] for k,v in latest.items()}
+
+def gate_completed(decisions,target_type,target_id,gate):
+    item=decisions.get((target_type,target_id,gate))
+    return bool(item and str(item.get("outcome") or "").upper()=="COMPLETE" and str(item.get("operational_effect") or "")=="RESOLVE_RESEARCH_JOB_GATE")
+
+def queued_jobs(root:Path,spec:ProjectSpec,c:SourceCollector,completed,gate_map,gate_decisions):
     out=[]
     for p in yaml_files(root/"research/jobs/queued"):
         x=safe_yaml(p)
@@ -32,12 +56,15 @@ def queued_jobs(root:Path,spec:ProjectSpec,c:SourceCollector,completed,gate_map)
         jid=str(x.get("job_id") or p.stem); deps=[str(v) for v in x.get("depends_on_jobs",[]) or []]; missing=[d for d in deps if d not in completed]
         policy=x.get("review_policy") if isinstance(x.get("review_policy"),dict) else {}
         declared=[str(v) for v in policy.get("required_human_gates",[]) or []]; current=list(gate_map.get(jid,[])); state=str(x.get("state","QUEUED"))
+        all_gates=sorted(set(declared+current))
+        resolved=sorted(g for g in all_gates if gate_completed(gate_decisions,"RESEARCH_JOB",jid,g))
+        unresolved=sorted(g for g in all_gates if g not in resolved)
         if state=="BLOCKED_EXTERNAL": cls="BLOCKED_EXTERNAL"
         elif state=="BLOCKED_DEPENDENCY" or missing: cls="BLOCKED_DEPENDENCY"
-        elif current: cls="HUMAN_GATE"
+        elif unresolved: cls="HUMAN_GATE"
         elif state=="QUEUED": cls="READY"
         else: cls=state
-        out.append({"job_id":jid,"path":p.relative_to(root).as_posix(),"state":state,"classification":cls,"priority":x.get("priority"),"depends_on_jobs":deps,"unresolved_dependencies":missing,"research_question":x.get("research_question"),"declared_human_gates":sorted(set(declared)),"current_human_gates":sorted(set(current))})
+        out.append({"job_id":jid,"path":p.relative_to(root).as_posix(),"state":state,"classification":cls,"priority":x.get("priority"),"depends_on_jobs":deps,"unresolved_dependencies":missing,"research_question":x.get("research_question"),"declared_human_gates":sorted(set(declared)),"current_human_gates":sorted(set(current)),"resolved_human_gates":resolved,"unresolved_human_gates":unresolved})
     return sorted(out,key=lambda x:(-int(x.get("priority") or 0),x["job_id"]))
 
 def decisions(root:Path,spec:ProjectSpec,c:SourceCollector):

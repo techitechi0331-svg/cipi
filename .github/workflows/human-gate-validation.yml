@@ -9,6 +9,7 @@ on:
       - "automation/schemas/human_gate_decision.schema.json"
       - "research/human_gates/**"
       - "tests/test_human_gate.py"
+      - "tests/test_discord_bot.py"
       - ".github/workflows/human-gate-*.yml"
       - "integrations/discord/**"
   push:
@@ -19,6 +20,7 @@ on:
       - "automation/schemas/human_gate_decision.schema.json"
       - "research/human_gates/**"
       - "tests/test_human_gate.py"
+      - "tests/test_discord_bot.py"
       - ".github/workflows/human-gate-*.yml"
       - "integrations/discord/**"
 
@@ -27,14 +29,19 @@ permissions:
 
 jobs:
   validate:
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - run: python -m pip install PyYAML==6.0.2
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install PyYAML==6.0.2 -r integrations/discord/requirements.txt
+      - name: Discord catalog, sync and safety regression
+        run: python -m unittest tests.test_discord_bot -v
       - name: Human Gate tests
         run: python -m unittest tests.test_human_gate -v
       - name: Discord bot syntax

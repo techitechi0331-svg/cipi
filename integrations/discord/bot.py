@@ -1,5 +1,8 @@
 import os
 import json
+import asyncio
+import re
+import time
 from pathlib import Path
 
 import aiohttp
@@ -7,8 +10,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands, tasks
 
-TOKEN = os.environ["DISCORD_BOT_TOKEN"]
-GUILD_ID = int(os.environ["DISCORD_GUILD_ID"])
+TOKEN = os.environ.get("DISCORD_BOT_TOKEN", "")
+GUILD_ID = 0  # Validated in main(), so importing the catalog never starts the bot.
 GITHUB_TOKEN = os.environ.get("CIPI_DISCORD_GITHUB_TOKEN", "")
 
 OWNER = "techitechi0331-svg"
@@ -19,6 +22,82 @@ STATUS_URL = f"{RAW}/research/continuity/global/current.json"
 GLOBAL_DAG = "global-dag-orchestrator.yml"
 HUMAN_GATE_WORKFLOW = "human-gate-decision.yml"
 ALERT_STATE = Path(__file__).with_name("alert_state.json")
+COMMAND_TITLE = "## 🧠 CIPI Bot コマンド一覧"
+STATUS_TITLE = "## 🧠 CIPI 開発状況"
+
+# Single source for slash descriptions, access checks and both help surfaces.
+COMMAND_CATALOG = {
+    "ping": ("状態確認", "CIPI管理Botの動作を確認", False, False),
+    "status": ("状態確認", "CIPI全体の開発状況を表示", False, False),
+    "project": ("状態確認", "選択した製品・研究プロジェクトの詳細を表示", False, False),
+    "continue": ("研究操作", "CIPIの安全条件を確認して研究再開を要求", True, True),
+    "human-gate": ("Human Gate", "人間確認が必要な項目を表示", False, False),
+    "gate-decision": ("Human Gate", "Human Gateの確認結果をCIPIへ正式記録", True, True),
+    "setup": ("管理", "Discord構成を最新状態へ同期", True, True),
+    "commands": ("管理", "このコマンド一覧を表示", False, False),
+}
+SYNC_LOCK = asyncio.Lock()
+MESSAGE_LOCK = asyncio.Lock()
+DISPATCH_LOCK = asyncio.Lock()
+MESSAGE_IDS = {}  # Presentation cache only; rediscovered from Discord after restart.
+LAST_DISPATCH = {}  # Short debounce only; CIPI remains the scheduler/authority.
+
+
+def commands_text():
+    lines = [COMMAND_TITLE, "🟢 閲覧のみ ｜ ⚠️ 変更・実行あり（要注意） ｜ 🔒 管理者限定", ""]
+    category = None
+    for name, (group, description, changes_state, admin_only) in COMMAND_CATALOG.items():
+        if category != group:
+            lines += [f"【{group}】"]
+            category = group
+        badges = "⚠️" if changes_state else "🟢"
+        if admin_only:
+            badges += " 🔒"
+        lines += [f"{badges} **/{name}** — {description}"]
+    lines += ["", "まず /status で全体を確認し、/project で詳細を確認できます。",
+              "再開・Human Gateの反映はCIPIが安全条件を再確認します。",
+              "自動研究トラックの決定は記録のみです。秘密情報は入力しないでください。"]
+    text = "\n".join(lines)
+    if len(text.encode("utf-16-le")) // 2 > 2000:
+        raise ValueError("command catalog exceeds Discord message limit")
+    return text
+
+
+def clip_message(text):
+    if len(text.encode("utf-16-le")) // 2 <= 1900:
+        return text
+    return text.encode("utf-16-le")[:3700].decode("utf-16-le", errors="ignore") + "\n…（一部省略）"
+
+
+class PublicError(RuntimeError):
+    """Only fixed, non-sensitive messages may be displayed to users."""
+
+
+def error_text(error):
+    if isinstance(error, PublicError):
+        return str(error)
+    if isinstance(error, (TimeoutError, aiohttp.ClientError)):
+        return "接続を確認できません。送信後のタイムアウトでは受付済みの可能性があります。GitHub Actionsを確認してください。"
+    if isinstance(error, discord.Forbidden):
+        return "Botのチャンネル閲覧・履歴閲覧・送信権限を確認してください。/setup にはチャンネル管理権限も必要です。"
+    return "処理を完了できませんでした。設定・権限・CIPIの状態を確認してください。"
+
+
+def validate_public_input(value):
+    # Standalone bot.py distribution: keep coverage of the authoritative intake
+    # patterns (tested against automation.human_gate.apply.SENSITIVE_PATTERNS).
+    patterns = (
+        r"\bgh[pousr]_[A-Za-z0-9]{20,}\b", r"\bgithub_pat_[A-Za-z0-9_]{20,}\b",
+        r"\bsk-[A-Za-z0-9_-]{20,}\b", r"\bAIza[0-9A-Za-z_-]{30,}\b",
+        r"-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----",
+        r"(?i)\b(?:api[_-]?key|access[_-]?token|auth[_-]?token|password|secret)\s*[:=]",
+        r"(?i)\b(?:[A-Z0-9_]*TOKEN|[A-Z0-9_]*API_KEY|PRIVATE_KEY)\s*[:=]",
+        r"\b[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{20,}\b",
+    )
+    if any(re.search(pattern, value) for pattern in patterns) or any(
+        secret and secret in value for secret in (TOKEN, GITHUB_TOKEN)
+    ):
+        raise PublicError("秘密情報らしい入力があるため送信しません。公開可能な参照・判断理由だけを入力してください。")
 
 PROJECTS = {
     "amp_simulator": "Amp Simulator", "black76": "76 Black",
@@ -73,6 +152,10 @@ FORUM_SPECS = {
 
 class CIPIBot(commands.Bot):
     async def setup_hook(self):
+        registered = {command.name for command in self.tree.get_commands()}
+        if registered != set(COMMAND_CATALOG):
+            raise PublicError("コマンド定義と一覧が一致しません。Botを更新してください。")
+        commands_text()
         guild = discord.Object(id=GUILD_ID)
         self.tree.copy_global_to(guild=guild)
         await self.tree.sync(guild=guild)
@@ -80,7 +163,37 @@ class CIPIBot(commands.Bot):
             monitor.start()
 
 
-bot = CIPIBot(command_prefix="!", intents=discord.Intents.default())
+bot = CIPIBot(command_prefix="!", intents=discord.Intents.default(),
+              allowed_mentions=discord.AllowedMentions.none())
+
+
+def catalog_command(name):
+    _, description, _, admin_only = COMMAND_CATALOG[name]
+
+    async def allowed(interaction):
+        if interaction.guild_id != GUILD_ID:
+            raise app_commands.CheckFailure("guild")
+        if admin_only and not interaction.user.guild_permissions.administrator:
+            raise app_commands.CheckFailure("administrator")
+        return True
+
+    def decorate(callback):
+        callback = app_commands.check(allowed)(callback)
+        callback = app_commands.guild_only()(callback)
+        if admin_only:
+            callback = app_commands.default_permissions(administrator=True)(callback)
+        return bot.tree.command(name=name, description=description)(callback)
+    return decorate
+
+
+@bot.tree.error
+async def command_error(interaction, error):
+    text = ("❌ このサーバーで実行する権限がありません。管理者限定のコマンドもあります。"
+            if isinstance(error, app_commands.CheckFailure) else f"❌ {error_text(error)}")
+    if interaction.response.is_done():
+        await interaction.followup.send(text, ephemeral=True)
+    else:
+        await interaction.response.send_message(text, ephemeral=True)
 
 
 def gh_headers():
@@ -96,37 +209,51 @@ async def get_json(url, headers=None):
     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=20)) as s:
         async with s.get(url, headers=headers) as r:
             if r.status != 200:
-                raise RuntimeError(f"HTTP {r.status}: {(await r.text())[:200]}")
+                raise PublicError(f"GitHubから取得できません（HTTP {r.status}）。設定・権限を確認してください。")
             return await r.json(content_type=None)
 
 
 async def post_json(url, payload):
     if not GITHUB_TOKEN:
-        raise RuntimeError("CIPI_DISCORD_GITHUB_TOKEN が設定されていません")
+        raise PublicError("CIPI_DISCORD_GITHUB_TOKEN が設定されていません")
     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=20)) as s:
         async with s.post(url, headers=gh_headers(), json=payload) as r:
             if r.status != 204:
-                raise RuntimeError(f"HTTP {r.status}: {(await r.text())[:300]}")
+                raise PublicError(f"GitHubへの送信に失敗しました（HTTP {r.status}）。GitHub Actionsを確認してください。")
 
 
 async def project_state(project_id):
     if project_id not in PROJECTS:
-        raise ValueError("不明なプロジェクトです")
+        raise PublicError("不明なプロジェクトです")
     return await get_json(f"{RAW}/research/continuity/projects/{project_id}/current.json")
 
 
 async def dispatch(workflow, inputs=None):
-    payload = {"ref": "main"}
-    if inputs:
-        payload["inputs"] = inputs
-    await post_json(f"{API}/actions/workflows/{workflow}/dispatches", payload)
+    async with DISPATCH_LOCK:
+        if not GITHUB_TOKEN:
+            raise PublicError("CIPI_DISCORD_GITHUB_TOKEN が設定されていません")
+        if time.monotonic() - LAST_DISPATCH.get(workflow, -float("inf")) < 60:
+            raise PublicError("同じ処理を送信済み、または受付状況を確認中です。GitHub Actionsを確認し、少し待ってください。")
+        if await workflow_running(workflow):
+            raise PublicError("CIPIの同じ処理が実行中です。完了後に状態を確認してください。")
+        payload = {"ref": "main"}
+        if inputs:
+            payload["inputs"] = inputs
+        # Reserve before POST: a timeout does not mean GitHub rejected the request.
+        LAST_DISPATCH[workflow] = time.monotonic()
+        await post_json(f"{API}/actions/workflows/{workflow}/dispatches", payload)
 
 
 async def workflow_running(workflow):
     if not GITHUB_TOKEN:
-        return False
-    data = await get_json(f"{API}/actions/workflows/{workflow}/runs?branch=main&per_page=10", gh_headers())
-    return any(x.get("status") in {"queued", "in_progress"} for x in data.get("workflow_runs", []))
+        raise PublicError("CIPI_DISCORD_GITHUB_TOKEN が設定されていません")
+    for state in ("queued", "in_progress", "waiting", "pending", "requested"):
+        data = await get_json(f"{API}/actions/workflows/{workflow}/runs?branch=main&status={state}&per_page=1", gh_headers())
+        if not isinstance(data.get("workflow_runs"), list):
+            raise PublicError("GitHubの実行状態を確認できないため送信しません。")
+        if data["workflow_runs"]:
+            return True
+    return False
 
 
 def phase_display(phase):
@@ -141,7 +268,9 @@ def load_alerts():
 
 
 def save_alerts(value):
-    ALERT_STATE.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary = ALERT_STATE.with_suffix(".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.replace(ALERT_STATE)
 
 
 def find_named(items, names):
@@ -215,13 +344,13 @@ def status_text(data):
         icon, label = phase_display(item.get("phase", "UNKNOWN"))
         lines.append(f"{icon} **{PROJECTS.get(pid, pid)}** — {label}")
     f = data.get("freshness_counts", {})
-    return "\n".join([
-        "## 🧠 CIPI 開発状況",
+    return clip_message("\n".join([
+        STATUS_TITLE,
         f"最終更新: {data.get('generated_at', '不明')}",
         f"管理数: {data.get('project_count', len(lines))} ｜ 最新 {f.get('FRESH', 0)} ｜ 古い {f.get('STALE', 0)} ｜ 競合 {f.get('CONFLICT', 0)} ｜ 無効 {f.get('INVALID', 0)}",
         "",
         *lines,
-    ])
+    ]))
 
 def project_text(data):
     pid = data.get("project_id", "不明")
@@ -243,7 +372,7 @@ def project_text(data):
     deps = resume.get("blocked_dependencies", [])
     if deps:
         lines += ["", "### 🟡 未解決の依存"] + [f"• {x}" for x in deps[:8]]
-    return "\n".join(lines)[:1900]
+    return clip_message("\n".join(lines))
 
 def human_gate_text(data):
     pid = data.get("project_id", "不明")
@@ -264,7 +393,41 @@ def human_gate_text(data):
         ]
         lines += [f"• {g}" for g in item.get("gates", [])]
         lines.append("")
-    return "\n".join(lines)[:1900]
+    return clip_message("\n".join(lines))
+
+
+async def upsert_message(channel, title, text):
+    async with MESSAGE_LOCK:
+        key = (channel.id, title)
+        message = None
+        if key in MESSAGE_IDS:
+            try:
+                candidate = await channel.fetch_message(MESSAGE_IDS[key])
+                if candidate.author == bot.user and candidate.content.splitlines()[:1] == [title]:
+                    message = candidate
+            except discord.NotFound:
+                MESSAGE_IDS.pop(key, None)
+        if message is None:
+            # Search all history, including a message buried by >30 later posts.
+            # Permission/network errors must propagate: never send on failed lookup.
+            async for candidate in channel.history(limit=None, oldest_first=True):
+                if candidate.author == bot.user and candidate.content.splitlines()[:1] == [title]:
+                    message = candidate
+                    break
+        if message is None:
+            message = await channel.send(text, allowed_mentions=discord.AllowedMentions.none())
+        elif message.content != text:
+            await message.edit(content=text, allowed_mentions=discord.AllowedMentions.none())
+        MESSAGE_IDS[key] = message.id
+
+
+async def update_commands_channel():
+    guild = bot.get_guild(GUILD_ID)
+    if not guild:
+        raise PublicError("設定されたDiscordサーバーを確認できません。")
+    category = await ensure_category(guild, *CATEGORY_SPECS[0])
+    channel = await ensure_text(guild, category, "コマンド", "command")
+    await upsert_message(channel, COMMAND_TITLE, commands_text())
 
 async def update_status_channel(data):
     guild = bot.get_guild(GUILD_ID)
@@ -273,13 +436,7 @@ async def update_status_channel(data):
     channel = find_named(guild.text_channels, ["cipi状況", "cipi-status"])
     if not channel:
         return
-    text = status_text(data)
-    async for msg in channel.history(limit=30):
-        if msg.author == bot.user and msg.content.startswith("## 🧠 CIPI"):
-            if msg.content != text:
-                await msg.edit(content=text)
-            return
-    await channel.send(text)
+    await upsert_message(channel, STATUS_TITLE, status_text(data))
 
 
 async def update_alerts(data):
@@ -290,13 +447,11 @@ async def update_alerts(data):
     if not channel:
         return
     old = load_alerts()
-    new = {}
     for item in data.get("projects", []):
         pid = item.get("project_id", "不明")
         name = PROJECTS.get(pid, pid)
         phase = item.get("phase", "UNKNOWN")
         prev = old.get(pid)
-        new[pid] = phase
         if phase == prev:
             continue
         if phase == "BLOCKED":
@@ -305,16 +460,27 @@ async def update_alerts(data):
             await channel.send(f"🔴 **人間の確認が必要です**\n{name} が人間の確認待ちになりました。")
         elif prev in {"BLOCKED", "HUMAN_GATE"}:
             await channel.send(f"✅ **警告解除**\n{name} の警告が解除されました。現在: {phase_display(phase)[1]}")
-    save_alerts(new)
+        # Persist each successful item so a later send failure cannot replay it.
+        old[pid] = phase
+        save_alerts(old)
 
-async def sync_once():
-    try:
-        data = await get_json(STATUS_URL)
-        await update_status_channel(data)
-        await update_alerts(data)
-        print("CIPI同期完了")
-    except Exception as e:
-        print(f"CIPI同期エラー: {e}")
+async def sync_once(configure_guild=None):
+    async with SYNC_LOCK:
+        errors = []
+        if configure_guild is not None:
+            await ensure_structure(configure_guild)
+        try:
+            await update_commands_channel()
+        except Exception as e:
+            errors.append("コマンド一覧: " + error_text(e))
+        try:
+            data = await get_json(STATUS_URL)
+            await update_status_channel(data)
+            await update_alerts(data)
+        except Exception as e:
+            errors.append("CIPI状態: " + error_text(e))
+        print("CIPI同期完了" if not errors else "CIPI同期エラー: " + " / ".join(errors))
+        return errors
 
 
 @tasks.loop(minutes=5)
@@ -330,44 +496,44 @@ async def before_monitor():
 @bot.event
 async def on_ready():
     print(f"CIPI管理Bot オンライン: {bot.user}")
-    await sync_once()
+    # monitor performs the first sync after readiness, then every five minutes.
 
 
-@bot.tree.command(name="ping", description="CIPI管理Botの動作確認")
+@catalog_command("ping")
 async def ping(interaction: discord.Interaction):
-    await interaction.response.send_message("🟢 CIPI管理Botは正常に稼働しています")
+    await interaction.response.send_message("🟢 CIPI管理Botは正常に稼働しています", ephemeral=True)
 
 
-@bot.tree.command(name="status", description="CIPI全体の現在状況を表示")
+@catalog_command("status")
 async def status(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
     try:
         await interaction.followup.send(status_text(await get_json(STATUS_URL)), ephemeral=True)
     except Exception as e:
-        await interaction.followup.send(f"❌ CIPI接続エラー: {e}", ephemeral=True)
+        await interaction.followup.send(f"❌ CIPI接続エラー: {error_text(e)}", ephemeral=True)
 
 
-@bot.tree.command(name="project", description="指定プロジェクトの詳細状況を表示")
+@catalog_command("project")
 @app_commands.choices(project=PROJECT_CHOICES)
 async def project_command(interaction: discord.Interaction, project: app_commands.Choice[str]):
     await interaction.response.defer(ephemeral=True)
     try:
         await interaction.followup.send(project_text(await project_state(project.value)), ephemeral=True)
     except Exception as e:
-        await interaction.followup.send(f"❌ プロジェクト取得エラー: {e}", ephemeral=True)
+        await interaction.followup.send(f"❌ プロジェクト取得エラー: {error_text(e)}", ephemeral=True)
 
 
-@bot.tree.command(name="human-gate", description="指定プロジェクトの人間確認ゲートを表示")
+@catalog_command("human-gate")
 @app_commands.choices(project=PROJECT_CHOICES)
 async def human_gate_command(interaction: discord.Interaction, project: app_commands.Choice[str]):
     await interaction.response.defer(ephemeral=True)
     try:
         await interaction.followup.send(human_gate_text(await project_state(project.value)), ephemeral=True)
     except Exception as e:
-        await interaction.followup.send(f"❌ Human Gate取得エラー: {e}", ephemeral=True)
+        await interaction.followup.send(f"❌ Human Gate取得エラー: {error_text(e)}", ephemeral=True)
 
 
-@bot.tree.command(name="gate-decision", description="Human Gateの結果をCIPIへ正式記録")
+@catalog_command("gate-decision")
 @app_commands.choices(project=PROJECT_CHOICES, target_type=TARGET_CHOICES, outcome=OUTCOME_CHOICES)
 @app_commands.describe(
     target_id="human-gate に表示されたジョブまたはトラックID",
@@ -393,6 +559,8 @@ async def gate_decision(
     if not GITHUB_TOKEN:
         return await interaction.followup.send("❌ GitHubトークンが読み込まれていません。", ephemeral=True)
     try:
+        for value in (target_id, gate, evidence_ref, rationale):
+            validate_public_input(value)
         data = await project_state(project.value)
         if data.get("freshness") != "FRESH":
             return await interaction.followup.send("⚠️ Continuityが最新ではないため記録しません。", ephemeral=True)
@@ -424,18 +592,18 @@ async def gate_decision(
         else:
             effect = "決定記録を保存します。"
         await interaction.followup.send(
-            f"✅ Human Gate Decisionを送信しました。\n"
+            clip_message(f"✅ Human Gate Decisionを送信しました。\n"
             f"対象: {target_id}\n"
             f"ゲート: {gate}\n"
             f"判断: {outcome.name}\n\n"
-            f"{effect}",
+            f"{effect}"),
             ephemeral=True,
         )
     except Exception as e:
-        await interaction.followup.send(f"❌ Human Gate送信エラー: {e}", ephemeral=True)
+        await interaction.followup.send(f"❌ Human Gate送信エラー: {error_text(e)}", ephemeral=True)
 
 
-@bot.tree.command(name="continue", description="CIPIの安全条件を確認して再開を要求")
+@catalog_command("continue")
 @app_commands.choices(project=PROJECT_CHOICES)
 async def continue_project(interaction: discord.Interaction, project: app_commands.Choice[str]):
     await interaction.response.defer(ephemeral=True)
@@ -452,27 +620,48 @@ async def continue_project(interaction: discord.Interaction, project: app_comman
             text = f"🟡 {name} は依存関係待ちです。"
             if deps:
                 text += "\n" + "\n".join(f"• {x}" for x in deps[:8])
-            return await interaction.followup.send(text[:1900], ephemeral=True)
+            return await interaction.followup.send(clip_message(text), ephemeral=True)
         if not resume.get("can_resume", False) or not resume.get("can_autonomously_resume", False):
             return await interaction.followup.send(f"⚠️ {name} は現在、自動再開条件を満たしていません。", ephemeral=True)
         if not GITHUB_TOKEN:
             return await interaction.followup.send("❌ GitHubトークンが読み込まれていません。", ephemeral=True)
-        if await workflow_running(GLOBAL_DAG):
-            return await interaction.followup.send("🔵 CIPI Orchestratorはすでに実行中です。二重起動しません。", ephemeral=True)
         await dispatch(GLOBAL_DAG)
         await interaction.followup.send(f"🟢 {name} の再開要求をCIPIへ送りました。Global DAGが再評価します。", ephemeral=True)
     except Exception as e:
-        await interaction.followup.send(f"❌ 再開処理エラー: {e}", ephemeral=True)
+        await interaction.followup.send(f"❌ 再開処理エラー: {error_text(e)}", ephemeral=True)
 
 
-@bot.tree.command(name="setup", description="CIPI開発用Discordを構成・日本語化")
+@catalog_command("setup")
 async def setup(interaction: discord.Interaction):
     if interaction.guild is None or not interaction.user.guild_permissions.administrator:
         return await interaction.response.send_message("❌ 管理者のみ実行できます。", ephemeral=True)
     await interaction.response.defer(ephemeral=True)
-    await ensure_structure(interaction.guild)
-    await sync_once()
-    await interaction.followup.send("✅ Discord構成・日本語化・CIPI同期・警告監視を更新しました。", ephemeral=True)
+    try:
+        errors = await sync_once(configure_guild=interaction.guild)
+        message = ("⚠️ 同期が一部未完了です。\n" + "\n".join(errors) if errors else
+                   "✅ Discord構成・コマンド一覧・CIPI同期・警告監視を更新しました。")
+        await interaction.followup.send(message, ephemeral=True)
+    except Exception as e:
+        await interaction.followup.send(f"❌ {error_text(e)}", ephemeral=True)
 
 
-bot.run(TOKEN)
+@catalog_command("commands")
+async def commands_command(interaction: discord.Interaction):
+    await interaction.response.send_message(commands_text(), ephemeral=True)
+
+
+def main():
+    global GUILD_ID
+    if not TOKEN:
+        raise SystemExit("DISCORD_BOT_TOKEN が設定されていません。環境変数を確認してください。")
+    guild_value = os.environ.get("DISCORD_GUILD_ID", "")
+    if not guild_value.isascii() or not guild_value.isdecimal() or not 0 < int(guild_value) < 2**64:
+        raise SystemExit("DISCORD_GUILD_ID に有効なサーバーIDを設定してください。")
+    GUILD_ID = int(guild_value)
+    if not GITHUB_TOKEN:
+        print("GitHubトークン未設定: 状態確認のみ利用可能です。")
+    bot.run(TOKEN)
+
+
+if __name__ == "__main__":
+    main()

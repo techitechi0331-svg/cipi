@@ -3,6 +3,8 @@ name: Auto Research Gate
 on:
   pull_request:
     paths:
+      - "integrations/discord/**"
+      - "tests/test_discord_bot.py"
       - "automation/**"
       - "research/jobs/**"
       - "research/runs/**"

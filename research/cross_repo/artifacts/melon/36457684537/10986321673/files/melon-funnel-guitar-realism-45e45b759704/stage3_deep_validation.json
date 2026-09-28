@@ -1,0 +1,13 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "GTR-REALISM-V2-002",
+    "promotion_authority": false,
+    "reason": "Continue bounded architecture discrimination. Synthetic proxies cannot establish guitar fidelity.",
+    "route": "ITERATE",
+    "scientific": {
+      "evidence_boundary": "MEASURED_SYNTHETIC_ARCHITECTURE_IDENTIFIABILITY_NOT_REAL_GUITAR_FIDELITY"
+    },
+    "species": "PASSIVE_PLUCK_BRIDGE"
+  }
+]

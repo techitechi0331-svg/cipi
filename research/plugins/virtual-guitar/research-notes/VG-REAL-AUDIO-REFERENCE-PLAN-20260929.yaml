@@ -1,0 +1,86 @@
+schema_version: "1.0"
+research_note_id: VG-REAL-AUDIO-REFERENCE-PLAN-20260929
+subject: electric-guitar real-audio reference benchmark
+created_at: "2026-09-29"
+
+evidence_classes:
+  SOURCE_FACT:
+    - id: SF-VG-DATASET-GUITAR-TECHS
+      source:
+        title: "Guitar-TECHS: An Electric Guitar Dataset Covering Techniques, Musical Excerpts, Chords and Scales Using a Diverse Array of Hardware"
+        url: "https://guitar-techs.github.io/"
+        zenodo: "https://zenodo.org/records/14963133"
+        license: "CC BY 4.0"
+      fact: >-
+        Guitar-TECHS contains more than five hours of electric-guitar recordings from three
+        professional players and includes direct-input audio, amplifier-microphone audio,
+        egocentric/exocentric microphone audio, and synchronized per-string MIDI annotations.
+      useful_files:
+        - "P1_singlenotes.zip (~108.6 MB)"
+        - "P2_singlenotes.zip (~116.1 MB)"
+      scope_limit: "Use the official dataset with attribution; do not vendor or redistribute audio inside CIPI/MELON/product repositories."
+
+    - id: SF-VG-DATASET-IDMT-SMT-GUITAR
+      source:
+        title: "IDMT-SMT-Guitar"
+        url: "https://www.idmt.fraunhofer.de/en/publications/datasets/guitar.html"
+        license: "CC BY-NC-ND 4.0"
+      fact: >-
+        IDMT-SMT-Guitar contains electric/acoustic guitar material, multiple guitars and
+        playing techniques, including isolated note events.
+      scope_limit: >-
+        Because the project may eventually be commercial, do not use this NC dataset for
+        optimization/training without a separate license decision. It may be reconsidered for
+        evaluation-only use if governance explicitly approves it.
+
+  INFERRED:
+    - id: INF-VG-REAL-AUDIO-DI-FIRST
+      inference: >-
+        The first real-audio benchmark should use Guitar-TECHS DI single notes, not microphone
+        capture, so string/pickup/electronics realism can be evaluated without mixing in room,
+        cabinet, or microphone behavior that belongs to separate downstream stages.
+      basis:
+        - SF-VG-DATASET-GUITAR-TECHS
+        - research/plugins/virtual-guitar/integration-policies/EXTERNAL-MIC-SIMULATOR-INTEGRATION-V1.1.yaml
+
+    - id: INF-VG-REAL-AUDIO-FEATURES
+      inference: >-
+        A bounded DI reference benchmark should compare pitch/string-matched distributions of
+        attack spectral shape, harmonic decay versus frequency, inharmonicity, onset duration,
+        short-term pitch glide/dynamic detune, and time-varying spectral centroid. These metrics
+        are evidence for narrowing candidates, not a substitute for listening.
+
+  HYPOTHESIS:
+    - id: HYP-VG-REAL-AUDIO-BENCHMARK-001
+      hypothesis: >-
+        Reference-constrained architecture search using CC-BY Guitar-TECHS DI single notes can
+        eliminate synthetic candidates that merely satisfy internal mechanism proxies while
+        remaining perceptually far from a real electric guitar.
+
+  REJECTED:
+    - id: REJ-VG-REAL-AUDIO-MIC-FIRST
+      direction: "Use microphone/cabinet audio as the first target for the physical-string benchmark."
+      reason: "It would confound Physical Guitar/Pickup/Electronics with Amp/Cab/Mic stages."
+
+    - id: REJ-VG-IDMT-NC-OPTIMIZATION-WITHOUT-LICENSE-GATE
+      direction: "Use CC BY-NC-ND IDMT material for product optimization by default."
+      reason: "Commercial-use posture is not cleared."
+
+activation_plan:
+  status: STAGED_NOT_ACTIVE
+  prerequisites:
+    - MELON_REALISM_V2_VALIDATED
+    - REAL_AUDIO_REFERENCE_ADAPTER_IMPLEMENTED
+    - DATASET_DOWNLOAD_IS_RUNNER_CACHE_ONLY
+    - ATTRIBUTION_MANIFEST_PRESENT
+  first_dataset: GUITAR_TECHS
+  first_signal: DI
+  first_content: ISOLATED_SINGLE_NOTES
+  redistribution: false
+  product_integration: false
+
+authority:
+  cipi_evidence_authority: true
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  listening_gate_required: true

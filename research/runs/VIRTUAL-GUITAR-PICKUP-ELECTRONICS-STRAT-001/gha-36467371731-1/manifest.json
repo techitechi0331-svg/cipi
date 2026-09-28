@@ -1,0 +1,27 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed source-backed Pickup/Electrical evidence foundation",
+    "verify primary/peer-reviewed source coverage",
+    "verify competing model classes and rejected shortcuts",
+    "verify authority remains research-only"
+  ],
+  "completed_at": "2026-09-28T18:45:08.992110Z",
+  "environment": {
+    "experiment_adapter": "virtual_guitar_pickup_electrical_foundation_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
+  "random_seed": 0,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36467371731-1",
+  "schema_version": "1.0",
+  "source_commit": "d904cdae0d17e96e7381da63726a1cdd71fe7ba1",
+  "started_at": "2026-09-28T18:45:08.990044Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

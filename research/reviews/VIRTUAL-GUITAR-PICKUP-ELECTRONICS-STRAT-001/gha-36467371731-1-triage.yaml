@@ -1,0 +1,30 @@
+schema_version: '1.0'
+triage_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001:gha-36467371731-1:triage-v1
+job_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001
+run_id: gha-36467371731-1
+source_run: research/runs/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1
+source_decision_id: VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001:gha-36467371731-1:auto
+source_decision_path: research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml
+job_path: research/jobs/completed/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001.yaml
+knowledge_candidate_path: research/knowledge_candidates/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1.yaml
+candidate_class: RESEARCH_MORE
+route: HUMAN_GATE_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: true
+rejection_triggered: false
+promotion_requested: HYPOTHESIS
+review_gaps: []
+required_human_gates:
+- FINAL_SUBJECTIVE_PICKUP_TONE
+- REAL_DI_AB_BEFORE_PRODUCT_ADOPTION
+- COIL_SPLIT_PRODUCT_ADOPTION_WHEN_LATER_IMPLEMENTED
+downstream_gate_signals: []
+reasons:
+- The research job explicitly requires human gates before further promotion.
+recommended_action: Resolve the listed review gaps or required human gates before
+  a final knowledge decision.
+created_at: '2026-09-28T18:45:08.992110Z'
+triage_version: '1.0'
+immutable: true

@@ -1,0 +1,25 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/amp_simulator
+repo_key: amp_simulator
+run_id: 36468131924
+run_attempt: 1
+artifact_id: 10990076864
+artifact_name: amp-input-reference-36468131924
+expired: false
+size_in_bytes: 68112
+created_at: '2026-09-28T18:51:43Z'
+expires_at: '2026-10-28T18:51:40Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: input_network_reference.json
+  status: ingested
+  size: 1825
+  sha256: 34068bdc9676436a114521eb9238ef5c15e0ef1bfed9dadfdbaa5ad506277aef
+- path: input_network_sweep.csv
+  status: ingested
+  size: 152194
+  sha256: a16f026fd916174d8492d333f49713eb6fabd553052c4910f605e765088b020f
+archive_sha256: a3ceb4c81b39ffb3746524aa1d38fc1e91c5ff0a5ff02d8baa02e54e1689447b
+ingest_status: text_evidence_ingested

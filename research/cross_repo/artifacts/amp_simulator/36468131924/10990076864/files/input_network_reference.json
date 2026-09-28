@@ -1,0 +1,57 @@
+{
+  "authority": {
+    "amp_fidelity_claim": false,
+    "automatic_knowledge_promotion": false,
+    "automatic_product_decision": false,
+    "guitar_pickup_model_adopted": false,
+    "product_dsp_adopted": false
+  },
+  "automatic_knowledge_promotion": false,
+  "automatic_product_decision": false,
+  "candidate_model": "LINEAR_LUMPED_CABLE_AND_AMP_INPUT_REFERENCE_V1",
+  "evidence_boundary": "MEASURED_SYNTHETIC_LINEAR_LUMPED_REFERENCE_NOT_HARDWARE_FIDELITY",
+  "evidence_class": "MEASURED",
+  "job_id": "AMP-INPUT-NETWORK-REFERENCE-001",
+  "measurements": {
+    "all_finite": true,
+    "cable_capacitance_changes_resonant_response": true,
+    "passivity_check_method": "POSITIVE_COMPONENT_CONSTRAINTS_AND_NETWORK_STRUCTURE",
+    "peak_moves_lower_as_capacitance_increases": true,
+    "scenarios": [
+      {
+        "all_finite": true,
+        "cable_capacitance_pf": 100.0,
+        "peak_frequency_hz": 11245.268820639172,
+        "peak_magnitude_db": 14.710223280841232
+      },
+      {
+        "all_finite": true,
+        "cable_capacitance_pf": 300.0,
+        "peak_frequency_hz": 6516.30010783501,
+        "peak_magnitude_db": 16.160702222774738
+      },
+      {
+        "all_finite": true,
+        "cable_capacitance_pf": 600.0,
+        "peak_frequency_hz": 4567.681734297379,
+        "peak_magnitude_db": 15.82695274496257
+      }
+    ],
+    "voltage_magnitude_le_one_rule_used": false
+  },
+  "schema_version": "1.0",
+  "status": "PASS",
+  "synthetic_fixture": {
+    "cable_capacitance_pf": [
+      100.0,
+      300.0,
+      600.0
+    ],
+    "hardware_parameter_claim": false,
+    "input_capacitance_f": 0.0,
+    "input_resistance_ohm": 1000000.0,
+    "source_inductance_h": 2.0,
+    "source_resistance_ohm": 6000.0
+  },
+  "track_id": "AMP-INPUT-NETWORK-001"
+}

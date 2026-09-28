@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36474592634
+run_attempt: 1
+artifact_id: 10992614411
+artifact_name: melon-research-36474592634
+expired: false
+size_in_bytes: 10554
+created_at: '2026-09-28T19:47:17Z'
+expires_at: '2026-10-28T19:47:14Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/efficiency_metrics.json
+  status: ingested
+  size: 3503
+  sha256: cf7309d41a6ce29ce083f56d54f40b44b5af19b3fa43ea34e7488699b3025117
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/manifest.json
+  status: ingested
+  size: 370
+  sha256: 2424f2636fecc700657b10466ebd399caf5cdf1bb077f5a68783bb6d3e3acf39
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/precision_review.json
+  status: ingested
+  size: 471
+  sha256: 2638d43e5b4c86e844683bd3f4b86c7fe8dc11149840b65327c96bfc3de1c3d0
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/macro_result.json
+  status: ingested
+  size: 12455
+  sha256: f0c313bf134a2cf3ffea43c594af436d0c224449aab6731ce1f84df01336cd5a
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/stage1_screening.json
+  status: ingested
+  size: 10036
+  sha256: f0d4ecf0b33ca999480d761c02cf0e78328d08090bfa77ffe70ba4bd9395dc6f
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/summary.json
+  status: ingested
+  size: 1648
+  sha256: 2b287e2d4c48d96b562a08d3582ab5cd6f7a5effc6868b440981f734b7e72c39
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/stage3_deep_validation.json
+  status: ingested
+  size: 577
+  sha256: ed6e25a61aba57e727ba1c5a4a4634b108fb08ea620f93197b32db3e971219db
+- path: melon-funnel-vocal-denoise-robustness-1175be2b5526/vocal_denoise_foundation_measurements.json
+  status: ingested
+  size: 11427
+  sha256: b06ad4017f17d5989d8d0baf14837fbcac095bfdbb45456bf423fdbc6f4a9660
+archive_sha256: e2539afd07170d031d5606420686d99da866f3b3085c72b98e314496b7b702d4
+ingest_status: text_evidence_ingested

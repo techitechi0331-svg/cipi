@@ -1,0 +1,55 @@
+{
+  "bridge_profile": {
+    "architecture": "VOCAL_DENOISE_ROBUSTNESS_FOUNDATION_V1",
+    "benchmark_profiles": [
+      "vocal_denoise_robustness_foundation_v1",
+      "authority_boundary_v1"
+    ],
+    "input_set": "SYNTHETIC_OR_METADATA_ONLY_UNTIL_DATASET_GATE",
+    "objective_set": [
+      "vocal_preservation",
+      "matched_noise_reduction",
+      "reproducibility",
+      "bounded_cost"
+    ],
+    "reference_model": "NO_PROPRIETARY_REVERSE_ENGINEERING",
+    "relevant_constraints": [
+      "dataset_license_gate",
+      "identity_disjoint_holdout",
+      "no_private_audio_commit",
+      "no_auto_promotion",
+      "no_auto_release"
+    ],
+    "research_domain": "VOCAL_DENOISE_ROBUSTNESS",
+    "sample_rate": 48000
+  },
+  "budget_recommendation": {
+    "action": "HOLD_BOUNDED_PROFILE"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "vocal_denoise_foundation_measurements.json",
+  "effective_config": {
+    "generations": 2,
+    "max_candidates": 8,
+    "max_runtime_seconds": 60.0,
+    "population_size": 4,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VOCAL_DENOISE_ROBUSTNESS",
+  "routes": {
+    "ITERATE": 1
+  },
+  "run_id": "melon-funnel-vocal-denoise-robustness-1175be2b5526",
+  "seed": 2026092707,
+  "stage1_pareto": 4,
+  "stage1_stop_reason": "MAX_CANDIDATES",
+  "stage2_archive": 4,
+  "stage2_pareto": 4,
+  "timestamp": "2026-09-28T19:47:13.297212+00:00"
+}

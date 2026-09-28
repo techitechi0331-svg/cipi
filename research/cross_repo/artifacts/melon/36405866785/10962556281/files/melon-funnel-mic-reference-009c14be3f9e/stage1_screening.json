@@ -1,0 +1,79 @@
+[
+  {
+    "candidate_id": "SM57-EVID-01",
+    "coverage": 1.0,
+    "dimension": "frequency_response",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "SOURCE_FACT_PRESENT",
+    "finite": true,
+    "reason": "Official response range and graph exist, but a graph is not a complete transfer-function measurement.",
+    "requires_controlled_measurement": true,
+    "uncertainty": 0.0
+  },
+  {
+    "candidate_id": "SM57-EVID-02",
+    "coverage": 0.75,
+    "dimension": "polar_off_axis",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "SOURCE_FACT_PARTIAL",
+    "finite": true,
+    "reason": "Official polar plots exist at selected frequencies; dense angle/frequency behavior remains unresolved.",
+    "requires_controlled_measurement": true,
+    "uncertainty": 0.25
+  },
+  {
+    "candidate_id": "SM57-EVID-03",
+    "coverage": 0.65,
+    "dimension": "proximity_distance",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "SOURCE_FACT_PARTIAL",
+    "finite": true,
+    "reason": "Manufacturer documents close-distance bass boost, but a continuous distance model is not available.",
+    "requires_controlled_measurement": true,
+    "uncertainty": 0.35
+  },
+  {
+    "candidate_id": "SM57-EVID-04",
+    "coverage": 1.0,
+    "dimension": "sensitivity_impedance_polarity",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "SOURCE_FACT_PRESENT",
+    "finite": true,
+    "reason": "Manufacturer specifications directly cover these static electrical facts.",
+    "requires_controlled_measurement": false,
+    "uncertainty": 0.0
+  },
+  {
+    "candidate_id": "SM57-EVID-05",
+    "coverage": 0.0,
+    "dimension": "phase_group_delay",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "UNRESOLVED",
+    "finite": true,
+    "reason": "No quantified phase/group-delay reference is present in the registered manufacturer source facts.",
+    "requires_controlled_measurement": true,
+    "uncertainty": 1.0
+  },
+  {
+    "candidate_id": "SM57-EVID-06",
+    "coverage": 0.0,
+    "dimension": "transient_response",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "UNRESOLVED",
+    "finite": true,
+    "reason": "No quantified transient/step/impulse reference is present in the registered manufacturer source facts.",
+    "requires_controlled_measurement": true,
+    "uncertainty": 1.0
+  },
+  {
+    "candidate_id": "SM57-EVID-07",
+    "coverage": 0.2,
+    "dimension": "level_dependency",
+    "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+    "evidence_state": "SOURCE_FACT_QUALITATIVE_ONLY",
+    "finite": true,
+    "reason": "High-level handling is described qualitatively, but no bounded nonlinear transfer dataset is registered.",
+    "requires_controlled_measurement": true,
+    "uncertainty": 0.8
+  }
+]

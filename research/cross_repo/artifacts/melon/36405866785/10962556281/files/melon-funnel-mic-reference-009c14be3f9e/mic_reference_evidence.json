@@ -1,0 +1,129 @@
+{
+  "automatic_final_decision": false,
+  "cipi_promotion_authority": false,
+  "evidence_dimensions": [
+    {
+      "candidate_id": "SM57-EVID-01",
+      "coverage": 1.0,
+      "dimension": "frequency_response",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "SOURCE_FACT_PRESENT",
+      "finite": true,
+      "reason": "Official response range and graph exist, but a graph is not a complete transfer-function measurement.",
+      "requires_controlled_measurement": true,
+      "uncertainty": 0.0
+    },
+    {
+      "candidate_id": "SM57-EVID-02",
+      "coverage": 0.75,
+      "dimension": "polar_off_axis",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "SOURCE_FACT_PARTIAL",
+      "finite": true,
+      "reason": "Official polar plots exist at selected frequencies; dense angle/frequency behavior remains unresolved.",
+      "requires_controlled_measurement": true,
+      "uncertainty": 0.25
+    },
+    {
+      "candidate_id": "SM57-EVID-03",
+      "coverage": 0.65,
+      "dimension": "proximity_distance",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "SOURCE_FACT_PARTIAL",
+      "finite": true,
+      "reason": "Manufacturer documents close-distance bass boost, but a continuous distance model is not available.",
+      "requires_controlled_measurement": true,
+      "uncertainty": 0.35
+    },
+    {
+      "candidate_id": "SM57-EVID-04",
+      "coverage": 1.0,
+      "dimension": "sensitivity_impedance_polarity",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "SOURCE_FACT_PRESENT",
+      "finite": true,
+      "reason": "Manufacturer specifications directly cover these static electrical facts.",
+      "requires_controlled_measurement": false,
+      "uncertainty": 0.0
+    },
+    {
+      "candidate_id": "SM57-EVID-05",
+      "coverage": 0.0,
+      "dimension": "phase_group_delay",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "UNRESOLVED",
+      "finite": true,
+      "reason": "No quantified phase/group-delay reference is present in the registered manufacturer source facts.",
+      "requires_controlled_measurement": true,
+      "uncertainty": 1.0
+    },
+    {
+      "candidate_id": "SM57-EVID-06",
+      "coverage": 0.0,
+      "dimension": "transient_response",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "UNRESOLVED",
+      "finite": true,
+      "reason": "No quantified transient/step/impulse reference is present in the registered manufacturer source facts.",
+      "requires_controlled_measurement": true,
+      "uncertainty": 1.0
+    },
+    {
+      "candidate_id": "SM57-EVID-07",
+      "coverage": 0.2,
+      "dimension": "level_dependency",
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "evidence_state": "SOURCE_FACT_QUALITATIVE_ONLY",
+      "finite": true,
+      "reason": "High-level handling is described qualitatively, but no bounded nonlinear transfer dataset is registered.",
+      "requires_controlled_measurement": true,
+      "uncertainty": 0.8
+    }
+  ],
+  "hypothesis_id": "HYP-MIC-SM57-REFERENCE-EVIDENCE",
+  "job_id": "MIC-SIM-REFERENCE-SM57-001-R1-FF6CA76C",
+  "listening_authority": false,
+  "loop_depth": 1,
+  "product_integration_authority": false,
+  "reference_model": "SHURE_SM57",
+  "reference_profile_version": "sm57_reference_evidence_v1",
+  "research_question": "Can a Shure SM57 reference track convert manufacturer-supported source facts into a falsifiable microphone-model research plan while preserving unresolved phase, transient, off-axis, proximity/distance and level-dependent behavior instead of fabricating hardware-fidelity evidence?",
+  "research_version": "melon-mic-reference/1.0",
+  "schema_version": "1.0",
+  "source_facts": {
+    "frequency_response_hz": [
+      40,
+      15000
+    ],
+    "manufacturer": "Shure",
+    "model": "SM57",
+    "official_frequency_response_curve_available": true,
+    "official_polar_plots_available": true,
+    "output_impedance_ohm_actual": 310,
+    "polar_pattern": "cardioid",
+    "proximity_effect": {
+      "bass_boost_db_range_below_100hz": [
+        6,
+        10
+      ],
+      "close_distance_mm": 6,
+      "manufacturer_documented": true
+    },
+    "sensitivity_dbv_pa_1khz": -56.0,
+    "sensitivity_mv_pa_1khz": 1.6,
+    "transducer_type": "dynamic_moving_coil"
+  },
+  "summary": {
+    "coverage_mean": 0.5142857142857143,
+    "highest_priority_unresolved": "phase_group_delay",
+    "information_gain_signal": 0.85,
+    "unresolved_dimensions": [
+      "phase_group_delay",
+      "transient_response",
+      "level_dependency",
+      "proximity_distance",
+      "polar_off_axis"
+    ]
+  },
+  "track_id": "MIC-SIM-REFERENCE-SM57-001"
+}

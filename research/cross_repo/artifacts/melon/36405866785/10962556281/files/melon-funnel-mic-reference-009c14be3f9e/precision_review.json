@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "automatic_promotion_disabled": true,
+    "cardioid_fact_present": true,
+    "frequency_range_present": true,
+    "hardware_fidelity_not_claimed": true,
+    "manufacturer_identity_present": true,
+    "phase_gap_not_fabricated": true,
+    "product_integration_disabled": true,
+    "proximity_fact_present": true,
+    "transient_gap_not_fabricated": true
+  },
+  "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+  "passed": true
+}

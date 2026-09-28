@@ -1,0 +1,55 @@
+{
+  "bridge_profile": {
+    "architecture": "SM57_REFERENCE_EVIDENCE_MODEL_V1",
+    "benchmark_profiles": [
+      "sm57_reference_evidence_v1",
+      "mic_reference_gap_analysis_v1"
+    ],
+    "input_set": "SHURE_OFFICIAL_SM57_SOURCE_FACT_INVENTORY_V1",
+    "objective_set": [
+      "evidence_coverage",
+      "uncertainty_priority",
+      "falsifiability",
+      "measurement_readiness"
+    ],
+    "reference_model": "SHURE_SM57_MANUFACTURER_SOURCE_FACTS_NOT_MEASURED_UNIT_TRANSFER_FUNCTION",
+    "relevant_constraints": [
+      "no_frequency_response_only_parity_claim",
+      "no_hardware_fidelity_claim_without_controlled_measurement",
+      "do_not_invent_phase_or_transient_data",
+      "product_integration_off",
+      "automatic_promotion_off"
+    ],
+    "research_domain": "MIC_SIMULATOR_REFERENCE_SM57",
+    "sample_rate": 48000
+  },
+  "budget_recommendation": {
+    "action": "HOLD_UNTIL_CONTROLLED_REFERENCE_ACQUISITION"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "mic_reference_evidence.json",
+  "effective_config": {
+    "generations": 1,
+    "max_candidates": 8,
+    "max_runtime_seconds": 60.0,
+    "population_size": 4,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "MIC_SIMULATOR_REFERENCE_SM57",
+  "routes": {
+    "CANDIDATE_FOR_CIPI_REVIEW": 1
+  },
+  "run_id": "melon-funnel-mic-reference-009c14be3f9e",
+  "seed": 2026092801,
+  "stage1_pareto": 5,
+  "stage1_stop_reason": "REFERENCE_SOURCE_FACT_INVENTORY_COMPLETE",
+  "stage2_archive": 5,
+  "stage2_pareto": 5,
+  "timestamp": "2026-09-28T09:49:12.154263+00:00"
+}

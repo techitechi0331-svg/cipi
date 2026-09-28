@@ -1,0 +1,21 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "SM57-EVID-05",
+    "promotion_authority": false,
+    "reason": "SM57 manufacturer-source inventory is bounded and explicit. Controlled reference acquisition is now required before any microphone-fidelity claim; highest-priority unresolved dimensions are phase/group delay, transient response, dense off-axis behavior, distance/proximity behavior, and quantified level dependency.",
+    "route": "CANDIDATE_FOR_CIPI_REVIEW",
+    "scientific": {
+      "evidence_boundary": "MEASURED_REFERENCE_EVIDENCE_COVERAGE_NOT_HARDWARE_FIDELITY",
+      "reference_model": "SHURE_SM57",
+      "unresolved_dimensions": [
+        "phase_group_delay",
+        "transient_response",
+        "level_dependency",
+        "proximity_distance",
+        "polar_off_axis"
+      ]
+    },
+    "species": "mic_reference_measurement_plan"
+  }
+]

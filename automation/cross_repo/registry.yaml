@@ -250,6 +250,9 @@ repositories:
         allowed_inputs:
           - job_id
           - track_id
+          - validation_mode
+          - acquisition_manifest
+          - acquisition_root
         required_inputs:
           - job_id
           - track_id

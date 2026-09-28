@@ -16,6 +16,7 @@ on:
       - "research/decisions/**"
       - "research/reviews/**"
       - "research/autonomous_bridge/**"
+      - "research/human_gates/**"
   push:
     branches: [ main ]
     paths:
@@ -31,6 +32,7 @@ on:
       - "research/decisions/**"
       - "research/reviews/**"
       - "research/autonomous_bridge/**"
+      - "research/human_gates/**"
       - "research/cross_repo/**"
 
 permissions:

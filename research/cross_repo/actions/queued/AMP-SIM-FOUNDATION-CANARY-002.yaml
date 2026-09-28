@@ -1,0 +1,33 @@
+schema_version: "1.0"
+action_id: AMP-SIM-FOUNDATION-CANARY-002
+state: QUEUED
+repo_key: amp_simulator
+workflow_key: canary
+ref: main
+
+inputs:
+  job_id: AMP-SIM-FOUNDATION-CANARY-002
+  track_id: AMP-SIM-FOUNDATION-001
+
+priority: 62
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+
+depends_on_jobs: []
+depends_on_actions: []
+
+reason: >-
+  Re-run the deterministic Amp Simulator foundation canary after replacing the unavailable
+  global Python command with the repository-independent portable Python bootstrap. Prior
+  run AMP-SIM-FOUNDATION-CANARY-001 is preserved as infrastructure failure evidence.
+
+lineage:
+  prior_failed_action: AMP-SIM-FOUNDATION-CANARY-001
+  correction: PORTABLE_PYTHON_BOOTSTRAP
+  scientific_model_changed: false
+
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

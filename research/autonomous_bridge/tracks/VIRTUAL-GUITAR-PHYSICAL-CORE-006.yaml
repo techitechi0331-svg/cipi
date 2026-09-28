@@ -1,0 +1,74 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-PHYSICAL-CORE-006
+enabled: false
+activation_state: BLOCKED_BY_RESEARCH_METHOD_005
+root_research_id: VIRTUAL-GUITAR-PHYSICAL-CORE-006
+depends_on:
+  - VIRTUAL-GUITAR-RESEARCH-METHOD-005
+
+research_question: >-
+  Can one authoritative six-string PhysicalGuitarModel causally connect player action,
+  distributed string state, fret/finger contact, structural boundaries and inter-string
+  bridge transfer while remaining stable and realtime-feasible?
+
+authority_boundaries:
+  cipi_evidence_authority: true
+  product_repository_write: false
+  product_integration: false
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  human_gate_required: true
+
+required_contracts:
+  - VG-PHYSICAL-STATE-CONTRACT-001
+  - VG-TEST-TAXONOMY-001
+  - VG-REFERENCE-LAYER-MATRIX-001
+
+migration_slices:
+  - id: S0
+    goal: "One authoritative PhysicalStringState API; no sound change required."
+    acceptance:
+      - no_second_acoustic_truth
+      - deterministic_state_lifecycle
+  - id: S1
+    goal: "Executable distributed single-string state with position-dependent excitation/observation."
+    acceptance:
+      - numerical_stability
+      - energy_telemetry
+      - measured_runtime_memory
+      - 44k1_48k_96k
+  - id: S2
+    goal: "Player/string and fret/finger contact on the same physical state."
+    acceptance:
+      - dynamic_plectrum_release
+      - mute_release
+      - nonlinear_fret_contact
+      - dynamic_pitch_behavior
+  - id: S3
+    goal: "Structural boundary admittance replacing generic body-coloration authority."
+    acceptance:
+      - open_vs_fretted_boundary_difference
+      - note_dependent_decay_behavior
+      - boundary_energy_transfer
+  - id: S4
+    goal: "Six-string bridge network and sympathetic coupling."
+    acceptance:
+      - controlled_cross_string_transfer
+      - all_six_strings_stable
+      - sympathetic_decay
+      - no_independent_voice_plus_global_fx_substitution
+  - id: S5
+    goal: "Performance action trajectories drive the same PhysicalGuitarModel."
+    acceptance:
+      - note_off_changes_sounding_state
+      - mute_changes_sounding_state
+      - slide_bend_vibrato_constraints_drive_state
+      - fingering_outputs_physical_constraints_not_timbre_shortcuts
+
+promotion_gate:
+  required:
+    - all_S5_audit_blockers_remediated_or_explicitly_rejected_with_evidence
+    - executable_ablation_evidence
+    - layer_appropriate_reference_evidence
+    - human_listening_survivor_gate
+    - explicit_product_repository_write_authority

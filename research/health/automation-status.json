@@ -479,11 +479,11 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 50,
+      "completed": 51,
       "dispatched": 1,
       "failed": 14,
       "quarantined": 0,
-      "queued": 2
+      "queued": 1
     }
   },
   "human_gates": [

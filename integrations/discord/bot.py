@@ -215,18 +215,13 @@ def status_text(data):
         icon, label = phase_display(item.get("phase", "UNKNOWN"))
         lines.append(f"{icon} **{PROJECTS.get(pid, pid)}** — {label}")
     f = data.get("freshness_counts", {})
-    return (
-        "## 🧠 CIPI 開発状況
-"
-        f"最終更新: {data.get('generated_at', '不明')}
-"
-        f"管理数: {data.get('project_count', len(lines))} ｜ 最新 {f.get('FRESH', 0)} ｜ 古い {f.get('STALE', 0)} ｜ 競合 {f.get('CONFLICT', 0)} ｜ 無効 {f.get('INVALID', 0)}
-
-"
-        + "
-".join(lines)
-    )
-
+    return "\n".join([
+        "## 🧠 CIPI 開発状況",
+        f"最終更新: {data.get('generated_at', '不明')}",
+        f"管理数: {data.get('project_count', len(lines))} ｜ 最新 {f.get('FRESH', 0)} ｜ 古い {f.get('STALE', 0)} ｜ 競合 {f.get('CONFLICT', 0)} ｜ 無効 {f.get('INVALID', 0)}",
+        "",
+        *lines,
+    ])
 
 def project_text(data):
     pid = data.get("project_id", "不明")
@@ -248,17 +243,14 @@ def project_text(data):
     deps = resume.get("blocked_dependencies", [])
     if deps:
         lines += ["", "### 🟡 未解決の依存"] + [f"• {x}" for x in deps[:8]]
-    return "
-".join(lines)[:1900]
-
+    return "\n".join(lines)[:1900]
 
 def human_gate_text(data):
     pid = data.get("project_id", "不明")
     lines = [f"## 🔴 {PROJECTS.get(pid, pid)}｜人間確認ゲート", f"世代ID: {data.get('generation_id', '不明')}", ""]
     gates = data.get("human_gates", [])
     if not gates:
-        return "
-".join(lines + ["✅ 現在、人間確認が必要なゲートはありません。"])
+        return "\n".join(lines + ["✅ 現在、人間確認が必要なゲートはありません。"])
     for item in gates:
         source = item.get("source", "UNKNOWN")
         target = item.get("job_id") or item.get("track_id") or "不明"
@@ -272,9 +264,7 @@ def human_gate_text(data):
         ]
         lines += [f"• {g}" for g in item.get("gates", [])]
         lines.append("")
-    return "
-".join(lines)[:1900]
-
+    return "\n".join(lines)[:1900]
 
 async def update_status_channel(data):
     guild = bot.get_guild(GUILD_ID)
@@ -310,16 +300,12 @@ async def update_alerts(data):
         if phase == prev:
             continue
         if phase == "BLOCKED":
-            await channel.send(f"🟡 **ブロック発生**
-{name} がブロック中になりました。")
+            await channel.send(f"🟡 **ブロック発生**\n{name} がブロック中になりました。")
         elif phase == "HUMAN_GATE":
-            await channel.send(f"🔴 **人間の確認が必要です**
-{name} が人間の確認待ちになりました。")
+            await channel.send(f"🔴 **人間の確認が必要です**\n{name} が人間の確認待ちになりました。")
         elif prev in {"BLOCKED", "HUMAN_GATE"}:
-            await channel.send(f"✅ **警告解除**
-{name} の警告が解除されました。現在: {phase_display(phase)[1]}")
+            await channel.send(f"✅ **警告解除**\n{name} の警告が解除されました。現在: {phase_display(phase)[1]}")
     save_alerts(new)
-
 
 async def sync_once():
     try:
@@ -438,12 +424,11 @@ async def gate_decision(
         else:
             effect = "決定記録を保存します。"
         await interaction.followup.send(
-            f"✅ Human Gate Decisionを送信しました。
-対象: {target_id}
-ゲート: {gate}
-判断: {outcome.name}
-
-{effect}",
+            f"✅ Human Gate Decisionを送信しました。\n"
+            f"対象: {target_id}\n"
+            f"ゲート: {gate}\n"
+            f"判断: {outcome.name}\n\n"
+            f"{effect}",
             ephemeral=True,
         )
     except Exception as e:
@@ -466,9 +451,7 @@ async def continue_project(interaction: discord.Interaction, project: app_comman
         if data.get("phase") == "BLOCKED" or (deps and not resume.get("can_autonomously_resume", False)):
             text = f"🟡 {name} は依存関係待ちです。"
             if deps:
-                text += "
-" + "
-".join(f"• {x}" for x in deps[:8])
+                text += "\n" + "\n".join(f"• {x}" for x in deps[:8])
             return await interaction.followup.send(text[:1900], ephemeral=True)
         if not resume.get("can_resume", False) or not resume.get("can_autonomously_resume", False):
             return await interaction.followup.send(f"⚠️ {name} は現在、自動再開条件を満たしていません。", ephemeral=True)

@@ -1,0 +1,48 @@
+schema_version: "1.0"
+criteria_id: VG-ENERGY-STABILITY-CRITERIA-005
+track_id: VIRTUAL-GUITAR-RESEARCH-METHOD-005
+recorded_at: "2026-09-29"
+
+numerical_requirements:
+  finite_state:
+    required: true
+  output_clamp:
+    allowed_for_measurement_masking: false
+    required_telemetry:
+      - clamp_hits
+      - max_pre_clamp_value_if_clamp_exists
+  cfl:
+    required: true
+    rule: "Explicit finite-difference baseline must remain inside declared stability bound."
+  external_excitation:
+    rule: >-
+      Energy growth while a player/contact source is injecting energy is not automatically instability.
+      Evaluate boundedness after the external contact has released.
+  post_release_energy:
+    current_research_gate:
+      max_growth_ratio: 1.20
+    evidence_class: HYPOTHESIS_NUMERICAL_GATE
+    note: >-
+      This threshold is a research safety gate, not a calibrated physical decay target.
+  nonfinite:
+    action: REJECT_IMPLEMENTATION
+  runaway_state:
+    action: REJECT_IMPLEMENTATION
+
+sample_rate_gate:
+  required:
+    - 44100
+    - 48000
+    - 96000
+
+performance_measurement:
+  required:
+    - measured_runtime_seconds
+    - peak_python_memory_bytes
+  estimated_ops_only_is_sufficient: false
+
+future_006_additions:
+  - per_string_energy_transfer
+  - bridge_network_energy_balance
+  - sympathetic_transfer_decay
+  - all_six_strings_stability

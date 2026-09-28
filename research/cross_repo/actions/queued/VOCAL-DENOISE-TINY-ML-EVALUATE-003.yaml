@@ -1,0 +1,27 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-003
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-005
+  model_run_id: '36466102524'
+  seed: '2026092906'
+  max_files: '18'
+priority: 99
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-002
+reason: >-
+  Re-evaluate the exact same v0.2 HF-protect model under the corrected singer-balanced
+  evaluation protocol. The prior bounded evaluator selected the first N manifest files
+  and could overrepresent one singer, so its generalization numbers are not sufficient
+  for model-to-model decisions. Keep model weights, evaluation seed family, dataset,
+  and architecture fixed; change only singer-balanced file selection. No listening,
+  product-adoption, or release authority.
+previous_run_id: 36466633128

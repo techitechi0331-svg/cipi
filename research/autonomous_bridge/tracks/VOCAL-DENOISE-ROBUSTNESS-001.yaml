@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VOCAL-DENOISE-ROBUSTNESS-001
-enabled: false
-activation_state: BLOCKED_MODEL_CANDIDATE
+enabled: true
+activation_state: ACTIVE_MEASURED_CANDIDATE
 root_research_id: VOCAL-DENOISE-ROBUSTNESS-001
 research_question: >-
   Does a selected model candidate remain stable across singers, noise families, levels and edge cases?
@@ -62,7 +62,7 @@ initial_experiment:
     benchmark_profile:
       - vocal_denoise_robustness_foundation_v1
     sample_rate: 48000
-    input_set: SYNTHETIC_OR_METADATA_ONLY_UNTIL_DATA_GATE
+    input_set: MEASURED_TINY_ML_CANDIDATE_PLUS_IDENTITY_DISJOINT_METRICS
     reference_model: NO_PROPRIETARY_REVERSE_ENGINEERING
     objective_set:
       - vocal_preservation
@@ -83,7 +83,7 @@ initial_experiment:
 efficiency_policy:
   policy_id: VOCAL-DENOISE-ROBUSTNESS-001-EFFICIENCY-V1
   policy_version: "1.0"
-  state: BLOCKED_DEPENDENCY
+  state: ACTIVE
   max_memory_mb: 2048
   candidate_timeout_seconds: 10
   full_regression_required: false

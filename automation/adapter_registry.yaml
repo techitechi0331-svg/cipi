@@ -1,5 +1,18 @@
 schema_version: "1.0"
 adapters:
+
+  virtual_guitar_pickup_electrical_foundation_v1:
+    tracks:
+      - VIRTUAL_GUITAR_PICKUP_ELECTRONICS_RESEARCH
+    max_timeout_minutes: 20
+    network_required: false
+    purpose: >-
+      Deterministically audit the committed Fender manufacturer topology evidence,
+      peer-reviewed Pickup/Cable research, competing low/high-order model classes,
+      rejected shortcuts, and authority boundaries. PASS authorizes measurement-design
+      continuation only; it does not adopt pickup tone, component values, product DSP,
+      or a hardware-fidelity claim.
+
   black76_real_vocal_snapshot_gate_v1:
     tracks:
       - 1176_FAMILY_FORMAL

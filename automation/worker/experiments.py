@@ -13,6 +13,7 @@ import tempfile
 from typing import Any
 
 ADAPTERS = {
+    "virtual_guitar_pickup_electrical_foundation_v1",
     "black76_real_vocal_snapshot_gate_v1",
     "black76_real_vocal_snapshot_gate_v2",
     "black76_ratio_p2a_compare_v1",
@@ -3936,7 +3937,148 @@ def _vopripro_voprep_eventonly_integration(
     }
 
 
+
+def _virtual_guitar_pickup_electrical_foundation(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    del timeout_seconds
+    evidence_path = (
+        repo_root
+        / "research"
+        / "plugins"
+        / "virtual-guitar"
+        / "evidence"
+        / "VG-PICKUP-ELECTRICAL-EVIDENCE-FOUNDATION-20260929.json"
+    )
+    if not evidence_path.is_file():
+        raise FileNotFoundError(evidence_path)
+
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    sources = list(evidence.get("sources", []))
+    tier1 = [src for src in sources if int(src.get("tier", 99)) == 1]
+    tier2 = [src for src in sources if int(src.get("tier", 99)) == 2]
+
+    required_classes = {
+        "pickup_observation",
+        "magnetic_transduction",
+        "pickup_electrical",
+        "cable",
+        "amp_input",
+    }
+    model_classes = evidence.get("candidate_model_classes", {})
+    rejected = set(evidence.get("REJECTED", []))
+    authority = evidence.get("authority", {})
+
+    has_fender_sss = any(src.get("source_id") == "FENDER-SSS-PREWIRED-2019" for src in sources)
+    has_fender_hss = any(src.get("source_id") == "FENDER-MODERN-PLAYER-HSS" for src in sources)
+    has_peer_pickup = any(src.get("source_id") == "PAIVA-PAKARINEN-VALIMAKI-2012" for src in sources)
+    has_peer_cable = any(src.get("source_id") == "PAIVA-PENTTINEN-2011" for src in sources)
+    has_higher_order_counter = any(src.get("source_id") == "KOTIUGA-2015" for src in sources)
+
+    required_rejections = {
+        "PICKUP_EQUALS_STATIC_EQ",
+        "CABLE_EQUALS_POST_EQ_WITHOUT_NETWORK_EQUIVALENCE",
+        "REFERENCE_DI_BEFORE_PICKUP_ELECTRONICS",
+        "ONE_FENDER_SPECIMEN_VALUE_EQUALS_ALL_STRAT_VALUES",
+        "LOW_ORDER_RLC_IS_FINAL_BY_ASSUMPTION",
+        "DISTRIBUTED_PICKUP_MODEL_IS_REQUIRED_BY_ASSUMPTION",
+        "AMP_CAB_MIC_COLORATION_PROVES_UPSTREAM_REALISM",
+    }
+
+    gates = {
+        "manufacturer_sss_source_present": has_fender_sss,
+        "manufacturer_hss_source_present": has_fender_hss,
+        "peer_reviewed_pickup_model_source_present": has_peer_pickup,
+        "peer_reviewed_cable_loading_source_present": has_peer_cable,
+        "higher_order_counter_hypothesis_present": has_higher_order_counter,
+        "minimum_tier1_sources": len(tier1) >= 2,
+        "minimum_tier2_sources": len(tier2) >= 3,
+        "all_model_boundaries_present": required_classes.issubset(model_classes),
+        "shortcut_rejections_complete": required_rejections.issubset(rejected),
+        "reference_di_is_rejected_as_upstream_prerequisite":
+            "REFERENCE_DI_BEFORE_PICKUP_ELECTRONICS" in rejected,
+        "low_order_model_not_predeclared_final":
+            "LOW_ORDER_RLC_IS_FINAL_BY_ASSUMPTION" in rejected,
+        "higher_order_model_not_predeclared_required":
+            "DISTRIBUTED_PICKUP_MODEL_IS_REQUIRED_BY_ASSUMPTION" in rejected,
+        "automatic_product_decision_off": authority.get("automatic_product_decision") is False,
+        "automatic_knowledge_promotion_off": authority.get("automatic_knowledge_promotion") is False,
+        "product_repository_write_off": authority.get("product_repository_write") is False,
+    }
+
+    classification_counts = {
+        key: len(evidence.get(key, []))
+        for key in ("SOURCE_FACT", "MEASURED", "INFERRED", "HYPOTHESIS", "REJECTED")
+    }
+    candidate_counts = {
+        key: len(value) if isinstance(value, list) else 0
+        for key, value in model_classes.items()
+    }
+    acceptance_met = all(gates.values())
+
+    source_csv = io.StringIO()
+    source_writer = csv.writer(source_csv, lineterminator="\n")
+    source_writer.writerow(["source_id", "tier", "type", "title", "url"])
+    for src in sources:
+        source_writer.writerow([
+            src.get("source_id", ""),
+            src.get("tier", ""),
+            src.get("type", ""),
+            src.get("title", ""),
+            src.get("url", ""),
+        ])
+
+    model_csv = io.StringIO()
+    model_writer = csv.writer(model_csv, lineterminator="\n")
+    model_writer.writerow(["boundary", "candidate_model_class"])
+    for boundary in sorted(model_classes):
+        candidates = model_classes.get(boundary, [])
+        if isinstance(candidates, list):
+            for candidate in candidates:
+                model_writer.writerow([boundary, candidate])
+
+    metrics = {
+        "source_count": len(sources),
+        "tier1_source_count": len(tier1),
+        "tier2_source_count": len(tier2),
+        "classification_counts": classification_counts,
+        "candidate_model_counts": candidate_counts,
+        "evidence_gates": gates,
+        "foundation_ready_for_measurement_design": acceptance_met,
+        "model_adopted": False,
+        "pickup_fidelity_claim": False,
+        "reference_di_converged": False,
+        "product_repository_write": False,
+    }
+
+    return {
+        "metrics": metrics,
+        "raw_files": {
+            "source_matrix.csv": source_csv.getvalue(),
+            "candidate_model_matrix.csv": model_csv.getvalue(),
+            "foundation_summary.json": json.dumps(metrics, indent=2, sort_keys=True) + "\n",
+        },
+        "commands": [
+            "read committed source-backed Pickup/Electrical evidence foundation",
+            "verify primary/peer-reviewed source coverage",
+            "verify competing model classes and rejected shortcuts",
+            "verify authority remains research-only",
+        ],
+        "acceptance_met": acceptance_met,
+        "rejection_triggered": not acceptance_met,
+        "summary": (
+            "Deterministic evidence-foundation audit for Virtual Guitar Pickup/Electrical "
+            "research. PASS means only that the source hierarchy, causal boundaries, competing "
+            "model classes, falsification directions and authority constraints are sufficient "
+            "to design measurements. It does not adopt an RLC model, distributed model, pickup "
+            "tone, cable constants, amplifier target, product DSP, or hardware-fidelity claim."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    if name == "virtual_guitar_pickup_electrical_foundation_v1":
+        return _virtual_guitar_pickup_electrical_foundation(repo_root, timeout_seconds)
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
     if timeout_seconds < 1:

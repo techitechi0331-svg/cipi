@@ -5,6 +5,14 @@ adapters:
     tracks:
       - VIRTUAL_GUITAR_PICKUP_ELECTRONICS_RESEARCH
       - VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+    max_timeout_minutes: 20
+    network_required: false
+    purpose: >-
+      Deterministically audit the committed Fender manufacturer topology evidence,
+      peer-reviewed Pickup/Cable research, competing low/high-order model classes,
+      rejected shortcuts, and authority boundaries. PASS authorizes measurement-design
+      continuation only; it does not adopt pickup tone, component values, product DSP,
+      or a hardware-fidelity claim.
 
   virtual_guitar_physical_convergence_gate_v1:
     tracks:
@@ -41,14 +49,6 @@ adapters:
     purpose: >-
       Evaluate whether the Guitar Electrical Port contract is validated rather than
       design-only, without writing to the product repository.
-    max_timeout_minutes: 20
-    network_required: false
-    purpose: >-
-      Deterministically audit the committed Fender manufacturer topology evidence,
-      peer-reviewed Pickup/Cable research, competing low/high-order model classes,
-      rejected shortcuts, and authority boundaries. PASS authorizes measurement-design
-      continuation only; it does not adopt pickup tone, component values, product DSP,
-      or a hardware-fidelity claim.
 
   black76_real_vocal_snapshot_gate_v1:
     tracks:

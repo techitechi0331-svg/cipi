@@ -551,8 +551,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 71,
-      "dispatched": 1,
+      "completed": 72,
+      "dispatched": 0,
       "failed": 16,
       "quarantined": 0,
       "queued": 1
@@ -577,23 +577,19 @@
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [
-      "research-bot/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/auto-7672394d7d56"
+    "claimed_branches": [],
+    "claimed_count": 0,
+    "claimed_jobs": [],
+    "dependency_blocked_count": 1,
+    "human_gate_blocked_count": 1,
+    "human_gate_jobs": [
+      "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001<-FINAL_SUBJECTIVE_PICKUP_TONE,REAL_DI_AB,PRODUCT_ADOPTION_DECISION"
     ],
-    "claimed_count": 1,
-    "claimed_jobs": [
-      "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
-    ],
-    "dependency_blocked_count": 2,
-    "human_gate_blocked_count": 0,
-    "human_gate_jobs": [],
     "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/auto-7672394d7d56",
-    "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
-    "kind": "EVIDENCE_INTAKE",
-    "priority": 90
+    "kind": "IDLE",
+    "priority": -999
   }
 }

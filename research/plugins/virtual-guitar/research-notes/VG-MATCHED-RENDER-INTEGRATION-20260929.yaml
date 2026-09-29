@@ -1,7 +1,7 @@
 schema_version: "1.0"
 note_id: VG-MATCHED-RENDER-INTEGRATION-20260929
 project: virtual-guitar
-status: VALIDATION_PENDING
+status: VALIDATED
 recorded_at: "2026-09-29"
 
 purpose: >-
@@ -32,3 +32,18 @@ authority:
   product_integration: false
   automatic_final_decision: false
   automatic_knowledge_promotion: false
+
+validation_result:
+  workflow_run_id: 36513334593
+  conclusion: PASS
+  melon_harness_sha: c564a83adb92916cea0156de9b54adefcb88b541
+  virtual_guitar_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
+  smoke_coordinate: {string_number: 6, fret: 12, midi_note: 52}
+  parameter_hash: 07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038
+  wav_sha256: 28bf02196b1159fc45626fe8c6e3ed9608008f0fe678028aa9a4f6733443ca49
+  source_tree_sha256_before: 7de7a853f32ed43493306ef0df3957119bf8d9cdd34b6a9cd0d0953d3408e2c8
+  source_tree_sha256_after: 7de7a853f32ed43493306ef0df3957119bf8d9cdd34b6a9cd0d0953d3408e2c8
+  source_tree_unchanged: true
+  product_repository_persistent_write: false
+  pickup_di_stage_status: BLOCKED_STAGE_MISMATCH
+  fake_di_substitution_used: false

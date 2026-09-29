@@ -1,0 +1,31 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-008
+state: DISPATCHED
+repo_key: vocal_denoise
+workflow_key: train
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-008
+  dataset_registry_path: configs/datasets/registry.json
+  seed: '2026092905'
+  max_steps: '300'
+priority: 99
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-006
+reason: Reject the v0.4 low-SNR hard-example hypothesis after independent evaluation
+  regressed Test mean SNR from v0.3 +1.998 dB to +1.391 dB and worsened Test worst-case
+  from -3.727 dB to -5.871 dB. Its bounded diagnostics show the worst failures cluster
+  at high input SNR around 16-19 dB, especially belt/arpeggio phrases. Train v0.5
+  with the same architecture, singer balancing, HF protection, seed and 300-step budget,
+  but use a broad 0-20 dB view plus a 14-24 dB preservation view with a small mask-to-unity
+  suppression-backoff penalty. No listening, product-adoption, promotion or release
+  authority.
+previous_run_id: 36507881805
+dispatched_at: '2026-09-29T01:35:07.155614Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-train.yml

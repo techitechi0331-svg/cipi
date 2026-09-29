@@ -92,10 +92,15 @@ measured_reference_state:
   evidence_class: MEASURED
   reference_ready_does_not_mean_model_fidelity: true
 
+resolved_prerequisites:
+  - EGFXSET_REFERENCE_READY
+  - MATCHED_RENDER_HARNESS_AVAILABLE_AND_VALIDATED
+  - V11_BASELINE_EXECUTION_ADAPTER_AVAILABLE
+
 activation_blockers:
+  - V11_BASELINE_18_POINT_MEASUREMENT_NOT_COMPLETED
   - REALISM_004_IMPLEMENTATION_CANDIDATE_NOT_BUILT
-  - MATCHED_RENDER_HARNESS_NOT_AVAILABLE
-  - EXECUTION_ADAPTER_NOT_AVAILABLE
+  - PICKUP_DI_IMPLEMENTATION_CANDIDATE_NOT_AVAILABLE
 
 non_blocking_authority_note:
   product_repository_write: false

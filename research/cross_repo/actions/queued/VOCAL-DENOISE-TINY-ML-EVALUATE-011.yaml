@@ -1,0 +1,27 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-011
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-011
+  model_run_id: '36566425588'
+  seed: '20260929120'
+  max_files: '32'
+priority: 100
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-TRAIN-011
+reason: >-
+  Fresh-seed confirmation evaluation for the v0.8 confidence-aware Vocal Safety
+  candidate. Use a new three-seed family beginning at 20260929120 and the maximum
+  bounded 32 files per validation/test split. Primary checks are whether confidence
+  gating reduces high-SNR arpeggios/breathy worst-case degradation while preserving
+  mean SNR improvement, clean-vocal identity and high-frequency retention. No
+  listening, product-adoption, promotion or release authority.
+previous_run_id: 36517697779

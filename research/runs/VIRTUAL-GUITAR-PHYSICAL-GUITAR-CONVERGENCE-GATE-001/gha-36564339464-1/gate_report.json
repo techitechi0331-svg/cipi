@@ -1,0 +1,16 @@
+{
+  "acceptance_met": false,
+  "checks": {
+    "baseline_completed": true,
+    "deterministic_repeatability_pass": true,
+    "foundation_status": "SOURCE_EVIDENCE_FOUNDATION",
+    "pickup_di_research_job_completed": true,
+    "product_repository_write": false,
+    "same_midi_identity_collapse_count": 2,
+    "same_midi_identity_preserved": false
+  },
+  "gate": "physical",
+  "missing_evidence_or_work": [
+    "repair string/fret identity collapse before physical convergence"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "baseline": [
+    "completed VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001 evidence"
+  ],
+  "experiment_adapter": "virtual_guitar_physical_convergence_gate_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001.yaml",
+  "metrics": [
+    "same_midi_identity_collapse_count",
+    "deterministic_repeatability"
+  ],
+  "variants": [
+    "CURRENT_V11_PHYSICAL_GUITAR_BASELINE"
+  ]
+}

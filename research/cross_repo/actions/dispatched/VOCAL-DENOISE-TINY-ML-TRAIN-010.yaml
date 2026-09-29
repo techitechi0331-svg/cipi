@@ -1,0 +1,30 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-010
+state: DISPATCHED
+repo_key: vocal_denoise
+workflow_key: train
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-010
+  dataset_registry_path: configs/datasets/registry.json
+  seed: '2026092910'
+  max_steps: '400'
+priority: 100
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-009
+reason: Train v0.7 robustness candidate from the fresh-seed v0.6 confirmation evidence.
+  The dominant failures were high-SNR arpeggios/breathy examples with a smaller arpeggios/belt
+  cluster. v0.7 preserves singer/performance balancing, adds one category-level hard-bucket
+  exposure every four steps, narrows the preservation view to 16-24 dB, and strengthens
+  conservative mask backoff. Use a bounded 400-step run to test whether worst-case
+  degradation improves without sacrificing mean SNR. No listening, product-adoption,
+  promotion or release authority.
+previous_run_id: 36509253517
+dispatched_at: '2026-09-29T03:30:13.649688Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-train.yml

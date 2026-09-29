@@ -1,0 +1,14 @@
+{
+  "absolute_level_features_excluded": [
+    "rms_dbfs",
+    "peak_dbfs"
+  ],
+  "acceptance_met": true,
+  "baseline_identity_collapse_count": 2,
+  "baseline_track_id": "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001",
+  "dataset_id": "EGFXSET_CLEAN_V1",
+  "fully_measured_separated_pair_count": 2,
+  "pair_count": 2,
+  "pickup_configurations_per_pair": 5,
+  "reference_ready_does_not_mean_model_fidelity": true
+}

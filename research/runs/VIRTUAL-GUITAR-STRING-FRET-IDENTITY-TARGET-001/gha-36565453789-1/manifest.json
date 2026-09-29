@@ -1,0 +1,26 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read completed v1.1 baseline same-MIDI red-team evidence",
+    "read validated 690-capture EGFxSet measured reference",
+    "derive non-level same-MIDI string/fret separation targets across five pickup configurations"
+  ],
+  "completed_at": "2026-09-29T12:02:07.131545Z",
+  "environment": {
+    "experiment_adapter": "virtual_guitar_string_fret_identity_target_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
+  "random_seed": 0,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-36565453789-1",
+  "schema_version": "1.0",
+  "source_commit": "19b216731b83300880c63cf0b14fbc5d27293b8d",
+  "started_at": "2026-09-29T12:02:07.115687Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-REAL-AUDIO-AB-001
 enabled: false
-activation_state: BLOCKED_REFERENCE_AND_IMPLEMENTATION_CANDIDATE
+activation_state: BLOCKED_IMPLEMENTATION_CANDIDATE_AND_MATCHED_RENDER_HARNESS
 root_research_id: VIRTUAL-GUITAR-REAL-AUDIO-AB-001
 
 research_question: >-
@@ -38,7 +38,9 @@ depends_on_tracks:
 
 activation_requirements:
   measured_reference_track_ready: true
+  measured_reference_state: REFERENCE_READY
   measured_reference_expected_capture_count: 690
+  measured_reference_completed_run_id: melon-funnel-guitar-measured-reference-d7a5b217bc17
   implementation_candidate_required: true
   matched_render_harness_required: true
   execution_adapter_required_before_enable: true
@@ -46,7 +48,8 @@ activation_requirements:
   raw_physical_string_layer_required: true
   pickup_di_layer_required: true
   level_match_required: true
-  do_not_enable_while_product_repository_write_authority_false_and_candidate_missing: true
+  product_repository_write_false_does_not_block_baseline_research_render: true
+  implementation_candidate_must_not_be_written_to_product_repo_without_explicit_authority: true
 
 dedup_baseline:
   baseline_product_sha: bd26a0556fb501228b4551f61f6a8e760a14455b

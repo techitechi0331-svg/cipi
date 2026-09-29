@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "19b216731b83300880c63cf0b14fbc5d27293b8d",
+    "commit_sha": "51f6eaaf85ad98c093a7f3c2711b120b02b4f30d",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T21:01:54+09:00",
-  "generation_id": "d4dd84ab1e1833c18ff22590",
+  "generated_at": "2026-09-29T21:09:09+09:00",
+  "generation_id": "9d3f5a3a5008be9d21beb598",
   "human_gates": [
     {
       "blocking": true,
@@ -108,6 +108,16 @@
   "latest_decision_refs": [
     {
       "authority": "AUTOMATION",
+      "created_at": "2026-09-29T12:02:07.131545Z",
+      "decision": "ITERATE",
+      "decision_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001:gha-36565453789-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
+      "path": "research/decisions/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
       "created_at": "2026-09-29T11:53:00.037036Z",
       "decision": "REJECT",
       "decision_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:auto",
@@ -167,7 +177,7 @@
       "review_status": "PENDING"
     }
   ],
-  "phase": "AUTO_READY",
+  "phase": "HUMAN_GATE",
   "product_ref": {
     "commit_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
     "ref": "main",
@@ -175,26 +185,11 @@
     "verification": "VERIFIED"
   },
   "project_id": "virtual_guitar",
-  "ready": [
-    {
-      "classification": "READY",
-      "current_human_gates": [],
-      "declared_human_gates": [],
-      "depends_on_jobs": [],
-      "job_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml",
-      "priority": 96,
-      "research_question": "Do validated EGFxSet same-MIDI captures establish measured non-level string/fret identity differences that can serve as a falsifiable target for the next physical-string research candidate?",
-      "resolved_human_gates": [],
-      "state": "QUEUED",
-      "unresolved_dependencies": [],
-      "unresolved_human_gates": []
-    }
-  ],
+  "ready": [],
   "rejected_refs": [],
   "research": {
-    "decision_ref_count": 6,
-    "review_ref_count": 12,
+    "decision_ref_count": 7,
+    "review_ref_count": 14,
     "track_lifecycle": {
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
         "reason": "HUMAN_GATE",
@@ -252,7 +247,7 @@
       "MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001",
       "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001"
     ],
-    "can_autonomously_resume": true,
+    "can_autonomously_resume": false,
     "can_resume": true,
     "human_gates": [
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
@@ -269,28 +264,38 @@
       "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
       "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
       "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
-      "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001"
+      "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+      "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001"
     ],
-    "recommended_action": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
+    "recommended_action": "HUMAN_GATE",
     "required_context": [
+      "research/decisions/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
+      "research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
-      "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-review-brief.yaml",
-      "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml"
+      "research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-review-brief.yaml"
     ],
-    "resume_mode": "AUTO_READY"
+    "resume_mode": "HUMAN_GATE"
   },
   "review_refs": [
+    {
+      "created_at": "2026-09-29T12:02:07.131545Z",
+      "final_decision_made": false,
+      "job_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-triage.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001:gha-36565453789-1:triage-v1"
+    },
     {
       "created_at": "2026-09-29T11:53:00.037036Z",
       "final_decision_made": false,
@@ -338,6 +343,14 @@
       "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
       "route": "HUMAN_GATE_REVIEW",
       "triage_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001:gha-36467371731-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-review-brief.yaml",
+      "route": "CONTINUE_RESEARCH",
+      "triage_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001:gha-36565453789-1:triage-v1"
     },
     {
       "created_at": null,
@@ -400,7 +413,7 @@
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "c9271a2b8eb89683238562f1a5b8ec68d8b45829ebb5d3fb2c906383c6e2d0e2",
+      "sha256": "2f617e57385b68ae1b816c88b0c73874ad5bb0a4d4a39c80c78a0ccc5bdc8f59",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -440,9 +453,15 @@
       "source_type": "DECISION"
     },
     {
+      "path": "research/decisions/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7674b3a914642315de8e23f2310b1d48acd1c0016731cd1de7712c168a83657a",
+      "source_type": "DECISION"
+    },
+    {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "79c23bd9ee85dd3dcd5c559d4096ac3a4da5c0808a627d55e4048f3624a790f3",
+      "sha256": "3c26b3c6eb4b8afe649c823bf3aab52b392caa8511314f8c44cb18ebd842673d",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -455,7 +474,7 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "b744872c83018b0036316fd8242dc175ea99f688ac8d11bcc15f0ec04721327d",
+      "sha256": "31c120fca8fb89d7ff9c6d726eddfa3ea8d80b74a0654b006b0929bbfda252f5",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -495,10 +514,16 @@
       "source_type": "RESEARCH_JOB_DEPENDENCY"
     },
     {
+      "path": "research/jobs/completed/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "63bae8d23e170f538876a914a1a0c8a708fddddc55cbcca5d5a0d0605427c565",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "4196cc01034ec4a2ad2944a94dd8f7e70dff178642a67408468b6c00f81a0daf",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -514,16 +539,10 @@
       "source_type": "RESEARCH_JOB"
     },
     {
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml",
-      "repository": "techitechi0331-svg/cipi",
-      "sha256": "bc4be84386d9e1b7cd56c88abb101bca5bf593f943c0db97f745f06b6e977ba7",
-      "source_type": "RESEARCH_JOB"
-    },
-    {
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "3b5c1b1aaa603df1c6d6795f7593d8eb69b241eed39e890e3c7bccfa1a8355b1",
+      "sha256": "a4cb70e1e33b585be56dee49611975b0fa373d5c9199d8f005396c38c4be648e",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -597,18 +616,29 @@
       "repository": "techitechi0331-svg/cipi",
       "sha256": "66186fcdfe44ce06903e54c0b2f9ff538bf7c5f0e1317cbe049848665972e926",
       "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "66ff30cbc3af85126d8a22b867fcc95bbe9335bcd4fd311b5aadbe23677d4cb3",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "5a0d504ec448f8107c39587ba7e21b2f663d7e6a6fc4f63b7639b5e510f8205f",
+      "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "af79914d4d7f19316a2abdc20a41b6beec35197de9346c6b11e648b28c76bd93",
+  "source_state_digest": "c88aba7b95119dd1141566481867b112f6b1f33b9f3f9dc425d996a3f0e96d22",
   "unresolved_questions": [
-    "Do validated EGFxSet same-MIDI captures establish measured non-level string/fret identity differences that can serve as a falsifiable target for the next physical-string research candidate?",
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"
   ],
   "work": {
     "blocked_count": 1,
     "human_gate_count": 7,
-    "queued_job_count": 3,
-    "ready_count": 1
+    "queued_job_count": 2,
+    "ready_count": 0
   }
 }

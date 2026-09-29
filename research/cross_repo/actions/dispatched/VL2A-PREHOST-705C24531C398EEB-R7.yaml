@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: VL2A-PREHOST-705C24531C398EEB-R7
-state: QUEUED
+state: DISPATCHED
 repo_key: vl2a
 workflow_key: prehost_stage
 ref: main
@@ -11,7 +11,7 @@ inputs:
   candidate_json: '{"candidate_id":"HA100X-R4-012-591362e2","core_loss_ohm":266576.9148779566,"leakage_h":0.00016910013055046575,"magnetizing_h":23.787562773717497,"primary_dcr_ohm":64.42056271688182,"secondary_cap_f":1.8971658271371616e-11,"secondary_dcr_ohm":3031.5360890531933,"turns_ratio":10.0}'
   evidence_hash: 047fb05774aa7f8954148ba9dbd6d6bfba1c035abf52c15e885017d075fd7ca6
 priority: 99
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -29,16 +29,21 @@ retry_of: VL2A-PREHOST-705C24531C398EEB-R6
 remediation_reason: PAIRED_ISOLATED_PROCESS_CPU_AND_T4_GAIN_REUSE
 remediation_product_repo_commit: b894c74304145196c4f553545ea75360e166fdd9
 previous_failed_run_id: 36459085904
-reason: >
-  Bounded remediation retry after R6 proved compiled isolation, control regression,
-  state/automation compatibility, and real-vocal objective A/B all PASS, with Gate 5
-  failing only the CPU decision. The failing checkpoint showed the old 12 percent
+reason: 'Bounded remediation retry after R6 proved compiled isolation, control regression,
+  state/automation compatibility, and real-vocal objective A/B all PASS, with Gate
+  5 failing only the CPU decision. The failing checkpoint showed the old 12 percent
   pre-host absolute CPU ceiling was stricter than the accepted RC2 CPU safety gate
   and even the unchanged RC2 baseline exceeded it on the same runner. VocalPrepComp
   main now restores the accepted RC2 absolute ceiling (<50 percent of one realtime
   core), retains a new-candidate incremental ceiling (candidate/baseline <=1.35x),
   runs every channel/block case as a fresh process with alternating A/B order and
-  median-of-five measurements, uses final 0 dB Gain semantics, and removes the
-  candidate-only extra T4 resistance pow/exp by deriving HA100X load weight from
-  the already-computed optical node gain. Candidate identity and evidence hash are
-  unchanged. Product release and Cubase/listening gates remain human-only.
+  median-of-five measurements, uses final 0 dB Gain semantics, and removes the candidate-only
+  extra T4 resistance pow/exp by deriving HA100X load weight from the already-computed
+  optical node gain. Candidate identity and evidence hash are unchanged. Product release
+  and Cubase/listening gates remain human-only.
+
+  '
+previous_run_id: 36459085904
+dispatched_at: '2026-09-29T00:19:00.546144Z'
+repository: techitechi0331-svg/VocalPrepComp
+workflow_file: vl2a-prehost-stage.yml

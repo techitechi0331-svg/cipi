@@ -1,0 +1,60 @@
+schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001
+state: QUEUED
+priority: 96
+track:
+  id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001
+  path: research/plugins/virtual-guitar/research-tracks
+research_phase: MEASURED_IDENTITY_TARGET_EXTRACTION
+research_question: >-
+  Do validated EGFxSet same-MIDI captures establish measured non-level string/fret identity
+  differences that can serve as a falsifiable target for the next physical-string research candidate?
+hypothesis: >-
+  Real Stratocaster captures at the same MIDI pitch but different string/fret coordinates
+  exhibit non-level spectral/decay differences across pickup configurations, while v1.1
+  collapses those coordinates to identical output.
+counter_hypotheses:
+  - MIDI pitch alone is sufficient to represent physical string identity.
+  - Any observed difference is only absolute level normalization.
+baseline:
+  - VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001 completed MEASURED baseline
+  - EGFxSet 690/690 REFERENCE_READY measured reference
+  - v1.1 same-MIDI collapse pairs are MIDI 62 s4f12 vs s6f22 and MIDI 67 s3f12 vs s5f22
+variants:
+  - MIDI_62_S4F12_VS_S6F22
+  - MIDI_67_S3F12_VS_S5F22
+metrics:
+  - measured_same_midi_pair_count
+  - five_pickup_coverage
+  - decay_delta
+  - harmonic_centroid_delta
+  - harmonic_rolloff_delta
+  - hf_harmonic_ratio_delta
+  - crest_factor_delta
+acceptance:
+  - both baseline same-MIDI collapse pairs are found in EGFxSet
+  - all five pickup configurations are present for both sides of each pair
+  - non-level measured separation exists for every pair across all five pickup configurations
+  - RMS and peak are excluded as physical-truth objectives
+  - no product repository write
+rejection:
+  - missing EGFxSet coordinate or pickup coverage
+  - only absolute level explains the difference
+  - target is treated as a product model or fidelity claim
+max_runs: 1
+timeout_minutes: 5
+experiment_adapter: virtual_guitar_string_fret_identity_target_v1
+allowed_operations:
+  - inspect_committed_v11_baseline_evidence
+  - inspect_committed_egfxset_measured_reference
+  - derive_non_level_same_midi_identity_targets
+  - write_research_evidence
+prohibited_operations:
+  - product_repository_write
+  - automatic_product_integration
+  - automatic_knowledge_promotion
+  - use_rms_or_peak_as_hardware_truth
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

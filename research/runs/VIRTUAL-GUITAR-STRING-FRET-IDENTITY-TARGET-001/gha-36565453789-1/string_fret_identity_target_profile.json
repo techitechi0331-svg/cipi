@@ -1,0 +1,224 @@
+{
+  "authority": {
+    "automatic_knowledge_promotion": false,
+    "automatic_product_decision": false,
+    "product_repository_write": false
+  },
+  "baseline_track_id": "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001",
+  "evidence_class": "MEASURED",
+  "excluded_as_physical_truth": [
+    "rms_dbfs",
+    "peak_dbfs"
+  ],
+  "pairs": [
+    {
+      "baseline_classification": "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED",
+      "baseline_wav_sha_equal": true,
+      "left": {
+        "fret": 12,
+        "string_number": 4
+      },
+      "midi_note": 62,
+      "pickup_rows": [
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0074",
+          "left_sha256": "382a579e10085ba6040ace6abdf9d0d6ba31f01bff57d9372868613b2130fe94",
+          "material_non_level_delta_count": 5,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 5.555077145377425,
+            "decay_db_per_s": 1.0216971187310797,
+            "harmonic_centroid_hz": 129.85355608986526,
+            "harmonic_rolloff_hz": 293.6647679174076,
+            "hf_harmonic_ratio": 0.0005299903447776532
+          },
+          "pickup_configuration": "bridge",
+          "right_capture_id": "EGFX-0131",
+          "right_sha256": "12d4a269de360a2398d372e41e20c0364b770d9752d7201fe42413a285c3f12f",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0212",
+          "left_sha256": "276cc864e5a52cbd4b4f1597c80a0bf47be5989f6d8b903aa56c20ae73f1d777",
+          "material_non_level_delta_count": 5,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 1.929288802667319,
+            "decay_db_per_s": 4.09659850803985,
+            "harmonic_centroid_hz": 146.69602436898344,
+            "harmonic_rolloff_hz": 293.6647679174076,
+            "hf_harmonic_ratio": 9.929761993266584e-05
+          },
+          "pickup_configuration": "bridge-middle",
+          "right_capture_id": "EGFX-0269",
+          "right_sha256": "d3154894cdb330b0dba3820cfa3671e6ff9e5e2c111f72805aa320b5c82e893a",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0350",
+          "left_sha256": "74ed03306731d161b9d820daa31347f3d32af564eaca9859d97fdd1018e6ac1c",
+          "material_non_level_delta_count": 5,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 2.730391370324721,
+            "decay_db_per_s": 5.884389030896008,
+            "harmonic_centroid_hz": 49.58949156829726,
+            "harmonic_rolloff_hz": 293.6647679174076,
+            "hf_harmonic_ratio": 0.0002903839578181382
+          },
+          "pickup_configuration": "middle",
+          "right_capture_id": "EGFX-0407",
+          "right_sha256": "1ca38a2738d6176522bfeb750d4cb141f5a6c6cc23173567286d70c893f9e629",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0488",
+          "left_sha256": "2ebc49a41c6e8a3d6f556dfc6e3ea62985eddb9d4a2be4c6e06953f6633f878e",
+          "material_non_level_delta_count": 4,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 2.562617867401734,
+            "decay_db_per_s": 5.004852078297123,
+            "harmonic_centroid_hz": 27.479484287796197,
+            "harmonic_rolloff_hz": 0.0,
+            "hf_harmonic_ratio": 6.535269849304894e-05
+          },
+          "pickup_configuration": "middle-neck",
+          "right_capture_id": "EGFX-0545",
+          "right_sha256": "28a2dcde6cb307490688eecc2f12ed9e88f9fe1f93cb9d4ee52cd8e5fdc22a46",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0626",
+          "left_sha256": "47a0338fa6a6ac39685c67b7f7e60f856d40750468a89a6cdb8a1baf128c4e95",
+          "material_non_level_delta_count": 5,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 5.773997681433929,
+            "decay_db_per_s": 8.198812291347917,
+            "harmonic_centroid_hz": 65.90707301795976,
+            "harmonic_rolloff_hz": 293.6647679174076,
+            "hf_harmonic_ratio": 0.0001490847802876146
+          },
+          "pickup_configuration": "neck",
+          "right_capture_id": "EGFX-0683",
+          "right_sha256": "7aa3c7a4ed1ebdbd647a9456c8c93422d972ba8d033a0b95e0fb36468a2da61a",
+          "wav_identity_differs": true
+        }
+      ],
+      "required_pickup_count": 5,
+      "right": {
+        "fret": 22,
+        "string_number": 6
+      },
+      "separated_pickup_count": 5
+    },
+    {
+      "baseline_classification": "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED",
+      "baseline_wav_sha_equal": true,
+      "left": {
+        "fret": 12,
+        "string_number": 3
+      },
+      "midi_note": 67,
+      "pickup_rows": [
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0051",
+          "left_sha256": "e13a64e698af64b52f25af3a43d4df53edf9330262b7c46e26c141dc1fc0a21c",
+          "material_non_level_delta_count": 4,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 4.5712144123697875,
+            "decay_db_per_s": 1.7125906877147692,
+            "harmonic_centroid_hz": 23.379815175191197,
+            "harmonic_rolloff_hz": 0.0,
+            "hf_harmonic_ratio": 1.0478638482082851e-05
+          },
+          "pickup_configuration": "bridge",
+          "right_capture_id": "EGFX-0108",
+          "right_sha256": "9c4fda8bc0bb090470900577d3fcdb021be0342767f0dbad1ebeb5842ee6687e",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0189",
+          "left_sha256": "21009ee035620a7f6247940682a3d535cf9e84bd8a061d85c2c9f2e2652e1012",
+          "material_non_level_delta_count": 5,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 4.742732449014021,
+            "decay_db_per_s": 1.6390425187115163,
+            "harmonic_centroid_hz": 88.11111247680753,
+            "harmonic_rolloff_hz": 391.99543598174927,
+            "hf_harmonic_ratio": 0.00020928953969662353
+          },
+          "pickup_configuration": "bridge-middle",
+          "right_capture_id": "EGFX-0246",
+          "right_sha256": "d9d437eaaba0658b267b4f5b82aa723136ebb89dc220f7f2df7e77a3cdcc5d82",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0327",
+          "left_sha256": "0e825f222727d019b08e47b66733eb232f38277899e63c0608435469bf28e342",
+          "material_non_level_delta_count": 5,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 3.2090882563022802,
+            "decay_db_per_s": 1.6495240320056777,
+            "harmonic_centroid_hz": 80.36868934954953,
+            "harmonic_rolloff_hz": 391.99543598174927,
+            "hf_harmonic_ratio": 1.3834471506952273e-05
+          },
+          "pickup_configuration": "middle",
+          "right_capture_id": "EGFX-0384",
+          "right_sha256": "13ffc97ced4d068e94d2a788cd4dd8ed0c23a44f9c40ca06b68be30951cc1881",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0465",
+          "left_sha256": "ba35418db512f0b04f2dcffb434a813ab52562f75bd40732d7b7332afca77a0c",
+          "material_non_level_delta_count": 4,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 1.2187646129371998,
+            "decay_db_per_s": 4.422409610525987,
+            "harmonic_centroid_hz": 23.01052661447727,
+            "harmonic_rolloff_hz": 0.0,
+            "hf_harmonic_ratio": 1.5011899968392113e-05
+          },
+          "pickup_configuration": "middle-neck",
+          "right_capture_id": "EGFX-0522",
+          "right_sha256": "d27b0b3f7431a2375b8ced986f83d04b07c90d9c52dbd955e02c2cd7a0e31752",
+          "wav_identity_differs": true
+        },
+        {
+          "classification": "MEASURED_STRING_FRET_IDENTITY_SEPARATION",
+          "left_capture_id": "EGFX-0603",
+          "left_sha256": "f4cb07f01da13b956a0e76d225c5ba3cfb7a544a581d792d612274166b8d7878",
+          "material_non_level_delta_count": 4,
+          "non_level_feature_deltas": {
+            "crest_factor_db": 2.95614574630266,
+            "decay_db_per_s": 0.6392122323462814,
+            "harmonic_centroid_hz": 34.71021801679416,
+            "harmonic_rolloff_hz": 0.0,
+            "hf_harmonic_ratio": 2.8288435065800204e-05
+          },
+          "pickup_configuration": "neck",
+          "right_capture_id": "EGFX-0660",
+          "right_sha256": "5e5d7b106778103dd35c90e62039e61db6064aa6a9f5e5f3e8292b05e4bc9c16",
+          "wav_identity_differs": true
+        }
+      ],
+      "required_pickup_count": 5,
+      "right": {
+        "fret": 22,
+        "string_number": 5
+      },
+      "separated_pickup_count": 5
+    }
+  ],
+  "profile_id": "VG-STRING-FRET-IDENTITY-TARGET-EGFXSET-001",
+  "purpose": "Define measured same-MIDI string/fret separation targets for research-side physical-string candidates. This profile is not a product model or fidelity claim.",
+  "reference_family": "STRATOCASTER_2004_22FRET",
+  "schema_version": "1.0",
+  "source_dataset": "EGFXSET_CLEAN_V1"
+}

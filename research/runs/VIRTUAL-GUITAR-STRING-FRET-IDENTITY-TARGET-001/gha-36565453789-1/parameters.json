@@ -1,0 +1,22 @@
+{
+  "baseline": [
+    "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001 completed MEASURED baseline",
+    "EGFxSet 690/690 REFERENCE_READY measured reference",
+    "v1.1 same-MIDI collapse pairs are MIDI 62 s4f12 vs s6f22 and MIDI 67 s3f12 vs s5f22"
+  ],
+  "experiment_adapter": "virtual_guitar_string_fret_identity_target_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml",
+  "metrics": [
+    "measured_same_midi_pair_count",
+    "five_pickup_coverage",
+    "decay_delta",
+    "harmonic_centroid_delta",
+    "harmonic_rolloff_delta",
+    "hf_harmonic_ratio_delta",
+    "crest_factor_delta"
+  ],
+  "variants": [
+    "MIDI_62_S4F12_VS_S6F22",
+    "MIDI_67_S3F12_VS_S5F22"
+  ]
+}

@@ -1,0 +1,86 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001:gha-36565453789-1:review-brief-v1
+job_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001
+run_id: gha-36565453789-1
+source_run: research/runs/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1-triage.yaml
+triage_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001:gha-36565453789-1:triage-v1
+job_path: research/jobs/completed/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml
+research_question: Do validated EGFxSet same-MIDI captures establish measured non-level
+  string/fret identity differences that can serve as a falsifiable target for the
+  next physical-string research candidate?
+hypothesis: Real Stratocaster captures at the same MIDI pitch but different string/fret
+  coordinates exhibit non-level spectral/decay differences across pickup configurations,
+  while v1.1 collapses those coordinates to identical output.
+counter_hypotheses:
+- MIDI pitch alone is sufficient to represent physical string identity.
+- Any observed difference is only absolute level normalization.
+acceptance_criteria:
+- both baseline same-MIDI collapse pairs are found in EGFxSet
+- all five pickup configurations are present for both sides of each pair
+- non-level measured separation exists for every pair across all five pickup configurations
+- RMS and peak are excluded as physical-truth objectives
+- no product repository write
+rejection_criteria:
+- missing EGFxSet coordinate or pickup coverage
+- only absolute level explains the difference
+- target is treated as a product model or fidelity claim
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 19b216731b83300880c63cf0b14fbc5d27293b8d
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: absolute_level_features_excluded[0]
+  value: rms_dbfs
+- path: absolute_level_features_excluded[1]
+  value: peak_dbfs
+- path: acceptance_met
+  value: true
+- path: baseline_identity_collapse_count
+  value: 2
+- path: baseline_track_id
+  value: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
+- path: dataset_id
+  value: EGFXSET_CLEAN_V1
+- path: fully_measured_separated_pair_count
+  value: 2
+- path: pair_count
+  value: 2
+- path: pickup_configurations_per_pair
+  value: 5
+- path: reference_ready_does_not_mean_model_fidelity
+  value: true
+knowledge_candidate: null
+source_proposal:
+  decision_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001:gha-36565453789-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

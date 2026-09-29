@@ -1,0 +1,142 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+enabled: false
+activation_state: PENDING_MELON_ADAPTER_VALIDATION_AND_DATASET_ACQUISITION
+root_research_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+
+research_question: >-
+  Can a provenance-verified EGFxSet clean Stratocaster reference corpus establish a real-audio
+  benchmark that separates physical-string/model error from pickup/electronics differences after
+  the bounded synthetic Realism-004 search reached HUMAN_GATE?
+
+hypothesis_id: HYP-VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+hypothesis: >-
+  A complete integrity-checked 690-note EGFxSet clean manifest with extracted per-capture acoustic
+  features can provide MEASURED reference evidence for model-vs-real A/B without treating dataset
+  normalization, synthetic proxy scores, or a different guitar family as hardware fidelity truth.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: true
+human_gate_conditions:
+  - DATASET_RIGHTS_AND_PROVENANCE
+  - COMPLETE_REFERENCE_MANIFEST
+  - REAL_AUDIO_AB
+  - HUMAN_LISTENING
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+depends_on_tracks:
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+
+activation_requirements:
+  melon_adapter: melon/guitar_measured_reference_research.py
+  melon_adapter_validation_required: PASS
+  primary_dataset: EGFXSET_CLEAN_V1
+  canonical_source: https://zenodo.org/records/7044411
+  doi: 10.5281/zenodo.7044411
+  expected_clean_archive_md5: cdb1b401960f56becc8640387910e78a
+  expected_clean_capture_count: 690
+  required_sample_rate_hz: 48000
+  required_bit_depth: 24
+  research_use_permission_required: true
+  raw_audio_in_repo_forbidden: true
+  runner_cache_allowed: true
+  complete_per_capture_sha256_required: true
+  extracted_feature_manifest_required: true
+  do_not_enable_before_adapter_and_dataset_validation: true
+
+dedup_baseline:
+  prior_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+  prior_stop_reason: HUMAN_GATE
+  evidence_snapshot: research/plugins/virtual-guitar/research-notes/VG-EGFXSET-REAL-AUDIO-REFERENCE-20260929-001.yaml
+  rejected_directions:
+    - SYNTHETIC_PROXY_EQUALS_REAL_GUITAR_FIDELITY
+    - DATASET_NORMALIZATION_EQUALS_HARDWARE_OUTPUT_LEVEL
+    - GUITAR_TECHS_EQUALS_STRATOCASTER_TONAL_GROUND_TRUTH
+    - UNALIGNED_GUITAR_TECHS_SHORT_TIME_METRICS
+    - RAW_DATASET_AUDIO_COMMITTED_TO_REPOSITORY
+    - AUTO_PRODUCT_ADOPTION
+
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 690
+  max_runtime: 1800
+  max_same_hypothesis_retry: 1
+  max_same_architecture_retry: 1
+  max_no_improvement_runs: 1
+
+initial_experiment:
+  experiment_id: EXP-VIRTUAL-GUITAR-MEASURED-REFERENCE-R1
+  experiment_type: REAL_AUDIO_REFERENCE_PREFLIGHT
+  expected_information_gain: 0.95
+  scope:
+    - virtual_guitar
+    - egfxset
+    - measured_reference
+    - stratocaster_clean_di
+    - real_audio_ab
+  inputs:
+    seed: 2026092904
+    population: 4
+    generations: 1
+    max_candidates: 690
+    max_runtime_seconds: 900
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A complete EGFxSet clean reference manifest can cross the evidence boundary from synthetic
+      architecture identifiability to measured real-audio comparison without claiming product fidelity.
+    architecture: EGFXSET_REAL_AUDIO_REFERENCE_PREFLIGHT_V1
+    tested_parameters:
+      dataset_identity: EGFXSET_CLEAN_V1
+      reference_family: STRATOCASTER_2004_22FRET
+      capture_count: 690
+      per_capture_hash: required
+      per_capture_features: required
+    benchmark_profile:
+      - egfxset_clean_strat_reference_v1
+      - guitar_real_audio_ab_preflight_v1
+    sample_rate: 48000
+    input_set: EGFXSET_CLEAN_V1
+    reference_model: STRATOCASTER_2004_22FRET
+    objective_set:
+      - provenance_integrity
+      - capture_coverage
+      - feature_readiness
+      - uncertainty_preservation
+    relevant_constraints:
+      - no_synthetic_proxy_as_real_fidelity
+      - no_absolute_level_truth_from_normalized_dataset
+      - no_product_integration
+      - automatic_promotion_off
+      - human_listening_required
+    experiment_type: REAL_AUDIO_REFERENCE_PREFLIGHT
+    scope:
+      - virtual_guitar
+      - measured_reference
+      - real_audio
+
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: PENDING_ADAPTER_AND_DATASET
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false

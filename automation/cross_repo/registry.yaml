@@ -41,6 +41,18 @@ repositories:
           - melon_sha
           - virtual_guitar_sha
 
+      vg_string_physics_precision:
+        file: vg-string-physics-precision.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - job_id
+          - melon_sha
+        required_inputs:
+          - job_id
+          - melon_sha
+
   black76:
     repository: techitechi0331-svg/76blackCompressor
     default_ref: main

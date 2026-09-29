@@ -549,13 +549,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001",
+      "kind": "CROSS_REPO",
+      "priority": 95,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 71,
       "dispatched": 0,
       "failed": 16,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -593,9 +598,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/auto-ec74b479214e",
-    "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
-    "kind": "EVIDENCE_INTAKE",
-    "priority": 90
+    "action_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001",
+    "kind": "CROSS_REPO",
+    "priority": 95,
+    "reason": "ready_external_action"
   }
 }

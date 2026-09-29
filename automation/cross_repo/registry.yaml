@@ -45,6 +45,8 @@ repositories:
         file: vg-string-physics-precision.yml
         dispatch: true
         monitor: true
+        runner_class: self-hosted
+        runner_wait_minutes: 20
         artifact_ingest: metadata_and_text
         allowed_inputs:
           - job_id

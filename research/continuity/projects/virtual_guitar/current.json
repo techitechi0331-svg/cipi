@@ -59,8 +59,6 @@
       "resolved_human_gates": [],
       "state": "QUEUED",
       "unresolved_dependencies": [
-        "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
-        "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
         "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
         "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
       ],
@@ -73,13 +71,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "de54edd95a502563a84826308f9f2b201c51502d",
+    "commit_sha": "67beb7b287618e7d01e87d241e2037fd464e5416",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T20:50:11+09:00",
-  "generation_id": "a8e870dab84ef11a89d50718",
+  "generated_at": "2026-09-29T20:58:30+09:00",
+  "generation_id": "95e8b52651823bcd381fa5b1",
   "human_gates": [
     {
       "blocking": true,
@@ -144,6 +142,26 @@
   "latest_decision_refs": [
     {
       "authority": "AUTOMATION",
+      "created_at": "2026-09-29T11:52:13.053769Z",
+      "decision": "REJECT",
+      "decision_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+      "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-29T11:51:36.975509Z",
+      "decision": "REJECT",
+      "decision_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001:gha-36564339464-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+      "path": "research/decisions/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
       "created_at": "2026-09-29T04:15:16.389909Z",
       "decision": "ITERATE",
       "decision_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001:gha-36520787383-1:auto",
@@ -177,34 +195,6 @@
       "current_human_gates": [],
       "declared_human_gates": [],
       "depends_on_jobs": [],
-      "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001.yaml",
-      "priority": 90,
-      "research_question": "Does the measured v1.1 physical-guitar baseline preserve string/fret identity strongly enough to permit downstream Pickup/Electronics product integration research?",
-      "resolved_human_gates": [],
-      "state": "QUEUED",
-      "unresolved_dependencies": [],
-      "unresolved_human_gates": []
-    },
-    {
-      "classification": "READY",
-      "current_human_gates": [],
-      "declared_human_gates": [],
-      "depends_on_jobs": [],
-      "job_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001.yaml",
-      "priority": 89,
-      "research_question": "Is the Pickup Observation boundary supported by measured pickup-position/aperture evidence and a physical input that preserves string/fret identity?",
-      "resolved_human_gates": [],
-      "state": "QUEUED",
-      "unresolved_dependencies": [],
-      "unresolved_human_gates": []
-    },
-    {
-      "classification": "READY",
-      "current_human_gates": [],
-      "declared_human_gates": [],
-      "depends_on_jobs": [],
       "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
       "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml",
       "priority": 88,
@@ -231,8 +221,8 @@
   ],
   "rejected_refs": [],
   "research": {
-    "decision_ref_count": 2,
-    "review_ref_count": 4,
+    "decision_ref_count": 4,
+    "review_ref_count": 8,
     "track_lifecycle": {
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
         "reason": "HUMAN_GATE",
@@ -290,9 +280,7 @@
       "MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001",
       "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001",
       "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
-      "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
-      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
-      "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001"
+      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001"
     ],
     "can_autonomously_resume": true,
     "can_resume": true,
@@ -306,21 +294,45 @@
       "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001"
     ],
     "must_not_repeat": [
+      "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
       "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
-      "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001"
+      "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
+      "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001"
     ],
-    "recommended_action": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+    "recommended_action": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
     "required_context": [
+      "research/decisions/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-auto.yaml",
+      "research/decisions/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-triage.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-review-brief.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml",
-      "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-review-brief.yaml"
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-review-brief.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-review-brief.yaml"
     ],
     "resume_mode": "AUTO_READY"
   },
   "review_refs": [
+    {
+      "created_at": "2026-09-29T11:52:13.053769Z",
+      "final_decision_made": false,
+      "job_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-29T11:51:36.975509Z",
+      "final_decision_made": false,
+      "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001:gha-36564339464-1:triage-v1"
+    },
     {
       "created_at": "2026-09-29T04:15:16.389909Z",
       "final_decision_made": false,
@@ -340,6 +352,14 @@
     {
       "created_at": null,
       "final_decision_made": null,
+      "job_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
       "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
       "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml",
       "route": "HUMAN_GATE_REVIEW",
@@ -352,6 +372,14 @@
       "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-review-brief.yaml",
       "route": "CONTINUE_RESEARCH",
       "triage_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001:gha-36520787383-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001:gha-36564339464-1:triage-v1"
     }
   ],
   "schema_version": "1.0",
@@ -359,15 +387,21 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "f9703b679422a22a2d1693d492b436c837358ae3a83a24203134bc05ae20f8aa",
+      "sha256": "5c999470de2f2818a6b83b2ca841b8166837b79e1d40762e2d21d559d4ef5753",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "c83034d637c4823900c5479745ad08ff5e34748604ca9523fe55de69711e0b8a",
+      "sha256": "64500f3233d81f993194232d0bd82e175dae8a67045f6d6e379daabbb4d68350",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ddfbf8d17bcd3082d98915232fd89a43bfa134609c22cea0f49fef2ee67b578f",
+      "source_type": "DECISION"
     },
     {
       "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-auto.yaml",
@@ -382,9 +416,15 @@
       "source_type": "DECISION"
     },
     {
+      "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "fe258026aaa1e5f75143bebf36f91effbc935a20afecf7cae118c00786d3ab9f",
+      "source_type": "DECISION"
+    },
+    {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "a467b90dd6597bb713f0a2eb22933c6cf4eaabac69aa18647f1f3bf37a41e151",
+      "sha256": "ea3222df95b9a19d04f2d7ee76b855818ffceb75e49beb529e7e81aca79c4210",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -397,8 +437,14 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "44d4a7cd0b30248126a61190b9f5effe59d1de781c41f382c06112bc0ca7587f",
+      "sha256": "048614abbfe3daa11d3548e14cc5328a795c7df4805cfb2d6497137a3fcac08b",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "69f6a35b26220018d81c23bfd79dee36dd62b3338cd8f3a0f8148a7fb8d9ec51",
+      "source_type": "RESEARCH_JOB_DEPENDENCY"
     },
     {
       "path": "research/jobs/completed/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001.yaml",
@@ -413,10 +459,16 @@
       "source_type": "RESEARCH_JOB_COMPLETED"
     },
     {
+      "path": "research/jobs/completed/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "3e7f028ed6f725d3c111274dd79aa620e090592fa5cb09bf2c54815f8434904c",
+      "source_type": "RESEARCH_JOB_DEPENDENCY"
+    },
+    {
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "56eed1c9645247f4979f559be7c85b1cbbed3b81203594b95790743be9576a45",
+      "sha256": "591cd30898f22c0cb226758a5f75908427a9fa25d1d2f385306db35237384651",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -432,12 +484,6 @@
       "source_type": "RESEARCH_JOB"
     },
     {
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001.yaml",
-      "repository": "techitechi0331-svg/cipi",
-      "sha256": "62fd78d8a71e629419c732ea33b2e14ec5acdb22f4262f7e97f209769a67bb03",
-      "source_type": "RESEARCH_JOB"
-    },
-    {
       "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml",
       "repository": "techitechi0331-svg/cipi",
       "sha256": "ec74b479214e0f9e7fdc18f2a15a3e9e64ec669530a7e9a51969a085d225565d",
@@ -450,17 +496,23 @@
       "source_type": "RESEARCH_JOB"
     },
     {
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001.yaml",
-      "repository": "techitechi0331-svg/cipi",
-      "sha256": "ee5f627fb29ff1a755025cd0cb505fba8cd0de71a07328c77263aaedaebc9b46",
-      "source_type": "RESEARCH_JOB"
-    },
-    {
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "cf0484c68c91127ba647ecb32a4a8f1fe88e46a61ba6c525c512498af4e43b83",
+      "sha256": "6738b5ae6d6108fa861ea86cec4496bdc186b99027780dae8ddda354ea561641",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "272e81446c47edd12272fd2e97c070bf43fc3fa93580162182218da7d102c90a",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4dfc4063dd6f4c2a3f15488442861d8fd41663e7d77b900f2c5a8e8591b0f040",
+      "source_type": "REVIEW"
     },
     {
       "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-review-brief.yaml",
@@ -485,12 +537,22 @@
       "repository": "techitechi0331-svg/cipi",
       "sha256": "1244cfe70cc7a67c8ae913810b288cc55ff06b3308838d7b41f6c3ffa2d45dea",
       "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a996e242a48f28d9d31b380002e3a4fe2d71f8d872452ac02bd7d3d9f6ed69b2",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "66186fcdfe44ce06903e54c0b2f9ff538bf7c5f0e1317cbe049848665972e926",
+      "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "c6475440ceeb951d31b2d909fa755e8191f928f109b13bb548f1ce0a5df3cb0d",
+  "source_state_digest": "1d93adfc42f231712a9f153a86f17169420ad4d6b72f47caefd525ac11bdb4b0",
   "unresolved_questions": [
-    "Does the measured v1.1 physical-guitar baseline preserve string/fret identity strongly enough to permit downstream Pickup/Electronics product integration research?",
-    "Is the Pickup Observation boundary supported by measured pickup-position/aperture evidence and a physical input that preserves string/fret identity?",
     "Has Pickup/Electronics research advanced from a source-backed model foundation to explicit measured electrical validation suitable for integration-candidate work?",
     "Is the Guitar Electrical Port a validated versioned electrical boundary rather than a design-only contract or finished-WAV interface?",
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
@@ -499,7 +561,7 @@
   "work": {
     "blocked_count": 2,
     "human_gate_count": 7,
-    "queued_job_count": 6,
-    "ready_count": 4
+    "queued_job_count": 4,
+    "ready_count": 2
   }
 }

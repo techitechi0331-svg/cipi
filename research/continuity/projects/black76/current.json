@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "de54edd95a502563a84826308f9f2b201c51502d",
+    "commit_sha": "67beb7b287618e7d01e87d241e2037fd464e5416",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T20:50:11+09:00",
-  "generation_id": "6800e6fa4b5b882109bab04f",
+  "generated_at": "2026-09-29T20:58:30+09:00",
+  "generation_id": "f46987bf72bc2e042a4a5e3a",
   "human_gates": [],
   "latest_decision_refs": [
     {
@@ -201,14 +201,14 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "f9703b679422a22a2d1693d492b436c837358ae3a83a24203134bc05ae20f8aa",
+      "sha256": "5c999470de2f2818a6b83b2ca841b8166837b79e1d40762e2d21d559d4ef5753",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "c83034d637c4823900c5479745ad08ff5e34748604ca9523fe55de69711e0b8a",
+      "sha256": "64500f3233d81f993194232d0bd82e175dae8a67045f6d6e379daabbb4d68350",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -250,7 +250,7 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "a467b90dd6597bb713f0a2eb22933c6cf4eaabac69aa18647f1f3bf37a41e151",
+      "sha256": "ea3222df95b9a19d04f2d7ee76b855818ffceb75e49beb529e7e81aca79c4210",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -263,7 +263,7 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "44d4a7cd0b30248126a61190b9f5effe59d1de781c41f382c06112bc0ca7587f",
+      "sha256": "048614abbfe3daa11d3548e14cc5328a795c7df4805cfb2d6497137a3fcac08b",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -300,14 +300,14 @@
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "56eed1c9645247f4979f559be7c85b1cbbed3b81203594b95790743be9576a45",
+      "sha256": "591cd30898f22c0cb226758a5f75908427a9fa25d1d2f385306db35237384651",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "cf0484c68c91127ba647ecb32a4a8f1fe88e46a61ba6c525c512498af4e43b83",
+      "sha256": "6738b5ae6d6108fa861ea86cec4496bdc186b99027780dae8ddda354ea561641",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -359,7 +359,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "3e8bf525e88fe55ae02b7b53c748f98f106b77419b1417a703b3e3ff48c91abb",
+  "source_state_digest": "df26297d5062c29c905ee12e292d46825eecb3eb681d17049f30cd40a3a54edd",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

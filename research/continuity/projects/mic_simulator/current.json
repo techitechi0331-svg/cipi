@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "c683608abc73c5b2af08b011a9093ffbd8a93038",
+    "commit_sha": "c5f3eea76bcd63d391c3bac667c1b116674de689",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T10:36:28+09:00",
-  "generation_id": "5eeb946532423b8b9d0b2da7",
+  "generated_at": "2026-09-29T10:42:49+09:00",
+  "generation_id": "16cbfd985ae70f066e00be82",
   "human_gates": [
     {
       "blocking": false,
@@ -107,7 +107,7 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "36d3faa1c0dbec0ec1dfa63e79dbc3588da034bc4c3651520a776e8df186de07",
+      "sha256": "7860431e5c19759b4b5ce537ecf963061672b35a989f327f180ed86b10591ce7",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -144,7 +144,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "bfaa55394d91e07e3080f6d8512dfa83f0f0423f4390b4be77a9841d01da530c",
+  "source_state_digest": "c5245b136730d36a4dc7b0124d2864a75796f1a44e0c2b542b51466adf82ecd8",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?"
   ],

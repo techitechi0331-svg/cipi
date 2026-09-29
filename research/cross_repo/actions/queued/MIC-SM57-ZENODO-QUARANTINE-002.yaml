@@ -1,0 +1,25 @@
+schema_version: "1.0"
+action_id: MIC-SM57-ZENODO-QUARANTINE-002
+state: QUEUED
+repo_key: mic_simulator
+workflow_key: zenodo_ingest
+ref: main
+inputs:
+  rights_status: RESEARCH_ONLY_QUARANTINE
+  archive_url: https://zenodo.org/records/4633508/files/Microphone_Impulse_Responses.zip?download=1
+  expected_md5: c66c4f46be850aa25022145431b93caa
+priority: 97
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: >-
+  Retry after Mic Simulator main commit 69b9daa8b6954209ca0ce618f0215f3c553cc078
+  fixed MADIR geometry/bit-depth parsing to inspect full archive paths and added
+  regression coverage for folder-encoded metadata. Preserve research-only quarantine,
+  no raw redistribution, no commercial model-fit authority, no product adoption, no release.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

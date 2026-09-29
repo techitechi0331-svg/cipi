@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-011
+repo_key: vocal_denoise
+workflow_key: evaluate
+run_id: 36567013969
+run_attempt: 2
+head_sha: 04dbeb8cae4810e3ef6ff80422ed162e986274bb
+classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Validate dataset cache
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

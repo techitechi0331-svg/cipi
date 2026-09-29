@@ -15,6 +15,7 @@ from typing import Any
 
 ADAPTERS = {
     "virtual_guitar_pickup_electrical_foundation_v1",
+    "virtual_guitar_string_fret_identity_target_v1",
     "virtual_guitar_physical_convergence_gate_v1",
     "virtual_guitar_pickup_observation_contract_gate_v1",
     "virtual_guitar_pickup_electrical_validation_gate_v1",
@@ -4292,6 +4293,213 @@ def _vg_pickup_prereq_gate(
     }
 
 
+
+def _latest_vg_measured_reference(repo_root: Path) -> dict[str, Any]:
+    candidates = sorted(
+        repo_root.glob(
+            "research/cross_repo/artifacts/melon/**/files/**/guitar_measured_reference_evidence.json"
+        )
+    )
+    valid: list[dict[str, Any]] = []
+    for path in candidates:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8-sig"))
+        except Exception:
+            continue
+        if (
+            isinstance(data, dict)
+            and data.get("dataset_id") == "EGFXSET_CLEAN_V1"
+            and data.get("manifest_complete") is True
+            and data.get("full_feature_coverage") is True
+            and data.get("ready_for_real_audio_ab") is True
+            and int(data.get("capture_count", 0)) == 690
+        ):
+            valid.append(data)
+    if not valid:
+        raise FileNotFoundError("no complete EGFxSet measured-reference evidence")
+    return valid[-1]
+
+
+def _virtual_guitar_string_fret_identity_target(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    del timeout_seconds
+    baseline = _latest_vg_baseline_summary(repo_root)
+    reference = _latest_vg_measured_reference(repo_root)
+
+    open_midi = {1: 64, 2: 59, 3: 55, 4: 50, 5: 45, 6: 40}
+    captures = reference.get("captures", [])
+    if not isinstance(captures, list):
+        raise ValueError("measured-reference captures must be a list")
+
+    by_coordinate: dict[tuple[int, int, str], dict[str, Any]] = {}
+    for capture in captures:
+        if not isinstance(capture, dict):
+            continue
+        try:
+            key = (
+                int(capture["string_number"]),
+                int(capture["fret"]),
+                str(capture["pickup_configuration"]),
+            )
+        except (KeyError, TypeError, ValueError):
+            continue
+        by_coordinate[key] = capture
+
+    non_level_features = (
+        "decay_db_per_s",
+        "harmonic_centroid_hz",
+        "harmonic_rolloff_hz",
+        "hf_harmonic_ratio",
+        "crest_factor_db",
+    )
+    pickup_order = ("bridge", "bridge-middle", "middle", "middle-neck", "neck")
+    pairs: list[dict[str, Any]] = []
+
+    for item in baseline.get("same_midi_red_team", []):
+        if not isinstance(item, dict):
+            continue
+        midi_note = int(item["midi_note"])
+        left = item["left"]
+        right = item["right"]
+        left_string, left_fret = int(left["string_number"]), int(left["fret"])
+        right_string, right_fret = int(right["string_number"]), int(right["fret"])
+
+        if open_midi[left_string] + left_fret != midi_note:
+            raise ValueError("left same-MIDI coordinate is inconsistent")
+        if open_midi[right_string] + right_fret != midi_note:
+            raise ValueError("right same-MIDI coordinate is inconsistent")
+
+        pickup_rows: list[dict[str, Any]] = []
+        separated_pickups = 0
+        for pickup in pickup_order:
+            lcap = by_coordinate.get((left_string, left_fret, pickup))
+            rcap = by_coordinate.get((right_string, right_fret, pickup))
+            if lcap is None or rcap is None:
+                raise FileNotFoundError(
+                    f"missing EGFxSet capture for MIDI {midi_note}, pickup {pickup}"
+                )
+            lf = lcap.get("features", {})
+            rf = rcap.get("features", {})
+            deltas: dict[str, float] = {}
+            material_delta_count = 0
+            for feature in non_level_features:
+                lv = float(lf[feature])
+                rv = float(rf[feature])
+                delta = abs(lv - rv)
+                deltas[feature] = delta
+                scale = max(abs(lv), abs(rv), 1.0e-12)
+                if delta / scale > 1.0e-6:
+                    material_delta_count += 1
+
+            sha_different = lcap.get("sha256") != rcap.get("sha256")
+            measured_separation = sha_different and material_delta_count >= 2
+            if measured_separation:
+                separated_pickups += 1
+
+            pickup_rows.append(
+                {
+                    "pickup_configuration": pickup,
+                    "left_capture_id": lcap.get("capture_id"),
+                    "right_capture_id": rcap.get("capture_id"),
+                    "left_sha256": lcap.get("sha256"),
+                    "right_sha256": rcap.get("sha256"),
+                    "wav_identity_differs": sha_different,
+                    "non_level_feature_deltas": deltas,
+                    "material_non_level_delta_count": material_delta_count,
+                    "classification": (
+                        "MEASURED_STRING_FRET_IDENTITY_SEPARATION"
+                        if measured_separation
+                        else "NO_MEASURED_SEPARATION"
+                    ),
+                }
+            )
+
+        pairs.append(
+            {
+                "midi_note": midi_note,
+                "left": {"string_number": left_string, "fret": left_fret},
+                "right": {"string_number": right_string, "fret": right_fret},
+                "baseline_classification": item.get("classification"),
+                "baseline_wav_sha_equal": item.get("wav_sha_equal"),
+                "pickup_rows": pickup_rows,
+                "separated_pickup_count": separated_pickups,
+                "required_pickup_count": len(pickup_order),
+            }
+        )
+
+    pair_count = len(pairs)
+    fully_separated_pairs = sum(
+        1 for pair in pairs if pair["separated_pickup_count"] == len(pickup_order)
+    )
+    baseline_collapses = sum(
+        1
+        for item in baseline.get("same_midi_red_team", [])
+        if isinstance(item, dict)
+        and item.get("classification") == "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED"
+    )
+    acceptance = (
+        pair_count >= 2
+        and baseline_collapses == pair_count
+        and fully_separated_pairs == pair_count
+    )
+
+    metrics = {
+        "dataset_id": reference.get("dataset_id"),
+        "baseline_track_id": baseline.get("track_id"),
+        "pair_count": pair_count,
+        "baseline_identity_collapse_count": baseline_collapses,
+        "fully_measured_separated_pair_count": fully_separated_pairs,
+        "pickup_configurations_per_pair": len(pickup_order),
+        "absolute_level_features_excluded": ["rms_dbfs", "peak_dbfs"],
+        "reference_ready_does_not_mean_model_fidelity": True,
+        "acceptance_met": acceptance,
+    }
+    target_profile = {
+        "schema_version": "1.0",
+        "profile_id": "VG-STRING-FRET-IDENTITY-TARGET-EGFXSET-001",
+        "evidence_class": "MEASURED",
+        "source_dataset": reference.get("dataset_id"),
+        "reference_family": reference.get("reference_family"),
+        "baseline_track_id": baseline.get("track_id"),
+        "purpose": (
+            "Define measured same-MIDI string/fret separation targets for research-side "
+            "physical-string candidates. This profile is not a product model or fidelity claim."
+        ),
+        "excluded_as_physical_truth": ["rms_dbfs", "peak_dbfs"],
+        "pairs": pairs,
+        "authority": {
+            "automatic_product_decision": False,
+            "automatic_knowledge_promotion": False,
+            "product_repository_write": False,
+        },
+    }
+    return {
+        "metrics": metrics,
+        "raw_files": {
+            "string_fret_identity_target_profile.json":
+                json.dumps(target_profile, indent=2, sort_keys=True) + "\n",
+        },
+        "commands": [
+            "read completed v1.1 baseline same-MIDI red-team evidence",
+            "read validated 690-capture EGFxSet measured reference",
+            "derive non-level same-MIDI string/fret separation targets across five pickup configurations",
+        ],
+        "acceptance_met": acceptance,
+        "rejection_triggered": not acceptance,
+        "triggered_criteria": (
+            []
+            if acceptance
+            else ["EGFxSet same-MIDI identity target coverage is incomplete"]
+        ),
+        "summary": (
+            "Measured EGFxSet same-MIDI string/fret target extraction. "
+            "PASS means target evidence exists for candidate evaluation only; "
+            "it does not repair or adopt the product model."
+        ),
+    }
+
+
 def _virtual_guitar_physical_convergence_gate(
     repo_root: Path, timeout_seconds: int
 ) -> dict[str, Any]:
@@ -4319,6 +4527,8 @@ def _virtual_guitar_electrical_port_contract_gate(
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name == "virtual_guitar_pickup_electrical_foundation_v1":
         return _virtual_guitar_pickup_electrical_foundation(repo_root, timeout_seconds)
+    if name == "virtual_guitar_string_fret_identity_target_v1":
+        return _virtual_guitar_string_fret_identity_target(repo_root, timeout_seconds)
     if name == "virtual_guitar_physical_convergence_gate_v1":
         return _virtual_guitar_physical_convergence_gate(repo_root, timeout_seconds)
     if name == "virtual_guitar_pickup_observation_contract_gate_v1":

@@ -211,7 +211,8 @@ def _next_job(source_hash: str, summary: dict[str, Any]) -> dict[str, Any]:
             "candidate performs product repository writes or automatic product adoption",
         ],
         "max_runs": 3,
-        "timeout_minutes": 30,
+        "timeout_minutes": 20,
+        "experiment_adapter": "virtual_guitar_pickup_electrical_foundation_v1",
         "allowed_operations": [
             "inspect_existing_cipi_pickup_evidence",
             "inspect_existing_guitar_amp_electrical_contracts",

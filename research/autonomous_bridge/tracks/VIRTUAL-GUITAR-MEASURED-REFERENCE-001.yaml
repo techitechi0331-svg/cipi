@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
-enabled: false
-activation_state: PENDING_MELON_ADAPTER_VALIDATION
+enabled: true
+activation_state: ACTIVE_EGFXSET_REAL_AUDIO_ACQUISITION
 root_research_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
 
 research_question: >-
@@ -143,7 +143,7 @@ initial_experiment:
 efficiency_policy:
   policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
   policy_version: "1.0"
-  state: PENDING_ADAPTER_VALIDATION
+  state: APPLIED
   max_memory_mb: 2048
   candidate_timeout_seconds: 10
   full_regression_required: false
@@ -154,4 +154,4 @@ efficiency_policy:
   expected_capture_count: 690
   pending_adapter_commit: f34851b7477bee36b9d314865407f92830e507b9
   pending_validation_run: 36502461630
-  validation_result: PENDING
+  validation_result: PASS

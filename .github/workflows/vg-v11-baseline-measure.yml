@@ -1,0 +1,108 @@
+name: Virtual Guitar v1.1 Baseline Measure
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: "CIPI executable job/action id"
+        required: true
+      track_id:
+        description: "CIPI research track id"
+        required: true
+      melon_sha:
+        description: "Pinned MELON commit containing baseline adapter"
+        required: true
+      virtual_guitar_sha:
+        description: "Immutable virtual-guitar baseline SHA"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vg-v11-baseline-measure-${{ inputs.job_id }}
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MELON_SHA: ${{ inputs.melon_sha }}
+      VG_SHA: ${{ inputs.virtual_guitar_sha }}
+    steps:
+      - name: Checkout pinned MELON adapter
+        id: melon
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/melon
+          ref: ${{ env.MELON_SHA }}
+          path: _melon
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout immutable virtual-guitar baseline
+        id: guitar
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/virtual-guitar
+          ref: ${{ env.VG_SHA }}
+          path: _vg_source
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify exact SHAs and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.melon.outputs.commit }}" = "$MELON_SHA"
+          test "${{ steps.guitar.outputs.commit }}" = "$VG_SHA"
+          test "$(git -C _melon rev-parse HEAD)" = "$MELON_SHA"
+          test "$(git -C _vg_source rev-parse HEAD)" = "$VG_SHA"
+          test -z "$(git -C _vg_source status --porcelain)"
+          python --version
+          cmake --version
+          c++ --version
+
+      - name: Run baseline adapter policy tests
+        working-directory: _melon
+        run: |
+          python -m unittest             tests.test_guitar_v11_baseline             tests.test_guitar_matched_render             tests.test_guitar_real_audio_metric_policy -v
+
+      - name: Execute all 18 RAW coordinates and 15 PICKUP_DI classifications
+        working-directory: _melon
+        run: |
+          python -m melon.guitar_v11_baseline             --checkout ../_vg_source             --workspace "$RUNNER_TEMP/vg-v11-baseline-work"             --output-dir ../results/vg-v11-baseline             --cmake cmake             --source-verification-mode GIT_EXACT_SHA             --source-sha-proof "$VG_SHA"
+
+      - name: Enforce completion acceptance
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("results/vg-v11-baseline/baseline-summary.json").read_text())
+          assert summary["track_id"] == "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001"
+          assert summary["status"] == "COMPLETED"
+          assert len(summary["coordinates"]) == 18
+          assert len(summary["pickup_di_classification"]) == 15
+          assert all(item["status"] in {"PASS", "BLOCKED_STAGE_MISMATCH"} for item in summary["pickup_di_classification"])
+          assert all(not item["raw_to_di_fake_substitution"] for item in summary["pickup_di_classification"])
+          assert summary["acceptance"]["source_tree_unchanged"] is True
+          assert summary["acceptance"]["repeat_render_check_complete"] is True
+          assert summary["acceptance"]["no_nan_inf"] is True
+          assert summary["authority"]["product_repository_write"] is False
+          print("VG_V11_BASELINE_MEASURE=COMPLETED")
+          PY
+          test -z "$(git -C _vg_source status --porcelain)"
+
+      - name: Upload CIPI evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: vg-v11-baseline-${{ inputs.job_id }}-${{ github.run_id }}
+          path: results/vg-v11-baseline/
+          if-no-files-found: error
+          retention-days: 30

@@ -6,7 +6,7 @@
     "INVALID": 0,
     "STALE": 0
   },
-  "generated_at": "2026-09-29T13:06:42+09:00",
+  "generated_at": "2026-09-29T13:15:08+09:00",
   "project_count": 16,
   "projects": [
     {
@@ -71,9 +71,9 @@
     },
     {
       "freshness": "FRESH",
-      "phase": "HUMAN_GATE",
+      "phase": "AUTO_READY",
       "project_id": "virtual_guitar",
-      "recommended_action": "HUMAN_GATE"
+      "recommended_action": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001"
     },
     {
       "freshness": "FRESH",

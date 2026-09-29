@@ -73,13 +73,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "a7db3213f937a7fba1cedadac635f3d798649621",
+    "commit_sha": "79fbf39ab2a1bc7b368948f3ed8cfb0418b25c28",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T13:06:42+09:00",
-  "generation_id": "1f29807b91451df02a0e6e99",
+  "generated_at": "2026-09-29T13:15:08+09:00",
+  "generation_id": "83721a3c72fddc862e070f81",
   "human_gates": [
     {
       "blocking": true,
@@ -153,7 +153,7 @@
       "review_status": "PENDING"
     }
   ],
-  "phase": "HUMAN_GATE",
+  "phase": "AUTO_READY",
   "product_ref": {
     "commit_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
     "ref": "main",
@@ -161,7 +161,22 @@
     "verification": "VERIFIED"
   },
   "project_id": "virtual_guitar",
-  "ready": [],
+  "ready": [
+    {
+      "classification": "READY",
+      "current_human_gates": [],
+      "declared_human_gates": [],
+      "depends_on_jobs": [],
+      "job_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001.yaml",
+      "priority": 82,
+      "research_question": "What minimum physical/electrical Pickup/DI architecture can explain the baseline string/fret identity and pickup-stage gaps while preserving explicit uncertainty?",
+      "resolved_human_gates": [],
+      "state": "QUEUED",
+      "unresolved_dependencies": [],
+      "unresolved_human_gates": []
+    }
+  ],
   "rejected_refs": [],
   "research": {
     "decision_ref_count": 1,
@@ -227,7 +242,7 @@
       "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
       "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001"
     ],
-    "can_autonomously_resume": false,
+    "can_autonomously_resume": true,
     "can_resume": true,
     "human_gates": [
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
@@ -241,13 +256,13 @@
     "must_not_repeat": [
       "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001"
     ],
-    "recommended_action": "HUMAN_GATE",
+    "recommended_action": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
     "required_context": [
       "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml"
     ],
-    "resume_mode": "HUMAN_GATE"
+    "resume_mode": "AUTO_READY"
   },
   "review_refs": [
     {
@@ -291,7 +306,7 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "ee02671d5b783ea3723e254c6c1dd18a4d6258800399ddb7a07173b2c1412774",
+      "sha256": "628e9e9221e6eee000ae31a5c61f616230501ea57c9dbf29449789a389315dc8",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -317,13 +332,19 @@
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "sha256": "fece5956522fe0fa223a3f5dbe1b6f8944a02464ce05c7bc5a66133bfb266a95",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "path": "research/jobs/queued/VIRTUAL-GUITAR-MIC-INTEGRATION-001.yaml",
       "repository": "techitechi0331-svg/cipi",
       "sha256": "8c1ec216ae9dd387221f4b0dc1547e2195cff9cdaf63647bcac0a16fab7437f5",
+      "source_type": "RESEARCH_JOB"
+    },
+    {
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "361b0de0a00ec8b63e6eb01d85e79787a67f08d9c7ccc3c696a63d204c6f92fa",
       "source_type": "RESEARCH_JOB"
     },
     {
@@ -352,15 +373,16 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "72d4d97cab12b48d3cc2eb74b974bffeabd44d2ec0bccc38c89df9b8dc7a35be",
+  "source_state_digest": "2a3ffc70820a10e5939e512c4ee992bdea43a80032f4571baa4cd67eb29183fd",
   "unresolved_questions": [
+    "What minimum physical/electrical Pickup/DI architecture can explain the baseline string/fret identity and pickup-stage gaps while preserving explicit uncertainty?",
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"
   ],
   "work": {
     "blocked_count": 2,
     "human_gate_count": 7,
-    "queued_job_count": 2,
-    "ready_count": 0
+    "queued_job_count": 3,
+    "ready_count": 1
   }
 }

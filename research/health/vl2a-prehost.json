@@ -1,15 +1,25 @@
 {
-  "action_id": "VL2A-PREHOST-705C24531C398EEB-R7",
+  "action_id": null,
+  "artifact_path": "/home/runner/work/cipi/cipi/research/cross_repo/artifacts/vl2a/36502478020/11007495947/files/prehost-results/prehost_summary.json",
   "authority": "PREHOST_OPERATIONAL_SCHEDULING_ONLY",
   "automatic_product_decision": false,
   "automatic_release_decision": false,
   "candidate_id": "HA100X-R4-012-591362e2",
-  "conclusion": null,
-  "run_id": 36502478020,
-  "run_url": "https://github.com/techitechi0331-svg/VocalPrepComp/actions/runs/36502478020",
+  "cubase": {
+    "automation": "UNVERIFIED",
+    "insert": "UNVERIFIED",
+    "pdc": "UNVERIFIED",
+    "playback": "UNVERIFIED",
+    "save_reload": "UNVERIFIED",
+    "scan": "UNVERIFIED"
+  },
+  "listening_judgment": "UNVERIFIED",
+  "product_adoption": "PREHOST_APPROVED_FOR_VST3_CANDIDATE_ONLY",
+  "release_decision": "UNVERIFIED",
   "schema_version": "1.0",
   "source_ref": "integration/vl2a-v060-rc2",
-  "state": "PREHOST_DISPATCHED",
+  "staging_branch": "research/prehost/ha100x-r4-012-591362e2-36502478020",
+  "state": "CUBASE_READY_HUMAN_GATE",
   "track_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
   "validation_path": "/home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36291787400/10921584956/files/melon-funnel-ha100x-shortlist-8ee4eab691cb/ha100x_shortlist_validation.json"
 }

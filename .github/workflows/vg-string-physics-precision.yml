@@ -1,0 +1,75 @@
+name: Virtual Guitar String Physics Precision
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: "CIPI action id"
+        required: true
+      melon_sha:
+        description: "Validated MELON precision-analysis SHA"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vg-string-physics-precision-${{ inputs.job_id }}
+  cancel-in-progress: false
+
+jobs:
+  precision:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 30
+    steps:
+      - name: Checkout pinned MELON
+        id: melon
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/melon
+          ref: ${{ inputs.melon_sha }}
+          path: _melon
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify exact MELON SHA
+        shell: pwsh
+        run: |
+          if ("${{ steps.melon.outputs.commit }}" -ne "${{ inputs.melon_sha }}") {
+            throw "MELON SHA mismatch"
+          }
+
+      - name: Run precision unit tests
+        working-directory: _melon
+        shell: pwsh
+        run: |
+          python -m unittest tests.test_egfxset_string_physics_precision -v
+
+      - name: Analyze EGFxSet same-MIDI string physics
+        working-directory: _melon
+        shell: pwsh
+        run: |
+          $cache = Join-Path $env:USERPROFILE ".melon\egfxset-cache"
+          $out = Join-Path $env:GITHUB_WORKSPACE "results\string-physics-precision"
+          New-Item -ItemType Directory -Force -Path $cache | Out-Null
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          python -m melon.egfxset_string_physics_precision --cache-root "$cache" --output-dir "$out"
+
+      - name: Enforce evidence boundary
+        shell: pwsh
+        run: |
+          python -c "import json,pathlib; p=pathlib.Path(r'results/string-physics-precision/string-physics-precision-evidence.json'); d=json.loads(p.read_text()); assert d['evidence_ready'] is True; assert d['valid_coordinate_count']==4; b=d['interpretation_boundary']; assert b['exact_string_gauge_is_known'] is False; assert b['pickup_amplitude_is_raw_string_truth'] is False; assert b['product_candidate_adopted'] is False; assert d['authority']['product_repository_write'] is False; print('VG_STRING_PHYSICS_PRECISION=PASS')"
+          $forbidden = Get-ChildItem -Path "results\string-physics-precision" -Recurse -File | Where-Object { $_.Extension -match '^[.](wav|flac|aif|aiff|mp3|zip)$' }
+          if ($forbidden) { throw "Raw/media artifact persistence is forbidden" }
+
+      - name: Upload precision evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vg-string-physics-precision-${{ inputs.job_id }}-${{ github.run_id }}
+          path: results/string-physics-precision/*.json
+          if-no-files-found: error
+          retention-days: 30

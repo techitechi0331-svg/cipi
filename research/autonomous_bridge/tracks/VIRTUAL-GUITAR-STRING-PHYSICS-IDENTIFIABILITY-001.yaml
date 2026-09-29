@@ -20,6 +20,16 @@ depends_on:
   - VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001
   - VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001
 
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 20
+  max_runtime: 300
+  max_same_hypothesis_retry: 1
+  max_same_architecture_retry: 1
+  max_no_improvement_runs: 1
+
 source_boundary:
   evidence_note: research/plugins/virtual-guitar/research-notes/VG-STRING-FRET-IDENTITY-PHYSICS-BOUNDARY-20260929-001.yaml
   primary_dataset: EGFXSET_CLEAN_V1

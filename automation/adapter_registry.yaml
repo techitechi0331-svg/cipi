@@ -4,6 +4,7 @@ adapters:
   virtual_guitar_pickup_electrical_foundation_v1:
     tracks:
       - VIRTUAL_GUITAR_PICKUP_ELECTRONICS_RESEARCH
+      - VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
     max_timeout_minutes: 20
     network_required: false
     purpose: >-

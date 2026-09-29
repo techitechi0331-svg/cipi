@@ -1,4 +1,4 @@
-> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `4b8c765b09cbf28ed28cd61442cfd87a5a8ad35b`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
+> CIPI sync note: product implementation source of truth is `techitechi0331-svg/vocal_rider` main. This snapshot was synchronized from dedicated Repo HEAD `bc346336b5a0cca105e9462468cdea2b53ea3f6d`. Research classifications remain SOURCE_FACT / MEASURED / INFERRED / HYPOTHESIS / REJECTED as written below.
 
 # CIPI Vocal Rider 0.1 Research Track
 
@@ -231,6 +231,43 @@ Exploratory diagnostic from the same rendered matrix:
 
 Any Amount 50 strength revision must be evaluated on a fresh, previously unused validation set.
 
+
+
+## MEASURED — v0.3 fresh-validation checkpoint before headroom correction
+
+Fresh 12-file workflow run `36456747788` evaluated the predeclared Amount 50 depth-1.10 candidate.
+
+Local-leveling metrics:
+- positive local residual-std reduction: 10 / 12 files;
+- median shrink rate: 0.6859;
+- median mean absolute residual reduction: 0.5492 dB;
+- maximum sign-flip rate: 0.0732.
+
+These meet the predeclared local-leveling thresholds.
+
+However, the run also measured **three processed cases above 0 dBFS**, all on `man4_butterfly.wav`:
+- Amount 25: output peak +0.2121 dBFS;
+- Amount 50: output peak +0.2121 dBFS;
+- Amount 75: output peak +0.2121 dBFS;
+- source peak: -0.1005 dBFS.
+
+Therefore v0.3 is **not promoted** from this run even though the local-leveling sub-gate passed. The predeclared fresh-validation requirement included no >0 dBFS processed sample.
+
+The real-vocal validator had been counting clipping only as a warning. That validator behavior is now rejected for product-gate use: any processed sample >0 dBFS is a hard failure.
+
+INFERRED root cause from source review:
+- the Headroom Guard pre-ramped a future safety limit, but did not keep an exact sample-aligned peak constraint for the audio sample leaving the lookahead delay;
+- a hot delayed source sample could therefore receive residual positive ride.
+
+Revision under test:
+- retain the existing future smoothed safety limit for pre-ramping;
+- add a lookahead-aligned peak ring so the exact delayed sample gets a final boost-only positive-ride clamp at output time;
+- neutral and already-negative ride remain unchanged;
+- no hidden attenuation / limiter floor is reintroduced.
+
+The corrected guard and hard clipping gate remain unpromoted until deterministic, fresh-real-vocal, processor, VST3, pluginval and Steinberg validation rerun.
+
+The v0.3 research workflow `36456747908` also failed only the old deterministic assertion that Amount 50 stay inside the previous ±4 dB-class range. The candidate was predeclared at approximately ±4.4 dB, so that assertion has been updated on the research branch to a ±4.4 dB-class bound rather than treating the planned range increase as a DSP defect.
 
 ## HYPOTHESIS — Amount 50 strength candidate v0.3
 
@@ -500,7 +537,7 @@ All constants above remain HYPOTHESIS until compiled measurement and real-vocal 
 
 ## Current location
 
-Dedicated product Repo measurement/revision stage. Main deterministic/core/processor/measurement/VST3 gates pass, pluginval strictness 5 non-GUI passes, and the pinned Steinberg validator passes 47/47 tests. The prospective 12-file holdout shows consistent local leveling but narrowly misses the predeclared Amount 50 correction-depth target. Musical-effectiveness tuning, interactive GUI validation, listening and Cubase host verification remain open.
+Dedicated product Repo measurement/revision stage. Baseline main deterministic/core/processor/measurement/VST3/pluginval/Steinberg gates pass. Amount 50 v0.3 passed its fresh local-leveling metrics but exposed a real headroom-alignment defect on one hot source file; the guard now has an exact sample-aligned boost-only clamp and clipping is a hard real-vocal failure. Corrected main and v0.3 reruns are pending. Musical-effectiveness tuning, interactive GUI validation, listening and Cubase host verification remain open.
 
 ## Next stage
 

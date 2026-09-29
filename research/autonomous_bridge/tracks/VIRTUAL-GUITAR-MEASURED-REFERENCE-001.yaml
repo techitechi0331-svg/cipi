@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
 enabled: true
-activation_state: ACTIVE_EGFXSET_REAL_AUDIO_ACQUISITION
+activation_state: REFERENCE_READY_EGFXSET_CLEAN_VALIDATED
 root_research_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
 
 research_question: >-
@@ -24,6 +24,24 @@ human_gate_conditions:
   - COMPLETE_REFERENCE_MANIFEST
   - REFERENCE_FEATURE_MANIFEST
   - REFERENCE_DATASET_READY_FOR_DOWNSTREAM_AB
+
+reference_completion:
+  state: REFERENCE_READY
+  completed_run_id: melon-funnel-guitar-measured-reference-d7a5b217bc17
+  completed_job_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+  source_melon_commit: f34851b7477bee36b9d314865407f92830e507b9
+  measured_capture_count: 690
+  rejected_before_measurement: 0
+  duplicate_hits: 0
+  manifest_complete: true
+  feature_manifest_complete: true
+  integrity_validation_passed: true
+  precision_review_passed: true
+  evidence_class: MEASURED
+  raw_audio_storage: RUNNER_CACHE_ONLY
+  human_gate_stop_recorded: true
+  ready_for_real_audio_ab: true
+  reference_ready_does_not_mean_model_fidelity: true
 
 downstream_boundary:
   reference_ready_does_not_mean_model_fidelity: true

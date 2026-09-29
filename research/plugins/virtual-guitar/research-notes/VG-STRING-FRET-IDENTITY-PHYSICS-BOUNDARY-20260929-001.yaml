@@ -1,0 +1,101 @@
+schema_version: "1.0"
+research_note_id: VG-STRING-FRET-IDENTITY-PHYSICS-BOUNDARY-20260929-001
+project: virtual-guitar
+subject: "Measured same-MIDI identity evidence and string-physics identifiability boundary"
+created_at: "2026-09-29"
+
+authority:
+  evidence_authority: true
+  product_repository_write: false
+  product_integration: false
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+
+source_facts:
+  - id: EGFXSET-INSTRUMENT-METADATA
+    evidence_class: SOURCE_FACT
+    statement: >-
+      The checked EGFxSet paper and Zenodo record document a 2004-model 22-fret
+      Stratocaster in standard tuning, five pickup configurations, 48-kHz/24-bit recording,
+      amplitude normalization and a 2000-ms terminal fade. They do not document the exact
+      installed string gauge, construction, material, tension set, or Young's modulus.
+    sources:
+      - https://archives.ismir.net/ismir2022/latebreaking/000006.pdf
+      - https://zenodo.org/records/7044411
+
+  - id: STIFF-STRING-PARAMETERIZATION
+    evidence_class: SOURCE_FACT
+    statement: >-
+      A standard stiff-string physical model can be parameterized by material density rho,
+      Young's modulus E, radius r, tension T, low/high-frequency loss terms, and speaking
+      length L; string stiffness introduces dispersive propagation.
+    sources:
+      - https://dafx.de/paper-archive/details/glxmTJxjLpMNMY2RNWrxEg
+      - https://www.dsprelated.com/freebooks/pasp/Digital_Waveguide_Models.html
+
+  - id: FRET-CONTACT-PHYSICS
+    evidence_class: SOURCE_FACT
+    statement: >-
+      Published guitar physical-model work treats string/fret interaction, two-polarization
+      motion and dynamic detuning as physical mechanisms rather than per-note EQ labels.
+    sources:
+      - https://www.diva-portal.org/smash/get/diva2%3A535799/FULLTEXT01.pdf%3BFulltext
+
+  - id: PASSIVE-BRIDGE-BOUNDARY
+    evidence_class: SOURCE_FACT
+    statement: >-
+      Published guitar synthesis work connects dual-polarization string models to measured
+      bridge admittance through passive reflectance structures, supporting measured boundary
+      coupling rather than generic body-EQ substitution.
+    sources:
+      - https://dafx.de/paper-archive/details/KhIp4wXYNNsFzCbLHElaPA
+
+measured_evidence:
+  - id: VG-SAME-MIDI-TARGET-001
+    evidence_class: MEASURED
+    source: research/runs/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001/gha-36565453789-1/string_fret_identity_target_profile.json
+    statement: >-
+      The two v1.1 same-MIDI collapse pairs are separated in EGFxSet by non-level measured
+      features across all five pickup configurations.
+    pairs:
+      - midi_note: 62
+        left: {string_number: 4, fret: 12}
+        right: {string_number: 6, fret: 22}
+      - midi_note: 67
+        left: {string_number: 3, fret: 12}
+        right: {string_number: 5, fret: 22}
+
+inferences:
+  - id: RAW-VS-DI-IDENTIFIABILITY
+    evidence_class: INFERRED
+    statement: >-
+      EGFxSet proves that string/fret identity must survive to the recorded DI signal, but
+      pickup-dependent spectral amplitude differences cannot uniquely identify the RAW
+      physical-string parameter vector.
+  - id: EXACT-STRING-SPECS-UNKNOWN
+    evidence_class: INFERRED
+    statement: >-
+      Exact EGFxSet string construction cannot be reconstructed from the checked metadata.
+      Candidate work must therefore use bounded parameter families and measured falsification
+      instead of asserting a specific commercial string set.
+
+rejected_shortcuts:
+  - ARBITRARY_STRING_NUMBER_EQ
+  - STRING_NUMBER_RANDOM_SEED_AS_PHYSICAL_MODEL
+  - ASSUME_UNDOCUMENTED_EGFXSET_STRING_GAUGE
+  - RAW_PHYSICAL_STRING_DIRECT_FIT_TO_PICKUP_DI_SPECTRAL_AMPLITUDES
+  - TREAT_EGFXSET_RMS_OR_PEAK_AS_HARDWARE_OUTPUT_TRUTH
+
+next_research:
+  priority: 1
+  track_id: VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001
+  goal: >-
+    Extract pickup-robust string-physics evidence from the same-MIDI EGFxSet pairs, prioritizing
+    partial-frequency/inharmonicity and decay behavior, then test bounded string-specific
+    rho/E/r/T/loss/L candidate families without product-repository mutation.
+  constraints:
+    - preserve string_number and fret as first-class coordinates
+    - aggregate across five pickup configurations instead of treating one pickup amplitude as RAW truth
+    - exclude absolute RMS/peak as hardware truth
+    - no product repository write
+    - no automatic architecture adoption

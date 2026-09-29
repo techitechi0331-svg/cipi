@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-010
-state: DISPATCHED
+state: COMPLETED
 repo_key: vocal_denoise
 workflow_key: evaluate
 ref: main
@@ -28,3 +28,18 @@ repository: techitechi0331-svg/Vocal_Denoise
 workflow_file: vocal-denoise-evaluate.yml
 run_id: 36517697779
 run_url: https://github.com/techitechi0331-svg/Vocal_Denoise/actions/runs/36517697779
+conclusion: success
+completed_at: '2026-09-29T03:35:07Z'
+time_metrics:
+  schema_version: '1.0'
+  queue_wait_seconds: 0.0
+  runner_job_seconds: 72.0
+  checkout_seconds: null
+  environment_setup_seconds: null
+  preflight_seconds: null
+  research_compute_seconds: null
+  macro_export_seconds: null
+  artifact_upload_seconds: null
+  total_wall_seconds: 72.0
+  source: GITHUB_WORKFLOW_RUN_TIMESTAMPS
+failure_classification: null

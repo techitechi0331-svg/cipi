@@ -3,10 +3,10 @@ action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-010
 repo_key: vocal_denoise
 workflow_key: evaluate
 runner_class: self-hosted
-state: RUNNING
+state: COMPLETED
 run_id: 36517697779
-run_status: in_progress
-run_conclusion: null
+run_status: completed
+run_conclusion: success
 since: '2026-09-29T03:33:55Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

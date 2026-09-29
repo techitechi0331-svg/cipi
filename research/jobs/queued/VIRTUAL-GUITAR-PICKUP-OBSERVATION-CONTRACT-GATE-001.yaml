@@ -1,0 +1,51 @@
+schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+state: QUEUED
+priority: 89
+track:
+  id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+  path: research/plugins/virtual-guitar/research-tracks
+research_phase: INTEGRATION_PREREQUISITE_GATE
+research_question: >-
+  Is the Pickup Observation boundary supported by measured pickup-position/aperture evidence
+  and a physical input that preserves string/fret identity?
+hypothesis: >-
+  Pickup position and aperture must be measured as an observation of physical string state,
+  not substituted by post-EQ or MIDI-only identity.
+counter_hypotheses:
+  - Pickup position can be represented as a static EQ preset.
+  - MIDI pitch alone is sufficient input to the pickup observation layer.
+baseline:
+  - VIRTUAL-GUITAR-PICKUP-OBSERVATION-001 research contract
+  - completed v1.1 baseline evidence
+variants:
+  - POINT_OBSERVATION_BASELINE
+  - FINITE_APERTURE_OBSERVATION
+metrics:
+  - measured_pickup_position_observation_artifact_present
+  - same_midi_identity_preserved
+  - point_and_finite_aperture_candidates_present
+acceptance:
+  - observation research contract is present
+  - point and finite-aperture candidates are explicit
+  - measured pickup-position observation evidence exists
+  - upstream string/fret identity is preserved
+rejection:
+  - measured pickup-position/aperture evidence is absent
+  - upstream string/fret identity remains collapsed
+  - post-EQ substitution is used
+max_runs: 1
+timeout_minutes: 5
+experiment_adapter: virtual_guitar_pickup_observation_contract_gate_v1
+allowed_operations:
+  - inspect_committed_pickup_observation_evidence
+  - inspect_committed_baseline_evidence
+  - write_gate_evidence
+prohibited_operations:
+  - product_repository_write
+  - post_eq_substitution
+  - automatic_product_integration
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

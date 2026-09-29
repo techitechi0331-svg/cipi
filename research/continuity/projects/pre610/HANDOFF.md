@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 27f4d85f9dd4404ec642f689e260931b357201ff
-- Source-state digest: 5eec4f2a329d77a6e616f17dc2bb3b81f8736137b726ecc09e81aad7bb9ca817
+- CIPI source commit: 6253ccf46a401477bcbd716112107acadd89e893
+- Source-state digest: c814c42f1cf6dceb193f7ca8c7277ed1b4ad0e9b78536ca771c071da89cff2fd
 - Product: techitechi0331-svg/610@main
 - Product commit: ac3620a0ccfca6b4646e81828e7863dd8a76fc54
 

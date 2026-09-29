@@ -322,7 +322,7 @@
       "pareto_front_turnover": null,
       "ranking_stability": null,
       "replication_consistency": null,
-      "research_compute_to_runner_wall_ratio": 0.05388367116987576,
+      "research_compute_to_runner_wall_ratio": 0.042265434841424414,
       "semantic_duplicate_rate": 0.0
     },
     "result_missing": 0,
@@ -352,13 +352,13 @@
       "artifact_upload_seconds": null,
       "checkout_seconds": null,
       "environment_setup_seconds": null,
-      "known_runner_samples": 32,
+      "known_runner_samples": 33,
       "macro_export_seconds": null,
       "preflight_seconds": null,
       "queue_wait_seconds": 0.0,
       "research_compute_seconds": 562.3838759999933,
-      "runner_job_seconds": 10437.0,
-      "total_wall_seconds": 10437.0
+      "runner_job_seconds": 13306.0,
+      "total_wall_seconds": 13306.0
     },
     "track_lifecycle": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -551,8 +551,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 60,
-      "dispatched": 1,
+      "completed": 61,
+      "dispatched": 0,
       "failed": 15,
       "quarantined": 0,
       "queued": 1
@@ -587,9 +587,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

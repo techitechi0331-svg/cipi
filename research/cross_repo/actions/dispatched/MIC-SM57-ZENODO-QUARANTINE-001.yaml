@@ -1,6 +1,6 @@
-schema_version: "1.0"
+schema_version: '1.0'
 action_id: MIC-SM57-ZENODO-QUARANTINE-001
-state: QUEUED
+state: DISPATCHED
 repo_key: mic_simulator
 workflow_key: zenodo_ingest
 ref: main
@@ -9,16 +9,20 @@ inputs:
   archive_url: https://zenodo.org/records/4633508/files/Microphone_Impulse_Responses.zip?download=1
   expected_md5: c66c4f46be850aa25022145431b93caa
 priority: 96
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions: []
-reason: >-
-  User-authorized research-only use of the public Zenodo SM57 dataset. Download and analyze
-  only inside the isolated runner workflow; retain provenance and derived JSON only; do not
-  redistribute raw IRs and do not authorize commercial model fitting, product adoption, or release.
+reason: User-authorized research-only use of the public Zenodo SM57 dataset. Download
+  and analyze only inside the isolated runner workflow; retain provenance and derived
+  JSON only; do not redistribute raw IRs and do not authorize commercial model fitting,
+  product adoption, or release.
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 0
+dispatched_at: '2026-09-29T01:30:41.362810Z'
+repository: techitechi0331-svg/mic_simulator
+workflow_file: sm57-zenodo-ingest.yml

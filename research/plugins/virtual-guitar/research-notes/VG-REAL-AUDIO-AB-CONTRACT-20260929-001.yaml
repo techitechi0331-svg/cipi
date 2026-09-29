@@ -1,0 +1,97 @@
+schema_version: "1.0"
+note_id: VG-REAL-AUDIO-AB-CONTRACT-20260929-001
+project: virtual-guitar
+date: "2026-09-29"
+purpose: >-
+  Define the downstream model-vs-real comparison boundary after EGFxSet reference acquisition
+  without modifying the virtual-guitar product repository before explicit product-write authority.
+
+current_product_baseline:
+  repository: techitechi0331-svg/virtual-guitar
+  main_sha_at_review: bd26a0556fb501228b4551f61f6a8e760a14455b
+  existing_single_note_harness: Tests/Audio/physical_realism_render.cpp
+  observed_limitations:
+    - renders only MIDI note 52 in the current fixed program
+    - does not expose string/fret coordinate as a first-class input
+    - does not expose EGFxSet pickup configuration
+    - writes a 16-bit mono WAV while the reference corpus is 48-kHz/24-bit
+    - represents the rejected-for-now Realism-v1.1 lineage rather than a Realism-004 architecture implementation
+  evidence_class: SOURCE_FACT_FROM_REPOSITORY
+
+inferences:
+  - id: VG-AB-INF-001
+    evidence_class: INFERRED
+    claim: >-
+      A valid EGFxSet A/B requires an explicit render manifest mapping string, fret, MIDI pitch,
+      pickup configuration, model revision, sample rate, render layer and file hash.
+  - id: VG-AB-INF-002
+    evidence_class: INFERRED
+    claim: >-
+      The comparison must expose both raw physical-string output and pickup/DI output. Otherwise
+      pickup/electronics behavior can mask or mimic physical-string improvements.
+  - id: VG-AB-INF-003
+    evidence_class: INFERRED
+    claim: >-
+      The current v1.1 render should be retained as a baseline control, not treated as the Realism-004
+      implementation candidate.
+  - id: VG-AB-INF-004
+    evidence_class: INFERRED
+    claim: >-
+      Reference readiness and model fidelity are separate evidence events. A validated 690-note
+      EGFxSet manifest cannot by itself satisfy a model-fidelity or product-adoption gate.
+
+required_render_contract:
+  sample_rate_hz: 48000
+  deterministic_seed_required: true
+  coordinate_fields:
+    - string_number
+    - fret
+    - midi_note
+    - pickup_configuration
+  identity_fields:
+    - source_git_sha
+    - architecture_id
+    - parameter_hash
+    - render_layer
+    - wav_sha256
+  render_layers:
+    - RAW_PHYSICAL_STRING
+    - PICKUP_DI
+  minimum_reference_matrix:
+    stage_1_anchor_notes:
+      - low_register
+      - mid_register
+      - high_register
+    pickup_configs:
+      - bridge
+      - bridge-middle
+      - middle
+      - middle-neck
+      - neck
+    stage_2_full_grid: ALL_690_REFERENCE_COORDINATES
+  comparison_metrics:
+    - onset_envelope_error
+    - decay_curve_error
+    - harmonic_energy_distribution_error
+    - inharmonicity_error
+    - partial_frequency_evolution_error
+    - spectral_centroid_error
+    - spectral_rolloff_error
+    - pickup_delta_error
+  listening:
+    level_match_required: true
+    randomized_or_blind_where_practical: true
+    reference_and_candidate_identity_recorded: true
+    automatic_preference_decision: false
+
+activation_blockers:
+  - VIRTUAL-GUITAR-MEASURED-REFERENCE-001_NOT_READY
+  - REALISM_004_IMPLEMENTATION_CANDIDATE_NOT_BUILT
+  - MATCHED_RENDER_HARNESS_NOT_AVAILABLE
+  - PRODUCT_REPOSITORY_WRITE_AUTHORITY_FALSE
+
+authority:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  product_integration: false

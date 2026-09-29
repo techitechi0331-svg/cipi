@@ -3,7 +3,7 @@ action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-011
 repo_key: vocal_denoise
 workflow_key: evaluate
 runner_class: self-hosted
-state: QUEUED
+state: RUNNER_WAIT
 run_id: 36567013969
 run_status: queued
 run_conclusion: null

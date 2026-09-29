@@ -1,0 +1,18 @@
+{
+  "acceptance_met": false,
+  "checks": {
+    "baseline_completed": true,
+    "contract_values_frozen": false,
+    "foundation_status": "SOURCE_EVIDENCE_FOUNDATION",
+    "interface_contract_validated": false,
+    "pickup_di_research_job_completed": true,
+    "port_track_research_ready": true,
+    "product_repository_write": false,
+    "required_capabilities_covered": true,
+    "same_midi_identity_collapse_count": 2
+  },
+  "gate": "port",
+  "missing_evidence_or_work": [
+    "validate Guitar Electrical Port contract with measured network evidence"
+  ]
+}

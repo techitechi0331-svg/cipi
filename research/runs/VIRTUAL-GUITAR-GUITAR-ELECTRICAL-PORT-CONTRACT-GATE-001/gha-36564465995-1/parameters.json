@@ -1,0 +1,16 @@
+{
+  "baseline": [
+    "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-001",
+    "GUITAR-AMP-ELECTRICAL-INTERFACE-CONTRACT-V0.1"
+  ],
+  "experiment_adapter": "virtual_guitar_electrical_port_contract_gate_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001.yaml",
+  "metrics": [
+    "required_capabilities_covered",
+    "interface_contract_validated",
+    "port_track_research_ready"
+  ],
+  "variants": [
+    "VERSIONED_ELECTRICAL_PORT_CONTRACT"
+  ]
+}

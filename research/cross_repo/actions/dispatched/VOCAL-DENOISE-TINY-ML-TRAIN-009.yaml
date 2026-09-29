@@ -1,0 +1,30 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-009
+state: DISPATCHED
+repo_key: vocal_denoise
+workflow_key: train
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-009
+  dataset_registry_path: configs/datasets/registry.json
+  seed: '2026092905'
+  max_steps: '300'
+priority: 99
+attempts: 1
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-007
+reason: Advance from v0.5 after independent evaluation improved Test mean SNR to +2.061
+  dB, worst-case to -3.117 dB, HF retention to 66.7 percent and clean identity error
+  to 0.00282. Remaining bounded worst cases cluster in performance-specific arpeggios/belt
+  and arpeggios/breathy material. Train v0.6 with the same architecture, v0.5 high-SNR
+  backoff objective, seed and 300-step budget, changing only sampling to singer +
+  performance-bucket round-robin so difficult styles are represented deliberately.
+  No listening, product-adoption, promotion or release authority.
+previous_run_id: 36508597270
+dispatched_at: '2026-09-29T01:43:40.182682Z'
+repository: techitechi0331-svg/Vocal_Denoise
+workflow_file: vocal-denoise-train.yml

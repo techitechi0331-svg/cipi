@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
 enabled: false
-activation_state: PENDING_MELON_ADAPTER_VALIDATION_AND_DATASET_ACQUISITION
+activation_state: PENDING_MELON_ADAPTER_VALIDATION
 root_research_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
 
 research_question: >-
@@ -52,7 +52,9 @@ activation_requirements:
   runner_cache_allowed: true
   complete_per_capture_sha256_required: true
   extracted_feature_manifest_required: true
-  do_not_enable_before_adapter_and_dataset_validation: true
+  do_not_enable_before_adapter_validation: true
+  dataset_integrity_validation_stage: R1_BEFORE_MEASURED_EVIDENCE
+  fail_closed_on_dataset_validation_error: true
 
 dedup_baseline:
   prior_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-004

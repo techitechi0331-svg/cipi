@@ -1,11 +1,11 @@
 source_repo: techitechi0331-svg/vocal_rider
-source_head: ec2e9cfd2fe7a10c5a0dfe118b461bcd00254ef0
+source_head: bc346336b5a0cca105e9462468cdea2b53ea3f6d
 id: VOCAL_RIDER_01
 title: CIPI Vocal Rider 0.1
 
 status: measurement
 knowledge_status: HYPOTHESIS
-confidence: 0.76
+confidence: 0.74
 
 stages:
   research: complete
@@ -42,11 +42,16 @@ unresolved:
   - pluginval 1.0.4 strictness-5 passes in official --skip-gui-tests service-safe mode.
   - Pinned Steinberg VST3 SDK 3.8.1 validator passes 47/47 tests.
   - Interactive GUI Editor validation remains a separate final host check.
+  - Fresh v0.3 local-leveling metrics passed (10/12 positive residual-std reduction, shrink 0.6859, mean absolute shrink 0.5492 dB, max sign-flip 0.0732).
+  - The same fresh run exposed three >0 dBFS processed cases on man4_butterfly.wav; v0.3 is not promoted until corrected.
+  - Headroom Guard now adds an exact lookahead-aligned boost-only peak clamp in addition to the future smoothed limit.
+  - Real-vocal validation now treats any processed >0 dBFS sample as a hard failure.
+  - v0.3 deterministic range assertion was updated from the old ±4 dB-class bound to the predeclared ±4.4 dB-class candidate bound.
   - Cubase Pro 14 host verification is pending.
 
 next_stage: measurement
-why_next: "Core, processor, measurement, VST3, pluginval non-GUI and Steinberg validator gates pass. The next evidence must test any Amount 50 strength revision on fresh unused real vocals without reusing the observed holdout."
-next_confirmation: "Whether a fresh unused validation corpus supports a modest Amount 50 strength increase without excess sign-flips or musical flattening, followed by level-matched listening and Cubase GUI/host validation."
+why_next: "Fresh v0.3 local-leveling metrics are promising, but an actual hot-sample headroom defect was measured. The next evidence must prove the aligned boost-only guard removes clipping without regressing riding, processor, VST3 or validator behavior."
+next_confirmation: "Zero >0 dBFS processed samples on corrected fresh-vocal rerun, preserved v0.3 local-leveling thresholds, and full deterministic/processor/VST3/pluginval/Steinberg regression pass."
 
 blockers:
   - "Human level-matched listening remains required before sound-quality promotion."

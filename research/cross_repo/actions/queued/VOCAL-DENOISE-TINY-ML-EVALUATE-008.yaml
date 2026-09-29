@@ -1,0 +1,26 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-008
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-009
+  model_run_id: '36509253517'
+  seed: '2026092906'
+  max_files: '18'
+priority: 99
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-TRAIN-009
+reason: >-
+  Independently evaluate v0.6 singer + performance-bucket balanced training
+  under the exact same three-seed singer-balanced identity-disjoint protocol.
+  Compare v0.6 with v0.5 on mean/worst SNR, vocal identity error,
+  removed-clean leakage, HF retention and performance-labelled worst cases.
+  No listening, product-adoption, promotion or release authority.
+previous_run_id: 36508824766

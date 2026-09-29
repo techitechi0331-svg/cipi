@@ -14,6 +14,15 @@ adapters:
       continuation only; it does not adopt pickup tone, component values, product DSP,
       or a hardware-fidelity claim.
 
+  virtual_guitar_string_fret_identity_target_v1:
+    tracks:
+      - VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: >-
+      Derive measured same-MIDI string/fret separation targets from the completed v1.1
+      baseline and validated EGFxSet reference without product mutation or a fidelity claim.
+
   virtual_guitar_physical_convergence_gate_v1:
     tracks:
       - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001

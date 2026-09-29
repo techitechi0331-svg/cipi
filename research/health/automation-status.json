@@ -555,21 +555,12 @@
     "blocked_action": null,
     "blocked_reason": null,
     "enabled": true,
-    "health_alerts": [
-      {
-        "action_id": "VOCAL-DENOISE-TINY-ML-EVALUATE-011",
-        "repo_key": "vocal_denoise",
-        "since": "2026-09-29T12:16:21Z",
-        "state": "RUNNER_WAIT",
-        "wait_threshold_minutes": 20,
-        "workflow_key": "evaluate"
-      }
-    ],
+    "health_alerts": [],
     "ready_action": null,
     "states": {
       "completed": 73,
-      "dispatched": 1,
-      "failed": 17,
+      "dispatched": 0,
+      "failed": 18,
       "quarantined": 0,
       "queued": 1
     }
@@ -605,9 +596,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "kind": "IDLE",
+    "priority": -999
   }
 }

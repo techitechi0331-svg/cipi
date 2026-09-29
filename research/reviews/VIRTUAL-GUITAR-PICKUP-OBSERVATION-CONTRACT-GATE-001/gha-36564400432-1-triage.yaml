@@ -1,0 +1,30 @@
+schema_version: '1.0'
+triage_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:triage-v1
+job_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+run_id: gha-36564400432-1
+source_run: research/runs/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1
+source_decision_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:auto
+source_decision_path: research/decisions/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-auto.yaml
+job_path: research/jobs/completed/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001.yaml
+knowledge_candidate_path: null
+candidate_class: REJECT_CANDIDATE
+route: REJECTION_REVIEW
+final_decision_made: false
+existing_review_decision_id: null
+existing_review_source_run_match: false
+acceptance_met: false
+rejection_triggered: true
+promotion_requested: null
+review_gaps:
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+required_human_gates: []
+downstream_gate_signals: []
+reasons:
+- The automated proposal is REJECT; final rejection still requires review authority.
+recommended_action: Review the triggered rejection criteria, retained findings, reusable
+  findings and revisit conditions; confirm or supersede with a new REVIEW decision.
+created_at: '2026-09-29T11:52:13.053769Z'
+triage_version: '1.0'
+immutable: true

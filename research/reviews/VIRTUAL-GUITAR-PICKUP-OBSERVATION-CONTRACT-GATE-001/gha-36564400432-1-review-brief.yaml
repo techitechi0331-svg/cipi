@@ -1,0 +1,97 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:review-brief-v1
+job_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+run_id: gha-36564400432-1
+source_run: research/runs/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-triage.yaml
+triage_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:triage-v1
+job_path: research/jobs/completed/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001.yaml
+research_question: Is the Pickup Observation boundary supported by measured pickup-position/aperture
+  evidence and a physical input that preserves string/fret identity?
+hypothesis: Pickup position and aperture must be measured as an observation of physical
+  string state, not substituted by post-EQ or MIDI-only identity.
+counter_hypotheses:
+- Pickup position can be represented as a static EQ preset.
+- MIDI pitch alone is sufficient input to the pickup observation layer.
+acceptance_criteria:
+- observation research contract is present
+- point and finite-aperture candidates are explicit
+- measured pickup-position observation evidence exists
+- upstream string/fret identity is preserved
+rejection_criteria:
+- measured pickup-position/aperture evidence is absent
+- upstream string/fret identity remains collapsed
+- post-EQ substitution is used
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria:
+  - run measured pickup-position/aperture observation validation
+  - upstream string/fret identity must be repaired first
+  source_commit: 9490593aac5d2f9f60cc987f82c6159a575dbe25
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: checks.baseline_completed
+  value: true
+- path: checks.foundation_status
+  value: SOURCE_EVIDENCE_FOUNDATION
+- path: checks.measured_pickup_position_observation_artifact_present
+  value: false
+- path: checks.observation_track_research_ready
+  value: true
+- path: checks.pickup_di_research_job_completed
+  value: true
+- path: checks.point_and_finite_aperture_candidates_present
+  value: true
+- path: checks.product_repository_write
+  value: false
+- path: checks.same_midi_identity_collapse_count
+  value: 2
+- path: checks.same_midi_identity_preserved
+  value: false
+- path: gate
+  value: observation
+- path: missing_evidence_or_work[0]
+  value: run measured pickup-position/aperture observation validation
+- path: missing_evidence_or_work[1]
+  value: upstream string/fret identity must be repaired first
+knowledge_candidate: null
+source_proposal:
+  decision_id: VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001:gha-36564400432-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

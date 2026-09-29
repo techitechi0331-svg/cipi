@@ -1,0 +1,17 @@
+{
+  "baseline": [
+    "VIRTUAL-GUITAR-PICKUP-OBSERVATION-001 research contract",
+    "completed v1.1 baseline evidence"
+  ],
+  "experiment_adapter": "virtual_guitar_pickup_observation_contract_gate_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001.yaml",
+  "metrics": [
+    "measured_pickup_position_observation_artifact_present",
+    "same_midi_identity_preserved",
+    "point_and_finite_aperture_candidates_present"
+  ],
+  "variants": [
+    "POINT_OBSERVATION_BASELINE",
+    "FINITE_APERTURE_OBSERVATION"
+  ]
+}

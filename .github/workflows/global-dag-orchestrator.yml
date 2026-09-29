@@ -63,8 +63,15 @@ jobs:
         id: guitar
         run: python automation/virtual_guitar/evaluate_canary.py --root . --github-output "$GITHUB_OUTPUT"
 
+      - name: Evaluate virtual-guitar v1.1 baseline evidence
+        id: guitar_baseline
+        run: python automation/virtual_guitar/evaluate_v11_baseline.py --root . --github-output "$GITHUB_OUTPUT"
+
+      - name: Test virtual-guitar v1.1 baseline evaluator
+        run: python tools/test_virtual_guitar_v11_baseline_evaluator.py
+
       - name: Validate bridge-generated state
-        if: steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true'
+        if: steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true' || steps.guitar_baseline.outputs.changed == 'true'
         run: |
           python tools/validate_cross_repo.py
           python tools/validate_autonomy_state.py
@@ -85,13 +92,22 @@ jobs:
         run: python tools/validate_autonomy_state.py
 
       - name: Commit bridge state and health dashboard when changed
-        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true'
+        if: steps.dag.outputs.dashboard_changed == 'true' || steps.bridge.outputs.changed == 'true' || steps.guitar.outputs.changed == 'true' || steps.guitar_baseline.outputs.changed == 'true'
         run: |
           git config user.name "cipi-health-bot"
           git config user.email "cipi-health-bot@users.noreply.github.com"
           git add -A -- research/autonomous_bridge research/health/autonomous-bridge.json research/health/automation-status.json research/health/automation-status.md
           if [ -d research/plugins/virtual-guitar/canary ]; then
             git add -A -- research/plugins/virtual-guitar/canary
+          fi
+          if [ -d research/plugins/virtual-guitar/baseline ]; then
+            git add -A -- research/plugins/virtual-guitar/baseline
+          fi
+          if [ -d research/plugins/virtual-guitar/research-tracks ]; then
+            git add -A -- research/plugins/virtual-guitar/research-tracks
+          fi
+          if [ -d research/jobs/queued ]; then
+            git add -A -- research/jobs/queued
           fi
           if [ -d research/cross_repo/actions/queued ]; then
             git add -A -- research/cross_repo/actions/queued

@@ -84,11 +84,25 @@ required_render_contract:
     reference_and_candidate_identity_recorded: true
     automatic_preference_decision: false
 
+measured_reference_state:
+  state: REFERENCE_READY
+  capture_count: 690
+  manifest_complete: true
+  feature_manifest_complete: true
+  evidence_class: MEASURED
+  reference_ready_does_not_mean_model_fidelity: true
+
 activation_blockers:
-  - VIRTUAL-GUITAR-MEASURED-REFERENCE-001_NOT_READY
   - REALISM_004_IMPLEMENTATION_CANDIDATE_NOT_BUILT
   - MATCHED_RENDER_HARNESS_NOT_AVAILABLE
-  - PRODUCT_REPOSITORY_WRITE_AUTHORITY_FALSE
+  - EXECUTION_ADAPTER_NOT_AVAILABLE
+
+non_blocking_authority_note:
+  product_repository_write: false
+  effect: >-
+    Product repository writes remain forbidden. This does not block a product-independent
+    research harness from checking out an immutable virtual-guitar commit into a temporary
+    workspace and rendering the existing baseline without persisting product-repo changes.
 
 authority:
   automatic_final_decision: false

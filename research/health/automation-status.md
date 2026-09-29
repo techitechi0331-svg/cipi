@@ -8,7 +8,7 @@
 - Local blocked / dependency-blocked / human-gate-blocked: **0 / 2 / 0**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
-- Cross-Repo queued / dispatched / failed / quarantined: **1 / 2 / 15 / 0**
+- Cross-Repo queued / dispatched / failed / quarantined: **1 / 1 / 15 / 0**
 - Runner/dispatch alerts: **0**
 - Declared human-gate jobs: **2**
 

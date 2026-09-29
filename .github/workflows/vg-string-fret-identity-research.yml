@@ -1,0 +1,97 @@
+name: Virtual Guitar String/Fret Identity Research
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: "CIPI action id"
+        required: true
+      melon_sha:
+        description: "Pinned MELON research SHA"
+        required: true
+      virtual_guitar_sha:
+        description: "Immutable virtual-guitar source SHA"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vg-string-fret-identity-${{ inputs.job_id }}
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout pinned MELON
+        id: melon
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/melon
+          ref: ${{ inputs.melon_sha }}
+          path: _melon
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout immutable virtual-guitar
+        id: guitar
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/virtual-guitar
+          ref: ${{ inputs.virtual_guitar_sha }}
+          path: _vg_source
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify exact SHAs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.melon.outputs.commit }}" = "${{ inputs.melon_sha }}"
+          test "${{ steps.guitar.outputs.commit }}" = "${{ inputs.virtual_guitar_sha }}"
+          test -z "$(git -C _vg_source status --porcelain)"
+
+      - name: Run research policy tests
+        working-directory: _melon
+        run: |
+          python -m unittest tests.test_guitar_string_identity_candidate -v
+
+      - name: Execute same-MIDI identity research
+        working-directory: _melon
+        run: |
+          python -m melon.guitar_string_identity_candidate             --checkout ../_vg_source             --workspace "$RUNNER_TEMP/vg-string-fret-identity"             --output-dir ../results/string-fret-identity             --cmake cmake
+
+      - name: Enforce research-only acceptance
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("results/string-fret-identity/string-fret-identity-summary.json")
+          d=json.loads(p.read_text())
+          f=d["findings"]
+          assert f["baseline_collapse_reproduced"] is True
+          assert f["identity_plumbing_control_distinguishes_pairs"] is True
+          assert f["fret_geometry_pick_position_distinguishes_pairs"] is True
+          assert f["string_specific_material_model_validated"] is False
+          assert f["product_candidate_adopted"] is False
+          assert d["source_tree_unchanged"] is True
+          assert d["product_repository_write"] is False
+          assert d["acceptance_met_for_research_continuation"] is True
+          print("VG_STRING_FRET_IDENTITY_RESEARCH=PASS")
+          PY
+          test -z "$(git -C _vg_source status --porcelain)"
+
+      - name: Upload research evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vg-string-fret-identity-evidence-${{ inputs.job_id }}-${{ github.run_id }}
+          path: results/string-fret-identity/
+          if-no-files-found: error
+          retention-days: 30

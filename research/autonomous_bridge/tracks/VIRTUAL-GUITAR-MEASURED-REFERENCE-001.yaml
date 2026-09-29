@@ -136,7 +136,15 @@ initial_experiment:
 efficiency_policy:
   policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
   policy_version: "1.0"
-  state: PENDING_ADAPTER_AND_DATASET
+  state: PENDING_ADAPTER_VALIDATION
   max_memory_mb: 2048
   candidate_timeout_seconds: 10
   full_regression_required: false
+  acquire_egfxset_clean: true
+  raw_audio_storage: RUNNER_CACHE_ONLY
+  dataset_url: https://zenodo.org/record/7044411/files/Clean.zip?download=1
+  dataset_archive_md5: cdb1b401960f56becc8640387910e78a
+  expected_capture_count: 690
+  pending_adapter_commit: 44c71f61e0b483cae7ada9580a54a420876855c8
+  pending_validation_run: 36502332552
+  validation_result: PENDING

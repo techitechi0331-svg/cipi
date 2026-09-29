@@ -1,6 +1,6 @@
-schema_version: "1.0"
+schema_version: '1.0'
 action_id: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
-state: QUEUED
+state: DISPATCHED
 repo_key: cipi
 workflow_key: vg_v11_baseline
 ref: main
@@ -10,17 +10,21 @@ inputs:
   melon_sha: a7fa61aca081d0973f46e3b744625b7d3ac75047
   virtual_guitar_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
 priority: 85
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions: []
-reason: >-
-  Execute the already-fixed 18-coordinate v1.1 RAW baseline, deterministic repeats,
+reason: Execute the already-fixed 18-coordinate v1.1 RAW baseline, deterministic repeats,
   same-MIDI red-team checks, and all 15 explicit PICKUP_DI fail-closed classifications.
-  This execution is independent of Realism-004 implementation readiness and requires no Human Gate.
+  This execution is independent of Realism-004 implementation readiness and requires
+  no Human Gate.
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
 product_repository_write: false
+previous_run_id: 0
+dispatched_at: '2026-09-29T04:07:07.680918Z'
+repository: techitechi0331-svg/cipi
+workflow_file: vg-v11-baseline-measure.yml

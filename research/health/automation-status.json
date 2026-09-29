@@ -577,13 +577,9 @@
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [
-      "research-bot/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/auto-361b0de0a00e"
-    ],
-    "claimed_count": 1,
-    "claimed_jobs": [
-      "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001"
-    ],
+    "claimed_branches": [],
+    "claimed_count": 0,
+    "claimed_jobs": [],
     "dependency_blocked_count": 2,
     "human_gate_blocked_count": 0,
     "human_gate_jobs": [],
@@ -591,9 +587,7 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/auto-361b0de0a00e",
-    "job_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
-    "kind": "EVIDENCE_INTAKE",
-    "priority": 90
+    "kind": "IDLE",
+    "priority": -999
   }
 }

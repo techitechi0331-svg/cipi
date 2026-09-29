@@ -1,0 +1,141 @@
+name: Virtual Guitar Matched Render Integration
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/vg-matched-render-integration.yml"
+      - "research/plugins/virtual-guitar/research-notes/VG-MATCHED-RENDER-INTEGRATION-20260929.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MELON_HARNESS_SHA: c564a83adb92916cea0156de9b54adefcb88b541
+      VG_BASELINE_SHA: bd26a0556fb501228b4551f61f6a8e760a14455b
+    steps:
+      - name: Checkout CIPI
+        uses: actions/checkout@v4
+
+      - name: Checkout exact MELON harness commit
+        id: melon
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/melon
+          ref: ${{ env.MELON_HARNESS_SHA }}
+          path: _melon
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout immutable virtual-guitar baseline
+        id: guitar
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/virtual-guitar
+          ref: ${{ env.VG_BASELINE_SHA }}
+          path: _vg_source
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify exact cross-repo SHAs and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.melon.outputs.commit }}" = "$MELON_HARNESS_SHA"
+          test "${{ steps.guitar.outputs.commit }}" = "$VG_BASELINE_SHA"
+          test "$(git -C _melon rev-parse HEAD)" = "$MELON_HARNESS_SHA"
+          test "$(git -C _vg_source rev-parse HEAD)" = "$VG_BASELINE_SHA"
+          test -z "$(git -C _vg_source status --porcelain)"
+          python --version
+          cmake --version
+          c++ --version
+
+      - name: Run matched-render unit policies
+        working-directory: _melon
+        run: |
+          python -m unittest tests.test_guitar_matched_render tests.test_guitar_real_audio_metric_policy -v
+
+      - name: Render one product-independent RAW baseline anchor
+        working-directory: _melon
+        run: |
+          python -m melon.guitar_matched_render \
+            --checkout ../_vg_source \
+            --workspace "$RUNNER_TEMP/vg-matched-render-work" \
+            --output-dir ../results/matched-render \
+            --cmake cmake \
+            --string-number 6 \
+            --fret 12 \
+            --midi-note 52 \
+            --pickup-configuration not-applicable \
+            --sample-rate 48000 \
+            --render-duration 3.0 \
+            --deterministic-seed 2026092905 \
+            --architecture-id REALISM_V11_BASELINE \
+            --source-git-sha "$VG_BASELINE_SHA" \
+            --source-verification-mode GIT_EXACT_SHA \
+            --source-sha-proof "$VG_BASELINE_SHA" \
+            --render-layer RAW_PHYSICAL_STRING
+
+      - name: Verify PICKUP_DI fails closed
+        working-directory: _melon
+        shell: bash
+        run: |
+          set +e
+          python -m melon.guitar_matched_render \
+            --checkout ../_vg_source \
+            --workspace "$RUNNER_TEMP/vg-matched-render-blocked-work" \
+            --output-dir ../results/pickup-blocked \
+            --cmake cmake \
+            --string-number 6 \
+            --fret 0 \
+            --midi-note 40 \
+            --pickup-configuration bridge \
+            --sample-rate 48000 \
+            --render-duration 3.0 \
+            --deterministic-seed 2026092905 \
+            --architecture-id REALISM_V11_BASELINE \
+            --source-git-sha "$VG_BASELINE_SHA" \
+            --source-verification-mode GIT_EXACT_SHA \
+            --source-sha-proof "$VG_BASELINE_SHA" \
+            --render-layer PICKUP_DI
+          rc=$?
+          set -e
+          test "$rc" -eq 3
+          test -f ../results/pickup-blocked/blocked_render.json
+
+      - name: Validate evidence and immutable product source
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("results/matched-render/s6_f12_m52_raw_physical_string.manifest.json").read_text())
+          blocked = json.loads(Path("results/pickup-blocked/blocked_render.json").read_text())
+          assert manifest["actual_source_git_sha"] == "bd26a0556fb501228b4551f61f6a8e760a14455b"
+          assert manifest["render_layer"] == "RAW_PHYSICAL_STRING"
+          assert manifest["wav_format"]["sample_rate_hz"] == 48000
+          assert manifest["wav_format"]["bit_depth"] == 24
+          assert manifest["source_tree_unchanged"] is True
+          assert manifest["product_repository_persistent_write"] is False
+          assert manifest["string_fret_identity_applied_to_solver"] is False
+          assert blocked["status"] == "BLOCKED_STAGE_MISMATCH"
+          assert blocked["request"]["render_layer"] == "PICKUP_DI"
+          print("VG_MATCHED_RENDER_INTEGRATION=PASS")
+          PY
+          test -z "$(git -C _vg_source status --porcelain)"
+
+      - name: Upload integration evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vg-matched-render-integration-${{ github.run_id }}
+          path: results/
+          if-no-files-found: error
+          retention-days: 30

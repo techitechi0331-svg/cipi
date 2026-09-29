@@ -1,0 +1,18 @@
+{
+  "acceptance_met": false,
+  "checks": {
+    "baseline_completed": true,
+    "electrical_candidate_classes_present": true,
+    "explicit_electrical_validation_artifact_present": false,
+    "foundation_status": "SOURCE_EVIDENCE_FOUNDATION",
+    "measurement_requirements_declared": true,
+    "pickup_di_research_job_completed": true,
+    "product_repository_write": false,
+    "same_midi_identity_collapse_count": 2,
+    "source_foundation_has_measured_content": true
+  },
+  "gate": "electrical",
+  "missing_evidence_or_work": [
+    "execute impedance/transfer, loaded resonance, control sweep and model-order validation"
+  ]
+}

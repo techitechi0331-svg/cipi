@@ -1,0 +1,35 @@
+schema_version: '1.0'
+decision_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:auto
+job_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+source_run: research/runs/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1
+event_type: AUTOMATED_PROPOSAL
+authority: AUTOMATION
+decision: REJECT
+review_status: PENDING
+rationale: Declared rejection criteria were triggered; detailed rationale requires
+  review.
+scope: Automated rejection evidence for VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001;
+  final rejection requires review.
+declared_rejection_criteria:
+- source foundation is mistaken for measured validation
+- impedance or loaded-resonance validation is absent
+- model order is adopted by assumption
+triggered_criteria:
+- execute impedance/transfer, loaded resonance, control sweep and model-order validation
+retained_findings:
+- All run artifacts, measurements, parameters, environment data and checksums are
+  retained as negative evidence.
+reusable_findings: []
+revisit_if:
+- New evidence, a changed model, or a changed baseline materially affects the failed
+  criteria.
+review_gaps:
+- retained_findings_need_domain_review
+- reusable_findings_need_domain_review
+- revisit_conditions_need_domain_review
+lineage:
+  supersedes: []
+  related_jobs: []
+  related_decisions: []
+created_at: '2026-09-29T11:52:39.088783Z'
+immutable: true

@@ -1,0 +1,18 @@
+{
+  "baseline": [
+    "VG-PICKUP-ELECTRICAL-EVIDENCE-FOUNDATION-20260929",
+    "completed VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001"
+  ],
+  "experiment_adapter": "virtual_guitar_pickup_electrical_validation_gate_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml",
+  "metrics": [
+    "explicit_electrical_validation_artifact_present",
+    "electrical_candidate_classes_present",
+    "pickup_di_research_job_completed"
+  ],
+  "variants": [
+    "LOW_ORDER_LUMPED_EQUIVALENT_BASELINE",
+    "FREQUENCY_DEPENDENT_LOSS_EXTENSION",
+    "DISTRIBUTED_CAPACITANCE_COUNTER_CANDIDATE"
+  ]
+}

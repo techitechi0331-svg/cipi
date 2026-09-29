@@ -580,14 +580,21 @@
     "claimed_branches": [],
     "claimed_count": 0,
     "claimed_jobs": [],
-    "dependency_blocked_count": 2,
+    "dependency_blocked_count": 0,
     "human_gate_blocked_count": 0,
     "human_gate_jobs": [],
-    "ready_job": null
+    "ready_job": {
+      "branch": "research-bot/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/auto-62fd78d8a71e",
+      "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+      "kind": "LOCAL_RESEARCH",
+      "priority": 90
+    }
   },
   "schema_version": "1.0",
   "selected": {
-    "kind": "IDLE",
-    "priority": -999
+    "branch": "research-bot/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/auto-62fd78d8a71e",
+    "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+    "kind": "LOCAL_RESEARCH",
+    "priority": 90
   }
 }

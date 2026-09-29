@@ -2,10 +2,10 @@
 
 > Operational status only. This is not a sound-quality score or release decision.
 
-- Next scheduler action: **IDLE**
-- Local READY job: **-**
+- Next scheduler action: **LOCAL_RESEARCH**
+- Local READY job: **VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001**
 - Claimed evidence branches: **0**
-- Local blocked / dependency-blocked / human-gate-blocked: **0 / 2 / 0**
+- Local blocked / dependency-blocked / human-gate-blocked: **0 / 0 / 0**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**
 - Cross-Repo queued / dispatched / failed / quarantined: **1 / 0 / 16 / 0**

@@ -6,6 +6,27 @@ defaults:
   max_retries: 1
   runner_wait_minutes: 30
 repositories:
+  cipi:
+    repository: techitechi0331-svg/cipi
+    default_ref: main
+    runner_class: github-hosted
+    workflows:
+      vg_v11_baseline:
+        file: vg-v11-baseline-measure.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs:
+          - job_id
+          - track_id
+          - melon_sha
+          - virtual_guitar_sha
+        required_inputs:
+          - job_id
+          - track_id
+          - melon_sha
+          - virtual_guitar_sha
+
   black76:
     repository: techitechi0331-svg/76blackCompressor
     default_ref: main

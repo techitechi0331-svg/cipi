@@ -1,0 +1,61 @@
+name: Oracle ARM64 Smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cipi-oracle-arm64-smoke
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, Linux, ARM64, oracle, cipi-oracle]
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout main without persistent credentials
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify Oracle Linux ARM64 runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "runner_name=${RUNNER_NAME}"
+          echo "runner_os=${RUNNER_OS}"
+          echo "runner_arch=${RUNNER_ARCH}"
+          test "${RUNNER_OS}" = "Linux"
+          test "${RUNNER_ARCH}" = "ARM64"
+          test "$(uname -m)" = "aarch64"
+
+      - name: Create isolated Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv "$RUNNER_TEMP/cipi-oracle-smoke-venv"
+          "$RUNNER_TEMP/cipi-oracle-smoke-venv/bin/python" -m pip install --disable-pip-version-check PyYAML==6.0.2
+
+      - name: Run lightweight CIPI contract checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          PY="$RUNNER_TEMP/cipi-oracle-smoke-venv/bin/python"
+          "$PY" -m py_compile automation/autonomous_bridge/bridge.py automation/orchestrator/global_dag.py
+          "$PY" tools/validate_research.py
+          "$PY" tools/validate_cross_repo.py
+          "$PY" tools/validate_autonomy_state.py
+          "$PY" tools/test_no_wait_scheduler.py
+          "$PY" tools/test_autonomy_stack.py
+          "$PY" tools/build_continuity.py --offline --check-only
+          "$PY" tools/validate_continuity.py
+
+      - name: Assert smoke did not modify the checkout
+        shell: bash
+        run: git diff --exit-code

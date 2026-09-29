@@ -1,0 +1,28 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-EVALUATE-009
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: evaluate
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-009
+  model_run_id: '36509253517'
+  seed: '2026092960'
+  max_files: '32'
+priority: 99
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-008
+reason: >-
+  Confirmation sweep for v0.6 before any further parameter tuning. The iterative
+  v0.3-v0.6 loop reused the same 18 files and three noise seeds, so continuing to
+  optimize on that slice risks adaptive overfitting. Re-evaluate the unchanged v0.6
+  model with a fresh three-seed family starting at 2026092960 and the maximum bounded
+  32 files per split, expanding audio coverage while preserving singer-disjoint splits.
+  This is confirmation evidence only: no listening, product-adoption, promotion or
+  release authority.
+previous_run_id: 36509479163

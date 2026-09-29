@@ -1,0 +1,16 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/VocalPrepComp
+repo_key: vl2a
+run_id: 36502478020
+run_attempt: 1
+artifact_id: 11007009891
+artifact_name: VL2A-PreHost-06-VST3-HA100X-R4-012-591362e2-36502478020
+expired: false
+size_in_bytes: 7894754
+created_at: '2026-09-29T01:06:21Z'
+expires_at: '2026-12-28T00:19:01Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files: []
+ingest_status: metadata_only

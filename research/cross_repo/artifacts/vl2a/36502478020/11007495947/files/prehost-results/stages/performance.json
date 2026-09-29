@@ -1,0 +1,13 @@
+{
+  "baseline_worst_single_core_realtime_pct": 4.6875,
+  "gate_mode": "ACCEPTED_RC2_ABSOLUTE_PLUS_HA100X_INCREMENTAL",
+  "measurement": "WINDOWS_PROCESS_CPU_TIME_ISOLATED_PAIRED_MEDIAN_OF_5",
+  "result": "PASS",
+  "stage": "performance",
+  "worst_candidate_to_baseline_ns_ratio": 1.0999997542399749,
+  "worst_ratio_case": [
+    1,
+    256
+  ],
+  "worst_single_core_realtime_pct": 4.6875
+}

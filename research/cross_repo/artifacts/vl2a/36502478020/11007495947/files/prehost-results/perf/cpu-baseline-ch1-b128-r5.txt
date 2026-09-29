@@ -1,0 +1,1 @@
+channels=1,block=128,audio_seconds=8,wall_seconds=0.315863,wall_realtime_pct=3.94828,process_cpu_seconds=0.3125,single_core_cpu_realtime_pct=3.90625,cpu_ns_per_host_sample=813.802,final_gr_db=8.20465

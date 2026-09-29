@@ -1,0 +1,96 @@
+{
+  "automatic_product_decision": false,
+  "automatic_release_decision": false,
+  "candidate_id": "HA100X-R4-012-591362e2",
+  "classification": "PREHOST_AUTOMATED_VALIDATION_NOT_PRODUCT_ADOPTION",
+  "compiled_isolation": {
+    "candidate_20kHz_rel_1k_db": 0.009859294717338431,
+    "candidate_30Hz_rel_1k_db": -0.004967722575751568,
+    "candidate_transformer_thd_pct": 8.36720307977e-07,
+    "comp_pr50_delta_db": -0.48379945755000087,
+    "limit_pr50_delta_db": -0.5412778854399996,
+    "result": "PASS",
+    "stage": "isolation"
+  },
+  "control_regression": {
+    "result": "PASS",
+    "retained_60ms": 0.50850713,
+    "sample_rate_spread_db": 0.013002399999999525,
+    "stage": "control",
+    "start_gr_db": 5.70824623
+  },
+  "cubase": {
+    "automation": "UNVERIFIED",
+    "insert": "UNVERIFIED",
+    "pdc": "UNVERIFIED",
+    "playback": "UNVERIFIED",
+    "save_reload": "UNVERIFIED",
+    "scan": "UNVERIFIED"
+  },
+  "exact_vst3_host_latency": "PASS",
+  "listening_judgment": "UNVERIFIED",
+  "performance": {
+    "baseline_worst_single_core_realtime_pct": 4.6875,
+    "gate_mode": "ACCEPTED_RC2_ABSOLUTE_PLUS_HA100X_INCREMENTAL",
+    "measurement": "WINDOWS_PROCESS_CPU_TIME_ISOLATED_PAIRED_MEDIAN_OF_5",
+    "result": "PASS",
+    "stage": "performance",
+    "worst_candidate_to_baseline_ns_ratio": 1.0999997542399749,
+    "worst_ratio_case": [
+      1,
+      256
+    ],
+    "worst_single_core_realtime_pct": 4.6875
+  },
+  "pluginval_strictness_10": "PASS",
+  "product_adoption": "PREHOST_APPROVED_FOR_VST3_CANDIDATE_ONLY",
+  "real_vocal_objective_ab": {
+    "clips": [
+      {
+        "candidate_max_gr_db": 4.95372,
+        "centroid_shift_pct": -0.00277035,
+        "clip": "breathy",
+        "correlation": 0.999838,
+        "derivative_delta_db": 0.00483312,
+        "match_db": 0.328221,
+        "max_abs_band_shift_db": 0.861498,
+        "residual_db": -34.9011
+      },
+      {
+        "candidate_max_gr_db": 5.1843,
+        "centroid_shift_pct": -0.0257567,
+        "clip": "straight",
+        "correlation": 0.999815,
+        "derivative_delta_db": -0.00405371,
+        "match_db": 0.338441,
+        "max_abs_band_shift_db": 0.992135,
+        "residual_db": -34.3283
+      },
+      {
+        "candidate_max_gr_db": 5.99072,
+        "centroid_shift_pct": 0.00645593,
+        "clip": "forte",
+        "correlation": 0.99984,
+        "derivative_delta_db": 0.0044037,
+        "match_db": 0.305989,
+        "max_abs_band_shift_db": 0.705483,
+        "residual_db": -34.9365
+      }
+    ],
+    "median_max_gr_db": 5.1843,
+    "result": "PASS",
+    "stage": "vocal"
+  },
+  "release_decision": "UNVERIFIED",
+  "schema_version": "1.1",
+  "source_evidence_hash": "047fb05774aa7f8954148ba9dbd6d6bfba1c035abf52c15e885017d075fd7ca6",
+  "source_ref": "integration/vl2a-v060-rc2",
+  "staging_branch": "research/prehost/ha100x-r4-012-591362e2-36502478020",
+  "state": "CUBASE_READY_HUMAN_GATE",
+  "state_automation": {
+    "result": "PASS",
+    "stage": "state",
+    "state_compatibility": "PASS"
+  },
+  "track_id": "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
+}

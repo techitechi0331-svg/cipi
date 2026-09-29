@@ -1,0 +1,37 @@
+{
+  "clips": [
+    {
+      "candidate_max_gr_db": 4.95372,
+      "centroid_shift_pct": -0.00277035,
+      "clip": "breathy",
+      "correlation": 0.999838,
+      "derivative_delta_db": 0.00483312,
+      "match_db": 0.328221,
+      "max_abs_band_shift_db": 0.861498,
+      "residual_db": -34.9011
+    },
+    {
+      "candidate_max_gr_db": 5.1843,
+      "centroid_shift_pct": -0.0257567,
+      "clip": "straight",
+      "correlation": 0.999815,
+      "derivative_delta_db": -0.00405371,
+      "match_db": 0.338441,
+      "max_abs_band_shift_db": 0.992135,
+      "residual_db": -34.3283
+    },
+    {
+      "candidate_max_gr_db": 5.99072,
+      "centroid_shift_pct": 0.00645593,
+      "clip": "forte",
+      "correlation": 0.99984,
+      "derivative_delta_db": 0.0044037,
+      "match_db": 0.305989,
+      "max_abs_band_shift_db": 0.705483,
+      "residual_db": -34.9365
+    }
+  ],
+  "median_max_gr_db": 5.1843,
+  "result": "PASS",
+  "stage": "vocal"
+}

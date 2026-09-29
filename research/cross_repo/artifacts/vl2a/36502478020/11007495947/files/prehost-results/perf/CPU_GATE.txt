@@ -1,0 +1,21 @@
+measurement=WINDOWS_PROCESS_CPU_TIME_ISOLATED_PAIRED_MEDIAN_OF_5
+accepted_rc2_absolute_limit_pct=50.0
+candidate_incremental_ratio_limit=1.35
+baseline_worst_single_core_cpu_realtime_pct=4.6875
+candidate_worst_single_core_cpu_realtime_pct=4.6875
+worst_candidate_to_baseline_cpu_ratio=1.0999997542399749
+worst_ratio_case=(1, 256)
+channels=1,block=64,baseline_cpu_pct=3.906250,candidate_cpu_pct=4.101560,baseline_cpu_ns=813.802,candidate_cpu_ns=854.492,cpu_ratio=1.050000,baseline_wall_pct=3.963800,candidate_wall_pct=4.256940
+channels=1,block=128,baseline_cpu_pct=3.906250,candidate_cpu_pct=4.101560,baseline_cpu_ns=813.802,candidate_cpu_ns=854.492,cpu_ratio=1.050000,baseline_wall_pct=3.948280,candidate_wall_pct=4.256100
+channels=1,block=256,baseline_cpu_pct=3.906250,candidate_cpu_pct=4.296880,baseline_cpu_ns=813.802,candidate_cpu_ns=895.182,cpu_ratio=1.100000,baseline_wall_pct=3.935960,candidate_wall_pct=4.293090
+channels=1,block=512,baseline_cpu_pct=3.906250,candidate_cpu_pct=4.296880,baseline_cpu_ns=813.802,candidate_cpu_ns=895.182,cpu_ratio=1.100000,baseline_wall_pct=3.958920,candidate_wall_pct=4.399290
+channels=1,block=1024,baseline_cpu_pct=3.906250,candidate_cpu_pct=4.296880,baseline_cpu_ns=813.802,candidate_cpu_ns=895.182,cpu_ratio=1.100000,baseline_wall_pct=3.925700,candidate_wall_pct=4.316400
+channels=2,block=64,baseline_cpu_pct=4.687500,candidate_cpu_pct=4.492190,baseline_cpu_ns=976.562,candidate_cpu_ns=935.872,cpu_ratio=0.958333,baseline_wall_pct=4.645750,candidate_wall_pct=4.648210
+channels=2,block=128,baseline_cpu_pct=4.492190,candidate_cpu_pct=4.687500,baseline_cpu_ns=935.872,candidate_cpu_ns=976.562,cpu_ratio=1.043478,baseline_wall_pct=4.603010,candidate_wall_pct=4.697420
+channels=2,block=256,baseline_cpu_pct=4.687500,candidate_cpu_pct=4.492190,baseline_cpu_ns=976.562,candidate_cpu_ns=935.872,cpu_ratio=0.958333,baseline_wall_pct=4.721820,candidate_wall_pct=4.608460
+channels=2,block=512,baseline_cpu_pct=4.492190,candidate_cpu_pct=4.296880,baseline_cpu_ns=935.872,candidate_cpu_ns=895.182,cpu_ratio=0.956522,baseline_wall_pct=4.682160,candidate_wall_pct=4.633780
+channels=2,block=1024,baseline_cpu_pct=4.492190,candidate_cpu_pct=4.687500,baseline_cpu_ns=935.872,candidate_cpu_ns=976.562,cpu_ratio=1.043478,baseline_wall_pct=4.696450,candidate_wall_pct=4.659600
+gate_mode=ACCEPTED_RC2_ABSOLUTE_PLUS_HA100X_INCREMENTAL
+absolute_pass=1
+relative_pass=1
+RESULT=PASS

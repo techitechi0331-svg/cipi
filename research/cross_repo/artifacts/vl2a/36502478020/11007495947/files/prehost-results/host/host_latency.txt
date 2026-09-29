@@ -1,0 +1,7 @@
+plugin=VL2A
+format=VST3
+latency_before_prepare=0
+latency_48k_512=6
+latency_44k_64=6
+latency_96k_1024=6
+RESULT=PASS

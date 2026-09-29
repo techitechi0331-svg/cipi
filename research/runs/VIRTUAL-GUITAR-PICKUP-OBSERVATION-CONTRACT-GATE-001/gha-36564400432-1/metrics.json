@@ -1,0 +1,19 @@
+{
+  "acceptance_met": false,
+  "checks": {
+    "baseline_completed": true,
+    "foundation_status": "SOURCE_EVIDENCE_FOUNDATION",
+    "measured_pickup_position_observation_artifact_present": false,
+    "observation_track_research_ready": true,
+    "pickup_di_research_job_completed": true,
+    "point_and_finite_aperture_candidates_present": true,
+    "product_repository_write": false,
+    "same_midi_identity_collapse_count": 2,
+    "same_midi_identity_preserved": false
+  },
+  "gate": "observation",
+  "missing_evidence_or_work": [
+    "run measured pickup-position/aperture observation validation",
+    "upstream string/fret identity must be repaired first"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "bridge_profile": {
+    "architecture": "EGFXSET_REAL_AUDIO_REFERENCE_PREFLIGHT_V1",
+    "benchmark_profiles": [
+      "egfxset_clean_strat_reference_v1",
+      "guitar_real_audio_ab_preflight_v1"
+    ],
+    "input_set": "EGFXSET_CLEAN_V1",
+    "objective_set": [
+      "provenance_integrity",
+      "coverage",
+      "feature_readiness",
+      "uncertainty_preservation"
+    ],
+    "reference_model": "STRATOCASTER_2004_22FRET",
+    "relevant_constraints": [
+      "no_synthetic_proxy_as_real_fidelity",
+      "no_hardware_fidelity_claim",
+      "no_product_integration",
+      "automatic_promotion_off",
+      "human_listening_required",
+      "real_audio_ab_required"
+    ],
+    "research_domain": "VIRTUAL_GUITAR_MEASURED_REFERENCE_EGFXSET",
+    "sample_rate": 48000
+  },
+  "budget_recommendation": {
+    "action": "HOLD_FOR_CIPI_REAL_AUDIO_AB"
+  },
+  "deep_validation_count": 1,
+  "domain_evidence_artifact": "guitar_measured_reference_evidence.json",
+  "effective_config": {
+    "generations": 1,
+    "max_candidates": 690,
+    "max_runtime_seconds": 900.0,
+    "population_size": 4,
+    "stage2_archive_limit": 4,
+    "stage2_epsilon_range_fraction": 0.03,
+    "stage2_epsilon_spread_multiplier": 0.5,
+    "stage2_limit": 4,
+    "stage3_limit": 1,
+    "workers": 1
+  },
+  "precision_review_passed": true,
+  "research_domain": "VIRTUAL_GUITAR_MEASURED_REFERENCE_EGFXSET",
+  "routes": {
+    "CANDIDATE_FOR_CIPI_REVIEW": 1
+  },
+  "run_id": "melon-funnel-guitar-measured-reference-d7a5b217bc17",
+  "seed": 2026092904,
+  "stage1_pareto": 690,
+  "stage1_stop_reason": "REFERENCE_PREFLIGHT_COMPLETE",
+  "stage2_archive": 0,
+  "stage2_pareto": 0,
+  "timestamp": "2026-09-29T00:37:48.671465+00:00"
+}

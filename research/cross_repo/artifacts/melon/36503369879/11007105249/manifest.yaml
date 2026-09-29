@@ -1,0 +1,53 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/melon
+repo_key: melon
+run_id: 36503369879
+run_attempt: 1
+artifact_id: 11007105249
+artifact_name: melon-research-36503369879
+expired: false
+size_in_bytes: 182426
+created_at: '2026-09-29T00:37:54Z'
+expires_at: '2026-10-29T00:37:51Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/efficiency_metrics.json
+  status: ingested
+  size: 3130
+  sha256: 2238e248ce6260870169426d674cbf6af89c627491c6a0d44169c16c9d0657cd
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/macro_result.json
+  status: ingested
+  size: 9426
+  sha256: e71d90fbc43999f5a55e39eef6ea3b7ebf36dd5530374e62ed9ffc3b8aa23384
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/manifest.json
+  status: ingested
+  size: 482
+  sha256: 7cad0bf6caf4fae3667e48b1848c07b567639e903ba984f1d19148d652b781c9
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/guitar_measured_reference_evidence.json
+  status: ingested
+  size: 493784
+  sha256: 3404ea5c4c0cbaf5ba7f9fbd20fc7a8a700109f2dac393bf511b092167e142e4
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/precision_review.json
+  status: ingested
+  size: 502
+  sha256: 23cbdde5034bde1bc1bb335e5c9fa4edb36c7f7a625b13ff70fbe9b68243721f
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/stage2_multiseed.json
+  status: ingested
+  size: 4
+  sha256: a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/stage1_screening.json
+  status: ingested
+  size: 465060
+  sha256: e9e90280016998e86d4200c5b459261c3b2e5b06923da719e0a1765c808512a4
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/stage3_deep_validation.json
+  status: ingested
+  size: 457
+  sha256: 11e7b432aef09de4a6384872a9bd8701bc5133b08c12d2fdb1022ba4be08f01a
+- path: melon-funnel-guitar-measured-reference-d7a5b217bc17/summary.json
+  status: ingested
+  size: 1758
+  sha256: 63031bae5fd3ece75dd941792f3e4a8f49902ddb1c67862c4d8a1afb57b5f01b
+archive_sha256: d7599bde303e78ae2a999f6f4b2c6e7fced7a43612b7a2d0c1ed61f07f74bea3
+ingest_status: text_evidence_ingested

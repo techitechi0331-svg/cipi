@@ -1,0 +1,11 @@
+[
+  {
+    "automatic_final_decision": false,
+    "candidate_id": "EGFXSET-CLEAN-REFERENCE-PREFLIGHT",
+    "next_experiment_type": "UNCERTAINTY_REDUCTION",
+    "promotion_authority": false,
+    "reason": "Complete 690-note EGFxSet clean reference manifest with per-capture measured features is validated and ready for model-vs-real A/B.",
+    "route": "CANDIDATE_FOR_CIPI_REVIEW",
+    "species": "guitar_measured_reference_input_validation"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "acquisition_validation_passed": true,
+    "automatic_release_disabled": true,
+    "capture_manifest_nonempty": true,
+    "dataset_identity_exact": true,
+    "hardware_fidelity_not_claimed": true,
+    "integrity_validation_passed": true,
+    "product_integration_disabled": true,
+    "reference_family_exact": true,
+    "research_use_permission_explicit": true
+  },
+  "evidence_boundary": "VALIDATED_REAL_AUDIO_REFERENCE_INPUT_NOT_MODEL_FIDELITY",
+  "passed": true
+}

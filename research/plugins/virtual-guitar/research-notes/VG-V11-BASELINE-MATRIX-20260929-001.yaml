@@ -1,0 +1,214 @@
+schema_version: "1.0"
+note_id: VG-V11-BASELINE-MATRIX-20260929-001
+project: virtual-guitar
+recorded_at: "2026-09-29"
+status: MEASUREMENT_PLAN_FIXED_NOT_EXECUTED
+purpose: >-
+  Fix the v1.1 pre-rebuild baseline coordinate matrix and pickup subset before any
+  new physical model work. Preserve string/fret identity even when MIDI pitch collides.
+
+baseline:
+  virtual_guitar_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
+  architecture_id: REALISM_V11_BASELINE
+  render_harness: MELON_PRODUCT_INDEPENDENT_MATCHED_RENDER
+  sample_rate_hz: 48000
+  raw_render_layer: RAW_PHYSICAL_STRING
+  primary_reference_layer: PICKUP_DI
+  product_repository_write: false
+
+anchor_policy:
+  string_count: 6
+  frets: [0, 12, 22]
+  rationale:
+    fret_0: OPEN_STRING
+    fret_12: OCTAVE_MID_REGISTER_ANCHOR
+    fret_22: HIGHEST_AVAILABLE_REFERENCE_FRET
+  coordinate_count: 18
+  raw_direct_egfxset_objective_comparison_allowed: false
+  reference_capture_rows_are_coordinate_provenance_only_until_pickup_di_exists: true
+
+anchor_matrix:
+  - string_number: 1
+    fret: 0
+    midi_note: 64
+    reference_coordinate_capture_id: EGFX-0001
+    reference_coordinate_sha256: 84d809280d35b145ed90d19badc9ee1cb5f36b051024f4d5182b73c1995999d9
+    reference_pickup: bridge
+  - string_number: 1
+    fret: 12
+    midi_note: 76
+    reference_coordinate_capture_id: EGFX-0005
+    reference_coordinate_sha256: 4a826bb474800be8cce39c681e8fcce509eb892443969b9e2447f0d5a0c18dda
+    reference_pickup: bridge
+  - string_number: 1
+    fret: 22
+    midi_note: 86
+    reference_coordinate_capture_id: EGFX-0016
+    reference_coordinate_sha256: d46a63b651281469412e60969eff19e1d1d0d0464d5261abf59a0edd1cef1754
+    reference_pickup: bridge
+  - string_number: 2
+    fret: 0
+    midi_note: 59
+    reference_coordinate_capture_id: EGFX-0024
+    reference_coordinate_sha256: 66557c449b051f210df0efc96d6af426116246dbece1f2cb9ad07ff0d2e2b4f0
+    reference_pickup: bridge
+  - string_number: 2
+    fret: 12
+    midi_note: 71
+    reference_coordinate_capture_id: EGFX-0028
+    reference_coordinate_sha256: e3f0ca85110a46319b7c39d4c47006e0378e8941ccc2d0442a4c7963362a8113
+    reference_pickup: bridge
+  - string_number: 2
+    fret: 22
+    midi_note: 81
+    reference_coordinate_capture_id: EGFX-0039
+    reference_coordinate_sha256: 4921e8cc5d48aedd438256455d55aa824db0b0ce2fa2f3bdb95052dc30b17fff
+    reference_pickup: bridge
+  - string_number: 3
+    fret: 0
+    midi_note: 55
+    reference_coordinate_capture_id: EGFX-0047
+    reference_coordinate_sha256: b6343afee49d90b6bcf417f5a2d7b8507ee220769ffb9f2539231ab12b944541
+    reference_pickup: bridge
+  - string_number: 3
+    fret: 12
+    midi_note: 67
+    reference_coordinate_capture_id: EGFX-0051
+    reference_coordinate_sha256: e13a64e698af64b52f25af3a43d4df53edf9330262b7c46e26c141dc1fc0a21c
+    reference_pickup: bridge
+  - string_number: 3
+    fret: 22
+    midi_note: 77
+    reference_coordinate_capture_id: EGFX-0062
+    reference_coordinate_sha256: 2496849e12386d9853aba8d610e037db1abf8f146d9b4a435706f62e8fb86295
+    reference_pickup: bridge
+  - string_number: 4
+    fret: 0
+    midi_note: 50
+    reference_coordinate_capture_id: EGFX-0070
+    reference_coordinate_sha256: c32cecc55b44dfb3b2f47193d74551c792beaaab6aed1ca87e3cc453072eb6bd
+    reference_pickup: bridge
+  - string_number: 4
+    fret: 12
+    midi_note: 62
+    reference_coordinate_capture_id: EGFX-0074
+    reference_coordinate_sha256: 382a579e10085ba6040ace6abdf9d0d6ba31f01bff57d9372868613b2130fe94
+    reference_pickup: bridge
+  - string_number: 4
+    fret: 22
+    midi_note: 72
+    reference_coordinate_capture_id: EGFX-0085
+    reference_coordinate_sha256: 93d6f6c2a737eb7c6ebe3a3ebba22e8f580ae2a163b39436ad1a1bc192ed7bfb
+    reference_pickup: bridge
+  - string_number: 5
+    fret: 0
+    midi_note: 45
+    reference_coordinate_capture_id: EGFX-0093
+    reference_coordinate_sha256: d466d58bebb362890e7d1af7442a413af182e184375d3b294380aa834e08d5cc
+    reference_pickup: bridge
+  - string_number: 5
+    fret: 12
+    midi_note: 57
+    reference_coordinate_capture_id: EGFX-0097
+    reference_coordinate_sha256: 78fdb92478b25911d42fd58539162d286e9fc92bdb547a724440b1a4d98ba98b
+    reference_pickup: bridge
+  - string_number: 5
+    fret: 22
+    midi_note: 67
+    reference_coordinate_capture_id: EGFX-0108
+    reference_coordinate_sha256: 9c4fda8bc0bb090470900577d3fcdb021be0342767f0dbad1ebeb5842ee6687e
+    reference_pickup: bridge
+  - string_number: 6
+    fret: 0
+    midi_note: 40
+    reference_coordinate_capture_id: EGFX-0116
+    reference_coordinate_sha256: 0256fd3c55c577970a4c2a06d760cf5798591adecffaa5e790addc38d1f0378e
+    reference_pickup: bridge
+  - string_number: 6
+    fret: 12
+    midi_note: 52
+    reference_coordinate_capture_id: EGFX-0120
+    reference_coordinate_sha256: 22243191936d1549f37448d269444fc9855731f7bff3b01f6ef7e175ce9c5ad5
+    reference_pickup: bridge
+  - string_number: 6
+    fret: 22
+    midi_note: 62
+    reference_coordinate_capture_id: EGFX-0131
+    reference_coordinate_sha256: 12d4a269de360a2398d372e41e20c0364b770d9752d7201fe42413a285c3f12f
+    reference_pickup: bridge
+
+same_midi_red_team_collisions:
+  - midi_note: 62
+    coordinates:
+      - {string_number: 4, fret: 12}
+      - {string_number: 6, fret: 22}
+  - midi_note: 67
+    coordinates:
+      - {string_number: 3, fret: 12}
+      - {string_number: 5, fret: 22}
+
+  expected_v11_behavior: IDENTICAL_RAW_RENDER_FOR_SAME_MIDI_WITH_DEFAULT_PARAMETERS
+  falsification_target: >-
+    Demonstrate by WAV SHA-256 whether v1.1 collapses distinct string/fret coordinates
+    that real EGFxSet captures distinguish at the same fundamental pitch.
+
+pickup_subset_policy:
+  representative_coordinates:
+    - {string_number: 6, fret: 0, midi_note: 40, register_role: LOW}
+    - {string_number: 4, fret: 12, midi_note: 62, register_role: MID}
+    - {string_number: 1, fret: 12, midi_note: 76, register_role: HIGH}
+  pickup_configurations: [bridge, bridge-middle, middle, middle-neck, neck]
+  request_count: 15
+  current_v11_expected_status: BLOCKED_STAGE_MISMATCH
+  raw_string_must_not_be_relabelled_as_pickup_di: true
+
+pickup_reference_subset:
+  - {string_number: 6, fret: 0, midi_note: 40, pickup_configuration: bridge, reference_capture_id: EGFX-0116, reference_sha256: 0256fd3c55c577970a4c2a06d760cf5798591adecffaa5e790addc38d1f0378e}
+  - {string_number: 6, fret: 0, midi_note: 40, pickup_configuration: bridge-middle, reference_capture_id: EGFX-0254, reference_sha256: 197401ee8febf55b8e881e6e0d0ec2d5d1c0656da39b9e2bf2b83b90d068ddbd}
+  - {string_number: 6, fret: 0, midi_note: 40, pickup_configuration: middle, reference_capture_id: EGFX-0392, reference_sha256: dc7a741b502ef16788a07a56372950b5172fe8adae9812c3ba1189dcb39c1e17}
+  - {string_number: 6, fret: 0, midi_note: 40, pickup_configuration: middle-neck, reference_capture_id: EGFX-0530, reference_sha256: 9636c9111ba7586ed594a5427e0eb6ba898b1d6163c1d83061892db1a06afb82}
+  - {string_number: 6, fret: 0, midi_note: 40, pickup_configuration: neck, reference_capture_id: EGFX-0668, reference_sha256: 2095218bc4941b8e4a3ec5682876c4cefdd307402a3e5fabe41008a72e630810}
+  - {string_number: 4, fret: 12, midi_note: 62, pickup_configuration: bridge, reference_capture_id: EGFX-0074, reference_sha256: 382a579e10085ba6040ace6abdf9d0d6ba31f01bff57d9372868613b2130fe94}
+  - {string_number: 4, fret: 12, midi_note: 62, pickup_configuration: bridge-middle, reference_capture_id: EGFX-0212, reference_sha256: 276cc864e5a52cbd4b4f1597c80a0bf47be5989f6d8b903aa56c20ae73f1d777}
+  - {string_number: 4, fret: 12, midi_note: 62, pickup_configuration: middle, reference_capture_id: EGFX-0350, reference_sha256: 74ed03306731d161b9d820daa31347f3d32af564eaca9859d97fdd1018e6ac1c}
+  - {string_number: 4, fret: 12, midi_note: 62, pickup_configuration: middle-neck, reference_capture_id: EGFX-0488, reference_sha256: 2ebc49a41c6e8a3d6f556dfc6e3ea62985eddb9d4a2be4c6e06953f6633f878e}
+  - {string_number: 4, fret: 12, midi_note: 62, pickup_configuration: neck, reference_capture_id: EGFX-0626, reference_sha256: 47a0338fa6a6ac39685c67b7f7e60f856d40750468a89a6cdb8a1baf128c4e95}
+  - {string_number: 1, fret: 12, midi_note: 76, pickup_configuration: bridge, reference_capture_id: EGFX-0005, reference_sha256: 4a826bb474800be8cce39c681e8fcce509eb892443969b9e2447f0d5a0c18dda}
+  - {string_number: 1, fret: 12, midi_note: 76, pickup_configuration: bridge-middle, reference_capture_id: EGFX-0143, reference_sha256: 7513907a8643823a37b206b97bc621a3e32566491d65419c6b795c9d76f6be22}
+  - {string_number: 1, fret: 12, midi_note: 76, pickup_configuration: middle, reference_capture_id: EGFX-0281, reference_sha256: a0c9de1ba284da6cffa6b99240726ca4554ccf503ccc0e47dfcdca6642f838f7}
+  - {string_number: 1, fret: 12, midi_note: 76, pickup_configuration: middle-neck, reference_capture_id: EGFX-0419, reference_sha256: 3e454648aa72f5a2869f932edee9bc696ee19d6aebb390aca83bceb6ba1eb94e}
+  - {string_number: 1, fret: 12, midi_note: 76, pickup_configuration: neck, reference_capture_id: EGFX-0557, reference_sha256: 1844e06f685724e1f801d25f63497ef2f36910762c15384a3ae4cc4e28cb29cb}
+
+egfxset_metric_policy:
+  absolute_rms_dbfs_role: DIAGNOSTIC_ONLY_NOT_HARDWARE_LEVEL_TRUTH
+  absolute_peak_dbfs_role: DIAGNOSTIC_ONLY_NOT_HARDWARE_LEVEL_TRUTH
+  crest_factor_role: DIAGNOSTIC_ONLY
+  documented_file_duration_seconds: 5.0
+  documented_linear_fade_out_seconds: 2.0
+  documented_fade_start_seconds: 3.0
+  completed_reference_max_onset_ms: 20
+  current_decay_window_start_after_onset_seconds: 0.15
+  current_decay_window_end_after_onset_seconds: 2.5
+  worst_case_decay_window_end_seconds: 2.52
+  fade_clearance_seconds: 0.48
+  current_decay_feature_fade_safe_for_completed_reference: true
+  raw_physical_string_direct_fit_to_egfxset_allowed: false
+  level_match_review_required: [RMS, PERCEPTUAL_LOUDNESS, ATTACK_PRESERVING]
+  automatic_preference_decision: false
+
+baseline_gap_acceptance:
+  - ALL_18_RAW_COORDINATES_RENDERED_WITH_MANIFESTS
+  - REPEAT_RENDER_SHA_MATCH
+  - SAME_MIDI_COLLISION_SHA_RELATION_RECORDED
+  - NO_NAN_INF_OR_INVALID_WAV
+  - PRODUCT_SOURCE_UNCHANGED
+  - ALL_15_PICKUP_DI_REQUESTS_EXPLICITLY_PASS_OR_BLOCK_WITH_STAGE_REASON
+  - NO_RAW_TO_DI_FAKE_SUBSTITUTION
+  - CATEGORY_LEVEL_GAP_REPORT
+  - NO_SINGLE_SCALAR_REALISM_VERDICT
+
+authority:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  human_listening_adoption: false

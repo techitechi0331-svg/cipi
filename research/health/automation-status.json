@@ -555,7 +555,16 @@
     "blocked_action": null,
     "blocked_reason": null,
     "enabled": true,
-    "health_alerts": [],
+    "health_alerts": [
+      {
+        "action_id": "VOCAL-DENOISE-TINY-ML-EVALUATE-011",
+        "repo_key": "vocal_denoise",
+        "since": "2026-09-29T12:16:21Z",
+        "state": "RUNNER_WAIT",
+        "wait_threshold_minutes": 20,
+        "workflow_key": "evaluate"
+      }
+    ],
     "ready_action": null,
     "states": {
       "completed": 73,

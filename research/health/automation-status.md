@@ -4,7 +4,7 @@
 
 - Next scheduler action: **CROSS_REPO**
 - Local READY job: **-**
-- Claimed evidence branches: **2**
+- Claimed evidence branches: **1**
 - Local blocked / dependency-blocked / human-gate-blocked: **0 / 2 / 0**
 - Cross-Repo enabled: **YES**
 - Cross-Repo blocked reason: **-**

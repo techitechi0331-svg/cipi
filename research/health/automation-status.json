@@ -583,12 +583,10 @@
   "local": {
     "blocked_count": 0,
     "claimed_branches": [
-      "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/auto-ec74b479214e",
       "research-bot/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/auto-7672394d7d56"
     ],
-    "claimed_count": 2,
+    "claimed_count": 1,
     "claimed_jobs": [
-      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
       "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
     ],
     "dependency_blocked_count": 2,

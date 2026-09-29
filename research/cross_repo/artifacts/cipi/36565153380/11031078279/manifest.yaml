@@ -1,0 +1,21 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/cipi
+repo_key: cipi
+run_id: 36565153380
+run_attempt: 1
+artifact_id: 11031078279
+artifact_name: vg-string-fret-identity-evidence-VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001-36565153380
+expired: false
+size_in_bytes: 4926932
+created_at: '2026-09-29T11:59:35Z'
+expires_at: '2026-10-29T11:59:34Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: string-fret-identity-summary.json
+  status: ingested
+  size: 7438
+  sha256: dda5f2a73e88e53f1cee138286c4410064cccdc3df206cc8b167b457ae53a7c3
+archive_sha256: aa9cc8e56c986738a1bb3139dfd08698308300ebcfbbbc7d4acd3fc5d2150750
+ingest_status: text_evidence_ingested

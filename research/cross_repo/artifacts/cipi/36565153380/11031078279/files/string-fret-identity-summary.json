@@ -1,0 +1,186 @@
+{
+  "acceptance_met_for_research_continuation": true,
+  "classification": {
+    "FRET_GEOMETRY_PICK_POSITION": "HYPOTHESIS_REQUIRES_REAL_AUDIO_AND_STRING_SPECIFIC_VALIDATION",
+    "IDENTITY_PLUMBING_CONTROL": "ARCHITECTURE_CONTROL_NOT_PHYSICAL_TONE_MODEL"
+  },
+  "experiment_id": "VG-STRING-FRET-IDENTITY-RESEARCH-001",
+  "findings": {
+    "baseline_collapse_reproduced": true,
+    "fret_geometry_pick_position_distinguishes_pairs": true,
+    "identity_plumbing_control_distinguishes_pairs": true,
+    "product_candidate_adopted": false,
+    "string_specific_material_model_validated": false
+  },
+  "next_required_work": [
+    "validate fret-normalized observation geometry against real guitar evidence",
+    "add string-specific construction/tension/stiffness evidence before product adoption",
+    "retain same-MIDI red-team as mandatory regression test"
+  ],
+  "pair_results": [
+    {
+      "midi": 62,
+      "variants": {
+        "BASELINE_EXTERNAL_REPLAY": {
+          "left": {
+            "control_only": false,
+            "fret": 12,
+            "midi": 62,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 4,
+            "variant": "BASELINE_EXTERNAL_REPLAY",
+            "wav": "../results/string-fret-identity/m62_BASELINE_EXTERNAL_REPLAY_left.wav",
+            "wav_sha256": "39b9b34f8fe70d5b856d37ff4b7401cf9dcc66e113a35263474e6d815dcf9a3b"
+          },
+          "right": {
+            "control_only": false,
+            "fret": 22,
+            "midi": 62,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 6,
+            "variant": "BASELINE_EXTERNAL_REPLAY",
+            "wav": "../results/string-fret-identity/m62_BASELINE_EXTERNAL_REPLAY_right.wav",
+            "wav_sha256": "39b9b34f8fe70d5b856d37ff4b7401cf9dcc66e113a35263474e6d815dcf9a3b"
+          },
+          "wav_sha_equal": true
+        },
+        "FRET_GEOMETRY_PICK_POSITION": {
+          "left": {
+            "control_only": false,
+            "fret": 12,
+            "midi": 62,
+            "physical_hypothesis_only": true,
+            "pick_position": 0.8016298809579299,
+            "string_number": 4,
+            "variant": "FRET_GEOMETRY_PICK_POSITION",
+            "wav": "../results/string-fret-identity/m62_FRET_GEOMETRY_PICK_POSITION_left.wav",
+            "wav_sha256": "6784ea157a0d17ca6712756ac2592ab8695858892de09bb64f53941f22afa9db"
+          },
+          "right": {
+            "control_only": false,
+            "fret": 22,
+            "midi": 62,
+            "physical_hypothesis_only": true,
+            "pick_position": 0.95,
+            "string_number": 6,
+            "variant": "FRET_GEOMETRY_PICK_POSITION",
+            "wav": "../results/string-fret-identity/m62_FRET_GEOMETRY_PICK_POSITION_right.wav",
+            "wav_sha256": "85020ca7fbfcdaf6f2134d29cf303c7e9ec0ebc9df154ea69c18a2f542b2e671"
+          },
+          "wav_sha_equal": false
+        },
+        "IDENTITY_PLUMBING_CONTROL": {
+          "left": {
+            "control_only": true,
+            "fret": 12,
+            "midi": 62,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 4,
+            "variant": "IDENTITY_PLUMBING_CONTROL",
+            "wav": "../results/string-fret-identity/m62_IDENTITY_PLUMBING_CONTROL_left.wav",
+            "wav_sha256": "97d194daa90877d67950e1f719aeeb064d960f1fcbe3a45db532544cc9e7a6fe"
+          },
+          "right": {
+            "control_only": true,
+            "fret": 22,
+            "midi": 62,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 6,
+            "variant": "IDENTITY_PLUMBING_CONTROL",
+            "wav": "../results/string-fret-identity/m62_IDENTITY_PLUMBING_CONTROL_right.wav",
+            "wav_sha256": "219ccd54e992773c6c127c1ad73c81a00963c17e2a68a1ea35f02cb2777a8f20"
+          },
+          "wav_sha_equal": false
+        }
+      }
+    },
+    {
+      "midi": 67,
+      "variants": {
+        "BASELINE_EXTERNAL_REPLAY": {
+          "left": {
+            "control_only": false,
+            "fret": 12,
+            "midi": 67,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 3,
+            "variant": "BASELINE_EXTERNAL_REPLAY",
+            "wav": "../results/string-fret-identity/m67_BASELINE_EXTERNAL_REPLAY_left.wav",
+            "wav_sha256": "ffd3259effc827aa7f857d074857f4cebcc9f7aa5288415034ca4ac1518dfe67"
+          },
+          "right": {
+            "control_only": false,
+            "fret": 22,
+            "midi": 67,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 5,
+            "variant": "BASELINE_EXTERNAL_REPLAY",
+            "wav": "../results/string-fret-identity/m67_BASELINE_EXTERNAL_REPLAY_right.wav",
+            "wav_sha256": "ffd3259effc827aa7f857d074857f4cebcc9f7aa5288415034ca4ac1518dfe67"
+          },
+          "wav_sha_equal": true
+        },
+        "FRET_GEOMETRY_PICK_POSITION": {
+          "left": {
+            "control_only": false,
+            "fret": 12,
+            "midi": 67,
+            "physical_hypothesis_only": true,
+            "pick_position": 0.8016298809579299,
+            "string_number": 3,
+            "variant": "FRET_GEOMETRY_PICK_POSITION",
+            "wav": "../results/string-fret-identity/m67_FRET_GEOMETRY_PICK_POSITION_left.wav",
+            "wav_sha256": "d93e9e9f00576a5402608c20980ec7e05f80afb40844f37fce5978b81953ec02"
+          },
+          "right": {
+            "control_only": false,
+            "fret": 22,
+            "midi": 67,
+            "physical_hypothesis_only": true,
+            "pick_position": 0.95,
+            "string_number": 5,
+            "variant": "FRET_GEOMETRY_PICK_POSITION",
+            "wav": "../results/string-fret-identity/m67_FRET_GEOMETRY_PICK_POSITION_right.wav",
+            "wav_sha256": "1f97b4c459aea510241b17136d8f2f57eebc6846eaf16fa4b258242874e881db"
+          },
+          "wav_sha_equal": false
+        },
+        "IDENTITY_PLUMBING_CONTROL": {
+          "left": {
+            "control_only": true,
+            "fret": 12,
+            "midi": 67,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 3,
+            "variant": "IDENTITY_PLUMBING_CONTROL",
+            "wav": "../results/string-fret-identity/m67_IDENTITY_PLUMBING_CONTROL_left.wav",
+            "wav_sha256": "08659c2ad0a9ca95cccb669176a8a5db9e7cf611a09ba8b8b35da6afd50701c6"
+          },
+          "right": {
+            "control_only": true,
+            "fret": 22,
+            "midi": 67,
+            "physical_hypothesis_only": false,
+            "pick_position": 0.40081494047896493,
+            "string_number": 5,
+            "variant": "IDENTITY_PLUMBING_CONTROL",
+            "wav": "../results/string-fret-identity/m67_IDENTITY_PLUMBING_CONTROL_right.wav",
+            "wav_sha256": "7fb0f7e73f0a15216461c2809e7d760f8673e357ba7e8158135442147141a7e5"
+          },
+          "wav_sha_equal": false
+        }
+      }
+    }
+  ],
+  "product_repository_write": false,
+  "schema_version": "1.0",
+  "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+  "source_tree_unchanged": true
+}

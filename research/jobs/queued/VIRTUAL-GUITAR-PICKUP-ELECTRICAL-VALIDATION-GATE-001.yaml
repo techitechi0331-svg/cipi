@@ -1,0 +1,50 @@
+schema_version: "1.0"
+job_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+state: QUEUED
+priority: 88
+track:
+  id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+  path: research/plugins/virtual-guitar/research-tracks
+research_phase: INTEGRATION_PREREQUISITE_GATE
+research_question: >-
+  Has Pickup/Electronics research advanced from a source-backed model foundation to explicit
+  measured electrical validation suitable for integration-candidate work?
+hypothesis: >-
+  Source literature is sufficient to define candidate classes but not to validate a product
+  electrical model without impedance, loaded-resonance, control and model-order measurements.
+counter_hypotheses:
+  - Literature coverage alone is sufficient electrical validation.
+  - A low-order RLC model may be adopted without falsification.
+baseline:
+  - VG-PICKUP-ELECTRICAL-EVIDENCE-FOUNDATION-20260929
+  - completed VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+variants:
+  - LOW_ORDER_LUMPED_EQUIVALENT_BASELINE
+  - FREQUENCY_DEPENDENT_LOSS_EXTENSION
+  - DISTRIBUTED_CAPACITANCE_COUNTER_CANDIDATE
+metrics:
+  - explicit_electrical_validation_artifact_present
+  - electrical_candidate_classes_present
+  - pickup_di_research_job_completed
+acceptance:
+  - source foundation is present
+  - Pickup/DI research foundation completed
+  - explicit measured electrical validation artifact exists
+rejection:
+  - source foundation is mistaken for measured validation
+  - impedance or loaded-resonance validation is absent
+  - model order is adopted by assumption
+max_runs: 1
+timeout_minutes: 5
+experiment_adapter: virtual_guitar_pickup_electrical_validation_gate_v1
+allowed_operations:
+  - inspect_committed_pickup_electrical_evidence
+  - write_gate_evidence
+prohibited_operations:
+  - product_repository_write
+  - automatic_product_integration
+  - automatic_model_order_adoption
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

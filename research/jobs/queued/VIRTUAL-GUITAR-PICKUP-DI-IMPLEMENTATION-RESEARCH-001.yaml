@@ -18,9 +18,10 @@ counter_hypotheses:
 - String/fret identity can be discarded once MIDI pitch is known.
 - Amp/Cab/Mic coloration is required to make pickup behavior plausible.
 baseline:
-  track_id: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
-  summary_status: COMPLETED
-  product_repository_write: false
+- VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001 is COMPLETED with MEASURED evidence
+- Current v1.1 collapses both same-MIDI string/fret red-team pairs
+- Current v1.1 has no valid PICKUP_DI stage; 15/15 requests are BLOCKED_STAGE_MISMATCH
+- Product repository write remains false
 variants:
 - PHYSICAL_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC
 - REDUCED_ORDER_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC

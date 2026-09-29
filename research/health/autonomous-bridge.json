@@ -276,11 +276,9 @@
   "human_gates": 6,
   "invalid_results": 0,
   "melon_runs": 44,
-  "next_scheduler_action": "MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
+  "next_scheduler_action": "NO_READY_WORK",
   "no_improvement_count": 5,
-  "queued_actions": [
-    "MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32"
-  ],
+  "queued_actions": [],
   "registered_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
@@ -394,9 +392,9 @@
     },
     "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
       "job_id": "VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
-      "reason": "EXTERNAL_ACTION_QUEUED",
+      "reason": "EXTERNAL_ACTION_DISPATCHED",
       "scheduler_eligible": true,
-      "state": "READY"
+      "state": "WAITING_EXTERNAL"
     },
     "VIRTUAL-GUITAR-PHYSICAL-001": {
       "reason": "HUMAN_GATE",

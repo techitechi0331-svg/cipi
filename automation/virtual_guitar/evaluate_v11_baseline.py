@@ -176,11 +176,12 @@ def _next_job(source_hash: str, summary: dict[str, Any]) -> dict[str, Any]:
             "String/fret identity can be discarded once MIDI pitch is known.",
             "Amp/Cab/Mic coloration is required to make pickup behavior plausible.",
         ],
-        "baseline": {
-            "track_id": TRACK_ID,
-            "summary_status": summary.get("status"),
-            "product_repository_write": False,
-        },
+        "baseline": [
+            f"{TRACK_ID}: COMPLETED MEASURED baseline evidence {source_hash}",
+            "current v1.1 collapses both same-MIDI string/fret red-team pairs",
+            "current v1.1 has no valid PICKUP_DI stage; 15/15 requests are BLOCKED_STAGE_MISMATCH",
+            "product repository write remains false",
+        ],
         "variants": [
             "PHYSICAL_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC",
             "REDUCED_ORDER_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC",

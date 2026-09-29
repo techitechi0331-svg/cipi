@@ -25,9 +25,7 @@
       "VOCAL-DENOISE-ROBUSTNESS-001"
     ],
     "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-    "active_tracks": [
-      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001"
-    ],
+    "active_tracks": [],
     "authority": "OPERATIONAL_SCHEDULING_ONLY",
     "automatic_knowledge_promotion": false,
     "automatic_product_decision": false,
@@ -74,14 +72,14 @@
         "runtime_seconds": 0.0
       },
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
-        "candidates": 0,
+        "candidates": 690,
         "candidates_limit": 690,
-        "loop_depth": 0,
+        "loop_depth": 1,
         "loop_depth_limit": 2,
-        "runs": 0,
+        "runs": 1,
         "runs_limit": 2,
         "runtime_limit_seconds": 1800.0,
-        "runtime_seconds": 0.0
+        "runtime_seconds": 437.0469999999914
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
         "candidates": 36,
@@ -230,7 +228,7 @@
       "MELON-BRIDGE-PILOT-001": 3,
       "MIC-SIM-FOUNDATION-001": 2,
       "MIC-SIM-REFERENCE-SM57-001": 1,
-      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": 0,
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": 1,
       "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
@@ -271,15 +269,16 @@
     "generated_jobs": 45,
     "human_gate_tracks": [
       "MIC-SIM-REFERENCE-SM57-001",
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
     ],
-    "human_gates": 6,
+    "human_gates": 7,
     "invalid_results": 0,
-    "melon_runs": 44,
+    "melon_runs": 45,
     "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 5,
     "queued_actions": [],
@@ -317,13 +316,13 @@
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.3157894736842105,
-      "new_information_per_compute_second": 12.979086329172295,
-      "new_information_per_run": 0.7792693351624583,
+      "human_gate_rate": 0.3684210526315789,
+      "new_information_per_compute_second": 0.023709110926984547,
+      "new_information_per_run": 0.7414643826508541,
       "pareto_front_turnover": null,
       "ranking_stability": null,
       "replication_consistency": null,
-      "research_compute_to_runner_wall_ratio": 0.01260934366197204,
+      "research_compute_to_runner_wall_ratio": 0.05388367116987576,
       "semantic_duplicate_rate": 0.0
     },
     "result_missing": 0,
@@ -353,13 +352,13 @@
       "artifact_upload_seconds": null,
       "checkout_seconds": null,
       "environment_setup_seconds": null,
-      "known_runner_samples": 31,
+      "known_runner_samples": 32,
       "macro_export_seconds": null,
       "preflight_seconds": null,
       "queue_wait_seconds": 0.0,
-      "research_compute_seconds": 125.33687600000208,
-      "runner_job_seconds": 9940.0,
-      "total_wall_seconds": 9940.0
+      "research_compute_seconds": 562.3838759999933,
+      "runner_job_seconds": 10437.0,
+      "total_wall_seconds": 10437.0
     },
     "track_lifecycle": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -395,10 +394,9 @@
         "state": "HUMAN_GATE"
       },
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
-        "job_id": "VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
-        "reason": "EXTERNAL_ACTION_DISPATCHED",
-        "scheduler_eligible": true,
-        "state": "WAITING_EXTERNAL"
+        "reason": "HUMAN_GATE",
+        "scheduler_eligible": false,
+        "state": "HUMAN_GATE"
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
         "reason": "HUMAN_GATE",
@@ -510,6 +508,7 @@
       "MELON-BRIDGE-PILOT-001": "BUDGET_EXHAUSTED",
       "MIC-SIM-FOUNDATION-001": "DUPLICATE_ONLY",
       "MIC-SIM-REFERENCE-SM57-001": "HUMAN_GATE",
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": "HUMAN_GATE",
       "VIRTUAL-GUITAR-PHYSICAL-001": "HUMAN_GATE",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": "HUMAN_GATE",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": "DUPLICATE_ONLY",
@@ -552,8 +551,8 @@
     "health_alerts": [],
     "ready_action": null,
     "states": {
-      "completed": 59,
-      "dispatched": 2,
+      "completed": 60,
+      "dispatched": 1,
       "failed": 15,
       "quarantined": 0,
       "queued": 1

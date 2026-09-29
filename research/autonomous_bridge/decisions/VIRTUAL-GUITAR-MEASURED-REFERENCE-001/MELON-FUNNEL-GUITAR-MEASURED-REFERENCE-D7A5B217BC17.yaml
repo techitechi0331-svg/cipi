@@ -1,0 +1,50 @@
+schema_version: '1.0'
+decision_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001:melon-funnel-guitar-measured-reference-d7a5b217bc17:continuation
+track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+run_id: melon-funnel-guitar-measured-reference-d7a5b217bc17
+job_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+loop_depth: 1
+decision: STOP
+stop_reason: HUMAN_GATE
+continuation_fingerprint: null
+accepted_candidate_id: null
+selected_architecture: null
+rejections: []
+proposal_count: 0
+duplicate_suppressions: 0
+human_gate_proposals: 0
+processed_artifact_hash: e71d90fbc43999f5a55e39eef6ea3b7ebf36dd5530374e62ed9ffc3b8aa23384
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: APPLIED
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false
+  acquire_egfxset_clean: true
+  raw_audio_storage: RUNNER_CACHE_ONLY
+  dataset_url: https://zenodo.org/record/7044411/files/Clean.zip?download=1
+  dataset_archive_md5: cdb1b401960f56becc8640387910e78a
+  expected_capture_count: 690
+  pending_adapter_commit: f34851b7477bee36b9d314865407f92830e507b9
+  pending_validation_run: 36502461630
+  validation_result: PASS
+efficiency_summary:
+  candidate_count: 690
+  measured_count: 690
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 690
+  deep_stage_survivors: 1
+  runner_runtime_seconds: 437.0469999999914
+  candidates_per_runner_minute: 94.72665411271743
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 437.0469999999914
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_RUN_REFERENCE_PREFLIGHT
+authority: CIPI_CONTINUATION_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

@@ -1,0 +1,88 @@
+schema_version: '1.0'
+processed_run_id: melon-funnel-guitar-measured-reference-d7a5b217bc17
+processed_artifact_hash: e71d90fbc43999f5a55e39eef6ea3b7ebf36dd5530374e62ed9ffc3b8aa23384
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/melon/36503369879/11007105249/files/melon-funnel-guitar-measured-reference-d7a5b217bc17/macro_result.json
+track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+job_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+parent_job_id: null
+parent_run_id: null
+root_research_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+hypothesis_id: HYP-VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+experiment_id: EXP-VIRTUAL-GUITAR-MEASURED-REFERENCE-R1
+loop_depth: 1
+route: HUMAN_GATE
+evidence_class: MEASURED
+confidence: 0.8999999999999999
+novelty: 1.0
+improvement_signal: 0.25
+regression_status: NO_REGRESSION_SIGNAL_FROM_RESEARCH_GATES
+experiment_cost:
+  candidates: 690
+  deep_validation_count: 1
+  runtime_seconds: 437.0469999999914
+  stage2_measurement_runs: 0
+measured_candidates: 690
+stop_reason: REFERENCE_PREFLIGHT_COMPLETE
+bundle_hash: 558b31099c87046844f4ef7c2186d853ad4e20c7bc0e7fb9b5f60f76be7e7c84
+efficiency_policy:
+  acquire_egfxset_clean: true
+  candidate_timeout_seconds: 10
+  dataset_archive_md5: cdb1b401960f56becc8640387910e78a
+  dataset_url: https://zenodo.org/record/7044411/files/Clean.zip?download=1
+  expected_capture_count: 690
+  full_regression_required: false
+  max_memory_mb: 2048
+  pending_adapter_commit: f34851b7477bee36b9d314865407f92830e507b9
+  pending_validation_run: 36502461630
+  policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
+  policy_version: '1.0'
+  raw_audio_storage: RUNNER_CACHE_ONLY
+  state: APPLIED
+  validation_result: PASS
+efficiency_summary:
+  candidate_count: 690
+  measured_count: 690
+  rejected_before_measurement: 0
+  cache_hits: 0
+  duplicate_hits: 0
+  cheap_stage_survivors: 690
+  deep_stage_survivors: 1
+  runner_runtime_seconds: 437.0469999999914
+  research_compute_seconds: 437.0469999999914
+  runner_job_seconds: null
+  total_wall_seconds: null
+  information_gain_signal: 0.25
+  duplicate_rate: 0.0
+  candidates_per_runner_minute: 94.72665411271743
+  build_time_seconds: 0.0
+  benchmark_time_seconds: 437.0469999999914
+  queue_wait_seconds: null
+  full_regression_required: false
+  full_regression_result: NOT_RUN_REFERENCE_PREFLIGHT
+time_metrics:
+  queue_wait_seconds: null
+  runner_job_seconds: null
+  checkout_seconds: null
+  environment_setup_seconds: null
+  preflight_seconds: null
+  research_compute_seconds: 437.0469999999914
+  macro_export_seconds: null
+  artifact_upload_seconds: null
+  total_wall_seconds: null
+research_quality_metrics:
+  budget_exhaustion_rate: null
+  cache_hit_rate: null
+  duplicate_research_rate: 0.0
+  early_convergence_rate: null
+  falsification_rate: null
+  human_gate_rate: null
+  new_information_per_compute_second: 0.0005720208581685835
+  new_information_per_run: 0.25
+  pareto_front_turnover: null
+  ranking_stability: null
+  replication_consistency: null
+  research_compute_to_runner_wall_ratio: null
+  semantic_duplicate_rate: 0.0
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

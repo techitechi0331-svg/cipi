@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: RUNNING
+run_id: 36503369879
+run_status: in_progress
+run_conclusion: null
+since: '2026-09-29T00:29:44Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

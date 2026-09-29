@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "67beb7b287618e7d01e87d241e2037fd464e5416",
+    "commit_sha": "19b216731b83300880c63cf0b14fbc5d27293b8d",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T20:58:30+09:00",
-  "generation_id": "08ab729fd679cb24577194db",
+  "generated_at": "2026-09-29T21:01:54+09:00",
+  "generation_id": "80edfae14a304dbfb2767c00",
   "human_gates": [
     {
       "blocking": false,
@@ -101,13 +101,13 @@
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "64500f3233d81f993194232d0bd82e175dae8a67045f6d6e379daabbb4d68350",
+      "sha256": "c9271a2b8eb89683238562f1a5b8ec68d8b45829ebb5d3fb2c906383c6e2d0e2",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "ea3222df95b9a19d04f2d7ee76b855818ffceb75e49beb529e7e81aca79c4210",
+      "sha256": "79c23bd9ee85dd3dcd5c559d4096ac3a4da5c0808a627d55e4048f3624a790f3",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -120,14 +120,14 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "048614abbfe3daa11d3548e14cc5328a795c7df4805cfb2d6497137a3fcac08b",
+      "sha256": "b744872c83018b0036316fd8242dc175ea99f688ac8d11bcc15f0ec04721327d",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "591cd30898f22c0cb226758a5f75908427a9fa25d1d2f385306db35237384651",
+      "sha256": "4196cc01034ec4a2ad2944a94dd8f7e70dff178642a67408468b6c00f81a0daf",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -140,11 +140,11 @@
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "6738b5ae6d6108fa861ea86cec4496bdc186b99027780dae8ddda354ea561641",
+      "sha256": "3b5c1b1aaa603df1c6d6795f7593d8eb69b241eed39e890e3c7bccfa1a8355b1",
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "35751f156076fecfb8dfed87075787d4561c8a63cf2a590e8e4d97c5781fc573",
+  "source_state_digest": "9c60d403d10ffe422e0bba5cf7c6c1a33b8aca30bebae13b101559f26ee311e2",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?"
   ],

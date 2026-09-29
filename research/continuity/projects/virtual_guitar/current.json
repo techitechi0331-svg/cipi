@@ -33,51 +33,17 @@
         "FINAL_MIC_INTEGRATION_ADOPTION",
         "REAL_AUDIO_AB"
       ]
-    },
-    {
-      "classification": "BLOCKED_DEPENDENCY",
-      "current_human_gates": [
-        "FINAL_SUBJECTIVE_PICKUP_TONE",
-        "PRODUCT_ADOPTION_DECISION",
-        "REAL_DI_AB"
-      ],
-      "declared_human_gates": [
-        "FINAL_SUBJECTIVE_PICKUP_TONE",
-        "PRODUCT_ADOPTION_DECISION",
-        "REAL_DI_AB"
-      ],
-      "depends_on_jobs": [
-        "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
-        "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
-        "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
-        "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
-      ],
-      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001",
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001.yaml",
-      "priority": 35,
-      "research_question": "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?",
-      "resolved_human_gates": [],
-      "state": "QUEUED",
-      "unresolved_dependencies": [
-        "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
-        "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
-      ],
-      "unresolved_human_gates": [
-        "FINAL_SUBJECTIVE_PICKUP_TONE",
-        "PRODUCT_ADOPTION_DECISION",
-        "REAL_DI_AB"
-      ]
     }
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "67beb7b287618e7d01e87d241e2037fd464e5416",
+    "commit_sha": "19b216731b83300880c63cf0b14fbc5d27293b8d",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T20:58:30+09:00",
-  "generation_id": "95e8b52651823bcd381fa5b1",
+  "generated_at": "2026-09-29T21:01:54+09:00",
+  "generation_id": "d4dd84ab1e1833c18ff22590",
   "human_gates": [
     {
       "blocking": true,
@@ -129,7 +95,7 @@
       "track_id": "VIRTUAL-GUITAR-PHYSICAL-REALISM-004"
     },
     {
-      "blocking": false,
+      "blocking": true,
       "gates": [
         "FINAL_SUBJECTIVE_PICKUP_TONE",
         "PRODUCT_ADOPTION_DECISION",
@@ -140,6 +106,26 @@
     }
   ],
   "latest_decision_refs": [
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-29T11:53:00.037036Z",
+      "decision": "REJECT",
+      "decision_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
+      "path": "research/decisions/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-29T11:52:39.088783Z",
+      "decision": "REJECT",
+      "decision_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+      "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-auto.yaml",
+      "review_status": "PENDING"
+    },
     {
       "authority": "AUTOMATION",
       "created_at": "2026-09-29T11:52:13.053769Z",
@@ -195,24 +181,10 @@
       "current_human_gates": [],
       "declared_human_gates": [],
       "depends_on_jobs": [],
-      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml",
-      "priority": 88,
-      "research_question": "Has Pickup/Electronics research advanced from a source-backed model foundation to explicit measured electrical validation suitable for integration-candidate work?",
-      "resolved_human_gates": [],
-      "state": "QUEUED",
-      "unresolved_dependencies": [],
-      "unresolved_human_gates": []
-    },
-    {
-      "classification": "READY",
-      "current_human_gates": [],
-      "declared_human_gates": [],
-      "depends_on_jobs": [],
-      "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001.yaml",
-      "priority": 87,
-      "research_question": "Is the Guitar Electrical Port a validated versioned electrical boundary rather than a design-only contract or finished-WAV interface?",
+      "job_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml",
+      "priority": 96,
+      "research_question": "Do validated EGFxSet same-MIDI captures establish measured non-level string/fret identity differences that can serve as a falsifiable target for the next physical-string research candidate?",
       "resolved_human_gates": [],
       "state": "QUEUED",
       "unresolved_dependencies": [],
@@ -221,8 +193,8 @@
   ],
   "rejected_refs": [],
   "research": {
-    "decision_ref_count": 4,
-    "review_ref_count": 8,
+    "decision_ref_count": 6,
+    "review_ref_count": 12,
     "track_lifecycle": {
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
         "reason": "HUMAN_GATE",
@@ -278,9 +250,7 @@
       "MIC-SIMULATOR-CIPI-INTEGRATION-CANDIDATE-GATE-001",
       "MIC-SIMULATOR-MINIMUM-VALIDATION-GATE-001",
       "MIC-SIMULATOR-VERSIONED-CONTRACT-GATE-001",
-      "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001",
-      "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
-      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001"
+      "VIRTUAL-GUITAR-CABINET-SPEAKER-OUTPUT-CONVERGENCE-GATE-001"
     ],
     "can_autonomously_resume": true,
     "can_resume": true,
@@ -294,29 +264,49 @@
       "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001"
     ],
     "must_not_repeat": [
+      "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
       "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
       "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
+      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
       "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001",
       "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001"
     ],
-    "recommended_action": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+    "recommended_action": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001",
     "required_context": [
+      "research/decisions/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-auto.yaml",
+      "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-auto.yaml",
       "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-auto.yaml",
+      "research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-triage.yaml",
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-triage.yaml",
       "research/reviews/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/gha-36564400432-1-review-brief.yaml",
-      "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml",
-      "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-review-brief.yaml",
-      "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-review-brief.yaml"
+      "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001/gha-36467371731-1-review-brief.yaml"
     ],
     "resume_mode": "AUTO_READY"
   },
   "review_refs": [
+    {
+      "created_at": "2026-09-29T11:53:00.037036Z",
+      "final_decision_made": false,
+      "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-29T11:52:39.088783Z",
+      "final_decision_made": false,
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:triage-v1"
+    },
     {
       "created_at": "2026-09-29T11:52:13.053769Z",
       "final_decision_made": false,
@@ -368,6 +358,14 @@
     {
       "created_at": null,
       "final_decision_made": null,
+      "job_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
       "job_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
       "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-review-brief.yaml",
       "route": "CONTINUE_RESEARCH",
@@ -380,6 +378,14 @@
       "path": "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-review-brief.yaml",
       "route": "REJECTION_REVIEW",
       "triage_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001:gha-36564339464-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
+      "path": "research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:triage-v1"
     }
   ],
   "schema_version": "1.0",
@@ -394,8 +400,14 @@
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "64500f3233d81f993194232d0bd82e175dae8a67045f6d6e379daabbb4d68350",
+      "sha256": "c9271a2b8eb89683238562f1a5b8ec68d8b45829ebb5d3fb2c906383c6e2d0e2",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f2f5d584f303a01942b22fe13aabe5650a6d34035e51aeb6473854c736ff8c2d",
+      "source_type": "DECISION"
     },
     {
       "path": "research/decisions/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-auto.yaml",
@@ -407,6 +419,12 @@
       "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-auto.yaml",
       "repository": "techitechi0331-svg/cipi",
       "sha256": "858a3dee5379b61559007fc51e281fa4a24e569f6affa6105d02716abff2369c",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e4495144704635b05a2832dc05165c8602ff659244f8531ae288e916fb0b9c41",
       "source_type": "DECISION"
     },
     {
@@ -424,7 +442,7 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "ea3222df95b9a19d04f2d7ee76b855818ffceb75e49beb529e7e81aca79c4210",
+      "sha256": "79c23bd9ee85dd3dcd5c559d4096ac3a4da5c0808a627d55e4048f3624a790f3",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -437,8 +455,14 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "048614abbfe3daa11d3548e14cc5328a795c7df4805cfb2d6497137a3fcac08b",
+      "sha256": "b744872c83018b0036316fd8242dc175ea99f688ac8d11bcc15f0ec04721327d",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8b64091ad899df23a9a79907aac4e44154ff793f0712098340cd193a398f3463",
+      "source_type": "RESEARCH_JOB_DEPENDENCY"
     },
     {
       "path": "research/jobs/completed/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001.yaml",
@@ -451,6 +475,12 @@
       "repository": "techitechi0331-svg/cipi",
       "sha256": "536ad1d3877698a674d7592869da8c44f8b8f2fe6fa6aafc16089aaef24afe7d",
       "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7646b0b514bfebeb186887746f53faee33babee2b808a191fed384e4ef62c8ad",
+      "source_type": "RESEARCH_JOB_DEPENDENCY"
     },
     {
       "path": "research/jobs/completed/VIRTUAL-GUITAR-PICKUP-ELECTRONICS-STRAT-001.yaml",
@@ -468,25 +498,13 @@
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "591cd30898f22c0cb226758a5f75908427a9fa25d1d2f385306db35237384651",
+      "sha256": "4196cc01034ec4a2ad2944a94dd8f7e70dff178642a67408468b6c00f81a0daf",
       "source_type": "CIPI_DIRECTORY_INDEX"
-    },
-    {
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001.yaml",
-      "repository": "techitechi0331-svg/cipi",
-      "sha256": "7672394d7d56a880272fe2028d30b5c980babe529a76482116b5b5c02074fc57",
-      "source_type": "RESEARCH_JOB"
     },
     {
       "path": "research/jobs/queued/VIRTUAL-GUITAR-MIC-INTEGRATION-001.yaml",
       "repository": "techitechi0331-svg/cipi",
       "sha256": "8c1ec216ae9dd387221f4b0dc1547e2195cff9cdaf63647bcac0a16fab7437f5",
-      "source_type": "RESEARCH_JOB"
-    },
-    {
-      "path": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml",
-      "repository": "techitechi0331-svg/cipi",
-      "sha256": "ec74b479214e0f9e7fdc18f2a15a3e9e64ec669530a7e9a51969a085d225565d",
       "source_type": "RESEARCH_JOB"
     },
     {
@@ -496,11 +514,29 @@
       "source_type": "RESEARCH_JOB"
     },
     {
+      "path": "research/jobs/queued/VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bc4be84386d9e1b7cd56c88abb101bca5bf593f943c0db97f745f06b6e977ba7",
+      "source_type": "RESEARCH_JOB"
+    },
+    {
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "6738b5ae6d6108fa861ea86cec4496bdc186b99027780dae8ddda354ea561641",
+      "sha256": "3b5c1b1aaa603df1c6d6795f7593d8eb69b241eed39e890e3c7bccfa1a8355b1",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "cca52710c39e1e69fb9401aa5b253a4e1d279c2c9ff6f90ead224e5b6bcbc947",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "31c97abdee50d9ec9efada3d791f3804810a90a4dbb57c1aae0fc50bc7872dca",
+      "source_type": "REVIEW"
     },
     {
       "path": "research/reviews/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/gha-36564339464-1-review-brief.yaml",
@@ -524,6 +560,18 @@
       "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-triage.yaml",
       "repository": "techitechi0331-svg/cipi",
       "sha256": "e66b54da7d4067b536bb9e524deec802cbb9b084f9e6cc4e51ac7bab47f929c6",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "55dddf9a52c43cc21e85414bff4b774a83f9431a4bf898fd01b2d442db32b059",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "55ec01da33ff90afe1bfc1e3bc8660d8dde359b478ba9f3f01ced744860ae3df",
       "source_type": "REVIEW"
     },
     {
@@ -551,17 +599,16 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "1d93adfc42f231712a9f153a86f17169420ad4d6b72f47caefd525ac11bdb4b0",
+  "source_state_digest": "af79914d4d7f19316a2abdc20a41b6beec35197de9346c6b11e648b28c76bd93",
   "unresolved_questions": [
-    "Has Pickup/Electronics research advanced from a source-backed model foundation to explicit measured electrical validation suitable for integration-candidate work?",
-    "Is the Guitar Electrical Port a validated versioned electrical boundary rather than a design-only contract or finished-WAV interface?",
+    "Do validated EGFxSet same-MIDI captures establish measured non-level string/fret identity differences that can serve as a falsifiable target for the next physical-string research candidate?",
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"
   ],
   "work": {
-    "blocked_count": 2,
+    "blocked_count": 1,
     "human_gate_count": 7,
-    "queued_job_count": 4,
-    "ready_count": 2
+    "queued_job_count": 3,
+    "ready_count": 1
   }
 }

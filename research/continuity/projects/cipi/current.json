@@ -43,7 +43,7 @@
   "conflicts": [],
   "freshness": "FRESH",
   "generated_at": "2026-09-29T13:06:42+09:00",
-  "generation_id": "129045d115030a8fb31930b7",
+  "generation_id": "09cb3dfeca92a0ea50642ad1",
   "human_gates": [
     {
       "blocking": false,
@@ -55,19 +55,41 @@
       "source": "RESEARCH_JOB"
     }
   ],
-  "latest_decision_refs": [],
+  "latest_decision_refs": [
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
   "phase": "BLOCKED",
   "product_ref": {
-    "commit_sha": "d97a5f7e8a6f72dc513152f579fb69a61ba54229",
+    "commit_sha": "dbdc535a5f122191b005253b0f79207d82a0a5c8",
     "ref": "main",
-    "repository": "techitechi0331-svg/mic_simulator",
+    "repository": "techitechi0331-svg/cipi",
     "verification": "VERIFIED"
   },
-  "project_id": "mic_simulator",
+  "project_id": "cipi",
   "ready": [],
-  "rejected_refs": [],
+  "rejected_refs": [
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
   "research": {
-    "decision_ref_count": 0,
+    "decision_ref_count": 1,
     "review_ref_count": 0,
     "track_lifecycle": {}
   },
@@ -83,9 +105,13 @@
     "human_gates": [
       "VIRTUAL-GUITAR-MIC-INTEGRATION-001"
     ],
-    "must_not_repeat": [],
+    "must_not_repeat": [
+      "VOPRIPRO-BALLISTICS-TRANSFER-001"
+    ],
     "recommended_action": "WAIT_OR_STEAL_OTHER_PROJECT",
-    "required_context": [],
+    "required_context": [
+      "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml"
+    ],
     "resume_mode": "BLOCKED"
   },
   "review_refs": [],
@@ -103,6 +129,12 @@
       "repository": "techitechi0331-svg/cipi",
       "sha256": "c66ca453e5be3cbe4942fd2ffb73c9398d2c518acc95f32f83810a842e444a6d",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "099f6eff3c2116013258ad1c027b2a0815fa035649b092e708e8028df46c74df",
+      "source_type": "DECISION"
     },
     {
       "path": "research/health/automation-status.json",
@@ -144,7 +176,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "c5e8a5ac079f5804b74317962a41c509c217fda839d0fcd7dc530da40c08cab0",
+  "source_state_digest": "c0a6660fa395875e1923e115737809a79014172d9a4983161534b92a2f34c5c6",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?"
   ],

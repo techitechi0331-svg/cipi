@@ -2,12 +2,12 @@
   "authority": "CONTEXT_RECONSTRUCTION_ONLY",
   "freshness_counts": {
     "CONFLICT": 0,
-    "FRESH": 15,
+    "FRESH": 16,
     "INVALID": 0,
     "STALE": 0
   },
-  "generated_at": "2026-09-29T12:31:53+09:00",
-  "project_count": 15,
+  "generated_at": "2026-09-29T13:06:42+09:00",
+  "project_count": 16,
   "projects": [
     {
       "freshness": "FRESH",
@@ -20,6 +20,12 @@
       "phase": "IDLE",
       "project_id": "black76",
       "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "FRESH",
+      "phase": "BLOCKED",
+      "project_id": "cipi",
+      "recommended_action": "WAIT_OR_STEAL_OTHER_PROJECT"
     },
     {
       "freshness": "FRESH",

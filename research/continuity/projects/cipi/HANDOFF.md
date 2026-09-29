@@ -1,11 +1,11 @@
-# mic_simulator Continuity
+# cipi Continuity
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
 - CIPI source commit: a7db3213f937a7fba1cedadac635f3d798649621
-- Source-state digest: c5e8a5ac079f5804b74317962a41c509c217fda839d0fcd7dc530da40c08cab0
-- Product: techitechi0331-svg/mic_simulator@main
-- Product commit: d97a5f7e8a6f72dc513152f579fb69a61ba54229
+- Source-state digest: c0a6660fa395875e1923e115737809a79014172d9a4983161534b92a2f34c5c6
+- Product: techitechi0331-svg/cipi@main
+- Product commit: dbdc535a5f122191b005253b0f79207d82a0a5c8
 
 ## Current position
 - Phase: **BLOCKED**
@@ -23,10 +23,10 @@
 - VIRTUAL-GUITAR-MIC-INTEGRATION-001: FINAL_MIC_INTEGRATION_ADOPTION, REAL_AUDIO_AB
 
 ## Must not repeat
-- none
+- VOPRIPRO-BALLISTICS-TRANSFER-001
 
 ## Important decision refs
-- none
+- research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml
 
 ## Unresolved questions
 - After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?

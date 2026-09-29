@@ -549,18 +549,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001",
-      "kind": "CROSS_REPO",
-      "priority": 95,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 71,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 16,
       "quarantined": 0,
-      "queued": 2
+      "queued": 1
     }
   },
   "human_gates": [
@@ -596,9 +591,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001",
-    "kind": "CROSS_REPO",
-    "priority": 95,
-    "reason": "ready_external_action"
+    "branch": "research-bot/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/auto-7672394d7d56",
+    "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
+    "kind": "EVIDENCE_INTAKE",
+    "priority": 90
   }
 }

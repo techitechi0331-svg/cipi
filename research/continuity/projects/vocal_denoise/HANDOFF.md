@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 51f6eaaf85ad98c093a7f3c2711b120b02b4f30d
-- Source-state digest: c795480715f22d576a68dc353759a92b3ffbf02508752c79b6790fc31577f2db
+- CIPI source commit: 9528c80221b82312f158af2ab66d13d253979871
+- Source-state digest: ddd80ec4b17b7148da107bf9741034239bbec166c6729c609156ecb80df9266a
 - Product: techitechi0331-svg/Vocal_Denoise@main
 - Product commit: 04dbeb8cae4810e3ef6ff80422ed162e986274bb
 

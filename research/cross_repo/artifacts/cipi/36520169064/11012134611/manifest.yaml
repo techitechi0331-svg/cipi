@@ -1,0 +1,165 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/cipi
+repo_key: cipi
+run_id: 36520169064
+run_attempt: 1
+artifact_id: 11012134611
+artifact_name: vg-v11-baseline-VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001-36520169064
+expired: false
+size_in_bytes: 14845711
+created_at: '2026-09-29T04:07:36Z'
+expires_at: '2026-10-29T04:07:34Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files:
+- path: baseline-summary.json
+  status: ingested
+  size: 56555
+  sha256: d18c42d6f774157835cc16dc37043dccafb41994d3a4064a01d18ec174cb642f
+- path: raw/s1_f0_m64_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s1_f0_m64_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s1_f12_m76_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s1_f12_m76_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s1_f22_m86_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s1_f22_m86_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s2_f0_m59_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s2_f0_m59_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s2_f12_m71_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s2_f12_m71_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s2_f22_m81_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s3_f0_m55_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s2_f22_m81_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s3_f0_m55_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s3_f12_m67_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s3_f12_m67_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s3_f22_m77_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s3_f22_m77_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s4_f0_m50_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s4_f0_m50_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s4_f12_m62_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s4_f12_m62_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s4_f22_m72_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s4_f22_m72_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s5_f0_m45_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s5_f0_m45_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s5_f12_m57_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s5_f12_m57_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s5_f22_m67_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s5_f22_m67_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s6_f0_m40_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s6_f0_m40_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s6_f12_m52_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s6_f12_m52_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s6_f22_m62_repeat_a.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+- path: raw/s6_f22_m62_repeat_b.params.json
+  status: ingested
+  size: 318
+  sha256: 02eb4349ddc244db5f857dd089637837de204c67a62aae7f99130f80236ad91e
+archive_sha256: d3933244baeda0bb997b8c32dc65dcb3e2c065c107d55049b7acd080a1858227
+ingest_status: text_evidence_ingested

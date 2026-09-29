@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
+repo_key: cipi
+workflow_key: vg_v11_baseline
+runner_class: github-hosted
+state: COMPLETED
+run_id: 36520169064
+run_status: completed
+run_conclusion: success
+since: '2026-09-29T04:07:07Z'
+wait_threshold_minutes: 30
+blocks_only_dependent_work: true

@@ -1,0 +1,1527 @@
+{
+  "acceptance": {
+    "all_15_pickup_di_requests_explicitly_classified": true,
+    "all_18_manifests_present": true,
+    "all_18_raw_coordinates_rendered": true,
+    "category_level_gap_report_generated": true,
+    "no_nan_inf": true,
+    "no_raw_to_di_fake_substitution": true,
+    "no_single_scalar_realism_verdict": true,
+    "product_repository_persistent_write": false,
+    "repeat_render_check_complete": true,
+    "same_midi_collision_result_recorded": true,
+    "source_tree_unchanged": true,
+    "wav_validity_pass": true
+  },
+  "authority": {
+    "automatic_knowledge_promotion": false,
+    "automatic_product_decision": false,
+    "human_listening_adoption": false,
+    "product_repository_write": false
+  },
+  "baseline": {
+    "architecture_id": "REALISM_V11_BASELINE",
+    "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+    "render_layer": "RAW_PHYSICAL_STRING",
+    "sample_rate_hz": 48000,
+    "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b"
+  },
+  "continuation_proposal": {
+    "activation": "AFTER_CIPI_EVIDENCE_INTAKE",
+    "automatic_product_integration": false,
+    "next_track_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001"
+  },
+  "coordinates": [
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 0,
+      "midi_note": 64,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.250603470786357,
+          "harmonic_centroid_hz": 443.70878668932335,
+          "harmonic_energy_1_to_8": [
+            99.80834634132043,
+            11.229468831266786,
+            4.627225482849305,
+            4.30745352679034,
+            0.01732284050253513,
+            1.341095089929059,
+            0.2710873827417588,
+            0.04175329836377806
+          ],
+          "harmonic_rolloff85_hz": 659.2551138257398,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3439143113987817,
+          "rms": 0.09576863009652183,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s1_f0_m64_repeat_a.wav",
+        "wav_sha256": "cf8b5563edb066e68695e54df3274284f1c97d91b2cd30744e4a2d1ec11741b4"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.250603470786357,
+          "harmonic_centroid_hz": 443.70878668932335,
+          "harmonic_energy_1_to_8": [
+            99.80834634132043,
+            11.229468831266786,
+            4.627225482849305,
+            4.30745352679034,
+            0.01732284050253513,
+            1.341095089929059,
+            0.2710873827417588,
+            0.04175329836377806
+          ],
+          "harmonic_rolloff85_hz": 659.2551138257398,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3439143113987817,
+          "rms": 0.09576863009652183,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s1_f0_m64_repeat_b.wav",
+        "wav_sha256": "cf8b5563edb066e68695e54df3274284f1c97d91b2cd30744e4a2d1ec11741b4"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 1
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 12,
+      "midi_note": 76,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.308341538277478,
+          "harmonic_centroid_hz": 863.1490756002618,
+          "harmonic_energy_1_to_8": [
+            89.99689774378203,
+            10.851408589485004,
+            4.568341728939018,
+            3.9936167737307784,
+            0.01051930817817962,
+            0.35359430611673803,
+            0.0033531418516693284,
+            0.022848102758719027
+          ],
+          "harmonic_rolloff85_hz": 1318.5102276514797,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.3647044139748113,
+          "rms": 0.09197370836600413,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s1_f12_m76_repeat_a.wav",
+        "wav_sha256": "0c32eb4f735b3b0d7f5f9dcefff95e917bdfc4c20d0706a87068212f6337c4e4"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.308341538277478,
+          "harmonic_centroid_hz": 863.1490756002618,
+          "harmonic_energy_1_to_8": [
+            89.99689774378203,
+            10.851408589485004,
+            4.568341728939018,
+            3.9936167737307784,
+            0.01051930817817962,
+            0.35359430611673803,
+            0.0033531418516693284,
+            0.022848102758719027
+          ],
+          "harmonic_rolloff85_hz": 1318.5102276514797,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.3647044139748113,
+          "rms": 0.09197370836600413,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s1_f12_m76_repeat_b.wav",
+        "wav_sha256": "0c32eb4f735b3b0d7f5f9dcefff95e917bdfc4c20d0706a87068212f6337c4e4"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 1
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 22,
+      "midi_note": 86,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.3146179612081,
+          "harmonic_centroid_hz": 1495.6844287025726,
+          "harmonic_energy_1_to_8": [
+            99.18146055517354,
+            12.290178409439136,
+            4.944387883314995,
+            3.4207910365191747,
+            0.003075809717162625,
+            0.05496711645572568,
+            0.0034425184336954293,
+            0.0027011413735397874
+          ],
+          "harmonic_rolloff85_hz": 2349.3181433392606,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.4080763349624079,
+          "rms": 0.09672963534452145,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s1_f22_m86_repeat_a.wav",
+        "wav_sha256": "5f4f609bee77be40e9f09c523adfb25d74462ca791b401a9c10eb385cae619fa"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.3146179612081,
+          "harmonic_centroid_hz": 1495.6844287025726,
+          "harmonic_energy_1_to_8": [
+            99.18146055517354,
+            12.290178409439136,
+            4.944387883314995,
+            3.4207910365191747,
+            0.003075809717162625,
+            0.05496711645572568,
+            0.0034425184336954293,
+            0.0027011413735397874
+          ],
+          "harmonic_rolloff85_hz": 2349.3181433392606,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.4080763349624079,
+          "rms": 0.09672963534452145,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s1_f22_m86_repeat_b.wav",
+        "wav_sha256": "5f4f609bee77be40e9f09c523adfb25d74462ca791b401a9c10eb385cae619fa"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 1
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 0,
+      "midi_note": 59,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.252615674166861,
+          "harmonic_centroid_hz": 338.63926808722056,
+          "harmonic_energy_1_to_8": [
+            102.54514276781265,
+            11.95356112333991,
+            4.839153566001528,
+            4.510960707095364,
+            0.018909374629575162,
+            1.5585709633670604,
+            0.42749275371192264,
+            0.17129895860151745
+          ],
+          "harmonic_rolloff85_hz": 493.8833012561241,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.38941078059801826,
+          "rms": 0.09719695206947732,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s2_f0_m59_repeat_a.wav",
+        "wav_sha256": "a159aa7605b0cb4dbf4ae72c894e0c90c6e07e179d82426074dd3e797a449e47"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.252615674166861,
+          "harmonic_centroid_hz": 338.63926808722056,
+          "harmonic_energy_1_to_8": [
+            102.54514276781265,
+            11.95356112333991,
+            4.839153566001528,
+            4.510960707095364,
+            0.018909374629575162,
+            1.5585709633670604,
+            0.42749275371192264,
+            0.17129895860151745
+          ],
+          "harmonic_rolloff85_hz": 493.8833012561241,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.38941078059801826,
+          "rms": 0.09719695206947732,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s2_f0_m59_repeat_b.wav",
+        "wav_sha256": "a159aa7605b0cb4dbf4ae72c894e0c90c6e07e179d82426074dd3e797a449e47"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 2
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 12,
+      "midi_note": 71,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.281830252431092,
+          "harmonic_centroid_hz": 651.3966212474224,
+          "harmonic_energy_1_to_8": [
+            95.33308953422147,
+            10.903875701296784,
+            4.551610890014615,
+            4.168521714909243,
+            0.013817809998647207,
+            0.7942040319134005,
+            0.0497041909958455,
+            0.014883232994131579
+          ],
+          "harmonic_rolloff85_hz": 987.7666025122483,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3977374312564649,
+          "rms": 0.09390991535532149,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s2_f12_m71_repeat_a.wav",
+        "wav_sha256": "20fb0942df5ced2862a5ee68c8e7fb7f9b6099f972b75277b4867e2fecf809ae"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.281830252431092,
+          "harmonic_centroid_hz": 651.3966212474224,
+          "harmonic_energy_1_to_8": [
+            95.33308953422147,
+            10.903875701296784,
+            4.551610890014615,
+            4.168521714909243,
+            0.013817809998647207,
+            0.7942040319134005,
+            0.0497041909958455,
+            0.014883232994131579
+          ],
+          "harmonic_rolloff85_hz": 987.7666025122483,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3977374312564649,
+          "rms": 0.09390991535532149,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s2_f12_m71_repeat_b.wav",
+        "wav_sha256": "20fb0942df5ced2862a5ee68c8e7fb7f9b6099f972b75277b4867e2fecf809ae"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 2
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 22,
+      "midi_note": 81,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.324350932251942,
+          "harmonic_centroid_hz": 1137.0258234955656,
+          "harmonic_energy_1_to_8": [
+            88.14025531821108,
+            10.924960176885065,
+            4.5561045438275585,
+            3.6275090901047644,
+            0.0052023773570184974,
+            0.03224348050678694,
+            0.038580945404304776,
+            0.002038879427279461
+          ],
+          "harmonic_rolloff85_hz": 1760.0,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.37378470585163903,
+          "rms": 0.09120019229488714,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s2_f22_m81_repeat_a.wav",
+        "wav_sha256": "4e68d4de929e5e4973123b1cf12a73e80731f306427265c414e576e6e2f71879"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.324350932251942,
+          "harmonic_centroid_hz": 1137.0258234955656,
+          "harmonic_energy_1_to_8": [
+            88.14025531821108,
+            10.924960176885065,
+            4.5561045438275585,
+            3.6275090901047644,
+            0.0052023773570184974,
+            0.03224348050678694,
+            0.038580945404304776,
+            0.002038879427279461
+          ],
+          "harmonic_rolloff85_hz": 1760.0,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.37378470585163903,
+          "rms": 0.09120019229488714,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s2_f22_m81_repeat_b.wav",
+        "wav_sha256": "4e68d4de929e5e4973123b1cf12a73e80731f306427265c414e576e6e2f71879"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 2
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 0,
+      "midi_note": 55,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.214996403870844,
+          "harmonic_centroid_hz": 266.23670232992407,
+          "harmonic_energy_1_to_8": [
+            109.90446028264705,
+            12.131274300496443,
+            4.636207659606043,
+            4.344756663039178,
+            0.01545746388145081,
+            1.6700860040769712,
+            0.516874150663539,
+            0.26947925245180904
+          ],
+          "harmonic_rolloff85_hz": 391.99543598174927,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.36085931788197967,
+          "rms": 0.09998125693617026,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s3_f0_m55_repeat_a.wav",
+        "wav_sha256": "bb7035f1f7933bd966a46c619b8f84eb56eb005c5b01f54fb1f9a0bd4837c0bf"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.214996403870844,
+          "harmonic_centroid_hz": 266.23670232992407,
+          "harmonic_energy_1_to_8": [
+            109.90446028264705,
+            12.131274300496443,
+            4.636207659606043,
+            4.344756663039178,
+            0.01545746388145081,
+            1.6700860040769712,
+            0.516874150663539,
+            0.26947925245180904
+          ],
+          "harmonic_rolloff85_hz": 391.99543598174927,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.36085931788197967,
+          "rms": 0.09998125693617026,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s3_f0_m55_repeat_b.wav",
+        "wav_sha256": "bb7035f1f7933bd966a46c619b8f84eb56eb005c5b01f54fb1f9a0bd4837c0bf"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 3
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 12,
+      "midi_note": 67,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.259234396524146,
+          "harmonic_centroid_hz": 518.2482881100219,
+          "harmonic_energy_1_to_8": [
+            99.73912639634364,
+            10.705137591343487,
+            4.482311408252538,
+            4.184126369702049,
+            0.01167099943552205,
+            1.1092133220052602,
+            0.15726096056001837,
+            0.002405720214056526
+          ],
+          "harmonic_rolloff85_hz": 783.9908719634985,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.34540848081213005,
+          "rms": 0.0956811312862533,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s3_f12_m67_repeat_a.wav",
+        "wav_sha256": "ffd3259effc827aa7f857d074857f4cebcc9f7aa5288415034ca4ac1518dfe67"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.259234396524146,
+          "harmonic_centroid_hz": 518.2482881100219,
+          "harmonic_energy_1_to_8": [
+            99.73912639634364,
+            10.705137591343487,
+            4.482311408252538,
+            4.184126369702049,
+            0.01167099943552205,
+            1.1092133220052602,
+            0.15726096056001837,
+            0.002405720214056526
+          ],
+          "harmonic_rolloff85_hz": 783.9908719634985,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.34540848081213005,
+          "rms": 0.0956811312862533,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s3_f12_m67_repeat_b.wav",
+        "wav_sha256": "ffd3259effc827aa7f857d074857f4cebcc9f7aa5288415034ca4ac1518dfe67"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 3
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 22,
+      "midi_note": 77,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.3188786822397,
+          "harmonic_centroid_hz": 912.7422739823008,
+          "harmonic_energy_1_to_8": [
+            89.64418139014845,
+            10.959576217486529,
+            4.615520092005546,
+            3.9450069657172016,
+            0.009725529806103396,
+            0.2676058669353927,
+            0.00931514918322382,
+            0.01807611353439104
+          ],
+          "harmonic_rolloff85_hz": 1396.9129257320155,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.3761889190899037,
+          "rms": 0.09177010418986684,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s3_f22_m77_repeat_a.wav",
+        "wav_sha256": "2899d43e21fb556be134781fc1cb7bc4bc5c061bf9f7bdbf657b388552927f58"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.3188786822397,
+          "harmonic_centroid_hz": 912.7422739823008,
+          "harmonic_energy_1_to_8": [
+            89.64418139014845,
+            10.959576217486529,
+            4.615520092005546,
+            3.9450069657172016,
+            0.009725529806103396,
+            0.2676058669353927,
+            0.00931514918322382,
+            0.01807611353439104
+          ],
+          "harmonic_rolloff85_hz": 1396.9129257320155,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.3761889190899037,
+          "rms": 0.09177010418986684,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s3_f22_m77_repeat_b.wav",
+        "wav_sha256": "2899d43e21fb556be134781fc1cb7bc4bc5c061bf9f7bdbf657b388552927f58"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 3
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 0,
+      "midi_note": 50,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.217389164431193,
+          "harmonic_centroid_hz": 203.64436176522275,
+          "harmonic_energy_1_to_8": [
+            110.87909894739278,
+            12.080068411628417,
+            5.168836544472924,
+            4.5765558950364955,
+            0.027535594013556874,
+            1.8733133779118702,
+            0.6610059032339848,
+            0.41535110702367106
+          ],
+          "harmonic_rolloff85_hz": 293.6647679174076,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.36484281597647855,
+          "rms": 0.1007285023714506,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s4_f0_m50_repeat_a.wav",
+        "wav_sha256": "ed4c1a4ab56b08207ba7ca8efe4c9c0f849618783b9a127c8ffab26a05ce5de6"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.217389164431193,
+          "harmonic_centroid_hz": 203.64436176522275,
+          "harmonic_energy_1_to_8": [
+            110.87909894739278,
+            12.080068411628417,
+            5.168836544472924,
+            4.5765558950364955,
+            0.027535594013556874,
+            1.8733133779118702,
+            0.6610059032339848,
+            0.41535110702367106
+          ],
+          "harmonic_rolloff85_hz": 293.6647679174076,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.36484281597647855,
+          "rms": 0.1007285023714506,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s4_f0_m50_repeat_b.wav",
+        "wav_sha256": "ed4c1a4ab56b08207ba7ca8efe4c9c0f849618783b9a127c8ffab26a05ce5de6"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 4
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 12,
+      "midi_note": 62,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.260447940140322,
+          "harmonic_centroid_hz": 399.7693280108471,
+          "harmonic_energy_1_to_8": [
+            99.92395178548031,
+            11.377656432629053,
+            4.77895230568771,
+            4.478628577902043,
+            0.01889399159496069,
+            1.4381739059669059,
+            0.33523395614358975,
+            0.0840146912690733
+          ],
+          "harmonic_rolloff85_hz": 587.3295358348151,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3562077708492006,
+          "rms": 0.0960430682455469,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s4_f12_m62_repeat_a.wav",
+        "wav_sha256": "39b9b34f8fe70d5b856d37ff4b7401cf9dcc66e113a35263474e6d815dcf9a3b"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.260447940140322,
+          "harmonic_centroid_hz": 399.7693280108471,
+          "harmonic_energy_1_to_8": [
+            99.92395178548031,
+            11.377656432629053,
+            4.77895230568771,
+            4.478628577902043,
+            0.01889399159496069,
+            1.4381739059669059,
+            0.33523395614358975,
+            0.0840146912690733
+          ],
+          "harmonic_rolloff85_hz": 587.3295358348151,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3562077708492006,
+          "rms": 0.0960430682455469,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s4_f12_m62_repeat_b.wav",
+        "wav_sha256": "39b9b34f8fe70d5b856d37ff4b7401cf9dcc66e113a35263474e6d815dcf9a3b"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 4
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 22,
+      "midi_note": 72,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.285685615712561,
+          "harmonic_centroid_hz": 690.1271369268061,
+          "harmonic_energy_1_to_8": [
+            93.87402188805481,
+            10.912757430263127,
+            4.563306234942132,
+            4.162366412785362,
+            0.013221687563611612,
+            0.7054687559869954,
+            0.0301946601713918,
+            0.022829101603475288
+          ],
+          "harmonic_rolloff85_hz": 1046.5022612023945,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.35569171377321646,
+          "rms": 0.09336713459968167,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s4_f22_m72_repeat_a.wav",
+        "wav_sha256": "60712794b554b501ec865d72e3d7156282f665408db8e7cd54bbf51b9baa5381"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.285685615712561,
+          "harmonic_centroid_hz": 690.1271369268061,
+          "harmonic_energy_1_to_8": [
+            93.87402188805481,
+            10.912757430263127,
+            4.563306234942132,
+            4.162366412785362,
+            0.013221687563611612,
+            0.7054687559869954,
+            0.0301946601713918,
+            0.022829101603475288
+          ],
+          "harmonic_rolloff85_hz": 1046.5022612023945,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.35569171377321646,
+          "rms": 0.09336713459968167,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s4_f22_m72_repeat_b.wav",
+        "wav_sha256": "60712794b554b501ec865d72e3d7156282f665408db8e7cd54bbf51b9baa5381"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 4
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 0,
+      "midi_note": 45,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.262179917824824,
+          "harmonic_centroid_hz": 155.03551479098405,
+          "harmonic_energy_1_to_8": [
+            106.8837934700714,
+            12.431641963212314,
+            5.010849480206616,
+            5.132460089768301,
+            0.017653443870014218,
+            1.8570554992511177,
+            0.625107228915482,
+            0.4655725877553589
+          ],
+          "harmonic_rolloff85_hz": 220.0,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.37498371302887357,
+          "rms": 0.09967787263706146,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s5_f0_m45_repeat_a.wav",
+        "wav_sha256": "896353de0f32b7a7f12bf9d3f993d57c5699a34b15906b014ed227cb873ec053"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.262179917824824,
+          "harmonic_centroid_hz": 155.03551479098405,
+          "harmonic_energy_1_to_8": [
+            106.8837934700714,
+            12.431641963212314,
+            5.010849480206616,
+            5.132460089768301,
+            0.017653443870014218,
+            1.8570554992511177,
+            0.625107228915482,
+            0.4655725877553589
+          ],
+          "harmonic_rolloff85_hz": 220.0,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.37498371302887357,
+          "rms": 0.09967787263706146,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s5_f0_m45_repeat_b.wav",
+        "wav_sha256": "896353de0f32b7a7f12bf9d3f993d57c5699a34b15906b014ed227cb873ec053"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 5
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 12,
+      "midi_note": 57,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.23660053458741,
+          "harmonic_centroid_hz": 300.09132806076195,
+          "harmonic_energy_1_to_8": [
+            105.5771946834866,
+            12.071188154139236,
+            4.607513229997835,
+            4.3559368261176274,
+            0.014741188057126285,
+            1.6184426137157217,
+            0.48663743409071003,
+            0.216988291708212
+          ],
+          "harmonic_rolloff85_hz": 440.0,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.36369554563707657,
+          "rms": 0.09850595131841483,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s5_f12_m57_repeat_a.wav",
+        "wav_sha256": "a778ebc1df03b30db7098af9b364815c64a7e737114465ef5d4c2740c7a7ac93"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.23660053458741,
+          "harmonic_centroid_hz": 300.09132806076195,
+          "harmonic_energy_1_to_8": [
+            105.5771946834866,
+            12.071188154139236,
+            4.607513229997835,
+            4.3559368261176274,
+            0.014741188057126285,
+            1.6184426137157217,
+            0.48663743409071003,
+            0.216988291708212
+          ],
+          "harmonic_rolloff85_hz": 440.0,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.36369554563707657,
+          "rms": 0.09850595131841483,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s5_f12_m57_repeat_b.wav",
+        "wav_sha256": "a778ebc1df03b30db7098af9b364815c64a7e737114465ef5d4c2740c7a7ac93"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 5
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 22,
+      "midi_note": 67,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.259234396524146,
+          "harmonic_centroid_hz": 518.2482881100219,
+          "harmonic_energy_1_to_8": [
+            99.73912639634364,
+            10.705137591343487,
+            4.482311408252538,
+            4.184126369702049,
+            0.01167099943552205,
+            1.1092133220052602,
+            0.15726096056001837,
+            0.002405720214056526
+          ],
+          "harmonic_rolloff85_hz": 783.9908719634985,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.34540848081213005,
+          "rms": 0.0956811312862533,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s5_f22_m67_repeat_a.wav",
+        "wav_sha256": "ffd3259effc827aa7f857d074857f4cebcc9f7aa5288415034ca4ac1518dfe67"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.259234396524146,
+          "harmonic_centroid_hz": 518.2482881100219,
+          "harmonic_energy_1_to_8": [
+            99.73912639634364,
+            10.705137591343487,
+            4.482311408252538,
+            4.184126369702049,
+            0.01167099943552205,
+            1.1092133220052602,
+            0.15726096056001837,
+            0.002405720214056526
+          ],
+          "harmonic_rolloff85_hz": 783.9908719634985,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.34540848081213005,
+          "rms": 0.0956811312862533,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s5_f22_m67_repeat_b.wav",
+        "wav_sha256": "ffd3259effc827aa7f857d074857f4cebcc9f7aa5288415034ca4ac1518dfe67"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 5
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 0,
+      "midi_note": 40,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.305562434032613,
+          "harmonic_centroid_hz": 121.15010789499375,
+          "harmonic_energy_1_to_8": [
+            104.20832719630562,
+            14.641196101285459,
+            5.658879908834933,
+            5.302299381494799,
+            0.04599881625528113,
+            2.2777439417087635,
+            0.8475613815170391,
+            0.6121023616665582
+          ],
+          "harmonic_rolloff85_hz": 164.813778456435,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.39174966713782156,
+          "rms": 0.09935493829190484,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s6_f0_m40_repeat_a.wav",
+        "wav_sha256": "d90520ebc5f4dd51897142d235877b888e67971c0368493227bbd1a622b7b9a4"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.305562434032613,
+          "harmonic_centroid_hz": 121.15010789499375,
+          "harmonic_energy_1_to_8": [
+            104.20832719630562,
+            14.641196101285459,
+            5.658879908834933,
+            5.302299381494799,
+            0.04599881625528113,
+            2.2777439417087635,
+            0.8475613815170391,
+            0.6121023616665582
+          ],
+          "harmonic_rolloff85_hz": 164.813778456435,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.0,
+          "peak": 0.39174966713782156,
+          "rms": 0.09935493829190484,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s6_f0_m40_repeat_b.wav",
+        "wav_sha256": "d90520ebc5f4dd51897142d235877b888e67971c0368493227bbd1a622b7b9a4"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 6
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 12,
+      "midi_note": 52,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.23169017534416,
+          "harmonic_centroid_hz": 225.78945635771296,
+          "harmonic_energy_1_to_8": [
+            112.44221811971511,
+            12.248792332705477,
+            5.128477102525949,
+            4.591225577592013,
+            0.026714841891578356,
+            1.7179167835065243,
+            0.5519167992912273,
+            0.3453713816912959
+          ],
+          "harmonic_rolloff85_hz": 329.6275569128699,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3724937883012042,
+          "rms": 0.10105162500658812,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s6_f12_m52_repeat_a.wav",
+        "wav_sha256": "28bf02196b1159fc45626fe8c6e3ed9608008f0fe678028aa9a4f6733443ca49"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.23169017534416,
+          "harmonic_centroid_hz": 225.78945635771296,
+          "harmonic_energy_1_to_8": [
+            112.44221811971511,
+            12.248792332705477,
+            5.128477102525949,
+            4.591225577592013,
+            0.026714841891578356,
+            1.7179167835065243,
+            0.5519167992912273,
+            0.3453713816912959
+          ],
+          "harmonic_rolloff85_hz": 329.6275569128699,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3724937883012042,
+          "rms": 0.10105162500658812,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s6_f12_m52_repeat_b.wav",
+        "wav_sha256": "28bf02196b1159fc45626fe8c6e3ed9608008f0fe678028aa9a4f6733443ca49"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 6
+    },
+    {
+      "architecture_id": "REALISM_V11_BASELINE",
+      "fret": 22,
+      "midi_note": 62,
+      "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+      "render_layer": "RAW_PHYSICAL_STRING",
+      "repeat_sha_match": true,
+      "run_a": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.260447940140322,
+          "harmonic_centroid_hz": 399.7693280108471,
+          "harmonic_energy_1_to_8": [
+            99.92395178548031,
+            11.377656432629053,
+            4.77895230568771,
+            4.478628577902043,
+            0.01889399159496069,
+            1.4381739059669059,
+            0.33523395614358975,
+            0.0840146912690733
+          ],
+          "harmonic_rolloff85_hz": 587.3295358348151,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3562077708492006,
+          "rms": 0.0960430682455469,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s6_f22_m62_repeat_a.wav",
+        "wav_sha256": "39b9b34f8fe70d5b856d37ff4b7401cf9dcc66e113a35263474e6d815dcf9a3b"
+      },
+      "run_b": {
+        "features": {
+          "decay_db_0p15_to_2p5": -10.260447940140322,
+          "harmonic_centroid_hz": 399.7693280108471,
+          "harmonic_energy_1_to_8": [
+            99.92395178548031,
+            11.377656432629053,
+            4.77895230568771,
+            4.478628577902043,
+            0.01889399159496069,
+            1.4381739059669059,
+            0.33523395614358975,
+            0.0840146912690733
+          ],
+          "harmonic_rolloff85_hz": 587.3295358348151,
+          "inf_count": 0,
+          "invalid_sample_count": 0,
+          "nan_count": 0,
+          "onset_ms": 0.020833333333333332,
+          "peak": 0.3562077708492006,
+          "rms": 0.0960430682455469,
+          "sample_count": 144000,
+          "sample_rate_hz": 48000
+        },
+        "parameter_hash": "07a5a1cdc4fc041c75aeab8881c254265fdaabfab4661a2af6b1d7b989f55038",
+        "wav": "../results/vg-v11-baseline/raw/s6_f22_m62_repeat_b.wav",
+        "wav_sha256": "39b9b34f8fe70d5b856d37ff4b7401cf9dcc66e113a35263474e6d815dcf9a3b"
+      },
+      "source_git_sha": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+      "string_number": 6
+    }
+  ],
+  "gap_report": {
+    "attack": "MEASURED_BASELINE_FEATURES_RECORDED",
+    "decay": "MEASURED_BASELINE_FEATURES_RECORDED",
+    "deterministic_repeatability": "PASS",
+    "fret_identity": [
+      "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED",
+      "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED"
+    ],
+    "harmonic_distribution": "HARMONIC_FEATURES_RECORDED",
+    "hf_behavior": "HARMONIC_ROLLOFF_RECORDED",
+    "inharmonicity": "NOT_DIRECTLY_ESTIMATED_IN_V11_BASELINE_BATCH",
+    "pickup_stage_availability": "BLOCKED_STAGE_MISMATCH",
+    "pitch_tuning": "BASELINE_RENDERED_BY_MIDI_COORDINATE",
+    "single_scalar_realism_verdict": false,
+    "spectral_balance": "HARMONIC_FEATURES_RECORDED",
+    "string_identity": [
+      "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED",
+      "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED"
+    ]
+  },
+  "pickup_di_classification": [
+    {
+      "fret": 0,
+      "midi_note": 40,
+      "pickup_configuration": "bridge",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 6
+    },
+    {
+      "fret": 0,
+      "midi_note": 40,
+      "pickup_configuration": "bridge-middle",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 6
+    },
+    {
+      "fret": 0,
+      "midi_note": 40,
+      "pickup_configuration": "middle",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 6
+    },
+    {
+      "fret": 0,
+      "midi_note": 40,
+      "pickup_configuration": "middle-neck",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 6
+    },
+    {
+      "fret": 0,
+      "midi_note": 40,
+      "pickup_configuration": "neck",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 6
+    },
+    {
+      "fret": 12,
+      "midi_note": 62,
+      "pickup_configuration": "bridge",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 4
+    },
+    {
+      "fret": 12,
+      "midi_note": 62,
+      "pickup_configuration": "bridge-middle",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 4
+    },
+    {
+      "fret": 12,
+      "midi_note": 62,
+      "pickup_configuration": "middle",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 4
+    },
+    {
+      "fret": 12,
+      "midi_note": 62,
+      "pickup_configuration": "middle-neck",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 4
+    },
+    {
+      "fret": 12,
+      "midi_note": 62,
+      "pickup_configuration": "neck",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 4
+    },
+    {
+      "fret": 12,
+      "midi_note": 76,
+      "pickup_configuration": "bridge",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 1
+    },
+    {
+      "fret": 12,
+      "midi_note": 76,
+      "pickup_configuration": "bridge-middle",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 1
+    },
+    {
+      "fret": 12,
+      "midi_note": 76,
+      "pickup_configuration": "middle",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 1
+    },
+    {
+      "fret": 12,
+      "midi_note": 76,
+      "pickup_configuration": "middle-neck",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 1
+    },
+    {
+      "fret": 12,
+      "midi_note": 76,
+      "pickup_configuration": "neck",
+      "raw_to_di_fake_substitution": false,
+      "reason": "PICKUP_DI is unavailable for the inspected v1.1 product baseline. RAW_PHYSICAL_STRING must not be relabeled or filtered into a fake DI layer.",
+      "render_layer": "PICKUP_DI",
+      "status": "BLOCKED_STAGE_MISMATCH",
+      "string_number": 1
+    }
+  ],
+  "same_midi_red_team": [
+    {
+      "classification": "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED",
+      "left": {
+        "fret": 12,
+        "string_number": 4
+      },
+      "left_features": {
+        "decay_db_0p15_to_2p5": -10.260447940140322,
+        "harmonic_centroid_hz": 399.7693280108471,
+        "harmonic_energy_1_to_8": [
+          99.92395178548031,
+          11.377656432629053,
+          4.77895230568771,
+          4.478628577902043,
+          0.01889399159496069,
+          1.4381739059669059,
+          0.33523395614358975,
+          0.0840146912690733
+        ],
+        "harmonic_rolloff85_hz": 587.3295358348151,
+        "inf_count": 0,
+        "invalid_sample_count": 0,
+        "nan_count": 0,
+        "onset_ms": 0.020833333333333332,
+        "peak": 0.3562077708492006,
+        "rms": 0.0960430682455469,
+        "sample_count": 144000,
+        "sample_rate_hz": 48000
+      },
+      "midi_note": 62,
+      "right": {
+        "fret": 22,
+        "string_number": 6
+      },
+      "right_features": {
+        "decay_db_0p15_to_2p5": -10.260447940140322,
+        "harmonic_centroid_hz": 399.7693280108471,
+        "harmonic_energy_1_to_8": [
+          99.92395178548031,
+          11.377656432629053,
+          4.77895230568771,
+          4.478628577902043,
+          0.01889399159496069,
+          1.4381739059669059,
+          0.33523395614358975,
+          0.0840146912690733
+        ],
+        "harmonic_rolloff85_hz": 587.3295358348151,
+        "inf_count": 0,
+        "invalid_sample_count": 0,
+        "nan_count": 0,
+        "onset_ms": 0.020833333333333332,
+        "peak": 0.3562077708492006,
+        "rms": 0.0960430682455469,
+        "sample_count": 144000,
+        "sample_rate_hz": 48000
+      },
+      "wav_sha_equal": true
+    },
+    {
+      "classification": "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED",
+      "left": {
+        "fret": 12,
+        "string_number": 3
+      },
+      "left_features": {
+        "decay_db_0p15_to_2p5": -10.259234396524146,
+        "harmonic_centroid_hz": 518.2482881100219,
+        "harmonic_energy_1_to_8": [
+          99.73912639634364,
+          10.705137591343487,
+          4.482311408252538,
+          4.184126369702049,
+          0.01167099943552205,
+          1.1092133220052602,
+          0.15726096056001837,
+          0.002405720214056526
+        ],
+        "harmonic_rolloff85_hz": 783.9908719634985,
+        "inf_count": 0,
+        "invalid_sample_count": 0,
+        "nan_count": 0,
+        "onset_ms": 0.020833333333333332,
+        "peak": 0.34540848081213005,
+        "rms": 0.0956811312862533,
+        "sample_count": 144000,
+        "sample_rate_hz": 48000
+      },
+      "midi_note": 67,
+      "right": {
+        "fret": 22,
+        "string_number": 5
+      },
+      "right_features": {
+        "decay_db_0p15_to_2p5": -10.259234396524146,
+        "harmonic_centroid_hz": 518.2482881100219,
+        "harmonic_energy_1_to_8": [
+          99.73912639634364,
+          10.705137591343487,
+          4.482311408252538,
+          4.184126369702049,
+          0.01167099943552205,
+          1.1092133220052602,
+          0.15726096056001837,
+          0.002405720214056526
+        ],
+        "harmonic_rolloff85_hz": 783.9908719634985,
+        "inf_count": 0,
+        "invalid_sample_count": 0,
+        "nan_count": 0,
+        "onset_ms": 0.020833333333333332,
+        "peak": 0.34540848081213005,
+        "rms": 0.0956811312862533,
+        "sample_count": 144000,
+        "sample_rate_hz": 48000
+      },
+      "wav_sha_equal": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source_provenance": {
+    "git_metadata_available": true,
+    "source_sha_proof": "bd26a0556fb501228b4551f61f6a8e760a14455b",
+    "source_tree_sha256_after": "7de7a853f32ed43493306ef0df3957119bf8d9cdd34b6a9cd0d0953d3408e2c8",
+    "source_tree_sha256_before": "7de7a853f32ed43493306ef0df3957119bf8d9cdd34b6a9cd0d0953d3408e2c8",
+    "source_tree_unchanged": true,
+    "source_verification_mode": "GIT_EXACT_SHA"
+  },
+  "status": "COMPLETED",
+  "track_id": "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001"
+}

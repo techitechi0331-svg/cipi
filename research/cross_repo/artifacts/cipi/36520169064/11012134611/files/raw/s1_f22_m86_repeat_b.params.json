@@ -1,0 +1,10 @@
+{
+  "hfDamping": 0.2006080821138545,
+  "dispersionB": 5.485678763134211e-05,
+  "pickBrightness": 0.28484799380338527,
+  "pickTransientMix": 0.094756324048844737,
+  "pickPosition": 0.40081494047896493,
+  "bridgeCoupling": 0.15400131634155312,
+  "bodyMix": 0.10662698980459362,
+  "bodyResonanceHz": 173.02268936352272
+}

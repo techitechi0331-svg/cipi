@@ -16,6 +16,8 @@ on:
       - "automation/autonomous_bridge/**"
       - "automation/orchestrator/**"
       - "automation/cross_repo/**"
+      - "automation/virtual_guitar/**"
+      - "tools/test_virtual_guitar_v11_baseline_evaluator.py"
       - ".github/workflows/global-dag-orchestrator.yml"
 
 permissions:

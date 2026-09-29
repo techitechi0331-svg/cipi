@@ -22,10 +22,15 @@ human_gate_required: true
 human_gate_conditions:
   - DATASET_RIGHTS_AND_PROVENANCE
   - COMPLETE_REFERENCE_MANIFEST
-  - REAL_AUDIO_AB
-  - HUMAN_LISTENING
-  - CUBASE_HOST_CONFIRMATION
-  - PRODUCT_ADOPTION_DECISION
+  - REFERENCE_FEATURE_MANIFEST
+  - REFERENCE_DATASET_READY_FOR_DOWNSTREAM_AB
+
+downstream_boundary:
+  reference_ready_does_not_mean_model_fidelity: true
+  model_vs_real_ab_is_separate_track: VIRTUAL-GUITAR-REAL-AUDIO-AB-001
+  human_listening_is_downstream: true
+  cubase_host_confirmation_is_downstream: true
+  product_adoption_is_downstream: true
 
 authority_boundaries:
   automatic_final_decision: false
@@ -87,7 +92,7 @@ initial_experiment:
     - egfxset
     - measured_reference
     - stratocaster_clean_di
-    - real_audio_ab
+    - real_audio_reference
   inputs:
     seed: 2026092904
     population: 4

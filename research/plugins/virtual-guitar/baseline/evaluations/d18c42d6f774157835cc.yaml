@@ -1,0 +1,13 @@
+schema_version: '1.0'
+evaluation_id: VG-V11-BASELINE-EVAL-D18C42D6F774
+source_artifact: /home/runner/work/cipi/cipi/research/cross_repo/artifacts/cipi/36520169064/11012134611/files/baseline-summary.json
+source_sha256: d18c42d6f774157835cc16dc37043dccafb41994d3a4064a01d18ec174cb642f
+track_id: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
+evidence_class: MEASURED
+decision: CONTINUE
+stop_reason: BASELINE_MEASURED
+validation_errors: []
+authority: CIPI_EVIDENCE_EVALUATION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

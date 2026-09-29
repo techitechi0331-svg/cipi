@@ -1,0 +1,10 @@
+schema_version: '1.0'
+decision_id: VG-V11-BASELINE-DECISION-D18C42D6F774
+evaluation_id: VG-V11-BASELINE-EVAL-D18C42D6F774
+decision: CONTINUE
+stop_reason: BASELINE_MEASURED
+next_job_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+authority: CIPI_CONTINUATION_DECISION
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

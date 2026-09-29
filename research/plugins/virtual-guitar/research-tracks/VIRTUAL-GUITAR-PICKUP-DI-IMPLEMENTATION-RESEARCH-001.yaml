@@ -1,0 +1,37 @@
+schema_version: '1.0'
+track_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+state: READY_FOR_RESEARCH
+project: virtual-guitar
+source_baseline_evidence_sha256: d18c42d6f774157835cc16dc37043dccafb41994d3a4064a01d18ec174cb642f
+research_question: Can an evidence-backed physical/electrical Pickup/DI observation
+  path preserve string/fret identity and reproduce measured pickup-configuration deltas
+  without using downstream Amp/Cab/Mic coloration or writing to the product repository?
+baseline_findings:
+  same_midi_identity_collapse_count: 2
+  pickup_di_stage: BLOCKED_STAGE_MISMATCH
+  deterministic_repeatability: PASS
+required_model_scope:
+- pickup_position
+- string_displacement_observation
+- magnetic_observation_model
+- pickup_R_L_C_behavior
+- volume_tone_interaction
+- cable_load
+- output_impedance
+- guitar_output_jack_behavior
+reuse_required:
+- existing CIPI Pickup Observation evidence
+- existing Pickup electrical evidence
+- existing Cable/Load research
+- existing Guitar Electrical Port contract
+- existing Guitar/Amp electrical architecture
+authority:
+  product_repository_write: false
+  product_integration: false
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+human_gate_required_for_research: false
+downstream_human_gates:
+- REAL_DI_AB
+- FINAL_SUBJECTIVE_PICKUP_TONE
+- PRODUCT_ADOPTION_DECISION

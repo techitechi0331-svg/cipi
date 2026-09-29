@@ -1,0 +1,57 @@
+schema_version: '1.0'
+job_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+state: QUEUED
+priority: 82
+track:
+  id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+  path: research/plugins/virtual-guitar/research-tracks
+research_phase: PICKUP_DI_RESEARCH_CANDIDATE
+source_baseline_evidence_sha256: d18c42d6f774157835cc16dc37043dccafb41994d3a4064a01d18ec174cb642f
+research_question: What minimum physical/electrical Pickup/DI architecture can explain
+  the baseline string/fret identity and pickup-stage gaps while preserving explicit
+  uncertainty?
+hypothesis: Separating string-state observation, magnetic pickup behavior, passive
+  R/L/C network, controls, cable load, output impedance and guitar jack will provide
+  a falsifiable PICKUP_DI candidate without disguising RAW-string model error.
+counter_hypotheses:
+- A static EQ-only pickup model is sufficient.
+- String/fret identity can be discarded once MIDI pitch is known.
+- Amp/Cab/Mic coloration is required to make pickup behavior plausible.
+baseline:
+  track_id: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
+  summary_status: COMPLETED
+  product_repository_write: false
+metrics:
+- pickup_configuration_delta_error
+- string_fret_identity_preservation
+- electrical_transfer_consistency
+- deterministic_output
+- parameter_identifiability
+- reference_di_stage_compatibility
+acceptance:
+- reuse existing CIPI pickup/electrical/cable/output-port evidence before new research
+- produce an explicit RAW_PHYSICAL_STRING to PICKUP_DI stage contract
+- no RAW-to-DI fake substitution
+- no static EQ-only adoption without falsification against electrical alternatives
+- no product repository write
+- prepare matched Reference DI validation as a downstream gate
+max_runs: 3
+timeout_minutes: 30
+allowed_operations:
+- inspect_existing_cipi_pickup_evidence
+- inspect_existing_guitar_amp_electrical_contracts
+- perform_bounded_model_discrimination
+- add_research_side_tests_and_measurement_adapters
+- prepare_pickup_di_stage_contract
+- write_research_evidence
+prohibited_operations:
+- product_repository_write
+- automatic_product_integration
+- automatic_knowledge_promotion
+- raw_to_di_fake_substitution
+- use_amp_cab_mic_to_hide_string_or_pickup_defects
+- auto_release
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false

@@ -73,14 +73,22 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "a8669722fcf320e91a07b3ad213eb436096f8c6f",
+    "commit_sha": "4a879c74c2a199d8091443cde4d75ac92727ded3",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T09:21:49+09:00",
-  "generation_id": "063f619fa4d181e75457572b",
+  "generated_at": "2026-09-29T10:25:14+09:00",
+  "generation_id": "2362cdd3137b6b83cbbbea50",
   "human_gates": [
+    {
+      "blocking": true,
+      "gates": [
+        "HUMAN_GATE"
+      ],
+      "source": "AUTONOMOUS_TRACK",
+      "track_id": "VIRTUAL-GUITAR-MEASURED-REFERENCE-001"
+    },
     {
       "blocking": false,
       "gates": [
@@ -160,9 +168,9 @@
     "review_ref_count": 2,
     "track_lifecycle": {
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
-        "reason": "TRACK_DISABLED",
+        "reason": "HUMAN_GATE",
         "scheduler_eligible": false,
-        "state": "DISABLED"
+        "state": "HUMAN_GATE"
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
         "reason": "HUMAN_GATE",
@@ -200,6 +208,11 @@
         "reason": "BUDGET_EXHAUSTED",
         "scheduler_eligible": false,
         "state": "BUDGET_EXHAUSTED"
+      },
+      "VIRTUAL-GUITAR-REAL-AUDIO-AB-001": {
+        "reason": "TRACK_DISABLED",
+        "scheduler_eligible": false,
+        "state": "DISABLED"
       }
     }
   },
@@ -217,6 +230,7 @@
     "can_autonomously_resume": false,
     "can_resume": true,
     "human_gates": [
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
@@ -277,13 +291,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "eafb9ecb8fe3cf2b4d1a1557c408debbb88c652cfa2e01952cf562692ddbacd3",
+      "sha256": "44fa4a740e702d455e964b88011adc0ce719d07f9274080f0abbba1768df51d5",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "ff708d5b50435ec4099b172045bc2cd0998c1f5f4231ff6e640d713a7fd925c2",
+      "sha256": "4e6eb09f216d626f4fa4bb51afd9440b56b6b8c37abacdaff142d8eebc094514",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -338,14 +352,14 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "39f1fd41e5fa57b5f92a8ba62b38a9e59d4f178f578a208024ab9d2f81d3e988",
+  "source_state_digest": "6c9b03ec129d81e2bb894a6cfa543764f38b2fc1ea58558d269ee4456a3a0d14",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"
   ],
   "work": {
     "blocked_count": 2,
-    "human_gate_count": 6,
+    "human_gate_count": 7,
     "queued_job_count": 2,
     "ready_count": 0
   }

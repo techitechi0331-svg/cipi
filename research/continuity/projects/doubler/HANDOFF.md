@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: a8669722fcf320e91a07b3ad213eb436096f8c6f
-- Source-state digest: 4465081d8abded0fcccf7bde3f17eb7dca4adf8782ead9f06ce6429136a7494c
+- CIPI source commit: 4a879c74c2a199d8091443cde4d75ac92727ded3
+- Source-state digest: 4f8f864ecb1f15672ccaf7db895040385d94882580b0c9d3eb2bb524d35e4eba
 - Product: techitechi0331-svg/Vocal-One-Knob-Doubler@main
 - Product commit: af01f303d7a212035ec5ced10e8f6988dc1de7c0
 

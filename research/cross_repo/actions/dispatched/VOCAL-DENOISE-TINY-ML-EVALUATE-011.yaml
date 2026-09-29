@@ -12,7 +12,7 @@ inputs:
 priority: 100
 attempts: 1
 max_attempts: 2
-retry_count: 0
+retry_count: 1
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions:
@@ -27,3 +27,14 @@ previous_run_id: 36517697779
 dispatched_at: '2026-09-29T12:16:22.103000Z'
 repository: techitechi0331-svg/Vocal_Denoise
 workflow_file: vocal-denoise-evaluate.yml
+run_id: 36567013969
+run_url: https://github.com/techitechi0331-svg/Vocal_Denoise/actions/runs/36567013969
+last_failure_classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Validate dataset cache
+last_retry_at: '2026-09-29T12:17:06.506228Z'
+retry_waiting_for_attempt: 2

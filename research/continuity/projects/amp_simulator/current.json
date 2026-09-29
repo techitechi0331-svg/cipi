@@ -3,12 +3,12 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "6253ccf46a401477bcbd716112107acadd89e893",
+    "commit_sha": "a4a4697960d8e18f8bd4ff6024bdb61f126b49c9",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T11:26:27+09:00",
+  "generated_at": "2026-09-29T12:29:18+09:00",
   "generation_id": "c5fc5ced399fae0dad353e52",
   "human_gates": [],
   "latest_decision_refs": [],

@@ -3,18 +3,18 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "6253ccf46a401477bcbd716112107acadd89e893",
+    "commit_sha": "a4a4697960d8e18f8bd4ff6024bdb61f126b49c9",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T11:26:27+09:00",
-  "generation_id": "1e5880700f3acca0ad80b85b",
+  "generated_at": "2026-09-29T12:29:18+09:00",
+  "generation_id": "e0f8f3aec33ed96b9e384a7a",
   "human_gates": [],
   "latest_decision_refs": [],
   "phase": "IDLE",
   "product_ref": {
-    "commit_sha": "f34851b7477bee36b9d314865407f92830e507b9",
+    "commit_sha": "0f5dbcbd3856cd7a8f015a1284d3e5fa5234b3ed",
     "ref": "main",
     "repository": "techitechi0331-svg/melon",
     "verification": "VERIFIED"

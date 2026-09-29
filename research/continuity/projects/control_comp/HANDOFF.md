@@ -2,7 +2,7 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 6253ccf46a401477bcbd716112107acadd89e893
+- CIPI source commit: a4a4697960d8e18f8bd4ff6024bdb61f126b49c9
 - Source-state digest: c814c42f1cf6dceb193f7ca8c7277ed1b4ad0e9b78536ca771c071da89cff2fd
 - Product: techitechi0331-svg/VocalControlComp@main
 - Product commit: 87d7758abf4d8c7e7f6998d934cf6a2f210adea3

@@ -3,18 +3,18 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "6253ccf46a401477bcbd716112107acadd89e893",
+    "commit_sha": "a4a4697960d8e18f8bd4ff6024bdb61f126b49c9",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-09-29T11:26:27+09:00",
-  "generation_id": "2c191a116227a6c811e9cb30",
+  "generated_at": "2026-09-29T12:29:18+09:00",
+  "generation_id": "a077b6a44c9c99e29d0beb03",
   "human_gates": [],
   "latest_decision_refs": [],
   "phase": "IDLE",
   "product_ref": {
-    "commit_sha": "8d489802b785e98ab9bccb9d900b533b51cbf04c",
+    "commit_sha": "99fa53d5a6640e1d2c0988c0ad0cc3a2f3bd9b49",
     "ref": "main",
     "repository": "techitechi0331-svg/Vocal_Denoise",
     "verification": "VERIFIED"

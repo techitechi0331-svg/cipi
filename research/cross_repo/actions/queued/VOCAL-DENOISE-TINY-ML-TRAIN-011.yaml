@@ -1,0 +1,29 @@
+schema_version: '1.0'
+action_id: VOCAL-DENOISE-TINY-ML-TRAIN-011
+state: QUEUED
+repo_key: vocal_denoise
+workflow_key: train
+ref: main
+inputs:
+  experiment_id: VOCAL-DENOISE-TINY-ML-011
+  dataset_registry_path: configs/datasets/registry.json
+  seed: '2026092911'
+  max_steps: '500'
+priority: 100
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+- VOCAL-DENOISE-TINY-ML-EVALUATE-010
+reason: >-
+  Train v0.8 with the new confidence-aware Vocal Safety controller. v0.7 achieved
+  about 96 percent high-frequency clean-vocal retention but still showed severe
+  fresh-seed worst cases on high-SNR arpeggios/breathy material. v0.8 learns a
+  frame-wise suppression-confidence head from exact synthetic-mixture SNR and
+  continuously pulls the mask toward unity when confidence is low, while retaining
+  singer/performance balancing and bounded hard-bucket exposure. Use 500 steps to
+  give the new confidence head enough bounded training time. No listening,
+  product-adoption, promotion or release authority.
+previous_run_id: 36517414298

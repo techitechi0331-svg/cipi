@@ -5,6 +5,42 @@ adapters:
     tracks:
       - VIRTUAL_GUITAR_PICKUP_ELECTRONICS_RESEARCH
       - VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+
+  virtual_guitar_physical_convergence_gate_v1:
+    tracks:
+      - VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: >-
+      Evaluate the completed v1.1 baseline for physical string/fret identity convergence.
+      A failure remains research work and cannot unlock product integration.
+
+  virtual_guitar_pickup_observation_contract_gate_v1:
+    tracks:
+      - VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: >-
+      Evaluate whether pickup-position/aperture observation has measured evidence and
+      preserves upstream string/fret identity before product integration.
+
+  virtual_guitar_pickup_electrical_validation_gate_v1:
+    tracks:
+      - VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: >-
+      Evaluate whether Pickup/Electronics research has progressed from source foundation
+      to explicit measured electrical validation.
+
+  virtual_guitar_electrical_port_contract_gate_v1:
+    tracks:
+      - VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+    max_timeout_minutes: 5
+    network_required: false
+    purpose: >-
+      Evaluate whether the Guitar Electrical Port contract is validated rather than
+      design-only, without writing to the product repository.
     max_timeout_minutes: 20
     network_required: false
     purpose: >-

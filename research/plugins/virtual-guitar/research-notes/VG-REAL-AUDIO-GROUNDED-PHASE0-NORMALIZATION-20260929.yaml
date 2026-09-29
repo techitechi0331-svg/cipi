@@ -1,0 +1,74 @@
+schema_version: "1.0"
+audit_id: VG-REAL-AUDIO-GROUNDED-PHASE0-NORMALIZATION-20260929
+project: virtual-guitar
+recorded_at: "2026-09-29"
+status: PHASE0_NORMALIZED_PENDING_REVIEW
+directive: Virtual Guitar Real-Audio Grounded Rebuild v1.0
+
+main_snapshot:
+  cipi: aeaf4f7ae059935522722a84cf38cbfa4789e7e9
+  melon: f34851b7477bee36b9d314865407f92830e507b9
+  virtual_guitar: bd26a0556fb501228b4551f61f6a8e760a14455b
+
+SOURCE_FACT:
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-004 stopped at HUMAN_GATE with accepted_candidate_id null.
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-004 has no selected architecture.
+  - virtual-guitar main still contains the 24-mode PhysicalRealismString implementation.
+  - current physical_realism_render renders fixed MIDI note 52 and 16-bit mono WAV.
+  - virtual-guitar main has no dedicated pickup/electronics render layer in the inspected audio path.
+  - product_repository_write remains false.
+  - MELON main contains EGFxSet clean acquisition and measured-reference adapters.
+  - MELON self-hosted validation for f34851b7477bee36b9d314865407f92830e507b9 passed.
+  - virtual-guitar core and targeted validation on bd26a0556fb501228b4551f61f6a8e760a14455b passed.
+
+MEASURED:
+  measured_reference:
+    track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+    run_id: melon-funnel-guitar-measured-reference-d7a5b217bc17
+    capture_count: 690
+    measured_count: 690
+    rejected_before_measurement: 0
+    duplicate_hits: 0
+    manifest_complete: true
+    feature_manifest_complete: true
+    integrity_validation_passed: true
+    precision_review_passed: true
+    evidence_class: MEASURED
+    raw_audio_storage: RUNNER_CACHE_ONLY
+    ready_for_real_audio_ab: true
+    reference_ready_does_not_mean_model_fidelity: true
+
+INFERRED:
+  - The measured-reference track is complete for reference readiness even though its immutable continuation decision records a Human Gate stop.
+  - VIRTUAL-GUITAR-REAL-AUDIO-AB-001 should no longer be blocked by reference readiness.
+  - product_repository_write false does not prevent a temporary research-environment checkout/build of an immutable product SHA.
+  - A valid baseline harness must preserve string/fret identity even when the current solver produces only MIDI-dependent sound.
+  - PICKUP_DI must fail closed if the checked-out product SHA cannot expose a real pickup/electronics layer; RAW_PHYSICAL_STRING must not be silently relabeled as DI.
+
+HYPOTHESIS:
+  - A MELON-side matched-render harness can checkout a specific virtual-guitar SHA, patch only a temporary workspace, build deterministically, and emit reproducible RAW_PHYSICAL_STRING baseline renders without persistent product-repository changes.
+  - A later evidence-backed downstream pickup/electronics adapter can provide stage-compatible PICKUP_DI without changing the product repo before authority is granted.
+
+REJECTED:
+  - REFERENCE_READY_EQUALS_MODEL_FIDELITY
+  - RAW_PHYSICAL_STRING_DIRECTLY_FIT_TO_EGFXSET_PICKUP_DI
+  - PRODUCT_REPOSITORY_WRITE_REQUIRED_FOR_BASELINE_RESEARCH_RENDER
+  - FIXED_MIDI_NOTE_ONLY_BASELINE_IS_SUFFICIENT
+  - ABSOLUTE_EGFXSET_RMS_OR_PEAK_AS_HARDWARE_LEVEL_TRUTH
+  - FADE_REGION_AS_NATURAL_STRING_DECAY
+
+phase0_result:
+  measured_reference_state: REFERENCE_READY
+  stale_reference_blocker_removed: true
+  real_audio_ab_enabled: false
+  remaining_real_audio_ab_blockers:
+    - REALISM_004_IMPLEMENTATION_CANDIDATE_NOT_BUILT
+    - MATCHED_RENDER_HARNESS_NOT_AVAILABLE
+    - EXECUTION_ADAPTER_NOT_AVAILABLE
+  product_repository_write: false
+
+next_ready_work:
+  - PHASE1_PRODUCT_INDEPENDENT_MATCHED_RENDER_HARNESS
+  - EXPLICIT_EGFXSET_METRIC_POLICY
+  - V11_18_COORDINATE_ANCHOR_MATRIX_DESIGN
+  - PICKUP_COMPARISON_SUBSET_DESIGN

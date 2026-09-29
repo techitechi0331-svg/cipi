@@ -1,0 +1,42 @@
+schema_version: '1.0'
+action_id: MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026092904
+  population: 4
+  generations: 1
+  max_candidates: 690
+  max_runtime_seconds: 900
+  stage2_limit: 4
+  stage2_archive_limit: 4
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"acquire_egfxset_clean":true,"candidate_timeout_seconds":10,"dataset_archive_md5":"cdb1b401960f56becc8640387910e78a","dataset_url":"https://zenodo.org/record/7044411/files/Clean.zip?download=1","expected_capture_count":690,"full_regression_required":false,"max_memory_mb":2048,"pending_adapter_commit":"f34851b7477bee36b9d314865407f92830e507b9","pending_validation_run":36502461630,"policy_id":"VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1","policy_version":"1.0","raw_audio_storage":"RUNNER_CACHE_ONLY","state":"APPLIED","validation_result":"PASS"},"experiment_id":"EXP-VIRTUAL-GUITAR-MEASURED-REFERENCE-R1","experiment_type":"REAL_AUDIO_REFERENCE_PREFLIGHT","hypothesis_id":"HYP-VIRTUAL-GUITAR-MEASURED-REFERENCE-001","job_id":"VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VIRTUAL-GUITAR-MEASURED-REFERENCE-001","research_question":"Can
+    a provenance-verified EGFxSet clean Stratocaster reference corpus establish a
+    real-audio benchmark that separates physical-string/model error from pickup/electronics
+    differences after the bounded synthetic Realism-004 search reached HUMAN_GATE?","track_id":"VIRTUAL-GUITAR-MEASURED-REFERENCE-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+bridge_job_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+continuation_fingerprint: 5afe7f320def0bfdac2c1426566bf60b2b4a8d5a656be3930781df1439b2fec1
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: APPLIED
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

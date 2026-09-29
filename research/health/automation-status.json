@@ -8,6 +8,7 @@
       "MELON-BRIDGE-PILOT-001",
       "MIC-SIM-FOUNDATION-001",
       "MIC-SIM-REFERENCE-SM57-001",
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
@@ -24,7 +25,9 @@
       "VOCAL-DENOISE-ROBUSTNESS-001"
     ],
     "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
-    "active_tracks": [],
+    "active_tracks": [
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001"
+    ],
     "authority": "OPERATIONAL_SCHEDULING_ONLY",
     "automatic_knowledge_promotion": false,
     "automatic_product_decision": false,
@@ -68,6 +71,16 @@
         "runs": 1,
         "runs_limit": 2,
         "runtime_limit_seconds": 180.0,
+        "runtime_seconds": 0.0
+      },
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
+        "candidates": 0,
+        "candidates_limit": 690,
+        "loop_depth": 0,
+        "loop_depth_limit": 2,
+        "runs": 0,
+        "runs_limit": 2,
+        "runtime_limit_seconds": 1800.0,
         "runtime_seconds": 0.0
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
@@ -217,6 +230,7 @@
       "MELON-BRIDGE-PILOT-001": 3,
       "MIC-SIM-FOUNDATION-001": 2,
       "MIC-SIM-REFERENCE-SM57-001": 1,
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": 0,
       "VIRTUAL-GUITAR-PHYSICAL-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001": 3,
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002": 2,
@@ -238,6 +252,7 @@
       "MELON-BRIDGE-PILOT-001",
       "MIC-SIM-FOUNDATION-001",
       "MIC-SIM-REFERENCE-SM57-001",
+      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
       "VIRTUAL-GUITAR-PHYSICAL-AUDIO-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
@@ -253,7 +268,7 @@
       "VOCAL-DENOISE-PRESERVATION-001",
       "VOCAL-DENOISE-ROBUSTNESS-001"
     ],
-    "generated_jobs": 44,
+    "generated_jobs": 45,
     "human_gate_tracks": [
       "MIC-SIM-REFERENCE-SM57-001",
       "VIRTUAL-GUITAR-PHYSICAL-001",
@@ -265,9 +280,11 @@
     "human_gates": 6,
     "invalid_results": 0,
     "melon_runs": 44,
-    "next_scheduler_action": "NO_READY_WORK",
+    "next_scheduler_action": "MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
     "no_improvement_count": 5,
-    "queued_actions": [],
+    "queued_actions": [
+      "MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32"
+    ],
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
@@ -297,12 +314,12 @@
     ],
     "rejected_continuations": 12,
     "research_quality_metrics": {
-      "budget_exhaustion_rate": 0.2222222222222222,
+      "budget_exhaustion_rate": 0.21052631578947367,
       "cache_hit_rate": 0.0,
       "duplicate_research_rate": 0.0,
       "early_convergence_rate": null,
       "falsification_rate": 0.0,
-      "human_gate_rate": 0.3333333333333333,
+      "human_gate_rate": 0.3157894736842105,
       "new_information_per_compute_second": 12.979086329172295,
       "new_information_per_run": 0.7792693351624583,
       "pareto_front_turnover": null,
@@ -320,7 +337,6 @@
       "MIC-SIM-EXTERNAL-REFERENCE-SM57-001",
       "MIC-SIM-FOUNDATION-001",
       "MIC-SIM-MEASURED-SM57-001",
-      "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
       "VIRTUAL-GUITAR-PHYSICAL-REALISM-002",
       "VIRTUAL-GUITAR-PICKUP-EXTERNAL-EVIDENCE-003",
       "VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002",
@@ -381,9 +397,10 @@
         "state": "HUMAN_GATE"
       },
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
-        "reason": "TRACK_DISABLED",
-        "scheduler_eligible": false,
-        "state": "DISABLED"
+        "job_id": "VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
+        "reason": "EXTERNAL_ACTION_QUEUED",
+        "scheduler_eligible": true,
+        "state": "READY"
       },
       "VIRTUAL-GUITAR-PHYSICAL-001": {
         "reason": "HUMAN_GATE",
@@ -535,13 +552,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
+      "kind": "CROSS_REPO",
+      "priority": 80,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 59,
       "dispatched": 1,
       "failed": 15,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -573,9 +595,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
+    "action_id": "MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32",
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "reason": "ready_external_action"
   }
 }

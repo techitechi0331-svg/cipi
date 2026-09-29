@@ -1,0 +1,51 @@
+schema_version: '1.0'
+job_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+track_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+root_research_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+parent_job_id: ''
+parent_run_id: ''
+hypothesis_id: HYP-VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+experiment_id: EXP-VIRTUAL-GUITAR-MEASURED-REFERENCE-R1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs: []
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-VIRTUAL-GUITAR-MEASURED-REFERENCE-001-R1-5AFE7F32
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 690
+  max_runtime: 1800
+  max_same_hypothesis_retry: 1
+  max_same_architecture_retry: 1
+  max_no_improvement_runs: 1
+continuation_reason: initial registered research experiment
+expected_information_gain: 0.95
+fingerprint: 5afe7f320def0bfdac2c1426566bf60b2b4a8d5a656be3930781df1439b2fec1
+loop_depth: 1
+experiment_type: REAL_AUDIO_REFERENCE_PREFLIGHT
+selected_architecture: EGFXSET_REAL_AUDIO_REFERENCE_PREFLIGHT_V1
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-MEASURED-REFERENCE-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: APPLIED
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 10
+  full_regression_required: false
+  acquire_egfxset_clean: true
+  raw_audio_storage: RUNNER_CACHE_ONLY
+  dataset_url: https://zenodo.org/record/7044411/files/Clean.zip?download=1
+  dataset_archive_md5: cdb1b401960f56becc8640387910e78a
+  expected_capture_count: 690
+  pending_adapter_commit: f34851b7477bee36b9d314865407f92830e507b9
+  pending_validation_run: 36502461630
+  validation_result: PASS

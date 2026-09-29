@@ -1,0 +1,116 @@
+schema_version: "1.0"
+note_id: VG-EGFXSET-REAL-AUDIO-REFERENCE-20260929-001
+project: virtual-guitar
+date: "2026-09-29"
+purpose: >-
+  Establish a provenance-safe real-audio reference plan for the next physical-realism phase
+  after VIRTUAL-GUITAR-PHYSICAL-REALISM-004 reached HUMAN_GATE.
+
+source_facts:
+  - id: EGFXSET-SF-001
+    evidence_class: SOURCE_FACT
+    source: "EGFxSet ISMIR 2022 extended abstract; Zenodo record 7044411"
+    claim: >-
+      EGFxSet clean recordings were made from a 2004 twenty-two-fret Stratocaster in standard tuning,
+      with 138 notes repeated across five pickup configurations for 690 clean notes total.
+  - id: EGFXSET-SF-002
+    evidence_class: SOURCE_FACT
+    source: "EGFxSet ISMIR 2022 extended abstract"
+    claim: >-
+      Guitar volume and tone controls were set to maximum and recordings were captured through an
+      Audient iD14 at 48 kHz / 24-bit.
+  - id: EGFXSET-SF-003
+    evidence_class: SOURCE_FACT
+    source: "Zenodo 7044411"
+    claim: >-
+      Clean.zip is approximately 431 MB and is published with MD5
+      cdb1b401960f56becc8640387910e78a; dataset DOI is 10.5281/zenodo.7044411.
+  - id: EGFXSET-SF-004
+    evidence_class: SOURCE_FACT
+    source: "ISMIR 2022 extended abstract"
+    claim: "The paper is licensed under CC BY 4.0; Zenodo exposes the dataset as an open dataset."
+  - id: GUITAR-TECHS-SF-001
+    evidence_class: SOURCE_FACT
+    source: "Guitar-TECHS Zenodo 14963133 / project site"
+    claim: >-
+      Guitar-TECHS provides DI plus technique/performance material from three professional players
+      but the documented instruments are Ibanez PF300, EVH Wolfgang, and Sire T7 rather than the
+      EGFxSet Stratocaster reference.
+  - id: GUITAR-TECHS-SF-002
+    evidence_class: SOURCE_FACT
+    source: "Guitar-TECHS Zenodo 14963133"
+    claim: >-
+      The dataset documentation warns that signals may exhibit up to approximately 100 ms temporal
+      misalignment and recommends correction for alignment-critical analysis.
+
+inferences:
+  - id: VG-REF-INF-001
+    evidence_class: INFERRED
+    claim: >-
+      EGFxSet Clean should be the primary Strat-style isolated-note reference for physical-string
+      and pickup-position comparison; Guitar-TECHS should be complementary evidence for techniques,
+      transitions, chords and expressive behavior rather than Strat tonal ground truth.
+  - id: VG-REF-INF-002
+    evidence_class: INFERRED
+    claim: >-
+      Real-audio validation must compare matched string/fret/pickup coordinates where possible and
+      must retain per-capture provenance and hashes so dataset identity cannot silently drift.
+  - id: VG-REF-INF-003
+    evidence_class: INFERRED
+    claim: >-
+      Raw reference audio must remain outside Git repositories. Runner cache may hold downloaded
+      audio; CIPI should retain source identifiers, hashes, extracted measurements and decisions.
+  - id: VG-REF-INF-004
+    evidence_class: INFERRED
+    claim: >-
+      Because EGFxSet files include normalization/fade processing, absolute level should not be used
+      as a hardware-output truth. Prefer level-matched spectral/decay/onset/pitch-evolution metrics
+      and listening comparisons.
+
+real_audio_gate_protocol:
+  primary_dataset: EGFXSET_CLEAN_V1
+  complementary_dataset: GUITAR_TECHS_V1
+  required_primary_coverage:
+    clean_capture_count: 690
+    pickup_configurations:
+      - bridge
+      - bridge-middle
+      - middle
+      - middle-neck
+      - neck
+    sample_rate_hz: 48000
+    bit_depth: 24
+  mandatory_integrity:
+    - canonical_source_url
+    - DOI
+    - archive_checksum
+    - per_capture_sha256_after_extraction
+    - string_number
+    - fret
+    - pickup_configuration
+  required_measurements:
+    - onset_envelope
+    - decay_curve_multiband
+    - partial_frequency_trajectory
+    - inharmonicity
+    - short_time_spectral_centroid
+    - spectral_rolloff
+    - crest_factor_level_matched
+    - pickup_configuration_delta
+  comparison_rules:
+    - level_match_before_preference_or_error_scoring
+    - do_not_treat_dataset_normalization_as_output_gain_truth
+    - preserve_raw_string_reference_separately_from_pickup_DI_reference
+    - do_not_promote_synthetic_proxy_results_to_real_guitar_fidelity
+    - alignment_correct_Guitar_TECHS_before_short_time_metrics
+  human_gate:
+    - blind_or_randomized_AB_where_practical
+    - record_listener_judgment
+    - retain_rejection_reason
+    - no_product_adoption_without_explicit_decision
+
+authority:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  product_integration: false

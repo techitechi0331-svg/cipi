@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MIC-SM57-ZENODO-QUARANTINE-001
+repo_key: mic_simulator
+workflow_key: zenodo_ingest
+runner_class: self-hosted
+state: RUNNING
+run_id: 36508247372
+run_status: in_progress
+run_conclusion: null
+since: '2026-09-29T01:30:41Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

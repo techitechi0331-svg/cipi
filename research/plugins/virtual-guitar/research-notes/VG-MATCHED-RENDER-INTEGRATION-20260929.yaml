@@ -1,0 +1,34 @@
+schema_version: "1.0"
+note_id: VG-MATCHED-RENDER-INTEGRATION-20260929
+project: virtual-guitar
+status: VALIDATION_PENDING
+recorded_at: "2026-09-29"
+
+purpose: >-
+  Validate the MELON product-independent matched render harness against an immutable
+  virtual-guitar baseline without granting product repository write authority.
+
+pinned_inputs:
+  melon_harness_sha: c564a83adb92916cea0156de9b54adefcb88b541
+  virtual_guitar_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
+  architecture_id: REALISM_V11_BASELINE
+  smoke_coordinate: {string_number: 6, fret: 12, midi_note: 52}
+  sample_rate_hz: 48000
+  render_layer: RAW_PHYSICAL_STRING
+
+required_validation:
+  - EXACT_MELON_SHA
+  - EXACT_VIRTUAL_GUITAR_SHA
+  - PRODUCT_SOURCE_CLEAN_BEFORE_AND_AFTER
+  - 24BIT_48KHZ_WAV
+  - WAV_SHA256
+  - PARAMETER_HASH
+  - SOURCE_TREE_DIGEST_UNCHANGED
+  - PICKUP_DI_FAILS_CLOSED_FOR_V11
+  - NO_PERSISTENT_PRODUCT_REPOSITORY_WRITE
+
+authority:
+  product_repository_write: false
+  product_integration: false
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false

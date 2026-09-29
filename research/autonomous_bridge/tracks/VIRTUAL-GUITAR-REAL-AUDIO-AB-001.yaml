@@ -1,0 +1,140 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-REAL-AUDIO-AB-001
+enabled: false
+activation_state: BLOCKED_REFERENCE_AND_IMPLEMENTATION_CANDIDATE
+root_research_id: VIRTUAL-GUITAR-REAL-AUDIO-AB-001
+
+research_question: >-
+  When the Realism-004 architecture is implemented as a bounded research candidate, does its
+  level-matched output reduce measurable and audible error against matched EGFxSet Stratocaster
+  clean references relative to the rejected-for-now Realism-v1.1 baseline?
+
+hypothesis_id: HYP-VIRTUAL-GUITAR-REAL-AUDIO-AB-001
+hypothesis: >-
+  A continuous-state physical guitar architecture informed by Realism-004 will reduce onset,
+  decay, partial-evolution, inharmonicity and pickup-configuration error against EGFxSet while
+  preserving realtime feasibility, but adoption requires human listening and host validation.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.02
+product_integration: false
+human_gate_required: true
+human_gate_conditions:
+  - REAL_AUDIO_AB
+  - LEVEL_MATCHED_HUMAN_LISTENING
+  - CUBASE_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+depends_on_tracks:
+  - VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+  - VIRTUAL-GUITAR-MEASURED-REFERENCE-001
+
+activation_requirements:
+  measured_reference_track_ready: true
+  measured_reference_expected_capture_count: 690
+  implementation_candidate_required: true
+  matched_render_harness_required: true
+  execution_adapter_required_before_enable: true
+  render_contract: research/plugins/virtual-guitar/research-notes/VG-REAL-AUDIO-AB-CONTRACT-20260929-001.yaml
+  raw_physical_string_layer_required: true
+  pickup_di_layer_required: true
+  level_match_required: true
+  do_not_enable_while_product_repository_write_authority_false_and_candidate_missing: true
+
+dedup_baseline:
+  baseline_product_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
+  baseline_status: REALISM_V11_REJECTED_FOR_NOW_BY_HUMAN_LISTENING
+  prior_track: VIRTUAL-GUITAR-PHYSICAL-REALISM-004
+  prior_stop_reason: HUMAN_GATE
+  rejected_directions:
+    - REFERENCE_READY_EQUALS_MODEL_FIDELITY
+    - SYNTHETIC_PROXY_EQUALS_REAL_AUDIO_AB
+    - PICKUP_ONLY_MATCH_MASKS_STRING_MODEL_ERROR
+    - UNLEVEL_MATCHED_PREFERENCE
+    - AUTO_PRODUCT_ADOPTION
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 690
+  max_runtime: 3600
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-VIRTUAL-GUITAR-REAL-AUDIO-AB-R1
+  experiment_type: MATCHED_REAL_AUDIO_AB
+  expected_information_gain: 0.98
+  scope:
+    - virtual_guitar
+    - egfxset
+    - real_audio_ab
+    - physical_string
+    - pickup_di
+  inputs:
+    seed: 2026092905
+    population: 4
+    generations: 1
+    max_candidates: 15
+    max_runtime_seconds: 600
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A matched anchor-note and pickup matrix can falsify or support the Realism-004 implementation
+      before spending budget on the full 690-note grid.
+    architecture: REALISM_004_IMPLEMENTATION_CANDIDATE_REQUIRED
+    tested_parameters:
+      stage: anchor_matrix
+      reference_dataset: EGFXSET_CLEAN_V1
+      render_layers:
+        - RAW_PHYSICAL_STRING
+        - PICKUP_DI
+      baseline: REALISM_V11
+    benchmark_profile:
+      - egfxset_matched_anchor_ab_v1
+      - raw_string_layer_ab_v1
+      - pickup_di_layer_ab_v1
+    sample_rate: 48000
+    input_set: EGFXSET_MATCHED_ANCHOR_MATRIX
+    reference_model: STRATOCASTER_2004_22FRET
+    objective_set:
+      - onset_error
+      - decay_error
+      - harmonic_distribution_error
+      - inharmonicity_error
+      - partial_evolution_error
+      - pickup_delta_error
+    relevant_constraints:
+      - level_match_required
+      - reference_ready_not_fidelity
+      - human_listening_required
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: MATCHED_REAL_AUDIO_AB
+    scope:
+      - virtual_guitar
+      - measured_reference
+      - model_vs_real
+
+efficiency_policy:
+  policy_id: VIRTUAL-GUITAR-REAL-AUDIO-AB-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: BLOCKED_PREREQUISITES
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 15
+  full_regression_required: true

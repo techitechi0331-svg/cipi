@@ -1,0 +1,27 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read committed Virtual Guitar baseline/electrical evidence",
+    "evaluate predeclared integration prerequisite without product mutation"
+  ],
+  "completed_at": "2026-09-29T11:53:00.037036Z",
+  "environment": {
+    "experiment_adapter": "virtual_guitar_electrical_port_contract_gate_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "job_id": "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001",
+  "random_seed": 0,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-36564465995-1",
+  "schema_version": "1.0",
+  "source_commit": "9490593aac5d2f9f60cc987f82c6159a575dbe25",
+  "started_at": "2026-09-29T11:53:00.018924Z",
+  "triggered_criteria": [
+    "validate Guitar Electrical Port contract with measured network evidence"
+  ],
+  "worker_version": "cipi-research-worker/0.2"
+}

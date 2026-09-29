@@ -1,0 +1,47 @@
+schema_version: '1.0'
+job_id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+state: COMPLETED
+priority: 87
+track:
+  id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+  path: research/plugins/virtual-guitar/research-tracks
+research_phase: INTEGRATION_PREREQUISITE_GATE
+research_question: Is the Guitar Electrical Port a validated versioned electrical
+  boundary rather than a design-only contract or finished-WAV interface?
+hypothesis: Integration requires a validated source/network representation with explicit
+  state and compatibility semantics before Reference DI or Amp loading can be trusted.
+counter_hypotheses:
+- A design-only interface contract is sufficient for product integration.
+- A rendered WAV is sufficient to represent passive source/load interaction.
+baseline:
+- VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-001
+- GUITAR-AMP-ELECTRICAL-INTERFACE-CONTRACT-V0.1
+variants:
+- VERSIONED_ELECTRICAL_PORT_CONTRACT
+metrics:
+- required_capabilities_covered
+- interface_contract_validated
+- port_track_research_ready
+acceptance:
+- required electrical-port capabilities are explicit
+- interface contract has measured validation status
+- missing fields cannot silently default
+rejection:
+- contract remains design-only
+- source impedance or network representation is missing
+- finished WAV is used as proof of loading behavior
+max_runs: 1
+timeout_minutes: 5
+experiment_adapter: virtual_guitar_electrical_port_contract_gate_v1
+allowed_operations:
+- inspect_committed_electrical_port_contracts
+- write_gate_evidence
+prohibited_operations:
+- product_repository_write
+- finished_wav_only_contract
+- automatic_product_integration
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+latest_run: gha-36564465995-1

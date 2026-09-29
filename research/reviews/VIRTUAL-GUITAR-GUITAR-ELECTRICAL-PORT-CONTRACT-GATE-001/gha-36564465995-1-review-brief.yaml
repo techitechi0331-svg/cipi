@@ -1,0 +1,93 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:review-brief-v1
+job_id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001
+run_id: gha-36564465995-1
+source_run: research/runs/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/gha-36564465995-1-triage.yaml
+triage_id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:triage-v1
+job_path: research/jobs/completed/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001.yaml
+research_question: Is the Guitar Electrical Port a validated versioned electrical
+  boundary rather than a design-only contract or finished-WAV interface?
+hypothesis: Integration requires a validated source/network representation with explicit
+  state and compatibility semantics before Reference DI or Amp loading can be trusted.
+counter_hypotheses:
+- A design-only interface contract is sufficient for product integration.
+- A rendered WAV is sufficient to represent passive source/load interaction.
+acceptance_criteria:
+- required electrical-port capabilities are explicit
+- interface contract has measured validation status
+- missing fields cannot silently default
+rejection_criteria:
+- contract remains design-only
+- source impedance or network representation is missing
+- finished WAV is used as proof of loading behavior
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria:
+  - validate Guitar Electrical Port contract with measured network evidence
+  source_commit: 9490593aac5d2f9f60cc987f82c6159a575dbe25
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: checks.baseline_completed
+  value: true
+- path: checks.contract_values_frozen
+  value: false
+- path: checks.foundation_status
+  value: SOURCE_EVIDENCE_FOUNDATION
+- path: checks.interface_contract_validated
+  value: false
+- path: checks.pickup_di_research_job_completed
+  value: true
+- path: checks.port_track_research_ready
+  value: true
+- path: checks.product_repository_write
+  value: false
+- path: checks.required_capabilities_covered
+  value: true
+- path: checks.same_midi_identity_collapse_count
+  value: 2
+- path: gate
+  value: port
+- path: missing_evidence_or_work[0]
+  value: validate Guitar Electrical Port contract with measured network evidence
+knowledge_candidate: null
+source_proposal:
+  decision_id: VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001:gha-36564465995-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

@@ -1,0 +1,23 @@
+{
+  "baseline": [
+    "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001 is COMPLETED with MEASURED evidence",
+    "Current v1.1 collapses both same-MIDI string/fret red-team pairs",
+    "Current v1.1 has no valid PICKUP_DI stage; 15/15 requests are BLOCKED_STAGE_MISMATCH",
+    "Product repository write remains false"
+  ],
+  "experiment_adapter": "virtual_guitar_pickup_electrical_foundation_v1",
+  "job_file": "research/jobs/queued/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001.yaml",
+  "metrics": [
+    "pickup_configuration_delta_error",
+    "string_fret_identity_preservation",
+    "electrical_transfer_consistency",
+    "deterministic_output",
+    "parameter_identifiability",
+    "reference_di_stage_compatibility"
+  ],
+  "variants": [
+    "PHYSICAL_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC",
+    "REDUCED_ORDER_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC",
+    "STATIC_EQ_ONLY_COUNTER_HYPOTHESIS"
+  ]
+}

@@ -1,0 +1,134 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001:gha-36520787383-1:review-brief-v1
+job_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+run_id: gha-36520787383-1
+source_run: research/runs/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/gha-36520787383-1-triage.yaml
+triage_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001:gha-36520787383-1:triage-v1
+job_path: research/jobs/completed/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001.yaml
+research_question: What minimum physical/electrical Pickup/DI architecture can explain
+  the baseline string/fret identity and pickup-stage gaps while preserving explicit
+  uncertainty?
+hypothesis: Separating string-state observation, magnetic pickup behavior, passive
+  R/L/C network, controls, cable load, output impedance and guitar jack will provide
+  a falsifiable PICKUP_DI candidate without disguising RAW-string model error.
+counter_hypotheses:
+- A static EQ-only pickup model is sufficient.
+- String/fret identity can be discarded once MIDI pitch is known.
+- Amp/Cab/Mic coloration is required to make pickup behavior plausible.
+acceptance_criteria:
+- reuse existing CIPI pickup/electrical/cable/output-port evidence before new research
+- produce an explicit RAW_PHYSICAL_STRING to PICKUP_DI stage contract
+- no RAW-to-DI fake substitution
+- no static EQ-only adoption without falsification against electrical alternatives
+- no product repository write
+- prepare matched Reference DI validation as a downstream gate
+rejection_criteria:
+- candidate collapses string/fret identity to MIDI pitch only
+- candidate uses RAW output relabelled as PICKUP_DI
+- candidate requires Amp/Cab/Mic coloration to hide upstream defects
+- candidate introduces unsupported electrical constants without evidence classification
+- candidate performs product repository writes or automatic product adoption
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 79fbf39ab2a1bc7b368948f3ed8cfb0418b25c28
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: candidate_model_counts.amp_input
+  value: 3
+- path: candidate_model_counts.cable
+  value: 3
+- path: candidate_model_counts.magnetic_transduction
+  value: 2
+- path: candidate_model_counts.pickup_electrical
+  value: 3
+- path: candidate_model_counts.pickup_observation
+  value: 2
+- path: classification_counts.HYPOTHESIS
+  value: 3
+- path: classification_counts.INFERRED
+  value: 3
+- path: classification_counts.MEASURED
+  value: 1
+- path: classification_counts.REJECTED
+  value: 7
+- path: classification_counts.SOURCE_FACT
+  value: 4
+- path: evidence_gates.all_model_boundaries_present
+  value: true
+- path: evidence_gates.automatic_knowledge_promotion_off
+  value: true
+- path: evidence_gates.automatic_product_decision_off
+  value: true
+- path: evidence_gates.higher_order_counter_hypothesis_present
+  value: true
+- path: evidence_gates.higher_order_model_not_predeclared_required
+  value: true
+- path: evidence_gates.low_order_model_not_predeclared_final
+  value: true
+- path: evidence_gates.manufacturer_hss_source_present
+  value: true
+- path: evidence_gates.manufacturer_sss_source_present
+  value: true
+- path: evidence_gates.minimum_tier1_sources
+  value: true
+- path: evidence_gates.minimum_tier2_sources
+  value: true
+- path: evidence_gates.peer_reviewed_cable_loading_source_present
+  value: true
+- path: evidence_gates.peer_reviewed_pickup_model_source_present
+  value: true
+- path: evidence_gates.product_repository_write_off
+  value: true
+- path: evidence_gates.reference_di_is_rejected_as_upstream_prerequisite
+  value: true
+- path: evidence_gates.shortcut_rejections_complete
+  value: true
+- path: foundation_ready_for_measurement_design
+  value: true
+- path: model_adopted
+  value: false
+- path: pickup_fidelity_claim
+  value: false
+- path: product_repository_write
+  value: false
+- path: reference_di_converged
+  value: false
+- path: source_count
+  value: 5
+- path: tier1_source_count
+  value: 2
+knowledge_candidate: null
+source_proposal:
+  decision_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001:gha-36520787383-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

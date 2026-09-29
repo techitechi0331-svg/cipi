@@ -28,3 +28,5 @@ previous_run_id: 36509479163
 dispatched_at: '2026-09-29T01:55:02.905939Z'
 repository: techitechi0331-svg/Vocal_Denoise
 workflow_file: vocal-denoise-evaluate.yml
+run_id: 36510133348
+run_url: https://github.com/techitechi0331-svg/Vocal_Denoise/actions/runs/36510133348

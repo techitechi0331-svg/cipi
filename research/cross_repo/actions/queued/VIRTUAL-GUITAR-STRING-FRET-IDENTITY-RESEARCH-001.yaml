@@ -1,0 +1,24 @@
+schema_version: "1.0"
+action_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001
+state: QUEUED
+repo_key: cipi
+workflow_key: vg_string_fret_identity
+ref: main
+inputs:
+  job_id: VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001
+  melon_sha: b4db58a803ce6297b0bb7df17c0fd3c5239ef3a6
+  virtual_guitar_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
+priority: 95
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: >-
+  Falsify the v1.1 same-MIDI identity collapse with research-only coordinate plumbing
+  and a fret-geometry hypothesis while keeping the product checkout immutable.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+product_repository_write: false

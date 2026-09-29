@@ -1,0 +1,79 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
+state: SCHEDULER_QUEUED
+project: virtual-guitar
+directive: Virtual Guitar Real-Audio Grounded Rebuild v1.0
+
+purpose: >-
+  Execute the fixed v1.1 pre-rebuild baseline matrix as MEASURED evidence before any
+  Realism-004 or Pickup/DI product integration. This track is intentionally independent
+  of the later model-vs-real adoption gate.
+
+baseline:
+  repository: techitechi0331-svg/virtual-guitar
+  source_git_sha: bd26a0556fb501228b4551f61f6a8e760a14455b
+  architecture_id: REALISM_V11_BASELINE
+  matrix_ref: research/plugins/virtual-guitar/research-notes/VG-V11-BASELINE-MATRIX-20260929-001.yaml
+  render_layer: RAW_PHYSICAL_STRING
+  sample_rate_hz: 48000
+  product_repository_write: false
+
+execution:
+  owner: CIPI
+  adapter_owner: MELON
+  adapter: melon/guitar_v11_baseline.py
+  workflow: .github/workflows/vg-v11-baseline-measure.yml
+  coordinate_count: 18
+  deterministic_repeat_required: true
+  pickup_di_classification_count: 15
+  pickup_di_fail_closed_required: true
+
+same_midi_red_team:
+  - midi_note: 62
+    coordinates:
+      - {string_number: 4, fret: 12}
+      - {string_number: 6, fret: 22}
+  - midi_note: 67
+    coordinates:
+      - {string_number: 3, fret: 12}
+      - {string_number: 5, fret: 22}
+
+acceptance:
+  - ALL_18_RAW_COORDINATES_RENDERED
+  - ALL_18_MANIFEST_EQUIVALENT_RECORDS_PRESENT
+  - REPEAT_RENDER_SHA_MATCH
+  - WAV_VALIDITY_PASS
+  - NO_NAN_INF
+  - SAME_MIDI_COLLISION_RESULT_RECORDED
+  - SOURCE_TREE_UNCHANGED
+  - PRODUCT_REPOSITORY_PERSISTENT_WRITE_FALSE
+  - ALL_15_PICKUP_DI_REQUESTS_EXPLICITLY_CLASSIFIED
+  - NO_RAW_TO_DI_FAKE_SUBSTITUTION
+  - CATEGORY_LEVEL_GAP_REPORT_GENERATED
+  - NO_SINGLE_SCALAR_REALISM_VERDICT
+
+human_gate:
+  required_for_execution: false
+  allowed_only_downstream:
+    - SUBJECTIVE_LISTENING
+    - PRODUCT_ADOPTION
+    - CUBASE_FINAL_HOST_JUDGEMENT
+    - FINAL_PRODUCT_INTEGRATION
+
+authority:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  product_integration: false
+  cipi_evidence_authority: true
+
+continuation:
+  after_completed:
+    next_track_id: VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001
+    activation: CIPI_EVIDENCE_EVALUATION
+    automatic_product_integration: false
+  real_audio_ab_track: VIRTUAL-GUITAR-REAL-AUDIO-AB-001
+  real_audio_ab_must_wait_for:
+    - BASELINE_18_POINT_MEASURED
+    - VALID_PICKUP_DI_IMPLEMENTATION_CANDIDATE
+    - LEVEL_MATCH_PROCEDURE_READY

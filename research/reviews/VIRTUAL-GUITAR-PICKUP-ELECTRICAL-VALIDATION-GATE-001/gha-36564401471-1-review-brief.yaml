@@ -1,0 +1,96 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:review-brief-v1
+job_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001
+run_id: gha-36564401471-1
+source_run: research/runs/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/gha-36564401471-1-triage.yaml
+triage_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:triage-v1
+job_path: research/jobs/completed/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001.yaml
+research_question: Has Pickup/Electronics research advanced from a source-backed model
+  foundation to explicit measured electrical validation suitable for integration-candidate
+  work?
+hypothesis: Source literature is sufficient to define candidate classes but not to
+  validate a product electrical model without impedance, loaded-resonance, control
+  and model-order measurements.
+counter_hypotheses:
+- Literature coverage alone is sufficient electrical validation.
+- A low-order RLC model may be adopted without falsification.
+acceptance_criteria:
+- source foundation is present
+- Pickup/DI research foundation completed
+- explicit measured electrical validation artifact exists
+rejection_criteria:
+- source foundation is mistaken for measured validation
+- impedance or loaded-resonance validation is absent
+- model order is adopted by assumption
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria:
+  - execute impedance/transfer, loaded resonance, control sweep and model-order validation
+  source_commit: 9490593aac5d2f9f60cc987f82c6159a575dbe25
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: acceptance_met
+  value: false
+- path: checks.baseline_completed
+  value: true
+- path: checks.electrical_candidate_classes_present
+  value: true
+- path: checks.explicit_electrical_validation_artifact_present
+  value: false
+- path: checks.foundation_status
+  value: SOURCE_EVIDENCE_FOUNDATION
+- path: checks.measurement_requirements_declared
+  value: true
+- path: checks.pickup_di_research_job_completed
+  value: true
+- path: checks.product_repository_write
+  value: false
+- path: checks.same_midi_identity_collapse_count
+  value: 2
+- path: checks.source_foundation_has_measured_content
+  value: true
+- path: gate
+  value: electrical
+- path: missing_evidence_or_work[0]
+  value: execute impedance/transfer, loaded resonance, control sweep and model-order
+    validation
+knowledge_candidate: null
+source_proposal:
+  decision_id: VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001:gha-36564401471-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

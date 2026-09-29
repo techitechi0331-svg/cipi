@@ -577,24 +577,29 @@
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [],
-    "claimed_count": 0,
-    "claimed_jobs": [],
-    "dependency_blocked_count": 0,
+    "claimed_branches": [
+      "research-bot/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/auto-62fd78d8a71e",
+      "research-bot/VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001/auto-ee5f627fb29f",
+      "research-bot/VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001/auto-ec74b479214e",
+      "research-bot/VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001/auto-7672394d7d56"
+    ],
+    "claimed_count": 4,
+    "claimed_jobs": [
+      "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
+      "VIRTUAL-GUITAR-PICKUP-OBSERVATION-CONTRACT-GATE-001",
+      "VIRTUAL-GUITAR-PICKUP-ELECTRICAL-VALIDATION-GATE-001",
+      "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-CONTRACT-GATE-001"
+    ],
+    "dependency_blocked_count": 2,
     "human_gate_blocked_count": 0,
     "human_gate_jobs": [],
-    "ready_job": {
-      "branch": "research-bot/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/auto-62fd78d8a71e",
-      "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
-      "kind": "LOCAL_RESEARCH",
-      "priority": 90
-    }
+    "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
     "branch": "research-bot/VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001/auto-62fd78d8a71e",
     "job_id": "VIRTUAL-GUITAR-PHYSICAL-GUITAR-CONVERGENCE-GATE-001",
-    "kind": "LOCAL_RESEARCH",
+    "kind": "EVIDENCE_INTAKE",
     "priority": 90
   }
 }

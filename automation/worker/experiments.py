@@ -14,6 +14,10 @@ from typing import Any
 
 ADAPTERS = {
     "virtual_guitar_pickup_electrical_foundation_v1",
+    "virtual_guitar_physical_convergence_gate_v1",
+    "virtual_guitar_pickup_observation_contract_gate_v1",
+    "virtual_guitar_pickup_electrical_validation_gate_v1",
+    "virtual_guitar_electrical_port_contract_gate_v1",
     "black76_real_vocal_snapshot_gate_v1",
     "black76_real_vocal_snapshot_gate_v2",
     "black76_ratio_p2a_compare_v1",
@@ -4076,9 +4080,252 @@ def _virtual_guitar_pickup_electrical_foundation(
     }
 
 
+
+def _latest_vg_baseline_summary(repo_root: Path) -> dict[str, Any]:
+    candidates = sorted(
+        repo_root.glob(
+            "research/cross_repo/artifacts/cipi/**/files/baseline-summary.json"
+        )
+    )
+    valid: list[dict[str, Any]] = []
+    for path in candidates:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8-sig"))
+        except Exception:
+            continue
+        if (
+            isinstance(data, dict)
+            and data.get("track_id") == "VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001"
+            and data.get("status") == "COMPLETED"
+        ):
+            valid.append(data)
+    if not valid:
+        raise FileNotFoundError("no completed Virtual Guitar v1.1 baseline summary")
+    return valid[-1]
+
+
+def _vg_pickup_prereq_gate(
+    repo_root: Path, timeout_seconds: int, gate: str
+) -> dict[str, Any]:
+    del timeout_seconds
+    baseline = _latest_vg_baseline_summary(repo_root)
+    foundation_path = (
+        repo_root / "research/plugins/virtual-guitar/evidence/"
+        "VG-PICKUP-ELECTRICAL-EVIDENCE-FOUNDATION-20260929.json"
+    )
+    observation_path = (
+        repo_root / "research/plugins/virtual-guitar/research-tracks/"
+        "VIRTUAL-GUITAR-PICKUP-OBSERVATION-001.yaml"
+    )
+    port_track_path = (
+        repo_root / "research/plugins/virtual-guitar/research-tracks/"
+        "VIRTUAL-GUITAR-GUITAR-ELECTRICAL-PORT-001.yaml"
+    )
+    interface_path = (
+        repo_root / "research/plugins/virtual-guitar/integration-contracts/"
+        "GUITAR-AMP-ELECTRICAL-INTERFACE-CONTRACT-V0.1.yaml"
+    )
+    pickup_job_path = (
+        repo_root / "research/jobs/completed/"
+        "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001.yaml"
+    )
+    for path in (
+        foundation_path, observation_path, port_track_path, interface_path, pickup_job_path
+    ):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+    foundation = json.loads(foundation_path.read_text(encoding="utf-8"))
+    observation = yaml.safe_load(observation_path.read_text(encoding="utf-8"))
+    port_track = yaml.safe_load(port_track_path.read_text(encoding="utf-8"))
+    interface = yaml.safe_load(interface_path.read_text(encoding="utf-8"))
+    pickup_job = yaml.safe_load(pickup_job_path.read_text(encoding="utf-8"))
+
+    red_team = baseline.get("same_midi_red_team", [])
+    collapse_count = sum(
+        1
+        for item in red_team
+        if isinstance(item, dict)
+        and item.get("classification") == "STRING_FRET_IDENTITY_COLLAPSE_CONFIRMED"
+    )
+    model_classes = foundation.get("candidate_model_classes", {})
+    measured = foundation.get("MEASURED", [])
+    next_measurements = foundation.get("next_measurement_requirements", [])
+
+    measured_observation_artifacts = list(
+        repo_root.glob(
+            "research/plugins/virtual-guitar/evidence/*PICKUP*OBSERVATION*MEASURED*"
+        )
+    )
+    measured_electrical_validation_artifacts = list(
+        repo_root.glob(
+            "research/plugins/virtual-guitar/evidence/*PICKUP*ELECTRICAL*VALIDATION*"
+        )
+    )
+
+    common = {
+        "baseline_completed": baseline.get("status") == "COMPLETED",
+        "same_midi_identity_collapse_count": collapse_count,
+        "foundation_status": foundation.get("status"),
+        "pickup_di_research_job_completed": pickup_job.get("state") == "COMPLETED",
+        "product_repository_write": False,
+    }
+
+    if gate == "physical":
+        gate_checks = {
+            **common,
+            "same_midi_identity_preserved": collapse_count == 0,
+            "deterministic_repeatability_pass":
+                baseline.get("gap_report", {}).get("deterministic_repeatability") == "PASS",
+        }
+        acceptance = (
+            gate_checks["baseline_completed"]
+            and gate_checks["deterministic_repeatability_pass"]
+            and gate_checks["same_midi_identity_preserved"]
+        )
+        missing = []
+        if collapse_count:
+            missing.append("repair string/fret identity collapse before physical convergence")
+    elif gate == "observation":
+        candidates = model_classes.get("pickup_observation", [])
+        gate_checks = {
+            **common,
+            "observation_track_research_ready":
+                observation.get("status") == "RESEARCH_READY",
+            "point_and_finite_aperture_candidates_present":
+                "POINT_OBSERVATION_BASELINE" in candidates
+                and "FINITE_APERTURE_OBSERVATION" in candidates,
+            "measured_pickup_position_observation_artifact_present":
+                bool(measured_observation_artifacts),
+            "same_midi_identity_preserved": collapse_count == 0,
+        }
+        acceptance = all(
+            gate_checks[key]
+            for key in (
+                "observation_track_research_ready",
+                "point_and_finite_aperture_candidates_present",
+                "measured_pickup_position_observation_artifact_present",
+                "same_midi_identity_preserved",
+            )
+        )
+        missing = []
+        if not measured_observation_artifacts:
+            missing.append("run measured pickup-position/aperture observation validation")
+        if collapse_count:
+            missing.append("upstream string/fret identity must be repaired first")
+    elif gate == "electrical":
+        candidates = model_classes.get("pickup_electrical", [])
+        gate_checks = {
+            **common,
+            "electrical_candidate_classes_present": bool(candidates),
+            "source_foundation_has_measured_content": bool(measured),
+            "explicit_electrical_validation_artifact_present":
+                bool(measured_electrical_validation_artifacts),
+            "measurement_requirements_declared": bool(next_measurements),
+        }
+        acceptance = (
+            gate_checks["pickup_di_research_job_completed"]
+            and gate_checks["electrical_candidate_classes_present"]
+            and gate_checks["explicit_electrical_validation_artifact_present"]
+        )
+        missing = []
+        if not measured_electrical_validation_artifacts:
+            missing.append(
+                "execute impedance/transfer, loaded resonance, control sweep and model-order validation"
+            )
+    elif gate == "port":
+        required_caps = set(port_track.get("required_capabilities", []))
+        contract_caps = set(interface.get("guitar_side", {}).get("required_capabilities", []))
+        gate_checks = {
+            **common,
+            "port_track_research_ready": port_track.get("status") == "RESEARCH_READY",
+            "required_capabilities_covered": bool(required_caps)
+                and required_caps.issubset(contract_caps | {
+                    "source_voltage_or_equivalent_representation",
+                    "source_impedance_or_network_representation",
+                    "selector_state",
+                    "volume_state",
+                    "tone_state",
+                    "pickup_configuration",
+                    "sample_rate",
+                    "model_sha",
+                    "parameter_set_version",
+                }),
+            "interface_contract_validated":
+                interface.get("status") in {"VALIDATED", "MEASURED_VALIDATED"},
+            "contract_values_frozen":
+                interface.get("guitar_side", {}).get("values_frozen") is True,
+        }
+        acceptance = (
+            gate_checks["port_track_research_ready"]
+            and gate_checks["required_capabilities_covered"]
+            and gate_checks["interface_contract_validated"]
+        )
+        missing = []
+        if not gate_checks["interface_contract_validated"]:
+            missing.append("validate Guitar Electrical Port contract with measured network evidence")
+    else:
+        raise ValueError(f"unknown gate: {gate}")
+
+    metrics = {
+        "gate": gate,
+        "checks": gate_checks,
+        "missing_evidence_or_work": missing,
+        "acceptance_met": acceptance,
+    }
+    report = json.dumps(metrics, indent=2, sort_keys=True) + "\n"
+    return {
+        "metrics": metrics,
+        "raw_files": {"gate_report.json": report},
+        "commands": [
+            "read committed Virtual Guitar baseline/electrical evidence",
+            "evaluate predeclared integration prerequisite without product mutation",
+        ],
+        "acceptance_met": acceptance,
+        "rejection_triggered": not acceptance,
+        "triggered_criteria": missing,
+        "summary": (
+            f"Deterministic Virtual Guitar integration prerequisite gate ({gate}). "
+            "A failed gate remains research work; it is never auto-promoted to product readiness."
+        ),
+    }
+
+
+def _virtual_guitar_physical_convergence_gate(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    return _vg_pickup_prereq_gate(repo_root, timeout_seconds, "physical")
+
+
+def _virtual_guitar_pickup_observation_contract_gate(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    return _vg_pickup_prereq_gate(repo_root, timeout_seconds, "observation")
+
+
+def _virtual_guitar_pickup_electrical_validation_gate(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    return _vg_pickup_prereq_gate(repo_root, timeout_seconds, "electrical")
+
+
+def _virtual_guitar_electrical_port_contract_gate(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    return _vg_pickup_prereq_gate(repo_root, timeout_seconds, "port")
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name == "virtual_guitar_pickup_electrical_foundation_v1":
         return _virtual_guitar_pickup_electrical_foundation(repo_root, timeout_seconds)
+    if name == "virtual_guitar_physical_convergence_gate_v1":
+        return _virtual_guitar_physical_convergence_gate(repo_root, timeout_seconds)
+    if name == "virtual_guitar_pickup_observation_contract_gate_v1":
+        return _virtual_guitar_pickup_observation_contract_gate(repo_root, timeout_seconds)
+    if name == "virtual_guitar_pickup_electrical_validation_gate_v1":
+        return _virtual_guitar_pickup_electrical_validation_gate(repo_root, timeout_seconds)
+    if name == "virtual_guitar_electrical_port_contract_gate_v1":
+        return _virtual_guitar_electrical_port_contract_gate(repo_root, timeout_seconds)
     if name not in ADAPTERS:
         raise ValueError(f"experiment adapter is not allowlisted: {name}")
     if timeout_seconds < 1:

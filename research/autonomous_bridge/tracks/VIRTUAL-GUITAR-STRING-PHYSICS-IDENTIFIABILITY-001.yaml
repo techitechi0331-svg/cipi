@@ -75,9 +75,10 @@ initial_experiment:
     - automatic_product_fidelity_claim
 
 activation_requirements:
-  melon_commit: 68e92bbcb4cd8655c2e01cbab914c663c3533526
+  melon_commit: 7aedcb8189d2b8927d74c96f6d5f624faf5b2c38
   melon_validation_required: PASS
   analysis_module: melon/egfxset_string_physics_precision.py
+  string_physics_family_module: melon/guitar_string_physics_family.py
   measured_reference_state: REFERENCE_READY
   raw_dataset_storage: RUNNER_CACHE_ONLY
   product_repository_write: false

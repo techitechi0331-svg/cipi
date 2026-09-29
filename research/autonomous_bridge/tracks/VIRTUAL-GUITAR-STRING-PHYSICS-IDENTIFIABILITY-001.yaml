@@ -1,0 +1,87 @@
+schema_version: "1.0"
+track_id: VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001
+enabled: false
+activation_state: BLOCKED_MELON_PRECISION_VALIDATION
+root_research_id: VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001
+
+research_question: >-
+  Can pickup-robust partial-frequency and inharmonicity evidence from EGFxSet same-MIDI
+  string/fret pairs bound string-specific physical parameters without pretending the exact
+  undocumented string gauge/material is known?
+
+hypothesis_id: HYP-VG-STRING-PHYSICS-IDENTIFIABILITY-001
+hypothesis: >-
+  Same-MIDI notes produced on different strings retain measurable partial-frequency and
+  inharmonicity differences across repeated pickup configurations, providing a stronger
+  physical constraint than string-number EQ or random coordinate jitter.
+
+depends_on:
+  - VIRTUAL-GUITAR-V11-BASELINE-MEASURE-001
+  - VIRTUAL-GUITAR-STRING-FRET-IDENTITY-TARGET-001
+  - VIRTUAL-GUITAR-STRING-FRET-IDENTITY-RESEARCH-001
+
+source_boundary:
+  evidence_note: research/plugins/virtual-guitar/research-notes/VG-STRING-FRET-IDENTITY-PHYSICS-BOUNDARY-20260929-001.yaml
+  primary_dataset: EGFXSET_CLEAN_V1
+  exact_string_gauge_known: false
+  exact_string_material_known: false
+  absolute_level_is_hardware_truth: false
+  raw_string_direct_spectral_fit_to_pickup_di_allowed: false
+
+candidate_parameter_family:
+  physical_axes:
+    - material_density_rho
+    - youngs_modulus_E
+    - string_radius_r
+    - tension_T
+    - low_frequency_loss
+    - frequency_dependent_loss
+    - speaking_length_L
+  rule: >-
+    Values remain bounded research hypotheses until constrained by measured evidence.
+    Do not map string number directly to arbitrary tone EQ.
+
+initial_experiment:
+  experiment_id: EXP-VG-STRING-PHYSICS-PRECISION-R1
+  experiment_type: EGFXSET_PARTIAL_FREQUENCY_INHARMONICITY
+  coordinates:
+    - {midi_note: 62, left: "s4f12", right: "s6f22"}
+    - {midi_note: 67, left: "s3f12", right: "s5f22"}
+  pickup_configurations:
+    - bridge
+    - bridge-middle
+    - middle
+    - middle-neck
+    - neck
+  metrics:
+    - fundamental_frequency
+    - partial_frequency_2_to_6
+    - per_partial_inharmonicity_B
+    - median_inharmonicity_B
+    - five_pickup_uncertainty_range
+  exclusions:
+    - rms_dbfs_as_hardware_truth
+    - peak_dbfs_as_hardware_truth
+    - automatic_product_fidelity_claim
+
+activation_requirements:
+  melon_commit: 68e92bbcb4cd8655c2e01cbab914c663c3533526
+  melon_validation_required: PASS
+  analysis_module: melon/egfxset_string_physics_precision.py
+  measured_reference_state: REFERENCE_READY
+  raw_dataset_storage: RUNNER_CACHE_ONLY
+  product_repository_write: false
+
+acceptance:
+  - all four string/fret coordinates analyzed
+  - at least three valid pickup measurements per coordinate
+  - per-pickup uncertainty retained
+  - no exact string gauge claim
+  - no product repository write
+  - no automatic product adoption
+
+authority_boundaries:
+  automatic_product_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  product_integration: false

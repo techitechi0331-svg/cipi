@@ -181,6 +181,11 @@ def _next_job(source_hash: str, summary: dict[str, Any]) -> dict[str, Any]:
             "summary_status": summary.get("status"),
             "product_repository_write": False,
         },
+        "variants": [
+            "PHYSICAL_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC",
+            "REDUCED_ORDER_MAGNETIC_OBSERVATION_PLUS_PASSIVE_RLC",
+            "STATIC_EQ_ONLY_COUNTER_HYPOTHESIS",
+        ],
         "metrics": [
             "pickup_configuration_delta_error",
             "string_fret_identity_preservation",
@@ -196,6 +201,13 @@ def _next_job(source_hash: str, summary: dict[str, Any]) -> dict[str, Any]:
             "no static EQ-only adoption without falsification against electrical alternatives",
             "no product repository write",
             "prepare matched Reference DI validation as a downstream gate",
+        ],
+        "rejection": [
+            "candidate collapses string/fret identity to MIDI pitch only",
+            "candidate uses RAW output relabelled as PICKUP_DI",
+            "candidate requires Amp/Cab/Mic coloration to hide upstream defects",
+            "candidate introduces unsupported electrical constants without evidence classification",
+            "candidate performs product repository writes or automatic product adoption",
         ],
         "max_runs": 3,
         "timeout_minutes": 30,

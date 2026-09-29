@@ -577,24 +577,23 @@
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [],
-    "claimed_count": 0,
-    "claimed_jobs": [],
-    "dependency_blocked_count": 0,
+    "claimed_branches": [
+      "research-bot/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/auto-361b0de0a00e"
+    ],
+    "claimed_count": 1,
+    "claimed_jobs": [
+      "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001"
+    ],
+    "dependency_blocked_count": 2,
     "human_gate_blocked_count": 0,
     "human_gate_jobs": [],
-    "ready_job": {
-      "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/auto-bcc370d75cd4",
-      "job_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
-      "kind": "LOCAL_RESEARCH",
-      "priority": 82
-    }
+    "ready_job": null
   },
   "schema_version": "1.0",
   "selected": {
-    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/auto-bcc370d75cd4",
+    "branch": "research-bot/VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001/auto-361b0de0a00e",
     "job_id": "VIRTUAL-GUITAR-PICKUP-DI-IMPLEMENTATION-RESEARCH-001",
-    "kind": "LOCAL_RESEARCH",
-    "priority": 82
+    "kind": "EVIDENCE_INTAKE",
+    "priority": 90
   }
 }

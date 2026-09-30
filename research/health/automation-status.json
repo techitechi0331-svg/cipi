@@ -580,8 +580,8 @@
     "ready_action": null,
     "states": {
       "completed": 73,
-      "dispatched": 2,
-      "failed": 18,
+      "dispatched": 1,
+      "failed": 19,
       "quarantined": 0,
       "queued": 1
     }

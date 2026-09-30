@@ -568,18 +568,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MIC-SM57-ZENODO-QUARANTINE-003",
-      "kind": "CROSS_REPO",
-      "priority": 98,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 73,
-      "dispatched": 1,
+      "dispatched": 2,
       "failed": 18,
       "quarantined": 0,
-      "queued": 2
+      "queued": 1
     }
   },
   "human_gates": [
@@ -613,9 +608,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MIC-SM57-ZENODO-QUARANTINE-003",
+    "action_id": null,
     "kind": "CROSS_REPO",
-    "priority": 98,
-    "reason": "ready_external_action"
+    "priority": 80,
+    "reason": "reconcile_dispatched_action"
   }
 }

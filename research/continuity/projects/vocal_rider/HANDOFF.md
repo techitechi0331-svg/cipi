@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: b7b5629cd703d83b603fd5bb0373be5526250ea8
-- Source-state digest: ef8079f5e590ed25cdfba3fcae5f1da1cf3ee76f1ad0177b73886150b9179d1c
+- CIPI source commit: 2212c347ad6d73f4f4972c7f5b84258e7601730f
+- Source-state digest: 76b2a6753306d79705c43d631622bdafe2e4b1bbb1575d2786af6e8d9292bcf2
 - Product: techitechi0331-svg/vocal_rider@main
 - Product commit: bc346336b5a0cca105e9462468cdea2b53ea3f6d
 

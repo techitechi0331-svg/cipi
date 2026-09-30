@@ -11,6 +11,7 @@
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
     "VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002",
+    "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001",
     "VL2A-CIRCUIT-HA100X-001",
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
     "VOCAL-DENOISE-ARCH-001",
@@ -137,6 +138,16 @@
       "runtime_limit_seconds": 90.0,
       "runtime_seconds": 0.004493
     },
+    "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001": {
+      "candidates": 0,
+      "candidates_limit": 20,
+      "loop_depth": 0,
+      "loop_depth_limit": 2,
+      "runs": 0,
+      "runs_limit": 2,
+      "runtime_limit_seconds": 300.0,
+      "runtime_seconds": 0.0
+    },
     "VL2A-CIRCUIT-HA100X-001": {
       "candidates": 60,
       "candidates_limit": 60,
@@ -231,6 +242,7 @@
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-003": 3,
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-004": 3,
     "VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002": 1,
+    "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001": 0,
     "VL2A-CIRCUIT-HA100X-001": 5,
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002": 3,
     "VOCAL-DENOISE-ARCH-001": 2,
@@ -253,6 +265,7 @@
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-003",
     "VIRTUAL-GUITAR-PHYSICAL-REALISM-004",
     "VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002",
+    "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001",
     "VL2A-CIRCUIT-HA100X-001",
     "VL2A-CIRCUIT-HA100X-SHORTLIST-002",
     "VOCAL-DENOISE-ARCH-001",
@@ -308,12 +321,12 @@
   ],
   "rejected_continuations": 12,
   "research_quality_metrics": {
-    "budget_exhaustion_rate": 0.21052631578947367,
+    "budget_exhaustion_rate": 0.2,
     "cache_hit_rate": 0.0,
     "duplicate_research_rate": 0.0,
     "early_convergence_rate": null,
     "falsification_rate": 0.0,
-    "human_gate_rate": 0.3684210526315789,
+    "human_gate_rate": 0.35,
     "new_information_per_compute_second": 0.023709110926984547,
     "new_information_per_run": 0.7414643826508541,
     "pareto_front_turnover": null,
@@ -335,7 +348,6 @@
     "VIRTUAL-GUITAR-PICKUP-EXTERNAL-EVIDENCE-003",
     "VIRTUAL-GUITAR-PICKUP-MODEL-DISCRIMINATION-002",
     "VIRTUAL-GUITAR-REAL-AUDIO-AB-001",
-    "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001",
     "VL2A-CIRCUIT-HA100X-001",
     "VOCAL-DENOISE-ARCH-001",
     "VOCAL-DENOISE-BASELINE-001",
@@ -439,9 +451,9 @@
       "state": "DISABLED"
     },
     "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001": {
-      "reason": "TRACK_DISABLED",
+      "reason": "NO_CURRENT_RUNNABLE_WORK",
       "scheduler_eligible": false,
-      "state": "DISABLED"
+      "state": "REGISTERED"
     },
     "VL2A-CIRCUIT-HA100X-001": {
       "reason": "BUDGET_EXHAUSTED",

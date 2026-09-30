@@ -59,6 +59,12 @@ No rendered audio is persisted.
 ## Interpretation
 This is a diagnostic sweep, not a product-selection gate.
 
+Use the 48 kHz / Sibilance 50% Vo.Prep-only event attenuation as the reference. For each high sample rate (88.2 and 96 kHz), a depth-only candidate must simultaneously:
+- keep absolute chain-vs-VoPriPro event delta <= 0.15 dB;
+- keep absolute post-event delta <= 0.15 dB;
+- keep Vo.Prep-only event attenuation >= 0.10 dB;
+- remain within +/-0.05 dB of the 48 kHz / 50% Vo.Prep-only event attenuation.
+
 Classify:
 - **DEPTH_SCALING_SUFFICIENT** if lower Sibilance amounts at high sample rates can recover the 48 kHz / 50% compatibility envelope while post-event behaviour remains bounded.
 - **DETECTOR_OR_TOPOLOGY_REVIEW** if reducing Amount cannot recover the envelope consistently, or the required amount relationship is materially irregular.

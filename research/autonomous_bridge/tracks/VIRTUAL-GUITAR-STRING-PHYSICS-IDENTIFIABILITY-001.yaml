@@ -1,7 +1,7 @@
 schema_version: "1.0"
 track_id: VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001
-enabled: false
-activation_state: BLOCKED_MELON_PRECISION_VALIDATION
+enabled: true
+activation_state: ACTIVE_STRING_PHYSICS_PRECISION_R1
 root_research_id: VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001
 
 research_question: >-
@@ -77,6 +77,8 @@ initial_experiment:
 activation_requirements:
   melon_commit: 7aedcb8189d2b8927d74c96f6d5f624faf5b2c38
   melon_validation_required: PASS
+  validation_result: PASS
+  validation_run_id: 36567207771
   analysis_module: melon/egfxset_string_physics_precision.py
   string_physics_family_module: melon/guitar_string_physics_family.py
   measured_reference_state: REFERENCE_READY

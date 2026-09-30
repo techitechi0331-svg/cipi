@@ -72,12 +72,24 @@ jobs:
           Write-Host "Using CMake generator: $generator"
           "generator=$generator" >> $env:GITHUB_OUTPUT
 
-      - name: Build candidate Vo.Prep VST3
+      - name: Build candidate Vo.Prep and regression targets
         if: env.CROSS_REPO_CONFIGURED == 'true'
         shell: pwsh
         run: |
           cmake -S product-voprep -B product-voprep\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
-          cmake --build product-voprep\build --config Release --target VoPrepMacro_VST3 --parallel 4
+          cmake --build product-voprep\build --config Release --parallel 4
+
+      - name: Run candidate Vo.Prep regression tests
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          $tests = @("VoPrepDSPTests.exe", "VoPrepSibilanceTests.exe", "VoPrepIntegrationTests.exe", "VoPrepUtilityTests.exe")
+          foreach ($name in $tests) {
+            $exe = Get-ChildItem -Path product-voprep\build -Filter $name -Recurse | Select-Object -First 1
+            if (-not $exe) { throw "$name not found" }
+            & $exe.FullName
+            if ($LASTEXITCODE -ne 0) { throw "$name failed with exit code $LASTEXITCODE" }
+          }
 
       - name: Build protected VoPriPro VST3
         if: env.CROSS_REPO_CONFIGURED == 'true'

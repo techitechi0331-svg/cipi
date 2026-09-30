@@ -60,6 +60,12 @@ Do not weaken existing maximum-reduction ceilings.
 
 ## Actual VST3 candidate gate
 
+Candidate Vo.Prep ref locked before execution:
+- `f6a6f62eea0122275f3b0566dc8858c727188846`
+
+Protected VoPriPro ref:
+- `58049696815fcc24067870edd6a1b89c3cfd2163`
+
 Build the candidate Vo.Prep VST3 and the protected VoPriPro VST3.
 
 Reuse the locked Actual VST3 Chain Validation v1 matrix and every original numerical gate without relaxation:

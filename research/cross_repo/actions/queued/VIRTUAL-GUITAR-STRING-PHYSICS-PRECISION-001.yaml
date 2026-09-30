@@ -1,0 +1,25 @@
+schema_version: "1.0"
+action_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001
+state: QUEUED
+repo_key: cipi
+workflow_key: vg_string_physics_precision
+ref: main
+inputs:
+  job_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001
+  melon_sha: 7aedcb8189d2b8927d74c96f6d5f624faf5b2c38
+priority: 97
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: >-
+  Run the validated EGFxSet same-MIDI string-physics precision analysis over four
+  string/fret coordinates and five pickup configurations, preserving pickup spread
+  as uncertainty and keeping raw audio runner-local only.
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+product_repository_write: false
+previous_run_id: 0

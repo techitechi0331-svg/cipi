@@ -25,3 +25,5 @@ previous_run_id: 0
 dispatched_at: '2026-09-30T17:31:13.171566Z'
 repository: techitechi0331-svg/cipi
 workflow_file: vg-string-physics-precision.yml
+run_id: 36751959445
+run_url: https://github.com/techitechi0331-svg/cipi/actions/runs/36751959445

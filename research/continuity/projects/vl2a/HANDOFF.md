@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 2212c347ad6d73f4f4972c7f5b84258e7601730f
-- Source-state digest: 2c9abaa10a244c8c6fabc1484abf0c0dd9270f66952d2491b4bff3f5dcd44468
+- CIPI source commit: bc77abbbfeadefd2fb241d1bc448bed3b47948ed
+- Source-state digest: 106c115f23eb8f16196cf0565b11f824275e7b7828e85ca66459632180ff3662
 - Product: techitechi0331-svg/VocalPrepComp@main
 - Product commit: b894c74304145196c4f553545ea75360e166fdd9
 

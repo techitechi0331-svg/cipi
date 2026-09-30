@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "2212c347ad6d73f4f4972c7f5b84258e7601730f",
+    "commit_sha": "bc77abbbfeadefd2fb241d1bc448bed3b47948ed",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-10-01T02:29:40+09:00",
-  "generation_id": "d321480d3b7fcdc96a068a53",
+  "generated_at": "2026-10-01T02:31:06+09:00",
+  "generation_id": "0e561bfcec62595c2e5f0a05",
   "human_gates": [
     {
       "blocking": true,
@@ -239,9 +239,9 @@
         "state": "DISABLED"
       },
       "VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001": {
-        "reason": "TRACK_DISABLED",
+        "reason": "NO_CURRENT_RUNNABLE_WORK",
         "scheduler_eligible": false,
-        "state": "DISABLED"
+        "state": "REGISTERED"
       }
     }
   },
@@ -411,7 +411,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "cfab4853d2aac36a8885e93a24e4ca7047746fd5e191954c63cb227e49093c53",
+      "sha256": "be69a253ae2e8bba96f581951c4be30c2caa4b5cefc6f07dba35664d6e3cf9dd",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -466,13 +466,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "4530205f0b5a6f0f2dc9b850f47f3f6351507e9c41a9396d6131bab14083563d",
+      "sha256": "aa311cbb9ab1d162f7a461feb1d0e16cd06eae3beddebc82c6dd0a8c4699a098",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "536268b61e85c6c79d01f7dd68b948e26646030e3a55e8f0fec02e5548deb982",
+      "sha256": "2b6c8c5a07a3d01ffadadc383a7f607f209f5e6c89819f7729809a95dc95bbab",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -635,7 +635,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "d6ba554e8ae0144e8f77922291ff249899f9a9a8a4707412b7a0826540990529",
+  "source_state_digest": "2a8c40a70020c84c00de3d989c464abd80ef912276964f31e11c9d0bc003ccdd",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"

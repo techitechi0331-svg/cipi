@@ -3,7 +3,7 @@ action_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001
 repo_key: cipi
 workflow_key: vg_string_physics_precision
 runner_class: self-hosted
-state: QUEUED
+state: RUNNER_WAIT
 run_id: 36751959445
 run_status: queued
 run_conclusion: null

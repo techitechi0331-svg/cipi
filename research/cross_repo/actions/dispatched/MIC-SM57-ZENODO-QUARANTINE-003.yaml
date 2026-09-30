@@ -26,3 +26,5 @@ previous_run_id: 36566734866
 dispatched_at: '2026-09-30T17:37:36.037163Z'
 repository: techitechi0331-svg/mic_simulator
 workflow_file: sm57-zenodo-ingest.yml
+run_id: 36752730706
+run_url: https://github.com/techitechi0331-svg/mic_simulator/actions/runs/36752730706

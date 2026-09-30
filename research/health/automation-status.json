@@ -567,7 +567,16 @@
     "blocked_action": null,
     "blocked_reason": null,
     "enabled": true,
-    "health_alerts": [],
+    "health_alerts": [
+      {
+        "action_id": "VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001",
+        "repo_key": "cipi",
+        "since": "2026-09-30T17:31:12Z",
+        "state": "RUNNER_WAIT",
+        "wait_threshold_minutes": 20,
+        "workflow_key": "vg_string_physics_precision"
+      }
+    ],
     "ready_action": null,
     "states": {
       "completed": 73,

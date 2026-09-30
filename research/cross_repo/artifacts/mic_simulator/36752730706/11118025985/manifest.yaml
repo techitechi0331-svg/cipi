@@ -1,0 +1,16 @@
+schema_version: '1.0'
+repository: techitechi0331-svg/mic_simulator
+repo_key: mic_simulator
+run_id: 36752730706
+run_attempt: 1
+artifact_id: 11118025985
+artifact_name: sm57-zenodo-inventory-diagnostic-36752730706
+expired: false
+size_in_bytes: 54346
+created_at: '2026-09-30T18:22:45Z'
+expires_at: '2026-10-30T18:22:42Z'
+authority: EXTERNAL_ARTIFACT_EVIDENCE_ONLY
+automatic_knowledge_promotion: false
+automatic_product_decision: false
+files: []
+ingest_status: metadata_only

@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: MIC-SM57-ZENODO-QUARANTINE-003
+repo_key: mic_simulator
+workflow_key: zenodo_ingest
+run_id: 36752730706
+run_attempt: 1
+head_sha: e6fb153ce49f012da9d7373bec154120450970d6
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Run research-only quarantined characterization
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

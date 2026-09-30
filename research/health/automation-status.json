@@ -568,13 +568,18 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": null,
+    "ready_action": {
+      "action_id": "VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001",
+      "kind": "CROSS_REPO",
+      "priority": 97,
+      "reason": "ready_external_action"
+    },
     "states": {
       "completed": 73,
       "dispatched": 0,
       "failed": 18,
       "quarantined": 0,
-      "queued": 1
+      "queued": 2
     }
   },
   "human_gates": [
@@ -608,7 +613,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "kind": "IDLE",
-    "priority": -999
+    "action_id": "VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001",
+    "kind": "CROSS_REPO",
+    "priority": 97,
+    "reason": "ready_external_action"
   }
 }

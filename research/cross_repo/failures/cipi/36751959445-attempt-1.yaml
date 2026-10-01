@@ -1,0 +1,16 @@
+schema_version: '1.0'
+action_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001
+repo_key: cipi
+workflow_key: vg_string_physics_precision
+run_id: 36751959445
+run_attempt: 1
+head_sha: bc77abbbfeadefd2fb241d1bc448bed3b47948ed
+classification:
+  category: CANCELLED_OR_MANUAL
+  retry_safe: false
+  reason: workflow was cancelled; cancellation intent is not safe to infer
+  conclusion: cancelled
+  failing_steps: []
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

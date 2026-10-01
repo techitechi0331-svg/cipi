@@ -1,0 +1,128 @@
+name: Vo.Prep Sibilance SR Sweep v1
+
+on:
+  pull_request:
+    paths:
+      - "research/plugins/vo-prep/experiments/SIBILANCE_SR_SWEEP_V1_PROTOCOL.md"
+      - "research/plugins/vo-prep/experiments/sibilance_sr_sweep_probe/**"
+      - ".github/workflows/voprep-sibilance-sr-sweep.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sibilance-sr-sweep:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      CROSS_REPO_CONFIGURED: ${{ secrets.CIPI_CROSS_REPO_TOKEN != '' }}
+
+    steps:
+      - name: Checkout CIPI
+        uses: actions/checkout@v4
+
+      - name: Require cross-repo credential
+        if: env.CROSS_REPO_CONFIGURED != 'true'
+        shell: pwsh
+        run: |
+          throw "CIPI_CROSS_REPO_TOKEN is not configured"
+
+      - name: Checkout pinned Vo.Prep
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/Vo.Prep
+          ref: ef9e577b6c355e34ae68a5cfb5fecf4fd8cfadf6
+          path: product-voprep
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout pinned VoPriPro
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/VocalPrepComp
+          ref: 58049696815fcc24067870edd6a1b89c3cfd2163
+          path: product-vopripro
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout JUCE 9.0.2
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: juce-framework/JUCE
+          ref: 9.0.2
+          path: JUCE
+          persist-credentials: false
+
+      - name: Resolve Visual Studio CMake generator
+        id: cmake_generator
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          $help = cmake --help | Out-String
+          if ($help -match 'Visual Studio 18 2026') {
+            $generator = 'Visual Studio 18 2026'
+          } elseif ($help -match 'Visual Studio 17 2022') {
+            $generator = 'Visual Studio 17 2022'
+          } else {
+            throw 'No supported Visual Studio CMake generator found'
+          }
+          Write-Host "Using CMake generator: $generator"
+          "generator=$generator" >> $env:GITHUB_OUTPUT
+
+      - name: Build pinned Vo.Prep VST3
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S product-voprep -B product-voprep\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build product-voprep\build --config Release --target VoPrepMacro_VST3 --parallel 4
+
+      - name: Build pinned VoPriPro VST3
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S product-vopripro -B product-vopripro\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build product-vopripro\build --config Release --target VocalPrepComp_VST3 --parallel 4
+
+      - name: Build Sibilance SR sweep host
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S research\plugins\vo-prep\experiments\sibilance_sr_sweep_probe -B sibilance-sweep-build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DJUCE_SOURCE_DIR="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build sibilance-sweep-build --config Release --target VoPrepSibilanceSrSweep --parallel 4
+
+      - name: Locate binaries
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        id: locate
+        shell: pwsh
+        run: |
+          $prep = Get-ChildItem -Path product-voprep\build -Directory -Filter *.vst3 -Recurse | Select-Object -First 1
+          $pri = Get-ChildItem -Path product-vopripro\build -Directory -Filter *.vst3 -Recurse | Select-Object -First 1
+          $hostExe = Get-ChildItem -Path sibilance-sweep-build -File -Filter VoPrepSibilanceSrSweep.exe -Recurse | Select-Object -First 1
+
+          if (-not $prep) { throw "Vo.Prep VST3 bundle not found" }
+          if (-not $pri) { throw "VoPriPro VST3 bundle not found" }
+          if (-not $hostExe) { throw "Sibilance SR sweep executable not found" }
+
+          "voprep=$($prep.FullName)" >> $env:GITHUB_OUTPUT
+          "vopripro=$($pri.FullName)" >> $env:GITHUB_OUTPUT
+          "host=$($hostExe.FullName)" >> $env:GITHUB_OUTPUT
+
+      - name: Run actual VST3 Sibilance SR sweep
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path result | Out-Null
+          & "${{ steps.locate.outputs.host }}" --voprep "${{ steps.locate.outputs.voprep }}" --vopripro "${{ steps.locate.outputs.vopripro }}" --out "$env:GITHUB_WORKSPACE\result\sibilance_sr_sweep_v1.json"
+          if ($LASTEXITCODE -ne 0) { throw "Sibilance SR sweep failed with exit code $LASTEXITCODE" }
+
+      - name: Upload diagnostic result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: VoPrep-Sibilance-SR-Sweep-v1
+          path: result/sibilance_sr_sweep_v1.json
+          if-no-files-found: warn

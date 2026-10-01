@@ -1,0 +1,154 @@
+name: Vo.Prep Sibilance SR Candidate Chain Gate
+
+on:
+  pull_request:
+    paths:
+      - "research/plugins/vo-prep/experiments/SIBILANCE_SR_DEPTH_NORMALIZATION_V1_PROTOCOL.md"
+      - ".github/workflows/voprep-sibilance-sr-candidate-chain.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-chain:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      CROSS_REPO_CONFIGURED: ${{ secrets.CIPI_CROSS_REPO_TOKEN != '' }}
+
+    steps:
+      - name: Checkout CIPI
+        uses: actions/checkout@v4
+
+      - name: Require cross-repo credential
+        if: env.CROSS_REPO_CONFIGURED != 'true'
+        shell: pwsh
+        run: |
+          throw "CIPI_CROSS_REPO_TOKEN is not configured"
+
+      - name: Checkout candidate Vo.Prep
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/Vo.Prep
+          ref: f6a6f62eea0122275f3b0566dc8858c727188846
+          path: product-voprep
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout protected VoPriPro
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: techitechi0331-svg/VocalPrepComp
+          ref: 58049696815fcc24067870edd6a1b89c3cfd2163
+          path: product-vopripro
+          token: ${{ secrets.CIPI_CROSS_REPO_TOKEN }}
+          persist-credentials: false
+
+      - name: Checkout JUCE 9.0.2
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: juce-framework/JUCE
+          ref: 9.0.2
+          path: JUCE
+          persist-credentials: false
+
+      - name: Resolve Visual Studio CMake generator
+        id: cmake_generator
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          $help = cmake --help | Out-String
+          if ($help -match 'Visual Studio 18 2026') {
+            $generator = 'Visual Studio 18 2026'
+          } elseif ($help -match 'Visual Studio 17 2022') {
+            $generator = 'Visual Studio 17 2022'
+          } else {
+            throw 'No supported Visual Studio CMake generator found'
+          }
+          Write-Host "Using CMake generator: $generator"
+          "generator=$generator" >> $env:GITHUB_OUTPUT
+
+      - name: Build candidate Vo.Prep and regression targets
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S product-voprep -B product-voprep\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build product-voprep\build --config Release --parallel 4
+
+      - name: Run candidate Vo.Prep regression tests
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          $tests = @("VoPrepDSPTests.exe", "VoPrepSibilanceTests.exe", "VoPrepIntegrationTests.exe", "VoPrepUtilityTests.exe")
+          foreach ($name in $tests) {
+            $exe = Get-ChildItem -Path product-voprep\build -Filter $name -Recurse | Select-Object -First 1
+            if (-not $exe) { throw "$name not found" }
+            & $exe.FullName
+            if ($LASTEXITCODE -ne 0) { throw "$name failed with exit code $LASTEXITCODE" }
+          }
+
+      - name: Build protected VoPriPro VST3
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S product-vopripro -B product-vopripro\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build product-vopripro\build --config Release --target VocalPrepComp_VST3 --parallel 4
+
+      - name: Build locked v1 chain host
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          cmake -S research\plugins\vo-prep\experiments\vst3_chain_probe -B chain-build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DJUCE_SOURCE_DIR="$env:GITHUB_WORKSPACE\JUCE"
+          cmake --build chain-build --config Release --target VoPrepActualVst3ChainProbe --parallel 4
+
+      - name: Locate binaries
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        id: locate
+        shell: pwsh
+        run: |
+          $prep = Get-ChildItem -Path product-voprep\build -Directory -Filter *.vst3 -Recurse | Select-Object -First 1
+          $pri = Get-ChildItem -Path product-vopripro\build -Directory -Filter *.vst3 -Recurse | Select-Object -First 1
+          $hostExe = Get-ChildItem -Path chain-build -File -Filter VoPrepActualVst3ChainProbe.exe -Recurse | Select-Object -First 1
+
+          if (-not $prep) { throw "Vo.Prep VST3 bundle not found" }
+          if (-not $pri) { throw "VoPriPro VST3 bundle not found" }
+          if (-not $hostExe) { throw "VST3 chain host executable not found" }
+
+          "voprep=$($prep.FullName)" >> $env:GITHUB_OUTPUT
+          "vopripro=$($pri.FullName)" >> $env:GITHUB_OUTPUT
+          "host=$($hostExe.FullName)" >> $env:GITHUB_OUTPUT
+
+      - name: Run candidate through locked v1 matrix
+        if: env.CROSS_REPO_CONFIGURED == 'true'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path result | Out-Null
+          & "${{ steps.locate.outputs.host }}" --voprep "${{ steps.locate.outputs.voprep }}" --vopripro "${{ steps.locate.outputs.vopripro }}" --out "$env:GITHUB_WORKSPACE\result\candidate_actual_vst3_chain.json"
+          $code = $LASTEXITCODE
+          if ($code -ne 0) {
+            throw "Candidate actual VST3 chain gate rejected or failed with exit code $code"
+          }
+
+      - name: Add candidate provenance
+        if: always()
+        shell: pwsh
+        run: |
+          if (Test-Path result\candidate_actual_vst3_chain.json) {
+            $result = Get-Content result\candidate_actual_vst3_chain.json -Raw | ConvertFrom-Json
+            $result | Add-Member -NotePropertyName voprep_ref -NotePropertyValue "f6a6f62eea0122275f3b0566dc8858c727188846" -Force
+            $result | Add-Member -NotePropertyName vopripro_ref -NotePropertyValue "58049696815fcc24067870edd6a1b89c3cfd2163" -Force
+            $result | Add-Member -NotePropertyName candidate_kind -NotePropertyValue "sibilance_sr_depth_normalization_v1" -Force
+            $result | ConvertTo-Json -Depth 12 | Set-Content result\candidate_actual_vst3_chain.json -Encoding utf8
+          }
+
+      - name: Upload candidate gate result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: VoPrep-Sibilance-SR-Candidate-Chain
+          path: result/candidate_actual_vst3_chain.json
+          if-no-files-found: warn

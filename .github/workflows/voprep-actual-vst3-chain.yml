@@ -108,25 +108,41 @@ jobs:
           path: JUCE
           persist-credentials: false
 
+      - name: Resolve Visual Studio CMake generator
+        id: cmake_generator
+        if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
+        shell: pwsh
+        run: |
+          $help = cmake --help | Out-String
+          if ($help -match 'Visual Studio 18 2026') {
+            $generator = 'Visual Studio 18 2026'
+          } elseif ($help -match 'Visual Studio 17 2022') {
+            $generator = 'Visual Studio 17 2022'
+          } else {
+            throw 'No supported Visual Studio CMake generator found (expected VS 2026 or VS 2022)'
+          }
+          Write-Host "Using CMake generator: $generator"
+          "generator=$generator" >> $env:GITHUB_OUTPUT
+
       - name: Configure and build pinned Vo.Prep VST3
         if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
-          cmake -S product-voprep -B product-voprep\build -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake -S product-voprep -B product-voprep\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
           cmake --build product-voprep\build --config Release --target VoPrepMacro_VST3 --parallel 4
 
       - name: Configure and build pinned VoPriPro VST3
         if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
-          cmake -S product-vopripro -B product-vopripro\build -G "Visual Studio 17 2022" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
+          cmake -S product-vopripro -B product-vopripro\build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DFETCHCONTENT_SOURCE_DIR_JUCE="$env:GITHUB_WORKSPACE\JUCE"
           cmake --build product-vopripro\build --config Release --target VocalPrepComp_VST3 --parallel 4
 
       - name: Configure and build JUCE headless chain host
         if: env.CROSS_REPO_CONFIGURED == 'true' && steps.checkout_voprep.outcome == 'success' && steps.checkout_vopripro.outcome == 'success'
         shell: pwsh
         run: |
-          cmake -S research\plugins\vo-prep\experiments\vst3_chain_probe -B chain-build -G "Visual Studio 17 2022" -A x64 -DJUCE_SOURCE_DIR="$env:GITHUB_WORKSPACE\JUCE"
+          cmake -S research\plugins\vo-prep\experiments\vst3_chain_probe -B chain-build -G "${{ steps.cmake_generator.outputs.generator }}" -A x64 -DJUCE_SOURCE_DIR="$env:GITHUB_WORKSPACE\JUCE"
           cmake --build chain-build --config Release --target VoPrepActualVst3ChainProbe --parallel 4
 
       - name: Locate actual VST3 bundles and host

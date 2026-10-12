@@ -8,6 +8,11 @@ from typing import Any
 
 from . import FACTORY_VERSION
 from .contract import contract_sha256, validate_contract
+from .dsp_modules.registry import (
+    module_spec_sha256,
+    registry_sha256,
+    require_build_eligible_module,
+)
 
 
 def _cpp_string(value: str) -> str:
@@ -58,6 +63,18 @@ def generate_project(contract: dict[str, Any], output_dir: str | Path) -> Path:
     plugin = contract["plugin"]
     ui = contract["ui"]
     validation = contract["validation"]
+    module_spec = require_build_eligible_module(
+        contract["dsp"]["template"],
+        contract_version=contract["contract_version"],
+    )
+    if module_spec.implementation_id != "builtin.golden_gain_v1":
+        raise ValueError(
+            f"Factory generator has no implementation for {module_spec.implementation_id}"
+        )
+    if module_spec.validation_profile != "golden_gain_v1":
+        raise ValueError(
+            f"Factory generator has no validation profile {module_spec.validation_profile}"
+        )
     sample_rates = validation.get("sample_rates", [44100, 48000, 88200, 96000])
     block_sizes = validation.get("block_sizes", [32, 64, 128, 257, 512, 1024])
     gain = next(p for p in contract["parameters"] if p["id"] == "gain_db")
@@ -635,6 +652,11 @@ target_link_libraries({target}FactoryValidation
         "plugin_id": plugin["id"],
         "plugin_version": plugin["version"],
         "dsp_template": contract["dsp"]["template"],
+        "dsp_implementation_id": module_spec.implementation_id,
+        "dsp_certification_status": module_spec.certification_status,
+        "dsp_validation_profile": module_spec.validation_profile,
+        "dsp_module_spec_sha256": module_spec_sha256(module_spec.module_id),
+        "dsp_module_registry_sha256": registry_sha256(),
         "dsp_source_revision": contract["dsp"]["source_revision"],
         "generated_source_sha256": generated_source_sha256,
         "juce_version": "9.0.2",

@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-E0B202B946CB830B
+source_path: research/experiments/MicroDouble/status.yaml
+kind: UNRESOLVED
+text_hash: e0b202b946cb830b
+text: Broader male/female, rap, falsetto, breathy and heavily tuned/compressed vocal
+  naturalness remains open.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

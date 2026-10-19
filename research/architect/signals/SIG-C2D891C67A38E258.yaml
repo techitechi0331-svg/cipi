@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-C2D891C67A38E258
+source_path: research/experiments/PeakBody/status.yaml
+kind: UNRESOLVED
+text_hash: c2d891c67a38e258
+text: The full raw Macro-Level vocal corpus is not directly materializable in the
+  current Project runtime.
+state: UNCLASSIFIED
+signal_class: DATA_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

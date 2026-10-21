@@ -1,0 +1,13 @@
+schema_version: '1.0'
+signal_id: SIG-7543B1A46E85DD49
+source_path: research/experiments/PeakBody/status.yaml
+kind: UNRESOLVED
+text_hash: 7543b1a46e85dd49
+text: '{''Private same-performance real-vocal guard study was INCONCLUSIVE'': ''processing
+  invariance and low-frequency/body preservation passed, but bright-voiced proxy count
+  was 0 and noise-like suppression missed the locked target.''}'
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DIAMOND STARS — PHYSICS & PLAYER ABILITIES v6.0</title>
+<style>
+:root{color-scheme:dark;--sky:#72ccf4;--nav:#091e36;--ink:#f5fbff;--cyan:#97eafc;--gold:#ffdd79}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#061527;font-family:system-ui,"Yu Gothic","Meiryo",sans-serif;color:var(--ink)}
+body{background:radial-gradient(circle at 50% -25%,#164b6f,#061527 72%)}
+.shell{width:min(100%,1450px);margin:0 auto;padding:9px 12px 20px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}.brand{display:flex;align-items:center;gap:9px;min-width:0}.logo{font-size:24px;background:#73d7f4;border-radius:12px;padding:5px 9px;color:#12335c}.brand-name{font-size:clamp(16px,2.5vw,23px);font-weight:1000;letter-spacing:.07em;line-height:1.12}.brand-name em{font-style:normal;color:#93ebd4}.byline{font-size:9px;letter-spacing:.14em;font-weight:bold;color:#9ecadf}.top-right{display:flex;align-items:center;gap:8px}.version{font-size:10px;font-weight:900;color:#a3dbed;white-space:nowrap}.full{font-size:12px;color:#103751;background:#b0f3ff;border:0;border-radius:9px;padding:9px 12px;font-weight:1000;white-space:nowrap}
+.stage{position:relative;overflow:hidden;width:100%;aspect-ratio:16/9;min-height:320px;background:linear-gradient(#7bd7f1 0 39%,#23627b 40% 53%,#367f51 54%);border:3px solid #88d9f1;border-radius:16px;box-shadow:0 20px 56px #0009;isolation:isolate}
+.stage:fullscreen{width:100%;height:100%;aspect-ratio:auto;border:0;border-radius:0}
+.stage canvas,.poster{position:absolute;inset:0;width:100%;height:100%;display:block}.poster{z-index:0;object-fit:fill}#scene{z-index:1;touch-action:none;cursor:crosshair;background:transparent}
+.panelbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding-top:10px}.panelbar .left{display:flex;gap:7px;flex-wrap:wrap;align-items:center}.pill{border:1px solid #5da4c8;background:#143a5a;color:#eafaff;border-radius:9px;font-weight:1000;padding:10px 15px;font-size:13px}.pill.selected{color:#103c3c;border-color:#91e9d4;background:#7ce8c8}.go{border:0;background:linear-gradient(180deg,#ffefaa,#ffbc69);box-shadow:0 4px 0 #a4682e;border-radius:12px;font-size:16px;color:#173047;font-weight:1000;padding:11px 24px;white-space:nowrap;min-width:175px}.go:disabled{opacity:.5;cursor:default}.help{color:#c1daee;font-size:12px;line-height:1.6;margin-top:10px}.help b{color:#fff2a1}.menu-layer{z-index:8;position:absolute;inset:0;background:#062746cc;display:grid;place-items:center;padding:10px;backdrop-filter:blur(3px)}.menu-layer[hidden]{display:none}.menu{background:linear-gradient(160deg,#318fbc,#17406e);border:3px solid #b7f1ff;border-radius:20px;width:min(470px,94%);padding:20px;text-align:center;box-shadow:0 14px 38px #0019;max-height:100%;overflow:auto}.menu h1{font-size:clamp(21px,4.2vw,34px);line-height:1.1;margin:5px 0 10px}.menu h1 b{color:#8fffe0}.menu p{font-size:12px;line-height:1.6;margin:7px 0 15px}.rowset{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}.rowset button{flex:1;min-width:60px;padding:9px 8px;border:1px solid #75c3e2;border-radius:9px;background:#1e507b;color:#fff;font-size:12px;font-weight:900}.rowset button.selected{background:#91e7cf;color:#123d45}.item-label{font-size:10px;letter-spacing:.12em;text-align:left;color:#daf6ff;font-weight:900;margin:12px 0 6px}.start{margin-top:15px;width:100%;border:0;background:linear-gradient(#fff4b7,#ffc06c);color:#193651;font-size:19px;font-weight:1000;padding:12px;border-radius:12px;box-shadow:0 4px 0 #935a23}.menu .small{font-size:10px;color:#e4f8ff}.fault{position:absolute;inset:0;z-index:12;display:none;place-items:center;background:linear-gradient(#236d94,#124561);text-align:center;padding:20px}.fault h2{font-size:19px}
+@media(max-width:780px){.shell{padding:7px}.stage{aspect-ratio:4/3;min-height:330px}.byline{display:none}.version{display:none}.full{font-size:11px;padding:7px 9px}.panelbar{gap:8px}.pill{font-size:12px;padding:9px}.go{font-size:13px;min-width:125px;padding:10px}.help{font-size:11px}}
+@media(max-width:440px){.stage{aspect-ratio:3/4;min-height:440px}.logo{font-size:16px}.brand-name{font-size:15px}.menu{padding:10px 12px}.menu h1{font-size:22px}.menu p{margin:4px 0 8px}.item-label{margin:8px 0 5px}.rowset button{padding:7px 4px}.menu .small{display:none}.panelbar{justify-content:center}}
+
+/* Explicit pitching sequence: pitch type -> 5x5 location -> throw */
+.pitch-flow[hidden]{display:none!important}.pitch-flow{position:absolute;inset:0;z-index:5;pointer-events:none;display:flex;justify-content:flex-end;align-items:center;padding:12px 3.6%;}
+.pitch-flow-card{pointer-events:auto;width:min(320px,44%);max-height:95%;overflow-y:auto;border:3px solid #9beaff;border-radius:18px;background:linear-gradient(155deg,#205d91f5,#092c54f9);box-shadow:0 16px 48px #001d42bd;padding:13px 14px;color:#fff;}
+.pitch-flow-tag{font-size:11px;color:#aaf5ff;font-weight:1000;letter-spacing:.13em}.pitch-flow-title{font-size:18px;font-weight:1000;margin:4px 0 7px}.pitch-flow-help{font-size:11px;color:#d4f4ff;line-height:1.55;margin:0 0 9px}.pitch-list{display:grid;grid-template-columns:1fr;gap:6px}.pitch-choice{border-radius:9px;border:2px solid #5bbadf;background:linear-gradient(#277fbd,#124a81);padding:7px 10px;display:flex;align-items:center;justify-content:space-between;color:white;font-weight:950;cursor:pointer;gap:7px;font-size:13px}.pitch-choice:focus-visible,.course-choice:focus-visible,.pitch-next:focus-visible{outline:3px solid #ffea87;outline-offset:2px}.pitch-choice:hover{background:#3e9cd4}.pitch-choice small{color:#c5f5ff;font-size:11px}.pitch-key{display:inline-grid;place-items:center;background:#ffe6a0;border-radius:5px;width:23px;height:24px;color:#163f65;font-size:12px;font-weight:1000;flex:none}.pitch-choice-name{flex:1;text-align:left}.course-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-width:255px;margin:7px auto}.course-choice{aspect-ratio:1;border:2px solid #5d99bf;border-radius:7px;background:#153d6d;cursor:pointer;color:#c6d8ec;font-size:10px;font-weight:950;display:grid;place-items:center}.course-choice.strike{background:#2880aa;border-color:#8cdef2}.course-choice:hover{background:#5dafcd}.course-choice.target{background:#ffce69;border-color:#fff6ca;color:#172c44;box-shadow:0 0 0 2px #ffe69a66}.course-legend{display:flex;justify-content:center;gap:14px;font-size:10px;font-weight:850;color:#d8eeff}.course-legend i{width:10px;height:10px;display:inline-block;border-radius:3px;margin-right:3px;background:#2880aa;border:1px solid #8cdef2}.course-legend i.ball{background:#153d6d;border-color:#5d99bf}.pitch-next,.pitch-back{display:block;border:0;border-radius:9px;padding:10px 12px;width:100%;margin-top:8px;font-size:13px;font-weight:1000;cursor:pointer}.pitch-next{background:linear-gradient(#fff0ae,#ffb85f);color:#153653}.pitch-back{border:1px solid #68acd3;background:#113d69;color:#e7faff}.pitch-summary{border-radius:10px;border:2px solid #9ce6ff;background:#0d3a65;padding:11px;margin:10px 0;font-size:13px;line-height:1.8;font-weight:900}.pitch-summary b{color:#ffe2a0}.pitch-step-dots{display:flex;gap:5px;margin:8px 0}.pitch-step-dots i{width:28%;height:5px;background:#355b7a;border-radius:5px}.pitch-step-dots i.active{background:#76e9cd}
+@media(max-width:780px){.pitch-flow{align-items:center;padding:8px}.pitch-flow-card{width:min(320px,70%);padding:9px 10px;border-width:2px}.pitch-flow-title{font-size:14px;margin:3px 0 5px}.pitch-flow-help{font-size:10px;line-height:1.35}.pitch-choice{font-size:11px;padding:6px 8px}.pitch-choice small{font-size:9px}.pitch-list{gap:4px}.course-grid{max-width:218px}.course-choice{border-width:1px}}
+@media(max-width:440px){.pitch-flow{align-items:center;justify-content:center;padding:6px}.pitch-flow-card{width:min(330px,95%);max-height:88%}.pitch-list{grid-template-columns:1fr}.course-grid{max-width:214px}.pitch-flow-help{margin-bottom:6px}}
+
+/* v6 player ability editor */
+.secondary-cta{display:block;margin:11px auto 0;border:1px solid #9addf7;background:#143e66;color:#f0fbff;font-size:12px;font-weight:900;padding:9px 18px;border-radius:10px;cursor:pointer}
+.roster-overlay[hidden]{display:none!important}.roster-overlay{position:fixed;z-index:50;inset:0;background:rgba(3,16,34,.90);display:grid;place-items:center;padding:12px}
+.roster-window{width:min(790px,100%);max-height:min(93vh,820px);overflow-y:auto;border:3px solid #82d8f4;background:linear-gradient(158deg,#174d7d,#092540);border-radius:18px;box-shadow:0 22px 80px #000b;padding:16px;color:#fff}
+.roster-head,.roster-toolbar,.roster-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.roster-head b{font-size:clamp(15px,2.2vw,22px)}.roster-head small{display:block;font-size:11px;color:#c6e9f7;margin-top:4px}.roster-head button,.roster-toolbar button,.roster-foot button{cursor:pointer;border:1px solid #82c8e5;background:#2b6f9e;color:white;padding:8px 12px;border-radius:9px;font-weight:900}.roster-toolbar{margin:16px 0;padding:12px;background:#0a2a4d;border-radius:12px;justify-content:flex-start}.roster-toolbar label{font-size:11px;font-weight:800;display:grid;gap:3px}.roster-toolbar select{background:#19486f;color:#fff;border:1px solid #8ad5f2;padding:8px;border-radius:7px;min-width:130px}.roster-toolbar button{margin-left:auto}.roster-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.roster-field{background:#0a2b4e;border:1px solid #487da4;border-radius:10px;padding:10px}.roster-field .field-title{font-size:12px;font-weight:950;display:flex;justify-content:space-between;align-items:center}.roster-field .field-title span{color:#ffe28b}.roster-field input{width:100%;accent-color:#70eac8;cursor:pointer;margin-top:10px}.roster-field small{color:#b1d7e8;font-size:10px}.roster-foot{margin-top:16px}.roster-foot span{font-size:11px;color:#c5e4ed}.roster-foot button{background:#ffcb78;color:#183b52;border:0;padding:12px 22px}.roster-foot button:focus-visible,.roster-overlay button:focus-visible{outline:3px solid #fff4a8;outline-offset:2px}
+@media(max-width:550px){.roster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.roster-window{padding:10px}.roster-toolbar{padding:8px}.roster-toolbar select{min-width:120px}.roster-head small{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><div class="brand"><div class="logo">✦</div><div><div class="brand-name">DIAMOND <em>STARS</em></div><div class="byline">3D BASEBALL · ABILITIES & PHYSICS</div></div></div><div class="top-right"><span class="version">SOFTWARE 3D · V6.0</span><button id="full" class="full">⛶ 全画面</button></div></header>
+<div class="stage" id="stage">
+<svg class="poster" id="poster" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-label="球場の静止プレビュー">
+<defs><linearGradient id="sk" x2="0" y2="1"><stop stop-color="#75c7e9"/><stop offset="1" stop-color="#c1f1f7"/></linearGradient><linearGradient id="grass" x2="0" y2="1"><stop stop-color="#448e59"/><stop offset="1" stop-color="#195c3b"/></linearGradient></defs>
+<rect width="1000" height="620" fill="url(#sk)"/><rect y="188" width="1000" height="145" fill="#215274"/><path d="M0 210H1000M0 265H1000M0 318H1000" stroke="#83b5cd" stroke-width="4"/>
+<g fill="#ffdc8b"><circle cx="70" cy="225" r="3"/><circle cx="140" cy="264" r="3"/><circle cx="260" cy="235" r="3"/><circle cx="320" cy="281" r="3"/><circle cx="410" cy="230" r="3"/><circle cx="500" cy="265" r="3"/><circle cx="580" cy="228" r="3"/><circle cx="700" cy="280" r="3"/><circle cx="760" cy="225" r="3"/><circle cx="840" cy="265" r="3"/><circle cx="940" cy="229" r="3"/></g>
+<path d="M0 333H1000V620H0" fill="url(#grass)"/><path d="M500 345 850 620 150 620Z" fill="#bc8859"/><path d="M500 365L500 405" stroke="#f5f4e2" stroke-width="5"/><path d="M500 540 535 567 500 584 465 567Z" fill="#fff0ce"/><ellipse cx="500" cy="352" rx="28" ry="7" fill="#915e3c"/>
+<ellipse cx="500" cy="360" rx="24" ry="5" fill="#132f38" opacity=".4"/><rect x="490" y="333" width="20" height="28" rx="7" fill="#ee5f73"/><circle cx="500" cy="322" r="14" fill="#ffe3c7"/><path d="M484 315Q500 297 516 315Z" fill="#243f6d"/>
+<ellipse cx="750" cy="542" rx="60" ry="12" opacity=".3"/><rect x="720" y="435" width="75" height="96" rx="28" fill="#55ccac"/><circle cx="756" cy="416" r="55" fill="#ffe0c1"/><path d="M705 398Q722 346 793 392L801 406H705Z" fill="#253d6e"/><rect x="801" y="308" width="12" height="164" rx="6" fill="#e0bb85"/>
+<rect x="452" y="384" width="96" height="112" fill="none" stroke="#82e6ff" stroke-width="4"/><ellipse cx="503" cy="455" rx="38" ry="23" fill="#ffdf53" fill-opacity=".45" stroke="#ffef62" stroke-width="6"/>
+</svg>
+<canvas id="scene" aria-label="野球ゲームの描画画面"></canvas>
+<div class="pitch-flow" id="pitchFlow" hidden aria-live="polite"><div class="pitch-flow-card" id="pitchFlowCard"></div></div>
+<div class="menu-layer" id="menuLayer"><div class="menu"><div style="font-size:22px">⚾</div><h1>DIAMOND <b>STARS</b></h1><p>オリジナル3D野球ゲーム v6.0。変化球・選手能力・守備を強化。<br>ミートカーソルを合わせ、ボールに重なるまでリングが縮む！ スイング後は捕球・送球まで遊ぼう！</p><div class="item-label">試合の長さ</div><div class="rowset" id="innings"><button data-innings="1" class="selected">1回</button><button data-innings="3">3回</button><button data-innings="5">5回</button><button data-innings="9">9回</button></div><div class="item-label">難易度</div><div class="rowset" id="diff"><button data-diff="easy" class="selected">やさしい</button><button data-diff="normal">ふつう</button><button data-diff="hard">むずかしい</button></div><button id="start" class="start">▶ 試合開始</button><button id="menuRoster" class="secondary-cta">⚙ 選手能力を確認・編集</button><div class="small">縮小リングでジャストミート ／ 守備はWASD + SPACE</div></div></div>
+<div id="fault" class="fault"><div><h2>⚾ 描画が停止しました</h2><p>HTMLをダウンロードし、ChromeまたはEdgeで直接開いてください。</p></div></div>
+</div>
+<div class="panelbar"><div class="left"><button class="pill selected" data-mode="contact" id="contact">Z ミート</button><button class="pill" data-mode="power" id="power">X 強振</button><button class="pill" id="camera">📷 カメラ</button><button class="pill defense-only" id="selectFielder" hidden>⇥ 野手切替</button><button class="pill defense-only" id="throwFirst" hidden>→ 一塁へ送球</button><button class="pill" id="editRoster">⚙ 選手能力</button><button class="pill" id="pause">⏸ 一時停止</button><button class="pill" id="menu">↺ 最初から</button></div><button id="hit" class="go">⚾ スイング [SPACE]</button></div>
+<div class="help"><b>打撃：</b> マウスで黄色いミートカーソルを動かす。<b>リングが小さくなりカーソルに重なったらスイング！</b> <b>ストライクゾーン直上の「BAT」ゲージ</b>で白い針が緑に入ったら <b>SPACE / 左クリック</b>。 <b>投球：</b> ①<b>1〜5</b>またはボタンで球種を選択 → ②<b>5×5のコース</b>を選択 → ③<b>SPACE</b>で投球。 <b>守備：</b>WASD/矢印で加速移動、TABで切替、SPACEで捕球・送球、1〜4で送球先を選択。</div>
+</div>
+<div class="roster-overlay" id="rosterOverlay" hidden role="dialog" aria-modal="true" aria-label="選手能力エディター">
+ <div class="roster-window"><div class="roster-head"><div><b>DIAMOND STARS · PLAYER DATA</b><small>各選手の能力は実際の打撃・走塁・守備・送球へ反映されます</small></div><button id="closeRoster" type="button">✕ 閉じる</button></div>
+ <div class="roster-toolbar"><label>チーム<select id="rosterTeam"><option value="0">SUNBIRDS</option><option value="1">NIGHT OWLS</option></select></label><label>選手<select id="rosterPlayer"></select></label><button id="resetRoster" type="button">能力を初期化</button></div>
+ <div class="roster-grid" id="rosterFields"></div><div class="roster-foot"><span id="rosterSaveStatus">能力値はこのPC内に保存されます</span><button id="saveRoster" type="button">変更を保存</button></div>
+ </div></div><noscript><div style="color:white;background:#104469;margin:12px;padding:15px">ゲームにはJavaScriptが必要です。ダウンロードしたHTMLをEdgeやChromeで直接開き、JavaScriptを有効にしてください。</div></noscript>
+<script>
+(function(){
+'use strict';
+const $=s=>document.getElementById(s),scene=$('scene'),stage=$('stage'),ctx=scene.getContext('2d',{alpha:false});
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t,rand=(a,b)=>a+Math.random()*(b-a),rnd=n=>Math.floor(Math.random()*n);
+const teamNames=['SUNBIRDS','NIGHT OWLS'];
+const rosters=[
+[
+ {name:'蒼井 ハル',pos:'CF',contact:89,power:78,run:87,field:76,arm:71,speed:88},
+ {name:'星野 リク',pos:'2B',contact:84,power:65,run:93,field:82,arm:68,speed:92},
+ {name:'白波 ユウ',pos:'1B',contact:78,power:94,run:71,field:69,arm:76,speed:72},
+ {name:'天宮 セナ',pos:'LF',contact:75,power:91,run:76,field:70,arm:79,speed:76},
+ {name:'七瀬 ナギ',pos:'SS',contact:86,power:68,run:88,field:88,arm:83,speed:87},
+ {name:'朝陽 カナタ',pos:'RF',contact:71,power:85,run:79,field:73,arm:80,speed:79},
+ {name:'風間 トワ',pos:'3B',contact:81,power:82,run:82,field:79,arm:78,speed:81},
+ {name:'水瀬 アオ',pos:'C',contact:79,power:79,run:75,field:85,arm:86,speed:67},
+ {name:'結城 ソラ',pos:'P',contact:85,power:73,run:83,field:74,arm:82,speed:74,velo:151,control:79,break:61,stamina:82}
+],
+[
+ {name:'霧島 レン',pos:'CF',contact:82,power:72,run:86,field:80,arm:74,speed:85},
+ {name:'早瀬 ミナト',pos:'2B',contact:88,power:66,run:90,field:84,arm:71,speed:89},
+ {name:'黒峰 ガク',pos:'1B',contact:74,power:92,run:68,field:65,arm:81,speed:69},
+ {name:'神代 ルカ',pos:'LF',contact:79,power:86,run:77,field:71,arm:78,speed:77},
+ {name:'橘 シオン',pos:'SS',contact:83,power:70,run:85,field:90,arm:84,speed:84},
+ {name:'真白 ユイ',pos:'RF',contact:76,power:81,run:80,field:77,arm:80,speed:79},
+ {name:'鷹宮 ジン',pos:'3B',contact:80,power:84,run:74,field:75,arm:82,speed:74},
+ {name:'城戸 レイ',pos:'C',contact:73,power:74,run:63,field:88,arm:92,speed:62},
+ {name:'南雲 レイ',pos:'P',contact:69,power:58,run:66,field:79,arm:88,speed:68,velo:154,control:84,break:87,stamina:86}
+]
+];
+const pitchers=[
+ {name:'結城 ソラ',velo:151,control:79,break:61,stamina:82,field:74,arm:82,speed:74},
+ {name:'南雲 レイ',velo:154,control:84,break:87,stamina:86,field:79,arm:88,speed:68}
+];
+const pitches=[
+ ['ストレート',154,0,0],
+ ['カーブ',114,-.22,.18],
+ ['スライダー',138,.25,.04],
+ ['フォーク',128,0,.28],
+ ['チェンジアップ',108,.1,.07]
+];
+const pitchProfiles={
+ 0:{label:'STRAIGHT',trail:'#fff3b8',marker:'#8fd6ff',late:.18,curveX:0,curveY:.02,shape:'直線'},
+ 1:{label:'CURVE',trail:'#8fd9ff',marker:'#7ad6ff',late:.72,curveX:-.23,curveY:.27,shape:'大きく曲がって落ちる'},
+ 2:{label:'SLIDER',trail:'#b7f3ff',marker:'#8fe8ff',late:.68,curveX:.27,curveY:.06,shape:'横に鋭く逃げる'},
+ 3:{label:'FORK',trail:'#ffe4ae',marker:'#ffd37c',late:.78,curveX:.02,curveY:.34,shape:'終盤で鋭く落ちる'},
+ 4:{label:'CHANGE',trail:'#d7d1ff',marker:'#b7a4ff',late:.58,curveX:.12,curveY:.16,shape:'ゆっくり沈んでズレる'}
+};
+const FIELD_POSITIONS=[
+ {x:-22,z:22,pos:'3B',lineup:6},
+ {x:22,z:22,pos:'1B',lineup:2},
+ {x:-11,z:38,pos:'SS',lineup:4},
+ {x:11,z:38,pos:'2B',lineup:1},
+ {x:0,z:18,pos:'P',lineup:8},
+ {x:-39,z:70,pos:'LF',lineup:3},
+ {x:0,z:86,pos:'CF',lineup:0},
+ {x:39,z:70,pos:'RF',lineup:5},
+ {x:0,z:-5,pos:'C',lineup:7}
+];
+function batterOf(team=S.half){return rosters[team][S.bat[team]%rosters[team].length]}
+function pitcherOf(defTeam=1-S.half){return rosters[defTeam][8]}
+function fielderTopSpeed(running){return 4.1+.045*running}
+function defenseRoster(teamIndex){return FIELD_POSITIONS.map((fp,i)=>{const pl=rosters[teamIndex][fp.lineup];return {x:fp.x,z:fp.z,homeX:fp.x,homeZ:fp.z,id:i,lineup:fp.lineup,pos:fp.pos,name:pl.name,speed:pl.speed,field:pl.field,arm:pl.arm,run:pl.run,catch:pl.catch,velocityX:0,velocityZ:0,reactionTimer:i===8?0:Math.max(.18,.63-.003*pl.field),pickupTimer:0};})}
+function pitchBreak(type,t){const spec=pitchProfiles[type]||pitchProfiles[0];const s=Math.max(0,(t-spec.late)/(1-spec.late));const late=s*s*(3-2*s);const early=t*.08;let dx=spec.curveX*late,dy=spec.curveY*late+early;if(type===0)dy=Math.sin(t*Math.PI)*.01;return {x:dx,y:dy,late,tag:spec.label,shape:spec.shape,color:spec.marker,trail:spec.trail};}
+rosters.forEach(team=>team.forEach(p=>{p.trajectory=p.trajectory||2+(p.power>83?1:0);p.catch=p.catch||Math.round((p.field+p.arm)/2);p.reaction=p.reaction||Math.max(.18,.63-.003*p.field)}));
+
+// Entire pitch, including break and batter collision, is sampled from this deterministic 3D trajectory.
+function pitchWorld(ball,t){
+ t=clamp(t,0,1);const k=pitchProfiles[ball.type]||pitchProfiles[0];
+ const bend=pitchBreak(ball.type,t);
+ const level=(ball.level||4)/5, offset=(t-bend.late)*level;
+ const x=lerp(0,(ball.destX-.5)*2.50,t)+k.curveX*offset*2.3;
+ const y=lerp(2.05,3.35-ball.destY*2.45,t)-k.curveY*offset*2.3+Math.sin(Math.PI*t)*.26;
+ return V(x,y,lerp(18,-.30,t));
+}
+function pitchScreen(ball,t){return project3(pitchWorld(ball,t))}
+function pitchPlateXY(ball,t=.94){const p=pitchWorld(ball,t);return {x:p[0]/2.50+.5,y:(3.35-p[1])/2.45}}
+
+const S={phase:'menu',limit:1,difficulty:'easy',half:0,inning:1,outs:0,balls:0,strikes:0,bases:[false,false,false],runs:[0,0],hits:[0,0],bat:[0,0],mode:'contact',selectedPitch:0,aim:{x:.5,y:.5},cursor:{x:.5,y:.5},ball:null,play:null,timer:0,notice:'',noticeDetail:'',noticeTimer:0,pitchMeter:0,pitchingStarted:false,courseLocked:false,courseCell:null,paused:false,swing:0,totalHits:0,debug:false};window.__diamondState=S;
+let w=960,h=540,ratio=16/9,frame=0,last=0,dpr=1,keys=new Set(),audio=null;
+let viewMode=0;const BASES={1:{x:22,z:20},2:{x:0,z:40},3:{x:-22,z:20},4:{x:0,z:0}};let fieldKeys=new Set();
+function sound(freq=420,length=.12){try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();const osc=audio.createOscillator(),g=audio.createGain();osc.type='triangle';osc.frequency.setValueAtTime(freq,audio.currentTime);g.gain.setValueAtTime(.09,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+length);osc.connect(g);g.connect(audio.destination);osc.start();osc.stop(audio.currentTime+length+.01);}catch(e){}}
+function resize(){const b=stage.getBoundingClientRect();w=Math.max(1,b.width);h=Math.max(1,b.height);ratio=w/h;dpr=Math.min(1.5,window.devicePixelRatio||1);let cw=Math.round(w*dpr),ch=Math.round(h*dpr);if(scene.width!==cw||scene.height!==ch){scene.width=cw;scene.height=ch;}ctx.setTransform(dpr,0,0,dpr,0,0);}
+function zone(){const left=project3(V(-1.25,.9,-.3)),right=project3(V(1.25,3.35,-.3));if(!left||!right)return {x:w*.42,y:h*.42,w:w*.16,h:h*.18};let x=Math.min(left.x,right.x),y=Math.min(left.y,right.y),zw=Math.abs(left.x-right.x),zh=Math.abs(left.y-right.y);return {x,y,w:zw,h:zh};}
+// True perspective projected 3D meshes, rendered to Canvas2D. No WebGL dependency.
+const D3={faces:[],eye:[0,5.9,-11.6],forward:[0,0,1],right:[1,0,0],up:[0,1,0],focus:700};
+const staticField=document.createElement("canvas"),staticFieldCtx=staticField.getContext("2d");let staticFieldKey="",staticFresh=true;
+const getFieldKey=()=>`${scene.width}x${scene.height}v${viewMode}`;
+const V=(x,y,z)=>[x,y,z];
+function norm3(a){let m=Math.hypot(...a)||1;return a.map(v=>v/m)}
+function cross3(a,b){return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}
+function dot3(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]}
+function setD3Camera(){
+  D3.eye=ratio<.85?[0,5.4,-13.8]:viewMode===1?[2.5,6.5,-15.2]:[0,5.9,-11.6];
+  const target=ratio<.85?[0,1.45,20]:viewMode===1?[0,1.7,20]:[0,1.7,19];
+  D3.forward=norm3(target.map((n,i)=>n-D3.eye[i])); D3.right=norm3(cross3([0,1,0],D3.forward));D3.up=norm3(cross3(D3.forward,D3.right));
+  D3.focus=Math.min(w*1.05,h*1.32);
+}
+function project3(p){const d=p.map((n,i)=>n-D3.eye[i]),dz=dot3(d,D3.forward);if(dz<.4)return null;let k=D3.focus/dz;return {x:w*.5+dot3(d,D3.right)*k,y:h*.47-dot3(d,D3.up)*k,z:dz,k}}
+function poly3(vertices,color,stroke=null){const ps=vertices.map(project3);if(ps.some(p=>!p))return;let depth=ps.reduce((a,p)=>a+p.z,0)/ps.length;D3.faces.push({ps,color,stroke,depth});}
+function line3(a,b,color,width=1){let pa=project3(a),pb=project3(b);if(!pa||!pb)return;D3.faces.push({line:[pa,pb],color,width,depth:(pa.z+pb.z)*.5})}
+function shade3(hex,f=1){const c=hex.replace('#','');if(c.length!==6)return hex;const nums=[0,2,4].map(i=>Math.round(Math.min(255,Math.max(0,parseInt(c.slice(i,i+2),16)*f))));return '#'+nums.map(x=>x.toString(16).padStart(2,'0')).join('')}
+function ellipse3(cx,cy,cz,rx,rz,color,segments=22){let a=[];for(let j=0;j<segments;j++){const ang=j*2*Math.PI/segments;a.push(V(cx+rx*Math.cos(ang),cy,cz+rz*Math.sin(ang)))}poly3(a,color)}
+function sphere3(x,y,z,rx,ry,rz,color,segments=9,rings=6){for(let i=0;i<rings;i++){let a=-Math.PI/2+i*Math.PI/rings,b=-Math.PI/2+(i+1)*Math.PI/rings;for(let j=0;j<segments;j++){let t=j*2*Math.PI/segments,u=(j+1)*2*Math.PI/segments;const q=(v,k)=>V(x+rx*Math.cos(v)*Math.cos(k),y+ry*Math.sin(v),z+rz*Math.cos(v)*Math.sin(k)); let facing=(Math.sin((t+u)*.5)*.22+Math.sin((a+b)*.5)*.12);poly3([q(a,t),q(a,u),q(b,u),q(b,t)],shade3(color,clamp(.83+facing,.65,1.22)));}}}
+function cylinder3(a,b,r,color,segments=8){let d=b.map((n,i)=>n-a[i]),axis=norm3(d),ref=Math.abs(axis[1])>.9?[1,0,0]:[0,1,0],u=norm3(cross3(axis,ref)),v=norm3(cross3(axis,u));const pt=(center,t)=>center.map((n,i)=>n+r*(u[i]*Math.cos(t)+v[i]*Math.sin(t)));for(let j=0;j<segments;j++){let t=j*2*Math.PI/segments,k=(j+1)*2*Math.PI/segments;poly3([pt(a,t),pt(a,k),pt(b,k),pt(b,t)],shade3(color,.79+.25*Math.cos(t)))}poly3(Array.from({length:segments},(_,j)=>pt(b,j*2*Math.PI/segments)),shade3(color,1.15));}
+function addPlayer3(x,z,team,role='field',phase=0,size=1){
+ const jersey=team===0?'#22a7ad':'#d45476',cap=team===0?'#16638e':'#333a6f',skin='#ffd6b8',s=size;
+ ellipse3(x,.055,z,.74*s,.52*s,'#1b413a');
+ for(let leg of [-1,1]){let dx=leg*.28*s;cylinder3(V(x+dx,.86*s,z),V(x+dx,.28*s,z),.17*s,'#203e63');sphere3(x+dx,.20*s,z-.06*s,.28*s,.16*s,.37*s,'#e3f4f9',7,4)}
+ sphere3(x,1.25*s,z,.70*s,.86*s,.50*s,jersey,11,6);sphere3(x,1.33*s,z-.47*s,.35*s,.50*s,.095*s,'#e7f9f8',8,4);
+ const move=role==='pitcher'?Math.sin(performance.now()/380)*.18:0;
+ sphere3(x-.68*s,1.50*s,z,.28*s,.32*s,.28*s,skin,7,5);sphere3(x+.69*s,1.52*s,z,.28*s,.32*s,.28*s,skin,7,5);
+ if(role==='pitcher')sphere3(x-.73*s,1.44*s,z-.27*s,.38*s,.35*s,.23*s,'#95483b',7,5);
+ sphere3(x,2.65*s,z-.06*s,1.01*s,1.03*s,.86*s,skin,13,8);
+ sphere3(x,3.45*s,z+.02*s,.96*s,.37*s,.88*s,cap,11,4);
+ // bill of the cap projects towards the viewer
+ poly3([V(x-.91*s,3.41*s,z-.63*s),V(x+.91*s,3.41*s,z-.63*s),V(x+.73*s,3.30*s,z-1.06*s),V(x-.73*s,3.30*s,z-1.06*s)],shade3(cap,.7));
+ for(let dx of [-.36,.36])sphere3(x+dx*s,2.70*s,z-.86*s,.09*s,.13*s,.07*s,'#21334d',6,4);
+ sphere3(x,2.43*s,z-.91*s,.15*s,.10*s,.08*s,'#e9988e',7,4);
+ if(role==='batter'){
+   const swing=clamp(phase,0,1),v=swing*.92;
+   cylinder3(V(x-.37*s,1.70*s,z-.55*s),V(x-.42*s+v*.7*s,3.83*s-v*1.25*s,z-.62*s-v*.78*s),.115*s,'#bf9a65',10);
+   cylinder3(V(x-.42*s+v*.7*s,3.83*s-v*1.25*s,z-.62*s-v*.78*s),V(x-.41*s+v*1.3*s,4.54*s-v*2.0*s,z-.62*s-v*.7*s),.16*s,'#e1c69a',10);
+ }
+}
+function bg(){
+  setD3Camera();D3.faces.length=0;
+  staticFresh=staticFieldKey!==getFieldKey();
+  if(!staticFresh){ctx.drawImage(staticField,0,0,w,h);return;}
+  const sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#65b1dc');sky.addColorStop(.48,'#a3e1ed');sky.addColorStop(1,'#a7dce6');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);ctx.fillStyle='#3e9561';ctx.fillRect(0,h*.40,w,h*.60);
+  // stadium wall and elevated grandstand terraces in full 3D
+  poly3([V(-125,0,112),V(125,0,112),V(125,7.2,112),V(-125,7.2,112)],'#204a59');
+  for(let row=0;row<8;row++){
+    const z=110+row*6,y=7.2+row*2.3;
+    poly3([V(-115,y,z),V(115,y,z),V(115,y+1.5,z+3),V(-115,y+1.5,z+3)],row%2?'#34546c':'#203f59');
+    // Spectators are shaded billboards, keeping CPU 3D fast on older PCs.
+  }
+  poly3([V(-115,27,168),V(115,27,168),V(115,31,170),V(-115,31,170)],'#142f50');
+  // deep outfield grass and cut stripes
+  poly3([V(-160,-.1,-25),V(160,-.1,-25),V(160,-.1,160),V(-160,-.1,160)],'#35825b');
+  for(let i=0;i<11;i++){let z0=-8+i*12;poly3([V(-140,-.076,z0),V(140,-.076,z0),V(140,-.076,z0+6),V(-140,-.076,z0+6)],i%2?'#418d5c':'#367e51')}
+  // infield diamond, dirt stripes, and batter's box
+  poly3([V(0,-.02,-2.5),V(24,-.02,20),V(0,-.02,43),V(-24,-.02,20)],'#b77f50');
+  poly3([V(-7,-.015,-7),V(7,-.015,-7),V(8,-.015,5),V(-8,-.015,5)],'#bb8a5f');
+  ellipse3(0,-.01,19,3.8,2.8,'#b08253');
+  // chalk baselines and foul lines (world-space)
+  for(let side of [-1,1])line3(V(0,.045,-2),V(side*90,.045,110),'#fff2da',.12);
+  for(let [x,z] of [[-22,19],[22,19],[0,41]]){poly3([V(x-.8,.04,z-.8),V(x+.8,.04,z-.8),V(x+.8,.04,z+.8),V(x-.8,.04,z+.8)],'#fff9e5')}
+  poly3([V(-.9,.07,-3),V(.9,.07,-3),V(1.25,.07,-1.8),V(0,.07,-1),V(-1.25,.07,-1.8)],'#fff7da');
+  line3(V(-3,.048,-5),V(-3,.048,-1),'#f6f8ef');line3(V(3,.048,-5),V(3,.048,-1),'#f6f8ef');
+  // outfield fence and yellow top rail
+  poly3([V(-105,0,103),V(105,0,103),V(105,7,103),V(-105,7,103)],'#174c60');
+  line3(V(-105,7,102.8),V(105,7,102.8),'#f5cf61');
+  for(let j=0;j<11;j++){let x=-100+j*20;let col=['#448b99','#2f7189','#63a4b4'][j%3];poly3([V(x,2,102.6),V(x+17,2,102.6),V(x+17,4.7,102.6),V(x,4.7,102.6)],col)}
+  // warning track
+  poly3([V(-110,-.035,96),V(110,-.035,96),V(110,-.035,103),V(-110,-.035,103)],'#98684a');
+  // signs along third-base side
+  poly3([V(-60,8,93),V(-28,8,93),V(-28,14,93),V(-60,14,93)],'#2b6485');
+  poly3([V(28,8,93),V(60,8,93),V(60,14,93),V(28,14,93)],'#346484');
+  // tiny back row of floodlight towers
+  for(let x of [-100,100]){cylinder3(V(x,0,113),V(x,42,113),.7,'#acb9cb',6);poly3([V(x-6,42,113),V(x+6,42,113),V(x+6,45,113),V(x-6,45,113)],'#e9f4dc')}
+}
+function flush3(){D3.faces.sort((a,b)=>b.depth-a.depth);for(let f of D3.faces){const pts=f.ps;ctx.beginPath();if(f.line){let [a,b]=f.line;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.lineWidth=Math.max(.7,f.width*D3.focus/f.depth);ctx.strokeStyle=f.color;ctx.stroke();continue;}ctx.moveTo(pts[0].x,pts[0].y);for(let j=1;j<pts.length;j++)ctx.lineTo(pts[j].x,pts[j].y);ctx.closePath();ctx.fillStyle=f.color;ctx.fill();if(f.stroke){ctx.strokeStyle=f.stroke;ctx.lineWidth=.7;ctx.stroke()}}D3.faces.length=0}
+function stadiumPlayers(){
+ if(staticFresh){
+  // Render the expensive stadium and background fielders once, cache its pixels.
+  for(let [x,z] of [[-23,21],[23,21],[-29,49],[29,49],[0,68],[-22,10],[22,10]])addPlayer3(x,z,1,'field',0,.85);
+  addPlayer3(0,19,1,'pitcher',0,.80);flush3();
+  const crowdColors=['#cce0eb','#ffcaa4','#f1dba4','#a7d8e5','#d58e99','#83cabb'];
+  for(let row=0;row<8;row++){let z=110+row*6,y=7.2+row*2.3;for(let j=0;j<55;j++){let x=-108+j*4;let p=project3(V(x,y+1.15,z+2));if(!p||p.x<-5||p.x>w+5||p.y<-5||p.y>h+5)continue;ctx.fillStyle=crowdColors[(j*5+row*3)%6];ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1,p.k*.35),0,Math.PI*2);ctx.fill();}}
+  let strip=project3(V(0,12,104));if(strip){ctx.save();ctx.textAlign='center';ctx.fillStyle='#f1f9fe';ctx.font=`900 ${clamp(w*.012,10,16)}px sans-serif`;ctx.globalAlpha=.9;ctx.fillText('D I A M O N D   A R E N A',strip.x,strip.y);ctx.restore()}
+  staticField.width=scene.width;staticField.height=scene.height;staticFieldCtx.setTransform(1,0,0,1,0,0);staticFieldCtx.clearRect(0,0,staticField.width,staticField.height);staticFieldCtx.drawImage(scene,0,0);staticFieldKey=getFieldKey();
+ }
+ // Only the near batter is animated as a real 3D mesh each frame.
+ addPlayer3(ratio<.85?3.0:4.0,-3.45,0,'batter',S.swing,1.05);flush3();
+}
+function pathRound(x,y,a,b,r){r=Math.min(r,a/2,b/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+a-r,y);ctx.quadraticCurveTo(x+a,y,x+a,y+r);ctx.lineTo(x+a,y+b-r);ctx.quadraticCurveTo(x+a,y+b,x+a-r,y+b);ctx.lineTo(x+r,y+b);ctx.quadraticCurveTo(x,y+b,x,y+b-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath()}
+function rect(x,y,a,b,fill,stroke,r=0){pathRound(x,y,a,b,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=Math.max(1,w*.0017);ctx.stroke();}}
+function text(s,x,y,size=15,color='#fff',weight=900,align='left'){ctx.font=`${weight} ${size}px system-ui,'Yu Gothic',sans-serif`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.lineWidth=Math.max(2,size*.17);ctx.strokeStyle='#12344d';ctx.strokeText(s,x,y);ctx.fillStyle=color;ctx.fillText(s,x,y)}
+function hud(){
+ const compact=w<790,small=w<490,ui=clamp(w/1080,.72,1.27),pad=small?7:13;
+ // Game scoreboard: upper left, B/S/O and baserunners clustered at upper right.
+ const scW=small?153:compact?188:266,scH=small?86:compact?95:116;
+ rect(pad,pad,scW,scH,'#164b7cf7','#66c9f9',10);rect(pad+3,pad+3,scW-6,small?20:25,'#338ac6',null,7);
+ text(`${S.inning}回 ${S.half===0?'表 ▲':'裏 ▼'}`,pad+10,pad+(small?13:16),small?11:16,'#fff5bf');
+ for(let i=0;i<2;i++){
+   let yy=pad+(small?39+i*27:compact?43+i*30:49+i*35);
+   rect(pad+7,yy-8,14,14,i===0?'#70dcdf':'#ef7d94','#f4f9ff',3);
+   text(teamNames[i],pad+29,yy,small?9:compact?11:13,'#fff',950);
+   rect(pad+scW-(small?35:47),yy-(small?13:17),small?26:36,small?26:34,'#0e3159','#8ad1f9',6);
+   text(`${S.runs[i]}`,pad+scW-(small?22:29),yy,small?17:23,'#ffeaaa',1000,'center');
+ }
+ const rightW=small?125:compact?172:218,rightX=w-pad-rightW,rsH=small?86:compact?95:116;
+ rect(rightX,pad,rightW,rsH,'#164b7cf7','#66c9f9',10);rect(rightX+3,pad+3,rightW-6,small?20:25,'#338ac6',null,6);
+ text('B  S  O',rightX+9,pad+(small?13:16),small?10:14,'#eaffff');
+ for(let [i,c,m,k] of [[0,S.balls,4,'#6ee69f'],[1,S.strikes,3,'#ffd86d'],[2,S.outs,3,'#fa778d']]){
+   let colX=rightX+10+i*(small?37:compact?46:58);
+   for(let n=0;n<m;n++){ctx.beginPath();ctx.arc(colX+n*(small?7:compact?9:11),pad+(small?33:42),small?2.5:3.5,0,Math.PI*2);ctx.fillStyle=n<c?k:'#234665';ctx.fill();ctx.strokeStyle='#a1cdea';ctx.lineWidth=.75;ctx.stroke()}
+ }
+ const bx=rightX+rightW/2,by=pad+(small?64:82),bs=small?10:12;
+ for(let [i,dx,dy] of [[0,19,0],[1,0,-13],[2,-19,0]]){ctx.save();ctx.translate(bx+dx,by+dy);ctx.rotate(Math.PI/4);ctx.fillStyle=S.bases[i]?'#ffdb60':'#1c3e61';ctx.strokeStyle='#dcf6ff';ctx.lineWidth=2;ctx.fillRect(-bs/2,-bs/2,bs,bs);ctx.strokeRect(-bs/2,-bs/2,bs,bs);ctx.restore()}
+ // Small pitch selection info, tucked beside the upper HUD rather than overlapping the plate.
+ if(!small){const pName=S.ball?pitches[S.ball.type][0]:pitches[S.selectedPitch][0];const iw=clamp(w*.19,160,230),ix=w/2-iw/2;rect(ix,pad,iw,29,'#184c76ef','#79c7ed',7);text(S.half===0?`相手の球種  ${S.phase==='pitch'?'変化に注意':'投球待ち'}`:`球種：${pName}`,ix+iw/2,pad+14,12,'#f5faff',900,'center')}
+ const z=zone();
+ // Light strike zone: no opaque fill; readable despite 3D ground / baseball.
+ ctx.save();ctx.fillStyle='rgba(57,161,244,.085)';ctx.fillRect(z.x,z.y,z.w,z.h);ctx.strokeStyle='#86dcff';ctx.lineWidth=small?2:3;ctx.shadowColor='#15589c';ctx.shadowBlur=5;ctx.strokeRect(z.x,z.y,z.w,z.h);ctx.shadowBlur=0;ctx.strokeStyle='#dff6ff68';ctx.lineWidth=1;
+ for(let i=1;i<3;i++){ctx.beginPath();ctx.moveTo(z.x+z.w*i/3,z.y);ctx.lineTo(z.x+z.w*i/3,z.y+z.h);ctx.moveTo(z.x,z.y+z.h*i/3);ctx.lineTo(z.x+z.w,z.y+z.h*i/3);ctx.stroke()}ctx.restore();
+ // IMPORTANT: BAT gauge is miniature and anchored DIRECTLY ABOVE the strike zone.
+ // Each frame uses zone() so it follows camera, aspect ratio and fullscreen correctly.
+ const gW=clamp(z.w*.75,small?102:120,small?122:172),gH=small?28:32,
+  gx=clamp(z.x+z.w/2-gW/2,4,w-gW-4),gy=Math.max(pad+rsH+8,z.y-gH-9),
+  barX=gx+8,barY=gy+gH-11,barW=gW-16,barH=5;
+ rect(gx,gy,gW,gH,'#112c55f7','#75c8f9',8);
+ // A tiny bat icon, distinct from the aiming cursor.
+ ctx.save();ctx.strokeStyle='#ffdb7b';ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(gx+12,gy+12);ctx.lineTo(gx+20,gy+6);ctx.stroke();ctx.fillStyle='#fff4d0';ctx.beginPath();ctx.arc(gx+11,gy+13,2,0,Math.PI*2);ctx.fill();ctx.restore();
+ const prog=S.half===0&&S.phase==='pitch'&&S.ball?clamp(S.ball.t,0,1):S.half===1&&S.phase==='pitch'?clamp(S.ball?.t||0,0,1):0;
+ text(S.half===0?'BAT  打撃':'PITCH  投球',gx+gW/2,gy+(small?9:10),small?9:11,'#fff',950,'center');
+ text(S.half===0?(S.ball&&S.phase==='pitch'?`${Math.max(0,(.94-S.ball.t)*S.ball.duration).toFixed(1)}s`:'READY'):(S.phase==='pitch'?'FLIGHT':'SELECT'),gx+gW-6,gy+(small?9:10),small?7:9,'#ffe5a0',900,'right');
+ rect(barX,barY,barW,barH,'#05203b',null,2);
+ const sweetStart=S.half===0?.875:.44,sweetEnd=S.half===0?.985:.56;
+ rect(barX+barW*sweetStart,barY,barW*(sweetEnd-sweetStart),barH,'#62eeb2',null,1);
+ ctx.fillStyle='#fffdf1';ctx.fillRect(barX+barW*prog-1.5,barY-2,3,barH+4);
+ if(S.half===0&&S.ball&&S.phase==='pitch'&&Math.abs(S.ball.t-.94)<.065){ctx.save();ctx.strokeStyle='#fff5a3';ctx.lineWidth=2;ctx.strokeRect(gx,gy,gW,gH);ctx.restore()}
+ // Batting cursor always follows mouse screen position exactly.
+ const a=S.half===0?S.cursor:S.aim,cx=z.x+a.x*z.w,cy=z.y+a.y*z.h,
+   cr=clamp(z.w*(S.mode==='power'?.14:.215),small?9:12,small?18:31);
+ ctx.save();ctx.fillStyle='rgba(255,221,72,.25)';ctx.strokeStyle=S.half===0?'#ffdb4f':'#79eced';ctx.lineWidth=small?2.8:4;ctx.shadowColor='#ffdc68';ctx.shadowBlur=10;
+ if(S.half===0||S.courseLocked||S.phase==='pitch-aim'){ctx.beginPath();ctx.ellipse(cx,cy,cr*1.32,cr*.78,0,0,Math.PI*2);ctx.fill();ctx.stroke()}ctx.shadowBlur=0;
+ ctx.strokeStyle='#1e273b';ctx.lineWidth=small?1.5:2.4;ctx.beginPath();ctx.moveTo(cx-cr*.5,cy);ctx.lineTo(cx+cr*.5,cy);ctx.moveTo(cx,cy-cr*.5);ctx.lineTo(cx,cy+cr*.5);ctx.stroke();ctx.restore();
+ // Ball and trail are drawn at the same trajectory coordinates used for hit detection.
+ if(S.half===0&&S.phase==='pitch'&&S.ball){
+ const b=S.ball,t=clamp(b.t,0,1),now=pitchScreen(b,t),arrival=pitchScreen(b,.94);
+ if(now){for(let i=7;i>=1;i--){const trail=pitchScreen(b,Math.max(0,t-i*.045));if(!trail)continue;ctx.save();ctx.globalAlpha=.07+(8-i)*.045;ctx.fillStyle=b.trailColor;ctx.beginPath();ctx.arc(trail.x,trail.y,Math.max(3,8-i*.3),0,7);ctx.fill();ctx.restore();}
+ const radius=lerp(small?3:4,small?10:17,t);ctx.save();ctx.fillStyle='#fffdfa';ctx.shadowColor=b.trailColor;ctx.shadowBlur=16;ctx.beginPath();ctx.arc(now.x,now.y,radius,0,7);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle='#e18b83';ctx.lineWidth=2;ctx.stroke();ctx.restore();}
+ if(t>.45&&arrival){ctx.save();ctx.setLineDash([4,4]);ctx.strokeStyle=b.breakColor;ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(arrival.x,arrival.y,7,0,7);ctx.stroke();ctx.restore();}
+ if(t>.34){rect(z.x+z.w+12,z.y+6,small?84:123,small?28:34,'#174f83e8',b.breakColor,7);text(b.breakTag,z.x+z.w+18,z.y+(small?16:20),small?9:11,'#fff',900);text(b.breakText,z.x+z.w+18,z.y+(small?25:30),small?7:9,'#d8f5ff',800)}
+ if(Math.abs(t-.94)<.07&&!b.swung){text('いま！',z.x+z.w/2,Math.max(pad+rsH+24,gy-24),small?15:22,'#fff19a',1000,'center')}
+ }
+ // Shrinking concentric impact ring: converges on the ball arrival position at contact time .94.
+ if(S.half===0&&S.phase==='pitch'&&S.ball&&!S.ball.swung){
+   const b=S.ball,t=clamp(b.t,0,1.15),impact=pitchScreen(b,.94),ex=impact?impact.x:z.x+b.destX*z.w,ey=impact?impact.y:z.y+b.destY*z.h;
+   const ringR=cr*1.32*Math.max(.45,3.25-2.25*clamp(t/.94,0,1.24));
+   const inWindow=Math.abs(t-.94)<.085;
+   ctx.save();ctx.beginPath();ctx.arc(ex,ey,ringR,0,Math.PI*2);
+   ctx.lineWidth=small?3:4.2;ctx.strokeStyle=inWindow?'#78ffb2':'#ffdc69';
+   ctx.shadowColor=inWindow?'#6dffba':'#ffb94d';ctx.shadowBlur=inWindow?19:11;ctx.stroke();ctx.shadowBlur=0;
+   ctx.lineWidth=1.8;ctx.strokeStyle='rgba(255,255,255,.7)';ctx.beginPath();ctx.arc(ex,ey,ringR*.72,0,Math.PI*2);ctx.stroke();
+   const count=Math.max(0,(.94-t)*b.duration);
+   if(t>.60){text(inWindow?'JUST!':`${count.toFixed(1)} 秒`,ex,ey-ringR-(small?13:18),small?11:15,inWindow?'#a0ffd1':'#fff1a8',1000,'center')}
+   ctx.restore();
+ }
+ // User pitch: identical trajectory in 3D as the batter sees.
+ if(S.half===1&&S.phase==='pitch'&&S.ball){
+   const b=S.ball,t=clamp(b.t,0,1),now=pitchScreen(b,t);
+   if(now){for(let i=7;i>=1;i--){const trail=pitchScreen(b,Math.max(0,t-i*.045));if(!trail)continue;ctx.save();ctx.globalAlpha=.07+(8-i)*.045;ctx.fillStyle=b.trailColor;ctx.beginPath();ctx.arc(trail.x,trail.y,Math.max(2.5,6-i*.25),0,7);ctx.fill();ctx.restore();}
+   const radius=lerp(small?3:4,small?9:14,t);ctx.save();ctx.fillStyle='#fffdfa';ctx.shadowColor=b.trailColor;ctx.shadowBlur=13;ctx.beginPath();ctx.arc(now.x,now.y,radius,0,7);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle='#de8580';ctx.lineWidth=2;ctx.stroke();ctx.restore();}
+   rect(z.x+z.w+12,z.y+6,small?84:123,small?28:34,'#174f83e8',b.breakColor,7);text(b.breakTag,z.x+z.w+18,z.y+(small?16:20),small?9:11,'#fff',900);text(b.breakText,z.x+z.w+18,z.y+(small?25:30),small?7:9,'#d8f5ff',800);
+ }
+ // Batter and pitcher cards stacked in the left foreground, like traditional console baseball UI.
+ const cardW=small?145:compact?185:252,cardH=small?39:compact?47:53,cardGap=small?4:6,cardY=h-pad-cardH*2-cardGap;
+ function playerCard(y,title,name,detail,accent){
+   rect(pad,y,cardW,cardH,'#174e85ee','#5cbcf0',8);
+   rect(pad+4,y+4,4,cardH-8,accent,null,2);
+   text(title,pad+14,y+(small?11:14),small?8:10,'#d1f1ff',900);
+   text(name,pad+14,y+cardH*(small?.52:.50),small?11:15,'#fff',950);
+   text(detail,pad+14,y+cardH*(small?.82:.82),small?8:11,'#fff1a8',900);
+ }
+ const atkBatter=batterOf(S.half),defPitcher=pitcherOf(1-S.half),pName=S.ball?pitches[S.ball.type][0]:pitches[S.selectedPitch][0];
+ playerCard(cardY,'PITCHER',`#01 ${defPitcher.name}`,`${pName}  ${S.ball?pitches[S.ball.type][1]:pitches[S.selectedPitch][1]} km/h   制球 ${defPitcher.control}  変化 ${defPitcher.break}`,'#ffaf82');
+ playerCard(cardY+cardH+cardGap,'BATTER',`#${String(S.bat[S.half]+1).padStart(2,'0')} ${atkBatter.name}`,`ミート ${atkBatter.contact}  パワー ${atkBatter.power}  走力 ${atkBatter.run}  守備 ${atkBatter.field}`,'#7bffcc');
+ // The bottom-right control hint never sits on top of the strike zone.
+ const cardRightW=small?145:compact?172:228,ctrlY=h-pad-(small?39:53);
+ rect(w-pad-cardRightW,ctrlY,cardRightW,small?39:53,'#174e85ee','#5cbcf0',8);
+ text(S.half===0?'SPACE / CLICK':S.phase==='pitch-select'?'① 球種を選択':S.phase==='pitch-aim'?'② コースを選択':'SPACE  投球',w-pad-cardRightW+9,ctrlY+(small?13:18),small?10:13,'#ffe39a');
+ text(S.half===0?'Z ミート  /  X 強振':`選択球  ${pName}`,w-pad-cardRightW+9,ctrlY+(small?28:38),small?9:11,'#fff');
+ if(S.phase==='field'&&S.play){let p=S.play,t=clamp(p.t,0,1),bx=lerp(w*.5,w*.5+p.dx,t),by=lerp(h*.83,h*.37-p.height,t)-Math.sin(t*Math.PI)*p.height;ctx.save();ctx.strokeStyle='#ffe589';ctx.lineWidth=2;ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(w*.5,h*.8);ctx.lineTo(bx,by);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(bx,by,7,0,7);ctx.fill();ctx.restore()}
+ if(S.noticeTimer>0){let bw=Math.min(w*.54,small?250:350),bh=small?45:57,x=w/2-bw/2,y=h*(small?.35:.34)-bh/2;rect(x,y,bw,bh,'#102f59eb','#ffdf7b',11);text(S.notice,x+bw/2,y+bh*.36,small?16:25,'#ffec9a',1000,'center');text(S.noticeDetail,x+bw/2,y+bh*.77,small?9:12,'#fff',800,'center')}
+}
+
+// Interactive defense: real ball path, moving fielders, catches, pickups, and throws.
+const START_FIELDERS=[[-22,22],[22,22],[-11,38],[11,38],[0,18],[-39,70],[0,86],[39,70]];
+function fielderDistance(f,x,z){return Math.hypot(f.x-x,f.z-z)}
+
+function launchField(quality,angle){
+  const battingTeam=S.half,defTeam=1-S.half,userBat=S.half===0,force=S.mode==='power'&&userBat;
+  const batter=batterOf(battingTeam),fielders=defenseRoster(defTeam);
+  const powerBias=((batter.power||75)-75)/100,runBias=((batter.run||75)-75)/100;
+  const groundChance=clamp(.38-.065*((batter.trajectory||2)-1)-(force?.08:0),.08,.43);
+  const ground=(quality<.38||Math.random()<groundChance);
+  const z=clamp(18+quality*(force?102:74)+(powerBias*15)+rand(-9,20),15,118);
+  const x=clamp(angle*(82+powerBias*18)+rand(-19,19),-Math.min(z*.85,83),Math.min(z*.85,83));
+  const air=ground?clamp(.7+z/74,.9,1.8):clamp(1.22+z/72+((batter.trajectory||2)-2)*.14,1.65,3.2);
+  let nearest=0,best=Infinity; fielders.forEach((f,i)=>{let d=fielderDistance(f,x,z);if(d<best){nearest=i;best=d}});
+  S.play={mode:'air',age:0,air,quality,ground,apex:ground?1.0:6.5+quality*11.5+((batter.trajectory||2)-2)*1.8,end:{x,z},x:0,z:0,y:0,
+    fielders,selected:nearest,defenseTeam:userBat?1:0,defender:null,throwBase:1,throwAge:0,throwDur:0,throwFrom:null,
+    elapsedOnGround:0,runTime:clamp(3.65-runBias*.95-quality*.35,2.28,4.4),autoTimer:0,catchBoost:0,catchUntil:0,
+    homeTeamAtBat:S.half,batter:{name:batter.name,run:batter.run,power:batter.power,contact:batter.contact,speed:batter.run,pos:batter.pos}};
+  S.swing=.8;S.phase='field';say('カキーン！','守備へ切り替え！',.7);sound(570,.25);syncButtons();
+}
+
+function startThrow(base=1){
+ const p=S.play;if(!p||p.mode!=='hold')return false;
+ p.throwBase=base;p.mode='throw';p.throwAge=0;
+ const f=p.fielders[p.defender],target=BASES[base];p.throwFrom={x:f.x,z:f.z};
+ const arm=((f.arm||75)-60)/40, baseDist=Math.hypot(f.x-target.x,f.z-target.z);
+ p.throwDur=clamp(baseDist/(58+arm*24)+.22,.3,1.95);
+ say(`${['','一塁','二塁','三塁','本塁'][base]}へ送球！`,`${f.name} の送球`,.65);sound(620,.09);syncButtons();return true;
+}
+
+function fieldAction(base=1){
+ const p=S.play;if(S.phase!=='field'||!p||p.defenseTeam!==0)return;
+ if(p.mode==='hold'){startThrow(base);return}
+ if(p.mode==='air'&&p.age>p.air*.57){const f=p.fielders[p.selected],bt=p.age/p.air;
+   const ballX=p.end.x*bt,ballZ=p.end.z*bt;
+   if(Math.hypot(f.x-ballX,f.z-ballZ)<10){p.catchBoost=3.5;p.catchUntil=p.age+.65;say('ジャンプキャッチ！','ボールをしっかり追おう！',.65);}}
+}
+function resolveDefense(caught=false){
+ const p=S.play;if(!p)return;
+ if(caught){S.play=null;addOut('フライアウト！');return}
+ if(p.end.z>105&&p.quality>.75){S.play=null;let score=advance(4);result('ホームラン！',`${score}点入った！`,2);return}
+ let base=p.throwBase,arrival=p.age;
+ // Runners genuinely race the throw to first; the out depends on pickup + throw time.
+ if(base===1&&arrival<p.runTime){S.play=null;addOut('一塁アウト！');return}
+ if(base===2&&S.bases[0]&&arrival<p.runTime+1.65){S.play=null;S.outs++;nextBatter();result('二塁フォースアウト！','送球成功！',1.4);return}
+ const range=Math.hypot(p.end.x,p.end.z);
+ const hit=range>91&&p.quality>.77?3:range>69&&arrival>p.runTime+2?2:1;
+ S.play=null;let score=advance(hit);
+ result(hit===3?'スリーベース！':hit===2?'ツーベース！':'ヒット！',score?`${score}点入った！`:'走者セーフ！',1.6);
+}
+function updateDefense(dt){
+ const p=S.play;if(!p)return;
+ p.age+=dt;const t=clamp(p.age/p.air,0,1);
+ if(p.mode==='air'){
+   p.x=p.end.x*t;p.z=p.end.z*t;p.y=p.apex*4*t*(1-t);
+   if(t>=1){p.mode='ground';p.x=p.end.x;p.z=p.end.z;p.y=0;p.elapsedOnGround=0;
+     let catcher=p.fielders.findIndex(f=>fielderDistance(f,p.x,p.z)<(3.3+(f.catch||75)*.035+(p.catchBoost&&p.age<=p.catchUntil?2.8:0)));
+     if(!p.ground&&catcher>=0){const f=p.fielders[catcher];if(Math.random()<Math.min(.995,.78+(f.catch||75)*.0021)){say('ナイスキャッチ！',`${f.name} が捕球！`,1);resolveDefense(true);return}else{say('落球！','捕球ミスで走者が進む！',.9)}}
+     if(p.end.z>105&&p.quality>.75){resolveDefense(false);return}
+   }
+ }else if(p.mode==='ground'){
+   p.elapsedOnGround+=dt;
+   const drift=Math.min(p.elapsedOnGround*2.15,5.4);p.x=p.end.x+Math.sign(p.end.x||1)*drift*.32;p.z=p.end.z+drift;
+ }
+ if(p.mode==='air'||p.mode==='ground'){
+   let order=p.fielders.map((f,i)=>({i,d:fielderDistance(f,p.end.x,p.end.z)})).sort((a,b)=>a.d-b.d);
+   for(let i=0;i<p.fielders.length;i++){
+     const f=p.fielders[i],manual=p.defenseTeam===0&&i===p.selected;
+     let mx=0,mz=0;
+     if(manual){mx=Number(fieldKeys.has('KeyD')||fieldKeys.has('ArrowRight'))-Number(fieldKeys.has('KeyA')||fieldKeys.has('ArrowLeft'));mz=Number(fieldKeys.has('KeyW')||fieldKeys.has('ArrowUp'))-Number(fieldKeys.has('KeyS')||fieldKeys.has('ArrowDown'));
+       if(mx===0&&mz===0&&p.defenseTeam===0&&order[0].i===i){mx=(p.x-f.x)*.024;mz=(p.z-f.z)*.024}
+     }else if((i!==8||p.end.z<12)&&order.slice(0,3).some(o=>o.i===i)){
+       const dest=p.mode==='air'?p.end:{x:p.x,z:p.z};mx=dest.x-f.x;mz=dest.z-f.z;
+     }else if(i===1){mx=22-f.x;mz=22-f.z;}
+     let dist=Math.hypot(mx,mz),maxSpeed=fielderTopSpeed(f.speed||75),accel=3.2+.023*(f.speed||75);
+     f.reactionTimer=Math.max(0,(f.reactionTimer||0)-dt);
+     let tx=0,tz=0;if((manual||f.reactionTimer<=0)&&dist>.05){tx=mx/dist*maxSpeed;tz=mz/dist*maxSpeed}
+     const dvx=tx-(f.velocityX||0),dvz=tz-(f.velocityZ||0),dm=Math.hypot(dvx,dvz),step=Math.min(dm,accel*dt);
+     if(dm>0.0001){f.velocityX=(f.velocityX||0)+dvx/dm*step;f.velocityZ=(f.velocityZ||0)+dvz/dm*step}
+     f.x+=(f.velocityX||0)*dt; f.z+=(f.velocityZ||0)*dt;
+     if(!Number.isFinite(f.x)||!Number.isFinite(f.z)){f.x=f.homeX;f.z=f.homeZ;f.velocityX=0;f.velocityZ=0}
+   }
+   if(p.mode==='ground'){
+     let nearest=0,min=Infinity;p.fielders.forEach((f,i)=>{let d=fielderDistance(f,p.x,p.z);if(d<min){min=d;nearest=i}});
+     const chosen=p.fielders[nearest],pickup=2.8+(chosen.catch||75)*.03;
+     p.fielders.forEach((f,i)=>{if(i!==nearest)f.pickupTimer=0});
+     if(min<pickup)chosen.pickupTimer+=dt;else chosen.pickupTimer=0;
+     const pickupWait=clamp(.8-.0055*(chosen.field||75),.22,.78);
+     if(min<pickup&&chosen.pickupTimer>=pickupWait){p.defender=nearest;p.mode='hold';p.autoTimer=0;say(p.defenseTeam===0?'捕球成功！':'野手が拾った！',p.defenseTeam===0?'SPACEで送球':'一塁へ送球！',1.1);sound(510,.1);syncButtons()}
+   }
+   if(p.age>8.4){resolveDefense(false);return}
+ }else if(p.mode==='hold'){
+   p.autoTimer+=dt;
+   if(p.defenseTeam===1&&p.autoTimer>.55)startThrow(1);
+   else if(p.defenseTeam===0&&p.autoTimer>3.6)startThrow(1);
+ }else if(p.mode==='throw'){
+   p.throwAge+=dt;if(p.throwAge>=p.throwDur){resolveDefense(false);return}
+ }
+}
+
+function setDefenseCamera(){
+ D3.eye=ratio<.85?[0,44,-44]:[0,39,-36];
+ const target=ratio<.85?[0,0,58]:[0,0,60];
+ D3.forward=norm3(target.map((n,i)=>n-D3.eye[i])); D3.right=norm3(cross3(D3.forward,[0,1,0])); D3.up=norm3(cross3(D3.right,D3.forward)); D3.focus=ratio<.85?720:860;
+}
+function fieldPoint(x,z){setDefenseCamera();const p=project3(V(x,0.1,z));return p?{x:p.x,y:p.y,scale:p.k}:{x:w/2,y:h/2,scale:1};}
+function drawDefense(){
+ setDefenseCamera();D3.faces.length=0;
+ const p=S.play;if(!p)return;
+ const sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#315b7f');sky.addColorStop(.55,'#5ba7b8');sky.addColorStop(1,'#a2d7d5');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+ poly3([V(-125,0,5),V(125,0,5),V(125,0,125),V(-125,0,125)],'#368b54');
+ poly3([V(0,0,-3),V(30,0,20),V(0,0,49),V(-30,0,20)],'#b67e55');
+ poly3([V(0,.02,0),V(22,.02,20),V(0,.02,40),V(-22,.02,20)],'#439761');
+ poly3([V(-125,0,105),V(125,0,105),V(125,7.5,105),V(-125,7.5,105)],'#234a5a');
+ for(let row=0;row<6;row++){let z=108+row*7,y=7.5+row*2.4;poly3([V(-104,y,z),V(104,y,z),V(104,y+1.6,z+3),V(-104,y+1.6,z+3)],row%2?'#35546c':'#233f58');}
+ line3(V(0,.06,0),V(105,.06,105),'#f8f5da',.45); line3(V(0,.06,0),V(-105,.06,105),'#f8f5da',.45);
+ for(const [bx,bz] of [[22,20],[0,40],[-22,20],[0,0]]){let base=project3(V(bx,0.12,bz)); if(base){ctx.save();ctx.translate(base.x,base.y);ctx.rotate(Math.PI/4);ctx.fillStyle='#fff5dd';ctx.fillRect(-6,-6,12,12);ctx.restore();}}
+ const end=project3(V(p.end.x,.12,p.end.z)); if(end){ctx.save();ctx.strokeStyle='#ffe48e';ctx.lineWidth=3;ctx.setLineDash([5,6]);ctx.beginPath();ctx.arc(end.x,end.y,18+Math.sin(p.age*10)*3,0,Math.PI*2);ctx.stroke();ctx.restore();}
+ flush3();
+ for(let i=0;i<p.fielders.length;i++){const f=p.fielders[i],active=p.defenseTeam===0&&i===p.selected;addPlayer3(f.x,f.z,p.defenseTeam===0?0:1,'field',0,active?0.95:0.88)}
+ const runT=clamp(p.age/p.runTime,0,1); addPlayer3(lerp(0,22,runT), lerp(0,20,runT), p.homeTeamAtBat===0?0:1,'field',0,0.92);
+ flush3();
+ for(let i=0;i<p.fielders.length;i++){
+   const f=p.fielders[i],q=fieldPoint(f.x,f.z),active=p.defenseTeam===0&&i===p.selected;
+   if(active){ctx.beginPath();ctx.arc(q.x,q.y-8,18,0,Math.PI*2);ctx.strokeStyle='#fff175';ctx.lineWidth=3;ctx.stroke();ctx.fillStyle='#fff3a0';ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.fillText('▼',q.x,q.y-30)}
+ }
+ let ballP=null;
+ if(p.mode==='throw'){let to=BASES[p.throwBase],a=p.throwFrom,progress=clamp(p.throwAge/p.throwDur,0,1);ballP=project3(V(lerp(a.x,to.x,progress),Math.sin(progress*Math.PI)*5.8,lerp(a.z,to.z,progress)));}
+ else if(p.mode==='air'||p.mode==='ground'){ballP=project3(V(p.x,Math.max(.22,p.y*1.05+.2),p.z));}
+ if(ballP){ctx.beginPath();ctx.arc(ballP.x,ballP.y,clamp(ballP.k*.8,3.5,8.5),0,Math.PI*2);ctx.fillStyle='#fffdf0';ctx.shadowColor='#ffffff';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle='#dd7b7b';ctx.lineWidth=1.2;ctx.stroke();}
+ const small=w<560,panelW=Math.min(w*.48,320),bx=10,by=10;
+ rect(bx,by,panelW,small?92:108,'#0b3159ef','#72c9f9',10);
+ text(`${S.inning}回 ${S.half===0?'表 ▲':'裏 ▼'}  3D守備`,bx+11,by+17,small?12:16,'#fff1a8');
+ text(`SUNBIRDS ${S.runs[0]}  -  ${S.runs[1]} NIGHT OWLS`,bx+11,by+(small?39:47),small?9:13,'#ffffff');
+ text(`${S.outs} OUT`,bx+11,by+(small?57:68),small?10:13,'#a3efca');
+ const activeF=p.fielders[p.selected]||p.fielders[0];
+ text(`選手 ${activeF.pos} ${activeF.name}`,bx+11,by+(small?74:87),small?9:12,'#ffdba2');
+ text(`走力 ${activeF.speed}  守備 ${activeF.field}  肩 ${activeF.arm}`,bx+11,by+(small?87:100),small?8:11,'#eaf8ff');
+ const titleW=Math.min(w*.50,395),right=w-titleW-10;
+ rect(right,10,titleW,small?88:106,'#0b3159ee','#72c9f9',10);
+ text(p.defenseTeam===0?'自分で3D守備！':'CPUが3D守備中',right+10,small?26:30,small?12:18,'#ffe28a');
+ let detail=p.mode==='air'?'落下地点へダッシュ！':p.mode==='ground'?'転がる打球を追え！':p.mode==='hold'?'捕球！ 送球しよう！':'送球中…';
+ text(detail,right+10,small?48:55,small?10:14,'#fff');
+ text(`打者 ${p.batter.name}  走力 ${p.batter.run}  パワー ${p.batter.power}`,right+10,small?66:77,small?9:12,'#dff4ff');
+ if(!small)text(p.defenseTeam===0?'WASD移動・TAB切替・SPACE送球・1〜4送球先':'CPU守備中',right+10,96,11,'#e0f3ff');
+ const msgW=Math.min(w-20,small?350:620),msgY=h-(small?54:69);rect((w-msgW)/2,msgY,msgW,small?45:57,'#0b3159e9','#72c9f9',12);
+ text(p.defenseTeam===0?'WASD 移動   TAB 野手切替   SPACE 捕球／一塁送球':'CPU守備中・捕球と送球で結果が決まる',w*.5,msgY+(small?18:24),small?10:15,'#fff',950,'center');
+ text('送球先：1 一塁   2 二塁   3 三塁   4 本塁',w*.5,msgY+(small?35:43),small?9:12,'#ffe5a7',900,'center');
+ if(S.noticeTimer>0){let mw=Math.min(w*.55,315),my=small?95:110;rect(w*.5-mw*.5,my,mw,42,'#1a436adf','#ffdc86',10);text(S.notice,w*.5,my+20,small?13:19,'#ffe998',1000,'center');}
+}
+
+
+function say(a,b='',sec=1.3){S.notice=a;S.noticeDetail=b;S.noticeTimer=sec}function resetCount(){S.strikes=0;S.balls=0}function nextBatter(){S.bat[S.half]=(S.bat[S.half]+1)%9;resetCount();}
+function resetGame(){Object.assign(S,{phase:'ready',half:0,inning:1,outs:0,balls:0,strikes:0,bases:[false,false,false],runs:[0,0],hits:[0,0],bat:[0,0],mode:'contact',selectedPitch:0,aim:{x:.5,y:.5},cursor:{x:.5,y:.5},ball:null,play:null,timer:.8,notice:'',noticeDetail:'',noticeTimer:0,pitchMeter:0,pitchingStarted:false,courseLocked:false,courseCell:null,paused:false,swing:0,totalHits:0});$('menuLayer').hidden=true;setMode('contact');say('PLAY BALL!','狙いを合わせてジャストミート！',1.5);syncButtons()}
+function setMode(m){S.mode=m;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===m))}
+const COURSE_COORDS=[-.2,.15,.5,.85,1.2];
+function choosePitch(type){if(S.half!==1||S.phase!=='pitch-select'||S.paused)return;S.selectedPitch=type;S.courseLocked=false;S.courseCell=null;S.phase='pitch-aim';say(`${pitches[type][0]}を選択！`,'次に投球コースを選ぼう',.9);syncButtons()}
+function chooseCourse(col,row){if(S.half!==1||S.phase!=='pitch-aim'||S.paused)return;S.aim={x:COURSE_COORDS[col],y:COURSE_COORDS[row]};S.courseCell={col,row};S.courseLocked=true;S.phase='pitch-ready';say('コース決定！','SPACEで投球',.9);syncButtons()}
+function backPitch(step){if(S.half!==1||S.paused)return;if(step==='type'){S.phase='pitch-select';S.courseLocked=false;S.courseCell=null}else if(step==='course'){S.phase='pitch-aim';S.courseLocked=false;S.courseCell=null}syncButtons()}
+const pitchLabels=['ストレート','カーブ','スライダー','フォーク','チェンジアップ'];
+function syncPitchUI(){const flow=$('pitchFlow'),card=$('pitchFlowCard');const active=S.half===1&&['pitch-select','pitch-aim','pitch-ready'].includes(S.phase);flow.hidden=!active;if(!active)return;const stage=S.phase;const key=stage+'|'+S.selectedPitch+'|'+(S.courseCell?`${S.courseCell.col},${S.courseCell.row}`:'');if(card.dataset.key===key)return;card.dataset.key=key;let n=stage==='pitch-select'?0:stage==='pitch-aim'?1:2;
+ const steps=`<div class="pitch-step-dots">${[0,1,2].map(i=>`<i class="${i<=n?'active':''}"></i>`).join('')}</div>`;
+ if(stage==='pitch-select'){
+ card.innerHTML=`<div class="pitch-flow-tag">STEP 1 / 3</div><div class="pitch-flow-title">① 球種を選ぼう</div><p class="pitch-flow-help">まず投げる球を決定。選んだらコース指定へ進みます。</p>${steps}<div class="pitch-list">${pitches.map((p,i)=>`<button type="button" class="pitch-choice" data-choose-pitch="${i}"><span class="pitch-key">${i+1}</span><span class="pitch-choice-name">${p[0]}</span><small>${p[1]} km/h</small></button>`).join('')}</div>`;
+ }else if(stage==='pitch-aim'){
+ card.innerHTML=`<div class="pitch-flow-tag">STEP 2 / 3</div><div class="pitch-flow-title">② コースを選ぼう</div><p class="pitch-flow-help">選択球：<b>${pitches[S.selectedPitch][0]}</b>　青はストライク、外側はボールゾーン。マスをクリック！</p>${steps}<div class="course-grid">${Array.from({length:25},(_,i)=>{let col=i%5,row=Math.floor(i/5),strike=col>0&&col<4&&row>0&&row<4;return `<button type="button" class="course-choice ${strike?'strike':''}" data-course-col="${col}" data-course-row="${row}" aria-label="${row+1}行${col+1}列、${strike?'ストライク':'ボール'}">${strike?'•':'·'}</button>`}).join('')}</div><div class="course-legend"><span><i></i>ストライク</span><span><i class="ball"></i>ボール</span></div><button type="button" class="pitch-back" data-back="type">← 球種を選び直す</button>`;
+ }else{
+ let {col,row}=S.courseCell,inside=col>0&&col<4&&row>0&&row<4;let label=(row===2?'真ん中':row<2?'高め':'低め')+'・'+(col===2?'中央':col<2?'左':'右');
+ card.innerHTML=`<div class="pitch-flow-tag">STEP 3 / 3</div><div class="pitch-flow-title">③ 投球しよう！</div><p class="pitch-flow-help">球種とコースを確認して、SPACEで投げよう。</p>${steps}<div class="pitch-summary">球種：<b>${pitches[S.selectedPitch][0]}</b><br>球速：<b>${pitches[S.selectedPitch][1]} km/h</b><br>コース：<b>${label} ${inside?'（ストライク）':'（ボール）'}</b></div><button type="button" class="pitch-next" data-throw="1">⚾ 投球する [SPACE]</button><button type="button" class="pitch-back" data-back="course">← コースを選び直す</button><button type="button" class="pitch-back" data-back="type">↶ 球種も変更する</button>`;
+ }
+}
+$('pitchFlow').addEventListener('click',e=>{let pitch=e.target.closest('[data-choose-pitch]'),cell=e.target.closest('[data-course-col]'),back=e.target.closest('[data-back]'),fire=e.target.closest('[data-throw]');if(pitch)choosePitch(Number(pitch.dataset.choosePitch));else if(cell)chooseCourse(Number(cell.dataset.courseCol),Number(cell.dataset.courseRow));else if(back)backPitch(back.dataset.back);else if(fire)interact()});
+function startPitch(){
+ const cpu=S.half===0,choice=cpu?rnd(5):S.selectedPitch,type=pitches[choice],pitcher=pitcherOf(cpu?1:0);
+ const control=(pitcher.control||80)/100;S.pitchCountByTeam=S.pitchCountByTeam||[0,0];S.pitchCountByTeam[cpu?1:0]++;const fatigue=Math.max(0,S.pitchCountByTeam[cpu?1:0]-(pitcher.stamina||80)*.55);
+ const jitter=(cpu?.16:Math.max(.04,.19-(control-.65)*.16))*(1+fatigue*.007);
+ const dx=cpu?rand(-.22,1.22):S.aim.x+rand(-jitter,jitter);
+ const dy=cpu?rand(-.2,1.2):S.aim.y+rand(-jitter*1.1,jitter*1.1);
+ const profile=pitchBreak(choice,1),spd=(cpu?1.63:1.42)+(155-type[1]+fatigue*.05)*.0062;
+ S.ball={t:0,duration:spd,destX:clamp(dx,-.32,1.32),destY:clamp(dy,-.32,1.32),type:choice,swung:false,cued:false,
+   breakTag:profile.tag,breakText:profile.shape,breakColor:profile.color,trailColor:profile.trail,level:Math.max(1,Math.min(7,Math.round((pitcher.break||75)/16)+(choice===0?0:1)))};
+ S.phase='pitch';S.pitchingStarted=false;syncButtons()}
+
+function result(title,detail,sec=1.12){S.ball=null;S.phase='result';S.timer=sec;say(title,detail,sec);syncButtons()}
+function addOut(title='アウト！'){S.outs++;if(S.outs>=3){result(title,'チェンジ！',1.45)}else{nextBatter();result(title,'次のバッター！')}}
+function walk(){let b=S.bases;let runs=b[0]&&b[1]&&b[2]?1:0;if(b[0]&&b[1])b[2]=true;if(b[0])b[1]=true;b[0]=true;S.runs[S.half]+=runs;nextBatter();result('フォアボール！',runs?'押し出しで1点！':'打者が一塁へ')}
+function strike(missed,detail){S.strikes++;if(S.strikes>=3){S.outs++;nextBatter();result('三振！',detail||'ストライクアウト！',1.25)}else result(missed?'空振り！':'ストライク！',detail)}
+function advance(hit){const b=S.bases;let score=0;if(hit>=4){score=b.filter(Boolean).length+1;S.bases=[false,false,false]}else if(hit===3){score=(b[0]?1:0)+(b[1]?1:0)+(b[2]?1:0);S.bases=[false,false,true]}else if(hit===2){score=(b[1]?1:0)+(b[2]?1:0);S.bases=[false,!!b[0],true]}else{score=b[2]?1:0;S.bases=[true,b[0],b[1]]}S.runs[S.half]+=score;S.hits[S.half]++;nextBatter();return score}
+function finishField(){if(S.play)resolveDefense(false)}
+function contactBall(quality,dx){launchField(quality,dx)}
+function bat(){
+ if(S.phase!=='pitch'||S.half!==0||!S.ball||S.ball.swung)return;let b=S.ball;b.swung=true;const batter=batterOf(0);
+ let error=Math.abs(b.t-.94),baseLimit=({easy:.19,normal:.145,hard:.11})[S.difficulty],limit=baseLimit*(.88+(batter.contact||75)/170);
+ let impact=pitchPlateXY(b,.94),aimErr=Math.hypot((S.cursor.x-impact.x)*.9,(S.cursor.y-impact.y)*.9),aimLimit=(S.mode==='contact'?.51:.36)*(.86+(batter.contact||75)/160);
+ if(error>limit){strike(true,b.t<.94?'早すぎた！':'振り遅れた！');sound(135);return}
+ if(aimErr>aimLimit){strike(true,'ミートカーソルがずれてる！');sound(150);return}
+ let powerBoost=((batter.power||75)-75)/100*.12; let quality=clamp(1-error/limit*.43-aimErr/aimLimit*.43+powerBoost,0,1);
+ contactBall(quality,S.cursor.x-.5)
+}
+
+function interact(){if(S.paused)return;if(S.phase==='menu'||S.phase==='over'){resetGame();return}if(S.phase==='field'){fieldAction(1);return}if(S.half===0){bat();return}if(S.phase==='pitch-select'||S.phase==='pitch-aim'){say('先に選択してね！',S.phase==='pitch-select'?'球種を選択':'投球コースを選択',.7);return}if(S.phase==='pitch-ready'&&S.courseLocked){startPitch();return}}
+function onPitchEnd(){const b=S.ball;if(!b)return;if(S.half===0){let strikeZone=b.destX>=0&&b.destX<=1&&b.destY>=0&&b.destY<=1;if(strikeZone)strike(false,'見送りストライク');else{S.balls++;if(S.balls>=4)walk();else result('ボール！','見送って正解！')}}else{const cpuBatter=batterOf(1);let chance=({easy:.5,normal:.66,hard:.78})[S.difficulty]*(.85+(cpuBatter.contact||75)/165),inZone=b.destX>=0&&b.destX<=1&&b.destY>=0&&b.destY<=1;if(Math.random()>(inZone?chance+.12:chance*.43)){if(inZone)strike(false,'CPUが見逃した！');else{S.balls++;if(S.balls>=4)walk();else result('ボール！','コースが外れた！')}}else if(Math.random()<.28-(cpuBatter.contact||75)/500){strike(true,'CPUが空振り！')}else contactBall(clamp(rand(.26,.82)+((cpuBatter.power||75)-75)/150,0,1),rand(-.55,.55));}}
+
+function inningChange(){if(S.outs<3)return;S.outs=0;resetCount();S.bases=[false,false,false];S.half=1-S.half;if(S.half===0){S.inning++;}if(S.inning>S.limit){S.phase='over';$('menuLayer').hidden=false;$('menuLayer').querySelector('h1').innerHTML=(S.runs[0]>=S.runs[1]?'YOU WIN!':'GAME SET!');$('start').textContent='▶ もう一度プレイ';return}S.phase='ready';S.timer=.8;say(S.half===0?'攻撃開始！':'守備開始！',`${S.inning}回 ${S.half===0?'表':'裏'}`,1.2)}
+function syncButtons(){const field=S.phase==='field'&&S.play;const defending=field&&S.play.defenseTeam===0;
+ $('selectFielder').hidden=!defending;$('throwFirst').hidden=!defending;
+ $('hit').disabled=S.phase==='result'||S.phase==='over'||S.paused||(field&&!defending);
+ $('hit').textContent=field?(defending?(S.play.mode==='hold'?'⚾ 一塁へ送球 [SPACE]':'🙌 捕球 [SPACE]'):'⚾ CPU守備中'):S.half===0?'⚾ スイング [SPACE]':S.phase==='pitch-select'?'① 球種を選択':S.phase==='pitch-aim'?'② コースを選択':S.phase==='pitch-ready'?'③ 投球 [SPACE]':'⚾ 投球中';$('hit').disabled=$('hit').disabled||(S.half===1&&S.phase!=='pitch-ready');syncPitchUI();
+}
+function update(dt){if(S.phase==='menu'||S.phase==='over'||S.paused)return;S.noticeTimer=Math.max(0,S.noticeTimer-dt);S.swing=Math.max(0,S.swing-dt*2);if(S.phase==='ready'){S.timer-=dt;if(S.timer<=0){if(S.half===0)startPitch();else{S.phase='pitch-select';S.courseLocked=false;S.courseCell=null;syncButtons()}}}else if(S.phase==='pitch'&&S.ball){S.ball.t+=dt/S.ball.duration;if(S.half===0&&S.ball.t>=.865&&!S.ball.cued){S.ball.cued=true;sound(740,.09)}if(S.ball.t>=1.04)onPitchEnd()}else if(S.phase==='field'&&S.play){updateDefense(dt)}else if(S.phase==='result'){S.timer-=dt;if(S.timer<=0){if(S.outs>=3)inningChange();else{S.phase='ready';S.timer=.55;syncButtons()}}}}
+function render(t){try{resize();let dt=last?clamp((t-last)/1000,0,.045):0;last=t;frame++;update(dt);if(S.phase==='field'&&S.play){drawDefense()}else{bg();stadiumPlayers();hud()}if(frame===1){$('poster').style.visibility='hidden';$('fault').style.display='none'}requestAnimationFrame(render)}catch(e){console.error(e);$('fault').style.display='grid';$('fault').querySelector('p').textContent='描画エラーが発生しました。Chrome / Edgeで直接開いてください。 '+e.message;}}
+function mouse(e){let b=scene.getBoundingClientRect();let x=(e.clientX-b.left),y=(e.clientY-b.top);let z=zone(),nx=clamp((x-z.x)/z.w,-.2,1.2),ny=clamp((y-z.y)/z.h,-.2,1.2);if(S.half===1&&S.phase!=='pitch-aim')return;let a=S.half===0?S.cursor:S.aim;a.x=nx;a.y=ny}
+
+const ROSTER_STORE_KEY='diamond-stars-v6-roster';
+const ROSTER_FIELDS=[['contact','ミート'],['power','パワー'],['trajectory','弾道'],['run','走力'],['speed','守備走速'],['field','守備力'],['arm','肩力'],['catch','捕球'],['velo','球速'],['control','制球'],['break','変化'],['stamina','スタミナ']];
+let rosterOpen=false;
+function loadRoster(){try{const blob=localStorage.getItem(ROSTER_STORE_KEY);if(!blob)return;const teams=JSON.parse(blob);if(!Array.isArray(teams)||teams.length!==2)return;for(let team=0;team<2;team++){for(let i=0;i<9;i++){const t=teams[team]?.[i];if(!t)continue;for(const [key] of ROSTER_FIELDS){const v=Number(t[key]);if(Number.isFinite(v)&&t[key]!==null)rosters[team][i][key]=Math.round(clamp(v,1,key==='trajectory'?4:key==='velo'?165:100));}}}}catch(e){console.warn('roster restore unavailable',e)}}
+function saveRoster(){try{localStorage.setItem(ROSTER_STORE_KEY,JSON.stringify(rosters));$('rosterSaveStatus').textContent='保存しました！ 次回起動時も能力が引き継がれます'}catch(e){$('rosterSaveStatus').textContent='この環境では保存できません。現在の試合には反映されています'}return false}
+function openRoster(){rosterOpen=true;S.paused=true;$('rosterOverlay').hidden=false;populateRosterPlayers();populateRosterFields();syncButtons()}
+function closeRoster(){rosterOpen=false;S.paused=false;$('rosterOverlay').hidden=true;syncButtons()}
+function populateRosterPlayers(){const team=Number($('rosterTeam').value)||0;const current=Number($('rosterPlayer').value)||0;$('rosterPlayer').innerHTML=rosters[team].map((p,i)=>`<option value="${i}">${i+1}. ${p.name} (${p.pos})</option>`).join('');$('rosterPlayer').value=String(Math.min(8,current))}
+function populateRosterFields(){const team=Number($('rosterTeam').value)||0,idx=Number($('rosterPlayer').value)||0,p=rosters[team][idx];$('rosterFields').innerHTML=ROSTER_FIELDS.filter(([key])=>p.pos==='P'||!['velo','control','break','stamina'].includes(key)).map(([key,label])=>{const v=p[key]||1,max=key==='trajectory'?4:key==='velo'?165:100;return `<label class="roster-field"><span class="field-title">${label}<span data-stat-val="${key}">${v}</span></span><input type="range" min="1" max="${max}" value="${v}" data-stat="${key}" aria-label="${label}"><small>${key==='trajectory'?'弾道1〜4':key==='velo'?'球速km/h':'能力値1〜100'} · ${key==='speed'?'守備時の最高速度':key==='arm'?'送球の速度':key==='catch'?'捕球の安定性':'打撃・守備に反映'}</small></label>`}).join('')}
+loadRoster();
+$('editRoster').addEventListener('click',openRoster);$('menuRoster').addEventListener('click',openRoster);$('closeRoster').addEventListener('click',closeRoster);$('saveRoster').addEventListener('click',saveRoster);
+$('rosterTeam').addEventListener('change',()=>{populateRosterPlayers();populateRosterFields()});$('rosterPlayer').addEventListener('change',populateRosterFields);
+$('rosterFields').addEventListener('input',e=>{const target=e.target;if(!target.matches('input[data-stat]'))return;const team=Number($('rosterTeam').value)||0,idx=Number($('rosterPlayer').value)||0,key=target.dataset.stat,val=Number(target.value);rosters[team][idx][key]=val;$('rosterFields').querySelector(`[data-stat-val="${key}"]`).textContent=String(val);$('rosterSaveStatus').textContent='変更あり・保存を押すと次回も反映されます'});
+$('resetRoster').addEventListener('click',()=>{try{localStorage.removeItem(ROSTER_STORE_KEY)}catch(e){};$('rosterSaveStatus').textContent='初期化は再起動時に反映されます';});
+// Minimal debug/test hooks; not used for gameplay.
+window.__diamondDebug={rosters,pitchWorld,pitchScreen,pitchPlateXY,pitchProfiles,launchField,updateDefense,startPitch,choosePitch,chooseCourse,frame:()=>frame,fieldTopSpeed:fielderTopSpeed};
+
+scene.addEventListener('pointermove',e=>{if(S.phase!=='field')mouse(e)});scene.addEventListener('pointerdown',e=>{if(S.phase==='field'&&S.play){let p=S.play;if(p.defenseTeam!==0)return;let bb=scene.getBoundingClientRect(),mx=e.clientX-bb.left,my=e.clientY-bb.top;
+ let pick=-1,dist=32;p.fielders.forEach((f,i)=>{let q=fieldPoint(f.x,f.z),d=Math.hypot(q.x-mx,q.y-my);if(d<dist){dist=d;pick=i}});
+ if(pick>=0){p.selected=pick;say('野手を切替！','WASDで移動',.6)}else if(p.mode==='hold'){let choice=1,dMin=Infinity;for(let n of [1,2,3,4]){let q=fieldPoint(BASES[n].x,BASES[n].z),d=Math.hypot(q.x-mx,q.y-my);if(d<dMin){dMin=d;choice=n}}startThrow(choice)}else fieldAction(1);
+ return}
+ if(S.half===1&&S.phase==='pitch-aim'){let z=zone(),b=scene.getBoundingClientRect();let px=e.clientX-b.left,py=e.clientY-b.top;let col=Math.round(clamp((px-z.x)/z.w,-.2,1.2)*4);let row=Math.round(clamp((py-z.y)/z.h,-.2,1.2)*4);chooseCourse(clamp(col,0,4),clamp(row,0,4));return}mouse(e);if(e.pointerType==='mouse'||S.phase==='pitch')interact()});$('hit').addEventListener('click',interact);$('selectFielder').addEventListener('click',()=>{if(S.phase==='field'&&S.play&&S.play.defenseTeam===0)S.play.selected=(S.play.selected+1)%S.play.fielders.length});$('throwFirst').addEventListener('click',()=>fieldAction(1));$('start').addEventListener('click',resetGame);$('menu').addEventListener('click',()=>{S.phase='menu';$('menuLayer').hidden=false;$('menuLayer').querySelector('h1').innerHTML='DIAMOND <b>STARS</b>';$('start').textContent='▶ 試合開始';syncPitchUI()});$('camera').addEventListener('click',()=>{viewMode=(viewMode+1)%2;$('camera').textContent=viewMode?'📷 斜め視点':'📷 カメラ';});$('pause').addEventListener('click',()=>{S.paused=!S.paused;$('pause').textContent=S.paused?'▶ 再開':'⏸ 一時停止';syncButtons()});document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+$('innings').addEventListener('click',e=>{let b=e.target.closest('[data-innings]');if(!b)return;S.limit=+b.dataset.innings;$('innings').querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b))});$('diff').addEventListener('click',e=>{let b=e.target.closest('[data-diff]');if(!b)return;S.difficulty=b.dataset.diff;$('diff').querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b))});$('full').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await stage.requestFullscreen()}catch(e){alert('全画面にできません。ダウンロードしてEdge / Chromeで開いてください。')}});window.addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Tab'].includes(e.code))e.preventDefault();fieldKeys.add(e.code);if(e.repeat)return;
+ if(S.phase==='field'&&S.play){if(e.code==='Tab'&&S.play.defenseTeam===0){S.play.selected=(S.play.selected+1)%S.play.fielders.length;return}
+   if(e.code==='Space'||e.code==='Enter'){fieldAction(1);return}
+   if(/^Digit[1-4]$/.test(e.code)&&S.play.defenseTeam===0){fieldAction(+e.code.slice(-1));return}
+ }
+ if(e.code==='Space'||e.code==='Enter')interact();if(e.code==='KeyZ')setMode('contact');if(e.code==='KeyX')setMode('power');if(e.code==='KeyP')$('pause').click();if(e.code==='KeyC')$('camera').click();if(/^Digit[1-5]$/.test(e.code)&&S.half===1&&S.phase==='pitch-select')choosePitch(Number(e.code.slice(-1))-1)});
+window.addEventListener('keyup',e=>fieldKeys.delete(e.code));window.addEventListener('blur',()=>fieldKeys.clear());
+window.addEventListener('resize',resize);resize();requestAnimationFrame(render);
+})();
+</script>
+</body></html>

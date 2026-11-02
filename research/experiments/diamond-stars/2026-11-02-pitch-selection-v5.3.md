@@ -33,3 +33,15 @@ Preserves CPU batting, shrinking ring timing, manual fielding/throws, and pitche
 ## Human gate / Next steps
 - User to launch the v5.3 EXE on Windows and verify pitch type → target → release, directional flight, hitting, and defense.
 - Failed observations should become new evidence; do not mark Windows validation complete without user confirmation.
+
+
+## Loader recovery v5.3.1 (2026-11-02)
+- User reported that v5.3 **could not be loaded** (exact error screen is not available).
+- The v5.3 HTML itself passed rerun browser logic tests. Root cause in the user's environment remains **unconfirmed**.
+- Replacement Windows launcher no longer opens a temporary localhost HTTP server. It extracts the bundled HTML to %LOCALAPPDATA%/DiamondStars/Standalone and opens that local HTML in Edge/Chrome app mode.
+- Linux-side launcher extraction and browser invocation tests passed.
+- Embedded game extracted bytes SHA-256: 676c12a8d75099a8b7d615dc90f9948668413fcf9df067354631d0d3a3783e60
+- Windows x64 PE executable SHA-256: 510585f053fe67a4d2025ec834f2b94897cc766bc38b0f66f3be90f53e19fac7
+- Browser execution tests of the v5.3.1 HTML at 1280/594/390 widths passed pitch selection → course selection → Space release with zero uncaught JS errors.
+- Limitations: this test environment restricts browser navigation to file://, so the precise local-file launch cannot be verified in Chromium here; Windows user confirmation remains necessary.
+- Status: proposed fix, not yet accepted or validated on the user's Windows PC; no main branch promotion.

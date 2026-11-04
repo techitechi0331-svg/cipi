@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-9985D9C72EF5EB1A
+source_path: research/experiments/PeakBody/status.yaml
+kind: UNRESOLVED
+text_hash: 9985d9c72ef5eb1a
+text: The 200 ms peak-preserve alternative protects transients but holds onset memory
+  too long.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-B635EA8ABA8D3651
+source_path: research/experiments/PeakBody/status.yaml
+kind: UNRESOLVED
+text_hash: b635ea8aba8d3651
+text: Revision 02 uses an 80 ms split-direction detector with 6–40 ms attack and 120–400
+  ms release; deterministic model replay and prototype branch gates have passed.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

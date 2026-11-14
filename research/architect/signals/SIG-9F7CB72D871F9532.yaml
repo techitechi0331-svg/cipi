@@ -1,0 +1,12 @@
+schema_version: '1.0'
+signal_id: SIG-9F7CB72D871F9532
+source_path: research/experiments/PeakBody/status.yaml
+kind: UNRESOLVED
+text_hash: 9f7cb72d871f9532
+text: The original crest-to-fast timing direction over-compresses short synthetic
+  bursts.
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

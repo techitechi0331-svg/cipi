@@ -1,0 +1,13 @@
+schema_version: '1.0'
+signal_id: SIG-22D4B7FAC8F7B4A1
+source_path: research/experiments/PeakBody/status.yaml
+kind: UNRESOLVED
+text_hash: 22d4b7fac8f7b4a1
+text: Spectral-only crest guarding is REJECTED; the original proportional periodicity
+  guard passed synthetic confounder gates but missed the locked private noise-like
+  target (median retention 0.492622).
+state: UNCLASSIFIED
+signal_class: RESEARCH_GAP
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

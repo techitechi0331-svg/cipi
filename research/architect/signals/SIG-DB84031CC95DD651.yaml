@@ -1,0 +1,11 @@
+schema_version: '1.0'
+signal_id: SIG-DB84031CC95DD651
+source_path: research/experiments/MicroDouble/status.yaml
+kind: BLOCKERS
+text_hash: db84031cc95dd651
+text: Final release evidence requires Cubase Pro 14 and target-machine listening.
+state: UNCLASSIFIED
+signal_class: HUMAN_GATE
+executable: false
+note: Gap signal only. It may seed a future reviewed topic/proposal but cannot execute
+  code.

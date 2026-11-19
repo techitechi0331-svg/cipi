@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "2e0fca7dc99d335644d05e647b72b4d9dc1fa5cb",
+    "commit_sha": "bb966bc9297b1fdbb6cc9507b3a12c44c669481f",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-10-01T02:36:50+09:00",
-  "generation_id": "323d4b2856360e432f1d9fd4",
+  "generated_at": "2026-11-19T17:56:14+09:00",
+  "generation_id": "ad725db57b4f9e5053274ba3",
   "human_gates": [
     {
       "blocking": true,
@@ -411,7 +411,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "be69a253ae2e8bba96f581951c4be30c2caa4b5cefc6f07dba35664d6e3cf9dd",
+      "sha256": "5848647f0ff32f2fcf8720c9ddac410e24a1ab03c9c248daf668d20c02bd0418",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -466,7 +466,7 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "e131580e3c6774937233b87797debd1567872566a49104af9029088f352d9de5",
+      "sha256": "859413b9351f713489bdfe95121334bc7c3c5c8fa9e0a00175ef8528245becac",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
@@ -635,7 +635,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "9acc21c9e0dfb877a5e6eafcdf8e0fba439046d9f808d55109fc68fe7b19fe17",
+  "source_state_digest": "bb81cd686df762c547012377a94acbc5cafac939c7a276868910a37041702cf8",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"

@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 2e0fca7dc99d335644d05e647b72b4d9dc1fa5cb
-- Source-state digest: 9c2c203008acad6343c798b8a232be49de45b9297b4c5b36deadc0c8e6ab5e08
+- CIPI source commit: bb966bc9297b1fdbb6cc9507b3a12c44c669481f
+- Source-state digest: 7f540d1549b1879818298b51acfaa691639e01fd5642d89ad1885edb9cc50c6c
 - Product: techitechi0331-svg/mic_simulator@main
 - Product commit: e6fb153ce49f012da9d7373bec154120450970d6
 

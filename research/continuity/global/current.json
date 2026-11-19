@@ -4,10 +4,10 @@
     "CONFLICT": 0,
     "FRESH": 16,
     "INVALID": 0,
-    "STALE": 0
+    "STALE": 1
   },
-  "generated_at": "2026-10-01T02:36:50+09:00",
-  "project_count": 16,
+  "generated_at": "2026-11-19T17:56:14+09:00",
+  "project_count": 17,
   "projects": [
     {
       "freshness": "FRESH",
@@ -92,6 +92,12 @@
       "phase": "IDLE",
       "project_id": "vocal_denoise",
       "recommended_action": "NO_READY_WORK"
+    },
+    {
+      "freshness": "STALE",
+      "phase": "REFRESH_REQUIRED",
+      "project_id": "vocal_one",
+      "recommended_action": "REFRESH_PRODUCT_REF"
     },
     {
       "freshness": "FRESH",

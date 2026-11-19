@@ -56,3 +56,16 @@ blockers:
   - external_repo_CI_access_unverified
 evidence_policy: "HYPOTHESIS until repeatable measurements; build != release"
 private_data_policy: "Never store client vocals, secret tokens or personal information in CIPI"
+
+foundation_p0:
+  intent: "Technical VST3/DSP infrastructure experiment only; NOT a product DSP parameter lock"
+  product_repo_head_commit: "2996273718c5d5cb1b6ed08351cdce07cba48e0c"
+  github_workflow_run: "https://github.com/techitechi0331-svg/Vocal-ONE/actions/runs/44491484634"
+  source_files: [CMakeLists.txt, Source/PluginProcessor.cpp, Source/DSP/Module.h, Source/DSP/ModuleChain.h, Source/DSP/GainModule.h, Tests/CoreTests.cpp]
+  portable_cpp_tests: PASS_observed_2026_11_19
+  windows_vst3_build: RUNNING_at_observation
+  pluginval: NOT_RUN
+  steinberg_validator: NOT_RUN
+  cubase_pro_14_host_validation: NOT_RUN
+  real_vocal_AB: NOT_RUN
+  expected_next: "Inspect Windows CI, fix failure if present, then independently validate plugin state/bypass and host behavior."

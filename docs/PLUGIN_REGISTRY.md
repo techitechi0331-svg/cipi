@@ -11,6 +11,8 @@
 | BreathKeeper 0.1 | research | breath-event detection can reduce excessive breaths while protecting voiced breathy phonation | singing breath-event evidence E4/E5; detector mapping HYPOTHESIS | feature review + labelled-corpus protocol |
 | VocalForward 0.1 | research | time-frequency masking-aware action can restore vocal audibility only when needed | masking-aware EQ evidence E4/E5; vocal topology HYPOTHESIS | masking-model review + routing design |
 
+| Vocal ONE | research / specification | One instance can provide repeatable, lead-vocal MIX using validated DSP and bounded assisted auto-mix, with optional accompaniment reference | PRODUCT HYPOTHESIS; no integration, listening or Cubase qualification yet | source/licensing audit -> module/graph contract -> baseline numerical tests -> level-matched vocal AB -> VST3/Cubase host gates |
+
 ## Promotion rule
 
 A plug-in is not marked **candidate** until it:

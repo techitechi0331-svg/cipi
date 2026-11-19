@@ -350,6 +350,17 @@ repositories:
           - expected_md5
 
 
+  vocal_one:
+    repository: techitechi0331-svg/Vocal-ONE
+    default_ref: main
+    runner_class: github-hosted
+    workflows:
+      foundation:
+        file: foundation-ci.yml
+        dispatch: false
+        monitor: true
+        artifact_ingest: metadata_and_text
+
   vocal_denoise:
     repository: techitechi0331-svg/Vocal_Denoise
     default_ref: main

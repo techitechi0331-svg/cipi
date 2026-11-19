@@ -2,6 +2,9 @@
 
 This catalog links every materially developed plug-in or plug-in research program currently known to the project into CIPI research governance.
 
+## Integrated product research tracks
+- Vocal ONE (main vocal all-in-one MIX; pitch/timing edit and mastering excluded) -> `research/plugins/vocal-one/` (private product repo: `techitechi0331-svg/Vocal-ONE`; formal Research stage; no DSP or host certification)
+
 ## Reference-device / hardware-inspired tracks
 - LA2ACompressor / LA-2A / T4 -> `research/reference_devices/la2a/`
 - 76blackCompressor / 1176 family -> `research/reference_devices/1176/`

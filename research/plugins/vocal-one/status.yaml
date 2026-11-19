@@ -1,0 +1,58 @@
+id: VOCAL_ONE_FORMAL
+title: Vocal ONE — Vocal-Only All-in-One MIX Research Track
+registered_date: "2026-11-19"
+status: research
+knowledge_status: HYPOTHESIS
+confidence: unverified_product_specific
+source_kind: product_repo_initialized
+source_ref: "https://github.com/techitechi0331-svg/Vocal-ONE"
+product_scope:
+  objective: "One VST3 instance handles nearly all main-vocal MIX processing"
+  target: "Windows x64 / JUCE 9.0.2 / Cubase Pro 14"
+  included: [dsp_assisted_mix, flexible_graph, vocal_eq, dynamics, noise_gate, multiband_deesser, vocal_rider, color, spatial, reference_analysis]
+  excluded: [pitch_edit, timing_edit, mastering, multi_instance_co_mixing]
+  user_approved: "26 decision questions accepted; Q26 recommended C"
+existing_sources:
+  - techitechi0331-svg/Vo.Prep
+  - techitechi0331-svg/VocalPrepComp
+  - techitechi0331-svg/VocalSurfaceProcessor
+  - techitechi0331-svg/76blackCompressor
+  - techitechi0331-svg/Vocal-One-Knob-Doubler
+  - techitechi0331-svg/vocal_rider
+  - techitechi0331-svg/Vocal_resonance
+  - techitechi0331-svg/610
+  - techitechi0331-svg/cipi
+stages:
+  research: in_progress
+  review: pending
+  parameter_lock: pending
+  implementation: not_started
+  measurement: not_started
+  audio_ab: not_started
+  revision: pending
+  vst3_validation: not_started
+  final_review: not_started
+current_stage: research
+completed:
+  - user_product_scope_selection
+  - initial_repo_registration
+measured: []
+unresolved:
+  - Actual reusable modules require source, test and dependency review before integration.
+  - ML must demonstrate repeatable improvement over a deterministic DSP baseline.
+  - Dynamic spectral suppression must avoid high-F0, formant and consonant false positives.
+  - Serial and parallel gain loops must not create contradictory auto-corrections.
+  - Latency/phase compensation and click-safe dynamic graph reordering require tests.
+  - Source code and license compatibility need verification before reuse.
+  - Real vocal level-matched A/B corpus and subjective Human Gate remain pending.
+  - Cubase Pro 14 host validation is pending and requires target host access.
+  - Cross-repo CI token permissions and runner status for the new private repo remain unverified.
+next_stage: review
+why_next: "Confirm the provenance and baseline quality of each reuse candidate before numeric lock or product adoption."
+next_confirmation: "Review executable baselines, licensing, sample-rate CPU/latency matrix, component contracts and negative evidence."
+blockers:
+  - real_vocal_AB_human_gate
+  - Cubase_Pro_14_host_human_gate
+  - external_repo_CI_access_unverified
+evidence_policy: "HYPOTHESIS until repeatable measurements; build != release"
+private_data_policy: "Never store client vocals, secret tokens or personal information in CIPI"

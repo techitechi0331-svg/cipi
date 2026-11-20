@@ -182,6 +182,14 @@ def main() -> int:
     matched = match_dispatched_run(dispatched_action, runs)
     assert matched is not None and matched["id"] == 13
 
+    # Two matching manual dispatches are ambiguous without a dispatch nonce.
+    unrelated_manual = dict(runs[-1], id=14, head_sha="different")
+    assert match_dispatched_run(dispatched_action, runs + [unrelated_manual]) is None
+    pinned_action = dict(dispatched_action, expected_source_sha="expected")
+    source_pinned = dict(runs[-1], id=15, head_sha="expected")
+    source_match = match_dispatched_run(pinned_action, runs + [unrelated_manual, source_pinned])
+    assert source_match is not None and source_match["id"] == 15
+
     job = {
         "state": "BLOCKED_EXTERNAL",
         "external_wait": [

@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "369ccaffd9514860042aa550d808fb9e23f080c0",
+    "commit_sha": "29e795966ea1e69614f1066b5d5442e498761c5f",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T19:54:14+09:00",
-  "generation_id": "13efb0cb4a967dfa9ecf307e",
+  "generated_at": "2026-11-20T19:58:18+09:00",
+  "generation_id": "b262f945eb7d60fc75633554",
   "human_gates": [
     {
       "blocking": true,
@@ -411,7 +411,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "bfe04f7307eb6718777c376210573277b552666b9ca34cebda60434b654e1f42",
+      "sha256": "74441d8bfbf36b7ff78b59622c86be10ef489b6fa88c8ca7e32a21ca038fc451",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -466,13 +466,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "163b2bb5ee6cfe96db8bd8145e0ebc7ed519c77c388ca9d056461a86111666f1",
+      "sha256": "305d5de0b76d27f833b73e975e05fc799bbd21e8499e4186232235c09708f0f8",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "5cf7aadd11bb6246132689011dc4dc62e09b887e1623cf0a154657244a4e3545",
+      "sha256": "d3baa017b231ce9fa43e39c63459dc6ccd508b78a22d5a631b7911bf64f65b59",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -635,7 +635,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "1c31766323bbe4e75a9c64676ef43413ce5c2fcd6fa6cf8fd346170c96e77ce6",
+  "source_state_digest": "ee1d1df1c8ca91f60d0abdb896231c617a58fdd5d4f17bb6cc439a10cba1631d",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"

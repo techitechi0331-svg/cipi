@@ -1,0 +1,32 @@
+schema_version: '1.0'
+action_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-RECOVERY-20261120
+state: DISPATCHED
+repo_key: cipi
+workflow_key: vg_string_physics_precision
+ref: main
+inputs:
+  job_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-RECOVERY-20261120
+  melon_sha: 7aedcb8189d2b8927d74c96f6d5f624faf5b2c38
+priority: 97
+attempts: 1
+max_attempts: 1
+retry_count: 0
+max_retries: 0
+depends_on_jobs: []
+depends_on_actions: []
+reason: 'Bounded infrastructure-recovery attempt for the EGFxSet same-MIDI four-coordinate
+  string-physics precision measurement. The previous 2026-09-30 action VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-001
+  was cancelled after runner wait; manual run 44702980744 on 2026-11-20 proved the
+  CIPI Windows runner could execute, but failed in actions/setup-python before any
+  physics tests. The reviewed portable-Python fix merged in CIPI PR #493 (commit 5dff1e3b647305e094c0f769f0a6652279770c88).
+  Use current main workflow, retain both failure records, and do not interpret successful
+  execution as product fidelity, Human Gate passage, or release approval.'
+track_id: VIRTUAL-GUITAR-STRING-PHYSICS-IDENTIFIABILITY-001
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+product_repository_write: false
+previous_run_id: 44702980744
+dispatched_at: '2026-11-20T10:55:25.314030Z'
+repository: techitechi0331-svg/cipi
+workflow_file: vg-string-physics-precision.yml

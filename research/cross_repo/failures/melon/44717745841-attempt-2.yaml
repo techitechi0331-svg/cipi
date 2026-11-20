@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
+repo_key: melon
+workflow_key: research
+run_id: 44717745841
+run_attempt: 2
+head_sha: 8e6e05c3147e3135c16e52c51f3000687b165f43
+classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Upload research evidence
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

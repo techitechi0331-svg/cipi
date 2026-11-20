@@ -333,7 +333,8 @@
     "VOCAL-DENOISE-ROBUSTNESS-001",
     "VOCAL-DENOISE-RUNTIME-001",
     "VOCAL-DENOISE-VST3-001",
-    "VOCAL-RIDER-REALVOCAL-001"
+    "VOCAL-RIDER-REALVOCAL-001",
+    "VOCAL-SURFACE-REAL-AUDIO-001"
   ],
   "rejected_continuations": 12,
   "research_quality_metrics": {
@@ -372,7 +373,8 @@
     "VOCAL-DENOISE-PRESERVATION-001",
     "VOCAL-DENOISE-ROBUSTNESS-001",
     "VOCAL-DENOISE-RUNTIME-001",
-    "VOCAL-DENOISE-VST3-001"
+    "VOCAL-DENOISE-VST3-001",
+    "VOCAL-SURFACE-REAL-AUDIO-001"
   ],
   "time_metrics": {
     "artifact_upload_seconds": null,
@@ -538,6 +540,11 @@
       "reason": "EXTERNAL_ACTION_DISPATCHED",
       "scheduler_eligible": true,
       "state": "WAITING_EXTERNAL"
+    },
+    "VOCAL-SURFACE-REAL-AUDIO-001": {
+      "reason": "TRACK_DISABLED",
+      "scheduler_eligible": false,
+      "state": "DISABLED"
     }
   },
   "track_stop_reasons": {

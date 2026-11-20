@@ -44,13 +44,16 @@ milestones:
   - CPU simple-baseline harness
   - level-matched vocal AB renderer and licensed source protocol
   - self-hosted runner shell/cache hardening
+  - CIPI autonomous UA610 bounded nonlinear proxy track registered and READY
+  - immutable licensed VocalSet real-singer vowel AB corpus for source-rate-limit recovery
+  - scheduled deferred upload of AB evidence when GitHub Actions storage quota recovers
 
 unresolved:
   - Final Character/Drive mapping is not locked.
   - Final Tone mapping is not locked.
   - Transformer contribution has not yet passed ablation.
   - Vocal-aware dynamic protection has not yet been justified.
-  - Level-matched real-vocal AB is pending. A previous source request hit HTTP 429 and the 2026-11-20 recovery job hit a PowerShell parser error; the parser fix is committed, but successful audio rendering is not yet confirmed.
+  - Full-phrase level-matched real-vocal AB is pending. Wikimedia HTTP 429 blocked the old corpus. A separately labelled real-singer sustained-vowel technical AB is running using a pinned CC BY 4.0 VocalSet subset; final renders/listening are not yet confirmed.
   - Windows VST3/Cubase Pro 14 RC validation is pending.
   - Final CPU/latency tradeoff is not locked; DSP-only vs oversampling-only benchmark is pending Windows execution.
   - Final shortlist profile is not locked; refreshed solver-corrected measurements now require level-matched vocal comparison.
@@ -63,9 +66,10 @@ historical_nonblocking_unknowns:
 
 next_stage: measurement
 why_next: "The high-level HF solver collapse is closed and corrected-solver measurements are refreshed. Independent next gates are now automation regression, DSP-only vs oversampling-only CPU/latency measurement, and level-matched real-vocal AB preparation/rendering; none should block the others."
-next_confirmation: "Inspect CIPI-dispatched 610 AB run 44714700336 and verify approved source hashes and blind/technical WAV artifacts. Then evaluate hosted performance vs DSP baseline, perform blind listening and Cubase validation before parameter lock."
+next_confirmation: "Inspect run 44716882636 (pinned VocalSet sustained-vowel AB), confirm source hashes and local persisted render ZIP, then verify deferred GitHub artifact upload. Distinguish this limited technical screen from still-required genuine phrase/consonant listening and Cubase host validation. Observe CIPI autonomous track UA610-ORIGINAL-TUBE-PROXY-001 separately; generic MELON measurements are proposals only."
 
 blockers:
   - Current automation/CPU/AB measurements depend on a Windows workflow reaching the relevant analyzer/render steps; independent review and preparation continue under No-Wait / Work-Stealing.
+  - GitHub Actions artifact storage quota was exceeded on 610 build run 44714253149 and MELON result-upload runs. Evidence upload is deferred to a scheduled self-hosted retry only after actual local render data exists. This is an infrastructure blocker, not a DSP-acoustic failure.
   - Final perceptual audio_ab closure requires real rendered licensed vocals and human listening; a CC0 source is selected, but HTTP 429 remains a possible acquisition blocker until CI proves otherwise.
   - Cubase Pro 14 validation ultimately requires the user-side Windows host run and must remain unconfirmed until performed.

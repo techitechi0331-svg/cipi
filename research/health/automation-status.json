@@ -645,9 +645,13 @@
   ],
   "local": {
     "blocked_count": 0,
-    "claimed_branches": [],
-    "claimed_count": 0,
-    "claimed_jobs": [],
+    "claimed_branches": [
+      "research-bot/VL2A-RC2-EVIDENCE-CONTINUITY-001/auto-bd765ff82a94"
+    ],
+    "claimed_count": 1,
+    "claimed_jobs": [
+      "VL2A-RC2-EVIDENCE-CONTINUITY-001"
+    ],
     "dependency_blocked_count": 1,
     "human_gate_blocked_count": 1,
     "human_gate_jobs": [
@@ -657,9 +661,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": null,
-    "kind": "CROSS_REPO",
-    "priority": 80,
-    "reason": "reconcile_dispatched_action"
+    "branch": "research-bot/VL2A-RC2-EVIDENCE-CONTINUITY-001/auto-bd765ff82a94",
+    "job_id": "VL2A-RC2-EVIDENCE-CONTINUITY-001",
+    "kind": "EVIDENCE_INTAKE",
+    "priority": 90
   }
 }

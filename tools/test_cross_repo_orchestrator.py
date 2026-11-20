@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "automation" / "cross_repo"))
 
 from core import match_dispatched_run, select_queued_action, should_resume_external_job, validate_action  # noqa: E402
-from orchestrate import _workflow_time_metrics, backfill_completed_artifacts, reconcile_retried_failed_actions  # noqa: E402
+from orchestrate import _workflow_time_metrics, backfill_completed_artifacts, reconcile_retried_failed_actions, ingest_melon_outbox_recoveries  # noqa: E402
 from failure import classify_failure  # noqa: E402
 from artifacts import ingest_artifact, extract_public_melon_evidence, project_public_melon_macro  # noqa: E402
 
@@ -174,8 +174,38 @@ def test_public_artifact_redaction() -> None:
         assert not (other / "files").exists()
 
 
+class FakeOutboxRecoveryClient(FakeArtifactClient):
+    def list_workflow_runs(self, repo: str, workflow_file: str, per_page: int = 20) -> list[dict]:
+        assert workflow_file == "melon-artifact-recovery.yml"
+        return [{
+            "id": 901, "run_attempt": 1, "status": "completed",
+            "conclusion": "success", "event": "workflow_dispatch",
+        }]
+
+
+def test_melon_outbox_recovery_idempotency() -> None:
+    live_registry = yaml.safe_load(
+        (ROOT / "automation/cross_repo/registry.yaml").read_text(encoding="utf-8")
+    )
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        client = FakeOutboxRecoveryClient()
+        ingested, markers = ingest_melon_outbox_recoveries(root, live_registry, client)
+        assert (ingested, markers) == (1, 1)
+        marker = root / "research/cross_repo/recovery_intake/melon/901.yaml"
+        assert marker.exists()
+        assert "PRIVATE_OUTBOX_UPLOAD_ONLY_REPLAY" in marker.read_text(encoding="utf-8")
+        artifact = root / "research/cross_repo/artifacts/melon/901/777/manifest.yaml"
+        assert artifact.exists()
+        manifest = yaml.safe_load(artifact.read_text(encoding="utf-8"))
+        # The fake private JSON lacks required fields; fail closed.
+        assert manifest["ingest_status"] == "private_evidence_quarantined"
+        assert ingest_melon_outbox_recoveries(root, live_registry, client) == (0, 0)
+
+
 def main() -> int:
     test_public_artifact_redaction()
+    test_melon_outbox_recovery_idempotency()
     # The legacy VoPriPro workflows must not be dispatched under VL2A.
     live_registry = yaml.safe_load(
         (ROOT / "automation/cross_repo/registry.yaml").read_text(encoding="utf-8")

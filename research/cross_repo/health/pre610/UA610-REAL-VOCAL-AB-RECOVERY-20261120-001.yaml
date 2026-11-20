@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: UA610-REAL-VOCAL-AB-RECOVERY-20261120-001
+repo_key: pre610
+workflow_key: real_vocal_ab
+runner_class: self-hosted
+state: RUNNING
+run_id: 44714700336
+run_status: in_progress
+run_conclusion: null
+since: '2026-11-20T09:54:46Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

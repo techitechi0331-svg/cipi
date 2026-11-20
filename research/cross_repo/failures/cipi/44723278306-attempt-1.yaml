@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-RECOVERY-20261120
+repo_key: cipi
+workflow_key: vg_string_physics_precision
+run_id: 44723278306
+run_attempt: 1
+head_sha: af7db541b23085e0ae04ad1c8caa8f131b5dd3be
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Prepare isolated Python 3.12.10 without registry writes
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

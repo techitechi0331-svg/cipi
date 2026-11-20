@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: VIRTUAL-GUITAR-STRING-PHYSICS-PRECISION-RECOVERY-20261120
+repo_key: cipi
+workflow_key: vg_string_physics_precision
+runner_class: self-hosted
+state: COMPLETED
+run_id: 44723278306
+run_status: completed
+run_conclusion: failure
+since: '2026-11-20T10:55:25Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

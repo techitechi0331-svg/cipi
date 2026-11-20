@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-DOUBLER-MONO-WIDTH-001-R1-B2BCC545
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     different mono-vs-width tradeoff than a positive-center delay proxy, worth falsifying
     separately in the actual product?","track_id":"VOCAL-DOUBLER-MONO-WIDTH-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -41,3 +41,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 44722183398
+dispatched_at: '2026-11-20T10:56:36.000443Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

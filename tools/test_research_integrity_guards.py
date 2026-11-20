@@ -62,8 +62,8 @@ def main() -> int:
             record = root / "research/decisions/FAKE-001/decision.yaml"
             record.parent.mkdir(parents=True, exist_ok=True)
             record.write_text(
-                f"event_type: {event_type}\\nauthority: {authority}\\n"
-                f"review_status: {review_status}\\ndecision: {decision}\\n".replace("\\\\n", "\\n"),
+                f"event_type: {event_type}\nauthority: {authority}\n"
+                f"review_status: {review_status}\ndecision: {decision}\n",
                 encoding="utf-8",
             )
             proposal = commit(root, f"decision fixture {event_type} {authority} {decision}")

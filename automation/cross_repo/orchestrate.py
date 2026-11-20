@@ -319,6 +319,7 @@ def ingest_run_artifacts(
         name = str(artifact.get("name") or "")
         should_download = (
             mode == "metadata_and_text"
+            and repo_key in {"cipi", "melon"}  # other private repos: metadata only
             and not bool(artifact.get("expired"))
             and should_download_text_artifact(name)
         )

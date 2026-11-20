@@ -663,7 +663,7 @@ def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient)
         recent = gh.list_workflow_runs(repo, "melon-artifact-recovery.yml", per_page=20)
     except RuntimeError as exc:
         print(f"MELON outbox recovery listing unavailable: {exc}")
-        return 0
+        return 0, 0
     created = 0
     markers = 0
     records_root = root / "research" / "cross_repo" / "recovery_intake" / "melon"

@@ -648,7 +648,7 @@ def backfill_completed_artifacts(root: Path, registry: dict, gh: GitHubClient) -
 
 
 
-def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient) -> int:
+def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient) -> tuple[int, int]:
     """Ingest upload-only recoveries; never recompute an already finished run.
 
     Recovery artifacts are associated with a new GitHub workflow run, while
@@ -657,7 +657,7 @@ def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient)
     """
     melon = registry.get("repositories", {}).get("melon")
     if not isinstance(melon, dict):
-        return 0
+        return 0, 0
     repo = str(melon["repository"])
     try:
         recent = gh.list_workflow_runs(repo, "melon-artifact-recovery.yml", per_page=20)
@@ -665,6 +665,7 @@ def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient)
         print(f"MELON outbox recovery listing unavailable: {exc}")
         return 0
     created = 0
+    markers = 0
     records_root = root / "research" / "cross_repo" / "recovery_intake" / "melon"
     for run in recent:
         if run.get("status") != "completed" or run.get("conclusion") != "success":
@@ -697,9 +698,10 @@ def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient)
             "automatic_product_decision": False,
             "automatic_knowledge_promotion": False,
         }
-        write_yaml_if_changed(marker, metadata)
+        if write_yaml_if_changed(marker, metadata):
+            markers += 1
         created += recovered
-    return created
+    return created, markers
 
 
 def observe_latest(root: Path, registry: dict, gh: GitHubClient) -> int:
@@ -867,7 +869,7 @@ def main() -> int:
     reconciliation = reconcile_actions(root, registry, gh)
     recovery = reconcile_retried_failed_actions(root, registry, gh)
     backfilled = backfill_completed_artifacts(root, registry, gh)
-    outbox_recoveries = ingest_melon_outbox_recoveries(root, registry, gh)
+    outbox_recoveries, outbox_recovery_markers = ingest_melon_outbox_recoveries(root, registry, gh)
     observed = observe_latest(root, registry, gh)
     resumed = resume_jobs(root)
     access_restored = reconcile_blocked_queued_access(root, registry, gh)
@@ -877,6 +879,7 @@ def main() -> int:
         or any(recovery.values())
         or backfilled > 0
         or outbox_recoveries > 0
+        or outbox_recovery_markers > 0
         or observed > 0
         or resumed > 0
         or access_restored > 0

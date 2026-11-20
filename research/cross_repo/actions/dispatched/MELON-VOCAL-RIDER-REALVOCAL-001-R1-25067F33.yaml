@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-RIDER-REALVOCAL-001-R1-25067F33
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -23,7 +23,7 @@ inputs:
     changes, musical section flattening, or damage to breaths, consonants, plosives
     and phrase tails?","track_id":"VOCAL-RIDER-REALVOCAL-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -41,3 +41,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 36577539491
+dispatched_at: '2026-11-20T09:50:01.952555Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

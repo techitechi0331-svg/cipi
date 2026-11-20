@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: VOCAL-RIDER-MAIN-REVALIDATE-20261120
+repo_key: vocal_rider
+workflow_key: research
+runner_class: self-hosted
+state: RUNNING
+run_id: 44713851124
+run_status: in_progress
+run_conclusion: null
+since: '2026-11-20T09:48:39Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

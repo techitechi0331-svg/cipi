@@ -45,3 +45,13 @@ If baseline is queued or the dedicated adapter is not yet reviewed, continue ind
 ## CIPI Research Gate prerequisite
 - The first PR #494 Research Gate failure was unrelated to Vocal Surface: Vocal ONE status schema recorded invalid `not_started` states, a text confidence and non-stage items under `completed`.
 - Minimal schema-only repair PR #495 passed the Research Gate and merged (commit `60823a5155c6b4bce041aeb6fbc00061a2be5f68`). This does not claim Vocal Surface CI or real-audio validation passed.
+
+## 2026-11-20 observed preflight outcome (negative infrastructure evidence)
+- CIPI cross-repo action: \`VOCAL-SURFACE-V03-PREFLIGHT-20261120-001\`.
+- Authoritative state: \`research/cross_repo/actions/failed/VOCAL-SURFACE-V03-PREFLIGHT-20261120-001.yaml\` (do not reset the terminal action as a workaround).
+- Product workflow run: https://github.com/techitechi0331-svg/VocalSurfaceProcessor/actions/runs/44714326508
+- DSP Reference test, VST3 build, pluginval strictness 10 and Steinberg validator steps: **PASS** in that run.
+- Upload VST3 step: **FAIL**, \`Failed to CreateArtifact: Artifact storage quota has been hit\`. Measurements artifact upload was skipped.
+- The CIPI classifier marked \`UNKNOWN_FAILURE\`, \`retry_safe: false\`. This is narrower than a DSP failure; do not retry this exact failed action without a reviewed remediation.
+- Product research PR https://github.com/techitechi0331-svg/VocalSurfaceProcessor/pull/5 proposes bounded offline WAV probe + synthetic-only smoke and opt-in artifact upload to avoid quota-caused CI failure. **Proposal is not a verified real-vocal result** and must pass its own CI before product merge or new CIPI action.
+- New native CIPI continuation: after PR #5 tested and reviewed, register the exact workflow contract and a fresh independent follow-up preflight; do not declare the existing failed action complete. Then verify a licensed, locally accessible real-vocal path and cross-repo measured-text evidence. Track \`VOCAL-SURFACE-REAL-AUDIO-001\` remains disabled until the actual data and adapter gates are met.

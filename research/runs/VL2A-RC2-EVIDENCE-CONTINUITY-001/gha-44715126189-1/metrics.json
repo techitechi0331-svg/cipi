@@ -1,0 +1,13 @@
+{
+  "authority_boundaries_preserved": true,
+  "formal_tracking_scope_reconciliation_recommended": true,
+  "formal_vst3_validation_stage": "in_progress",
+  "frozen_baseline_pluginval_present": true,
+  "frozen_baseline_prepared_latency_present": true,
+  "prehost_candidate_id": "HA100X-R4-012-591362e2",
+  "prehost_ready_for_human_gate": true,
+  "premature_formal_completion": false,
+  "recorded_prehost_state": "CUBASE_READY_HUMAN_GATE",
+  "track_ids_valid": true,
+  "unresolved_human_gate_count": 8
+}

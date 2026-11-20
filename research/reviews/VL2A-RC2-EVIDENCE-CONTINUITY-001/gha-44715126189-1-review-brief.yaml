@@ -1,0 +1,103 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VL2A-RC2-EVIDENCE-CONTINUITY-001:gha-44715126189-1:review-brief-v1
+job_id: VL2A-RC2-EVIDENCE-CONTINUITY-001
+run_id: gha-44715126189-1
+source_run: research/runs/VL2A-RC2-EVIDENCE-CONTINUITY-001/gha-44715126189-1
+route: CONTINUE_RESEARCH
+candidate_class: RESEARCH_MORE
+triage_path: research/reviews/VL2A-RC2-EVIDENCE-CONTINUITY-001/gha-44715126189-1-triage.yaml
+triage_id: VL2A-RC2-EVIDENCE-CONTINUITY-001:gha-44715126189-1:triage-v1
+job_path: research/jobs/completed/VL2A-RC2-EVIDENCE-CONTINUITY-001.yaml
+research_question: Does current CIPI main distinguish the accepted VL2A v0.6 RC2 pre-host
+  evidence from older Phase01-H formal status, while retaining the unresolved Cubase,
+  subjective listening, adoption and release gates?
+hypothesis: Independent CIPI evidence records retain the already-tested 6-sample prepared-VST3
+  latency, strict pluginval and HA100X pre-host candidate, but the older formal status
+  still requires scope-labelled reconciliation, not a new DSP optimization or product
+  release.
+counter_hypotheses:
+- The pre-host snapshot lacks a traceable candidate or claims verified Cubase outcomes
+  without evidence.
+- The retained baseline omits latency/pluginval measurements or the track's authority
+  restrictions.
+- The formal Phase01-H status already claims final review while external human gates
+  are still unverified.
+acceptance_criteria:
+- Every required provenance and track record is present.
+- The frozen baseline records strict pluginval and prepared VST3 latency without inventing
+  a Cubase result.
+- Product write and automatic knowledge/release decision remain prohibited.
+- The status audit reports scope divergence rather than silently editing historical
+  CIPI knowledge.
+rejection_criteria:
+- Any required source is missing or malformed.
+- A product/knowledge/release permission boundary is unexpectedly enabled.
+- The older formal status claims final review completion while external Human Gates
+  remain unverified.
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: true
+  rejection_triggered: false
+  triggered_criteria: []
+  source_commit: 90c56f048054821c3e5aca1199f961e6b1476445
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: authority_boundaries_preserved
+  value: true
+- path: formal_tracking_scope_reconciliation_recommended
+  value: true
+- path: formal_vst3_validation_stage
+  value: in_progress
+- path: frozen_baseline_pluginval_present
+  value: true
+- path: frozen_baseline_prepared_latency_present
+  value: true
+- path: prehost_candidate_id
+  value: HA100X-R4-012-591362e2
+- path: prehost_ready_for_human_gate
+  value: true
+- path: premature_formal_completion
+  value: false
+- path: recorded_prehost_state
+  value: CUBASE_READY_HUMAN_GATE
+- path: track_ids_valid
+  value: true
+- path: unresolved_human_gate_count
+  value: 8
+knowledge_candidate: null
+source_proposal:
+  decision_id: VL2A-RC2-EVIDENCE-CONTINUITY-001:gha-44715126189-1:auto
+  decision: ITERATE
+  rationale: The declared acceptance gate passed. Automation records evidence but
+    does not promote knowledge or finalize product decisions.
+  review_gaps: []
+  retained_findings:
+  - The complete accepted run evidence is retained; passing an experiment gate does
+    not itself promote shared knowledge.
+  reusable_findings: []
+  revisit_if: []
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals:
+- Phase 01-H line amplifier is KEEP and integrated in v0.5.0; human subjective preference
+  remains unmeasured and must not be represented as confirmed perceptual evidence.
+- Any Peak Reduction calibration change must rerun T4 timing, COMP/LIMIT separation,
+  sample-rate invariance, real-vocal validation and level-matched listening.
+- Strict pluginval and Cubase Pro 14 scan/load/automation/state-recall confirmation
+  remain pending for the eventual production candidate.
+- Final subjective product claims still require level-matched human listening.
+- Cubase Pro 14 release-candidate confirmation requires the user's Windows host.
+allowed_review_actions:
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

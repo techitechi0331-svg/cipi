@@ -1,0 +1,23 @@
+{
+  "baseline": [
+    "committed_vl2a_prehost_snapshot",
+    "ha100x_track_authority_and_budget",
+    "accepted_rc2_source_provenance"
+  ],
+  "experiment_adapter": "vl2a_rc2_evidence_continuity_v1",
+  "job_file": "research/jobs/queued/VL2A-RC2-EVIDENCE-CONTINUITY-001.yaml",
+  "metrics": [
+    "recorded_prehost_state",
+    "prehost_candidate_id",
+    "frozen_baseline_pluginval_present",
+    "frozen_baseline_prepared_latency_present",
+    "authority_boundaries_preserved",
+    "unresolved_human_gate_count",
+    "formal_tracking_scope_reconciliation_recommended",
+    "premature_formal_completion"
+  ],
+  "variants": [
+    "evidence_continuity_replay",
+    "formal_status_scope_divergence_report"
+  ]
+}

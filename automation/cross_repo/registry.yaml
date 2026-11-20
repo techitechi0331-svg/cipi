@@ -85,6 +85,16 @@ repositories:
         file: windows-bias-ladder-refine.yml
         dispatch: true
         monitor: true
+      ratio20_source_sweep:
+        file: windows-ratio20-source-sweep.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+      detector_iteration_probe:
+        file: windows-detector-iteration-probe.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
 
   vl2a:
     repository: techitechi0331-svg/VocalPrepComp

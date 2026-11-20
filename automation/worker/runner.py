@@ -108,7 +108,7 @@ def main() -> int:
     for name, content in result.get("raw_files", {}).items():
         relative = Path(name)
         if (not name or relative.is_absolute() or ".." in relative.parts or
-                "\\\\" in name or relative.as_posix() != name):
+                "\\" in name or relative.as_posix() != name):
             raise ValueError("unsafe raw evidence output filename")
         target = out / relative
         if target.is_symlink() or any(parent.is_symlink() for parent in target.parents if parent != out):

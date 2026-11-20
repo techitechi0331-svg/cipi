@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-RIDER-REALVOCAL-001-R1-25067F33
+repo_key: melon
+workflow_key: research
+run_id: 44714038497
+run_attempt: 1
+head_sha: 7aedcb8189d2b8927d74c96f6d5f624faf5b2c38
+classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Upload research evidence
+retry_requested: true
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

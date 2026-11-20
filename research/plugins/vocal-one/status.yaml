@@ -63,9 +63,30 @@ foundation_p0:
   github_workflow_run: "https://github.com/techitechi0331-svg/Vocal-ONE/actions/runs/44491484634"
   source_files: [CMakeLists.txt, Source/PluginProcessor.cpp, Source/DSP/Module.h, Source/DSP/ModuleChain.h, Source/DSP/GainModule.h, Tests/CoreTests.cpp]
   portable_cpp_tests: PASS_observed_2026_11_19
-  windows_vst3_build: RUNNING_at_observation
+  windows_vst3_build: PASS_observed_2026_11_20
   pluginval: NOT_RUN
   steinberg_validator: NOT_RUN
   cubase_pro_14_host_validation: NOT_RUN
   real_vocal_AB: NOT_RUN
   expected_next: "Inspect Windows CI, fix failure if present, then independently validate plugin state/bypass and host behavior."
+
+foundation_p0_latest:
+  date: "2026-11-20"
+  workflow_run: "https://github.com/techitechi0331-svg/Vocal-ONE/actions/runs/44695877831"
+  source_commit: "ae38bc6e95c31f5219ab426f15b804f3b6827f32"
+  portable_linux_dsp_tests: PASS
+  windows_vst3_compile: PASS
+  windows_portable_dsp_tests: PASS
+  windows_bundle_existence: PASS
+  internal_snapshot_archive: PASS
+  internal_snapshot_release: "https://github.com/techitechi0331-svg/Vocal-ONE/releases/tag/untagged-b6db7d5f8af43e4ea7ac"
+  internal_snapshot_access: PRIVATE_DRAFT
+  snapshot_validated_for_distribution: false
+  prior_failure: "GitHub Actions Artifact shared storage quota exceeded in run 44491640712; compile and tests were PASS."
+  remediation: "Use private draft GitHub Release assets rather than quota-exhausted Actions artifact upload."
+  artifact_quota_reclaimed: false
+  steinberg_validator: NOT_RUN
+  pluginval: NOT_RUN
+  cubase_host: NOT_RUN
+  level_matched_audio_ab: NOT_RUN
+  gate_meaning: "P0 technical build and portable DSP tests PASS; all release gates remain pending."

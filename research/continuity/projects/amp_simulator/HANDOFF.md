@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: e605815cad42333353b9392ed22b23855271601b
-- Source-state digest: d0f1ccc3dd3f7eff37227ed6c46dfbf80b5c43898e17d7eeccb2e1a80ad0ffbe
+- CIPI source commit: 369ccaffd9514860042aa550d808fb9e23f080c0
+- Source-state digest: ede68c38ef599ffaa136f3b02689ca7cddc5c948dee82dd61053a5dd9d633385
 - Product: techitechi0331-svg/amp_simulator@main
 - Product commit: c139c0526157a40e3ba815ff5616311d8c34eaa6
 

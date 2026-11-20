@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "e605815cad42333353b9392ed22b23855271601b",
+    "commit_sha": "369ccaffd9514860042aa550d808fb9e23f080c0",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T19:29:36+09:00",
-  "generation_id": "757a847d2859fa80910ded71",
+  "generated_at": "2026-11-20T19:54:14+09:00",
+  "generation_id": "13efb0cb4a967dfa9ecf307e",
   "human_gates": [
     {
       "blocking": true,
@@ -466,13 +466,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "ff86774bdce36d1b5853f082a04da04c0b009f36b90a54d65add4b64ec7531de",
+      "sha256": "163b2bb5ee6cfe96db8bd8145e0ebc7ed519c77c388ca9d056461a86111666f1",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "99f7c7106416438f0228f93d58cd5055bbf1685f951040b56a781530712b7a28",
+      "sha256": "5cf7aadd11bb6246132689011dc4dc62e09b887e1623cf0a154657244a4e3545",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -635,7 +635,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "cc8d2baa64bc08837aff1dee6b8bb5022366a0097d3f9b179bb86968e3279c8b",
+  "source_state_digest": "1c31766323bbe4e75a9c64676ef43413ce5c2fcd6fa6cf8fd346170c96e77ce6",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"

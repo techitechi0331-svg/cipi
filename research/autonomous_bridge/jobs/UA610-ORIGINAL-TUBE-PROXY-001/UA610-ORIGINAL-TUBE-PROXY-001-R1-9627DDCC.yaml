@@ -1,0 +1,36 @@
+schema_version: '1.0'
+job_id: UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
+track_id: UA610-ORIGINAL-TUBE-PROXY-001
+root_research_id: UA610_ORIGINAL_VOCAL_PRE
+parent_job_id: ''
+parent_run_id: ''
+hypothesis_id: HYP-UA610-BOUNDED-TUBE-PROXY
+experiment_id: EXP-UA610-TUBE-PROXY-R1
+priority: 80
+state: QUEUED
+execution_target: MELON_CROSS_REPO
+depends_on_jobs: []
+external_wait:
+- kind: GITHUB_ACTIONS
+  ref: action:MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
+  resume_when: success
+  resume_step: collect MELON macro result and evaluate continuation
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 12
+  max_runtime: 180
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+continuation_reason: initial registered research experiment
+expected_information_gain: 0.75
+fingerprint: 9627ddccc6be79c9b33ca4d12cf2e7651339dc0f16cda156a9e86bb7133ce6b0
+loop_depth: 1
+experiment_type: BOUNDED_NONLINEARITY_PROXY_SCREEN
+selected_architecture: UA610_TUBE_NONLINEARITY_GENERIC_PROXY_ONLY
+authority: CIPI_RESEARCH_JOB
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+immutable: true

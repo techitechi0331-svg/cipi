@@ -1,0 +1,38 @@
+schema_version: '1.0'
+action_id: MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026112061
+  population: 4
+  generations: 1
+  max_candidates: 8
+  max_runtime_seconds: 60
+  stage2_limit: 3
+  stage2_archive_limit: 3
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"experiment_id":"EXP-UA610-TUBE-PROXY-R1","experiment_type":"BOUNDED_NONLINEARITY_PROXY_SCREEN","hypothesis_id":"HYP-UA610-BOUNDED-TUBE-PROXY","job_id":"UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"UA610_ORIGINAL_VOCAL_PRE","research_question":"Can
+    a bounded MELON circuit/nonlinearity proxy search suggest a numerically stable
+    saturation and harmonic-shaping hypothesis worth testing against the preserved
+    610-B research path and the Original Vocal Pre Windows measurements, without claiming
+    that the proxy matches a 12AX7/12AT7 stage, transformer, hardware reference, or
+    an actual singer?","track_id":"UA610-ORIGINAL-TUBE-PROXY-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: UA610-ORIGINAL-TUBE-PROXY-001
+bridge_job_id: UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
+continuation_fingerprint: 9627ddccc6be79c9b33ca4d12cf2e7651339dc0f16cda156a9e86bb7133ce6b0
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

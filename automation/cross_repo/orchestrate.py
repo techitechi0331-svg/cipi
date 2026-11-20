@@ -173,6 +173,17 @@ class GitHubClient:
         jobs = data.get("jobs", [])
         return jobs if isinstance(jobs, list) else []
 
+    def read_job_log_tail(self, repo: str, job_id: int) -> str:
+        """Read a bounded, non-persisted excerpt for evidence-upload failure triage.
+
+        Do not store raw logs: they can contain sensitive paths and user information.
+        If the log exceeds the budget, the caller leaves the upload failure
+        unclassified and disables automatic retry.
+        """
+        url = f"https://api.github.com/repos/{repo}/actions/jobs/{job_id}/logs"
+        raw = self.request_bytes("GET", url, 5 * 1024 * 1024)
+        return raw[-128 * 1024:].decode("utf-8", errors="replace")
+
     def list_run_artifacts(self, repo: str, run_id: int) -> list[dict]:
         url = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/artifacts?per_page=100"
         data = self.request_json("GET", url)
@@ -419,7 +430,27 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
         except RuntimeError as exc:
             print(f"job detail warning: {action['action_id']}: {exc}")
             jobs = []
-        classification = classify_failure(run, jobs)
+        # Only fetch logs when an upload step failed. Step names alone cannot
+        # distinguish a quota block from a temporary network failure.
+        # Never write raw log text into CIPI evidence or GitHub state.
+        log_excerpt = ""
+        if str(run.get("conclusion") or "") != "success":
+            read_tail = getattr(gh, "read_job_log_tail", None)
+            if callable(read_tail):
+                for job in jobs:
+                    failed_upload = any(
+                        step.get("conclusion") == "failure"
+                        and "upload" in str(step.get("name") or "").lower()
+                        for step in job.get("steps", []) or []
+                    )
+                    if not failed_upload or not isinstance(job.get("id"), int):
+                        continue
+                    try:
+                        log_excerpt = read_tail(repo, int(job["id"]))
+                    except RuntimeError as exc:
+                        print(f"upload log inspection unavailable: {action['action_id']}: {exc}")
+                    break
+        classification = classify_failure(run, jobs, log_excerpt=log_excerpt)
 
         conclusion = str(run.get("conclusion") or "failure")
         if conclusion != "success":

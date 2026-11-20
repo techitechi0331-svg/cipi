@@ -107,3 +107,21 @@ foundation_step1_master_bypass_candidate:
   cipi_evidence: "research/plugins/vocal-one/foundation-step1-bypass-pr1-20261120.md"
   release_approved: false
   note: "Infrastructure candidate on draft PR; no product adoption or sound-quality claim."
+
+autonomous_step1_p0:
+  registration_date: "2026-11-20"
+  bridge_track: VOCAL-ONE-P0-BYPASS-001
+  enabled_on_main_after_merge: true
+  bootstrap_state_at_registration: NOT_YET_OBSERVED
+  research_scope: SYNTHETIC_BYPASS_TRANSITION_ONLY
+  product_main_unchanged_by_registration: true
+  synthetic_adapter_melon_main: 8e6e05c3147e3135c16e52c51f3000687b165f43
+  synthetic_adapter_ci: PASS_observed_2026_11_20
+  product_pr_1_ci: PASS_observed_2026_11_20
+  product_pr_1_merge: NOT_CLAIMED
+  actual_vst3_bypass_measurement: NOT_RUN
+  actual_vst3_validator: NOT_RUN
+  cubase_host_validation: NOT_RUN
+  real_vocal_ab: NOT_RUN
+  sound_quality_adoption: HUMAN_GATE
+  scheduled_chatgpt_automation_required: false

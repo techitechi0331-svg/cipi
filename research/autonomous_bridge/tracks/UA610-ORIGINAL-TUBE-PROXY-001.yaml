@@ -1,0 +1,122 @@
+schema_version: "1.0"
+track_id: UA610-ORIGINAL-TUBE-PROXY-001
+enabled: true
+root_research_id: UA610_ORIGINAL_VOCAL_PRE
+
+research_question: >-
+  Can a bounded MELON circuit/nonlinearity proxy search suggest a numerically
+  stable saturation and harmonic-shaping hypothesis worth testing against
+  the preserved 610-B research path and the Original Vocal Pre Windows
+  measurements, without claiming that the proxy matches a 12AX7/12AT7 stage,
+  transformer, hardware reference, or an actual singer?
+
+hypothesis_id: HYP-UA610-BOUNDED-TUBE-PROXY
+hypothesis: >-
+  A small, deterministic, bounded nonlinear transfer search can identify
+  or falsify parameter-space directions with good stability and harmonics
+  that merit later product-specific falsification using level-matched vocal
+  AB and transformer-ablation measurements.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - ACTUAL_610_PRODUCT_DSP_COMPILED_REGRESSION
+  - LICENSED_REAL_VOCAL_AB
+  - HUMAN_LISTENING
+  - CUBASE_PRO_14_HOST_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  evidence_snapshot: research/plugins/ua610/evidence/2026-11-20-autonomous-completion-track.md
+  known_product_measurement_run: 36179835447
+  do_not_reopen:
+    - PRESERVED_610_RESEARCH_BASELINE
+    - ORIGINAL_HF_SOLVER_COLLAPSE_FIX
+    - ORIGINAL_LEVEL_COMPENSATION_GATE
+    - ORIGINAL_27_POINT_TUNING_SWEEP
+  rejected_directions:
+    - MELON_GENERIC_PROXY_AS_HARDWARE_REFERENCE
+    - AUTO_PRODUCT_PARAMETER_LOCK_FROM_SYNTHETIC_FITNESS
+    - ADOPT_WITHOUT_TRANSFORMER_ABLATION
+    - ADOPT_WITHOUT_LICENSED_REAL_SINGER_AB
+    - CHANGE_SHARED_610_TRIODES_GLOBALLY
+    - AUTO_RELEASE
+
+budget:
+  max_loop_depth: 2
+  max_runs: 2
+  max_total_experiments: 2
+  max_candidates: 12
+  max_runtime: 180
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-UA610-TUBE-PROXY-R1
+  experiment_type: BOUNDED_NONLINEARITY_PROXY_SCREEN
+  expected_information_gain: 0.75
+  scope:
+    - ua610
+    - original_vocal_pre
+    - tube_nonlinearity_proxy
+    - numerical_stability
+    - alias_and_harmonics_proxy
+  inputs:
+    seed: 2026112061
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 3
+    stage2_archive_limit: 3
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      Stable low-cost nonlinear circuit proxy parameter variation can propose
+      candidates for independent 610 product-specific falsification.
+    architecture: UA610_TUBE_NONLINEARITY_GENERIC_PROXY_ONLY
+    tested_parameters:
+      saturation_transfer: bounded_candidate_space
+      harmonic_balance: exploration_only
+      stage_memory: proxy_not_circuit_truth
+      original_preamp_product_write: false
+    benchmark_profile:
+      - melon_staged_funnel_default_v1
+      - ua610_real_product_regression_still_required
+    sample_rate: 48000
+    input_set: MELON_SYNTHETIC_BENCHMARK_NOT_REAL_VOCAL
+    reference_model: MELON_DEFAULT_MATCHED_FIXED_BASELINE_NOT_UA_HARDWARE
+    objective_set:
+      - numerical_stability
+      - harmonic_balance_proxy
+      - alias_risk_proxy
+      - complexity
+    relevant_constraints:
+      - no_610_hardware_fidelity_claim
+      - no_real_vocal_quality_claim
+      - preserved_610_baseline_not_modified
+      - mandatory_compiled_DSP_AB
+      - no_auto_adoption
+      - no_auto_release
+    experiment_type: BOUNDED_NONLINEARITY_PROXY_SCREEN
+    scope:
+      - ua610
+      - original_vocal_pre
+      - tube_nonlinearity_proxy
+      - numerical_stability
+

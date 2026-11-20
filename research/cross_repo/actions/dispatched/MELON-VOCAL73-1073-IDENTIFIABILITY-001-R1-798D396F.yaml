@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -24,7 +24,7 @@ inputs:
     v0.2 model''s limitations without pretending that proxy tests or commercial plugins
     are physical hardware measurements?","track_id":"VOCAL73-1073-IDENTIFIABILITY-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -42,3 +42,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 44714038497
+dispatched_at: '2026-11-20T09:53:29.473771Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

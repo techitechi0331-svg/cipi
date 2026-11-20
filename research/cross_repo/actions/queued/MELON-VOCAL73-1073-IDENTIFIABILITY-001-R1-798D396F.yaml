@@ -1,0 +1,44 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026112002
+  population: 4
+  generations: 1
+  max_candidates: 8
+  max_runtime_seconds: 60
+  stage2_limit: 3
+  stage2_archive_limit: 3
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":1024,"policy_id":"VOCAL73-1073-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"EXP-VOCAL73-1073-IDENTIFIABILITY-R1","experiment_type":"INITIAL_CIRCUIT_IDENTIFIABILITY","hypothesis_id":"HYP-VOCAL73-1073-SOURCE-CONSTRAINED-CIRCUIT-FIRST","job_id":"VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VOCAL73-1073-IDENTIFIABILITY-001","research_question":"With
+    the original 1970s Neve 1073 revision explicitly distinguished from current reissues
+    and clones, can source-constrained circuit structure, switched gain/EQ/HPF topology
+    and falsifiable synthetic baseline experiments expose the current Vocal 73 Pre
+    v0.2 model''s limitations without pretending that proxy tests or commercial plugins
+    are physical hardware measurements?","track_id":"VOCAL73-1073-IDENTIFIABILITY-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL73-1073-IDENTIFIABILITY-001
+bridge_job_id: VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F
+continuation_fingerprint: 798d396f70efe8067f61968b7847feb90dd7100134fe192b4c5ea9f9375db6f5
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL73-1073-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

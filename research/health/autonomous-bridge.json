@@ -20,11 +20,13 @@
     "VOCAL-DENOISE-LOSS-001",
     "VOCAL-DENOISE-PRESERVATION-001",
     "VOCAL-DENOISE-ROBUSTNESS-001",
-    "VOCAL-RIDER-REALVOCAL-001"
+    "VOCAL-RIDER-REALVOCAL-001",
+    "VOCAL73-1073-IDENTIFIABILITY-001"
   ],
   "active_research_tracks_semantics": "LEGACY_ENABLED_TRACKS_DO_NOT_USE_FOR_LIFECYCLE",
   "active_tracks": [
-    "VOCAL-RIDER-REALVOCAL-001"
+    "VOCAL-RIDER-REALVOCAL-001",
+    "VOCAL73-1073-IDENTIFIABILITY-001"
   ],
   "authority": "OPERATIONAL_SCHEDULING_ONLY",
   "automatic_knowledge_promotion": false,
@@ -240,6 +242,16 @@
       "runs_limit": 3,
       "runtime_limit_seconds": 300.0,
       "runtime_seconds": 0.0
+    },
+    "VOCAL73-1073-IDENTIFIABILITY-001": {
+      "candidates": 0,
+      "candidates_limit": 24,
+      "loop_depth": 0,
+      "loop_depth_limit": 3,
+      "runs": 0,
+      "runs_limit": 3,
+      "runtime_limit_seconds": 300.0,
+      "runtime_seconds": 0.0
     }
   },
   "continuation_candidates": 36,
@@ -264,7 +276,8 @@
     "VOCAL-DENOISE-LOSS-001": 2,
     "VOCAL-DENOISE-PRESERVATION-001": 2,
     "VOCAL-DENOISE-ROBUSTNESS-001": 2,
-    "VOCAL-RIDER-REALVOCAL-001": 0
+    "VOCAL-RIDER-REALVOCAL-001": 0,
+    "VOCAL73-1073-IDENTIFIABILITY-001": 0
   },
   "duplicate_suppressions": 8,
   "enabled_tracks": [
@@ -288,9 +301,10 @@
     "VOCAL-DENOISE-LOSS-001",
     "VOCAL-DENOISE-PRESERVATION-001",
     "VOCAL-DENOISE-ROBUSTNESS-001",
-    "VOCAL-RIDER-REALVOCAL-001"
+    "VOCAL-RIDER-REALVOCAL-001",
+    "VOCAL73-1073-IDENTIFIABILITY-001"
   ],
-  "generated_jobs": 46,
+  "generated_jobs": 47,
   "human_gate_tracks": [
     "MIC-SIM-REFERENCE-SM57-001",
     "VIRTUAL-GUITAR-MEASURED-REFERENCE-001",
@@ -303,9 +317,11 @@
   "human_gates": 7,
   "invalid_results": 0,
   "melon_runs": 45,
-  "next_scheduler_action": "NO_READY_WORK",
+  "next_scheduler_action": "MELON-VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F",
   "no_improvement_count": 5,
-  "queued_actions": [],
+  "queued_actions": [
+    "MELON-VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F"
+  ],
   "registered_tracks": [
     "MELON-BRIDGE-CLEAN-PROOF-002",
     "MELON-BRIDGE-PILOT-001",
@@ -334,16 +350,17 @@
     "VOCAL-DENOISE-RUNTIME-001",
     "VOCAL-DENOISE-VST3-001",
     "VOCAL-RIDER-REALVOCAL-001",
-    "VOCAL-SURFACE-REAL-AUDIO-001"
+    "VOCAL-SURFACE-REAL-AUDIO-001",
+    "VOCAL73-1073-IDENTIFIABILITY-001"
   ],
   "rejected_continuations": 12,
   "research_quality_metrics": {
-    "budget_exhaustion_rate": 0.19047619047619047,
+    "budget_exhaustion_rate": 0.18181818181818182,
     "cache_hit_rate": 0.0,
     "duplicate_research_rate": 0.0,
     "early_convergence_rate": null,
     "falsification_rate": 0.0,
-    "human_gate_rate": 0.3333333333333333,
+    "human_gate_rate": 0.3181818181818182,
     "new_information_per_compute_second": 0.023709110926984547,
     "new_information_per_run": 0.7414643826508541,
     "pareto_front_turnover": null,
@@ -545,6 +562,12 @@
       "reason": "TRACK_DISABLED",
       "scheduler_eligible": false,
       "state": "DISABLED"
+    },
+    "VOCAL73-1073-IDENTIFIABILITY-001": {
+      "job_id": "VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F",
+      "reason": "EXTERNAL_ACTION_QUEUED",
+      "scheduler_eligible": true,
+      "state": "READY"
     }
   },
   "track_stop_reasons": {

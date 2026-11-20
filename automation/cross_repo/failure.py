@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+# Do not treat a failed artifact upload as a transient infrastructure failure.
+# Storage quotas need a quota/retention fix, not another expensive experiment.
 TRANSIENT_TOKENS = (
     "checkout",
     "cache",
@@ -13,9 +15,6 @@ TRANSIENT_TOKENS = (
     "ensure juce",
     "locate juce",
     "locate cmake",
-    "upload artifact",
-    "upload research evidence",
-    "artifact upload",
 )
 PRODUCT_TOKENS = (
     "configure",
@@ -32,6 +31,12 @@ PRODUCT_TOKENS = (
     "reference",
     "vocal",
 )
+QUOTA_MESSAGES = (
+    "artifact storage quota has been hit",
+    "artifact storage quota exceeded",
+    "artifact storage limit has been reached",
+    "failed to createartifact: artifact storage quota",
+)
 
 
 def _failing_steps(jobs: list[dict[str, Any]]) -> list[str]:
@@ -43,10 +48,23 @@ def _failing_steps(jobs: list[dict[str, Any]]) -> list[str]:
     return names
 
 
-def classify_failure(run: dict[str, Any], jobs: list[dict[str, Any]]) -> dict[str, Any]:
+def _is_upload_step(step: str) -> bool:
+    return "upload" in step and ("artifact" in step or "evidence" in step
+                                 or "log" in step or "measurement" in step
+                                 or "vst3" in step or "vocal" in step)
+
+
+def classify_failure(
+    run: dict[str, Any],
+    jobs: list[dict[str, Any]],
+    *,
+    log_excerpt: str = "",
+) -> dict[str, Any]:
     conclusion = str(run.get("conclusion") or "")
     failing_steps = _failing_steps(jobs)
     lowered = [name.lower() for name in failing_steps]
+    has_upload_failure = any(_is_upload_step(step) for step in lowered)
+    quota_reported = any(message in log_excerpt.lower() for message in QUOTA_MESSAGES)
 
     if conclusion == "success":
         category = "SUCCESS"
@@ -64,6 +82,14 @@ def classify_failure(run: dict[str, Any], jobs: list[dict[str, Any]]) -> dict[st
         category = "TIMEOUT_UNKNOWN"
         retry_safe = False
         reason = "timeout may be infrastructure or product behavior; no blind retry"
+    elif has_upload_failure and quota_reported:
+        category = "STORAGE_QUOTA_EXCEEDED"
+        retry_safe = False
+        reason = "GitHub Actions artifact storage quota is exhausted; do not rerun compute"
+    elif has_upload_failure:
+        category = "ARTIFACT_UPLOAD_FAILURE"
+        retry_safe = False
+        reason = "evidence upload failed; reason is unverified, so an automatic rerun is unsafe"
     elif lowered and all(any(token in step for token in TRANSIENT_TOKENS) for step in lowered):
         category = "INFRA_TRANSIENT"
         retry_safe = True

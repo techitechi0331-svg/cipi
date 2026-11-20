@@ -1,0 +1,126 @@
+schema_version: "1.0"
+track_id: VOCAL-RIDER-REALVOCAL-001
+enabled: true
+activation_state: ACTIVE_MEASUREMENT
+root_research_id: VOCAL_RIDER_01
+
+research_question: >-
+  Can the Vocal Rider v0.1 boost-only sample-aligned Headroom Guard and
+  proposed Amount50 v0.3 trajectory reduce local phrase-level variation
+  without >0 dBFS samples, Amount0 changes, musical section flattening,
+  or damage to breaths, consonants, plosives and phrase tails?
+hypothesis_id: HYP-VOCAL-RIDER-SAFE-LEVELING-001
+hypothesis: >-
+  A bounded local-median gain rider with the aligned boost-only safety
+  guard can preserve zero-clipping, delayed-unity Amount0 and intended
+  phrase dynamics while improving correction depth. Product validation
+  requires dedicated real-vocal and Windows VST3 evidence.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - LEVEL_MATCHED_HUMAN_LISTENING
+  - CUBASE_PRO_14_HOST_CONFIRMATION
+  - GUI_EDITOR_CONFIRMATION
+  - PRODUCT_ADOPTION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  source_repo: techitechi0331-svg/vocal_rider
+  source_head: bc346336b5a0cca105e9462468cdea2b53ea3f6d
+  evidence_snapshot: research/experiments/VocalRider/status.yaml
+  candidate_branch: amount50-v03
+  candidate_pull_request: 2
+  do_not_reopen:
+    - AMOUNT0_DELAY_ONLY_BASELINE
+    - BOOST_ONLY_GUARD_CONTRACT
+    - FIRST_12_FILE_HOLDOUT
+    - FRESH_V03_PRE_GUARD_CHECKPOINT
+  rejected_directions:
+    - PROMOTE_V03_FROM_PRE_GUARD_CLIPPING_RUN
+    - REUSE_PRIOR_HOLDOUT_FOR_FINAL_ACCEPTANCE
+    - RELAX_PREDECLARED_THRESHOLDS_AFTER_TEST
+    - TREAT_MELON_PROXY_AS_VOCAL_RIDER_REAL_AUDIO_EVIDENCE
+    - AUTO_PRODUCT_RELEASE
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-VOCAL-RIDER-REALVOCAL-001-R1
+  experiment_type: VOCAL_RIDER_GAIN_CONTROL_PROXY_SCREEN
+  expected_information_gain: 0.85
+  scope:
+    - vocal_rider
+    - gain_trajectory
+    - headroom_safety
+    - transient_preservation
+  inputs:
+    seed: 2026112001
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 3
+    stage2_archive_limit: 3
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      Bounded gain-trajectory proxy screening can generate falsifiable
+      candidates, but real-vocal quality and safety must be measured
+      by the dedicated Vocal Rider validation workflows.
+    architecture: VOCAL_RIDER_BOUNDED_GAIN_TRAJECTORY_PROXY
+    tested_parameters:
+      safety_guard: boost_only_sample_aligned
+      amount50_candidate: unpromoted_v03
+      target_mode: local_median
+      no_product_write: true
+    benchmark_profile:
+      - vocal_rider_gain_trajectory_proxy_v1
+      - dedicated_real_vocal_ci_required
+    sample_rate: 48000
+    input_set: MELON_SYNTHETIC_PROXY_ONLY
+    reference_model: VOCAL_RIDER_MAIN_BC346336
+    objective_set:
+      - settling
+      - gain_trajectory_smoothness
+      - boundedness
+      - numerical_stability
+    relevant_constraints:
+      - real_vocal_clipping_zero_hard_gate
+      - amount0_exact_delay_only
+      - no_proxy_quality_promotion
+      - no_auto_product_adoption
+      - keep_human_host_gates
+    experiment_type: VOCAL_RIDER_GAIN_CONTROL_PROXY_SCREEN
+    scope:
+      - vocal_rider
+      - gain_trajectory
+      - headroom_safety
+
+efficiency_policy:
+  policy_id: VOCAL-RIDER-REALVOCAL-001-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 2048
+  candidate_timeout_seconds: 15
+  full_regression_required: false

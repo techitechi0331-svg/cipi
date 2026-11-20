@@ -41,3 +41,7 @@ Product issue: https://github.com/techitechi0331-svg/VocalSurfaceProcessor/issue
 
 ## No-Wait next action
 If baseline is queued or the dedicated adapter is not yet reviewed, continue independent dataset licensing audit, input-manifest recipe and reproducible measurement-script proposal while preserving the exact blocker and re-entry reference.
+
+## CIPI Research Gate prerequisite
+- The first PR #494 Research Gate failure was unrelated to Vocal Surface: Vocal ONE status schema recorded invalid `not_started` states, a text confidence and non-stage items under `completed`.
+- Minimal schema-only repair PR #495 passed the Research Gate and merged (commit `60823a5155c6b4bce041aeb6fbc00061a2be5f68`). This does not claim Vocal Surface CI or real-audio validation passed.

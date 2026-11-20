@@ -99,6 +99,23 @@ class FakeRecoveryClient(FakeArtifactClient):
 
 
 def main() -> int:
+    # The legacy VoPriPro workflows must not be dispatched under VL2A.
+    live_registry = yaml.safe_load(
+        (ROOT / "automation/cross_repo/registry.yaml").read_text(encoding="utf-8")
+    )
+    vl2a = live_registry["repositories"]["vl2a"]["workflows"]
+    vopripro = live_registry["repositories"]["vopripro"]["workflows"]
+    assert vl2a["build"]["dispatch"] is False
+    assert vl2a["real_vocal"]["dispatch"] is False
+    assert vl2a["prehost_stage"]["dispatch"] is True
+    assert vopripro["build"]["file"] == "build-windows.yml"
+    assert vopripro["real_vocal"]["file"] == "real-vocal-validation.yml"
+    wrong_product = action("TEST-WRONG-PRODUCT-001", "build", 10)
+    wrong_product["repo_key"] = "vl2a"
+    assert any(
+        "monitor-only" in err for err in validate_action(wrong_product, live_registry)
+    )
+
     a = action("TEST-ACTION-001", "build", 20)
     assert validate_action(a, REGISTRY) == []
     invalid = action("TEST-ACTION-002", "monitor", 10)

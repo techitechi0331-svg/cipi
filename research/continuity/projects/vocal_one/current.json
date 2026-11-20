@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "c9641d932280578237472fc38f56eeb569aee960",
+    "commit_sha": "e605815cad42333353b9392ed22b23855271601b",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "STALE",
-  "generated_at": "2026-11-20T19:16:35+09:00",
-  "generation_id": "0e0353fba056c64ef8bb08f3",
+  "generated_at": "2026-11-20T19:29:36+09:00",
+  "generation_id": "ce3fe88c38916b1ff61fc42e",
   "human_gates": [],
   "latest_decision_refs": [
     {
@@ -36,7 +36,14 @@
   "research": {
     "decision_ref_count": 1,
     "review_ref_count": 0,
-    "track_lifecycle": {}
+    "track_lifecycle": {
+      "VOCAL-ONE-P0-BYPASS-001": {
+        "job_id": "VOCAL-ONE-P0-BYPASS-001-R1-623430BE",
+        "reason": "EXTERNAL_ACTION_QUEUED",
+        "scheduler_eligible": true,
+        "state": "READY"
+      }
+    }
   },
   "resume_contract": {
     "blocked_dependencies": [],
@@ -56,7 +63,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "8f292fb575d9e7ecde28cdad405932edec01580e34319b80c9650afa04ecdce0",
+      "sha256": "bfe04f7307eb6718777c376210573277b552666b9ca34cebda60434b654e1f42",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -75,13 +82,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "0f72704de02a756980c1c67e2ca2fad236a9f56de6f4de7f11a695491be1f228",
+      "sha256": "ff86774bdce36d1b5853f082a04da04c0b009f36b90a54d65add4b64ec7531de",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "525ff308d52a6574ae9d452202105333d62898bc16f437d3e781a4b281e28d58",
+      "sha256": "99f7c7106416438f0228f93d58cd5055bbf1685f951040b56a781530712b7a28",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -106,7 +113,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "d1c1a4cfc4d95e792f8fdd4a450139c2937577f85d99c64fe4c6e430ea2b7be0",
+  "source_state_digest": "e22e28ce6fa6c3d4026171a2463b216a50ee490844c21d957073067febcdc743",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

@@ -205,9 +205,37 @@ def main() -> int:
         assert completed_action["recovered_from_failed_attempt"] == 1
         assert not (failed_dir / "recover.yaml").exists()
 
-    transient = classify_failure(
+    # A failed upload is not safe to rerun without the actual cause.
+    upload_unknown = classify_failure(
         {"conclusion": "failure"},
         [{"steps": [{"name": "Upload research evidence", "conclusion": "failure"}]}],
+    )
+    assert upload_unknown["category"] == "ARTIFACT_UPLOAD_FAILURE"
+    assert upload_unknown["retry_safe"] is False
+
+    quota_failure = classify_failure(
+        {"conclusion": "failure"},
+        [{"steps": [{"name": "Upload research evidence", "conclusion": "failure"}]}],
+        log_excerpt="##[error]Failed to CreateArtifact: Artifact storage quota has been hit.",
+    )
+    assert quota_failure["category"] == "STORAGE_QUOTA_EXCEEDED"
+    assert quota_failure["retry_safe"] is False
+    assert "quota" in quota_failure["reason"].lower()
+
+    mixed_failure = classify_failure(
+        {"conclusion": "failure"},
+        [{"steps": [
+            {"name": "Fetch pinned SDK", "conclusion": "failure"},
+            {"name": "Upload Vocal Rider artifact", "conclusion": "failure"},
+        ]}],
+        log_excerpt="Artifact storage quota has been hit.",
+    )
+    assert mixed_failure["category"] == "STORAGE_QUOTA_EXCEEDED"
+    assert mixed_failure["retry_safe"] is False
+
+    transient = classify_failure(
+        {"conclusion": "failure"},
+        [{"steps": [{"name": "Download SDK", "conclusion": "failure"}]}],
     )
     assert transient["category"] == "INFRA_TRANSIENT"
     assert transient["retry_safe"] is True

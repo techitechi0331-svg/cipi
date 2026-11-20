@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "90c56f048054821c3e5aca1199f961e6b1476445",
+    "commit_sha": "d1228a9c6319b47c261a1993a00c38c3f32a263f",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T18:57:46+09:00",
-  "generation_id": "65990323e7caae237d3b2d25",
+  "generated_at": "2026-11-20T19:14:36+09:00",
+  "generation_id": "b351ff42dd093f2e20e29dad",
   "human_gates": [],
   "latest_decision_refs": [],
   "phase": "IDLE",
@@ -57,7 +57,7 @@
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "2f617e57385b68ae1b816c88b0c73874ad5bb0a4d4a39c80c78a0ccc5bdc8f59",
+      "sha256": "a0742c2437b806f5dc9f7c7ed60bddba14cb8ba3602a788b0f755a9c9f107629",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -76,25 +76,25 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "31c120fca8fb89d7ff9c6d726eddfa3ea8d80b74a0654b006b0929bbfda252f5",
+      "sha256": "5f6a64283b5701a2a6d63bbc02e531afe491a36227bc29896eb31e2c61c668a7",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "01f7d4fca69191936ad42c391541cd0e39be8e94dd0df61c816ecb0da648e37e",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "a4cb70e1e33b585be56dee49611975b0fa373d5c9199d8f005396c38c4be648e",
+      "sha256": "1e4d1ed9e7399ff3e52560e6f12066b3ac4b4a7841b29af3549aaa6f765525ee",
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "4e8058734cedb8376434b08727b350f274de0e9dafafc3f334ceb6c89ef2dce0",
+  "source_state_digest": "46dd7c9f2a40aa521617063ecd2bbfada048050f8c2953dad7b9f121f66b7f5f",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

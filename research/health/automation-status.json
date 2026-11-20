@@ -716,11 +716,18 @@
     "human_gate_jobs": [
       "VIRTUAL-GUITAR-PICKUP-ELECTRONICS-INTEGRATION-STRAT-001<-FINAL_SUBJECTIVE_PICKUP_TONE,REAL_DI_AB,PRODUCT_ADOPTION_DECISION"
     ],
-    "ready_job": null
+    "ready_job": {
+      "branch": "research-bot/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/auto-b545e621948c",
+      "job_id": "VOCAL-RESONANCE-R13-ACTION-EQUIV-001",
+      "kind": "LOCAL_RESEARCH",
+      "priority": 0
+    }
   },
   "schema_version": "1.0",
   "selected": {
-    "kind": "IDLE",
-    "priority": -999
+    "branch": "research-bot/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/auto-b545e621948c",
+    "job_id": "VOCAL-RESONANCE-R13-ACTION-EQUIV-001",
+    "kind": "LOCAL_RESEARCH",
+    "priority": 0
   }
 }

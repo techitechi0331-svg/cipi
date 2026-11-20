@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: bb966bc9297b1fdbb6cc9507b3a12c44c669481f
-- Source-state digest: 1b8708bd065db8d2d848748faa42520e21ce0fe0392c505f96103663c07b3b22
+- CIPI source commit: f3d02554cbdf8ee2e0cf21bcabb6c86179ef1533
+- Source-state digest: d6f3850e69e560581ecd1c3519bbfa28991809de337f9b5d2bb23002c798899b
 - Product: techitechi0331-svg/VocalSurfaceProcessor@main
 - Product commit: b89a1de4cd856b02ca9e0716b6775c576421d99d
 

@@ -1,0 +1,64 @@
+schema_version: "1.0"
+job_id: VL2A-RC2-EVIDENCE-CONTINUITY-001
+state: QUEUED
+priority: 85
+track:
+  id: VL2A_PHASE01H_LINEAMP
+  path: research/plugins/vl2a
+research_question: >-
+  Does current CIPI main distinguish the accepted VL2A v0.6 RC2 pre-host evidence
+  from older Phase01-H formal status, while retaining the unresolved Cubase,
+  subjective listening, adoption and release gates?
+hypothesis: >-
+  Independent CIPI evidence records retain the already-tested 6-sample
+  prepared-VST3 latency, strict pluginval and HA100X pre-host candidate,
+  but the older formal status still requires scope-labelled reconciliation,
+  not a new DSP optimization or product release.
+counter_hypotheses:
+  - "The pre-host snapshot lacks a traceable candidate or claims verified Cubase outcomes without evidence."
+  - "The retained baseline omits latency/pluginval measurements or the track's authority restrictions."
+  - "The formal Phase01-H status already claims final review while external human gates are still unverified."
+baseline:
+  - committed_vl2a_prehost_snapshot
+  - ha100x_track_authority_and_budget
+  - accepted_rc2_source_provenance
+variants:
+  - evidence_continuity_replay
+  - formal_status_scope_divergence_report
+metrics:
+  - recorded_prehost_state
+  - prehost_candidate_id
+  - frozen_baseline_pluginval_present
+  - frozen_baseline_prepared_latency_present
+  - authority_boundaries_preserved
+  - unresolved_human_gate_count
+  - formal_tracking_scope_reconciliation_recommended
+  - premature_formal_completion
+acceptance:
+  - "Every required provenance and track record is present."
+  - "The frozen baseline records strict pluginval and prepared VST3 latency without inventing a Cubase result."
+  - "Product write and automatic knowledge/release decision remain prohibited."
+  - "The status audit reports scope divergence rather than silently editing historical CIPI knowledge."
+rejection:
+  - "Any required source is missing or malformed."
+  - "A product/knowledge/release permission boundary is unexpectedly enabled."
+  - "The older formal status claims final review completion while external Human Gates remain unverified."
+max_runs: 1
+timeout_minutes: 2
+random_seed: 20261120
+experiment_adapter: vl2a_rc2_evidence_continuity_v1
+allowed_operations:
+  - read_committed_cipi_records
+  - compute_sha256
+  - validate_human_gate_boundaries
+  - write_derived_measurements
+prohibited_operations:
+  - arbitrary_shell
+  - network_access
+  - network_write
+  - raw_audio_write
+  - main_push
+  - confidence_change
+  - stage_promotion
+  - product_repository_write
+  - product_release

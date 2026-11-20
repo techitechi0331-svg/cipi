@@ -160,6 +160,16 @@ adapters:
     network_required: true
     purpose: "Audit disjoint VocalSet clean negatives by technique, singer, and F0 quantiles without persisting raw audio."
 
+  vl2a_rc2_evidence_continuity_v1:
+    tracks:
+      - VL2A_PHASE01H_LINEAMP
+    max_timeout_minutes: 2
+    network_required: false
+    purpose: >-
+      Audit historical Phase01-H formal status against accepted RC2/pre-host
+      evidence, report scope divergence and preserve all authority/human gates.
+      Derived diagnostic only; no product writes, new fidelity claim or release.
+
   vl2a_phase01h_checksum_diagnosis_v1:
     tracks:
       - VL2A_PHASE01H_LINEAMP

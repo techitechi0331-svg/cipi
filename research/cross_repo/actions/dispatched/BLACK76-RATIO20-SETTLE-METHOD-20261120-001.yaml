@@ -1,0 +1,30 @@
+schema_version: '1.0'
+action_id: BLACK76-RATIO20-SETTLE-METHOD-20261120-001
+state: DISPATCHED
+repo_key: black76
+workflow_key: ratio20_settle_diagnostic
+ref: main
+inputs: {}
+priority: 88
+attempts: 1
+max_attempts: 1
+retry_count: 0
+max_retries: 0
+depends_on_jobs: []
+depends_on_actions: []
+reason: CIPI-governed, independent and bounded 20:1 measurement-method investigation
+  following the distinct failed source-loading family in run 36296786162. Quantify
+  sensitivity to 14 ms vs 250 ms vs 1500 ms settling at 176400 and 192000 Hz in the
+  current production DSP without fitting or modifying circuit parameters. Fixed 80
+  ms measurement window, four signal levels; diagnostic-only, no vintage hardware
+  accuracy or release claim. GitHub Actions artifact storage quota prevents audio/CSV
+  upload; emit structured output to job log and step summary only. Preserve workflow
+  result, stdout evidence and missing-artifact caveat. Never infer success solely
+  from dispatch and never auto-retry failed scientific tests.
+authority: EXTERNAL_WORKFLOW_EVIDENCE_ONLY
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+previous_run_id: 0
+dispatched_at: '2026-11-20T11:00:19.923425Z'
+repository: techitechi0331-svg/76blackCompressor
+workflow_file: windows-ratio20-settle-diagnostic.yml

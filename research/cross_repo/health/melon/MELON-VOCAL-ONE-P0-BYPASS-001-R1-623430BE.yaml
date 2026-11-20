@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-ONE-P0-BYPASS-001-R1-623430BE
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: COMPLETED
+run_id: 44723748676
+run_status: completed
+run_conclusion: failure
+since: '2026-11-20T10:58:54Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

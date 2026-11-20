@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-VOCAL-ONE-P0-BYPASS-001-R1-623430BE
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -22,7 +22,7 @@ inputs:
     transition reveal falsifiable transition-step, sample-rate and smoothing tradeoffs
     before any actual VST3/host adoption?","track_id":"VOCAL-ONE-P0-BYPASS-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -40,3 +40,7 @@ policy_gate:
   state: ACTIVE
   safe_handoff_enforced: true
   interrupt_current_jobs: false
+previous_run_id: 44723438580
+dispatched_at: '2026-11-20T10:58:54.774253Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

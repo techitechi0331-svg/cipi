@@ -106,7 +106,14 @@ def main() -> int:
 
     raw_names = []
     for name, content in result.get("raw_files", {}).items():
-        target = out / name
+        relative = Path(name)
+        if (not name or relative.is_absolute() or ".." in relative.parts or
+                "\\\\" in name or relative.as_posix() != name):
+            raise ValueError("unsafe raw evidence output filename")
+        target = out / relative
+        if target.is_symlink() or any(parent.is_symlink() for parent in target.parents if parent != out):
+            raise ValueError("symlinked raw evidence target forbidden")
+        target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content, encoding="utf-8")
         raw_names.append(name)
 
@@ -125,7 +132,7 @@ def main() -> int:
 
     completed = utc_now()
     manifest = {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "job_id": job["job_id"],
         "run_id": args.run_id,
         "source_commit": git_sha(),

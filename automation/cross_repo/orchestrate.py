@@ -647,6 +647,63 @@ def backfill_completed_artifacts(root: Path, registry: dict, gh: GitHubClient) -
     return created
 
 
+
+def ingest_melon_outbox_recoveries(root: Path, registry: dict, gh: GitHubClient) -> tuple[int, int]:
+    """Ingest upload-only recoveries; never recompute an already finished run.
+
+    Recovery artifacts are associated with a new GitHub workflow run, while
+    their strictly redacted macro result retains the original MELON run_id.
+    The Bridge consumes the latter and remains idempotent on logical run_id.
+    """
+    melon = registry.get("repositories", {}).get("melon")
+    if not isinstance(melon, dict):
+        return 0, 0
+    repo = str(melon["repository"])
+    try:
+        recent = gh.list_workflow_runs(repo, "melon-artifact-recovery.yml", per_page=20)
+    except RuntimeError as exc:
+        print(f"MELON outbox recovery listing unavailable: {exc}")
+        return 0, 0
+    created = 0
+    markers = 0
+    records_root = root / "research" / "cross_repo" / "recovery_intake" / "melon"
+    for run in recent:
+        if run.get("status") != "completed" or run.get("conclusion") != "success":
+            continue
+        run_id = run.get("id")
+        if type(run_id) is not int:
+            continue
+        marker = records_root / f"{run_id}.yaml"
+        if marker.exists():
+            continue
+        try:
+            artifacts = gh.list_run_artifacts(repo, run_id)
+        except RuntimeError as exc:
+            print(f"MELON recovery artifact check unavailable: {run_id}: {exc}")
+            continue
+        recovered = 0
+        if artifacts:
+            recovered = ingest_run_artifacts(
+                root, gh=gh, repo_key="melon", repo=repo,
+                run=run, mode="metadata_and_text",
+            )
+        metadata = {
+            "schema_version": "1.0",
+            "recovery_workflow_run_id": run_id,
+            "recovery_attempt": int(run.get("run_attempt") or 1),
+            "recovered_artifact_records": recovered,
+            "discovered_artifact_count": len(artifacts),
+            "source": "PRIVATE_OUTBOX_UPLOAD_ONLY_REPLAY",
+            "authority": "EXTERNAL_EVIDENCE_ONLY",
+            "automatic_product_decision": False,
+            "automatic_knowledge_promotion": False,
+        }
+        if write_yaml_if_changed(marker, metadata):
+            markers += 1
+        created += recovered
+    return created, markers
+
+
 def observe_latest(root: Path, registry: dict, gh: GitHubClient) -> int:
     created = 0
     for repo_key, repo_spec in registry["repositories"].items():
@@ -812,6 +869,7 @@ def main() -> int:
     reconciliation = reconcile_actions(root, registry, gh)
     recovery = reconcile_retried_failed_actions(root, registry, gh)
     backfilled = backfill_completed_artifacts(root, registry, gh)
+    outbox_recoveries, outbox_recovery_markers = ingest_melon_outbox_recoveries(root, registry, gh)
     observed = observe_latest(root, registry, gh)
     resumed = resume_jobs(root)
     access_restored = reconcile_blocked_queued_access(root, registry, gh)
@@ -820,6 +878,8 @@ def main() -> int:
         any(reconciliation.values())
         or any(recovery.values())
         or backfilled > 0
+        or outbox_recoveries > 0
+        or outbox_recovery_markers > 0
         or observed > 0
         or resumed > 0
         or access_restored > 0
@@ -832,6 +892,7 @@ def main() -> int:
         *(f"{key}={value}" for key, value in reconciliation.items()),
         *(f"recovery_{key}={value}" for key, value in recovery.items()),
         f"backfilled_artifacts={backfilled}",
+        f"outbox_recovery_artifacts={outbox_recoveries}",
         f"observed={observed}",
         f"resumed={resumed}",
         f"access_restored={access_restored}",
@@ -849,7 +910,7 @@ def main() -> int:
             "access_restored": access_restored,
             "blocked_external": newly_blocked,
             "retried_actions": reconciliation["retried"],
-            "artifact_records": reconciliation["artifacts"] + recovery["artifacts"] + backfilled,
+            "artifact_records": reconciliation["artifacts"] + recovery["artifacts"] + backfilled + outbox_recoveries,
             "runner_health_changes": reconciliation["health_changes"] + recovery["health_changes"],
             "observed_events": observed + recovery["events"],
             "resumed_jobs": resumed,

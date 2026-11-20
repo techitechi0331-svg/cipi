@@ -165,6 +165,11 @@ class GitHubClient:
         runs = data.get("workflow_runs", [])
         return runs if isinstance(runs, list) else []
 
+    def get_workflow_run(self, repo: str, run_id: int) -> dict[str, Any] | None:
+        url = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}"
+        value = self.request_json("GET", url)
+        return value if isinstance(value, dict) else None
+
     def list_run_jobs(self, repo: str, run_id: int) -> list[dict]:
         url = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/jobs?per_page=100"
         data = self.request_json("GET", url)
@@ -358,9 +363,16 @@ def reconcile_actions(root: Path, registry: dict, gh: GitHubClient) -> dict[str,
 
         run = None
         run_id = action.get("run_id")
-        if run_id is not None:
+        if isinstance(run_id, int):
             run = next((r for r in runs if r.get("id") == run_id), None)
-        if run is None:
+            if run is None:
+                # The fixed run may simply have fallen off the 15-item list.
+                # Fetch it by ID; never silently re-associate to a newer run.
+                try:
+                    run = gh.get_workflow_run(repo, run_id)
+                except RuntimeError as exc:
+                    print(f"pinned workflow run unavailable: {action['action_id']}: {exc}")
+        elif run_id is None:
             run = match_dispatched_run(action, runs)
             if run is not None:
                 action["run_id"] = run.get("id")

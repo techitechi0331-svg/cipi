@@ -51,12 +51,13 @@ Render render(int blockSize, bool toggleHpf, bool toggleAnalog, bool toggleColor
 
 void report(const char* name, int block, const Render& changed, const Render& baseline)
 {
-    double maxAbsDelta = 0.0, rms = 0.0, switchPeak = 0.0;
+    double maxAbsDelta = 0.0, rms = 0.0, switchPeak = 0.0, preSwitchMaxDelta = 0.0;
     bool finite = true;
     for (int i = 0; i < nSamples; ++i) {
         const double x = changed.samples[static_cast<size_t>(i)];
         const double y = baseline.samples[static_cast<size_t>(i)];
         finite = finite && std::isfinite(x);
+        if (i < toggleSample) preSwitchMaxDelta = std::max(preSwitchMaxDelta, std::abs(x - y));
         if (i >= toggleSample) {
             const double d = x - y;
             maxAbsDelta = std::max(maxAbsDelta, std::abs(d));
@@ -64,18 +65,23 @@ void report(const char* name, int block, const Render& changed, const Render& ba
         }
     }
     rms = std::sqrt(rms / (nSamples - toggleSample));
+    if (preSwitchMaxDelta > 1.0e-6) std::cerr << "INVALID_CONTROL: pre-switch mismatch for " << name << " block=" << block << " delta=" << preSwitchMaxDelta << '\n';
     // switch_window_peak is absolute signal peak, NOT click amplitude or a hardware-fidelity metric.
     for (int i = toggleSample - 8; i < toggleSample + 64; ++i)
         switchPeak = std::max(switchPeak, std::abs(static_cast<double>(changed.samples[static_cast<size_t>(i)])));
+    const double changedJump = static_cast<double>(changed.samples[toggleSample]) - changed.samples[toggleSample - 1];
+    const double baselineJump = static_cast<double>(baseline.samples[toggleSample]) - baseline.samples[toggleSample - 1];
+    const double excessJump = changedJump - baselineJump;
     std::cout << name << ',' << block << ',' << changed.latency << ','
               << (finite ? "true" : "false") << ',' << std::setprecision(12)
-              << maxAbsDelta << ',' << rms << ',' << switchPeak << '\n';
+              << maxAbsDelta << ',' << rms << ',' << switchPeak << ','
+              << preSwitchMaxDelta << ',' << excessJump << '\n';
 }
 } // namespace
 
 int main()
 {
-    std::cout << "case,block_size,latency_samples,finite,max_abs_difference,rms_difference,switch_window_peak\n";
+    std::cout << "case,block_size,latency_samples,finite,max_abs_difference,rms_difference,switch_window_peak,pre_switch_max_difference,excess_jump_at_switch\n";
     for (int block : {32, 256, 2048}) {
         const auto baseline = render(block, false, false, false);
         const auto analogOffBaseline = render(block, false, false, false, false);

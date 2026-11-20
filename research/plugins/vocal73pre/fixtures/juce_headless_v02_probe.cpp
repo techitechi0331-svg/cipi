@@ -20,7 +20,7 @@ struct Render {
     int latency = -1;
 };
 
-Render render(int blockSize, bool toggleHpf, bool toggleAnalog, bool toggleColor)
+Render render(int blockSize, bool toggleHpf, bool toggleAnalog, bool toggleColor, bool initialAnalog = true)
 {
     Vocal73DSP dsp;
     dsp.prepare(fs, maxBlock, 1);
@@ -40,7 +40,7 @@ Render render(int blockSize, bool toggleHpf, bool toggleAnalog, bool toggleColor
         }
         const bool after = offset >= toggleSample;
         const int hpf = toggleHpf && after ? 2 : 0;
-        const bool analog = toggleAnalog ? after : true;
+        const bool analog = toggleAnalog ? after : initialAnalog;
         const float color = toggleColor && after ? 100.0f : 45.0f;
         dsp.process(audio, 0.0f, color, 0.0f, hpf, analog);
         for (int i = 0; i < count; ++i)
@@ -64,6 +64,7 @@ void report(const char* name, int block, const Render& changed, const Render& ba
         }
     }
     rms = std::sqrt(rms / (nSamples - toggleSample));
+    // switch_window_peak is absolute signal peak, NOT click amplitude or a hardware-fidelity metric.
     for (int i = toggleSample - 8; i < toggleSample + 64; ++i)
         switchPeak = std::max(switchPeak, std::abs(static_cast<double>(changed.samples[static_cast<size_t>(i)])));
     std::cout << name << ',' << block << ',' << changed.latency << ','
@@ -77,8 +78,9 @@ int main()
     std::cout << "case,block_size,latency_samples,finite,max_abs_difference,rms_difference,switch_window_peak\n";
     for (int block : {32, 256, 2048}) {
         const auto baseline = render(block, false, false, false);
+        const auto analogOffBaseline = render(block, false, false, false, false);
         report("HPF_0_TO_80", block, render(block, true, false, false), baseline);
-        report("ANALOG_OFF_TO_ON", block, render(block, false, true, false), baseline);
+        report("ANALOG_OFF_TO_ON", block, render(block, false, true, false, false), analogOffBaseline);
         report("COLOR_45_TO_100", block, render(block, false, false, true), baseline);
     }
     return 0;

@@ -112,14 +112,18 @@ repositories:
     runner_class: self-hosted
     runner_wait_minutes: 20
     workflows:
+      # Legacy paths build VoPriPro, not VL2A. Keep the keys for the
+      # historical action ledger but forbid new dispatch/misattribution.
       build:
         file: build-windows.yml
-        dispatch: true
-        monitor: true
+        dispatch: false
+        monitor: false
+        artifact_ingest: metadata_only
       real_vocal:
         file: real-vocal-validation.yml
-        dispatch: true
-        monitor: true
+        dispatch: false
+        monitor: false
+        artifact_ingest: metadata_only
       prehost_stage:
         file: vl2a-prehost-stage.yml
         dispatch: true
@@ -137,6 +141,23 @@ repositories:
           - candidate_id
           - candidate_json
           - evidence_hash
+
+  vopripro:
+    repository: techitechi0331-svg/VocalPrepComp
+    default_ref: main
+    runner_class: self-hosted
+    runner_wait_minutes: 20
+    workflows:
+      build:
+        file: build-windows.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_only
+      real_vocal:
+        file: real-vocal-validation.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_only
 
   vocal73pre:
     repository: techitechi0331-svg/VocalPrepComp

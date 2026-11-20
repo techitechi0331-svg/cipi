@@ -91,3 +91,19 @@ foundation_p0_latest:
   cubase_host: NOT_RUN
   level_matched_audio_ab: NOT_RUN
   gate_meaning: "P0 technical build and portable DSP tests PASS; all release gates remain pending."
+
+foundation_step1_master_bypass_candidate:
+  observation_date: "2026-11-20"
+  product_branch: "feat/p0-master-bypass-20261120"
+  product_commit: "f6ac1be356c6cdf8c049e0011eebe2003d107fa7"
+  draft_pr: "https://github.com/techitechi0331-svg/Vocal-ONE/pull/1"
+  pr_ci_run: "https://github.com/techitechi0331-svg/Vocal-ONE/actions/runs/44714539807"
+  linux_portable_dsp_tests: PASS_observed_2026_11_20
+  windows_vst3_build: IN_PROGRESS_at_observation
+  pluginval: NOT_RUN
+  steinberg_validator: NOT_RUN
+  cubase_pro_14: NOT_RUN
+  human_audio_ab: NOT_RUN
+  cipi_evidence: "research/plugins/vocal-one/foundation-step1-bypass-pr1-20261120.md"
+  release_approved: false
+  note: "Infrastructure candidate on draft PR; no product adoption or sound-quality claim."

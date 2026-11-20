@@ -2,7 +2,7 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: f3d02554cbdf8ee2e0cf21bcabb6c86179ef1533
+- CIPI source commit: 75d993a8585ce599695c87785acae841e7409624
 - Source-state digest: 66264e9c082a296a81f19cca4c21136d8befdd0be8da8207974f5a41a8804d08
 - Product: techitechi0331-svg/virtual-guitar@main
 - Product commit: bd26a0556fb501228b4551f61f6a8e760a14455b

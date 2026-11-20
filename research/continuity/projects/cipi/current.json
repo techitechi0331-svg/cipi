@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "f3d02554cbdf8ee2e0cf21bcabb6c86179ef1533",
+    "commit_sha": "75d993a8585ce599695c87785acae841e7409624",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T17:07:45+09:00",
-  "generation_id": "1a1ed9a902f9c6f2de90350b",
+  "generated_at": "2026-11-20T18:47:35+09:00",
+  "generation_id": "9a5dbf6299b0e8f4e83b2870",
   "human_gates": [
     {
       "blocking": false,
@@ -69,7 +69,7 @@
   ],
   "phase": "BLOCKED",
   "product_ref": {
-    "commit_sha": "e90017c210500417a35000c49b4edc7559cbcaf0",
+    "commit_sha": "f4144c6e64939e5c1523592abffde86c91bd70d5",
     "ref": "main",
     "repository": "techitechi0331-svg/cipi",
     "verification": "VERIFIED"

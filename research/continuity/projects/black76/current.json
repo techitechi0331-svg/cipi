@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "f3d02554cbdf8ee2e0cf21bcabb6c86179ef1533",
+    "commit_sha": "75d993a8585ce599695c87785acae841e7409624",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T17:07:45+09:00",
-  "generation_id": "07ca9f6d2e631b5279ad331b",
+  "generated_at": "2026-11-20T18:47:35+09:00",
+  "generation_id": "a8d399bb2e4db0aae840d8d2",
   "human_gates": [],
   "latest_decision_refs": [
     {
@@ -75,7 +75,7 @@
   ],
   "phase": "IDLE",
   "product_ref": {
-    "commit_sha": "cd7a3ffdcd4a19fa396fc96b7a105afccbc692e5",
+    "commit_sha": "4ac018adc57061d5043c595629651bb7da8a2670",
     "ref": "main",
     "repository": "techitechi0331-svg/76blackCompressor",
     "verification": "VERIFIED"

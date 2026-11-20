@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: BLACK76-RATIO20-SETTLE-METHOD-20261120-001
+repo_key: black76
+workflow_key: ratio20_settle_diagnostic
+runner_class: self-hosted
+state: COMPLETED
+run_id: 44723941446
+run_status: completed
+run_conclusion: success
+since: '2026-11-20T11:00:19Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

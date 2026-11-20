@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-ONE-P0-BYPASS-001-R1-623430BE
+repo_key: melon
+workflow_key: research
+run_id: 44723748676
+run_attempt: 2
+head_sha: 3e9e90f2799c69e61f5f5ff02c0acc5a3985a967
+classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Upload research evidence
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

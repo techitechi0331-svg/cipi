@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL73-1073-IDENTIFIABILITY-001-R1-798D396F
+repo_key: melon
+workflow_key: research
+runner_class: self-hosted
+state: COMPLETED
+run_id: 44714522345
+run_status: completed
+run_conclusion: failure
+since: '2026-11-20T09:53:29Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

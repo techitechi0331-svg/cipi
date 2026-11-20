@@ -26,7 +26,7 @@ inputs:
 priority: 80
 attempts: 1
 max_attempts: 2
-retry_count: 0
+retry_count: 1
 max_retries: 1
 depends_on_jobs: []
 depends_on_actions: []
@@ -46,3 +46,14 @@ previous_run_id: 44714038497
 dispatched_at: '2026-11-20T09:53:29.473771Z'
 repository: techitechi0331-svg/melon
 workflow_file: melon-research.yml
+run_id: 44714522345
+run_url: https://github.com/techitechi0331-svg/melon/actions/runs/44714522345
+last_failure_classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Upload research evidence
+last_retry_at: '2026-11-20T09:54:17.477297Z'
+retry_waiting_for_attempt: 2

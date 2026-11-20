@@ -1,0 +1,124 @@
+schema_version: "1.0"
+track_id: VOCAL-SURFACE-REAL-AUDIO-001
+enabled: false
+activation_state: BLOCKED_DEDICATED_REAL_AUDIO_ADAPTER
+root_research_id: VOCAL-SURFACE-REAL-AUDIO-001
+
+research_question: >-
+  Can the v0.3 Vocal Surface spectral Smooth stage suppress audible harshness
+  while preserving legitimate sung harmonics and formants, and is its 50 percent
+  nominal setting robust across singers when A/B output level is matched?
+hypothesis_id: HYP-VOCAL-SURFACE-HARMONIC-SAFE-001
+hypothesis: >-
+  Compared with the pinned v0.3 main baseline, a bounded harmonic/formant-aware
+  Smooth detector can reduce genuine inharmonic prominence without increasing
+  clean voiced-harmonic/formant loss or consonant, breath and tail artifacts.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - SUBJECTIVE_LEVEL_MATCHED_ABX
+  - CUBASE_PRO_14_PDC
+  - PRODUCT_ADOPTION
+  - FINAL_RELEASE
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  product_repository: techitechi0331-svg/VocalSurfaceProcessor
+  product_main_sha: b89a1de4cd856b02ca9e0716b6775c576421d99d
+  cipi_status: research/plugins/vocal-surface/status.yaml
+  research_prs:
+    - https://github.com/techitechi0331-svg/VocalSurfaceProcessor/pull/2
+    - https://github.com/techitechi0331-svg/VocalSurfaceProcessor/pull/3
+  issue: https://github.com/techitechi0331-svg/VocalSurfaceProcessor/issues/4
+  do_not_reopen:
+    - V03_SYNTHETIC_DSP_REFERENCE_PASS
+    - V03_PLUGINVAL_STRICTNESS_10_PASS
+    - V03_STEINBERG_VALIDATOR_PASS
+  rejected_directions:
+    - CLAIM_LISTENING_QUALITY_FROM_SYNTHETIC_TEST
+    - CLAIM_VOCALSET_CACHE_EXISTS_WITHOUT_PROOF
+    - CLAIM_PRIVATE_MIX_WAV_IS_DRY_STEM
+    - AUTO_PROMOTE_RESEARCH_PR_TO_PRODUCT_MAIN
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 18
+  max_runtime: 600
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-VOCAL-SURFACE-REAL-AUDIO-R1
+  experiment_type: REAL_VOCAL_HARMONIC_SAFE_GATE
+  expected_information_gain: 0.90
+  scope:
+    - vocal_surface
+    - vocalset_provenance
+    - spectral_harmonic_preservation
+    - real_vocal_level_matched_ab
+    - nominal_50_calibration
+  inputs:
+    seed: 2026112001
+    population: 4
+    generations: 2
+    max_candidates: 8
+    max_runtime_seconds: 120
+    stage2_limit: 4
+    stage2_archive_limit: 4
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: HYP-VOCAL-SURFACE-HARMONIC-SAFE-001
+    architecture: VOCAL_SURFACE_HARMONIC_SAFE_SMOOTH_V1
+    tested_parameters:
+      v03_baseline_pinned: true
+      candidate_a_research_only: true
+      amount_percent: [0, 50, 75]
+      auto_gain: [false, true]
+    benchmark_profile:
+      - singer_disjoint_real_vocal_v1
+      - clean_harmonic_formant_hard_negative_v1
+      - inharmonic_harshness_probe_v1
+    sample_rate: 48000
+    input_set: LICENSE_GATED_DRY_VOCAL_AND_FALSIFIABLE_PROBES
+    reference_model: PINNED_V03_MAIN_AND_LEVEL_MATCHED_BYPASS
+    objective_set:
+      - vocal_harmonic_formant_preservation
+      - harshness_suppression
+      - vocal_artifact_risk
+      - level_matched_dynamics
+      - computational_cost
+    relevant_constraints:
+      - license_verify_and_attribute
+      - singer_disjoint_holdout
+      - never_commit_raw_audio
+      - no_product_write
+      - no_automatic_promotion_or_release
+      - humans_only_for_listening_and_host_confirmation
+    experiment_type: REAL_VOCAL_HARMONIC_SAFE_GATE
+    scope:
+      - vocal_surface
+      - vocalset_provenance
+      - spectral_harmonic_preservation
+      - real_vocal_level_matched_ab
+
+activation_requirements:
+  - Dedicated Vocal Surface domain adapter exists in MELON or a reviewed CIPI allowlisted local research worker
+  - Reviewed workflow consumes actual licensed dry-vocal samples with reproducible input hashes and level-matched render evidence
+  - Accepted runner execution contract and datasets verified within existing free budget
+  - Validated results and review before setting enabled true

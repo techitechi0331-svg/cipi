@@ -1,0 +1,21 @@
+schema_version: "1.0"
+action_id: VOCAL-SURFACE-V03-PREFLIGHT-20261120-001
+state: QUEUED
+repo_key: surface
+workflow_key: vst3
+ref: main
+inputs: {}
+priority: 75
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+reason: >-
+  User-authorized CIPI autonomous Vocal Surface restart preflight. Re-run
+  the existing allowlisted VST3/DSP/validator baseline only within the free
+  GitHub Actions budget, ingest bounded text evidence, and retain source SHA.
+  This workflow does NOT render real vocals; dedicated licensed real-audio
+  adapter and tested runner contract remain separate prerequisites before
+  the VOCAL-SURFACE-REAL-AUDIO-001 track can be enabled.

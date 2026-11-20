@@ -593,9 +593,9 @@
     "enabled": true,
     "health_alerts": [],
     "ready_action": {
-      "action_id": "MELON-VOCAL-RIDER-REALVOCAL-001-R1-25067F33",
+      "action_id": "VOCAL-RIDER-MAIN-REVALIDATE-20261120",
       "kind": "CROSS_REPO",
-      "priority": 80,
+      "priority": 82,
       "reason": "ready_external_action"
     },
     "states": {
@@ -603,7 +603,7 @@
       "dispatched": 0,
       "failed": 20,
       "quarantined": 0,
-      "queued": 2
+      "queued": 4
     }
   },
   "human_gates": [
@@ -637,9 +637,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MELON-VOCAL-RIDER-REALVOCAL-001-R1-25067F33",
+    "action_id": "VOCAL-RIDER-MAIN-REVALIDATE-20261120",
     "kind": "CROSS_REPO",
-    "priority": 80,
+    "priority": 82,
     "reason": "ready_external_action"
   }
 }

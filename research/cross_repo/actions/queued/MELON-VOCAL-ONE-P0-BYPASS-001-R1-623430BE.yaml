@@ -1,0 +1,42 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-ONE-P0-BYPASS-001-R1-623430BE
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026112005
+  population: 5
+  generations: 1
+  max_candidates: 5
+  max_runtime_seconds: 60
+  stage2_limit: 3
+  stage2_archive_limit: 3
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":10,"full_regression_required":false,"max_memory_mb":1024,"policy_id":"VOCAL-ONE-P0-BYPASS-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"EXP-VOCAL-ONE-P0-BYPASS-R1","experiment_type":"VOCAL_ONE_BYPASS_SYNTHETIC_BASELINE","hypothesis_id":"HYP-VOCAL-ONE-P0-BYPASS-MATHEMATICAL-SAFETY","job_id":"VOCAL-ONE-P0-BYPASS-001-R1-623430BE","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VOCAL_ONE_FORMAL","research_question":"Does
+    a bounded, deterministic study of Vocal ONE''s documented 10 ms linear master-bypass
+    transition reveal falsifiable transition-step, sample-rate and smoothing tradeoffs
+    before any actual VST3/host adoption?","track_id":"VOCAL-ONE-P0-BYPASS-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-ONE-P0-BYPASS-001
+bridge_job_id: VOCAL-ONE-P0-BYPASS-001-R1-623430BE
+continuation_fingerprint: 623430bebe4c9876e42592b88dd6a1ec041fc29470dcdd6132d01a974362cbef
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-ONE-P0-BYPASS-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

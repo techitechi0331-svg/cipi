@@ -128,6 +128,19 @@ repositories:
           - candidate_json
           - evidence_hash
 
+  vocal73pre:
+    repository: techitechi0331-svg/VocalPrepComp
+    default_ref: main
+    runner_class: github-hosted
+    workflows:
+      build:
+        file: build-vocal73pre.yml
+        dispatch: true
+        monitor: true
+        artifact_ingest: metadata_and_text
+        allowed_inputs: []
+        required_inputs: []
+
   pre610:
     repository: techitechi0331-svg/610
     default_ref: main

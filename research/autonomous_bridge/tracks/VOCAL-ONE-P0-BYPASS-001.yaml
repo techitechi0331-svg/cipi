@@ -1,0 +1,123 @@
+schema_version: "1.0"
+track_id: VOCAL-ONE-P0-BYPASS-001
+enabled: true
+activation_state: ACTIVE_BOUNDED_SYNTHETIC_P0
+root_research_id: VOCAL_ONE_FORMAL
+
+research_question: >-
+  Does a bounded, deterministic study of Vocal ONE's documented
+  10 ms linear master-bypass transition reveal falsifiable transition-step,
+  sample-rate and smoothing tradeoffs before any actual VST3/host adoption?
+hypothesis_id: HYP-VOCAL-ONE-P0-BYPASS-MATHEMATICAL-SAFETY
+hypothesis: >-
+  Across 44.1/48/96/192 kHz, bounded fade envelopes in the 2-20 ms
+  range can achieve finite, monotone and settling dry/wet transitions.
+  This is only a mathematical synthetic proxy, NOT a measured product
+  behavior or an assertion that any candidate sounds better.
+
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - ACTUAL_VOCAL_ONE_VST3_EXECUTION
+  - PLUGINVAL_AND_STEINBERG_VALIDATOR
+  - CUBASE_PRO_14_NATIVE_BYPASS_AND_AUTOMATION
+  - HOST_STATE_RESTORE_AND_LATENCY
+  - REAL_VOCAL_LEVEL_MATCHED_AB
+  - PRODUCT_ADOPTION_DECISION
+  - FINAL_RELEASE
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  product_repository: techitechi0331-svg/Vocal-ONE
+  product_main_commit: ae38bc6e95c31f5219ab426f15b804f3b6827f32
+  implementation_candidate_commit: f6ac1be356c6cdf8c049e0011eebe2003d107fa7
+  implementation_candidate_pr: https://github.com/techitechi0331-svg/Vocal-ONE/pull/1
+  implementation_candidate_ci: https://github.com/techitechi0331-svg/Vocal-ONE/actions/runs/44714539807
+  ci_status_observed: LINUX_PORTABLE_AND_WINDOWS_VST3_BUILD_PASS
+  dedicated_melon_adapter: melon/vocal_one_research.py
+  dedicated_melon_adapter_main_commit: 8e6e05c3147e3135c16e52c51f3000687b165f43
+  dedicated_melon_adapter_ci: https://github.com/techitechi0331-svg/melon/actions/runs/44717385334
+  source_truth_limit: >-
+    Adapter uses mathematical constant-signal simulation only and does not
+    execute source DSP, test actual VST3, assess sonic quality or CPU usage.
+  do_not_reopen:
+    - P0_LINUX_PORTABLE_GAIN_TESTS
+    - P0_WINDOWS_VST3_BUILD_EXISTENCE
+    - P0_BYPASS_PR_CI_PASS
+  rejected_directions:
+    - CLAIM_SYNTHETIC_FADE_SCORE_IS_ACTUAL_VST3_MEASUREMENT
+    - CLAIM_SYNTHETIC_GAIN_STEP_IS_AUDIO_QUALITY
+    - COPY_UNAPPROVED_EXTERNAL_MODULE_CODE
+    - AUTOMATIC_PRODUCT_WRITE_OR_RELEASE
+    - SKIP_CUBASE_PLUGINVAL_OR_REAL_VOCAL_GATES
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 18
+  max_runtime: 240
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+
+initial_experiment:
+  experiment_id: EXP-VOCAL-ONE-P0-BYPASS-R1
+  experiment_type: VOCAL_ONE_BYPASS_SYNTHETIC_BASELINE
+  expected_information_gain: 0.78
+  scope:
+    - vocal_one
+    - p0_foundation
+    - master_bypass
+    - click_risk_proxy
+    - synthetic_only
+  inputs:
+    seed: 2026112005
+    population: 5
+    generations: 1
+    max_candidates: 5
+    max_runtime_seconds: 60
+    stage2_limit: 3
+    stage2_archive_limit: 3
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: HYP-VOCAL-ONE-P0-BYPASS-MATHEMATICAL-SAFETY
+    architecture: BOUNDED_SYNTHETIC_FADE_PROFILES
+    tested_parameters:
+      baseline_fade_ms: 10
+      baseline_shape: linear
+      fade_range_ms: [2, 20]
+      candidate_shapes: [linear, smoothstep, cosine]
+    benchmark_profile: [vocal_one_master_bypass_synthetic_matrix_v1]
+    sample_rate: 48000
+    input_set: SYNTHETIC_CONSTANTS_NO_REAL_AUDIO
+    reference_model: DOCUMENTED_VOCAL_ONE_P0_LINEAR_10MS_NOT_EXECUTED
+    objective_set: [finite_bounded_transition, max_per_sample_gain_step, cost_heuristic]
+    relevant_constraints:
+      - product_source_not_executed
+      - no_real_audio_measured
+      - no_product_write
+      - no_auto_release
+      - human_host_and_listening_gates
+    experiment_type: VOCAL_ONE_BYPASS_SYNTHETIC_BASELINE
+    scope: [vocal_one, master_bypass, p0_foundation, synthetic_only]
+
+efficiency_policy:
+  policy_id: VOCAL-ONE-P0-BYPASS-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 10
+  full_regression_required: false

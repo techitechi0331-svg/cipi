@@ -1,0 +1,24 @@
+schema_version: "1.0"
+action_id: VOCAL-RIDER-REALVOCAL-REVALIDATE-20261120
+state: QUEUED
+repo_key: vocal_rider
+workflow_key: real_vocal
+ref: main
+inputs: {}
+priority: 81
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions:
+  - VOCAL-RIDER-MAIN-REVALIDATE-20261120
+reason: >-
+  Reconfirm real-vocal finite output, zero processed samples above
+  0 dBFS, and exact Amount0 delay-only identity after the headroom
+  correction. Capture level-matched A/B artifacts for human listening.
+  Do not infer v0.3 acceptance from main's success.
+track_id: VOCAL-RIDER-REALVOCAL-001
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false

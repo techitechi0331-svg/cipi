@@ -1,0 +1,24 @@
+{
+  "acceptance_met": false,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "python research/experiments/VocalResonance/action_equivalence_audit.py --output-dir <temporary>"
+  ],
+  "completed_at": "2026-11-20T11:04:33.596540Z",
+  "environment": {
+    "experiment_adapter": "vocal_resonance_action_equivalence_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+    "python": "3.12.16"
+  },
+  "job_id": "VOCAL-RESONANCE-R13-ACTION-EQUIV-001",
+  "random_seed": 20261201,
+  "rejection_triggered": true,
+  "result": "COMPLETED",
+  "run_id": "gha-44724301511-1",
+  "schema_version": "1.0",
+  "source_commit": "46a9a7029d60eb45c4ba675039f3008d7b903fe0",
+  "started_at": "2026-11-20T11:03:14.196442Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

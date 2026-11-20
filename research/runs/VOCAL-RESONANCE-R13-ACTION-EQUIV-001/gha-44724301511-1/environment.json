@@ -1,0 +1,6 @@
+{
+  "experiment_adapter": "vocal_resonance_action_equivalence_v1",
+  "mode": "allowlisted_adapter",
+  "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+  "python": "3.12.16"
+}

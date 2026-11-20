@@ -2,19 +2,19 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 29e795966ea1e69614f1066b5d5442e498761c5f
-- Source-state digest: c54af43ba77ecf6c0024da44ac33f60e731c548965ea25ff099cb535d0ae154a
+- CIPI source commit: 46a9a7029d60eb45c4ba675039f3008d7b903fe0
+- Source-state digest: d372be79c8a5763c553520df921dc222579d0edafd10d7f516944135d002c922
 - Product: techitechi0331-svg/Vocal_resonance@main
 - Product commit: 3dd511529d47846fdb04f251e472c04e33a0302f
 
 ## Current position
-- Phase: **IDLE**
-- Resume mode: **IDLE**
-- Can autonomously resume: **false**
-- Recommended action: NO_READY_WORK
+- Phase: **AUTO_READY**
+- Resume mode: **AUTO_READY**
+- Can autonomously resume: **true**
+- Recommended action: VOCAL-RESONANCE-R13-ACTION-EQUIV-001
 
 ## READY
-- none
+- VOCAL-RESONANCE-R13-ACTION-EQUIV-001 — READY
 
 ## BLOCKED
 - none
@@ -37,6 +37,7 @@
 - VOCAL-RESONANCE-R9-TRANSFER-CONSISTENCY-001
 
 ## Important decision refs
+- research/decisions/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-review.yaml
 - research/decisions/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-auto.yaml
 - research/decisions/VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001/gha-36179619006-1-auto.yaml
 - research/decisions/VOCAL-RESONANCE-R10-CLEAN-PRIOR-001/gha-36177223221-1-auto.yaml
@@ -44,10 +45,9 @@
 - research/decisions/VOCAL-RESONANCE-R8-LOCAL-PATCH-001/gha-36155951333-1-auto.yaml
 - research/decisions/VOCAL-RESONANCE-R7-IDENTIFIABILITY-001/gha-36145023810-1-auto.yaml
 - research/decisions/VOCAL-RESONANCE-R6-RUN-VETO-001/gha-36142911813-1-auto.yaml
-- research/decisions/VOCAL-RESONANCE-R5B-MORPH-STABILITY-001/gha-36080499046-1-auto.yaml
 
 ## Unresolved questions
-- none
+- Does exact injected-target Top-K materially overstate the candidate-frequency accuracy needed for a narrow resonance-suppression action?
 
 ## Re-entry rule
 Validate schema, source-state digest, product ref, Human Gates, and READY/BLOCKED state before acting.

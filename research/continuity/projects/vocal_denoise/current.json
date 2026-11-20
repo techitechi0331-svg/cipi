@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "29e795966ea1e69614f1066b5d5442e498761c5f",
+    "commit_sha": "46a9a7029d60eb45c4ba675039f3008d7b903fe0",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T19:58:18+09:00",
-  "generation_id": "832c0e0138bb8ba164b46436",
+  "generated_at": "2026-11-20T20:02:44+09:00",
+  "generation_id": "9aea17d6a90ee9ac737eb3c5",
   "human_gates": [],
   "latest_decision_refs": [],
   "phase": "IDLE",
@@ -103,19 +103,19 @@
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "a0742c2437b806f5dc9f7c7ed60bddba14cb8ba3602a788b0f755a9c9f107629",
+      "sha256": "e857daa15e352397d336d0afe6ce3d681e76a56856fd1113deb015ead72affba",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "305d5de0b76d27f833b73e975e05fc799bbd21e8499e4186232235c09708f0f8",
+      "sha256": "d65c68cc9b94b1e6d5a1552510a34014af6ae2af9a18e1ac8c3bc74106c01cb8",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "d3baa017b231ce9fa43e39c63459dc6ccd508b78a22d5a631b7911bf64f65b59",
+      "sha256": "2147ec15463306530d0ed8d8a1032cec3dc1a95ab4401fc8c0f51377e3167a52",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -129,7 +129,7 @@
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "sha256": "05626a0259cb77fe094a2d70040890b6b7ce1f93bf84241fd824cf5a89863168",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -140,7 +140,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "4cb0ea86af376fff175e20e0ea3dd69ea43de0d44256c99ee469a82e6795a095",
+  "source_state_digest": "09593bd4470869d15bc4dbecb2ba11bf51b0e55117eac0ec89bac5f48be15449",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

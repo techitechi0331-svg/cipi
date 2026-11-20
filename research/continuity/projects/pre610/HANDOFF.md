@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 29e795966ea1e69614f1066b5d5442e498761c5f
-- Source-state digest: 4cb0ea86af376fff175e20e0ea3dd69ea43de0d44256c99ee469a82e6795a095
+- CIPI source commit: 46a9a7029d60eb45c4ba675039f3008d7b903fe0
+- Source-state digest: 7a69aed03b760a344e3d1ea5ca413cfbf003e28e28e634375dc834cb1031e86f
 - Product: techitechi0331-svg/610@main
 - Product commit: ff7ff61a3eca92a60074cf562498372a26956dc6
 
@@ -23,10 +23,10 @@
 - none
 
 ## Must not repeat
-- none
+- VOCAL-RESONANCE-R12-RAW-PATCH-001
 
 ## Important decision refs
-- none
+- research/decisions/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1-review.yaml
 
 ## Unresolved questions
 - none

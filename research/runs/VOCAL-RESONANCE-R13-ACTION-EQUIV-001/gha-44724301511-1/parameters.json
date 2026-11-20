@@ -1,0 +1,19 @@
+{
+  "baseline": [
+    "local_prominence_topk",
+    "frozen_static_r2_topk"
+  ],
+  "experiment_adapter": "vocal_resonance_action_equivalence_v1",
+  "job_file": "research/jobs/queued/000-VOCAL-RESONANCE-R13-ACTION-EQUIV-001.yaml",
+  "metrics": [
+    "exact_hit_rate",
+    "action_equivalent_rate",
+    "action_minus_exact",
+    "strong_action_equivalent_rate",
+    "median_action_attenuation_db",
+    "median_oracle_relative_attenuation"
+  ],
+  "variants": [
+    "analytical_action_equivalence_q8_q12_q20"
+  ]
+}

@@ -1,0 +1,152 @@
+schema_version: '1.0'
+brief_version: '1.0'
+brief_id: VOCAL-RESONANCE-R13-ACTION-EQUIV-001:gha-44724301511-1:review-brief-v1
+job_id: VOCAL-RESONANCE-R13-ACTION-EQUIV-001
+run_id: gha-44724301511-1
+source_run: research/runs/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/gha-44724301511-1
+route: REJECTION_REVIEW
+candidate_class: REJECT_CANDIDATE
+triage_path: research/reviews/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/gha-44724301511-1-triage.yaml
+triage_id: VOCAL-RESONANCE-R13-ACTION-EQUIV-001:gha-44724301511-1:triage-v1
+job_path: research/jobs/completed/000-VOCAL-RESONANCE-R13-ACTION-EQUIV-001.yaml
+research_question: Does exact injected-target Top-K materially overstate the candidate-frequency
+  accuracy needed for a narrow resonance-suppression action?
+hypothesis: 'Across both predeclared seeds, static Top-5 candidates will produce action-equivalent
+  target attenuation substantially more often than they exactly contain the injected
+  target: at Q=12 a fixed -2 dB candidate-centered cut will yield >=1 dB target attenuation
+  in at least 70 percent of generator-hit cases, exceed exact Top-5 hit rate by at
+  least 20 percentage points, preserve at least 70 percent action-equivalent coverage
+  on strong-effect cases, and achieve at least 60 percent median attenuation relative
+  to the nearest-candidate oracle. Q=8 and Q=20 must each retain at least a 10-point
+  action-equivalence gain over exact hit rate.'
+counter_hypotheses:
+- Exact target membership is a good proxy for useful frequency placement; action-equivalent
+  hit rate is not materially higher.
+- Only broad Q settings make near misses useful, so exact semantic ranking remains
+  necessary for selective suppression.
+- Strong-effect cases still require exact target ranking even if weak cases tolerate
+  nearby candidates.
+acceptance_criteria:
+- 'for each seed at static Top-5 Q=12: action-equivalent rate >= 0.70'
+- 'for each seed at static Top-5 Q=12: action-equivalent minus exact hit >= 0.20'
+- 'for each seed at static Top-5 Q=12: strong action-equivalent rate >= 0.70'
+- 'for each seed at static Top-5 Q=12: median oracle-relative attenuation >= 0.60'
+- 'for each seed at static Top-5 Q=8: action-equivalent minus exact hit >= 0.10'
+- 'for each seed at static Top-5 Q=20: action-equivalent minus exact hit >= 0.10'
+rejection_criteria:
+- any seed fails any primary or Q-sensitivity criterion
+manifest_summary:
+  result: COMPLETED
+  acceptance_met: false
+  rejection_triggered: true
+  triggered_criteria: []
+  source_commit: 46a9a7029d60eb45c4ba675039f3008d7b903fe0
+  worker_version: cipi-research-worker/0.2
+metric_snapshot:
+- path: action_equivalent_threshold_db
+  value: 1.0
+- path: cut_db
+  value: -2.0
+- path: diagnostic_gate.accepted
+  value: false
+- path: diagnostic_gate.criteria.20261003.action_equivalent_rate_gte_0_70
+  value: false
+- path: diagnostic_gate.criteria.20261003.action_minus_exact_gte_0_20
+  value: false
+- path: diagnostic_gate.criteria.20261003.median_oracle_relative_attenuation_gte_0_60
+  value: false
+- path: diagnostic_gate.criteria.20261003.q20_action_gain_gte_0_10
+  value: false
+- path: diagnostic_gate.criteria.20261003.q8_action_gain_gte_0_10
+  value: false
+- path: diagnostic_gate.criteria.20261003.strong_action_equivalent_rate_gte_0_70
+  value: false
+- path: diagnostic_gate.criteria.20261013.action_equivalent_rate_gte_0_70
+  value: false
+- path: diagnostic_gate.criteria.20261013.action_minus_exact_gte_0_20
+  value: false
+- path: diagnostic_gate.criteria.20261013.median_oracle_relative_attenuation_gte_0_60
+  value: false
+- path: diagnostic_gate.criteria.20261013.q20_action_gain_gte_0_10
+  value: false
+- path: diagnostic_gate.criteria.20261013.q8_action_gain_gte_0_10
+  value: false
+- path: diagnostic_gate.criteria.20261013.strong_action_equivalent_rate_gte_0_70
+  value: false
+- path: diagnostic_gate.meaning
+  value: Whether exact causal-target Top-K materially understates the frequency-placement
+    utility of the selected candidate set. This does not authorize a suppressor implementation.
+- path: diagnostic_gate.route
+  value: EXACT_RANKING_REMAINS_ACTION_RELEVANT
+- path: experiment
+  value: VOCAL_RESONANCE_R13_ACTION_EQUIVALENCE
+- path: per_seed.20261003.prominence.1.12.action_equivalent_rate
+  value: 0.0
+- path: per_seed.20261003.prominence.1.12.action_minus_exact
+  value: -0.03333333333333333
+- path: per_seed.20261003.prominence.1.12.exact_hit_rate
+  value: 0.03333333333333333
+- path: per_seed.20261003.prominence.1.12.median_action_attenuation_db
+  value: 0.0006606452091465812
+- path: per_seed.20261003.prominence.1.12.median_oracle_relative_attenuation
+  value: 0.0007764701962976182
+- path: per_seed.20261003.prominence.1.12.n_cases
+  value: 30
+- path: per_seed.20261003.prominence.1.12.strong_action_equivalent_rate
+  value: 0.0
+- path: per_seed.20261003.prominence.1.12.strong_n
+  value: 11
+- path: per_seed.20261003.prominence.1.20.action_equivalent_rate
+  value: 0.0
+- path: per_seed.20261003.prominence.1.20.action_minus_exact
+  value: -0.03333333333333333
+- path: per_seed.20261003.prominence.1.20.exact_hit_rate
+  value: 0.03333333333333333
+- path: per_seed.20261003.prominence.1.20.median_action_attenuation_db
+  value: 0.0002378860125380062
+- path: per_seed.20261003.prominence.1.20.median_oracle_relative_attenuation
+  value: 0.000362598329628784
+- path: per_seed.20261003.prominence.1.20.n_cases
+  value: 30
+knowledge_candidate:
+  claim: Exact candidate-label Top-K may understate the practical frequency-placement
+    utility of a resonance suppressor when nearby candidates produce equivalent narrow-band
+    attenuation at the causal target.
+  evidence_type: HYPOTHESIS
+  scope: Research-only metric/action-equivalence audit with analytical fixed peaking-cut
+    responses; not a product suppressor result.
+  promotion_requested: HYPOTHESIS
+source_proposal:
+  decision_id: VOCAL-RESONANCE-R13-ACTION-EQUIV-001:gha-44724301511-1:auto
+  decision: REJECT
+  rationale: Declared rejection criteria were triggered; detailed rationale requires
+    review.
+  review_gaps:
+  - triggered_criteria_need_adapter_or_review
+  - retained_findings_need_domain_review
+  - reusable_findings_need_domain_review
+  - revisit_conditions_need_domain_review
+  retained_findings:
+  - All run artifacts, measurements, parameters, environment data and checksums are
+    retained as negative evidence.
+  reusable_findings: []
+  revisit_if:
+  - New evidence, a changed model, or a changed baseline materially affects the failed
+    criteria.
+confirmed_review: null
+required_human_gates: []
+downstream_gate_signals: []
+allowed_review_actions:
+- REJECT
+- ITERATE
+- ARCHIVE
+required_precision_checks:
+- Evidence integrity and source-run provenance are intact.
+- Acceptance/rejection criteria were declared before interpreting the result.
+- Negative or contradictory evidence has not been omitted.
+- The proposed decision stays inside the measured scope.
+- Reusable findings are separated from product-specific calibration.
+- Human-only listening/Cubase/host gates remain open unless explicitly completed.
+- No product release claim is inferred from a research knowledge decision.
+automatic_final_decision: false
+immutable: true

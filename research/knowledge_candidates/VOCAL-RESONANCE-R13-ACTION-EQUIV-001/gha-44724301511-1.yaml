@@ -1,0 +1,8 @@
+claim: Exact candidate-label Top-K may understate the practical frequency-placement
+  utility of a resonance suppressor when nearby candidates produce equivalent narrow-band
+  attenuation at the causal target.
+evidence_type: HYPOTHESIS
+scope: Research-only metric/action-equivalence audit with analytical fixed peaking-cut
+  responses; not a product suppressor result.
+source_run: research/runs/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/gha-44724301511-1
+promotion_requested: HYPOTHESIS

@@ -2,19 +2,19 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 966ee66e6fb0773d48b41f5547c99b1a353263da
-- Source-state digest: 250e921351f4fc1931a2363b6a1572a9184fd00b6537afdb0772fa3c4e910ef2
+- CIPI source commit: 90c56f048054821c3e5aca1199f961e6b1476445
+- Source-state digest: d943d082e1290aaff36125224be35cd03a7211d6e172461eefffdd027f9a7fad
 - Product: techitechi0331-svg/VocalPrepComp@main
 - Product commit: b894c74304145196c4f553545ea75360e166fdd9
 
 ## Current position
-- Phase: **HUMAN_GATE**
-- Resume mode: **HUMAN_GATE**
-- Can autonomously resume: **false**
-- Recommended action: HUMAN_GATE
+- Phase: **AUTO_READY**
+- Resume mode: **AUTO_READY**
+- Can autonomously resume: **true**
+- Recommended action: VL2A-RC2-EVIDENCE-CONTINUITY-001
 
 ## READY
-- none
+- VL2A-RC2-EVIDENCE-CONTINUITY-001 — READY
 
 ## BLOCKED
 - none
@@ -30,7 +30,7 @@
 - research/decisions/VL2A-PHASE01H-CHECKSUM-DIAG-001/gha-36074857352-1-auto.yaml
 
 ## Unresolved questions
-- none
+- Does current CIPI main distinguish the accepted VL2A v0.6 RC2 pre-host evidence from older Phase01-H formal status, while retaining the unresolved Cubase, subjective listening, adoption and release gates?
 
 ## Re-entry rule
 Validate schema, source-state digest, product ref, Human Gates, and READY/BLOCKED state before acting.

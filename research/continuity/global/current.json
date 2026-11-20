@@ -6,7 +6,7 @@
     "INVALID": 0,
     "STALE": 1
   },
-  "generated_at": "2026-11-20T18:52:56+09:00",
+  "generated_at": "2026-11-20T18:57:46+09:00",
   "project_count": 18,
   "projects": [
     {
@@ -23,9 +23,9 @@
     },
     {
       "freshness": "FRESH",
-      "phase": "BLOCKED",
+      "phase": "AUTO_READY",
       "project_id": "cipi",
-      "recommended_action": "WAIT_OR_STEAL_OTHER_PROJECT"
+      "recommended_action": "VL2A-RC2-EVIDENCE-CONTINUITY-001"
     },
     {
       "freshness": "FRESH",
@@ -77,9 +77,9 @@
     },
     {
       "freshness": "FRESH",
-      "phase": "HUMAN_GATE",
+      "phase": "AUTO_READY",
       "project_id": "vl2a",
-      "recommended_action": "HUMAN_GATE"
+      "recommended_action": "VL2A-RC2-EVIDENCE-CONTINUITY-001"
     },
     {
       "freshness": "FRESH",

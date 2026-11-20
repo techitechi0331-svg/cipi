@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "966ee66e6fb0773d48b41f5547c99b1a353263da",
+    "commit_sha": "90c56f048054821c3e5aca1199f961e6b1476445",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T18:52:56+09:00",
-  "generation_id": "e2382f4f33086e40dbd51685",
+  "generated_at": "2026-11-20T18:57:46+09:00",
+  "generation_id": "9a8925829431150387f57ba6",
   "human_gates": [
     {
       "blocking": true,
@@ -32,7 +32,7 @@
       "review_status": "PENDING"
     }
   ],
-  "phase": "HUMAN_GATE",
+  "phase": "AUTO_READY",
   "product_ref": {
     "commit_sha": "b894c74304145196c4f553545ea75360e166fdd9",
     "ref": "main",
@@ -40,7 +40,22 @@
     "verification": "VERIFIED"
   },
   "project_id": "vl2a",
-  "ready": [],
+  "ready": [
+    {
+      "classification": "READY",
+      "current_human_gates": [],
+      "declared_human_gates": [],
+      "depends_on_jobs": [],
+      "job_id": "VL2A-RC2-EVIDENCE-CONTINUITY-001",
+      "path": "research/jobs/queued/VL2A-RC2-EVIDENCE-CONTINUITY-001.yaml",
+      "priority": 85,
+      "research_question": "Does current CIPI main distinguish the accepted VL2A v0.6 RC2 pre-host evidence from older Phase01-H formal status, while retaining the unresolved Cubase, subjective listening, adoption and release gates?",
+      "resolved_human_gates": [],
+      "state": "QUEUED",
+      "unresolved_dependencies": [],
+      "unresolved_human_gates": []
+    }
+  ],
   "rejected_refs": [],
   "research": {
     "decision_ref_count": 1,
@@ -60,7 +75,7 @@
   },
   "resume_contract": {
     "blocked_dependencies": [],
-    "can_autonomously_resume": false,
+    "can_autonomously_resume": true,
     "can_resume": true,
     "human_gates": [
       "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
@@ -69,12 +84,12 @@
       "VL2A-PHASE01H-CHECKSUM-DIAG-001",
       "VL2A-PHASE01H-SNAPSHOT-GATE-001"
     ],
-    "recommended_action": "HUMAN_GATE",
+    "recommended_action": "VL2A-RC2-EVIDENCE-CONTINUITY-001",
     "required_context": [
       "research/decisions/VL2A-PHASE01H-CHECKSUM-DIAG-001/gha-36074857352-1-auto.yaml",
       "research/reviews/VL2A-PHASE01H-CHECKSUM-DIAG-001/gha-36074857352-1-triage.yaml"
     ],
-    "resume_mode": "HUMAN_GATE"
+    "resume_mode": "AUTO_READY"
   },
   "review_refs": [
     {
@@ -110,13 +125,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "f71107a066191fb64bac0a94d6e3a7bf98e417541427c45df71ac11e05242aae",
+      "sha256": "0e191239e84b1b82ea83a3bd01fef2fa8df67b5db9c7db537e3297a57e1424b6",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "b81cf38e62ba6ace261c793a1cb08d52ba932b1df294897a131d7ab98fac9702",
+      "sha256": "4b1e5c0a8021d424dff8cf9c48b1506521cc2c98e77db9fdbf3def66919c1f25",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -142,8 +157,14 @@
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "sha256": "01f7d4fca69191936ad42c391541cd0e39be8e94dd0df61c816ecb0da648e37e",
       "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/queued/VL2A-RC2-EVIDENCE-CONTINUITY-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "bd765ff82a9436df5cc3a3581a45438938103e70480c50e3f29e016baadd7163",
+      "source_type": "RESEARCH_JOB"
     },
     {
       "kind": "directory_index",
@@ -159,12 +180,14 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "250e921351f4fc1931a2363b6a1572a9184fd00b6537afdb0772fa3c4e910ef2",
-  "unresolved_questions": [],
+  "source_state_digest": "d943d082e1290aaff36125224be35cd03a7211d6e172461eefffdd027f9a7fad",
+  "unresolved_questions": [
+    "Does current CIPI main distinguish the accepted VL2A v0.6 RC2 pre-host evidence from older Phase01-H formal status, while retaining the unresolved Cubase, subjective listening, adoption and release gates?"
+  ],
   "work": {
     "blocked_count": 0,
     "human_gate_count": 1,
-    "queued_job_count": 0,
-    "ready_count": 0
+    "queued_job_count": 1,
+    "ready_count": 1
   }
 }

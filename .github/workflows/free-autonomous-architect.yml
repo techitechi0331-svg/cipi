@@ -39,21 +39,42 @@ jobs:
       - name: Install pinned dependency
         run: python -m pip install PyYAML==6.0.2
 
+      - name: Backpressure duplicate Architect review backlog
+        id: backlog
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          COUNT="$(gh issue list --state open --limit 500 --json title --jq '[.[] | select(.title | startswith("Autonomous architect ready: "))] | length')"
+          if [ "$COUNT" -ge 5 ]; then
+            echo "can_run=false" >> "$GITHUB_OUTPUT"
+            echo "ARCHITECT_REVIEW_BACKPRESSURE: $COUNT pending reviews, no new branches/issues."
+          else
+            echo "can_run=true" >> "$GITHUB_OUTPUT"
+            echo "ARCHITECT_REVIEW_CAPACITY: $COUNT pending reviews."
+          fi
+
+      - name: Backpressure report; existing review items remain open
+        if: steps.backlog.outputs.can_run != 'true'
+        run: echo "Research Architect paused due to unreviewed backlog; no data was modified."
+
       - name: Extract unresolved research-gap signals
+        if: steps.backlog.outputs.can_run == 'true'
         id: signals
         run: python automation/architect/scan_signals.py --max-signals 8 --github-output "$GITHUB_OUTPUT"
 
       - name: Discover bounded research gaps
+        if: steps.backlog.outputs.can_run == 'true'
         id: discover
         run: python automation/architect/discover.py --max-gaps 3 --github-output "$GITHUB_OUTPUT"
 
       - name: Generate one bounded Adapter Candidate specification
+        if: steps.backlog.outputs.can_run == 'true'
         id: adapter_candidate
         run: python automation/architect/adapter_candidate.py --max-candidates 1 --github-output "$GITHUB_OUTPUT"
 
       - name: Run one allowlisted Pilot when available
         id: pilot
-        if: steps.discover.outputs.top_pilot_proposal != ''
+        if: steps.backlog.outputs.can_run == 'true' && (steps.discover.outputs.top_pilot_proposal != '')
         env:
           PROPOSAL: ${{ steps.discover.outputs.top_pilot_proposal }}
         run: |
@@ -62,23 +83,25 @@ jobs:
 
       - name: Route one product opportunity through Incubator
         id: incubator
-        if: steps.discover.outputs.top_plugin_proposal != ''
+        if: steps.backlog.outputs.can_run == 'true' && (steps.discover.outputs.top_plugin_proposal != '')
         env:
           PROPOSAL: ${{ steps.discover.outputs.top_plugin_proposal }}
         run: python automation/incubator/discover.py --proposal "$PROPOSAL" --github-output "$GITHUB_OUTPUT"
 
       - name: Evaluate one measured Plugin candidate
+        if: steps.backlog.outputs.can_run == 'true'
         id: evaluate
         run: python automation/incubator/evaluate.py --max-candidates 1 --github-output "$GITHUB_OUTPUT"
 
       - name: Run isolated prototype only after evidence-gated INCUBATE
-        if: steps.evaluate.outputs.incubate_decision_path != ''
+        if: steps.backlog.outputs.can_run == 'true' && (steps.evaluate.outputs.incubate_decision_path != '')
         env:
           PLUGIN_PROPOSAL: ${{ steps.evaluate.outputs.plugin_proposal_path }}
           INCUBATE_DECISION: ${{ steps.evaluate.outputs.incubate_decision_path }}
         run: python automation/incubator/prototype.py --proposal "$PLUGIN_PROPOSAL" --decision "$INCUBATE_DECISION"
 
       - name: Validate Architect, Incubator and existing research contracts
+        if: steps.backlog.outputs.can_run == 'true'
         run: |
           python tools/validate_architect.py
           python tools/validate_incubator.py
@@ -89,6 +112,7 @@ jobs:
           python tools/validate_research.py
 
       - name: Detect generated work
+        if: steps.backlog.outputs.can_run == 'true'
         id: changes
         env:
           TOP_GAP: ${{ steps.discover.outputs.top_gap_id }}
@@ -110,7 +134,7 @@ jobs:
           echo "bot_branch=architect-bot/discovery/gha-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
 
       - name: Commit bounded Architect evidence
-        if: steps.changes.outputs.has_changes == 'true'
+        if: steps.backlog.outputs.can_run == 'true' && (steps.changes.outputs.has_changes == 'true')
         id: commit
         env:
           BOT_BRANCH: ${{ steps.changes.outputs.bot_branch }}
@@ -133,7 +157,7 @@ jobs:
       - name: Open Architect review PR
         id: open_pr
         continue-on-error: true
-        if: steps.changes.outputs.has_changes == 'true'
+        if: steps.backlog.outputs.can_run == 'true' && (steps.changes.outputs.has_changes == 'true')
         env:
           GH_TOKEN: ${{ github.token }}
           BOT_BRANCH: ${{ steps.commit.outputs.branch }}
@@ -142,14 +166,20 @@ jobs:
           gh pr create --base main --head "$BOT_BRANCH" --title "Autonomous architect evidence: $WORK_KEY" --body "Bounded zero-paid CIPI Research Architect pass. It may add non-executable unresolved/blocker signals, at most three catalog-backed Research Gaps, one non-executable Adapter Candidate, one allowlisted pilot, one Plugin Incubator routing decision, and at most one evidence-gated non-final INCUBATE prototype. Unknown themes cannot execute arbitrary generated code. No production repository, release, adapter-registry self-mutation, Cubase/listening closure, PROMOTE or CONFIRMED action is automatic."
 
       - name: Create review issue when Actions PR creation is disabled
-        if: steps.changes.outputs.has_changes == 'true' && steps.open_pr.outcome != 'success'
+        if: steps.backlog.outputs.can_run == 'true' && (steps.changes.outputs.has_changes == 'true' && steps.open_pr.outcome != 'success')
         env:
           GH_TOKEN: ${{ github.token }}
           BOT_BRANCH: ${{ steps.commit.outputs.branch }}
           WORK_KEY: ${{ steps.changes.outputs.work_key }}
         run: |
-          gh issue create --title "Autonomous architect ready: $WORK_KEY" --body "A bounded Architect wave is ready on branch $BOT_BRANCH. Review signals, gaps/proposals, Adapter Candidate specifications, research evidence and any evidence-gated isolated prototype. Production adoption remains review-only."
+          WANTED="Autonomous architect ready: $WORK_KEY"
+          EXISTING="$(gh issue list --state open --limit 500 --json number,title | jq -r --arg wanted "$WANTED" '[.[] | select(.title == $wanted) | .number] | min // empty')"
+          if [ -n "$EXISTING" ]; then
+            echo "Architect review Issue #$EXISTING already tracks $WORK_KEY; suppressing duplicate."
+          else
+            gh issue create --title "$WANTED" --body "A bounded Architect wave is ready on branch $BOT_BRANCH. Review signals, gaps/proposals, Adapter Candidate specifications, research evidence and any evidence-gated isolated prototype. Production adoption remains review-only."
+          fi
 
       - name: No new architect work
-        if: steps.changes.outputs.has_changes != 'true'
+        if: steps.backlog.outputs.can_run == 'true' && (steps.changes.outputs.has_changes != 'true')
         run: echo "No new bounded Architect or Incubator evidence was generated."

@@ -160,6 +160,14 @@ repositories:
         auto_retry_transient: false
         allowed_inputs: []
         required_inputs: []
+      real_vocal_ab_deferred:
+        file: original-vocal-ab-deferred-upload.yml
+        dispatch: false
+        monitor: true
+        runner_class: self-hosted
+        runner_wait_minutes: 20
+        artifact_ingest: metadata_and_text
+
 
   surface:
     repository: techitechi0331-svg/VocalSurfaceProcessor

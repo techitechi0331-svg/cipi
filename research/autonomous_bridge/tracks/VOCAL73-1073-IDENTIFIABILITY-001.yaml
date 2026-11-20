@@ -1,0 +1,139 @@
+schema_version: "1.0"
+track_id: VOCAL73-1073-IDENTIFIABILITY-001
+enabled: true
+activation_state: ACTIVE_FOUNDATION
+root_research_id: VOCAL73-1073-IDENTIFIABILITY-001
+
+research_question: >-
+  With the original 1970s Neve 1073 revision explicitly distinguished from
+  current reissues and clones, can source-constrained circuit structure,
+  switched gain/EQ/HPF topology and falsifiable synthetic baseline experiments
+  expose the current Vocal 73 Pre v0.2 model's limitations without pretending
+  that proxy tests or commercial plugins are physical hardware measurements?
+
+hypothesis_id: HYP-VOCAL73-1073-SOURCE-CONSTRAINED-CIRCUIT-FIRST
+hypothesis: >-
+  A provenance-led, structurally decomposed input-transformer, gain-stage,
+  inductor-EQ and output-transformer model with explicitly unknown parameters
+  is more identifiable and falsifiable than a fixed COLOR tanh plus shelf
+  approximation; reliable analog fidelity remains conditional on measured
+  reference-unit evidence.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - LICENSED_1073_REAL_HARDWARE_MEASUREMENT
+  - LEVEL_MATCHED_REAL_VOCAL_BLIND_LISTENING
+  - CUBASE_PRO_14_HOST_CONFIRMATION
+  - PLUGINVAL_FINAL_GATE
+  - PRODUCT_ADOPTION_DECISION
+  - VOCAL_ONE_INTEGRATION_DECISION
+  - RELEASE_DECISION
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  source_repo: techitechi0331-svg/VocalPrepComp
+  source_subdirectory: Vocal73Pre
+  source_baseline_version: v0.2
+  source_dsp_blob_sha: 691ceb53d773a8d23ed782a33c1c5ca47b29859c
+  evidence_snapshot: research/plugins/vocal73pre/1073-replication-research-plan-v2.md
+  do_not_reopen:
+    - VOCAL73_V02_CI_BUILD_HISTORY
+    - VOCAL73_V02_TANH_COLOR_SOURCE_CONFIRMED
+    - VOCAL73_V02_HPF_18DB_PER_OCT_SOURCE_CONFIRMED
+    - VOCAL73_V02_COLOR_SHELF_VALUES_SOURCE_CONFIRMED
+  rejected_directions:
+    - CLAIM_FIXED_TANH_IS_MEASURED_1073_TRANSFORMER
+    - USE_COMMERCIAL_PLUGIN_AS_ORIGINAL_HARDWARE_GROUND_TRUTH
+    - MIX_ORIGINAL_1073_AND_MODERN_REISSUE_WITHOUT_VERSION_TAG
+    - FIT_ONLY_TO_SYNTHETIC_PROXY_AND_DECLARE_HARDWARE_FIDELITY
+    - UNLICENSED_REFERENCE_AUDIO
+    - AUTOMATIC_PRODUCT_WRITE_OR_RELEASE
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 2
+  max_same_architecture_retry: 2
+  max_no_improvement_runs: 2
+
+initial_experiment:
+  experiment_id: EXP-VOCAL73-1073-IDENTIFIABILITY-R1
+  experiment_type: INITIAL_CIRCUIT_IDENTIFIABILITY
+  expected_information_gain: 0.80
+  scope:
+    - vocal73pre
+    - original_1073_reference
+    - circuit_identifiability
+    - synthetic_proxy_only
+  inputs:
+    seed: 2026112002
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 3
+    stage2_archive_limit: 3
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: >-
+      A source-constrained circuit-structure identifiability proxy can screen
+      hypotheses relative to the fixed-shelf plus tanh v0.2 baseline, but is
+      not hardware fidelity evidence without identified-unit measurements.
+    architecture: ORIGINAL_1073_SOURCE_CONSTRAINED_CIRCUIT_STRUCTURE_PROXY
+    tested_parameters:
+      linear_transfer: source_bounded_unknown
+      input_transformer: topology_only_no_invented_constants
+      switched_gain_stages: topology_only
+      stepped_eq: nominal_frequency_constraints
+      saturation: unmeasured_not_accepted
+    benchmark_profile:
+      - original_1073_provenance_ledger_v1
+      - vocal73pre_v02_dsp_source_baseline_v1
+      - original_1073_topology_identifiability_proxy_v1
+    sample_rate: 48000
+    input_set: SYNTHETIC_CIRCUIT_PROXY_NO_REAL_1073_REFERENCE
+    reference_model: UNKNOWN_NO_MEASURED_ORIGINAL_1073_UNIT
+    objective_set:
+      - source_constraint_consistency
+      - parameter_identifiability
+      - falsification_coverage
+      - numerical_stability
+      - complexity
+    relevant_constraints:
+      - real_hardware_fidelity_unproven
+      - source_revision_tag_required
+      - provenance_and_rights_required
+      - real_measurements_human_gate
+      - preserve_v02_baseline
+      - product_integration_off
+      - automatic_promotion_off
+    experiment_type: INITIAL_CIRCUIT_IDENTIFIABILITY
+    scope:
+      - vocal73pre
+      - original_1073_reference
+      - circuit_identifiability
+      - synthetic_proxy_only
+
+efficiency_policy:
+  policy_id: VOCAL73-1073-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 10
+  full_regression_required: false

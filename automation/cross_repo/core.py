@@ -300,6 +300,7 @@ def match_dispatched_run(action: dict[str, Any], runs: list[dict[str, Any]]) -> 
     earliest = dispatched_at - timedelta(seconds=30)
     previous_run_id = action.get("previous_run_id")
     ref = str(action.get("ref", ""))
+    expected_sha = str(action.get("expected_source_sha") or "")
     candidates = []
     for run in runs:
         if run.get("event") != "workflow_dispatch":
@@ -309,14 +310,19 @@ def match_dispatched_run(action: dict[str, Any], runs: list[dict[str, Any]]) -> 
             continue
         if ref and run.get("head_branch") not in (None, ref):
             continue
+        if expected_sha and run.get("head_sha") != expected_sha:
+            continue
         created = run.get("created_at")
         if not isinstance(created, str):
             continue
         if parse_time(created) < earliest:
             continue
         candidates.append(run)
+    # Without a workflow-level nonce there is no sound way to choose between
+    # concurrent manual dispatches on the same branch. Fail closed instead of
+    # silently attributing someone else's test run to this research action.
     candidates.sort(key=lambda r: parse_time(str(r["created_at"])))
-    return candidates[0] if candidates else None
+    return candidates[0] if len(candidates) == 1 else None
 
 
 def action_terminal_dir(root: Path, conclusion: str | None) -> Path:

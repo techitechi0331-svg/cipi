@@ -1,0 +1,9 @@
+schema_version: '1.0'
+recovery_workflow_run_id: 44811431911
+recovery_attempt: 1
+recovered_artifact_records: 0
+discovered_artifact_count: 0
+source: PRIVATE_OUTBOX_UPLOAD_ONLY_REPLAY
+authority: EXTERNAL_EVIDENCE_ONLY
+automatic_product_decision: false
+automatic_knowledge_promotion: false

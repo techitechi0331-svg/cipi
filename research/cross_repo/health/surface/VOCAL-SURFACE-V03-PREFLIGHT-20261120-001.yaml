@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: VOCAL-SURFACE-V03-PREFLIGHT-20261120-001
+repo_key: surface
+workflow_key: vst3
+runner_class: github-hosted
+state: RUNNING
+run_id: 44714326508
+run_status: in_progress
+run_conclusion: null
+since: '2026-11-20T09:52:04Z'
+wait_threshold_minutes: 30
+blocks_only_dependent_work: true

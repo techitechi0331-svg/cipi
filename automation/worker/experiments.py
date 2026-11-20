@@ -35,6 +35,7 @@ ADAPTERS = {
     "vocal_resonance_motion_coherence_v1",
     "vl2a_phase01h_snapshot_gate_v1",
     "vl2a_phase01h_checksum_diagnosis_v1",
+    "vl2a_rc2_evidence_continuity_v1",
     "vocal_resonance_clean_negative_audit_v1",
     "vocal_resonance_clean_negative_reaudit_v2",
     "microdouble_product_v03_gate_v1",
@@ -4524,6 +4525,122 @@ def _virtual_guitar_electrical_port_contract_gate(
     return _vg_pickup_prereq_gate(repo_root, timeout_seconds, "port")
 
 
+
+
+def _vl2a_rc2_evidence_continuity(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
+    """CIPI-only consistency audit; never edits evidence, product or gates."""
+    del timeout_seconds
+    sources = {
+        "baseline": "research/plugins/vl2a/circuit-lab/autonomous-track-baseline-2026-09-27.md",
+        "phase1": "research/autonomous_bridge/tracks/VL2A-CIRCUIT-HA100X-001.yaml",
+        "shortlist": "research/autonomous_bridge/tracks/VL2A-CIRCUIT-HA100X-SHORTLIST-002.yaml",
+        "prehost": "research/health/vl2a-prehost.json",
+        "formal": "research/plugins/vl2a/status.yaml",
+    }
+    payloads: dict[str, str] = {}
+    source_sha256: dict[str, str] = {}
+    for key, relpath in sources.items():
+        path = repo_root / relpath
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        raw = path.read_bytes()
+        source_sha256[key] = hashlib.sha256(raw).hexdigest()
+        payloads[key] = raw.decode("utf-8-sig")
+
+    baseline = payloads["baseline"]
+    phase1 = yaml.safe_load(payloads["phase1"])
+    shortlist = yaml.safe_load(payloads["shortlist"])
+    prehost = json.loads(payloads["prehost"])
+    formal = yaml.safe_load(payloads["formal"])
+    if not all(isinstance(record, dict) for record in (phase1, shortlist, prehost, formal)):
+        raise ValueError("VL2A continuity inputs must be mapping objects")
+
+    pluginval_recorded = "pluginval 1.0.4 strictness 10: SUCCESS" in baseline
+    prepared_latency_recorded = "prepared latency 6 samples" in baseline
+    track_ids_valid = (
+        phase1.get("track_id") == "VL2A-CIRCUIT-HA100X-001"
+        and shortlist.get("track_id") == "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
+        and prehost.get("track_id") == "VL2A-CIRCUIT-HA100X-SHORTLIST-002"
+    )
+    authority_preserved = all(
+        record.get("authority_boundaries", {}).get(key) is False
+        for record in (phase1, shortlist)
+        for key in ("product_repository_write", "automatic_knowledge_promotion", "automatic_final_decision")
+    ) and (
+        prehost.get("automatic_product_decision") is False
+        and prehost.get("automatic_release_decision") is False
+    )
+    cubase = prehost.get("cubase") or {}
+    if not isinstance(cubase, dict):
+        raise ValueError("prehost cubase gate must be a mapping")
+    host_gates = ("scan", "insert", "playback", "automation", "save_reload", "pdc")
+    unresolved = sum(cubase.get(k) == "UNVERIFIED" for k in host_gates)
+    unresolved += int(prehost.get("listening_judgment") == "UNVERIFIED")
+    unresolved += int(prehost.get("release_decision") == "UNVERIFIED")
+    stages = formal.get("stages") or {}
+    if not isinstance(stages, dict):
+        raise ValueError("VL2A formal stages must be a mapping")
+    premature_completion = stages.get("final_review") == "complete" and unresolved > 0
+    historical_scope_review = (
+        pluginval_recorded
+        and prepared_latency_recorded
+        and stages.get("vst3_validation") != "complete"
+    )
+    prehost_ready = (
+        prehost.get("state") == "CUBASE_READY_HUMAN_GATE"
+        and bool(prehost.get("candidate_id"))
+        and prehost.get("source_ref") == "integration/vl2a-v060-rc2"
+    )
+    metrics = {
+        "recorded_prehost_state": str(prehost.get("state", "")),
+        "prehost_candidate_id": str(prehost.get("candidate_id", "")),
+        "frozen_baseline_pluginval_present": pluginval_recorded,
+        "frozen_baseline_prepared_latency_present": prepared_latency_recorded,
+        "track_ids_valid": track_ids_valid,
+        "prehost_ready_for_human_gate": prehost_ready,
+        "authority_boundaries_preserved": authority_preserved,
+        "unresolved_human_gate_count": unresolved,
+        "formal_vst3_validation_stage": str(stages.get("vst3_validation", "")),
+        "formal_tracking_scope_reconciliation_recommended": historical_scope_review,
+        "premature_formal_completion": premature_completion,
+    }
+    accepted = (
+        pluginval_recorded
+        and prepared_latency_recorded
+        and track_ids_valid
+        and prehost_ready
+        and authority_preserved
+        and not premature_completion
+    )
+    report = {
+        "schema_version": "1.0",
+        "job_id": "VL2A-RC2-EVIDENCE-CONTINUITY-001",
+        "authority": "DERIVED_DIAGNOSTIC_ONLY",
+        "scope_note": (
+            "Historical Phase01-H status and later RC2/pre-host evidence are "
+            "different scopes. Stage discrepancy is review-only, not automatic "
+            "confidence, knowledge, product or release promotion."
+        ),
+        "metrics": metrics,
+        "source_sha256": source_sha256,
+        "unresolved_human_gates_retained": True,
+        "product_write": False,
+        "automatic_knowledge_promotion": False,
+        "automatic_release": False,
+    }
+    return {
+        "metrics": metrics,
+        "raw_files": {"vl2a_rc2_status_audit.json": json.dumps(report, sort_keys=True, indent=2) + "\n"},
+        "commands": ["read five committed CIPI inputs", "hash inputs", "evaluate scope/authority/gate contract"],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Reconcile historical VL2A Phase01-H status with accepted RC2 and pre-host "
+            "evidence without changing any track, budget, DSP, host gate or release state. "
+            "This audit does not perform a fresh VST3 test or claim hardware parity."
+        ),
+    }
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name == "virtual_guitar_pickup_electrical_foundation_v1":
         return _virtual_guitar_pickup_electrical_foundation(repo_root, timeout_seconds)
@@ -4571,6 +4688,8 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vl2a_phase01h_snapshot_gate(repo_root, timeout_seconds)
     if name == "vl2a_phase01h_checksum_diagnosis_v1":
         return _vl2a_phase01h_checksum_diagnosis(repo_root, timeout_seconds)
+    if name == "vl2a_rc2_evidence_continuity_v1":
+        return _vl2a_rc2_evidence_continuity(repo_root, timeout_seconds)
     if name == "vocal_resonance_clean_negative_audit_v1":
         return _vocal_resonance_clean_negative_audit(repo_root, timeout_seconds)
     if name == "microdouble_product_v03_gate_v1":

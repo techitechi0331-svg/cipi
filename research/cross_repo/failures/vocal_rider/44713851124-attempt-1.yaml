@@ -1,0 +1,20 @@
+schema_version: '1.0'
+action_id: VOCAL-RIDER-MAIN-REVALIDATE-20261120
+repo_key: vocal_rider
+workflow_key: research
+run_id: 44713851124
+run_attempt: 1
+head_sha: bc346336b5a0cca105e9462468cdea2b53ea3f6d
+classification:
+  category: PRODUCT_OR_TEST_FAILURE
+  retry_safe: false
+  reason: a build/test/measurement/validation stage failed
+  conclusion: failure
+  failing_steps:
+  - Fetch pinned Steinberg VST3 SDK 3.8.1
+  - Upload Vocal Rider artifact
+  - Upload Vocal Rider measurements
+  - Upload pluginval log
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

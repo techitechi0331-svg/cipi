@@ -1,6 +1,6 @@
 schema_version: '1.0'
 action_id: MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
-state: QUEUED
+state: DISPATCHED
 repo_key: melon
 workflow_key: research
 ref: main
@@ -24,7 +24,7 @@ inputs:
     that the proxy matches a 12AX7/12AT7 stage, transformer, hardware reference, or
     an actual singer?","track_id":"UA610-ORIGINAL-TUBE-PROXY-001"}'
 priority: 80
-attempts: 0
+attempts: 1
 max_attempts: 2
 retry_count: 0
 max_retries: 1
@@ -36,3 +36,7 @@ continuation_fingerprint: 9627ddccc6be79c9b33ca4d12cf2e7651339dc0f16cda156a9e86b
 authority: CIPI_GLOBAL_DAG_READY_NODE
 automatic_product_decision: false
 automatic_knowledge_promotion: false
+previous_run_id: 44717432747
+dispatched_at: '2026-11-20T10:15:55.689342Z'
+repository: techitechi0331-svg/melon
+workflow_file: melon-research.yml

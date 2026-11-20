@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: UA610-REAL-VOCAL-AB-RECOVERY-20261120-001
+repo_key: pre610
+workflow_key: real_vocal_ab
+run_id: 44714700336
+run_attempt: 1
+head_sha: 25220d62cbda8530f317d42dbc907b612f4bae27
+classification:
+  category: INFRA_TRANSIENT
+  retry_safe: true
+  reason: only setup/download/cache/tooling stages failed
+  conclusion: failure
+  failing_steps:
+  - Fetch and cache approved vocal sources
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

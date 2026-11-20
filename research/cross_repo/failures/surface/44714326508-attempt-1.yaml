@@ -1,0 +1,17 @@
+schema_version: '1.0'
+action_id: VOCAL-SURFACE-V03-PREFLIGHT-20261120-001
+repo_key: surface
+workflow_key: vst3
+run_id: 44714326508
+run_attempt: 1
+head_sha: b89a1de4cd856b02ca9e0716b6775c576421d99d
+classification:
+  category: UNKNOWN_FAILURE
+  retry_safe: false
+  reason: failure is not safely classifiable as transient
+  conclusion: failure
+  failing_steps:
+  - Upload VST3
+retry_requested: false
+authority: AUTOMATED_FAILURE_CLASSIFICATION_ONLY
+automatic_product_decision: false

@@ -3,10 +3,10 @@ action_id: MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC
 repo_key: melon
 workflow_key: research
 runner_class: self-hosted
-state: QUEUED
+state: COMPLETED
 run_id: 44717745841
-run_status: queued
-run_conclusion: null
+run_status: completed
+run_conclusion: failure
 since: '2026-11-20T10:15:55Z'
 wait_threshold_minutes: 20
 blocks_only_dependent_work: true

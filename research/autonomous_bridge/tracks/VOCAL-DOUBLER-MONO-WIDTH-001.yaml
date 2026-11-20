@@ -1,0 +1,146 @@
+schema_version: "1.0"
+track_id: VOCAL-DOUBLER-MONO-WIDTH-001
+enabled: true
+activation_state: ACTIVE_BOUNDED_SYNTHETIC_TOPOLOGY
+root_research_id: MICRODOUBLE_01
+
+research_question: >-
+  Given existing Vocal One-Knob Doubler v0.3 product/CIPI evidence and
+  v0.4-v0.5 development-branch research, does a bounded theoretical
+  antisymmetric-Side delay topology offer a different mono-vs-width
+  tradeoff than a positive-center delay proxy, worth falsifying
+  separately in the actual product?
+hypothesis_id: HYP-DOUBLER-PROTECTED-CENTER-VS-ANTISYMMETRIC-SIDE
+hypothesis: >-
+  In an isolated deterministic delay-topology model, L=dry+g*S and
+  R=dry-g*S will algebraically preserve mono while allowing measurable
+  Side energy, unlike ordinary positive-polarity dual-delay copies.
+  This mathematical fact is NOT evidence that the side-only architecture
+  sounds more natural or should replace the measured v0.3 product engine.
+minimum_novelty: 0.10
+minimum_improvement: 0.01
+
+product_integration: false
+human_gate_required: false
+human_gate_conditions:
+  - ACTUAL_V05_PRODUCT_DSP_BASELINE_AND_MONO_SIDE_AB
+  - ACTUAL_WINDOWS_VST3_BUILD_AND_PLUGINVAL_STRICTNESS5
+  - MULTIRATE_BLOCK_AND_TRANSPORT_REGRESSIONS
+  - LEVEL_MATCHED_REPRESENTATIVE_REAL_VOCALS
+  - VOCAL_NATURALNESS_AND_MONO_LISTENING
+  - CUBASE_PRO_14_STATE_AUTOMATION_CPU_LATENCY_REALTIME_OFFLINE
+  - PRODUCT_ADOPTION_DECISION
+  - VOCAL_ONE_INTEGRATION_DECISION
+  - FINAL_RELEASE
+
+authority_boundaries:
+  automatic_final_decision: false
+  automatic_knowledge_promotion: false
+  product_repository_write: false
+  melon_continuation_is_proposal_only: true
+  cipi_evidence_authority: true
+
+dedup_baseline:
+  product_repository: techitechi0331-svg/Vocal-One-Knob-Doubler
+  product_main_commit: af01f303d7a212035ec5ced10e8f6988dc1de7c0
+  latest_research_branch: v0.5-research
+  latest_research_branch_commit: 90db4eaaf564d89d7ceed95d6122d8f019fb8529
+  current_product_release_candidate: v0.3
+  research_status: research/experiments/MicroDouble/status.yaml
+  formal_status: research/plugins/vocal-one-knob-doubler/status.yaml
+  previous_jobs:
+    - MICRODOUBLE-V03-PRODUCT-GATE-001
+    - MICRODOUBLE-SIBILANCE-R3-GATE-001
+    - MICRODOUBLE-TRANSIENT-NECESSITY-001
+  dedicated_melon_adapter: melon/vocal_doubler_research.py
+  adapter_pr: https://github.com/techitechi0331-svg/melon/pull/18
+  source_truth_limit: >-
+    Dedicated MELON adapter measures two abstract deterministic delay
+    topologies on synthetic multitone/onset signals only. It does NOT
+    execute the v0.3-v0.5 source DSP, pluginval, Cubase, or any real vocal.
+  do_not_reopen:
+    - V03_SNAPSHOT_GATE_MEASURED
+    - R1_R2_SIBILANCE_REJECTED_EVIDENCE
+    - SIBILANCE_R3_SELECTION_HOLDOUT
+    - TRANSIENT_NECESSITY_PRIOR_GATE
+  rejected_directions:
+    - CLAIM_SYNTHETIC_SIDE_MONO_IDENTITY_PROVES_NATURALNESS
+    - REPLACE_EXISTING_PRODUCT_ENGINE_FROM_PROXY_ONLY
+    - CLAIM_V05_BRANCH_IS_MERGED_TO_MAIN
+    - IGNORE_PREVIOUS_SIBILANCE_NEGATIVE_RESULTS
+    - AUTOMATIC_PRODUCT_WRITE_OR_RELEASE
+    - SKIP_CUBASE_AND_REAL_VOCAL_HUMAN_GATES
+
+budget:
+  max_loop_depth: 3
+  max_runs: 3
+  max_total_experiments: 3
+  max_candidates: 24
+  max_runtime: 300
+  max_same_hypothesis_retry: 3
+  max_same_architecture_retry: 3
+  max_no_improvement_runs: 3
+
+initial_experiment:
+  experiment_id: EXP-VOCAL-DOUBLER-MONO-WIDTH-R1
+  experiment_type: DOUBLER_SYNTHETIC_MONO_WIDTH_TOPOLOGY
+  expected_information_gain: 0.78
+  scope:
+    - vocal_doubler
+    - positive_center_vs_antisymmetric_side
+    - mono_compatibility
+    - stereo_width
+    - synthetic_only
+  inputs:
+    seed: 2026112007
+    population: 4
+    generations: 1
+    max_candidates: 8
+    max_runtime_seconds: 60
+    stage2_limit: 3
+    stage2_archive_limit: 3
+    stage2_epsilon_range_fraction: 0.03
+    stage2_epsilon_spread_multiplier: 0.5
+    stage3_limit: 1
+    workers: 1
+    preflight_mode: fast
+  fingerprint_material:
+    hypothesis: HYP-DOUBLER-PROTECTED-CENTER-VS-ANTISYMMETRIC-SIDE
+    architecture: POSITIVE_CENTER_VS_ANTISYMMETRIC_SIDE_DELAY_MODEL
+    tested_parameters:
+      baseline_mode: positive_center
+      candidate_mode: antisymmetric_side
+      delay_a_ms: [5, 25]
+      delay_b_ms: [5, 30]
+      wet_gain: [0.04, 0.30]
+      exact_mono_algebra: test_only
+    benchmark_profile:
+      - synthetic_multitone_onset_v1
+      - two_signal_families_three_rates_v1
+    sample_rate: 48000
+    input_set: SYNTHETIC_NO_VOCAL
+    reference_model: ABSTRACT_DELAY_TOPOLOGIES_NOT_PRODUCT_V05
+    objective_set:
+      - max_algebraic_mono_error
+      - mono_error_ratio
+      - side_to_dry_ratio
+      - stereo_correlation
+      - finite_boundedness
+    relevant_constraints:
+      - no_product_dsp_execution
+      - no_audio_quality_claim
+      - no_product_write
+      - bounded_3_run_budget
+      - preserve_host_and_listening_gates
+    experiment_type: DOUBLER_SYNTHETIC_MONO_WIDTH_TOPOLOGY
+    scope:
+      - vocal_doubler
+      - mono_width_synthetic_only
+
+efficiency_policy:
+  policy_id: VOCAL-DOUBLER-MONO-WIDTH-EFFICIENCY-V1
+  policy_version: "1.0"
+  state: ACTIVE
+  max_memory_mb: 1024
+  candidate_timeout_seconds: 10
+  full_regression_required: false

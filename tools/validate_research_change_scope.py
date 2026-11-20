@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import subprocess
 
+import yaml
+
 ALLOWED_PREFIXES = (
     "research/jobs/",
     "research/runs/",
@@ -22,6 +24,42 @@ APPEND_ONLY_PREFIXES = (
     "research/jobs/completed/",
     "research/jobs/rejected/",
 )
+
+DECISION_PREFIX = "research/decisions/"
+
+
+def verify_worker_decision(head: str, path: str) -> list[str]:
+    """Check the actual new blob, not an untrusted declared authority string.
+
+    This applies only to bot-submitted diff additions; independent, authorized
+    human/assistant review is intentionally outside the bot intake workflow.
+    """
+    errors: list[str] = []
+    if not path.endswith((".yaml", ".yml")):
+        return [f"worker decision file must be YAML: {path}"]
+    try:
+        raw = subprocess.check_output(
+            ["git", "show", f"{head}:{path}"], stderr=subprocess.PIPE
+        )
+        data = yaml.safe_load(raw.decode("utf-8"))
+    except (subprocess.CalledProcessError, UnicodeError, yaml.YAMLError) as exc:
+        return [f"worker decision file could not be parsed: {path}: {exc}"]
+    if not isinstance(data, dict):
+        return [f"worker decision must be a YAML mapping: {path}"]
+    required = {
+        "event_type": "AUTOMATED_PROPOSAL",
+        "authority": "AUTOMATION",
+        "review_status": "PENDING",
+    }
+    for field, expected in required.items():
+        if data.get(field) != expected:
+            errors.append(
+                f"worker may only submit {field}={expected}: {path}"
+            )
+    if data.get("decision") not in {"ITERATE", "REJECT", "ARCHIVE"}:
+        errors.append(f"worker decision cannot PROMOTE or contain unknown outcomes: {path}")
+    return errors
+
 
 QUEUE_PREFIX = "research/jobs/queued/"
 CROSS_REPO_QUEUE_PREFIX = "research/cross_repo/actions/queued/"
@@ -84,6 +122,9 @@ def main() -> int:
 
         if target.startswith(CROSS_REPO_QUEUE_PREFIX) and code != "A":
             errors.append(f"worker cross-repo actions may only be added to the queue: {status} {target}")
+
+        if target.startswith(DECISION_PREFIX) and code == "A":
+            errors.extend(verify_worker_decision(args.head, target))
 
         if source.startswith(QUEUE_PREFIX) and code == "D":
             pass

@@ -99,6 +99,23 @@ class FakeRecoveryClient(FakeArtifactClient):
 
 
 def main() -> int:
+    # The legacy VoPriPro workflows must not be dispatched under VL2A.
+    live_registry = yaml.safe_load(
+        (ROOT / "automation/cross_repo/registry.yaml").read_text(encoding="utf-8")
+    )
+    vl2a = live_registry["repositories"]["vl2a"]["workflows"]
+    vopripro = live_registry["repositories"]["vopripro"]["workflows"]
+    assert vl2a["build"]["dispatch"] is False
+    assert vl2a["real_vocal"]["dispatch"] is False
+    assert vl2a["prehost_stage"]["dispatch"] is True
+    assert vopripro["build"]["file"] == "build-windows.yml"
+    assert vopripro["real_vocal"]["file"] == "real-vocal-validation.yml"
+    wrong_product = action("TEST-WRONG-PRODUCT-001", "build", 10)
+    wrong_product["repo_key"] = "vl2a"
+    assert any(
+        "monitor-only" in err for err in validate_action(wrong_product, live_registry)
+    )
+
     a = action("TEST-ACTION-001", "build", 20)
     assert validate_action(a, REGISTRY) == []
     invalid = action("TEST-ACTION-002", "monitor", 10)
@@ -164,6 +181,14 @@ def main() -> int:
     ]
     matched = match_dispatched_run(dispatched_action, runs)
     assert matched is not None and matched["id"] == 13
+
+    # Two matching manual dispatches are ambiguous without a dispatch nonce.
+    unrelated_manual = dict(runs[-1], id=14, head_sha="different")
+    assert match_dispatched_run(dispatched_action, runs + [unrelated_manual]) is None
+    pinned_action = dict(dispatched_action, expected_source_sha="expected")
+    source_pinned = dict(runs[-1], id=15, head_sha="expected")
+    source_match = match_dispatched_run(pinned_action, runs + [unrelated_manual, source_pinned])
+    assert source_match is not None and source_match["id"] == 15
 
     job = {
         "state": "BLOCKED_EXTERNAL",

@@ -50,6 +50,25 @@ def main() -> int:
         allowed = commit(root, "allowed append, finalize and cross-repo continuation")
         check(root, base, allowed, True, "append-only addition and queue finalization")
 
+        # Worker branches may add pending proposals but never assert a reviewed
+        # promotion, regardless of the claimed actor inside YAML.
+        for event_type, authority, review_status, decision, expected in (
+            ("AUTOMATED_PROPOSAL", "AUTOMATION", "PENDING", "ITERATE", True),
+            ("REVIEW", "HUMAN_REVIEW", "CONFIRMED", "PROMOTE", False),
+            ("AUTOMATED_PROPOSAL", "ASSISTANT_REVIEW", "PENDING", "ITERATE", False),
+            ("AUTOMATED_PROPOSAL", "AUTOMATION", "PENDING", "PROMOTE", False),
+        ):
+            git(root, "reset", "--hard", base)
+            record = root / "research/decisions/FAKE-001/decision.yaml"
+            record.parent.mkdir(parents=True, exist_ok=True)
+            record.write_text(
+                f"event_type: {event_type}\nauthority: {authority}\n"
+                f"review_status: {review_status}\ndecision: {decision}\n",
+                encoding="utf-8",
+            )
+            proposal = commit(root, f"decision fixture {event_type} {authority} {decision}")
+            check(root, base, proposal, expected, f"worker decision {event_type}/{authority}/{decision}")
+
         git(root, "reset", "--hard", base)
         (root / "research/runs/OLD/run-1/metrics.json").write_text("{\"changed\": true}\n", encoding="utf-8")
         modified = commit(root, "modify old evidence")

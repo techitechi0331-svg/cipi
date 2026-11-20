@@ -333,11 +333,9 @@
     "human_gates": 7,
     "invalid_results": 0,
     "melon_runs": 45,
-    "next_scheduler_action": "MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC",
+    "next_scheduler_action": "NO_READY_WORK",
     "no_improvement_count": 5,
-    "queued_actions": [
-      "MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC"
-    ],
+    "queued_actions": [],
     "registered_tracks": [
       "MELON-BRIDGE-CLEAN-PROOF-002",
       "MELON-BRIDGE-PILOT-001",
@@ -383,7 +381,7 @@
       "pareto_front_turnover": null,
       "ranking_stability": null,
       "replication_consistency": null,
-      "research_compute_to_runner_wall_ratio": 0.04200656378846678,
+      "research_compute_to_runner_wall_ratio": 0.037723629997316425,
       "semantic_duplicate_rate": 0.0
     },
     "result_missing": 0,
@@ -416,13 +414,13 @@
       "artifact_upload_seconds": null,
       "checkout_seconds": null,
       "environment_setup_seconds": null,
-      "known_runner_samples": 35,
+      "known_runner_samples": 36,
       "macro_export_seconds": null,
       "preflight_seconds": null,
       "queue_wait_seconds": 143.0,
       "research_compute_seconds": 562.3838759999933,
-      "runner_job_seconds": 13388.0,
-      "total_wall_seconds": 13531.0
+      "runner_job_seconds": 14908.0,
+      "total_wall_seconds": 15051.0
     },
     "track_lifecycle": {
       "MELON-BRIDGE-CLEAN-PROOF-002": {
@@ -459,9 +457,9 @@
       },
       "UA610-ORIGINAL-TUBE-PROXY-001": {
         "job_id": "UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC",
-        "reason": "EXTERNAL_ACTION_QUEUED",
+        "reason": "EXTERNAL_ACTION_DISPATCHED",
         "scheduler_eligible": true,
-        "state": "READY"
+        "state": "WAITING_EXTERNAL"
       },
       "VIRTUAL-GUITAR-MEASURED-REFERENCE-001": {
         "reason": "HUMAN_GATE",
@@ -641,18 +639,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC",
-      "kind": "CROSS_REPO",
-      "priority": 80,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 73,
-      "dispatched": 3,
-      "failed": 22,
+      "dispatched": 1,
+      "failed": 25,
       "quarantined": 0,
-      "queued": 3
+      "queued": 2
     }
   },
   "human_gates": [
@@ -686,9 +679,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "MELON-UA610-ORIGINAL-TUBE-PROXY-001-R1-9627DDCC",
+    "action_id": null,
     "kind": "CROSS_REPO",
     "priority": 80,
-    "reason": "ready_external_action"
+    "reason": "reconcile_dispatched_action"
   }
 }

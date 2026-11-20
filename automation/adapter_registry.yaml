@@ -438,3 +438,10 @@ adapters:
     max_timeout_minutes: 5
     network_required: false
     purpose: "Bounded Sibilance Guard activation-threshold calibration over the frozen v2.3 feature family using absolute negative-occupancy gates; highest passing threshold may advance to real-vocal validation only."
+
+  vocal_resonance_action_equivalence_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 10
+    network_required: true
+    purpose: "Audit whether exact injected-target Top-K understates practical frequency-placement utility using analytical fixed peaking-cut responses; no suppressor implementation or audio rendering."

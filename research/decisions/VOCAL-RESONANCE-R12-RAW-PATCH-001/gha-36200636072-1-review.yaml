@@ -1,0 +1,54 @@
+schema_version: "1.0"
+decision_id: "VOCAL-RESONANCE-R12-RAW-PATCH-001:gha-36200636072-1:review-01"
+job_id: VOCAL-RESONANCE-R12-RAW-PATCH-001
+source_run: research/runs/VOCAL-RESONANCE-R12-RAW-PATCH-001/gha-36200636072-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  R12 is rejected for the tested representation/model scope. On seed 20261003,
+  the frozen static ranker achieved 26.67 percent conditional Top-5 while
+  patch-only linear, static-plus-patch linear and the tiny MLP achieved
+  23.33, 26.67 and 26.67 percent respectively. Strong-effect conditional
+  Top-5 fell from 36.36 percent to 18.18, 18.18 and 0 percent. On seed
+  20261013, static achieved 40.74 percent conditional Top-5 while patch-only,
+  combined and tiny MLP achieved 22.22, 29.63 and 33.33 percent. None closed
+  the R7 oracle gap; all gap-closure values were zero or negative. External
+  clean false-trigger rates improved for several patch models, so the patch
+  contains some abstention/naturalness signal, but it did not provide the
+  missing target-selection information required by the declared hypothesis.
+scope: >-
+  Candidate-centered 17-by-25 robust local-residual raw patch representation,
+  tested with patch-only logistic regression, static-plus-patch logistic
+  regression and one fixed 32-unit shallow MLP across seeds 20261003 and
+  20261013. This decision does not prove that every possible raw representation
+  or learned model is useless.
+declared_rejection_criteria:
+  - no raw-patch model satisfies all criteria on both seeds
+triggered_criteria:
+  - "No tested raw-patch model improved conditional Top-5 by the required 0.08 on either seed."
+  - "No tested raw-patch model closed at least 15 percent of the R7 oracle gap on either seed."
+  - "Seed 20261003 strong-effect conditional Top-5 regressed materially for every raw-patch model, reaching 0 percent for the tiny MLP."
+retained_findings:
+  - "Source overlap count was zero on both seeds."
+  - "Generator ceiling remained 93.75 percent and 84.375 percent, so the negative result is not explained by candidate-generator collapse."
+  - "Patch-only external clean false-trigger improved from 17.5 to 12.5 percent on seed 20261003 and from 25 to 0 percent on seed 20261013."
+  - "Tiny MLP external clean false-trigger improved to 7.5 percent and 2.5 percent, but ranking did not improve."
+reusable_findings:
+  - "A representation can improve abstention/clean-negative behavior while failing the target-selection task; those objectives should be evaluated separately."
+  - "Increasing local representation richness or adding a small nonlinear model does not automatically recover causal target information missing from single-view inference."
+revisit_if:
+  - "A materially different representation adds nonlocal or task-relevant information rather than a denser version of the same local field."
+  - "The product evaluation target is revised from exact causal-target identification to a validated action-utility objective."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOCAL-RESONANCE-R7-IDENTIFIABILITY-001
+    - VOCAL-RESONANCE-R11-SELF-COUNTERFACTUAL-001
+  related_decisions:
+    - "VOCAL-RESONANCE-R12-RAW-PATCH-001:gha-36200636072-1:auto"
+parent_decision_id: "VOCAL-RESONANCE-R12-RAW-PATCH-001:gha-36200636072-1:auto"
+created_at: "2026-09-26"
+immutable: true
+review_gaps: []

@@ -42,6 +42,7 @@ milestones:
   - R9 transfer-consistency single-view proxy failed its predeclared two-seed retention gate and is rejected.
   - R10 singer-disjoint clean normative-prior proxy failed its predeclared two-seed retention gate and is rejected.
   - R11 same-observation self-counterfactual spectral-inpainting proxy failed its predeclared two-seed retention gate and is rejected.
+  - R12 raw 2D patch linear/combined/tiny-MLP sufficiency audit failed its predeclared two-seed gate and is rejected for the tested scope.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -71,11 +72,13 @@ unresolved:
   - R11 seed 20261013 regressed conditional Top-5 from 40.74 to 37.04 percent and worsened external clean false-trigger from 25.0 to 37.5 percent.
   - R11 proxy-to-true-delta Spearman correlations were only about 0.18 to 0.21 for the best local-delta proxies, so simple spectral inpainting did not approximate the R7 paired causal signal sufficiently.
   - Hand-crafted single-view summaries from R8 through R11 are therefore exhausted as the current primary route.
+  - R12 raw-patch models did not improve conditional Top-5 or close the R7 oracle gap on either seed; seed 20261003 strong-effect conditional Top-5 regressed to 18.18 percent / 18.18 percent / 0 percent for patch-linear / combined / tiny-MLP.
+  - R12 patch-only external clean false-trigger improved from 17.5 to 12.5 percent and 25 to 0 percent, while tiny-MLP improved to 7.5 and 2.5 percent, showing an abstention signal without useful target-selection information.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R7 proved that the candidate objects are identifiable with paired causal information, while four different hand-crafted single-view proxy families (R8 local patch summaries, R9 transfer consistency, R10 population prior, R11 self-counterfactual inpainting) all failed robustly. The next bounded question is whether candidate-aligned raw spectro-temporal patches contain useful single-view information that the summaries discarded."
-next_confirmation: "Whether a fixed-size normalized raw 2D local-residual patch can materially improve conditional Top-5 across both seeds under a simple linear classifier, and whether a tiny nonlinear diagnostic upper bound shows additional separability without worsening independent clean-vocal false triggers."
+why_next: "R8 through R12 exhausted increasingly rich single-view target-selection representations without recovering the R7 causal-oracle gap. Before adding more model complexity, the next bounded question is whether exact causal-target Top-K is stricter than the action actually required by a narrow resonance suppressor."
+next_confirmation: "Whether Top-K candidates that are not the exact injected target are often close enough in frequency to deliver nearly equivalent shallow narrow-band attenuation at the true target, and whether this action-equivalence result is stable across both seeds and Q sensitivity settings."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

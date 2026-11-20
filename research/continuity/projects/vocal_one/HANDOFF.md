@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **STALE**
-- CIPI source commit: 75d993a8585ce599695c87785acae841e7409624
-- Source-state digest: bd5159709e30bba68c608e958b45b593b2c8ef87f4808801773cb497d00f1cd9
+- CIPI source commit: 966ee66e6fb0773d48b41f5547c99b1a353263da
+- Source-state digest: 51619cc118aec7735c2fa3777dec62fd721e0a1ac947db08f89d6cade03f7d73
 - Product: techitechi0331-svg/Vocal-ONE@main
 - Product commit: UNVERIFIED
 

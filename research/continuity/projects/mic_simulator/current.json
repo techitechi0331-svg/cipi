@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "75d993a8585ce599695c87785acae841e7409624",
+    "commit_sha": "966ee66e6fb0773d48b41f5547c99b1a353263da",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T18:47:35+09:00",
-  "generation_id": "d2586540f9faf3648705dbcd",
+  "generated_at": "2026-11-20T18:52:56+09:00",
+  "generation_id": "875b2626bc439e53f1606ee4",
   "human_gates": [
     {
       "blocking": false,
@@ -94,7 +94,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "231d9343711aa2f95649f1671195efd2d685af4044c54d34cb045fa5ec668920",
+      "sha256": "8f292fb575d9e7ecde28cdad405932edec01580e34319b80c9650afa04ecdce0",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -107,13 +107,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "859413b9351f713489bdfe95121334bc7c3c5c8fa9e0a00175ef8528245becac",
+      "sha256": "f71107a066191fb64bac0a94d6e3a7bf98e417541427c45df71ac11e05242aae",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "2b6c8c5a07a3d01ffadadc383a7f607f209f5e6c89819f7729809a95dc95bbab",
+      "sha256": "b81cf38e62ba6ace261c793a1cb08d52ba932b1df294897a131d7ab98fac9702",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -144,7 +144,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "ec5d9429df1480cffdb83401c32bc7554af759ca3e3606e55eb59d9e8271d8c0",
+  "source_state_digest": "a302ce4c7aa4d9c4cda9125d2d27d67747f50a771a8805e151b0b91d59af58b7",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?"
   ],

@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "75d993a8585ce599695c87785acae841e7409624",
+    "commit_sha": "966ee66e6fb0773d48b41f5547c99b1a353263da",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T18:47:35+09:00",
-  "generation_id": "8c5622891c3e56775e47baea",
+  "generated_at": "2026-11-20T18:52:56+09:00",
+  "generation_id": "226c72769d95c25ce7a723bb",
   "human_gates": [],
   "latest_decision_refs": [],
   "phase": "IDLE",
@@ -25,7 +25,13 @@
   "research": {
     "decision_ref_count": 0,
     "review_ref_count": 0,
-    "track_lifecycle": {}
+    "track_lifecycle": {
+      "VOCAL-SURFACE-REAL-AUDIO-001": {
+        "reason": "TRACK_DISABLED",
+        "scheduler_eligible": false,
+        "state": "DISABLED"
+      }
+    }
   },
   "resume_contract": {
     "blocked_dependencies": [],
@@ -43,7 +49,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "231d9343711aa2f95649f1671195efd2d685af4044c54d34cb045fa5ec668920",
+      "sha256": "8f292fb575d9e7ecde28cdad405932edec01580e34319b80c9650afa04ecdce0",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -56,13 +62,13 @@
     {
       "path": "research/health/automation-status.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "859413b9351f713489bdfe95121334bc7c3c5c8fa9e0a00175ef8528245becac",
+      "sha256": "f71107a066191fb64bac0a94d6e3a7bf98e417541427c45df71ac11e05242aae",
       "source_type": "AUTOMATION_HEALTH"
     },
     {
       "path": "research/health/autonomous-bridge.json",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "2b6c8c5a07a3d01ffadadc383a7f607f209f5e6c89819f7729809a95dc95bbab",
+      "sha256": "b81cf38e62ba6ace261c793a1cb08d52ba932b1df294897a131d7ab98fac9702",
       "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
     },
     {
@@ -87,7 +93,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "d6f3850e69e560581ecd1c3519bbfa28991809de337f9b5d2bb23002c798899b",
+  "source_state_digest": "8e72902425d278d89506f859b88933be15bf07fdecd201537cf7e4556d805aec",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

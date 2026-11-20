@@ -738,3 +738,66 @@ Required:
 - no deep/model-complexity product claim from a diagnostic pass.
 
 No production suppressor or VST3 is authorized.
+
+
+---
+
+# MODULE 1 v0.4R.12 — Raw 2D Patch Sufficiency Review
+
+Run: `VOCAL-RESONANCE-R12-RAW-PATCH-001 / gha-36200636072-1`
+
+## MEASURED
+
+Seed 20261003:
+- static conditional Top-5: 26.67%
+- patch-linear: 23.33%
+- static + patch linear: 26.67%
+- tiny MLP: 26.67%
+- static strong-effect conditional Top-5: 36.36%
+- patch-linear / combined / tiny MLP: 18.18% / 18.18% / 0%
+- external clean false-trigger: 17.5% static, 12.5% patch-linear, 17.5% combined, 7.5% tiny MLP
+
+Seed 20261013:
+- static conditional Top-5: 40.74%
+- patch-linear: 22.22%
+- static + patch linear: 29.63%
+- tiny MLP: 33.33%
+- static strong-effect conditional Top-5: 28.57%
+- patch-linear / combined / tiny MLP: 28.57% / 35.71% / 28.57%
+- external clean false-trigger: 25% static, 0% patch-linear, 0% combined, 2.5% tiny MLP
+
+No model produced positive R7 oracle-gap closure.
+
+## DECISION
+
+**REJECT the tested raw-patch representation/model family for target selection.**
+
+The result is still informative:
+raw patches appear to contain some clean-abstention signal, but not the missing causal target-selection information.
+
+This ends the current sequence of single-view representation escalation:
+- local summaries;
+- temporal transfer consistency;
+- clean population prior;
+- self-counterfactual inpainting;
+- raw local patch;
+- tiny nonlinear diagnostic model.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.13 — Action Equivalence / Metric Necessity Audit.**
+
+Research question:
+Does exact injected-target ranking materially overstate what a narrow suppressor action needs?
+
+Audit:
+- freeze candidate generator and static ranker;
+- inspect Top-1 / Top-3 / Top-5 selected frequencies;
+- apply only an analytical fixed shallow peaking-cut response at Q=8/12/20;
+- count an action-equivalent hit when a selected candidate would attenuate the true target by at least 1 dB under a -2 dB cut;
+- compare exact hit rate vs action-equivalent hit rate;
+- report strong-effect subgroup;
+- compare against simple local-prominence selection;
+- no product suppressor implementation and no audio render.
+
+A positive result would justify reviewing the semantic-ranking product gate. It would not by itself authorize MODULE 2 or a VST3.

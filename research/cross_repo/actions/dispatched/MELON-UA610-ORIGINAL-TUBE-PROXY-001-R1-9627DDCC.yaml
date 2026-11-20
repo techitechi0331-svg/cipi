@@ -50,4 +50,3 @@ last_failure_classification:
   failing_steps:
   - Upload research evidence
 last_retry_at: '2026-11-20T10:30:21.064364Z'
-retry_waiting_for_attempt: 2

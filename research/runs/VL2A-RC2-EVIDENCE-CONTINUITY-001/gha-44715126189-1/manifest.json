@@ -1,0 +1,26 @@
+{
+  "acceptance_met": true,
+  "checksums_file": "checksums.sha256",
+  "commands": [
+    "read five committed CIPI inputs",
+    "hash inputs",
+    "evaluate scope/authority/gate contract"
+  ],
+  "completed_at": "2026-11-20T09:57:58.390469Z",
+  "environment": {
+    "experiment_adapter": "vl2a_rc2_evidence_continuity_v1",
+    "mode": "allowlisted_adapter",
+    "platform": "Linux-7.0.0-1019-azure-x86_64-with-glibc2.43",
+    "python": "3.12.16"
+  },
+  "job_id": "VL2A-RC2-EVIDENCE-CONTINUITY-001",
+  "random_seed": 20261120,
+  "rejection_triggered": false,
+  "result": "COMPLETED",
+  "run_id": "gha-44715126189-1",
+  "schema_version": "1.0",
+  "source_commit": "90c56f048054821c3e5aca1199f961e6b1476445",
+  "started_at": "2026-11-20T09:57:58.376430Z",
+  "triggered_criteria": [],
+  "worker_version": "cipi-research-worker/0.2"
+}

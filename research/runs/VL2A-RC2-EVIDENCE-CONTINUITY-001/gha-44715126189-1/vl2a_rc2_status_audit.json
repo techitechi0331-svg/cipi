@@ -1,0 +1,30 @@
+{
+  "authority": "DERIVED_DIAGNOSTIC_ONLY",
+  "automatic_knowledge_promotion": false,
+  "automatic_release": false,
+  "job_id": "VL2A-RC2-EVIDENCE-CONTINUITY-001",
+  "metrics": {
+    "authority_boundaries_preserved": true,
+    "formal_tracking_scope_reconciliation_recommended": true,
+    "formal_vst3_validation_stage": "in_progress",
+    "frozen_baseline_pluginval_present": true,
+    "frozen_baseline_prepared_latency_present": true,
+    "prehost_candidate_id": "HA100X-R4-012-591362e2",
+    "prehost_ready_for_human_gate": true,
+    "premature_formal_completion": false,
+    "recorded_prehost_state": "CUBASE_READY_HUMAN_GATE",
+    "track_ids_valid": true,
+    "unresolved_human_gate_count": 8
+  },
+  "product_write": false,
+  "schema_version": "1.0",
+  "scope_note": "Historical Phase01-H status and later RC2/pre-host evidence are different scopes. Stage discrepancy is review-only, not automatic confidence, knowledge, product or release promotion.",
+  "source_sha256": {
+    "baseline": "f9092c4fc298fdffc9b29c3bec3d834f62c7c8461bc33a6a55f029be3e7e1c66",
+    "formal": "68ff681f81a72f369acbcfdd2b5be834d4f48e2d92484e200615bb275837620b",
+    "phase1": "8f18f77176b3523da0827ab5d5a61b46f31c024eb1246e8ecfba78c9171169d2",
+    "prehost": "c782861b1e9043df7baa621171e8bd0c49a9eb40319e82f3a4625466f4f77482",
+    "shortlist": "7e7b087e97e320ec4e95e8ffcdd65e0d5539c995380111ed0f7ada9f5d204bed"
+  },
+  "unresolved_human_gates_retained": true
+}

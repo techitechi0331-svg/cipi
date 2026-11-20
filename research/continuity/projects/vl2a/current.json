@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "46a9a7029d60eb45c4ba675039f3008d7b903fe0",
+    "commit_sha": "36eaea9cd8e3d89ecedf1a29ea46fdded7c1d16f",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T20:02:44+09:00",
-  "generation_id": "19808d6a160209761554885f",
+  "generated_at": "2026-11-20T20:41:18+09:00",
+  "generation_id": "dc3ff29d282582edee6ba854",
   "human_gates": [
     {
       "blocking": true,
@@ -121,14 +121,14 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "74441d8bfbf36b7ff78b59622c86be10ef489b6fa88c8ca7e32a21ca038fc451",
+      "sha256": "eb9a7f4c53c1e4e9ee75f7dcad5bd9c94593058383c0d37495cb49dadf3afeee",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
       "kind": "directory_index",
       "path": "research/decisions",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "e857daa15e352397d336d0afe6ce3d681e76a56856fd1113deb015ead72affba",
+      "sha256": "857b7e9567ce2daf2de8b43b4ded8745c7cde1544b82504ca5db6cba0c632f2c",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -159,7 +159,7 @@
       "kind": "directory_index",
       "path": "research/jobs/completed",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "5f6a64283b5701a2a6d63bbc02e531afe491a36227bc29896eb31e2c61c668a7",
+      "sha256": "4372baca839b81ee638ff081b9cf9bdc551295e04989999c05214428a95db0d5",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -184,14 +184,14 @@
       "kind": "directory_index",
       "path": "research/jobs/queued",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "05626a0259cb77fe094a2d70040890b6b7ce1f93bf84241fd824cf5a89863168",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
       "kind": "directory_index",
       "path": "research/reviews",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "1e4d1ed9e7399ff3e52560e6f12066b3ac4b4a7841b29af3549aaa6f765525ee",
+      "sha256": "504e8c684c34070291ece4f31a5285c877f990a71c59bb6795730ae19241ede1",
       "source_type": "CIPI_DIRECTORY_INDEX"
     },
     {
@@ -213,7 +213,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "3dd6f6ecf66986d49b7feab595d5776926ad18dcae8c2a6a27350ec4dd47ad99",
+  "source_state_digest": "e7be3288dec769c5b8bc60c63811e8c4e1f308e698817dafdeb93c002d45c66a",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

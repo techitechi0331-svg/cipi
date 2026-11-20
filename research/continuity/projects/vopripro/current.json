@@ -1,0 +1,567 @@
+{
+  "authority": "CONTEXT_RECONSTRUCTION_ONLY",
+  "blocked": [],
+  "cipi_ref": {
+    "branch": "main",
+    "commit_sha": "36eaea9cd8e3d89ecedf1a29ea46fdded7c1d16f",
+    "freshness_basis": "source_state_digest"
+  },
+  "conflicts": [],
+  "freshness": "FRESH",
+  "generated_at": "2026-11-20T20:41:18+09:00",
+  "generation_id": "f765f0827b72db0400c46524",
+  "human_gates": [],
+  "latest_decision_refs": [
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:31:58.396836Z",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:24:10.224433Z",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T08:16:57.077255Z",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-26T00:30:27.936755Z",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ITERATE",
+      "decision_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "ARCHIVE",
+      "decision_id": "VO-PREP-SC-HPF-REAL-001:gha-36201657171-1:review-01",
+      "event_type": "REVIEW",
+      "job_id": "VO-PREP-SC-HPF-REAL-001",
+      "path": "research/decisions/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-review.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T20:33:14.332011Z",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-auto.yaml",
+      "review_status": "PENDING"
+    },
+    {
+      "authority": "AUTOMATION",
+      "created_at": "2026-09-25T20:26:20.606134Z",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-DETECTOR-TRANSFER-001:gha-36185711418-1:auto",
+      "event_type": "AUTOMATED_PROPOSAL",
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-auto.yaml",
+      "review_status": "PENDING"
+    }
+  ],
+  "phase": "IDLE",
+  "product_ref": {
+    "commit_sha": "b894c74304145196c4f553545ea75360e166fdd9",
+    "ref": "main",
+    "repository": "techitechi0331-svg/VocalPrepComp",
+    "verification": "VERIFIED"
+  },
+  "project_id": "vopripro",
+  "ready": [],
+  "rejected_refs": [
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-VOPREP-INTEGRATION-002:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-DETECTOR-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    },
+    {
+      "authority": "ASSISTANT_REVIEW",
+      "created_at": "2026-09-26",
+      "decision": "REJECT",
+      "decision_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:assistant-review-20260926",
+      "event_type": "REVIEW",
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "review_status": "CONFIRMED"
+    }
+  ],
+  "research": {
+    "decision_ref_count": 13,
+    "review_ref_count": 12,
+    "track_lifecycle": {}
+  },
+  "resume_contract": {
+    "blocked_dependencies": [],
+    "can_autonomously_resume": false,
+    "can_resume": true,
+    "human_gates": [],
+    "must_not_repeat": [
+      "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001"
+    ],
+    "recommended_action": "NO_READY_WORK",
+    "required_context": [
+      "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-auto.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/assistant-review-20260926.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/assistant-review-20260926.yaml",
+      "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/assistant-review-20260926.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-triage.yaml",
+      "research/reviews/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-triage.yaml",
+      "research/reviews/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-triage.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-review-brief.yaml",
+      "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-review-brief.yaml"
+    ],
+    "resume_mode": "IDLE"
+  },
+  "review_refs": [
+    {
+      "created_at": "2026-09-26T08:31:58.396836Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T08:24:10.224433Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T08:16:57.077255Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-26T00:30:27.936755Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T20:33:14.332011Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/reviews/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:triage-v1"
+    },
+    {
+      "created_at": "2026-09-25T20:26:20.606134Z",
+      "final_decision_made": false,
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/reviews/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-triage.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-DETECTOR-TRANSFER-001:gha-36185711418-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001:gha-36229620093-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-002",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-002:gha-36229226819-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-INTEGRATION-001:gha-36205036139-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001",
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-review-brief.yaml",
+      "route": "HUMAN_GATE_REVIEW",
+      "triage_id": "VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001:gha-36229978298-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-DETECTOR-TRANSFER-001",
+      "path": "research/reviews/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-DETECTOR-TRANSFER-001:gha-36185711418-1:triage-v1"
+    },
+    {
+      "created_at": null,
+      "final_decision_made": null,
+      "job_id": "VOPRIPRO-BALLISTICS-TRANSFER-001",
+      "path": "research/reviews/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-review-brief.yaml",
+      "route": "REJECTION_REVIEW",
+      "triage_id": "VOPRIPRO-BALLISTICS-TRANSFER-001:gha-36186421812-1:triage-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_manifest": [
+    {
+      "path": "automation/cross_repo/registry.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "eb9a7f4c53c1e4e9ee75f7dcad5bd9c94593058383c0d37495cb49dadf3afeee",
+      "source_type": "CROSS_REPO_REGISTRY"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/decisions",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "857b7e9567ce2daf2de8b43b4ded8745c7cde1544b82504ca5db6cba0c632f2c",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/decisions/VO-PREP-SC-HPF-REAL-001/gha-36201657171-1-review.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9521bf8e68284820b0132100a093ef66fbe84fe03da252674ef781ab9f9db4b3",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "099f6eff3c2116013258ad1c027b2a0815fa035649b092e708e8028df46c74df",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "be5688eb1c26fe1b960e7862be005026564e7fe1a3c30ea0a6b540f73c3a93b3",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9901dc1dddaf3484168302c83fb5ad3691db11ccd0717f518528e355bac7e433",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "457a70899e197527acc2148ef5fe85100401a3811cc458c915494c85cfcd5176",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e84e8a39c70ba3b990e28b83645a9259065f1becf1bdfefee5a7264598e65795",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "71c4207fa563da8f8ff7065fa02943fe8a76ef87633f1926273814532c3c853c",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9a7511e39833f6128796b15283557acd31aacb287579424ae942c979d227294b",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7418dab8862326fc44ac4181a6639ee0addc804941b999b1641ec35a7a34b620",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "ae17ac5e01ac07dd35067bb4a3a5096a3e241ec6e7185f4075be4c8f15f4f901",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "6e4639b91e297fa1ad408bc7d5cb8d28cf4061009eb63b1a3d03f2995f6bb1fe",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/assistant-review-20260926.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "9de0b35e0027f15b491289c07546ca1d52da3e337f1aa60ecc219cdb3760be60",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/decisions/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-auto.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8d362579ff0a79160628692d1864e4460672a838fa96b7ed2fc13f8f9bc76d13",
+      "source_type": "DECISION"
+    },
+    {
+      "path": "research/health/automation-status.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d65c68cc9b94b1e6d5a1552510a34014af6ae2af9a18e1ac8c3bc74106c01cb8",
+      "source_type": "AUTOMATION_HEALTH"
+    },
+    {
+      "path": "research/health/autonomous-bridge.json",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "2147ec15463306530d0ed8d8a1032cec3dc1a95ab4401fc8c0f51377e3167a52",
+      "source_type": "AUTONOMOUS_BRIDGE_HEALTH"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/completed",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "4372baca839b81ee638ff081b9cf9bdc551295e04989999c05214428a95db0d5",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-BALLISTICS-TRANSFER-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b246225165178bf5356c105622b2f3dcbc71034b0afdb56cec880080da1f1537",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-DETECTOR-TRANSFER-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "089d292c67fb6b1e9dfb1bb3ed50a104730bede20b3d8c64fd4401c153f7eb1e",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "f907eba16e9d5ccfd66b7dc44cc4402563f983815497981b1c62fe76ff468365",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-INTEGRATION-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d89f3939064ee93a23cb5c306a197c131a375f4ce083c10c195f4e63872238d6",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-INTEGRATION-002.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "82baedef9ae021b8d8a6d9e26c72eff33473514fafd31122e603d4952a46fc2e",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "path": "research/jobs/completed/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "608a5a3b46a6f93bf7995260dd4aef099a7d419438a780c4c1e509f371ee31d2",
+      "source_type": "RESEARCH_JOB_COMPLETED"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/jobs/queued",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b54b309c433057f67870fe95920acfaeb0724511b6d1cbb92a97a57acaf7c14a",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "kind": "directory_index",
+      "path": "research/reviews",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "504e8c684c34070291ece4f31a5285c877f990a71c59bb6795730ae19241ede1",
+      "source_type": "CIPI_DIRECTORY_INDEX"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "769b03fef0d491376362141b8df642aaab955924aba4d03b050366f7e20747e9",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-BALLISTICS-TRANSFER-001/gha-36186421812-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "00780feed81ea63bd7360f1fd833ce7dae6a8dc0e5f76539008ce1aa0d91b081",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "8a598f86cf878f297eec226342d07c9e0306f91320e51815500016922a582919",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-DETECTOR-TRANSFER-001/gha-36185711418-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "b59bf562b60965e91f8652ef27224d2e0be1fbcc801b0ac9c6e06e89c3504be1",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "a7086753ad820df3ad29d99096da5f050a37634ad7bcfd362365dfcc61ad6458",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-EVENTONLY-INTEGRATION-001/gha-36229978298-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "d7ed7012a8fab0ba00159c2657d1b393a18ad0c0289c50224e4cde434127a19f",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "5f0c0d719e2bb1c83f3b004d9d994d851b255198f4d77db160a675d405ec0911",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-001/gha-36205036139-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "3a15c8cf65f64f78b25610cca934f870479d525c7c5181b7c12cffdf3bf5a472",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "7f8f7d093da42125547da5640ddad5f3458b9ded29165a64435af8ff6a88c93f",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-INTEGRATION-002/gha-36229226819-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "e85c614870ca2608cf9af7ddeeaa57afec40a5d5e8245da2e597284a9556917e",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-review-brief.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "26c4177a6f19f8b1962cf0981635217be42abedb735d6407ab19e0352ba45630",
+      "source_type": "REVIEW"
+    },
+    {
+      "path": "research/reviews/VOPRIPRO-VOPREP-PLOSIVE-DECOMP-001/gha-36229620093-1-triage.yaml",
+      "repository": "techitechi0331-svg/cipi",
+      "sha256": "c8d8e831c7d2d97093b7bd59b401fdc9216fbff1f09b06526f96511162974803",
+      "source_type": "REVIEW"
+    }
+  ],
+  "source_state_digest": "8f92069cbb5ed83de15d5935097c008090562eba90b8ca2f00987d53cdd193ee",
+  "unresolved_questions": [],
+  "work": {
+    "blocked_count": 0,
+    "human_gate_count": 0,
+    "queued_job_count": 0,
+    "ready_count": 0
+  }
+}

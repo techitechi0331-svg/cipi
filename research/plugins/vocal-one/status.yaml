@@ -3,7 +3,7 @@ title: Vocal ONE — Vocal-Only All-in-One MIX Research Track
 registered_date: "2026-11-19"
 status: research
 knowledge_status: HYPOTHESIS
-confidence: unverified_product_specific
+confidence: 0.0
 source_kind: product_repo_initialized
 source_ref: "https://github.com/techitechi0331-svg/Vocal-ONE"
 product_scope:
@@ -26,14 +26,15 @@ stages:
   research: in_progress
   review: pending
   parameter_lock: pending
-  implementation: not_started
-  measurement: not_started
-  audio_ab: not_started
+  implementation: pending
+  measurement: pending
+  audio_ab: pending
   revision: pending
-  vst3_validation: not_started
-  final_review: not_started
+  vst3_validation: pending
+  final_review: pending
 current_stage: research
-completed:
+completed: []
+non_stage_milestones:
   - user_product_scope_selection
   - initial_repo_registration
 measured: []

@@ -1,0 +1,43 @@
+schema_version: '1.0'
+action_id: MELON-VOCAL-RIDER-REALVOCAL-001-R1-25067F33
+state: QUEUED
+repo_key: melon
+workflow_key: research
+ref: main
+inputs:
+  seed: 2026112001
+  population: 4
+  generations: 1
+  max_candidates: 8
+  max_runtime_seconds: 60
+  stage2_limit: 3
+  stage2_archive_limit: 3
+  stage2_epsilon_range_fraction: 0.03
+  stage2_epsilon_spread_multiplier: 0.5
+  stage3_limit: 1
+  workers: 1
+  preflight_mode: fast
+  cipi_context_json: '{"efficiency_policy":{"candidate_timeout_seconds":15,"full_regression_required":false,"max_memory_mb":2048,"policy_id":"VOCAL-RIDER-REALVOCAL-001-EFFICIENCY-V1","policy_version":"1.0","state":"ACTIVE"},"experiment_id":"EXP-VOCAL-RIDER-REALVOCAL-001-R1","experiment_type":"VOCAL_RIDER_GAIN_CONTROL_PROXY_SCREEN","hypothesis_id":"HYP-VOCAL-RIDER-SAFE-LEVELING-001","job_id":"VOCAL-RIDER-REALVOCAL-001-R1-25067F33","loop_depth":1,"parent_job_id":"","parent_run_id":"","research_id":"VOCAL_RIDER_01","research_question":"Can
+    the Vocal Rider v0.1 boost-only sample-aligned Headroom Guard and proposed Amount50
+    v0.3 trajectory reduce local phrase-level variation without >0 dBFS samples, Amount0
+    changes, musical section flattening, or damage to breaths, consonants, plosives
+    and phrase tails?","track_id":"VOCAL-RIDER-REALVOCAL-001"}'
+priority: 80
+attempts: 0
+max_attempts: 2
+retry_count: 0
+max_retries: 1
+depends_on_jobs: []
+depends_on_actions: []
+track_id: VOCAL-RIDER-REALVOCAL-001
+bridge_job_id: VOCAL-RIDER-REALVOCAL-001-R1-25067F33
+continuation_fingerprint: 25067f333edf16b27f5f1ce2c25a2d92d18fc84de68a84fa6186f46698ec3b7d
+authority: CIPI_GLOBAL_DAG_READY_NODE
+automatic_product_decision: false
+automatic_knowledge_promotion: false
+policy_gate:
+  policy_id: VOCAL-RIDER-REALVOCAL-001-EFFICIENCY-V1
+  policy_version: '1.0'
+  state: ACTIVE
+  safe_handoff_enforced: true
+  interrupt_current_jobs: false

@@ -50,7 +50,7 @@ unresolved:
   - Final Tone mapping is not locked.
   - Transformer contribution has not yet passed ablation.
   - Vocal-aware dynamic protection has not yet been justified.
-  - Level-matched real-vocal AB is pending.
+  - Level-matched real-vocal AB is pending. A previous source request hit HTTP 429 and the 2026-11-20 recovery job hit a PowerShell parser error; the parser fix is committed, but successful audio rendering is not yet confirmed.
   - Windows VST3/Cubase Pro 14 RC validation is pending.
   - Final CPU/latency tradeoff is not locked; DSP-only vs oversampling-only benchmark is pending Windows execution.
   - Final shortlist profile is not locked; refreshed solver-corrected measurements now require level-matched vocal comparison.
@@ -63,9 +63,9 @@ historical_nonblocking_unknowns:
 
 next_stage: measurement
 why_next: "The high-level HF solver collapse is closed and corrected-solver measurements are refreshed. Independent next gates are now automation regression, DSP-only vs oversampling-only CPU/latency measurement, and level-matched real-vocal AB preparation/rendering; none should block the others."
-next_confirmation: "Pass the automation transition gate, quantify robust-solver cost against the oversampling-only simple baseline, render the licensed level-matched vocal shortlist, and then use listening plus Cubase validation before parameter lock."
+next_confirmation: "Inspect CIPI-dispatched 610 AB run 44714700336 and verify approved source hashes and blind/technical WAV artifacts. Then evaluate hosted performance vs DSP baseline, perform blind listening and Cubase validation before parameter lock."
 
 blockers:
   - Current automation/CPU/AB measurements depend on a Windows workflow reaching the relevant analyzer/render steps; independent review and preparation continue under No-Wait / Work-Stealing.
-  - Final perceptual audio_ab closure requires listening evidence from the rendered vocal set; a CC0 a-cappella source is already selected, so source acquisition is no longer the blocker.
+  - Final perceptual audio_ab closure requires real rendered licensed vocals and human listening; a CC0 source is selected, but HTTP 429 remains a possible acquisition blocker until CI proves otherwise.
   - Cubase Pro 14 validation ultimately requires the user-side Windows host run and must remain unconfirmed until performed.

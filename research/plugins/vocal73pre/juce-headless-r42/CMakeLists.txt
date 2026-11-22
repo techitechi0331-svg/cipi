@@ -17,6 +17,7 @@ target_sources(vocal73_headless PRIVATE
   main.cpp
   "${VOCAL73_SOURCE_DIR}/Source/Vocal73DSP.cpp"
   "${VOCAL73_SOURCE_DIR}/Source/Vocal73DSP.h")
+target_include_directories(vocal73_headless PRIVATE "${VOCAL73_SOURCE_DIR}/Source")
 target_compile_definitions(vocal73_headless PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
 target_link_libraries(vocal73_headless PRIVATE juce::juce_audio_utils juce::juce_dsp
   juce::juce_recommended_config_flags)

@@ -2,8 +2,8 @@
 
 - Authority: **CONTEXT_RECONSTRUCTION_ONLY**
 - Freshness: **FRESH**
-- CIPI source commit: 36eaea9cd8e3d89ecedf1a29ea46fdded7c1d16f
-- Source-state digest: c1c6f8cf50ac6f7ac8ef23ebdb724b611448e8f6cb970b9df33a5ad2a880641d
+- CIPI source commit: 592dd3c1ce1fdbb15ee719071504a0b2650b25c9
+- Source-state digest: e3dbaae7fcf0af1ccf00f7eb55267bd6869c203ffa11060629b85d3ab8d456f5
 - Product: techitechi0331-svg/Vocal_resonance@main
 - Product commit: 3dd511529d47846fdb04f251e472c04e33a0302f
 

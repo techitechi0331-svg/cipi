@@ -37,13 +37,13 @@
   ],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "36eaea9cd8e3d89ecedf1a29ea46fdded7c1d16f",
+    "commit_sha": "592dd3c1ce1fdbb15ee719071504a0b2650b25c9",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "FRESH",
-  "generated_at": "2026-11-20T20:41:18+09:00",
-  "generation_id": "ab99977f20aee9d9d19e24cb",
+  "generated_at": "2026-11-22T15:30:18+09:00",
+  "generation_id": "58703dd7dcaed66aaa34ae13",
   "human_gates": [
     {
       "blocking": true,
@@ -411,7 +411,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "eb9a7f4c53c1e4e9ee75f7dcad5bd9c94593058383c0d37495cb49dadf3afeee",
+      "sha256": "afde9713ae53d48edeff282173d7a200268730eb2aec3a0c0bd5c9d0c3701ca0",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -635,7 +635,7 @@
       "source_type": "REVIEW"
     }
   ],
-  "source_state_digest": "b776d4f853a6ae4d564a9767730440f3e91eacac5780ca4572bc199233437ade",
+  "source_state_digest": "99b6973083f3915c695bd60f5bccf168dc47b641455223c2e3674742f1817b47",
   "unresolved_questions": [
     "After the Cabinet/Speaker output boundary and the independent Mic Simulator contract, validation, and CIPI Integration Candidate have converged, can Virtual Guitar integrate the external Mic Engine through a versioned optional boundary without coupling to its internals or regressing existing guitar behavior?",
     "Once the physical-guitar, pickup-observation, pickup-electrical and Guitar Electrical Port gates are explicitly complete, can the approved STRAT_STYLE SSS/HSS candidate be integrated without regressing the established physical-string baseline?"

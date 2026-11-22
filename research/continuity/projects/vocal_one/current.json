@@ -3,13 +3,13 @@
   "blocked": [],
   "cipi_ref": {
     "branch": "main",
-    "commit_sha": "36eaea9cd8e3d89ecedf1a29ea46fdded7c1d16f",
+    "commit_sha": "592dd3c1ce1fdbb15ee719071504a0b2650b25c9",
     "freshness_basis": "source_state_digest"
   },
   "conflicts": [],
   "freshness": "STALE",
-  "generated_at": "2026-11-20T20:41:18+09:00",
-  "generation_id": "490fba82014a9992e6095b6f",
+  "generated_at": "2026-11-22T15:30:18+09:00",
+  "generation_id": "af729d74cd299b7d3fcc4ffd",
   "human_gates": [],
   "latest_decision_refs": [
     {
@@ -63,7 +63,7 @@
     {
       "path": "automation/cross_repo/registry.yaml",
       "repository": "techitechi0331-svg/cipi",
-      "sha256": "eb9a7f4c53c1e4e9ee75f7dcad5bd9c94593058383c0d37495cb49dadf3afeee",
+      "sha256": "afde9713ae53d48edeff282173d7a200268730eb2aec3a0c0bd5c9d0c3701ca0",
       "source_type": "CROSS_REPO_REGISTRY"
     },
     {
@@ -113,7 +113,7 @@
       "source_type": "CIPI_DIRECTORY_INDEX"
     }
   ],
-  "source_state_digest": "51e485247c709f73670f81941442672feed5f90515e40244566cde9573071dc4",
+  "source_state_digest": "fcc4905def9e9cc09064da75d4dc3550b4906104fb13ee4b0f1702cf2c02ce66",
   "unresolved_questions": [],
   "work": {
     "blocked_count": 0,

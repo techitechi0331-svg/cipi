@@ -680,18 +680,13 @@
     "blocked_reason": null,
     "enabled": true,
     "health_alerts": [],
-    "ready_action": {
-      "action_id": "BLACK76-RATIO20-CONTROL-PATH-20261122-001",
-      "kind": "CROSS_REPO",
-      "priority": 88,
-      "reason": "ready_external_action"
-    },
+    "ready_action": null,
     "states": {
       "completed": 74,
-      "dispatched": 0,
+      "dispatched": 1,
       "failed": 29,
       "quarantined": 0,
-      "queued": 3
+      "queued": 2
     }
   },
   "human_gates": [
@@ -725,9 +720,9 @@
   },
   "schema_version": "1.0",
   "selected": {
-    "action_id": "BLACK76-RATIO20-CONTROL-PATH-20261122-001",
+    "action_id": null,
     "kind": "CROSS_REPO",
-    "priority": 88,
-    "reason": "ready_external_action"
+    "priority": 80,
+    "reason": "reconcile_dispatched_action"
   }
 }

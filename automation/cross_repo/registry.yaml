@@ -100,6 +100,16 @@ repositories:
         auto_retry_transient: false
         allowed_inputs: []
         required_inputs: []
+      ratio20_control_path_diagnostic:
+        file: windows-ratio20-control-path-diagnostic.yml
+        dispatch: true
+        monitor: true
+        runner_class: self-hosted
+        runner_wait_minutes: 20
+        artifact_ingest: metadata_only
+        auto_retry_transient: false
+        allowed_inputs: []
+        required_inputs: []
       detector_iteration_probe:
         file: windows-detector-iteration-probe.yml
         dispatch: true

@@ -1,0 +1,12 @@
+schema_version: '1.0'
+action_id: BLACK76-RATIO20-CONTROL-PATH-20261122-001
+repo_key: black76
+workflow_key: ratio20_control_path_diagnostic
+runner_class: self-hosted
+state: RUNNING
+run_id: 44994131006
+run_status: in_progress
+run_conclusion: null
+since: '2026-11-22T06:31:46Z'
+wait_threshold_minutes: 20
+blocks_only_dependent_work: true

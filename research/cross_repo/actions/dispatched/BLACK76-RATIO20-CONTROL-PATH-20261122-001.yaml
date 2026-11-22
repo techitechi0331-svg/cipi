@@ -30,3 +30,5 @@ previous_run_id: 0
 dispatched_at: '2026-11-22T06:31:47.237798Z'
 repository: techitechi0331-svg/76blackCompressor
 workflow_file: windows-ratio20-control-path-diagnostic.yml
+run_id: 44994131006
+run_url: https://github.com/techitechi0331-svg/76blackCompressor/actions/runs/44994131006

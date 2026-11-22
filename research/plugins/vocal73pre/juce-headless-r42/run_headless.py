@@ -27,6 +27,21 @@ def main():
               juce/"CMakeLists.txt", harness/"CMakeLists.txt", harness/"check_csv.py"):
         if not f.is_file():
             p.error(f"Missing required file: {f}")
+    # Refuse to label a run as JUCE 9.0.2 unless the local checkout is verifiable.
+    # Git worktrees and detached tag checkouts are both supported.
+    def git_sha(directory):
+        proc = subprocess.run(["git", "-C", str(directory), "rev-parse", "HEAD"],
+                              capture_output=True, text=True, errors="replace")
+        return proc.stdout.strip() if proc.returncode == 0 else None
+    juce_head = git_sha(juce)
+    juce_tag = subprocess.run(["git", "-C", str(juce), "rev-list", "-n", "1", "9.0.2"],
+                              capture_output=True, text=True, errors="replace")
+    expected_juce = juce_tag.stdout.strip() if juce_tag.returncode == 0 else None
+    if not juce_head or not expected_juce or juce_head != expected_juce:
+        p.error("JUCE checkout must be at the verifiable 9.0.2 tag commit; no unverified versions")
+    product_head = git_sha(src)
+    if not product_head:
+        p.error("Product source must be a verifiable git checkout")
     build.mkdir(parents=True, exist_ok=True)
     out.mkdir(parents=True, exist_ok=True)
     steps = []
@@ -63,7 +78,7 @@ def main():
     result = dict(status=status, evidence_kind="ACTUAL_JUCE_DSP_EXECUTION" if status == "PASS"
                   else "ATTEMPT_NO_VALIDATED_AUDIO", platform=platform.platform(),
                   python=sys.version.split()[0], source=str(src), juce=str(juce),
-                  steps=steps, error=error)
+                  juce_commit=juce_head, product_commit=product_head,\n                  steps=steps, error=error)
     if status == "PASS":
         data = (out/"measured.csv").read_bytes()
         result["measured_csv_sha256"] = hashlib.sha256(data).hexdigest()

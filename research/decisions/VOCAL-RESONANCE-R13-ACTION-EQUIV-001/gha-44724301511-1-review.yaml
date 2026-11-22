@@ -1,0 +1,57 @@
+schema_version: "1.0"
+decision_id: "VOCAL-RESONANCE-R13-ACTION-EQUIV-001:gha-44724301511-1:review-01"
+job_id: VOCAL-RESONANCE-R13-ACTION-EQUIV-001
+source_run: research/runs/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/gha-44724301511-1
+event_type: REVIEW
+authority: ASSISTANT_REVIEW
+decision: REJECT
+review_status: CONFIRMED
+rationale: >-
+  Reject the predeclared R13 action-equivalence hypothesis for the measured
+  fixed -2 dB analytical peaking cut at Q=8/12/20 and two injection seeds.
+  The static Top-5 Q=12 action-equivalent rates were 16.67% (5/30) and
+  22.22% (6/27), below the required 70%, and LOWER than the respective
+  exact-hit rates of 26.67% and 40.74%. Strong-effect action coverage was
+  27.27% and 28.57%, below the required 70%. Median oracle-relative
+  attenuation was 3.92% and 10.84%, below the required 60%; Q=8 and Q=20
+  action gains were negative for both seeds. All twelve predeclared
+  seed-by-criterion checks failed. This is negative evidence, not a
+  successful metric redefinition and not a quality/release approval.
+scope: >-
+  Frozen static R2 and local-prominence Top-1/3/5 selection, conditional
+  on the generator-hit controlled-injection test cases in the singer-disjoint
+  VocalSet development protocol; an analytical -2 dB cut at Q=8/12/20.
+  No actual suppressor DSP, audio render, host validation or independent
+  product A/B was performed. Two injection seeds are not an independent
+  dataset or a proof that all possible action utilities fail.
+declared_rejection_criteria:
+  - any seed fails any primary or Q-sensitivity criterion
+triggered_criteria:
+  - "Both seeds failed the static Top-5 Q=12 >=0.70 action-equivalent rate."
+  - "Both seeds had negative action-minus-exact Top-5 Q=12 gains, not >=0.20."
+  - "Both seeds failed >=0.70 strong-effect action-equivalent coverage."
+  - "Both seeds failed >=0.60 median oracle-relative attenuation."
+  - "Both seeds failed >=0.10 action gain at Q=8."
+  - "Both seeds failed >=0.10 action gain at Q=20."
+retained_findings:
+  - "Seed 20261003 static Top-5 Q=12: 30 generator-hit cases, action 5/30 (16.67%), exact 8/30 (26.67%), strong action 3/11 (27.27%), median oracle-relative 3.92%."
+  - "Seed 20261013 static Top-5 Q=12: 27 generator-hit cases, action 6/27 (22.22%), exact 11/27 (40.74%), strong action 4/14 (28.57%), median oracle-relative 10.84%."
+  - "Q sensitivity on static Top-5: action 20.00% / 16.67% / 13.33% at Q=8/12/20 for seed 20261003, and 25.93% / 22.22% / 18.52% for seed 20261013."
+  - "CIPI contains the completed Job, manifest, derived metrics, per-case derived CSV and SHA-256 file list. The CIPI worker reported successful contract validation; this review has not independently re-run the full audio experiment."
+reusable_findings:
+  - "Under this narrow action model, nearby Top-K misses do not rescue exact-target ranking errors; weakening the exact-hit metric is unsupported."
+  - "Separating generator-frequency reachability from ranker selection on NEW controlled-injection seeds is the next falsifiable diagnostic, not a product release gate."
+revisit_if:
+  - "A distinct action model, validated preservation bounds or independent real-singer evidence changes frequency-placement utility."
+  - "Fresh singer-disjoint evidence identifies a reproducible generator-versus-ranker failure mechanism."
+lineage:
+  supersedes: []
+  related_jobs:
+    - VOCAL-RESONANCE-R12-RAW-PATCH-001
+    - VOCAL-RESONANCE-R7-IDENTIFIABILITY-001
+  related_decisions:
+    - "VOCAL-RESONANCE-R13-ACTION-EQUIV-001:gha-44724301511-1:auto"
+parent_decision_id: "VOCAL-RESONANCE-R13-ACTION-EQUIV-001:gha-44724301511-1:auto"
+created_at: "2026-11-22"
+immutable: true
+review_gaps: []

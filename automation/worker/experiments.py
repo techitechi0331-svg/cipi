@@ -71,7 +71,9 @@ ADAPTERS = {
     "voprep_plosive_adversarial_v1",
     "voprep_sibilance_adversarial_v1",
     "voprep_plosive_threshold_r2_v1",
-    "voprep_sibilance_threshold_r2_v1",    "vocal_resonance_action_equivalence_v1",
+    "voprep_sibilance_threshold_r2_v1",
+    "vocal_resonance_action_equivalence_v1",
+    "vocal_resonance_error_attribution_v1",
 }
 
 def _peakbody_legacy_model_stress(repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
@@ -4690,6 +4692,52 @@ def _vocal_resonance_action_equivalence(
         ),
     }
 
+
+def _vocal_resonance_error_attribution(
+    repo_root: Path, timeout_seconds: int
+) -> dict[str, Any]:
+    """CIPI-bound R14 new-seed diagnostic; no raw audio or product rendering."""
+    script = (
+        repo_root
+        / "research/experiments/VocalResonance/error_attribution_audit.py"
+    )
+    env = os.environ.copy()
+    env["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    with tempfile.TemporaryDirectory(prefix="cipi-vocal-resonance-r14-") as td:
+        out = Path(td)
+        command = [sys.executable, str(script), "--output-dir", str(out)]
+        subprocess.run(
+            command, cwd=repo_root, env=env, check=True,
+            capture_output=True, text=True, timeout=timeout_seconds,
+        )
+        summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        raw_files = {
+            "case_attribution.csv": (
+                out / "case_attribution.csv"
+            ).read_text(encoding="utf-8"),
+            "summary.json": (
+                out / "summary.json"
+            ).read_text(encoding="utf-8"),
+        }
+
+    accepted = bool(summary["diagnostic_gate"]["accepted"])
+    return {
+        "metrics": summary,
+        "raw_files": raw_files,
+        "commands": [
+            "python research/experiments/VocalResonance/error_attribution_audit.py --output-dir <temporary>"
+        ],
+        "acceptance_met": accepted,
+        "rejection_triggered": not accepted,
+        "summary": (
+            "Two new controlled-injection seeds attribute missed shallow "
+            "frequency actions between frozen generator reachability and "
+            "Top-K ranker selection; uncertainty is singer-cluster bootstrapped. "
+            "No DSP implementation, audio render or product quality gate."
+        ),
+    }
+
+
 def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, Any]:
     if name == "virtual_guitar_pickup_electrical_foundation_v1":
         return _virtual_guitar_pickup_electrical_foundation(repo_root, timeout_seconds)
@@ -4813,4 +4861,6 @@ def run_adapter(name: str, repo_root: Path, timeout_seconds: int) -> dict[str, A
         return _vocal_resonance_raw_patch_sufficiency_v2(repo_root, timeout_seconds)
     if name == "vocal_resonance_action_equivalence_v1":
         return _vocal_resonance_action_equivalence(repo_root, timeout_seconds)
+    if name == "vocal_resonance_error_attribution_v1":
+        return _vocal_resonance_error_attribution(repo_root, timeout_seconds)
     raise AssertionError(f"adapter dispatch missing for {name}")

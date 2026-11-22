@@ -801,3 +801,36 @@ Audit:
 - no product suppressor implementation and no audio render.
 
 A positive result would justify reviewing the semantic-ranking product gate. It would not by itself authorize MODULE 2 or a VST3.
+
+
+---
+
+# MODULE 1 v0.4R.13 — Action Equivalence Review
+
+Run: VOCAL-RESONANCE-R13-ACTION-EQUIV-001 / gha-44724301511-1.
+
+## MEASURED
+
+With a frozen static Top-5 ranker, analytical -2 dB peaking cut and Q=12:
+- Seed 20261003: conditional action-equivalent coverage 16.67% versus exact hit 26.67%, strong-effect action coverage 27.27%, median nearest-frequency-reference relative attenuation 3.92%.
+- Seed 20261013: conditional action-equivalent coverage 22.22% versus exact hit 40.74%, strong-effect action coverage 28.57%, median nearest-frequency-reference relative attenuation 10.84%.
+- All six acceptance checks on each seed failed; Q=8/20 action-minus-exact gains were also negative.
+
+## DECISION
+
+**REJECT the tested action-equivalence hypothesis** with an immutable assistant-review event under research/decisions/VOCAL-RESONANCE-R13-ACTION-EQUIV-001/. Nearby Top-K picks did not close the action gap under the fixed shallow narrow-band model. This rejects only the measured model and seeds, not all action utilities. The completed run is negative evidence; no production suppressor is authorized.
+
+## Next formal gate
+
+**MODULE 1 v0.4R.14 — Fresh-Seed Error Attribution Audit.**
+
+Job: VOCAL-RESONANCE-R14-ERROR-ATTRIBUTION-001.
+
+Use fresh injection seeds 20261103/20261113 with the frozen R13 generator and ranking models. For each seed separately:
+- validate singer-disjoint train/valid/test splits;
+- report represented-case candidate-generator hit rate (do not label it full-dataset recall);
+- report Top-1/3/5, Q=8/12/20 exact versus analytical action rates;
+- distinguish candidates that would be actionable at the nearest available generated frequency from failures to select those candidates;
+- evaluate the strong-effect subgroup and descriptive singer-cluster bootstrap uncertainty.
+
+No raw audio persistence, paid external API, product DSP, GUI, VST3, or release. The diagnostic does **not** replace independent external-clean negatives, high-F0/formant safety, listening, CPU/latency or product quality gates.

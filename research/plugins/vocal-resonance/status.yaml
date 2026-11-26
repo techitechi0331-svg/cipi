@@ -43,6 +43,7 @@ milestones:
   - R10 singer-disjoint clean normative-prior proxy failed its predeclared two-seed retention gate and is rejected.
   - R11 same-observation self-counterfactual spectral-inpainting proxy failed its predeclared two-seed retention gate and is rejected.
   - R12 raw 2D patch linear/combined/tiny-MLP sufficiency audit failed its predeclared two-seed gate and is rejected for the tested scope.
+  - R13 action-equivalence diagnostic failed all 12 predeclared two-seed criteria; final scoped REJECT review is recorded, and the follow-up R14 fresh-seed failure-attribution diagnostic is queued.
 
 unresolved:
   - Semantic ranking has not yet separated unwanted resonance from legitimate harmonics/formants/consonants.
@@ -74,11 +75,13 @@ unresolved:
   - Hand-crafted single-view summaries from R8 through R11 are therefore exhausted as the current primary route.
   - R12 raw-patch models did not improve conditional Top-5 or close the R7 oracle gap on either seed; seed 20261003 strong-effect conditional Top-5 regressed to 18.18 percent / 18.18 percent / 0 percent for patch-linear / combined / tiny-MLP.
   - R12 patch-only external clean false-trigger improved from 17.5 to 12.5 percent and 25 to 0 percent, while tiny-MLP improved to 7.5 and 2.5 percent, showing an abstention signal without useful target-selection information.
+  - R13 static Top-5 Q=12 action-equivalent coverage was 16.67 percent and 22.22 percent versus exact hits of 26.67 percent and 40.74 percent; nearby-frequency substitution did not rescue ranking misses at the predeclared -2 dB/Q conditions.
+  - R14 will distinguish nearest-generator-candidate reachability from selection failures on two new controlled-injection seeds; this is a diagnostic only, not a production semantic-ranker gate.
   - R5 did not improve Top-5/Top-3/MRR enough to satisfy the semantic-ranking product gate.
   - Suppression topology, maximum cut, and frequency-dependent ballistics are not numerically specified.
 
 next_stage: research
-why_next: "R8 through R12 exhausted increasingly rich single-view target-selection representations without recovering the R7 causal-oracle gap. Before adding more model complexity, the next bounded question is whether exact causal-target Top-K is stricter than the action actually required by a narrow resonance suppressor."
-next_confirmation: "Whether Top-K candidates that are not the exact injected target are often close enough in frequency to deliver nearly equivalent shallow narrow-band attenuation at the true target, and whether this action-equivalence result is stable across both seeds and Q sensitivity settings."
+why_next: "The R13 review rejected the claim that near-frequency Top-K selections are often action-equivalent under a fixed shallow narrow cut. R14 should test on fresh injection seeds whether losses arise mainly from an unhelpful generator frequency candidate or from the static ranker missing a potentially actionable near-frequency candidate."
+next_confirmation: "Independent injection seeds 20261103 and 20261113: singer-disjoint split integrity; represented injection generator-hit fraction; static/prominence Top-1/3/5 action coverage at Q=8/12/20; nearest-candidate action reachability and ranked actionable misses including strong-effect and singer-cluster confidence intervals. Preserve NO-GO for DSP/VST3 pending independent clean/high-F0/CPU/audio gates."
 blockers:
   - No production suppressor or VST3 until MODULE 1 semantic ranking passes.

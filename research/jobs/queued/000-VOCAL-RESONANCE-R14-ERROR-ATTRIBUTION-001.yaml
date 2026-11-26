@@ -1,0 +1,75 @@
+schema_version: "1.0"
+job_id: VOCAL-RESONANCE-R14-ERROR-ATTRIBUTION-001
+state: QUEUED
+track:
+  id: VOCAL_RESONANCE_FORMAL
+  path: research/plugins/vocal-resonance
+research_question: >-
+  On two NEW controlled-injection seeds, is weak narrow-band action coverage
+  primarily explained by a missed ranker selection even when the frozen
+  candidate generator contains a potentially actionable near-frequency candidate?
+hypothesis: >-
+  On each new seed, at static Top-5 Q=12 under the same analytical -2 dB
+  cut and >=1 dB action threshold, at least 25 percent of generator-hit
+  cases will have an actionable nearest-frequency candidate but no
+  action-equivalent Top-5 selection; at least 20 percent of strong-effect
+  generator-hit cases will show the same pattern, while >=80 percent of
+  represented injected test cases retain a generator hit.
+counter_hypotheses:
+  - Candidate frequency placement is itself too far from the injected target for a narrow cut, even when target membership is flagged as a generator hit.
+  - The previous failure is seed-sensitive and does not reproduce with new injection randomness.
+  - Top-5 placement failures predominantly affect weak injected effects rather than strong-effect cases.
+baseline:
+  - frozen_static_r2_topk
+  - local_prominence_topk
+variants:
+  - independent_seed_nearest_frequency_reachability_q8_q12_q20
+  - frozen_ranker_top1_top3_top5_action_coverage
+metrics:
+  - represented_injection_generator_hit_rate
+  - top1_top3_top5_exact_and_action_rate
+  - nearest_frequency_action_reachability_rate
+  - ranker_actionable_miss_rate
+  - strong_effect_ranker_actionable_miss_rate
+  - singer_cluster_bootstrap_95pct_interval
+  - singer_split_overlap_count
+acceptance:
+  - "for each seed: train/valid/test singer overlap count == 0"
+  - "for each seed: represented injection generator-hit rate >= 0.80"
+  - "for each seed at static Top-5 Q=12: actionable nearest-candidate but Top-5 miss rate >= 0.25"
+  - "for each seed at static Top-5 Q=12: strong-effect actionable-miss rate >= 0.20"
+rejection:
+  - any seed fails any acceptance criterion
+depends_on_jobs:
+  - VOCAL-RESONANCE-R13-ACTION-EQUIV-001
+max_runs: 1
+timeout_minutes: 10
+random_seed: 20261103
+experiment_adapter: vocal_resonance_error_attribution_v1
+allowed_operations:
+  - stream_public_vocalset_in_runner_memory
+  - controlled_eq_injection
+  - analytical_filter_response
+  - derived_metric_write
+prohibited_operations:
+  - arbitrary_shell
+  - main_push
+  - confidence_change
+  - current_stage_change
+  - raw_audio_write
+  - audio_render_write
+  - paid_api
+  - product_release
+knowledge_candidate:
+  claim: >-
+    Fresh singer-disjoint injection seeds may reveal whether missed narrow
+    resonance actions are dominated by frequency-candidate reachability
+    versus ranker selection, without implying that suppression is safe.
+  evidence_type: HYPOTHESIS
+  scope: >-
+    Research-only failure-attribution and uncertainty audit; fixed
+    -2 dB analytical cut, not a DSP implementation. Represented-case
+    generator hit is not full-dataset generator recall. External clean
+    negatives, high-F0/formant preservation, CPU/latency and audio A/B
+    are not revalidated by this diagnostic.
+  promotion_requested: HYPOTHESIS

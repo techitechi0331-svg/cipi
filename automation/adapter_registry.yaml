@@ -445,3 +445,10 @@ adapters:
     max_timeout_minutes: 10
     network_required: true
     purpose: "Audit whether exact injected-target Top-K understates practical frequency-placement utility using analytical fixed peaking-cut responses; no suppressor implementation or audio rendering."
+
+  vocal_resonance_error_attribution_v1:
+    tracks:
+      - VOCAL_RESONANCE_FORMAL
+    max_timeout_minutes: 10
+    network_required: true
+    purpose: "Bounded fresh-seed generator-vs-ranker frequency-placement failure attribution; streamed VocalSet in memory, analytic attenuation and derived case-level metrics only; no product suppression or audio rendering."
